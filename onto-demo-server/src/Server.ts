@@ -4,9 +4,9 @@ import {CookieOptions, Response} from "express/ts4.0"
 import cookieParser from "cookie-parser"
 import ExpiryMap from "expiry-map"
 import shortUUID from "short-uuid"
-import {AuthResponse, QRVariables, StateMapping} from "@gimly-blockchain/did-auth-siop-web-demo-shared";
+import {AuthResponse, QRVariables, StateMapping } from "@gimly-blockchain/did-auth-siop-web-demo-shared";
 import * as core from "express-serve-static-core";
-import {PresentationDefinition, Rules} from '@sphereon/pe-models';
+import {PresentationDefinitionV1, Rules} from '@sphereon/pex-models';
 import {RP} from "@sphereon/did-auth-siop";
 import {parseJWT} from '@sphereon/did-auth-siop/dist/main/functions/DidJWT'
 import {
@@ -46,6 +46,12 @@ class Server {
             const qrVariables = new QRVariables()
             qrVariables.requestorDID = process.env.RP_DID
             qrVariables.redirectUrl = process.env.REDIRECT_URL_BASE + "/get-auth-request-url"
+            qrVariables.claims = {
+              presentationDefinitions: [{
+                location: PresentationLocation.VP_TOKEN,
+                definition: this.buildPresentationDefinition()
+              }]
+            };
             response.send(qrVariables)
         })
 
@@ -137,7 +143,7 @@ class Server {
                         // The vp_token only contains 1 presentation max (the id_token can contaim multiple VPs)
                         const verifiableCredential = verifiedResponse.payload.vp_token.presentation.verifiableCredential;
                         if(verifiableCredential) {
-                            const credentialSubject = verifiableCredential[0].credentialSubject;
+                            const credentialSubject = verifiableCredential[0]['credentialSubject'];
                             const youtubeChannelOwner = credentialSubject['YoutubeChannelOwner']
                             if (youtubeChannelOwner) {
                                 stateMapping.authResponse = {
@@ -161,7 +167,7 @@ class Server {
     }
 
     private buildPresentationDefinition() {
-        const presentationDefinitions: PresentationDefinition = {
+        const presentationDefinitions: PresentationDefinitionV1 = {
             id: "9449e2db-791f-407c-b086-c21cc677d2e0",
             purpose: "You can login if you are a Youtube channel owner",
             submission_requirements: [{
@@ -204,7 +210,7 @@ class Server {
 
         if (stateMapping.pollCount > 2) {
             console.log("Poll mockup sending AuthResponse")
-            const authResponse: AuthResponse = new AuthResponse()
+            const authResponse: AuthResponse = new AuthResponse("did:test-user");
             authResponse.userDID = "did:test-user"
             authResponse.firstName = "Mr."
             authResponse.lastName = "Test"

@@ -1,13 +1,15 @@
 {
-  "name": "@gimly-blockchain/did-auth-siop-web-demo-shared",
-  "version": "0.1.0",
+  "name": "did-auth-siop-web-demo-shared",
+  "version": "0.1.2-UNSTABLE",
   "description": "Shared types between modules",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "author": "Sphereon <dev@sphereon.com>",
   "license": "Apache-2.0",
   "private": false,
-  "dependencies": {},
+  "dependencies": {
+    "@sphereon/did-auth-siop": "^0.2.7"
+  },
   "scripts": {
     "build": "tsc -b"
   },

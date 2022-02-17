@@ -1,8 +1,10 @@
 import React, {Component} from "react"
-import GimlyIDQRCode, {QRContent, QRMode, QRType} from "@gimly-blockchain/gimlyid-qr-code-generator"
+import GimlyIDQRCode, {QRContent, QRMode, QRType} from "gimly-siop-qr-code-generator"
 import axios from "axios"
 import Loader from "react-loader-spinner"
 import {AuthResponse, QRVariables, StateMapping} from "@gimly-blockchain/did-auth-siop-web-demo-shared"
+import {QRProps} from "gimly-siop-qr-code-generator/dist/types";
+import {ClaimOpts} from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
 
 export type AuthenticationQRProps = {
   onAuthRequestCreated: () => void
@@ -30,6 +32,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     this.qrExpiryMs = parseInt(process.env.REACT_APP_QR_CODE_EXPIRES_AFTER_SEC) * 1000
     if (!this.state.qrCode) {
       this.getQRVariables().then(qrVariables => {
+        console.log("componentDidMount:qrVariables:", qrVariables);
         return this.setState({qrVariables: qrVariables, qrCode: this.generateGimlyIDQRCode(qrVariables)})
       })
       this.refreshTimerHandle = setTimeout(() => this.refreshQR(), this.qrExpiryMs)
@@ -39,6 +42,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   componentWillUnmount() {
     if (this.refreshTimerHandle) {
+      console.log("state:", this.state)
       clearTimeout(this.refreshTimerHandle)
     }
     this._isMounted = false
@@ -54,12 +58,20 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
   /* The GimlyIDQRCode component generates a random state id. Here we make sure it's created only once
     and the render() function will reuse the same one every time it is called. */
   private generateGimlyIDQRCode(qrVariables: QRVariables) {
+    // console.log("generateGimlyIDQRCode:claims:", qrVariables.claims)
+    const qrProps: QRProps = {
+      type: QRType.AUTHENTICATION,
+      mode: QRMode.DID_AUTH_SIOP_V2,
+      did: qrVariables.requestorDID as string,
+      redirectUrl: qrVariables.redirectUrl,
+      claims: JSON.stringify(qrVariables.claims),
+      onGenerate: (content) => {
+        console.log("onGenerate:content:", JSON.stringify(content,null,2))
+        this.registerState(content)
+      }
+    }
     return <GimlyIDQRCode
-        type={QRType.AUTHENTICATION}
-        mode={QRMode.DID_AUTH_SIOP_V2}
-        did={qrVariables?.requestorDID as string}
-        redirectUrl={qrVariables?.redirectUrl}
-        onGenerate={(qrContent: QRContent) => this.registerState(qrContent)}
+      {...qrProps}
     />
   }
 
@@ -94,6 +106,10 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     stateMapping.requestorDID = qrContent.did
     stateMapping.redirectUrl = qrContent.redirectUrl
     stateMapping.stateId = qrContent.state
+    stateMapping.claims = qrContent.claims as ClaimOpts
+
+    console.log("registerState:stateMapping:", stateMapping)
+    console.log("registerState:qrContent:", qrContent)
     axios.post("/backend/register-state", stateMapping)
         .then(response => {
           console.log("register-state response status", response.status)
