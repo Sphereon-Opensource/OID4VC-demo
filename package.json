@@ -1,5 +1,5 @@
 {
-  "name": "@gimly-blockchain/did-auth-siop-web-demo-root",
+  "name": "@sphereon/did-auth-siop-web-demo-root",
   "version": "0.1.0",
   "main": "index.js",
   "license": "Apache-2.0",

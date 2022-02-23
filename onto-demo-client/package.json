@@ -1,17 +1,16 @@
 {
-  "name": "@gimly-blockchain/did-auth-siop-web-demo-client",
+  "name": "@sphereon/did-auth-siop-web-demo-client",
   "version": "0.1.0",
   "private": false,
   "license": "Apache-2.0",
   "dependencies": {
-    "did-auth-siop-web-demo-shared": "^0.1.2-UNSTABLE",
-    "@sphereon/did-auth-siop": "^0.2.7",
+    "@sphereon/did-auth-siop-web-demo-shared": "../onto-demo-shared-types/sphereon-did-auth-siop-web-demo-shared-0.1.2-UNSTABLE.tgz",
+    "@sphereon/ssi-sdk-waci-pex-qr-react": "^0.4.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
-    "gimly-siop-qr-code-generator": "^0.2.3-UNSTABLE",
     "jsonpack": "^1.1.5",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.3",
@@ -25,6 +24,7 @@
     "underscore.string": "^3.3.5",
     "web-vitals": "^1.0.1"
   },
+  "type": "module",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

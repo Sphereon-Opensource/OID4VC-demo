@@ -1,10 +1,9 @@
 import React, {Component} from "react"
-import GimlyIDQRCode, {QRContent, QRMode, QRType} from "gimly-siop-qr-code-generator"
 import axios from "axios"
 import Loader from "react-loader-spinner"
-import {AuthResponse, QRVariables, StateMapping} from "@gimly-blockchain/did-auth-siop-web-demo-shared"
-import {QRProps} from "gimly-siop-qr-code-generator/dist/types";
-import {ClaimOpts} from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
+import {AuthResponse, QRVariables, StateMapping} from "@sphereon/did-auth-siop-web-demo-shared"
+import {AcceptValue, QRMode, SsiQrCodeProps, SsiQrCodeProvider} from "@sphereon/ssi-sdk-waci-pex-qr-react";
+import {CredentialFormat, PassBy, SubjectIdentifierType} from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
 
 export type AuthenticationQRProps = {
   onAuthRequestCreated: () => void
@@ -32,8 +31,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     this.qrExpiryMs = parseInt(process.env.REACT_APP_QR_CODE_EXPIRES_AFTER_SEC) * 1000
     if (!this.state.qrCode) {
       this.getQRVariables().then(qrVariables => {
-        console.log("componentDidMount:qrVariables:", qrVariables);
-        return this.setState({qrVariables: qrVariables, qrCode: this.generateGimlyIDQRCode(qrVariables)})
+        return this.setState({qrVariables: qrVariables, qrCode: this.generateQRCode(qrVariables)})
       })
       this.refreshTimerHandle = setTimeout(() => this.refreshQR(), this.qrExpiryMs)
     }
@@ -42,7 +40,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   componentWillUnmount() {
     if (this.refreshTimerHandle) {
-      console.log("state:", this.state)
       clearTimeout(this.refreshTimerHandle)
     }
     this._isMounted = false
@@ -51,28 +48,43 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
   render() {
     // Show the loader until we have details on which parameters to load into the QR code
     return this.state.qrCode
-        ? this.state.qrCode
-        : <Loader type="ThreeDots" color="#FEFF8AFF" height="100" width="100"/>
+      ? this.state.qrCode
+      : <Loader type="ThreeDots" color="#FEFF8AFF" height="100" width="100"/>
   }
 
-  /* The GimlyIDQRCode component generates a random state id. Here we make sure it's created only once
+
+  /* The QRCode component generates a random state id. Here we make sure it's created only once
     and the render() function will reuse the same one every time it is called. */
-  private generateGimlyIDQRCode(qrVariables: QRVariables) {
+  private generateQRCode(qrVariables: QRVariables) {
     // console.log("generateGimlyIDQRCode:claims:", qrVariables.claims)
-    const qrProps: QRProps = {
-      type: QRType.AUTHENTICATION,
+    const qrProps: SsiQrCodeProps = {
+      accept: AcceptValue.SIOP_OVER_OIDC4VP,
       mode: QRMode.DID_AUTH_SIOP_V2,
-      did: qrVariables.requestorDID as string,
-      redirectUrl: qrVariables.redirectUrl,
-      claims: JSON.stringify(qrVariables.claims),
-      onGenerate: (content) => {
-        console.log("onGenerate:content:", JSON.stringify(content,null,2))
-        this.registerState(content)
+      authenticationRequestOpts: {
+        redirectUri: qrVariables.redirectUrl as string,
+        requestBy: {
+          type: PassBy.VALUE
+        },
+        signatureType: {
+          hexPublicKey: "PUBLIC_KEY",
+          did: qrVariables.requestorDID as string
+        },
+        registration: {
+          subjectIdentifiersSupported: SubjectIdentifierType.DID,
+          credentialFormatsSupported: [CredentialFormat.JWT, CredentialFormat.JSON_LD],
+          registrationBy: {
+            type: PassBy.VALUE
+          }
+        }
       }
     }
-    return <GimlyIDQRCode
-      {...qrProps}
-    />
+    let ssiQrCodeProvider: SsiQrCodeProvider = new SsiQrCodeProvider();
+
+    ssiQrCodeProvider.methods.ssiQrCode(qrProps, this.context).then((ssiQrCode) => {
+      return ssiQrCode;
+    }).catch(e => {
+      console.log(e)
+    });
   }
 
   /* Get the parameters that need to go into the QR code from the server. (We don't want to build/pack a new frontend version for every change to the QR code.) */
@@ -93,12 +105,12 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
       this.timedOutRequestMappings.add(this.currentStateMapping)
     }
     this.registerStateSent = false
-    this.setState({qrCode: this.generateGimlyIDQRCode(this.state.qrVariables as QRVariables)})
+    this.setState({qrCode: this.generateQRCode(this.state.qrVariables as QRVariables)})
     this.refreshTimerHandle = setTimeout(() => this.refreshQR(), this.qrExpiryMs)
   }
 
   /* Register the state along with the redirect URL in the backend */
-  private registerState = (qrContent: QRContent) => {
+  /*private registerState = (qrContent: QRContent) => {
     if (this.registerStateSent) return
     this.registerStateSent = true
 
@@ -106,10 +118,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     stateMapping.requestorDID = qrContent.did
     stateMapping.redirectUrl = qrContent.redirectUrl
     stateMapping.stateId = qrContent.state
-    stateMapping.claims = qrContent.claims as ClaimOpts
-
-    console.log("registerState:stateMapping:", stateMapping)
-    console.log("registerState:qrContent:", qrContent)
     axios.post("/backend/register-state", stateMapping)
         .then(response => {
           console.log("register-state response status", response.status)
@@ -120,7 +128,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
           this.pollForResponse(stateMapping)
         })
         .catch(error => console.error("register-state failed", error))
-  }
+  }*/
 
   /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
   private pollForResponse = async (stateMapping: StateMapping) => {

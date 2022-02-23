@@ -1,7 +1,8 @@
 import {Button, Col, Container, Modal, Row} from "react-bootstrap"
-import AuthenticationQR from "./AuthenticationQR"
 import {Component} from "react"
-import {AuthResponse} from "@gimly-blockchain/did-auth-siop-web-demo-shared"
+import {AuthResponse} from "@sphereon/did-auth-siop-web-demo-shared"
+import {PresentationDefinitionV1, Rules} from '@sphereon/pex-models';
+import AuthenticationQR from "./AuthenticationQR";
 
 /* This is a container dialog for the QR code component. It re emits the onSignInComplete callback.  */
 
@@ -25,7 +26,7 @@ export default class AuthenticationModal extends Component<AuthenticationModalPr
     this.state = {authRequestCreated: false}
   }
 
-  render() {
+    render() {
     return <Modal show={this.props.show} animation={false}>
       <Modal.Header style={{
         display: "flex",

@@ -1,5 +1,5 @@
 {
-  "name": "did-auth-siop-web-demo-shared",
+  "name": "@sphereon/did-auth-siop-web-demo-shared",
   "version": "0.1.2-UNSTABLE",
   "description": "Shared types between modules",
   "main": "dist/index.js",

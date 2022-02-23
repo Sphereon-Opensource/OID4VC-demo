@@ -4,7 +4,7 @@ import {CookieOptions, Response} from "express/ts4.0"
 import cookieParser from "cookie-parser"
 import ExpiryMap from "expiry-map"
 import shortUUID from "short-uuid"
-import {AuthResponse, QRVariables, StateMapping } from "@gimly-blockchain/did-auth-siop-web-demo-shared";
+import {AuthResponse, QRVariables, StateMapping } from "@sphereon/did-auth-siop-web-demo-shared";
 import * as core from "express-serve-static-core";
 import {PresentationDefinitionV1, Rules} from '@sphereon/pex-models';
 import {RP} from "@sphereon/did-auth-siop";

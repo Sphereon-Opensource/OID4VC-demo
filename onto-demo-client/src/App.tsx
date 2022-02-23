@@ -3,7 +3,7 @@ import React, {Component} from "react"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Button from "react-bootstrap/Button"
 import AuthenticationModal from "./components/AuthenticationModal"
-import {AuthResponse} from "@gimly-blockchain/did-auth-siop-web-demo-shared"
+import {AuthResponse} from "@sphereon/did-auth-siop-web-demo-shared"
 import jsonpack from "jsonpack"
 import Nav from "./components/Nav"
 import Landing from "./pages/Landing"
