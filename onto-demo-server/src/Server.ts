@@ -46,12 +46,6 @@ class Server {
             const qrVariables = new QRVariables()
             qrVariables.requestorDID = process.env.RP_DID
             qrVariables.redirectUrl = process.env.REDIRECT_URL_BASE + "/get-auth-request-url"
-            qrVariables.claims = {
-              presentationDefinitions: [{
-                location: PresentationLocation.VP_TOKEN,
-                definition: this.buildPresentationDefinition()
-              }]
-            };
             response.send(qrVariables)
         })
 

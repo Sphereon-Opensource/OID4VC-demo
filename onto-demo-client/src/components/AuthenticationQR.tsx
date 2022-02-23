@@ -2,8 +2,13 @@ import React, {Component} from "react"
 import axios from "axios"
 import Loader from "react-loader-spinner"
 import {AuthResponse, QRVariables, StateMapping} from "@sphereon/did-auth-siop-web-demo-shared"
-import {AcceptValue, QRMode, SsiQrCodeProps, SsiQrCodeProvider} from "@sphereon/ssi-sdk-waci-pex-qr-react";
-import {CredentialFormat, PassBy, SubjectIdentifierType} from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
+import {
+  AcceptMode,
+  GoalCode,
+  OobPayload,
+  OobQRProps,
+  QRType, WaciQrCodeProvider,
+} from "@sphereon/ssi-sdk-waci-pex-qr-react";
 
 export type AuthenticationQRProps = {
   onAuthRequestCreated: () => void
@@ -57,32 +62,29 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     and the render() function will reuse the same one every time it is called. */
   private generateQRCode(qrVariables: QRVariables) {
     // console.log("generateGimlyIDQRCode:claims:", qrVariables.claims)
-    const qrProps: SsiQrCodeProps = {
-      accept: AcceptValue.SIOP_OVER_OIDC4VP,
-      mode: QRMode.DID_AUTH_SIOP_V2,
-      authenticationRequestOpts: {
-        redirectUri: qrVariables.redirectUrl as string,
-        requestBy: {
-          type: PassBy.VALUE
-        },
-        signatureType: {
-          hexPublicKey: "PUBLIC_KEY",
-          did: qrVariables.requestorDID as string
-        },
-        registration: {
-          subjectIdentifiersSupported: SubjectIdentifierType.DID,
-          credentialFormatsSupported: [CredentialFormat.JWT, CredentialFormat.JSON_LD],
-          registrationBy: {
-            type: PassBy.VALUE
-          }
-        }
-      }
+    const oobQRProps: OobQRProps = {
+      oobBaseUrl: 'https://example.com/?oob=',
+      type: QRType.DID_AUTH_SIOP_V2,
+      id: '599f3638-b563-4937-9487-dfe55099d900',
+      from: 'did:key:zrfdjkgfjgfdjk',
+      body: {
+        goalCode: GoalCode.STREAMLINED_VP,
+        accept: [AcceptMode.SIOPV2_WITH_OIDC4VP],
+      },
+      onGenerate: (oobQRProps: OobQRProps, payload: OobPayload) => {
+        console.log(payload)
+      },
+      bgColor: 'white',
+      fgColor: 'black',
+      level: 'L',
+      size: 128,
+      title: 'title2021120903',
     }
-    let ssiQrCodeProvider: SsiQrCodeProvider = new SsiQrCodeProvider();
+    let waciQrCodeProvider: WaciQrCodeProvider = new WaciQrCodeProvider();
 
-    ssiQrCodeProvider.methods.ssiQrCode(qrProps, this.context).then((ssiQrCode) => {
+    waciQrCodeProvider.methods.createOobQrCode(oobQRProps, this.context).then((ssiQrCode: any) => {
       return ssiQrCode;
-    }).catch(e => {
+    }).catch((e: any) => {
       console.log(e)
     });
   }

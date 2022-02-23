@@ -4,7 +4,6 @@ import { ClaimOpts } from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
 export class QRVariables  {
   redirectUrl?: string
   requestorDID?: string
-  claims?: ClaimOpts
 }
 
 export class StateMapping {
