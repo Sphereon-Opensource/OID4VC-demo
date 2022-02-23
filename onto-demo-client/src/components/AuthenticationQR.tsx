@@ -52,8 +52,9 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   createOobQRProps(qrVariables: QRVariables): OobQRProps {
     console.log("qrVariables:",qrVariables)
+    const oobBaseUrl = qrVariables.redirectUrl as string + '?oob=';
     return {
-      oobBaseUrl: qrVariables.redirectUrl as string,
+      oobBaseUrl: oobBaseUrl,
       type: QRType.DID_AUTH_SIOP_V2,
       body: {
         goalCode: GoalCode.STREAMLINED_VP,
