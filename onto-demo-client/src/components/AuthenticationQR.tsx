@@ -9,6 +9,7 @@ import {
   OobQRProps,
   QRType, WaciQrCodeProvider,
 } from "@sphereon/ssi-sdk-waci-pex-qr-react";
+import {createOobQrCode} from '../agent';
 
 export type AuthenticationQRProps = {
   onAuthRequestCreated: () => void
@@ -36,8 +37,10 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     this.qrExpiryMs = parseInt(process.env.REACT_APP_QR_CODE_EXPIRES_AFTER_SEC) * 1000
     if (!this.state.qrCode) {
       this.getQRVariables().then(qrVariables => {
-        return this.setState({qrVariables: qrVariables, qrCode: this.generateQRCode(qrVariables)})
-      })
+        createOobQrCode(qrVariables).then(qr => {
+          return this.setState({qrVariables, qrCode: qr})
+        })
+      }).catch(e=> console.error(e))
       this.refreshTimerHandle = setTimeout(() => this.refreshQR(), this.qrExpiryMs)
     }
     this._isMounted = true
@@ -60,13 +63,12 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   /* The QRCode component generates a random state id. Here we make sure it's created only once
     and the render() function will reuse the same one every time it is called. */
-  private generateQRCode(qrVariables: QRVariables) {
-    // console.log("generateGimlyIDQRCode:claims:", qrVariables.claims)
+  private generateQRCode(qrVariables: QRVariables): any {
     const oobQRProps: OobQRProps = {
-      oobBaseUrl: 'https://example.com/?oob=',
+      oobBaseUrl: qrVariables.redirectUrl as string,
       type: QRType.DID_AUTH_SIOP_V2,
       id: '599f3638-b563-4937-9487-dfe55099d900',
-      from: 'did:key:zrfdjkgfjgfdjk',
+      from: qrVariables.requestorDID as string,
       body: {
         goalCode: GoalCode.STREAMLINED_VP,
         accept: [AcceptMode.SIOPV2_WITH_OIDC4VP],
@@ -80,13 +82,11 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
       size: 128,
       title: 'title2021120903',
     }
-    let waciQrCodeProvider: WaciQrCodeProvider = new WaciQrCodeProvider();
-
-    waciQrCodeProvider.methods.createOobQrCode(oobQRProps, this.context).then((ssiQrCode: any) => {
-      return ssiQrCode;
-    }).catch((e: any) => {
-      console.log(e)
-    });
+    createOobQrCode(oobQRProps).then(qr => {
+      return qr;
+    }).catch(e => {
+      throw e;
+    })
   }
 
   /* Get the parameters that need to go into the QR code from the server. (We don't want to build/pack a new frontend version for every change to the QR code.) */
@@ -107,30 +107,14 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
       this.timedOutRequestMappings.add(this.currentStateMapping)
     }
     this.registerStateSent = false
-    this.setState({qrCode: this.generateQRCode(this.state.qrVariables as QRVariables)})
-    this.refreshTimerHandle = setTimeout(() => this.refreshQR(), this.qrExpiryMs)
+    if (this.state.qrVariables) {
+      createOobQrCode(this.generateQRCode(this.state.qrVariables)).then(qr => {
+        return this.setState({qrCode: qr});
+      })
+    } else {
+      throw "qrVariables not defined";
+    }
   }
-
-  /* Register the state along with the redirect URL in the backend */
-  /*private registerState = (qrContent: QRContent) => {
-    if (this.registerStateSent) return
-    this.registerStateSent = true
-
-    const stateMapping: StateMapping = new StateMapping()
-    stateMapping.requestorDID = qrContent.did
-    stateMapping.redirectUrl = qrContent.redirectUrl
-    stateMapping.stateId = qrContent.state
-    axios.post("/backend/register-state", stateMapping)
-        .then(response => {
-          console.log("register-state response status", response.status)
-          if (response.status !== 200) {
-            throw Error(response.data.message)
-          }
-          this.currentStateMapping = stateMapping
-          this.pollForResponse(stateMapping)
-        })
-        .catch(error => console.error("register-state failed", error))
-  }*/
 
   /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
   private pollForResponse = async (stateMapping: StateMapping) => {
