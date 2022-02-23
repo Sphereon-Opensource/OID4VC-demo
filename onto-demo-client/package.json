@@ -5,31 +5,24 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@sphereon/did-auth-siop-web-demo-shared": "../onto-demo-shared-types/sphereon-did-auth-siop-web-demo-shared-0.1.2-UNSTABLE.tgz",
-    "@sphereon/ssi-sdk-waci-pex-qr-react": "^0.4.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@sphereon/ssi-sdk-waci-pex-qr-react": "../../ssi-sdk/packages/waci-pex-qr-react/sphereon-ssi-sdk-waci-pex-qr-react-0.4.0.tgz",
     "axios": "^0.21.4",
-    "bootstrap": "^5.1.1",
+    "bootstrap": "^5.1.3",
     "jsonpack": "^1.1.5",
-    "react": "^17.0.2",
-    "react-bootstrap": "^1.6.3",
-    "react-dom": "^17.0.2",
-    "react-loader-spinner": "^4.0.0",
-    "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "ts-loader": "^9.2.5",
+    "next": "latest",
+    "react": "latest",
+    "react-bootstrap": "^2.1.2",
+    "react-dom": "latest",
+    "react-loader-spinner": "^5.1.4",
     "typescript": "^4.4.3",
-    "underscore.string": "^3.3.5",
-    "web-vitals": "^1.0.1"
+    "underscore.string": "^3.3.6"
   },
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "next start",
+    "build": "next build",
+    "test": "next test",
+    "eject": "next eject"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +52,9 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-router": "^5.1.16",
     "@types/react-router-dom": "^5.1.9",
-    "@types/underscore.string": "^0.0.38"
+    "@types/underscore.string": "^0.0.38",
+    "eslint": "^8.9.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^7.0.0"
   }
 }

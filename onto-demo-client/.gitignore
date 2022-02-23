@@ -1,5 +1,6 @@
 .vscode/*
 .idea/*
+.next
 *.iml
 .nyc_output
 build

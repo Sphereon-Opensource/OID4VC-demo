@@ -1,5 +1,5 @@
 import React from "react"
-import ProtectedResource from "./ProtectedResource";
+import ProtectedResource from "../ProtectedResource";
 
 export default class Landing extends ProtectedResource {
 

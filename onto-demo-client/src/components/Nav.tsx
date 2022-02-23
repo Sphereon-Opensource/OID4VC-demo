@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import ProtectedResource from "../pages/ProtectedResource";
+import ProtectedResource from "../ProtectedResource";
 import Button from 'react-bootstrap/Button';
 
 
