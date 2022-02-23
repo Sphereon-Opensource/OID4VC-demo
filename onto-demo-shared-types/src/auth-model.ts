@@ -23,18 +23,18 @@ export class AuthResponse {
     this.kvkNummer = kvkNummer;
     // this.userName = userName;
   }
-  naam?: string
-  kvkNummer?: string
+  naam: string
+  kvkNummer: string
   rechtsvorm: string
   straatnaam?: string
-  aanduidingBijHuisnummer: string
+  aanduidingBijHuisnummer?: string
   huisnummer: string
-  huisnummerToevoeging: string
-  huisletter: string
-  postbusnummer: string
+  huisnummerToevoeging?: string
+  huisletter?: string
+  postbusnummer?: string
   postcode: string
   plaats: string
-  bagId: string
+  bagId?: string
   datumAkteOprichting: string
   token?: string
 }

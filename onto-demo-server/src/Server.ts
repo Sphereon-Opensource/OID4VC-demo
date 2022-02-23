@@ -4,7 +4,7 @@ import {CookieOptions, Response} from "express/ts4.0"
 import cookieParser from "cookie-parser"
 import ExpiryMap from "expiry-map"
 import shortUUID from "short-uuid"
-import {AuthResponse, QRVariables, StateMapping } from "@sphereon/did-auth-siop-web-demo-shared";
+import {AuthResponse, QRVariables, StateMapping} from "@sphereon/did-auth-siop-web-demo-shared";
 import * as core from "express-serve-static-core";
 import {PresentationDefinitionV1, Rules} from '@sphereon/pex-models';
 import {RP} from "@sphereon/did-auth-siop";
@@ -16,24 +16,26 @@ import {
 } from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
 import {OobPayload} from "@sphereon/ssi-sdk-waci-pex-qr-react";
 import {decodeBase64url} from "@sphereon/did-auth-siop/dist/did-jwt-fork/util";
+import {Resolver} from "did-resolver";
+import {getUniResolver} from "@sphereon/did-uni-client";
 
 class Server {
     public express: core.Express;
     private stateMap: ExpiryMap<string, StateMapping>;
     private rp: RP;
 
-  constructor() {
-    dotenv.config()
+    constructor() {
+        dotenv.config()
 
-    this.express = express()
-    const port = process.env.PORT || 5000
-    const secret = process.env.COOKIE_SIGNING_KEY
-    this.stateMap = new ExpiryMap(parseInt(process.env.AUTH_REQUEST_EXPIRES_AFTER_SEC) * 1000)
-    const bodyParser = require("body-parser")
-    this.express.use(bodyParser.urlencoded({extended: true}))
-    this.express.use(bodyParser.json())
-    this.express.use(cookieParser(secret))
-    this.express.listen(port as number, "0.0.0.0", () => console.log(`Listening on port ${port}`))
+        this.express = express()
+        const port = process.env.PORT || 5000
+        const secret = process.env.COOKIE_SIGNING_KEY
+        this.stateMap = new ExpiryMap(parseInt(process.env.AUTH_REQUEST_EXPIRES_AFTER_SEC) * 1000)
+        const bodyParser = require("body-parser")
+        this.express.use(bodyParser.urlencoded({extended: true}))
+        this.express.use(bodyParser.json())
+        this.express.use(cookieParser(secret))
+        this.express.listen(port as number, "0.0.0.0", () => console.log(`Listening on port ${port}`))
         this.buildRP();
         this.registerWebAppEndpoints()
         this.registerSIOPEndpoint()
@@ -73,13 +75,14 @@ class Server {
             }
             stateMapping.sessionId = sessionId
             this.stateMap.set(stateMapping.stateId, stateMapping)
-            console.log("Received AuthRequestMapping", stateMapping)
+            console.log("Received register state", stateMapping)
             response.statusCode = 200
             response.send()
         })
 
 
         this.express.post("/backend/poll-auth-response", (request, response) => {
+            // console.log("Received poll auth response...")
             const stateId: string = request.body.stateId as string
             const stateMapping: StateMapping = this.stateMap.get(stateId)
             if (!stateMapping) {
@@ -93,6 +96,7 @@ class Server {
             if ("true" == process.env.MOCK_AUTH_RESPONSE && "development" == process.env.NODE_ENV) {
                 this.mockResponse(stateMapping, response)
             } else {
+                // console.log("Poll auth resp: ", stateMapping)
                 if (stateMapping.authResponse == null) {
                     response.statusCode = 202
                     return response.send({authRequestCreated: stateMapping.authRequestCreated})
@@ -112,6 +116,7 @@ class Server {
 
     private registerSIOPEndpoint() {
         this.express.get("/ext/get-auth-request-url", (request, response) => {
+            console.log('get auth request url')
             // fixme: We are splitting, since the SIOP package appends ?state=undefined to the oob
             const oobQuery = (request.query['oob'] as string).split('?')[0]
             const oobStr = decodeBase64url(oobQuery).replace('goal-code', 'goalCode')
@@ -145,6 +150,7 @@ class Server {
         })
 
         this.express.post("/ext/siop-sessions", (request, response) => {
+                console.log('SIOP Sessions')
                 const jwt = request.body.id_token;
                 const authResponse = parseJWT(jwt);
                 const stateMapping: StateMapping = this.stateMap.get(authResponse.payload.state)
@@ -157,20 +163,20 @@ class Server {
                         console.log("verifiedResponse: ", verifiedResponse)
                         // The vp_token only contains 1 presentation max (the id_token can contaim multiple VPs)
                         const verifiableCredential = verifiedResponse.payload.vp_token.presentation.verifiableCredential;
-                        if(verifiableCredential) {
+                        if (verifiableCredential) {
                             const credentialSubject = verifiableCredential[0]['credentialSubject'];
                             const bedrijfsinformatie = credentialSubject['Bedrijfsinformatie']
                             if (bedrijfsinformatie) {
                                 stateMapping.authResponse = {
                                     token: verifiedResponse.jwt,
-                                  kvkNummer: verifiedResponse.payload.kvkNummer,
+                                    kvkNummer: verifiedResponse.payload.kvkNummer,
                                     ...bedrijfsinformatie
                                 }
                             }
                             response.statusCode = 200
                         } else {
                             response.statusCode = 500
-                            response.statusMessage = 'Missing Chember of Commerce credential subject'
+                            response.statusMessage = 'Missing Chamber of Commerce credential subject'
                         }
                         return response.send()
                     })
@@ -202,11 +208,26 @@ class Server {
     }
 
     private buildRP() {
+        const SPHEREON_UNIRESOLVER_RESOLVE_URL ='https://uniresolver.test.sphereon.io/1.0/identifiers'
+        const resolver = new Resolver({
+            ...getUniResolver('ethr', {
+                resolveUrl: 'https://dev.uniresolver.io/1.0/identifiers'
+            }),
+            // ...ethrDidResolver({infuraProjectId: 'e57bcb689a4f49d3a59e801384fcdca5'}),
+            ...getUniResolver('lto', {
+                resolveUrl: SPHEREON_UNIRESOLVER_RESOLVE_URL
+            }),
+            ...getUniResolver('factom', {
+                resolveUrl: SPHEREON_UNIRESOLVER_RESOLVE_URL
+            })
+        })
         this.rp = RP.builder()
             .redirect(process.env.REDIRECT_URL_BASE + "/siop-sessions",)
             .requestBy(PassBy.VALUE)
             .internalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller")
-            .addDidMethod("ethr")
+            .defaultResolver(resolver)
+            .addDidMethod("lto")
+            // .addDidMethod("ethr")
             .addDidMethod("key")
             .registrationBy(PassBy.VALUE)
             .addPresentationDefinitionClaim({
