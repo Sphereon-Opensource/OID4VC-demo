@@ -12,14 +12,14 @@ export default class Nav extends ProtectedResource {
             style={{
               padding: "10px",
               width: "10em",
-              height: "50em",
-              background: "#f0f0f0"
+              height: "60em",
+              background: "rgb(53 52 56 / 95%)"
             }}
         >
           <ul style={{listStyleType: "none", padding: 0}}>
             <li>
               <Link to="/">
-                <Button style={{width: "100%"}} variant="sphereon" size="lg">Home</Button>
+                <Button style={{width: "90%"}} variant="sphereon" size="lg">Home</Button>
               </Link>
             </li>
             {this.protectedResources()}

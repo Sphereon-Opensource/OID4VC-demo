@@ -54,7 +54,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     console.log("qrVariables:",qrVariables)
     const oobBaseUrl = qrVariables.redirectUrl as string + '?oob=';
     return {
-      oobBaseUrl: oobBaseUrl,
+      oobBaseUrl,
       type: QRType.DID_AUTH_SIOP_V2,
       body: {
         goalCode: GoalCode.STREAMLINED_VP,
@@ -66,10 +66,10 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         console.log(payload)
       },
       bgColor: 'white',
-      fgColor: 'black',
+      fgColor: '#352575',
       level: 'L',
-      size: 128,
-      title: 'title2021120903'
+      size: 250,
+      title: 'Sign in'
     }
   }
   componentWillUnmount() {
@@ -83,7 +83,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     // Show the loader until we have details on which parameters to load into the QR code
     return this.state.qrCode
       ? this.state.qrCode
-      : <Loader type="ThreeDots" color="#FEFF8AFF" height="100" width="100"/>
+      : <Loader type="BallTriangle" color="#352575" height="100" width="100"/>
   }
 
   /* Get the parameters that need to go into the QR code from the server. (We don't want to build/pack a new frontend version for every change to the QR code.) */
@@ -100,16 +100,18 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
   /* We don't want to keep used and unused states indefinitely, so expire the QR code after a configured timeout  */
   private refreshQR = () => {
     console.log("Timeout expired, refreshing QR code...")
-    if (this.currentStateMapping) {
-      this.timedOutRequestMappings.add(this.currentStateMapping)
-    }
-    this.registerStateSent = false
-    if (this.state.qrVariables) {
-      createOobQrCode(this.createOobQRProps(this.state.qrVariables)).then(qr => {
-        return this.setState({qrCode: qr});
-      })
-    } else {
-      throw "qrVariables not defined";
+    if (this.qrExpiryMs > 0) {
+      if (this.currentStateMapping) {
+        this.timedOutRequestMappings.add(this.currentStateMapping)
+      }
+      this.registerStateSent = false
+      if (this.state.qrVariables) {
+        createOobQrCode(this.createOobQRProps(this.state.qrVariables)).then(qr => {
+          return this.setState({qrCode: qr});
+        })
+      } else {
+        throw "qrVariables not defined";
+      }
     }
   }
 }

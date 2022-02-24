@@ -17,7 +17,7 @@ interface AuthenticationModalState {
 
 export default class AuthenticationModal extends Component<AuthenticationModalProps, AuthenticationModalState> {
 
-  private readonly scanText = "Please scan this QR code now in your authenticator app.";
+  private readonly scanText = "Please scan this QR code using your app.";
   private readonly authText = "Please approve the authentication request in your app.";
 
   constructor(props: AuthenticationModalProps) {
@@ -26,13 +26,18 @@ export default class AuthenticationModal extends Component<AuthenticationModalPr
   }
 
     render() {
-    return <Modal show={this.props.show} animation={false}>
+    return <Modal show={this.props.show} animation={true} style={{
+      height: "100%",
+      marginTop: "200px"
+    }}>
       <Modal.Header style={{
         display: "flex",
         justifyContent: "center",
+        backgroundColor: "#352575",
+        color: "white",
         alignItems: "center",
       }}>
-        <Modal.Title>QR Code Authentication</Modal.Title>
+        <Modal.Title>Authentication</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>

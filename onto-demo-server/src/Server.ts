@@ -14,6 +14,7 @@ import {
     PresentationLocation,
     VerifiedAuthenticationResponseWithJWT
 } from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
+import {OobPayload} from "@sphereon/ssi-sdk-waci-pex-qr-react";
 
 class Server {
     public express: core.Express;
@@ -46,6 +47,7 @@ class Server {
             const qrVariables = new QRVariables()
             qrVariables.requestorDID = process.env.RP_DID
             qrVariables.redirectUrl = process.env.REDIRECT_URL_BASE + "/get-auth-request-url"
+            qrVariables.id = shortUUID.generate()
             response.send(qrVariables)
         })
 
@@ -101,7 +103,15 @@ class Server {
 
     private registerSIOPEndpoint() {
         this.express.get("/ext/get-auth-request-url", (request, response) => {
-            const stateId = request.query["stateId"] as string
+            const oobQuery = request.query['oob'] as string
+            const oobStr = Buffer.from(oobQuery, 'base64').toString()
+            const oobPayload = JSON.parse(oobStr) as OobPayload
+            if (!oobPayload) {
+                return Server.sendErrorResponse(response, 403, "No oob param")
+            }
+
+            const stateId = oobPayload.id
+
             const stateMapping: StateMapping = this.stateMap.get(stateId);
             if (stateMapping) {
                 let nonce = shortUUID.generate();
@@ -187,6 +197,7 @@ class Server {
             .requestBy(PassBy.VALUE)
             .internalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller")
             .addDidMethod("ethr")
+            .addDidMethod("key")
             .registrationBy(PassBy.VALUE)
             .addPresentationDefinitionClaim({
                 location: PresentationLocation.VP_TOKEN,
