@@ -15,6 +15,7 @@ import {
     VerifiedAuthenticationResponseWithJWT
 } from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
 import {OobPayload} from "@sphereon/ssi-sdk-waci-pex-qr-react";
+import {decodeBase64url} from "@sphereon/did-auth-siop/dist/did-jwt-fork/util";
 
 class Server {
     public express: core.Express;
@@ -44,10 +45,18 @@ class Server {
 
     private registerWebAppEndpoints() {
         this.express.get("/backend/get-qr-variables", (request, response) => {
+            const sessionId = shortUUID.generate()
+            const stateMapping: StateMapping = request.body
+
             const qrVariables = new QRVariables()
             qrVariables.requestorDID = process.env.RP_DID
             qrVariables.redirectUrl = process.env.REDIRECT_URL_BASE + "/get-auth-request-url"
-            qrVariables.id = shortUUID.generate()
+            qrVariables.id = sessionId
+            stateMapping.sessionId = sessionId
+            if (!stateMapping.stateId) {
+                stateMapping.stateId = sessionId
+            }
+            this.stateMap.set(sessionId, stateMapping)
             response.send(qrVariables)
         })
 
@@ -103,8 +112,10 @@ class Server {
 
     private registerSIOPEndpoint() {
         this.express.get("/ext/get-auth-request-url", (request, response) => {
-            const oobQuery = request.query['oob'] as string
-            const oobStr = Buffer.from(oobQuery, 'base64').toString()
+            // fixme: We are splitting, since the SIOP package appends ?state=undefined to the oob
+            const oobQuery = (request.query['oob'] as string).split('?')[0]
+            const oobStr = decodeBase64url(oobQuery).replace('goal-code', 'goalCode')
+            console.log(oobStr)
             const oobPayload = JSON.parse(oobStr) as OobPayload
             if (!oobPayload) {
                 return Server.sendErrorResponse(response, 403, "No oob param")

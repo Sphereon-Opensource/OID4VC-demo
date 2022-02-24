@@ -60,7 +60,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         goalCode: GoalCode.STREAMLINED_VP,
         accept: [AcceptMode.SIOPV2_WITH_OIDC4VP],
       },
-      id: "jgjgjgj",
+      id: qrVariables.id,
       from: qrVariables.requestorDID as string,
       onGenerate: (oobQRProps: OobQRProps, payload: OobPayload) => {
         console.log(payload)
