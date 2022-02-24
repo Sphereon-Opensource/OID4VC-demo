@@ -196,7 +196,7 @@ class Server {
                 purpose: "checking the schema",
                 name: "kvkCredentialSchema",
                 group: ["A"],
-                schema: [{uri: "https://github.com/Sphereon-Opensource/vc-contexts/blob/master/myc/bedrijfsinformatie-v1.jsonld"}]
+                schema: [{uri: "https://sphereon-opensource.github.io/vc-contexts/myc/bedrijfsinformatie-v1.jsonld"}]
             }]
         };
     }
