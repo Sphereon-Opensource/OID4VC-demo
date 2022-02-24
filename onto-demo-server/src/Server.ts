@@ -226,9 +226,9 @@ class Server {
         if (stateMapping.pollCount > 2) {
             console.log("Poll mockup sending AuthResponse")
             const authResponse: AuthResponse = new AuthResponse("did:test-user");
-            authResponse.userDID = "did:test-user"
-            authResponse.firstName = "Mr."
-            authResponse.lastName = "Test"
+            authResponse.aanduidingBijHuisnummer = "did:test-user"
+            authResponse.naam = "Mr. Test"
+            authResponse.huisletter = "Test"
             response.statusCode = 200
             response.send(authResponse)
         } else {

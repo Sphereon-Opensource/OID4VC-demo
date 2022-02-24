@@ -11,7 +11,7 @@ export default class ProtectedResource extends Component<ProtectedResourceProps>
 
 
   protected isAuthenticated(): boolean {
-    return this.props.AuthResponse && !isBlank(this.props.AuthResponse.userDID)
+    return this.props.AuthResponse && !isBlank(this.props.AuthResponse.kvkNummer as string)
   }
 
 

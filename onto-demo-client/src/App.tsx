@@ -130,10 +130,10 @@ class App extends Component<AppState> {
                     <Row className="align-items-center">
 
                         <Col className="col">
-                                <a className="youTubeLink" href={authResponse.youtubeChannelURL} target={"_blank"}><Image width={"40px;"} src={authResponse.youtubeChannelImageURL}/><b>{authResponse.youtubeChannelName}</b></a>
+                                <a className="kvkCredential" href={authResponse.naam} target={"_blank"}><Image width={"40px;"} src={authResponse.bagId}/><b>{authResponse.plaats}</b></a>
                         </Col>
                         <Col className="col-1">
-                            <h5>Hi {authResponse.firstName} {authResponse.lastName}</h5>
+                            <h5>Hi {authResponse.naam} this is your kvk number {authResponse.kvkNummer}</h5>
                         </Col>
                         <Col className="col-1">
                             <Button variant="primary" size="lg" onClick={this.signOut}>Sign out</Button>
