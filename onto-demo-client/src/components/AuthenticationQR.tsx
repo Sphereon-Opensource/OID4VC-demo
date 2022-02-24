@@ -10,7 +10,7 @@ import {
   AcceptMode,
   GoalCode,
   OobPayload,
-  OobQRProps,
+  OobQRProps, QRContent,
   QRType
 } from "@sphereon/ssi-sdk-waci-pex-qr-react";
 import {createOobQrCode} from '../agent';
@@ -63,7 +63,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
       id: qrVariables.id,
       from: qrVariables.requestorDID as string,
       onGenerate: (oobQRProps: OobQRProps, payload: OobPayload) => {
-        console.log(payload)
+        this.registerState(qrVariables)
       },
       bgColor: 'white',
       fgColor: '#352575',
@@ -112,6 +112,48 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
       } else {
         throw "qrVariables not defined";
       }
+    }
+  }
+
+  /* Register the state along with the redirect URL in the backend */
+  private registerState = (qrVariables: QRVariables) => {
+    if (this.registerStateSent) return
+    this.registerStateSent = true
+
+    const stateMapping: StateMapping = new StateMapping()
+    stateMapping.stateId = qrVariables.id
+    stateMapping.redirectUrl = qrVariables.redirectUrl
+    stateMapping.sessionId = qrVariables.requestorDID
+    axios.post("/backend/register-state", stateMapping)
+      .then(response => {
+        console.log("register-state response status", response.status)
+        if (response.status !== 200) {
+          throw Error(response.data.message)
+        }
+        this.currentStateMapping = stateMapping
+        this.pollForResponse(stateMapping)
+      })
+      .catch(error => console.error("register-state failed", error))
+  }
+
+  /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
+  private pollForResponse = async (stateMapping: StateMapping) => {
+    let pollingResponse = await axios.post("/backend/poll-auth-response", {stateId: stateMapping.stateId})
+    while (pollingResponse.status === 202 && this._isMounted && !this.timedOutRequestMappings.has(stateMapping)) {
+      if (this.state.qrCode && pollingResponse.data && pollingResponse.data.authRequestCreated) {
+        this.setState({qrCode: undefined})
+        this.props.onAuthRequestCreated()
+      }
+      pollingResponse = await axios.post("/backend/poll-auth-response", {stateId: stateMapping.stateId})
+    }
+    if (this.timedOutRequestMappings.has(stateMapping)) {
+      console.log("Cancelling timed out auth request.")
+      await axios.post("/backend/cancel-auth-request", {stateId: stateMapping.stateId})
+      this.timedOutRequestMappings.delete(stateMapping)
+    } else if (pollingResponse.status === 200) {
+      this.props.onSignInComplete(pollingResponse.data as AuthResponse)
+    } else {
+      return Promise.reject(pollingResponse.data.message)
     }
   }
 }
