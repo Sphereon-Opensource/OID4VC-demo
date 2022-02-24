@@ -19,16 +19,22 @@ export class StateMapping {
 }
 
 export class AuthResponse {
-  constructor(userDID: string) { //, userName: string
-    this.userDID = userDID;
+  constructor(kvkNummer: string) { //, kvkNummer: string
+    this.kvkNummer = kvkNummer;
     // this.userName = userName;
   }
-  userDID: string
-  firstName?: string
-  lastName?: string
-  youtubeChannelName: string
-  youtubeChannelId?: string
-  youtubeChannelURL: string
-  youtubeChannelImageURL: string
+  naam?: string
+  kvkNummer?: string
+  rechtsvorm: string
+  straatnaam?: string
+  aanduidingBijHuisnummer: string
+  huisnummer: string
+  huisnummerToevoeging: string
+  huisletter: string
+  postbusnummer: string
+  postcode: string
+  plaats: string
+  bagId: string
+  datumAkteOprichting: string
   token?: string
 }

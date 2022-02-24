@@ -181,25 +181,24 @@ class Server {
         )
     }
 
-    private buildPresentationDefinition() {
-        const presentationDefinitions: PresentationDefinitionV1 = {
+    private static buildPresentationDefinition(): PresentationDefinitionV1 {
+        return {
             id: "9449e2db-791f-407c-b086-c21cc677d2e0",
-            purpose: "You can login if you are a Youtube channel owner",
+            purpose: "You can login if you have a valid chamber of commerce credential",
             submission_requirements: [{
-                name: "YoutubeChannelOwner",
+                name: "kvk",
                 rule: Rules.Pick,
                 count: 1,
                 from: "A"
             }],
             input_descriptors: [{
-                id: "YoutubeChannelOwner",
-                purpose: "The channel ownership needs to be asserted by Youtube",
-                name: "YoutubeChannelOwner",
+                id: "chamberOfCommerceSchema",
+                purpose: "The Chamber Of Commerce Credential needs to be asserted by Chamber Of Commerce",
+                name: "kvkCredential",
                 group: ["A"],
-                schema: [{uri: "https://sphereon-opensource.github.io/vc-contexts/gimly/youtube/youtube-channel-owner.jsonld"}]
+                schema: [{uri: "https://github.com/Sphereon-Opensource/vc-contexts/blob/master/myc/bedrijfsinformatie-v1.jsonld"}]
             }]
-        }
-        return presentationDefinitions;
+        };
     }
 
     private buildRP() {
@@ -212,7 +211,7 @@ class Server {
             .registrationBy(PassBy.VALUE)
             .addPresentationDefinitionClaim({
                 location: PresentationLocation.VP_TOKEN,
-                definition: this.buildPresentationDefinition()
+                definition: Server.buildPresentationDefinition()
             })
             .build();
     }
