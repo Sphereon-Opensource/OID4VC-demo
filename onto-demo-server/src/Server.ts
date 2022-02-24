@@ -159,18 +159,18 @@ class Server {
                         const verifiableCredential = verifiedResponse.payload.vp_token.presentation.verifiableCredential;
                         if(verifiableCredential) {
                             const credentialSubject = verifiableCredential[0]['credentialSubject'];
-                            const youtubeChannelOwner = credentialSubject['YoutubeChannelOwner']
-                            if (youtubeChannelOwner) {
+                            const bedrijfsinformatie = credentialSubject['Bedrijfsinformatie']
+                            if (bedrijfsinformatie) {
                                 stateMapping.authResponse = {
                                     token: verifiedResponse.jwt,
-                                    userDID: verifiedResponse.payload.did,
-                                    ...youtubeChannelOwner
+                                  kvkNummer: verifiedResponse.payload.kvkNummer,
+                                    ...bedrijfsinformatie
                                 }
                             }
                             response.statusCode = 200
                         } else {
                             response.statusCode = 500
-                            response.statusMessage = 'Missing YoutubeChannelOwner credential subject'
+                            response.statusMessage = 'Missing Chember of Commerce credential subject'
                         }
                         return response.send()
                     })
@@ -184,7 +184,7 @@ class Server {
     private static buildPresentationDefinition(): PresentationDefinitionV1 {
         return {
             id: "9449e2db-791f-407c-b086-c21cc677d2e0",
-            purpose: "You can login if you have a valid chamber of commerce credential",
+            purpose: "You need to prove your Chamber of Commerce data to login",
             submission_requirements: [{
                 name: "kvk",
                 rule: Rules.Pick,
@@ -193,8 +193,8 @@ class Server {
             }],
             input_descriptors: [{
                 id: "chamberOfCommerceSchema",
-                purpose: "The Chamber Of Commerce Credential needs to be asserted by Chamber Of Commerce",
-                name: "kvkCredential",
+                purpose: "checking the schema",
+                name: "kvkCredentialSchema",
                 group: ["A"],
                 schema: [{uri: "https://github.com/Sphereon-Opensource/vc-contexts/blob/master/myc/bedrijfsinformatie-v1.jsonld"}]
             }]
