@@ -5,7 +5,7 @@ export default class Landing extends Component {
     return (
         <div className="App" style={{ width: 750}}>
           <h2 style={{textAlign: 'left'}}>
-            Welcome to SSI demo web app
+            Welcome to the SSI demo
           </h2>
           <p style={{textAlign: "left" }}>The Demo app is using verifiable credentials to fetch personal identity of the authorized users, with an associated ‘wallet’ that holds the data as Verifiable Credentials (VCs).</p>
 

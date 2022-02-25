@@ -133,7 +133,7 @@ class App extends Component<AppState> {
                             <h5>{authResponse.naam} ({authResponse.kvkNummer})</h5>
                         </Col>
                         <Col className="col-1">
-                            <Button variant="contained" onClick={this.signOut} color={"secondary"}>Sign out</Button>
+                          <Button style={{width: "90%", backgroundColor:'red', color: "white"}} onClick={this.signOut} variant="contained" >Sign out</Button>
                         </Col>
                     </Row>
                 </Container>
@@ -148,7 +148,7 @@ class App extends Component<AppState> {
                           />
                         </Col>
                         <Col className="col-1">
-                <Button variant="contained" onClick={this.showLoginDialog} color={"secondary"}>Sign in</Button>
+                <Button style={{width: "90%", backgroundColor:'red', color: "white"}} onClick={this.showLoginDialog} variant="contained" >Sign in</Button>
               </Col>
             </Row>
           </Container>
