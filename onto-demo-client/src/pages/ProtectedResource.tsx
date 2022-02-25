@@ -18,7 +18,7 @@ export default class ProtectedResource extends Component<ProtectedResourceProps>
   protected accessDenied() {
     return (
         <div className="App">
-          <img src="access-denied.jpg" alt="logo" width="80%"/>
+          <img src="access-denied.jpg" alt="logo" width="50%"/>
         </div>
     )
   }
