@@ -7,11 +7,12 @@ export default class Landing extends Component {
           <h2 style={{textAlign: 'left'}}>
             Welcome to the SSI demo
           </h2>
-          <p style={{textAlign: "left" }}>The Demo app is using verifiable credentials to fetch personal identity of the authorized users, with an associated ‘wallet’ that holds the data as Verifiable Credentials (VCs).</p>
 
-          <p style={{textAlign: "left"}}>An example of company data as a Verifiable Credential could be an extract from Chamber of Commerce, the Bank account details, the Ultimate Beneficial Owner (UBO). These data are validated and digitally signed at issuance by so-called “Trusted Parties”, for example the Chamber of Commerce, the bank, a public notary, etc. and then stored in the SSI-Wallet.</p>
+          <p style={{textAlign: "left" }}>This demo is using Presentation Exchange to fetch claims of the authorized users, with an associated 'wallet' app that securely holds the data as Verifiable Credentials (VCs).</p>
 
-          <p style={{textAlign: "left"}}>By then sharing this data as Verifiable Credentials/Presentations, the requesting party – like for example the Telco – receiving the data can automatically import the data and verify its authenticity and trust the data.</p>
+          <p style={{textAlign: "left"}}>An example of company data as a Verifiable Credentials could be an extract from Chamber of Commerce, bank account details and the Ultimate Beneficial Owner (UBO). The data is validated and digitally signed in the process of issuing a Verifiable Credential by so-called "Issuers". Typically these are trusted parties like for example the Chamber of Commerce, the bank, a public notary, etc.. After issuance they are stored in the SSI-Wallet.</p>
+
+          <p style={{textAlign: "left"}}>By then sharing this data as a Verifiable Presentations, the requesting party, a "Verifier:" – like for example a Telco – receiving the data can automatically import the data and verify its authenticity.</p>
         </div>
     )
   }
