@@ -35,23 +35,23 @@ export default class Nav extends ProtectedResource {
       return <div style={{justifyContent: 'center', alignItems: "center"}}>
         <li>
           <Link to="/secret" style={{textDecoration: "none"}}>
-            <Button style={{width: "90%", backgroundColor:'red', color: "white", marginBottom: 10}} variant="contained" >secret page</Button>
+             <Button style={{width: "90%", backgroundColor:'red', color: "white", marginBottom: 10}} variant="contained" >secret page</Button>
           </Link>
         </li>
         <li>
-          <Link to="/classified"  style={{textDecoration: "none"}}>
-            <Button style={{width: "90%", backgroundColor:'red', color: "white", marginBottom: 10}} variant="contained" >classified page</Button>
+          <Link to="/secret" style={{textDecoration: "none"}}>
+             <Button style={{width: "90%", backgroundColor:'red', color: "white", marginBottom: 10}} variant="contained" >secret page</Button>
           </Link>
         </li>
       </div>;
     } else {
-      return <div style={{justifyContent: 'center', alignItems: "center"}}>
-        <li>
-          <Link to="/classified"  style={{textDecoration: "none"}}>
-            <Button style={{width: "90%", backgroundColor:'red', color: "white", marginBottom: 10}} variant="contained" >classified page</Button>
-          </Link>
-        </li>
-      </div>;
+        return <div style={{justifyContent: 'center', alignItems: "center"}}>
+            <li>
+                <Link to="/classified" style={{textDecoration: "none"}}>
+                    <Button style={{width: "90%", backgroundColor:'red', color: "white", marginBottom: 10}} variant="contained" >classified page</Button>
+                </Link>
+            </li>
+        </div>;
     }
   }
 }
