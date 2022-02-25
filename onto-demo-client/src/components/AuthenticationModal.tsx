@@ -33,7 +33,7 @@ export default class AuthenticationModal extends Component<AuthenticationModalPr
       <Modal.Header style={{
         display: "flex",
         justifyContent: "center",
-        backgroundColor: "dimgray",
+        backgroundColor: "#352575",
         color: "white",
         alignItems: "center",
       }}>
