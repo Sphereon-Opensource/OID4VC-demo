@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 import ProtectedResource from "../pages/ProtectedResource";
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
 
 
 export default class Nav extends ProtectedResource {
@@ -18,8 +18,8 @@ export default class Nav extends ProtectedResource {
         >
           <ul style={{listStyleType: "none", padding: 0}}>
             <li>
-              <Link to="/">
-                <Button style={{width: "90%"}} variant="sphereon" size="lg">Home</Button>
+              <Link to="/" style={{textDecoration: "none"}}>
+                <Button style={{width: "90%"}} variant="contained" color={"secondary"} >Home</Button>
               </Link>
             </li>
             {this.protectedResources()}
@@ -32,10 +32,14 @@ export default class Nav extends ProtectedResource {
     if (this.isAuthenticated()) {
       return <>
         <li>
-          <Link to="/secret">A secret page</Link>
+          <Link to="/secret" style={{textDecoration: "none"}}>
+            <Button style={{width: "90%"}} variant="contained" color={"secondary"} >A secret page</Button>
+          </Link>
         </li>
         <li>
-          <Link to="/classified">A classified page</Link>
+          <Link to="/classified"  style={{textDecoration: "none"}}>
+            <Button style={{width: "90%"}} variant="contained" color={"secondary"} >A classified page</Button>
+          </Link>
         </li>
       </>;
     } else {

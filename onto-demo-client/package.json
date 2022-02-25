@@ -4,6 +4,7 @@
   "private": false,
   "license": "Apache-2.0",
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@sphereon/did-auth-siop": "^0.2.9",
     "@sphereon/did-auth-siop-web-demo-shared": "0.1.3-UNSTABLE.7",
     "@sphereon/ssi-sdk-waci-pex-qr-react": "^0.5.0",

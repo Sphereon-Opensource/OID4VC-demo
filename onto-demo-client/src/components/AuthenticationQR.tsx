@@ -66,7 +66,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         this.registerState(qrVariables)
       },
       bgColor: 'white',
-      fgColor: '#352575',
+      fgColor: '#rgba(53, 52, 56, 0.95)',
       level: 'L',
       size: 250,
       title: 'Sign in'

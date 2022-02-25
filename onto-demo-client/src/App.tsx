@@ -1,7 +1,7 @@
 import "./App.css"
 import React, {Component} from "react"
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import Button from "react-bootstrap/Button"
+import Button from '@material-ui/core/Button';
 import AuthenticationModal from "./components/AuthenticationModal"
 import {AuthResponse} from "@sphereon/did-auth-siop-web-demo-shared"
 import jsonpack from "jsonpack"
@@ -133,7 +133,7 @@ class App extends Component<AppState> {
                             <h5>{authResponse.naam} ({authResponse.kvkNummer})</h5>
                         </Col>
                         <Col className="col-1">
-                            <Button variant="primary" size="lg" onClick={this.signOut}>Sign out</Button>
+                            <Button variant="contained" onClick={this.signOut} color={"secondary"}>Sign out</Button>
                         </Col>
                     </Row>
                 </Container>
@@ -148,7 +148,7 @@ class App extends Component<AppState> {
                           />
                         </Col>
                         <Col className="col-1">
-                <Button variant="sphereon" size="lg" onClick={this.showLoginDialog}>Sign in</Button>
+                <Button variant="contained" onClick={this.showLoginDialog} color={"secondary"}>Sign in</Button>
               </Col>
             </Row>
           </Container>
