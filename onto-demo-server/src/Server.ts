@@ -117,6 +117,7 @@ class Server {
     private registerSIOPEndpoint() {
         this.express.get("/ext/get-auth-request-url", (request, response) => {
             console.log('get auth request url')
+            console.log('request:' + request)
             // fixme: We are splitting, since the SIOP package appends ?state=undefined to the oob
             const oobQuery = (request.query['oob'] as string).split('?')[0]
             const oobStr = decodeBase64url(oobQuery).replace('goal-code', 'goalCode')
@@ -137,6 +138,7 @@ class Server {
                     nonce,
                     state: stateId
                 }).then(requestURI => {
+                    console.log('createAuthenticationRequest')
                     stateMapping.authRequestCreated = true
                     response.statusCode = 200
                     return response.send(requestURI.encodedUri)
@@ -170,6 +172,7 @@ class Server {
                                 stateMapping.authResponse = {
                                     token: verifiedResponse.jwt,
                                     kvkNummer: verifiedResponse.payload.kvkNummer,
+                                    // @ts-ignore
                                     ...bedrijfsinformatie
                                 }
                             }
@@ -226,8 +229,8 @@ class Server {
             .requestBy(PassBy.VALUE)
             .internalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller")
             .defaultResolver(resolver)
-            .addDidMethod("lto")
-            // .addDidMethod("ethr")
+            //.addDidMethod("lto")
+            .addDidMethod("ethr")
             .addDidMethod("key")
             .registrationBy(PassBy.VALUE)
             .addPresentationDefinitionClaim({

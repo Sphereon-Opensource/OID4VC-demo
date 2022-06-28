@@ -81,9 +81,9 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   render() {
     // Show the loader until we have details on which parameters to load into the QR code
-    return this.state.qrCode
-      ? this.state.qrCode
-      : <Loader type="BallTriangle" color="#352575" height="100" width="100"/>
+    return <div>{this.state.qrCode}</div>//this.state.qrCode
+      //
+      //<Loader type="BallTriangle" color="#352575" height="100" width="100"/>
   }
 
   /* Get the parameters that need to go into the QR code from the server. (We don't want to build/pack a new frontend version for every change to the QR code.) */
