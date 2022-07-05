@@ -1,0 +1,24 @@
+{
+  "name": "@sphereon/did-auth-siop-web-demo-root",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "scripts": {
+    "install-shared-types": "cd onto-demo-shared-types && yarn install",
+    "install-server": "cd onto-demo-server && yarn install",
+    "install-client": "cd onto-demo-client && yarn install",
+    "install-all": "yarn install-shared-types && yarn install-server && yarn install-client",
+    "start-server": "cd onto-demo-server && yarn run start",
+    "start-client": "cd onto-demo-client && yarn run start",
+    "build-types": "cd onto-demo-shared-types && yarn run build",
+    "build-client": "cd onto-demo-client && yarn run build",
+    "build": "yarn build-types && yarn build-client",
+    "start": "concurrently \"yarn start-server\" \"yarn start-client\""
+  },
+  "dependencies": {
+    "dotenv-flow": "^3.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^1.0.0"
+  }
+}
