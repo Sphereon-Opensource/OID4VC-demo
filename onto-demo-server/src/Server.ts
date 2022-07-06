@@ -15,9 +15,19 @@ import {
     VerifiedAuthenticationResponseWithJWT
 } from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
 import {OobPayload} from "@sphereon/ssi-sdk-waci-pex-qr-react";
-import {decodeBase64url} from "@sphereon/did-auth-siop/dist/did-jwt-fork/util";
 import {Resolver} from "did-resolver";
 import {getUniResolver} from "@sphereon/did-uni-client";
+
+import * as u8a from 'uint8arrays'
+
+export function base64ToBytes(s: string): Uint8Array {
+    const inputBase64Url = s.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
+    return u8a.fromString(inputBase64Url, 'base64url')
+}
+
+export function decodeBase64url(s: string): string {
+    return u8a.toString(base64ToBytes(s))
+}
 
 class Server {
     public express: core.Express;
@@ -66,6 +76,7 @@ class Server {
             const stateMapping: StateMapping = request.body
             let sessionId: string = request.signedCookies.sessionId;
             if (!sessionId) {
+                console.log(`Session ID will be generated in stored in cookie`)
                 sessionId = shortUUID.generate()
                 const options: CookieOptions = {
                     signed: true,
@@ -84,23 +95,28 @@ class Server {
         this.express.post("/backend/poll-auth-response", (request, response) => {
             // console.log("Received poll auth response...")
             const stateId: string = request.body.stateId as string
+            // console.log(`State id: ${stateId}`)
             const stateMapping: StateMapping = this.stateMap.get(stateId)
             if (!stateMapping) {
+                console.log("No authentication request mapping could be found for the given stateId.")
                 return Server.sendErrorResponse(response, 500, "No authentication request mapping could be found for the given stateId.")
             }
             const sessionId: string = request.signedCookies.sessionId
             if (!stateMapping.sessionId || stateMapping.sessionId !== sessionId) {
+                console.log(`Session id mismatch. statemapping: ${stateMapping.sessionId}, cookie session id: ${sessionId}`)
                 return Server.sendErrorResponse(response, 403, "Browser session violation!")
             }
 
             if ("true" == process.env.MOCK_AUTH_RESPONSE && "development" == process.env.NODE_ENV) {
                 this.mockResponse(stateMapping, response)
             } else {
-                // console.log("Poll auth resp: ", stateMapping)
+
                 if (stateMapping.authResponse == null) {
+                    console.log("Poll auth resp: auth created", stateMapping.authRequestCreated)
                     response.statusCode = 202
                     return response.send({authRequestCreated: stateMapping.authRequestCreated})
                 } else {
+                    console.log("Poll auth response, existing authResponse" + stateMapping.authResponse)
                     response.statusCode = 200
                     return response.send(stateMapping.authResponse)
                 }
@@ -153,12 +169,14 @@ class Server {
 
         this.express.post("/ext/siop-sessions", (request, response) => {
                 console.log('SIOP Sessions')
+                console.log(JSON.stringify(request.body, null, 2))
                 const jwt = request.body.id_token;
                 const authResponse = parseJWT(jwt);
                 const stateMapping: StateMapping = this.stateMap.get(authResponse.payload.state)
                 if (stateMapping === null) {
                     return Server.sendErrorResponse(response, 500, "No request mapping could be found for the given stateId.")
                 }
+
 
                 this.rp.verifyAuthenticationResponseJwt(jwt, {audience: authResponse.payload.aud as string})
                     .then((verifiedResponse: VerifiedAuthenticationResponseWithJWT) => {
@@ -211,7 +229,7 @@ class Server {
     }
 
     private buildRP() {
-        const SPHEREON_UNIRESOLVER_RESOLVE_URL ='https://uniresolver.test.sphereon.io/1.0/identifiers'
+        const SPHEREON_UNIRESOLVER_RESOLVE_URL = 'https://uniresolver.test.sphereon.io/1.0/identifiers'
         const resolver = new Resolver({
             ...getUniResolver('ethr', {
                 resolveUrl: 'https://dev.uniresolver.io/1.0/identifiers'
@@ -222,7 +240,11 @@ class Server {
             }),
             ...getUniResolver('factom', {
                 resolveUrl: SPHEREON_UNIRESOLVER_RESOLVE_URL
-            })
+            }),
+            ...getUniResolver('key', {
+                resolveUrl: 'https://dev.uniresolver.io/1.0/identifiers'
+            }),
+
         })
         this.rp = RP.builder()
             .redirect(process.env.REDIRECT_URL_BASE + "/siop-sessions",)
