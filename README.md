@@ -56,16 +56,13 @@ A QR code will appear which can be scanned with the mobile OP authenticator modu
 
 ![login-qr-screen.png](resources/login-qr-screen.png)
 
-
 Once the SIOP accepts the receipt of the Presentation Definition the screen will change to:
 ![login-wait-def-screen.png](resources/login-wait-def-screen.png)
-
 
 As soon as the SIOP sends in the Verifiable Presentation that conforms to the definition the SIOP will be authenticated:
 ![login-wait-def-screen.png](resources/vp-received-screen.png)
 
 Note the Information in the top left corner which actually comes from the Verifiable Credential sent by the SIOP.
-
 
 app "[rn-did-siop-example-app](https://github.com/Sphereon-OpenSource/rn-did-siop-example-app)"
 After a successful login two extra page will appear in the menu navigation.
@@ -81,29 +78,33 @@ more configurable soon.
 
 Definition:
 
-````typescript
+````json
 {
-    id: "9449e2db-791f-407c-b086-c21cc677d2e0",
-        purpose
-:
-    "You need to prove your Chamber of Commerce data to login",
-        submission_requirements
-:
-    [{
-        name: "kvk",
-        rule: Rules.Pick,
-        count: 1,
-        from: "A"
-    }],
-        input_descriptors
-:
-    [{
-        id: "chamberOfCommerceSchema",
-        purpose: "checking the schema",
-        name: "kvkCredentialSchema",
-        group: ["A"],
-        schema: [{uri: "https://sphereon-opensource.github.io/vc-contexts/myc/bedrijfsinformatie-v1.jsonld"}]
-    }]
+  "id": "9449e2db-791f-407c-b086-c21cc677d2e0",
+  "purpose": "You need to prove your Chamber of Commerce data to login",
+  "submission_requirements": [
+    {
+      "name": "kvk",
+      "rule": "Pick",
+      "count": 1,
+      "from": "A"
+    }
+  ],
+  "input_descriptors": [
+    {
+      "id": "chamberOfCommerceSchema",
+      "purpose": "checking the schema",
+      "name": "kvkCredentialSchema",
+      "group": [
+        "A"
+      ],
+      "schema": [
+        {
+          "uri": "https://sphereon-opensource.github.io/vc-contexts/myc/bedrijfsinformatie-v1.jsonld"
+        }
+      ]
+    }
+  ]
 }
 ````
 
