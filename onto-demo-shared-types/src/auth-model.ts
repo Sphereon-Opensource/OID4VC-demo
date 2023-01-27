@@ -1,5 +1,5 @@
 // noinspection JSUnusedGlobalSymbols
-import { ClaimOpts } from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
+import { ClaimPayloadCommonOpts } from "@sphereon/did-auth-siop";
 
 export class QRVariables  {
   redirectUrl?: string
@@ -15,7 +15,7 @@ export class StateMapping {
   pollCount?: number
   authRequestCreated: boolean = false
   authResponse? :AuthResponse
-  claims?: ClaimOpts
+  claims?: ClaimPayloadCommonOpts
 }
 
 export class AuthResponse {

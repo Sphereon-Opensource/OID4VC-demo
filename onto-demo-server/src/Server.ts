@@ -1,24 +1,21 @@
+// noinspection JSUnusedGlobalSymbols
+
 import * as dotenv from "dotenv-flow"
 import express from "express"
-import {CookieOptions, Response} from "express/ts4.0"
+import {CookieOptions, Response} from "express"
 import cookieParser from "cookie-parser"
 import ExpiryMap from "expiry-map"
 import shortUUID from "short-uuid"
 import {AuthResponse, QRVariables, StateMapping} from "@sphereon/did-auth-siop-web-demo-shared";
 import * as core from "express-serve-static-core";
-import {PresentationDefinitionV1, Rules} from '@sphereon/pex-models';
-import {RP} from "@sphereon/did-auth-siop";
-import {parseJWT} from '@sphereon/did-auth-siop/dist/main/functions/DidJWT'
-import {
-    PassBy,
-    PresentationLocation,
-    VerifiedAuthenticationResponseWithJWT
-} from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
+import {Rules} from '@sphereon/pex-models';
+import {RP, SigningAlgo, VerifiedAuthenticationResponse, PassBy, parseJWT} from '@sphereon/did-auth-siop'
 import {OobPayload} from "@sphereon/ssi-sdk-waci-pex-qr-react";
 import {Resolver} from "did-resolver";
 import {getUniResolver} from "@sphereon/did-uni-client";
 
 import * as u8a from 'uint8arrays'
+import {IPresentationDefinition} from "@sphereon/pex";
 
 export function base64ToBytes(s: string): Uint8Array {
     const inputBase64Url = s.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
@@ -29,6 +26,7 @@ export function decodeBase64url(s: string): string {
     return u8a.toString(base64ToBytes(s))
 }
 
+// noinspection JSUnusedLocalSymbols
 class Server {
     public express: core.Express;
     private stateMap: ExpiryMap<string, StateMapping>;
@@ -125,6 +123,7 @@ class Server {
 
         this.express.post("/backend/cancel-auth-request", (request, response) => {
                 const stateId: string = request.body as string
+                console.log(stateId)
                 // TODO
             }
         )
@@ -150,14 +149,14 @@ class Server {
                 let nonce = shortUUID.generate();
                 console.log(`Nonce: ${nonce}`)
 
-                this.rp.createAuthenticationRequest({
+                this.rp.createAuthorizationRequest({
                     nonce,
                     state: stateId
                 }).then(requestURI => {
                     console.log('createAuthenticationRequest')
                     stateMapping.authRequestCreated = true
                     response.statusCode = 200
-                    return response.send(requestURI.encodedUri)
+                    return response.send(requestURI.uri())
                 }).catch((e: Error) => {
                     console.error(e, e.stack)
                     return Server.sendErrorResponse(response, 500, "Could not create an authentication request URI: " + e.message)
@@ -178,10 +177,10 @@ class Server {
                 }
 
 
-                this.rp.verifyAuthenticationResponseJwt(jwt, {audience: authResponse.payload.aud as string})
-                    .then((verifiedResponse: VerifiedAuthenticationResponseWithJWT) => {
+                this.rp.verifyAuthorizationResponse(jwt, {audience: authResponse.payload.aud as string})
+                    .then((verifiedResponse: VerifiedAuthenticationResponse) => {
                         console.log("verifiedResponse: ", verifiedResponse)
-                        // The vp_token only contains 1 presentation max (the id_token can contaim multiple VPs)
+                        // The vp_token only contains 1 presentation max (the id_token can contain multiple VPs)
                         const verifiableCredential = verifiedResponse.payload.vp_token.presentation.verifiableCredential;
                         if (verifiableCredential) {
                             const credentialSubject = verifiableCredential[0]['credentialSubject'];
@@ -208,7 +207,7 @@ class Server {
         )
     }
 
-    private static buildPresentationDefinition(): PresentationDefinitionV1 {
+    private static buildPresentationDefinition(): IPresentationDefinition {
         return {
             id: "9449e2db-791f-407c-b086-c21cc677d2e0",
             purpose: "You need to prove your Chamber of Commerce data to login",
@@ -247,18 +246,15 @@ class Server {
 
         })
         this.rp = RP.builder()
-            .redirect(process.env.REDIRECT_URL_BASE + "/siop-sessions",)
-            .requestBy(PassBy.VALUE)
-            .internalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller")
-            .defaultResolver(resolver)
+            .withRedirectUri(process.env.REDIRECT_URL_BASE + "/siop-sessions",)
+            .withRequestBy(PassBy.VALUE)
+            .withInternalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller", SigningAlgo.EDDSA)
+            .withCustomResolver(resolver)
             //.addDidMethod("lto")
             .addDidMethod("ethr")
             .addDidMethod("key")
-            .registrationBy(PassBy.VALUE)
-            .addPresentationDefinitionClaim({
-                location: PresentationLocation.VP_TOKEN,
-                definition: Server.buildPresentationDefinition()
-            })
+            .withRequestBy(PassBy.VALUE)
+            .withPresentationDefinition(Server.buildPresentationDefinition())
             .build();
     }
 
