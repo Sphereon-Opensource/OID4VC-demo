@@ -9,13 +9,14 @@ import shortUUID from "short-uuid"
 import {AuthResponse, QRVariables, StateMapping} from "@sphereon/did-auth-siop-web-demo-shared";
 import * as core from "express-serve-static-core";
 import {Rules} from '@sphereon/pex-models';
-import {RP, SigningAlgo, VerifiedAuthenticationResponse, PassBy, parseJWT} from '@sphereon/did-auth-siop'
+import {RP, SigningAlgo, VerifiedAuthenticationResponse, PassBy, parseJWT, PropertyTarget, ResponseType, Scope} from '@sphereon/did-auth-siop'
 import {OobPayload} from "@sphereon/ssi-sdk-waci-pex-qr-react";
 import {Resolver} from "did-resolver";
 import {getUniResolver} from "@sphereon/did-uni-client";
 
 import * as u8a from 'uint8arrays'
 import {IPresentationDefinition} from "@sphereon/pex";
+import {SupportedVersion} from "@sphereon/did-auth-siop/dist/main/types/SIOP.types";
 
 export function base64ToBytes(s: string): Uint8Array {
     const inputBase64Url = s.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
@@ -250,10 +251,23 @@ class Server {
             .withRequestBy(PassBy.VALUE)
             .withInternalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller", SigningAlgo.EDDSA)
             .withCustomResolver(resolver)
-            //.addDidMethod("lto")
-            .addDidMethod("ethr")
-            .addDidMethod("key")
-            .withRequestBy(PassBy.VALUE)
+            .withClientId(process.env.RP_DID)
+            .withResponseType(ResponseType.ID_TOKEN)
+            .withSupportedVersions([
+              SupportedVersion.JWT_VC_PRESENTATION_PROFILE_v1,
+              SupportedVersion.SIOPv2_ID1,
+              SupportedVersion.SIOPv2_D11
+            ])
+            .withClientMetadata(
+                {
+                  passBy: PassBy.VALUE,
+                  scopesSupported: [Scope.OPENID_DIDAUTHN, Scope.OPENID],
+                  vpFormatsSupported: { jwt_vc: { alg: [SigningAlgo.EDDSA] } },
+                  subjectSyntaxTypesSupported: ['did'],
+                },
+                PropertyTarget.REQUEST_OBJECT
+            )
+            .withScope('openid')
             .withPresentationDefinition(Server.buildPresentationDefinition())
             .build();
     }
