@@ -111,7 +111,7 @@ class Server {
             } else {
 
                 if (stateMapping.authResponse == null) {
-                    console.log("Poll auth resp: auth created", stateMapping.authRequestCreated)
+                    // console.log("Poll auth resp: auth created", stateMapping.authRequestCreated)
                     response.statusCode = 202
                     return response.send({authRequestCreated: stateMapping.authRequestCreated})
                 } else {
@@ -133,7 +133,7 @@ class Server {
     private registerSIOPEndpoint() {
         this.express.get("/ext/get-auth-request-url", (request, response) => {
             console.log('get auth request url')
-            console.log('request:' + request)
+            console.log('request:' + JSON.stringify(request))
             // fixme: We are splitting, since the SIOP package appends ?state=undefined to the oob
             const oobQuery = (request.query['oob'] as string).split('?')[0]
             const oobStr = decodeBase64url(oobQuery).replace('goal-code', 'goalCode')
