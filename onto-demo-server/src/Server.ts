@@ -9,7 +9,16 @@ import shortUUID from "short-uuid"
 import {AuthResponse, QRVariables, StateMapping} from "@sphereon/did-auth-siop-web-demo-shared";
 import * as core from "express-serve-static-core";
 import {Rules} from '@sphereon/pex-models';
-import {RP, SigningAlgo, VerifiedAuthenticationResponse, PassBy, parseJWT, PropertyTarget, ResponseType, Scope} from '@sphereon/did-auth-siop'
+import {
+  RP,
+  SigningAlgo,
+  VerifiedAuthenticationResponse,
+  PassBy,
+  parseJWT,
+  ResponseType,
+  Scope,
+  SubjectType
+} from '@sphereon/did-auth-siop'
 import {OobPayload} from "@sphereon/ssi-sdk-waci-pex-qr-react";
 import {Resolver} from "did-resolver";
 import {getUniResolver} from "@sphereon/did-uni-client";
@@ -133,7 +142,7 @@ class Server {
     private registerSIOPEndpoint() {
         this.express.get("/ext/get-auth-request-url", (request, response) => {
             console.log('get auth request url')
-            console.log('request:' + JSON.stringify(request))
+            console.log('request:' + JSON.stringify(request.body))
             // fixme: We are splitting, since the SIOP package appends ?state=undefined to the oob
             const oobQuery = (request.query['oob'] as string).split('?')[0]
             const oobStr = decodeBase64url(oobQuery).replace('goal-code', 'goalCode')
@@ -153,11 +162,19 @@ class Server {
                 this.rp.createAuthorizationRequest({
                     nonce,
                     state: stateId
-                }).then(requestURI => {
+                }).then(authorizationRequest => {
                     console.log('createAuthenticationRequest')
+
+                  authorizationRequest.uri().then(uri => {
+                    const encodedUri = uri.encodedUri
+                    console.log(`encoded URI: ${encodedUri}`)
                     stateMapping.authRequestCreated = true
                     response.statusCode = 200
-                    return response.send(requestURI.uri())
+
+
+                    return response.send(encodedUri)
+
+                  })
                 }).catch((e: Error) => {
                     console.error(e, e.stack)
                     return Server.sendErrorResponse(response, 500, "Could not create an authentication request URI: " + e.message)
@@ -176,7 +193,6 @@ class Server {
                 if (stateMapping === null) {
                     return Server.sendErrorResponse(response, 500, "No request mapping could be found for the given stateId.")
                 }
-
 
                 this.rp.verifyAuthorizationResponse(jwt, {audience: authResponse.payload.aud as string})
                     .then((verifiedResponse: VerifiedAuthenticationResponse) => {
@@ -246,30 +262,33 @@ class Server {
             }),
 
         })
-        this.rp = RP.builder()
-            .withRedirectUri(process.env.REDIRECT_URL_BASE + "/siop-sessions",)
-            .withRequestBy(PassBy.VALUE)
-            .withInternalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller", SigningAlgo.EDDSA)
-            .withCustomResolver(resolver)
-            .withClientId(process.env.RP_DID)
-            .withResponseType(ResponseType.ID_TOKEN)
-            .withSupportedVersions([
-              SupportedVersion.JWT_VC_PRESENTATION_PROFILE_v1,
-              SupportedVersion.SIOPv2_ID1,
-              SupportedVersion.SIOPv2_D11
-            ])
-            .withClientMetadata(
-                {
-                  passBy: PassBy.VALUE,
-                  scopesSupported: [Scope.OPENID_DIDAUTHN, Scope.OPENID],
-                  vpFormatsSupported: { jwt_vc: { alg: [SigningAlgo.EDDSA] } },
-                  subjectSyntaxTypesSupported: ['did'],
-                },
-                PropertyTarget.REQUEST_OBJECT
-            )
-            .withScope('openid')
-            .withPresentationDefinition(Server.buildPresentationDefinition())
-            .build();
+
+        this.rp = RP.builder({ requestVersion: SupportedVersion.SIOPv2_ID1 })
+          .withScope('openid vp_token')
+          .withResponseType(ResponseType.ID_TOKEN)
+          .withRedirectUri(process.env.REDIRECT_URL_BASE + "/siop-sessions",)
+          .withRequestBy(PassBy.VALUE)
+          .withInternalSignature(process.env.RP_PRIVATE_HEX_KEY, process.env.RP_DID, process.env.RP_DID + "#controller", SigningAlgo.ES256K)
+          .withCustomResolver(resolver)
+          .withClientId(process.env.RP_DID)
+          .withSupportedVersions([
+            SupportedVersion.SIOPv2_ID1,
+          ])
+          .addDidMethod('ethr')
+          .withClientMetadata(
+              {
+                idTokenSigningAlgValuesSupported: [SigningAlgo.EDDSA], // added newly
+                requestObjectSigningAlgValuesSupported: [SigningAlgo.EDDSA, SigningAlgo.ES256], // added newly
+                responseTypesSupported: [ResponseType.ID_TOKEN], // added newly
+                vpFormatsSupported: { jwt_vc: { alg: [SigningAlgo.EDDSA] } },
+                scopesSupported: [Scope.OPENID_DIDAUTHN],
+                subjectTypesSupported: [SubjectType.PAIRWISE],
+                subjectSyntaxTypesSupported: ['did', 'did:ethr'],
+                passBy: PassBy.VALUE,
+              }
+          )
+          .withPresentationDefinition(Server.buildPresentationDefinition())
+          .build();
     }
 
     private timeout(ms: number) {
