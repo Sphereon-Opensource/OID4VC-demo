@@ -1,16 +1,13 @@
 {
   "name": "@sphereon/did-auth-siop-web-demo-client",
-  "version": "0.1.3-next.5",
+  "version": "0.1.3-next.8",
   "private": false,
   "license": "Apache-2.0",
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@sphereon/did-auth-siop": "^0.3.0-unstable.2",
-    "@sphereon/did-auth-siop-web-demo-shared": "^0.1.3-next.12",
-    "@sphereon/ssi-sdk-waci-pex-qr-react": "^0.6.1-next.9",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@material-ui/core": "^4.12.4",
+    "@sphereon/did-auth-siop-web-demo-shared": "^0.1.3-next.21",
+    "@sphereon/ssi-sdk-qr-react": "^0.8.1-unstable.242",
+    "@sphereon/ssi-types": "0.8.1-unstable.242",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
     "jsonpack": "^1.1.5",
@@ -26,6 +23,7 @@
     "underscore.string": "^3.3.5",
     "web-vitals": "^1.0.1"
   },
+
   "type": "module",
   "scripts": {
     "start": "react-scripts start",
@@ -51,7 +49,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5001",
+  "proxy": "https://nk-gx-compliance.eu.ngrok.io",
   "devDependencies": {
     "@types/js-cookie": "^2.2.7",
     "@types/jsonpack": "^1.1.1",
@@ -61,6 +59,9 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-router": "^5.1.16",
     "@types/react-router-dom": "^5.1.9",
-    "@types/underscore.string": "^0.0.38"
+    "@types/underscore.string": "^0.0.38",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10"
   }
 }

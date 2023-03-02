@@ -12,23 +12,23 @@ export type AuthenticationModalProps = {
 }
 
 interface AuthenticationModalState {
-  authRequestCreated: boolean
+  authRequestRetrieved: boolean
 }
 
 export default class AuthenticationModal extends Component<AuthenticationModalProps, AuthenticationModalState> {
 
-  private readonly scanText = "Please scan this QR code using your app.";
-  private readonly authText = "Please approve the authentication request in your app.";
+  private readonly scanText = "Please scan the QR code with your app.";
+  private readonly authText = "Please approve the request in your app.";
 
   constructor(props: AuthenticationModalProps) {
     super(props)
-    this.state = {authRequestCreated: false}
+    this.state = {authRequestRetrieved: false}
   }
 
     render() {
     return <Modal show={this.props.show} animation={true} style={{
       height: "100%",
-      marginTop: "200px"
+      marginTop: "150px"
     }}>
       <Modal.Header style={{
         display: "flex",
@@ -44,14 +44,14 @@ export default class AuthenticationModal extends Component<AuthenticationModalPr
         <Container>
           <Row>
             <Col className="d-flex justify-content-center">
-              <h6>{this.state.authRequestCreated ? this.authText : this.scanText}</h6>
+              <h6>{this.state.authRequestRetrieved ? this.authText : this.scanText}</h6>
             </Col>
           </Row>
           <Row>
             <Col className="d-flex justify-content-center" style={{paddingTop: "10px"}}>
               <AuthenticationQR
-                  onAuthRequestCreated={() => {
-                    this.setState({authRequestCreated: true})
+                  onAuthRequestRetrieved={() => {
+                    this.setState({authRequestRetrieved: true})
                   }}
                   onSignInComplete={(AuthResponse) =>
                       this.props.onSignInComplete(AuthResponse)}/>

@@ -1,12 +1,11 @@
-import { createAgent } from '@veramo/core'
+import {createAgent} from '@veramo/core'
 
-import {WaciQrCodeProvider, WaciTypes} from "@sphereon/ssi-sdk-waci-pex-qr-react";
+import {IQRCodeGenerator, QrCodeProvider} from "@sphereon/ssi-sdk-qr-react";
 
-const agent = createAgent<WaciTypes>({
+const agent = createAgent<IQRCodeGenerator>({
   plugins: [
-    new WaciQrCodeProvider()
+    new QrCodeProvider()
+
   ]
 })
-
-export const createOobQrCode = agent.createOobQrCode
 export default agent
