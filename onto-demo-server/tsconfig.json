@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "commonjs",
     "target": "esnext",
+    "moduleResolution": "Node",
     "declaration": true,
     "outDir": "./dist",
     "inlineSourceMap": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
     /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "resolveJsonModule": true
     /* Include modules imported with .json extension. */,
@@ -42,9 +42,9 @@
     "coverage/**",
     "dist/**"
   ],
-  // other settings...
+ /* // other settings...
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"
-  }
+  }*/
 }

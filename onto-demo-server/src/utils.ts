@@ -11,6 +11,7 @@ export function decodeBase64url(s: string): string {
 
 // noinspection JSUnusedLocalSymbols
 
-export function generateRequestObjectUri() {
-    return `${process.env.REDIRECT_URL_BASE}/requests/uniquevalue`;
+export function uriWithBase(path: string) {
+
+    return `${process.env.BASE_URL}${path.startsWith('/') ? path : '/' + path}`;
 }

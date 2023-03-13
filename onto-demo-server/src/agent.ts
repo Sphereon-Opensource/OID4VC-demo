@@ -10,7 +10,6 @@ import {
 
 import {QrCodeProvider} from "@sphereon/ssi-sdk-qr-react";
 import {getUniResolver} from '@sphereon/did-uni-client'
-// import {getDidJwkResolver, JwkDIDProvider} from '@sphereon/ssi-sdk-jwk-did-provider'
 import {
   CredentialHandlerLDLocal,
   ICredentialHandlerLDLocal,
@@ -31,8 +30,9 @@ import {DIDResolverPlugin} from '@veramo/did-resolver'
 import {KeyManager} from '@veramo/key-manager'
 import {KeyManagementSystem, SecretBox} from '@veramo/kms-local'
 import {Resolver} from 'did-resolver'
-import {getDbConnection} from "./database/databaseService";
-import {DB_CONNECTION_NAME, DB_ENCRYPTION_KEY} from "./database/config";
+import {getDbConnection} from "./database";
+import {DB_CONNECTION_NAME, DB_ENCRYPTION_KEY} from "./database";
+
 
 
 export const DIF_UNIRESOLVER_RESOLVE_URL = 'https://dev.uniresolver.io/1.0/identifiers'
@@ -46,21 +46,38 @@ export enum KeyManagementSystemEnum {
 export enum SupportedDidMethodEnum {
   DID_ETHR = 'ethr',
   DID_KEY = 'key',
-  DID_LTO = 'lto',
+  // DID_LTO = 'lto',
   DID_ION = 'ion',
-  DID_FACTOM = 'factom',
+  // DID_FACTOM = 'factom',
   DID_JWK = 'jwk'
 }
 
 
-export const didResolver = new Resolver({
+export const resolver = new Resolver({
+  /*// const SPHEREON_UNIRESOLVER_RESOLVE_URL = 'https://uniresolver.test.sphereon.io/1.0/identifiers'
+  ...getUniResolver('jwk', {
+      resolveUrl: DIF_UNIRESOLVER_RESOLVE_URL
+  }),
+  ...getUniResolver('ion', {
+      resolveUrl: DIF_UNIRESOLVER_RESOLVE_URL
+  }),
+  ..getUniResolver('lto', {
+      resolveUrl: SPHEREON_UNIRESOLVER_RESOLVE_URL
+  }),*/
+  ...getUniResolver('ethr', {
+    resolveUrl: DIF_UNIRESOLVER_RESOLVE_URL
+  }),
   ...getDidKeyResolver(),
-  ...getUniResolver(SupportedDidMethodEnum.DID_ETHR, {
+  ...getUniResolver('jwk', {
+    resolveUrl: DIF_UNIRESOLVER_RESOLVE_URL
+  }),
+  // ...getDidJwkResolver(),
+  ...getUniResolver('jwk', {
     resolveUrl: DIF_UNIRESOLVER_RESOLVE_URL
   }),
   ...getDidIonResolver(),
-  // ...getDidJwkResolver()
 })
+
 export const didProviders = {
   [`${DID_PREFIX}:${SupportedDidMethodEnum.DID_ETHR}`]: new EthrDIDProvider({
     defaultKms: KeyManagementSystemEnum.LOCAL,
@@ -105,7 +122,7 @@ const agent = createAgent<
       providers: didProviders
     }),
     new DIDResolverPlugin({
-      resolver: didResolver
+      resolver
     }),
     new CredentialPlugin(),
     new CredentialHandlerLDLocal({

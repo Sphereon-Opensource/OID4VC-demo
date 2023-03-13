@@ -1,7 +1,13 @@
 import React, {Component} from "react"
 import axios from "axios"
 import {BallTriangle} from "react-loader-spinner"
-import {AuthResponse, StateMapping} from "@sphereon/did-auth-siop-web-demo-shared"
+import {
+    AuthorizationRequestStateStatus,
+    AuthorizationResponseStateStatus,
+    AuthResponse,
+    AuthStatusResponse,
+    GenerateAuthRequestURIResponse
+} from "@sphereon/did-auth-siop-web-demo-shared"
 import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-react";
 import agent from '../agent';
 
@@ -11,7 +17,7 @@ export type AuthenticationQRProps = {
 }
 
 export interface AuthenticationQRState {
-    qrVariables?: URIData
+    authRequestURIResponse?: GenerateAuthRequestURIResponse
     qrCode?: Element
 }
 
@@ -22,9 +28,10 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     private registerStateSent: boolean = false
     private refreshTimerHandle?: NodeJS.Timeout
     private qrExpirationMs: number = 0
-    private currentStateMapping?: StateMapping
-    private timedOutRequestMappings: Set<StateMapping> = new Set<StateMapping>()
+    private timedOutRequestMappings: Set<AuthenticationQRState> = new Set<AuthenticationQRState>()
     private _isMounted: boolean = false
+
+    private readonly definitionId = process.env.PRESENTATION_DEF_ID || '9449e2db-791f-407c-b086-c21cc677d2e0'
 
 
     componentDidMount() {
@@ -32,44 +39,31 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         // actually since the QR points to a JWT it has its own expiration value as well.
 
         if (!this.state.qrCode) {
-            this.getQRValue().then(authRequestURI => {
-                agent.uriElement(this.createQRArg(authRequestURI)).then(qr => {
-                    return this.setState({qrVariables: authRequestURI, qrCode: qr})
-                })
-            }).catch(e => console.error(e))
-            this.refreshTimerHandle = setTimeout(() => this.refreshQR(), this.qrExpirationMs)
+            this.generateNewQRCode();
+            this.refreshTimerHandle = setTimeout(() => this.refreshQRCode(), this.qrExpirationMs)
         }
         this._isMounted = true
     }
 
-    createQRArg(requestUri: string): CreateElementArgs<QRType.URI, URIData> {
-        // console.log("SIOP URI:" + encodedUri)
-        /*const siopv2Object: SIOPv2DataWithScheme = {
-            scheme: 'openid-vc',
-            requestUri,
-        }
-        const siopv2Data: QRData<QRType.SIOPV2, SIOPv2DataWithScheme> = {
-            object: siopv2Object,
-            type: QRType.SIOPV2,
-            id: '456',
-        }
-        const siopv2CreateValue: CreateValueArgs<QRType.URI, URIData> = {
-            data: siopv2Data,
-            onGenerate: (result: ValueResult<QRType.SIOPV2, SIOPv2DataWithScheme>) => {
-                this.registerState(result.value)
-            },
-        }*/
+    private generateNewQRCode() {
+        this.generateAuthRequestURI().then(authRequestURIResponse => {
+            agent.uriElement(this.createQRCodeElement(authRequestURIResponse)).then(qrCode => {
+                return this.setState({authRequestURIResponse, qrCode})
+            })
+        }).catch(e => console.error(e))
+    }
 
+    createQRCodeElement(authRequestURIResponse: GenerateAuthRequestURIResponse): CreateElementArgs<QRType.URI, URIData> {
         const qrProps: CreateElementArgs<QRType.URI, URIData> = {
 
             data: {
                 type: QRType.URI,
-                object: requestUri,
-                id: '456'
+                object: authRequestURIResponse.authRequestURI,
+                id: authRequestURIResponse.correlationId
 
             },
             onGenerate: (result: ValueResult<QRType.URI, URIData>) => {
-                this.registerState(result)
+                this.registerState(authRequestURIResponse, result)
             },
             renderingProps: {
                 bgColor: 'white',
@@ -81,25 +75,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
         }
         return qrProps
-        /* const oobBaseUrl = encodedUri.redirectUrl as string + '?oob=';
-         return {
-           oobBaseUrl,
-           type: QRType.DID_AUTH_SIOP_V2,
-           body: {
-             goalCode: GoalCode.STREAMLINED_VP,
-             accept: [AcceptMode.SIOPV2_WITH_OIDC4VP],
-           },
-           id: encodedUri.id,
-           from: encodedUri.requestorDID as string,
-           onGenerate: (oobQRProps: OobQRProps, payload: OobPayload) => {
-             this.registerState(encodedUri)
-           },
-           bgColor: 'white',
-           fgColor: '#352575',
-           level: 'L',
-           size: 250,
-           title: 'Sign in'
-         }*/
     }
 
     componentWillUnmount() {
@@ -116,72 +91,68 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     }
 
     /* Get the parameters that need to go into the QR code from the server */
-    private getQRValue = async (): Promise<string> => {
-        const response = await axios.get("/webapp/auth-request-uri")
-        const requestURI = await response.data
+    private generateAuthRequestURI = async (): Promise<GenerateAuthRequestURIResponse> => {
+        const response = await axios.get(`/webapp/definitions/${this.definitionId}/auth-request-uri`)
+        const generateResponse = await response.data
         if (response.status !== 200) {
-            throw Error(requestURI.message)
+            throw Error(generateResponse.message)
         }
-        return requestURI as string
+        return generateResponse
     }
 
     /* We don't want to keep used and unused states indefinitely, so expire the QR code after a configured timeout  */
-    private refreshQR = () => {
+    private refreshQRCode = () => {
         console.log("Timeout expired, refreshing QR code...")
         if (this.qrExpirationMs > 0) {
-            if (this.currentStateMapping) {
-                this.timedOutRequestMappings.add(this.currentStateMapping)
+            if (this.state) {
+                this.timedOutRequestMappings.add(this.state)
             }
             this.registerStateSent = false
-            if (this.state.qrVariables) {
-                agent.uriElement(this.createQRArg(this.state.qrVariables!)).then(qr => {
-                    return this.setState({qrCode: qr});
-                })
-            } else {
-                throw "qrVariables not defined";
-            }
+            this.generateNewQRCode()
         }
     }
 
-    /* Register the state along with the redirect URL in the backend */
-    private registerState = (result: ValueResult<QRType.URI, URIData>) => {
+
+    private registerState = (authRequestURIResponse: GenerateAuthRequestURIResponse, result: ValueResult<QRType.URI, URIData>) => {
         if (this.registerStateSent) return
         this.registerStateSent = true
-
-        const stateMapping: StateMapping = new StateMapping()
-        stateMapping.stateId = result.value
-        stateMapping.redirectUrl = result.value.split('=')[1] // fixme
-        stateMapping.sessionId = result.value
-        /*    axios.post("/backend/register-state", stateMapping)
-                .then(response => {
-                    console.log("register-state response status", response.status)
-                    if (response.status !== 200) {
-                        throw Error(response.data.message)
-                    }
-                    this.currentStateMapping = stateMapping
-                    this.pollForResponse(stateMapping)
-                })
-                .catch(error => console.error("register-state failed", error))*/
+        this.pollAuthStatus(authRequestURIResponse)
     }
 
+
     /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
-    private pollForResponse = async (stateMapping: StateMapping) => {
-        let pollingResponse = await axios.post("/backend/poll-auth-response", {uri: stateMapping.stateId})
-        while (pollingResponse.status === 202 && this._isMounted && !this.timedOutRequestMappings.has(stateMapping)) {
-            if (this.state.qrCode && pollingResponse.data && pollingResponse.data.authRequestCreated) {
-                this.setState({qrCode: undefined})
-                this.props.onAuthRequestRetrieved()
+    private pollAuthStatus = async (authRequestURIResponse: GenerateAuthRequestURIResponse) => {
+        let pollingResponse = await axios.post("/webapp/auth-status", {
+            correlationId: authRequestURIResponse?.correlationId,
+            definitionId: authRequestURIResponse.definitionId
+        })
+
+        while (pollingResponse.status === 200 && this._isMounted && !this.timedOutRequestMappings.has(this.state)) {
+            const authStatus:  AuthStatusResponse = pollingResponse.data
+            if (!this.state.qrCode) {
+                await this.generateNewQRCode()
+            } else if (!authStatus) {
+                continue
+            } else if (this.timedOutRequestMappings.has(this.state)) {
+                console.log("Cancelling timed out auth request.")
+                await axios.post("/backend/cancel-auth-request", {}) // todo
+                this.timedOutRequestMappings.delete(this.state)
             }
-            pollingResponse = await axios.post("/backend/poll-auth-response", {stateId: stateMapping.stateId})
-        }
-        if (this.timedOutRequestMappings.has(stateMapping)) {
-            console.log("Cancelling timed out auth request.")
-            await axios.post("/backend/cancel-auth-request", {stateId: stateMapping.stateId})
-            this.timedOutRequestMappings.delete(stateMapping)
-        } else if (pollingResponse.status === 200) {
-            this.props.onSignInComplete(pollingResponse.data as AuthResponse)
-        } else {
-            return Promise.reject(pollingResponse.data.message)
+            // @ts-ignore
+            if (authStatus.status === AuthorizationRequestStateStatus.SENT) {
+                this.props.onAuthRequestRetrieved()
+            } else if (authStatus.status === AuthorizationResponseStateStatus.VERIFIED) {
+                this.props.onSignInComplete(authStatus as unknown as AuthResponse) // FIXME: BACKEND SHOULD PASS IN BODY HERE
+                break
+            } else if (authStatus.status === AuthorizationRequestStateStatus.ERROR || authStatus.status === AuthorizationResponseStateStatus.ERROR) {
+                return Promise.reject(authStatus.error)
+            } else {
+                console.log(`Unknown status during polling: ${JSON.stringify(authStatus)}`)
+            }
+            pollingResponse = await axios.post("/webapp/auth-status", {
+                correlationId: authRequestURIResponse?.correlationId,
+                definitionId: authRequestURIResponse.definitionId
+            })
         }
     }
 }

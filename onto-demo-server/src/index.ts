@@ -1,5 +1,5 @@
 export * from './agent'
-export * from './Server'
+export * from './RestAPI'
 export * from './utils'
-export * from './RelyingParty'
+export * from './Verifier'
 export * from './database'
