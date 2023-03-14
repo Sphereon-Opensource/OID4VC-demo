@@ -1,19 +1,14 @@
 import React, {Component} from "react"
 import axios from "axios"
 import {BallTriangle} from "react-loader-spinner"
-import {
-    AuthorizationRequestStateStatus,
-    AuthorizationResponseStateStatus,
-    AuthResponse,
-    AuthStatusResponse,
-    GenerateAuthRequestURIResponse
-} from "@sphereon/did-auth-siop-web-demo-shared"
+import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/did-auth-siop-web-demo-shared"
 import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-react";
 import agent from '../agent';
+import {AuthorizationResponse, AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
 
 export type AuthenticationQRProps = {
     onAuthRequestRetrieved: () => void
-    onSignInComplete: (AuthResponse: AuthResponse) => void
+    onSignInComplete: (payload: AuthorizationResponsePayload) => void
 }
 
 export interface AuthenticationQRState {
@@ -114,8 +109,10 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
 
     private registerState = (authRequestURIResponse: GenerateAuthRequestURIResponse, result: ValueResult<QRType.URI, URIData>) => {
-        if (this.registerStateSent) return
-        this.registerStateSent = true
+        if (this.state.authRequestURIResponse?.correlationId === authRequestURIResponse.correlationId) {
+            // same correlationId, which we are already polling
+            return
+        }
         this.pollAuthStatus(authRequestURIResponse)
     }
 
@@ -127,32 +124,39 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             definitionId: authRequestURIResponse.definitionId
         })
 
-        while (pollingResponse.status === 200 && this._isMounted && !this.timedOutRequestMappings.has(this.state)) {
+        const interval = setInterval(async args => {
             const authStatus:  AuthStatusResponse = pollingResponse.data
             if (!this.state.qrCode) {
                 await this.generateNewQRCode()
             } else if (!authStatus) {
-                continue
+                return
             } else if (this.timedOutRequestMappings.has(this.state)) {
                 console.log("Cancelling timed out auth request.")
-                await axios.post("/backend/cancel-auth-request", {}) // todo
+                await axios.delete(`/webapp/definitions/${this.state?.authRequestURIResponse?.definitionId}/auth-requests/${this.state?.authRequestURIResponse?.correlationId}`)
                 this.timedOutRequestMappings.delete(this.state)
             }
-            // @ts-ignore
-            if (authStatus.status === AuthorizationRequestStateStatus.SENT) {
+            if (authStatus.status === 'sent') {
                 this.props.onAuthRequestRetrieved()
-            } else if (authStatus.status === AuthorizationResponseStateStatus.VERIFIED) {
-                this.props.onSignInComplete(authStatus as unknown as AuthResponse) // FIXME: BACKEND SHOULD PASS IN BODY HERE
-                break
-            } else if (authStatus.status === AuthorizationRequestStateStatus.ERROR || authStatus.status === AuthorizationResponseStateStatus.ERROR) {
-                return Promise.reject(authStatus.error)
+            } else if (authStatus.status === 'verified') {
+                clearInterval(interval)
+                this.props.onSignInComplete(authStatus.payload!) // FIXME: BACKEND SHOULD PASS IN BODY HERE
+                return
+            } else if (pollingResponse.status > 202 || authStatus.status === 'error') {
+                clearInterval(interval)
+                return Promise.reject(authStatus.error ?? pollingResponse.data)
             } else {
-                console.log(`Unknown status during polling: ${JSON.stringify(authStatus)}`)
+                console.log(`status during polling: ${JSON.stringify(authStatus)}`)
             }
+
+            // Use the state, as that gets updated by the qr code
             pollingResponse = await axios.post("/webapp/auth-status", {
-                correlationId: authRequestURIResponse?.correlationId,
-                definitionId: authRequestURIResponse.definitionId
+                correlationId: this.state?.authRequestURIResponse?.correlationId,
+                definitionId: this.state?.authRequestURIResponse?.definitionId
             })
-        }
+            console.log(JSON.stringify(pollingResponse))
+        }, 1500)
+        // while (pollingResponse.status >= 200 && this._isMounted) {
+
+        // }
     }
 }

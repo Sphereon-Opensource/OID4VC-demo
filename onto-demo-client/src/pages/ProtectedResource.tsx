@@ -1,9 +1,8 @@
-import {AuthResponse} from "@sphereon/did-auth-siop-web-demo-shared"
 import React, {Component} from "react"
-import {isBlank} from "underscore.string"
+import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
 
 export type ProtectedResourceProps = {
-  AuthResponse: AuthResponse
+  payload: AuthorizationResponsePayload
 }
 
 
@@ -11,7 +10,7 @@ export default class ProtectedResource extends Component<ProtectedResourceProps>
 
 
   protected isAuthenticated(): boolean {
-    return this.props.AuthResponse && !isBlank(this.props.AuthResponse.kvkNummer as string)
+    return this.props.payload !== undefined
   }
 
 

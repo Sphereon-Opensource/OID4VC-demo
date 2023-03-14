@@ -1,14 +1,14 @@
 import {Button, Col, Container, Modal, Row} from "react-bootstrap"
 import {Component} from "react"
-import {AuthResponse} from "@sphereon/did-auth-siop-web-demo-shared"
 import AuthenticationQR from "./AuthenticationQR";
+import {AuthorizationResponse, AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
 
 /* This is a container dialog for the QR code component. It re emits the onSignInComplete callback.  */
 
 export type AuthenticationModalProps = {
   show?: boolean
   onCloseClicked?: () => void
-  onSignInComplete: (AuthResponse: AuthResponse) => void
+  onSignInComplete: (payload: AuthorizationResponsePayload) => void
 }
 
 interface AuthenticationModalState {
@@ -53,8 +53,8 @@ export default class AuthenticationModal extends Component<AuthenticationModalPr
                   onAuthRequestRetrieved={() => {
                     this.setState({authRequestRetrieved: true})
                   }}
-                  onSignInComplete={(AuthResponse) =>
-                      this.props.onSignInComplete(AuthResponse)}/>
+                  onSignInComplete={(payload) =>
+                      this.props.onSignInComplete(payload)}/>
             </Col>
           </Row>
 

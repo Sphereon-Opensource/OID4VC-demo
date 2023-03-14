@@ -833,17 +833,17 @@
     "@trust/keyto" "^2.0.0-alpha1"
     "@veramo/core" "4.2.0"
 
-"@sphereon/did-auth-siop-web-demo-shared@^0.1.3-next.28":
-  version "0.1.3-next.28"
-  resolved "https://registry.yarnpkg.com/@sphereon/did-auth-siop-web-demo-shared/-/did-auth-siop-web-demo-shared-0.1.3-next.28.tgz#7feb9032c6de0418d2f986745d456bac41fa66b9"
-  integrity sha512-7Vg0GY8utK4o9RqZSWwKO3tuUoPLwjKdxV8scbDxasg88diEjPbWdnmPN01zdU5AbSOzksCSSBqQovCyNGNxhw==
+"@sphereon/did-auth-siop-web-demo-shared@^0.1.3-next.32":
+  version "0.1.3-next.32"
+  resolved "https://registry.yarnpkg.com/@sphereon/did-auth-siop-web-demo-shared/-/did-auth-siop-web-demo-shared-0.1.3-next.32.tgz#a6aa97c29a723e93fb99da5f3f3616aeac9024c5"
+  integrity sha512-bqtIalrTxGneVy7ceLj5ndmYiWABUExYp/yIcHnmPNAAvx/9yY9i9FXKPZIdVf9a+lqRw/j2Hp6eGx35OzeOkQ==
   dependencies:
-    "@sphereon/did-auth-siop" "^0.3.0-unstable.29"
+    "@sphereon/did-auth-siop" "^0.3.0-unstable.30"
 
-"@sphereon/did-auth-siop@^0.3.0-unstable.29":
-  version "0.3.0-unstable.29"
-  resolved "https://registry.yarnpkg.com/@sphereon/did-auth-siop/-/did-auth-siop-0.3.0-unstable.29.tgz#c1879a932fd6c97762347f95d3ad4471acf2dc5d"
-  integrity sha512-+klePwA7rEeG1FuUbo1Gzbp4Z7r2xDNQ/f9m1LEhMXQMwICDFg8LX+nkfMo4n4XQ6NhoUtwm+67OHlAP003nEQ==
+"@sphereon/did-auth-siop@^0.3.0-unstable.30":
+  version "0.3.0-unstable.30"
+  resolved "https://registry.yarnpkg.com/@sphereon/did-auth-siop/-/did-auth-siop-0.3.0-unstable.30.tgz#06bc51c919d4970aa4ba19ce6fb8f1ee0149c380"
+  integrity sha512-zD5vWtTBbiJt4Nb2HCgTYztZT6LU+fSIaDDOXbhVAkLtHhkOKYaadg1QqfuZ1Iwa0y7vA6iZf4giSVOARB1U/w==
   dependencies:
     "@sphereon/did-uni-client" "^0.6.0"
     "@sphereon/pex" "^2.0.0-unstable.12"

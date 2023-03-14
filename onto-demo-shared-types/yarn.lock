@@ -367,10 +367,10 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
 
-"@sphereon/did-auth-siop@^0.3.0-unstable.29":
-  version "0.3.0-unstable.29"
-  resolved "https://registry.yarnpkg.com/@sphereon/did-auth-siop/-/did-auth-siop-0.3.0-unstable.29.tgz#c1879a932fd6c97762347f95d3ad4471acf2dc5d"
-  integrity sha512-+klePwA7rEeG1FuUbo1Gzbp4Z7r2xDNQ/f9m1LEhMXQMwICDFg8LX+nkfMo4n4XQ6NhoUtwm+67OHlAP003nEQ==
+"@sphereon/did-auth-siop@^0.3.0-unstable.30":
+  version "0.3.0-unstable.30"
+  resolved "https://registry.yarnpkg.com/@sphereon/did-auth-siop/-/did-auth-siop-0.3.0-unstable.30.tgz#06bc51c919d4970aa4ba19ce6fb8f1ee0149c380"
+  integrity sha512-zD5vWtTBbiJt4Nb2HCgTYztZT6LU+fSIaDDOXbhVAkLtHhkOKYaadg1QqfuZ1Iwa0y7vA6iZf4giSVOARB1U/w==
   dependencies:
     "@sphereon/did-uni-client" "^0.6.0"
     "@sphereon/pex" "^2.0.0-unstable.12"

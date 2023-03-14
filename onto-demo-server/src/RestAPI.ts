@@ -19,7 +19,6 @@ import {uriWithBase} from "./utils";
 import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/did-auth-siop-web-demo-shared";
 
 
-
 export class RestAPI {
     public express: core.Express;
     private verifier: Verifier
@@ -77,7 +76,7 @@ export class RestAPI {
         this.express.post("/webapp/auth-status", async (request, response) => {
             console.log("Received auth-status request...")
             const correlationId: string = request.body.correlationId as string
-            const definitionId: string = request.body.definition as string
+            const definitionId: string = request.body.definitionId as string
             const requestState = await this.verifier.sessionManager.getRequestStateByCorrelationId(correlationId, false)
             if (!requestState || !definitionId) {
                 console.log(`No authentication request mapping could be found for the given URL. correlation: ${correlationId}, definitionId: ${definitionId}`)
@@ -94,7 +93,7 @@ export class RestAPI {
             }
 
             let responseState;
-            if (requestState.status === AuthorizationRequestStateStatus.SENT) {
+            if (requestState.status === 'sent') {
                 responseState = await this.verifier.sessionManager.getResponseStateByCorrelationId(correlationId, false)
             }
             const overallState: AuthorizationRequestState | AuthorizationResponseState = responseState ?? requestState
@@ -104,7 +103,8 @@ export class RestAPI {
                 ...(overallState.error ? {error: overallState.error?.message} : {}),
                 correlationId,
                 definitionId,
-                lastUpdated: overallState.lastUpdated
+                lastUpdated: overallState.lastUpdated,
+                ...(responseState && responseState.status === 'verified' ? {payload: await responseState.response.mergedPayloads()} : {})
             }
             console.log(`Will send auth status: ${JSON.stringify(statusBody)}`)
             if (overallState.status === AuthorizationRequestStateStatus.ERROR || overallState.status === AuthorizationResponseStateStatus.ERROR) {
@@ -115,10 +115,9 @@ export class RestAPI {
             return response.send(statusBody)
         })
 
-        this.express.post("/webapp/cancel-auth-request", (request, response) => {
-                const stateId: string = request.body as string
-                console.log(stateId)
-                // TODO
+        this.express.delete("/webapp/definitions/:definitionId/auth-requests/:correlationId", (request, response) => {
+                const correlationId: string = request.params.correlationId
+                this.verifier.sessionManager.deleteStateForCorrelationId(correlationId)
             }
         )
     }
