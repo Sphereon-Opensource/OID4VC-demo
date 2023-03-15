@@ -58,9 +58,11 @@ importers:
       '@transmute/lds-ecdsa-secp256k1-recovery2020': ^0.0.7
       '@types/body-parser': ^1.19.2
       '@types/cookie-parser': ^1.4.3
+      '@types/cors': ^2.8.13
       '@types/debug': ^4.1.7
       '@types/dotenv-flow': ^3.2.0
       '@types/express': ^4.17.13
+      '@types/express-http-proxy': ^1.6.3
       '@types/node': ^18.15.0
       '@types/react': ^17.0.20
       '@veramo/core': 4.2.0
@@ -77,10 +79,12 @@ importers:
       ajv: ^8.12.0
       body-parser: ^1.19.0
       cookie-parser: ^1.4.5
+      cors: ^2.8.5
       did-resolver: ^4.0.1
       dotenv-flow: ^3.2.0
       expiry-map: ^1.1.0
       express: ^4.17.1
+      express-http-proxy: ^1.6.3
       secp256k1: ^4.0.2
       short-uuid: ^4.2.0
       sqlite3: ^5.1.4
@@ -117,10 +121,12 @@ importers:
       ajv: 8.12.0
       body-parser: 1.20.2
       cookie-parser: 1.4.6
+      cors: 2.8.5
       did-resolver: 4.1.0
       dotenv-flow: 3.2.0
       expiry-map: 1.1.0
       express: 4.18.2
+      express-http-proxy: 1.6.3
       secp256k1: 4.0.3
       short-uuid: 4.2.2
       sqlite3: 5.1.6
@@ -130,9 +136,11 @@ importers:
     devDependencies:
       '@types/body-parser': 1.19.2
       '@types/cookie-parser': 1.4.3
+      '@types/cors': 2.8.13
       '@types/debug': 4.1.7
       '@types/dotenv-flow': 3.2.0
       '@types/express': 4.17.17
+      '@types/express-http-proxy': 1.6.3
       '@types/node': 18.15.3
       '@types/react': 17.0.53
       ts-node: 10.9.1_ev3x2t2gv55at43ghevgmyytwy
@@ -147,6 +155,7 @@ importers:
       '@testing-library/jest-dom': ^5.11.4
       '@testing-library/react': ^11.1.0
       '@testing-library/user-event': ^12.1.10
+      '@types/dotenv-flow': ^3.2.0
       '@types/js-cookie': ^2.2.7
       '@types/jsonpack': ^1.1.1
       '@types/lodash': ^4.14.173
@@ -159,6 +168,7 @@ importers:
       '@veramo/core': 4.2.0
       axios: ^0.21.4
       bootstrap: ^5.1.1
+      dotenv-flow: ^3.2.0
       jsonpack: ^1.1.5
       react: ^17.0.2
       react-bootstrap: ^1.6.3
@@ -180,6 +190,7 @@ importers:
       '@veramo/core': 4.2.0
       axios: 0.21.4
       bootstrap: 5.2.3
+      dotenv-flow: 3.2.0
       jsonpack: 1.1.5
       react: 17.0.2
       react-bootstrap: 1.6.6_sfoxds7t5ydpegc3knd667wn6m
@@ -196,6 +207,7 @@ importers:
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 11.2.7_sfoxds7t5ydpegc3knd667wn6m
       '@testing-library/user-event': 12.8.3
+      '@types/dotenv-flow': 3.2.0
       '@types/js-cookie': 2.2.7
       '@types/jsonpack': 1.1.2
       '@types/lodash': 4.14.191
@@ -5054,7 +5066,7 @@ packages:
   /@types/bn.js/5.1.1:
     resolution: {integrity: sha512-qNrYbZqMx0uJAfKnKclPh+dTwK33KfLHYqtyODwd5HnXOjnkhc4qgn3BrK6RWyGZm5+sIFE7Q7Vz6QQtJB7w7g==}
     dependencies:
-      '@types/node': 16.18.16
+      '@types/node': 18.15.3
     dev: false
 
   /@types/body-parser/1.19.2:
@@ -5074,6 +5086,12 @@ packages:
     resolution: {integrity: sha512-CqSKwFwefj4PzZ5n/iwad/bow2hTCh0FlNAeWLtQM3JA/NX/iYagIpWG2cf1bQKQ2c9gU2log5VUCrn7LDOs0w==}
     dependencies:
       '@types/express': 4.17.17
+    dev: true
+
+  /@types/cors/2.8.13:
+    resolution: {integrity: sha512-RG8AStHlUiV5ysZQKq97copd2UmVYw3/pRMLefISZ3S1hK104Cwm7iLQ3fTKx+lsUH2CE8FlLaYeEA2LSeqYUA==}
+    dependencies:
+      '@types/node': 18.15.3
     dev: true
 
   /@types/debug/4.1.7:
@@ -5100,6 +5118,12 @@ packages:
   /@types/estree/1.0.0:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: false
+
+  /@types/express-http-proxy/1.6.3:
+    resolution: {integrity: sha512-dX3+Cb0HNPtqhC5JUWzzuODHRlgJRZx7KvwKVVwkOvm+8vOtpsh3qy8+qLv5X1hs4vdVHWKyXf86DwJot5H8pg==}
+    dependencies:
+      '@types/express': 4.17.17
+    dev: true
 
   /@types/express-serve-static-core/4.17.33:
     resolution: {integrity: sha512-TPBqmR/HRYI3eC2E5hmiivIzv+bidAfXofM+sbonAGvyDhySGw9/PQZFt2BLOrjUUR++4eJVpx6KnLQK1Fk9tA==}
@@ -5212,7 +5236,7 @@ packages:
   /@types/pbkdf2/3.1.0:
     resolution: {integrity: sha512-Cf63Rv7jCQ0LaL8tNXmEyqTHuIJxRdlS5vMh1mj5voN4+QFhVZnlZruezqpWYDiJ8UTzhP0VmeLXCmBk66YrMQ==}
     dependencies:
-      '@types/node': 16.18.16
+      '@types/node': 18.15.3
     dev: false
 
   /@types/prettier/2.7.2:
@@ -5280,7 +5304,7 @@ packages:
   /@types/secp256k1/4.0.3:
     resolution: {integrity: sha512-Da66lEIFeIz9ltsdMZcpQvmrmmoqrfju8pm1BH8WbYjZSwUgCwXLb9C+9XYogwBITnbsSaMdVPb2ekf7TV+03w==}
     dependencies:
-      '@types/node': 16.18.16
+      '@types/node': 18.15.3
     dev: false
 
   /@types/serve-static/1.15.1:
@@ -7371,7 +7395,7 @@ packages:
       minipass-pipeline: 1.2.4
       mkdirp: 1.0.4
       p-map: 4.0.0
-      promise-inflight: 1.0.1_bluebird@3.7.2
+      promise-inflight: 1.0.1
       rimraf: 3.0.2
       ssri: 8.0.1
       tar: 6.1.13
@@ -8064,6 +8088,14 @@ packages:
 
   /core-util-is/1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
+    dev: false
+
+  /cors/2.8.5:
+    resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      object-assign: 4.1.1
+      vary: 1.1.2
     dev: false
 
   /cosmiconfig/5.2.1:
@@ -10012,6 +10044,17 @@ packages:
       base64-js: 1.5.1
     dev: false
     optional: true
+
+  /express-http-proxy/1.6.3:
+    resolution: {integrity: sha512-/l77JHcOUrDUX8V67E287VEUQT0lbm71gdGVoodnlWBziarYKgMcpqT7xvh/HM8Jv52phw8Bd8tY+a7QjOr7Yg==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      debug: 3.2.7
+      es6-promise: 4.2.8
+      raw-body: 2.5.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /express/4.18.2:
     resolution: {integrity: sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==}
@@ -15377,6 +15420,15 @@ packages:
   /progress/2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
+    dev: false
+
+  /promise-inflight/1.0.1:
+    resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
     dev: false
 
   /promise-inflight/1.0.1_bluebird@3.7.2:

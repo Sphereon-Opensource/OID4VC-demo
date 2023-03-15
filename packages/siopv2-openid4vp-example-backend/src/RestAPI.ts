@@ -6,8 +6,10 @@ import cookieParser from "cookie-parser"
 import uuid from "short-uuid"
 // import * as core from "express-serve-static-core";
 import {
-    AuthorizationRequestState, AuthorizationRequestStateStatus,
-    AuthorizationResponseState, AuthorizationResponseStateStatus,
+    AuthorizationRequestState,
+    AuthorizationRequestStateStatus,
+    AuthorizationResponseState,
+    AuthorizationResponseStateStatus,
     PresentationDefinitionLocation,
     VerifiedAuthorizationResponse
 } from '@sphereon/did-auth-siop'
@@ -30,6 +32,22 @@ export class RestAPI {
         this.express = express()
         const port = process.env.PORT || 5000
         const secret = process.env.COOKIE_SIGNING_KEY
+
+       this.express.use((req, res, next) => {
+            res.header("Access-Control-Allow-Origin", "*");
+           // Request methods you wish to allow
+           res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+           // Request headers you wish to allow
+           res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+           // Set to true if you need the website to include cookies in the requests sent
+           // to the API (e.g. in case you use sessions)
+           res.setHeader('Access-Control-Allow-Credentials', 'true');
+            next();
+        });
+        // this.express.use(cors({ credentials: true }));
+        // this.express.use('/proxy', proxy('www.gssoogle.com'));
         this.express.use(bodyParser.urlencoded({extended: true}))
         this.express.use(bodyParser.json())
         this.express.use(cookieParser(secret))

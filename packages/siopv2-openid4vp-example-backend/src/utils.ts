@@ -12,6 +12,5 @@ export function decodeBase64url(s: string): string {
 // noinspection JSUnusedLocalSymbols
 
 export function uriWithBase(path: string) {
-
-    return `${process.env.BASE_URL}${path.startsWith('/') ? path : '/' + path}`;
+    return `${process.env.BACKEND_BASE_URL}${path.startsWith('/') ? path : '/' + path}`;
 }
