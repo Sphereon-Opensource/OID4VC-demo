@@ -1,0 +1,56 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "moduleResolution": "Node",
+    "declaration": true,
+    "outDir": "./dist",
+    "declarationMap": false,
+    "esModuleInterop": true,
+    /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
+    "resolveJsonModule": true
+    /* Include modules imported with .json extension. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    /* Additional Checks */
+    "noUnusedLocals": false
+    /* Report errors on unused locals. */,
+    "noUnusedParameters": false
+    /* Report errors on unused parameters. */,
+    "noImplicitReturns": true
+    /* Report error when not all code paths in function return a value. */,
+    "noFallthroughCasesInSwitch": true
+    /* Report errors for fallthrough cases in switch statement. */,
+    /* Debugging Options */
+    "traceResolution": false
+    /* Report module resolution log messages. */,
+    "listEmittedFiles": false
+    /* Print names of generated files part of the compilation. */,
+    "listFiles": false
+    /* Print names of files part of the compilation. */,
+    "pretty": true,
+
+    "types": ["node"]
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exclude": [
+    "node_modules/**",
+    "coverage/**",
+    "dist/**"
+  ],
+  "references": [
+    {
+      "path": "../siopv2-openid4vp-example-shared"
+    }
+  ]
+ /* // other settings...
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }*/
+}

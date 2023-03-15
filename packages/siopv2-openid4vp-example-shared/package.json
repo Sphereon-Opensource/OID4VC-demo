@@ -1,0 +1,22 @@
+{
+  "name": "@sphereon/siopv2-openid4vp-example-shared",
+  "version": "0.1.0",
+  "description": "Shared SIOPv2 and OpenID4VP Example types between modules",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "author": "Sphereon <dev@sphereon.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "dependencies": {
+    "@sphereon/did-auth-siop": "^0.3.0-unstable.30"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.16"
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}

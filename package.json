@@ -1,0 +1,57 @@
+{
+  "name": "@sphereon/siopv2-openid4vp-example-workspace",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "pnpm -r --stream build",
+    "test": "pnpm run test",
+    "start:dev": "pnpm -r --stream start:dev",
+    "start": "pnpm -r --stream start:prod",
+    "publish:latest": "lerna publish --conventional-commits --include-merged-tags --create-release github --yes --dist-tag latest --registry \"https://registry.npmjs.org/:_authToken=${NPM_TOKEN}\"",
+    "publish:next": "lerna publish --conventional-prerelease --force-publish --canary --no-git-tag-version --include-merged-tags --preid next --pre-dist-tag next --yes --registry \"https://registry.npmjs.org/:_authToken=${NPM_TOKEN}\"",
+    "publish:unstable": "lerna publish --conventional-prerelease --force-publish --canary --no-git-tag-version --include-merged-tags --preid unstable --pre-dist-tag unstable --yes --registry \"https://registry.npmjs.org/:_authToken=${NPM_TOKEN}\""
+  },
+  "resolutions": {
+    "@sphereon/ssi-sdk-data-store-common": "0.9.1-next.17",
+    "@sphereon/ssi-sdk-connection-manager": "0.9.1-next.17",
+    "@sphereon/ssi-types": "0.9.1-next.17",
+    "@sphereon/ssi-sdk-core": "0.9.1-next.17",
+    "@sphereon/ssi-sdk-did-utils": "0.9.1-next.17",
+    "@sphereon/ssi-sdk-data-store": "0.9.1-next.17",
+    "@veramo/core": "4.2.0",
+    "@veramo/credential-w3c": "4.2.0",
+    "@veramo/data-store": "4.2.0",
+    "@veramo/did-jwt": "4.2.0",
+    "@veramo/credential-ld": "4.2.0",
+    "@veramo/utils": "4.2.0",
+    "@veramo/did-manager": "4.2.0",
+    "@veramo/kms-local": "4.2.0",
+    "@veramo/key-manager": "4.2.0",
+    "@veramo/credential-eip712": "4.2.0",
+    "@veramo/did-comm": "4.2.0",
+    "@veramo/message-handler": "4.2.0",
+    "@veramo/did-discovery": "4.2.0",
+    "@veramo/did-provider-ethr": "4.2.0",
+    "@veramo/did-provider-key": "4.2.0",
+    "@veramo/did-provider-web": "4.2.0",
+    "@veramo/did-resolver": "4.2.0",
+    "@veramo/remote-client": "4.2.0",
+    "@veramo/remote-server": "4.2.0",
+    "@veramo/selective-disclosure": "4.2.0",
+    "@veramo/url-handler": "4.2.0"
+  },
+  "dependencies": {
+    "dotenv-flow": "^3.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 16.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
