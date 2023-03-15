@@ -1,7 +1,7 @@
 import React from "react"
 import ProtectedResource from "./ProtectedResource";
 
-export default class Landing extends ProtectedResource {
+export default class ClassifiedPage extends ProtectedResource {
 
   render() {
     if (this.isAuthenticated()) {

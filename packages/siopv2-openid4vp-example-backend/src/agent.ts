@@ -97,6 +97,7 @@ export const didProviders = {
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
 const privateKeyStore: PrivateKeyStore = new PrivateKeyStore(dbConnection, new SecretBox(DB_ENCRYPTION_KEY))
 
+// @ts-ignore
 const agent = createAgent<
     IDIDManager &
     IKeyManager &

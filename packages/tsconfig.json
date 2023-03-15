@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "siopv2-openid4vp-example-shared"
+    },
+    {
+      "path": "siopv2-openid4vp-example-backend"
+    },
+    {
+      "path": "siopv2-openid4vp-example-frontend"
+    }
+  ]
+}

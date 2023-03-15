@@ -1,10 +1,10 @@
 import React, {Component} from "react"
 import axios from "axios"
 import {BallTriangle} from "react-loader-spinner"
-import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/did-auth-siop-web-demo-shared"
-import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-react";
+import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/siopv2-openid4vp-example-shared"
+import {CreateElementArgs, QRRenderingProps, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-react";
 import agent from '../agent';
-import {AuthorizationResponse, AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
+import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
 
 export type AuthenticationQRProps = {
     onAuthRequestRetrieved: () => void
@@ -13,7 +13,7 @@ export type AuthenticationQRProps = {
 
 export interface AuthenticationQRState {
     authRequestURIResponse?: GenerateAuthRequestURIResponse
-    qrCode?: Element
+    qrCode?: JSX.Element
 }
 
 export default class AuthenticationQR extends Component<AuthenticationQRProps> {
@@ -43,7 +43,8 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     private generateNewQRCode() {
         this.generateAuthRequestURI().then(authRequestURIResponse => {
             agent.uriElement(this.createQRCodeElement(authRequestURIResponse)).then(qrCode => {
-                return this.setState({authRequestURIResponse, qrCode})
+                this.registerState(authRequestURIResponse, qrCode)
+                // return this.setState({authRequestURIResponse, qrCode})
             })
         }).catch(e => console.error(e))
     }
@@ -58,7 +59,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
             },
             onGenerate: (result: ValueResult<QRType.URI, URIData>) => {
-                this.registerState(authRequestURIResponse, result)
+                // this.registerState(authRequestURIResponse, qrProps.renderingProps)
             },
             renderingProps: {
                 bgColor: 'white',
@@ -81,6 +82,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     render() {
         // Show the loader until we have details on which parameters to load into the QR code
+        console.log(`====> render qr ${this.state.qrCode}`)
         return this.state.qrCode ? <div>{this.state.qrCode}</div>
             : <BallTriangle color="#352575" height="100" width="100"/>
     }
@@ -108,11 +110,19 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     }
 
 
-    private registerState = (authRequestURIResponse: GenerateAuthRequestURIResponse, result: ValueResult<QRType.URI, URIData>) => {
+    private registerState = (authRequestURIResponse: GenerateAuthRequestURIResponse, qrCode: JSX.Element) => {
         if (this.state.authRequestURIResponse?.correlationId === authRequestURIResponse.correlationId) {
             // same correlationId, which we are already polling
             return
         }
+
+        if (!this.timedOutRequestMappings.has({authRequestURIResponse, qrCode})) {
+            this.timedOutRequestMappings.add({authRequestURIResponse, qrCode})
+        }
+        this.setState({qrCode, authRequestURIResponse})
+    /*    this.state.qrCode = qrCode
+        this.state.authRequestURIResponse = authRequestURIResponse
+*/
         this.pollAuthStatus(authRequestURIResponse)
     }
 
@@ -127,21 +137,25 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         const interval = setInterval(async args => {
             const authStatus:  AuthStatusResponse = pollingResponse.data
             if (!this.state.qrCode) {
-                await this.generateNewQRCode()
+                clearInterval(interval)
+                return this.generateNewQRCode()
             } else if (!authStatus) {
                 return
             } else if (this.timedOutRequestMappings.has(this.state)) {
-                console.log("Cancelling timed out auth request.")
-                await axios.delete(`/webapp/definitions/${this.state?.authRequestURIResponse?.definitionId}/auth-requests/${this.state?.authRequestURIResponse?.correlationId}`)
-                this.timedOutRequestMappings.delete(this.state)
+                try {
+                    console.log("Cancelling timed out auth request.")
+                    await axios.delete(`/webapp/definitions/${this.state?.authRequestURIResponse?.definitionId}/auth-requests/${this.state?.authRequestURIResponse?.correlationId}`)
+                    this.timedOutRequestMappings.delete(this.state) // only delete after deleted remotely
+                } catch (error) {
+                    console.log(error)
+                }
             }
             if (authStatus.status === 'sent') {
                 this.props.onAuthRequestRetrieved()
             } else if (authStatus.status === 'verified') {
                 clearInterval(interval)
-                this.props.onSignInComplete(authStatus.payload!) // FIXME: BACKEND SHOULD PASS IN BODY HERE
-                return
-            } else if (pollingResponse.status > 202 || authStatus.status === 'error') {
+                return this.props.onSignInComplete(authStatus.payload!)
+            } else if (pollingResponse.status >= 400 || authStatus.status === 'error') {
                 clearInterval(interval)
                 return Promise.reject(authStatus.error ?? pollingResponse.data)
             } else {
@@ -154,9 +168,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
                 definitionId: this.state?.authRequestURIResponse?.definitionId
             })
             console.log(JSON.stringify(pollingResponse))
-        }, 1500)
-        // while (pollingResponse.status >= 200 && this._isMounted) {
-
-        // }
+        }, 2000)
     }
 }

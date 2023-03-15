@@ -1,6 +1,8 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist",
+    "baseUrl": ".",
+    "outDir": "dist",
     "target": "es6",
     "lib": [
       "DOM",
@@ -25,5 +27,10 @@
   },
   "include": [
     "./src/**/*"
+  ],
+  "references": [
+    {
+      "path": "../siopv2-openid4vp-example-shared"
+    }
   ]
 }

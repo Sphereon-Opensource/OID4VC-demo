@@ -1,12 +1,12 @@
 {
-  "name": "@sphereon/did-auth-siop-web-demo-server",
-  "version": "0.1.3-next.15",
+  "name": "@sphereon/siopv2-openid4vp-example-backend",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "start:prod": "node dist/index.js",
+    "start:prod": "node build/index.js",
     "start:dev": "ts-node src/RestAPI.ts",
     "start2": "node --experimental-specifier-resolution=node --loader ts-node/esm src/RestAPI.ts"
   },
@@ -17,7 +17,9 @@
 
   "dependencies": {
     "@sphereon/did-auth-siop": "^0.3.0-unstable.30",
-    "@sphereon/did-auth-siop-web-demo-shared": "^0.1.3-next.32",
+    "@sphereon/pex": "^2.0.0-unstable.12",
+    "@sphereon/pex-models": "^1.2.2",
+    "@sphereon/siopv2-openid4vp-example-shared": "^0.1.0",
     "@sphereon/did-uni-client": "^0.6.0",
     "@sphereon/ssi-sdk-qr-react": "0.9.1-next.17",
     "@sphereon/react-native-argon2": "^2.0.9",
@@ -39,6 +41,7 @@
     "@veramo/key-manager": "4.2.0",
     "@veramo/kms-local": "4.2.0",
     "@veramo/utils": "4.2.0",
+    "uint8arrays": "3.1.1",
     "sqlite3": "^5.1.4",
     "ajv": "^8.12.0",
     "body-parser": "^1.19.0",
@@ -59,44 +62,12 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/debug": "^4.1.7",
     "@types/node": "^18.15.0",
-    "@types/typescript": "^2.0.0",
+    "@types/body-parser": "^1.19.2",
     "ts-node": "^10.9.1"
   },
-  "resolutions": {
-    "@sphereon/ssi-sdk-data-store-common": "0.9.1-next.17",
-    "@sphereon/ssi-sdk-connection-manager": "0.9.1-next.17",
-    "@sphereon/ssi-types": "0.9.1-next.17",
-    "@sphereon/ssi-sdk-core": "0.9.1-next.17",
-    "@sphereon/ssi-sdk-did-utils": "0.9.1-next.17",
-    "@sphereon/ssi-sdk-data-store": "0.9.1-next.17",
-    "@veramo/core": "4.2.0",
-    "@veramo/credential-w3c": "4.2.0",
-    "@veramo/data-store": "4.2.0",
-    "@veramo/did-jwt": "4.2.0",
-    "@veramo/credential-ld": "4.2.0",
-    "@veramo/utils": "4.2.0",
-    "@veramo/did-manager": "4.2.0",
-    "@veramo/kms-local": "4.2.0",
-    "@veramo/key-manager": "4.2.0",
-    "@veramo/credential-eip712": "4.2.0",
-    "@veramo/did-comm": "4.2.0",
-    "@veramo/message-handler": "4.2.0",
-    "@veramo/did-discovery": "4.2.0",
-    "@veramo/did-provider-ethr": "4.2.0",
-    "@veramo/did-provider-key": "4.2.0",
-    "@veramo/did-provider-web": "4.2.0",
-    "@veramo/did-resolver": "4.2.0",
-    "@veramo/remote-client": "4.2.0",
-    "@veramo/remote-server": "4.2.0",
-    "@veramo/selective-disclosure": "4.2.0",
-    "@veramo/url-handler": "4.2.0"
-  },
+
   "files": [
     "/dist"
-  ],
-  "moduleDirectories": [
-    "node_modules",
-    "src"
   ],
   "engines": {
     "node": ">= 16.0.0"

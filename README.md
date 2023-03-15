@@ -1,47 +1,46 @@
 <h2 style="text-align: center; vertical-align: middle">
     <center><a href="https://www.sphereon.com"><img src="https://sphereon.com/content/themes/sphereon/assets/img/logo.svg" alt="Sphereon" width="320" style="vertical-align: middle" ></a></center>
 
-<br>SIOP v2 Demo Website      
+<br>SIOPv2 and OpenID4VP Example/Demo Website      
 <br>
 <br>
 </h2>
 
-#### This is a demo website to test and showcase our ["Self Issued OpenID Provider v2 (SIOP)" library](https://github.com/Sphereon-Opensource/did-auth-siop).
+#### This is a demo to showcase our ["Self Issued OpenID Provider v2 and OpenID4VP" library](https://github.com/Sphereon-Opensource/siopv2-openid4vp).
 
-**NOTE: Please note, this is not intended as production code, nor a starting point for your own implementation.
-It is a quite simple and crude implementation to show how the SIOPv2 and OIDC4VP tech can work.**
+**NOTE: Please note, this is not intended as production code.
+It is a quite simple implementation to show how the SIOPv2 and OpenID4VP technology can work.**
 
 ### Getting started
 
 #### Configure environment
 
-In the **./onto-demo-server folder**, create a file called .env.local and populate it using .env as example. A valid
+In the **./siopv2-openidvp-example-backend folder**, update the file called .env and populate it using .env as example. A valid
 config will look like this
 
 ```dotenv
 NODE_ENV=development
-PORT=5001
+PORT=3002
 COOKIE_SIGNING_KEY=8E5er6YyAO6dIrDTm7BXYWsafBSLxzjb
-REDIRECT_URL_BASE=http://192.168.1.200:5001/ext
-RP_DID=did:ethr:0xe1dB95357A4258b33A994Fa8cBA5FdC6bd70011D
-RP_PRIVATE_HEX_KEY=850e54b92c6291a1ff7b8c3ef30e032571ed77c9e5c78b1cd6ee5fec4fea984f
-AUTH_REQUEST_EXPIRES_AFTER_SEC=300
-MOCK_AUTH_RESPONSE=false
+BASE_URL=https://nk-gx-compliance.eu.ngrok.io
+AUTH_REQUEST_EXPIRES_AFTER_SEC=120
+RP_PRIVATE_KEY_HEX=851eb04ca3e2b2589d6f6a7287565816ee8e3126599bfeede8d3e93c53fb26e3
+RP_DID=did:ion:EiANaYB43B-E9ngU1Z9XLx8zgIJ6SdOcx74sjeeF7KSa2A
+RP_DID_KID="did:ion:EiANaYB43B-E9ngU1Z9XLx8zgIJ6SdOcx74sjeeF7KSa2A#auth-key"
 ```
 
-Except for the IP address this is a valid configuration to test with. You will need to replace it with the public IP
-interface/address where this
-server will be running and make sure it is accessible from your phone and the port is open in the firewall.
+Except for the IP address/hostname in the `BASE_URL` this is a valid configuration to test with. You will need to replace it with the public IP
+interface/address or ideally hostname where the
+backend will be running and make sure it is accessible from your phone and the port is open in the firewall.
 
 #### Build & start
+We use pnpm. Currently you cannot use regular npm or yarn to build this project!
+install pnpm globally using `npm -g install pnpm`
 
 From the root directory
-
-- yarn global add concurrently
-- yarn global add ts-node
-- yarn install-all
-- yarn build
-- yarn start
+- pnpm install
+- pnpm build
+- pnpm start or pnpm start:dev
 
 The server will start on port 5001, the client will start & open a browser on http://localhost:3000/
 
@@ -152,7 +151,7 @@ Example VC:
 From the root folder run:
 
 ```bash
-docker build -t onto-web-demo .
+docker build -t siopv2-openidvp-example .
 docker run -it -p 5001:5001 -p 3000:3000 onto-web-demo
 ```
 

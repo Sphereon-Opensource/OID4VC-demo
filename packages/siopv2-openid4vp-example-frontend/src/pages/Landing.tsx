@@ -5,7 +5,7 @@ export default class Landing extends Component {
     return (
         <div className="App" style={{ width: 750}}>
           <h2 style={{textAlign: 'left'}}>
-            Welcome to the SSI demo
+            Welcome to the Sphereon OpenID4VP and SIOPv2 demo
           </h2>
 
           <p style={{textAlign: "left" }}>This demo is using Presentation Exchange to fetch claims of the authorized users, with an associated 'wallet' app that securely holds the data as Verifiable Credentials (VCs).</p>

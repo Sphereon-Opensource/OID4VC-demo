@@ -1,10 +1,10 @@
 // noinspection JSUnusedGlobalSymbols
 
 import * as dotenv from "dotenv-flow"
-import express, {Response} from "express"
+import express, {Express, Response} from "express"
 import cookieParser from "cookie-parser"
 import uuid from "short-uuid"
-import * as core from "express-serve-static-core";
+// import * as core from "express-serve-static-core";
 import {
     AuthorizationRequestState, AuthorizationRequestStateStatus,
     AuthorizationResponseState, AuthorizationResponseStateStatus,
@@ -16,11 +16,11 @@ import {Verifier} from "./Verifier";
 import bodyParser from "body-parser"
 import {DefinitionIds, getPresentationDefinition} from "./presentationDefinitions";
 import {uriWithBase} from "./utils";
-import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/did-auth-siop-web-demo-shared";
+import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/siopv2-openid4vp-example-shared";
 
 
 export class RestAPI {
-    public express: core.Express;
+    public express: Express;
     private verifier: Verifier
 
 
@@ -40,6 +40,7 @@ export class RestAPI {
     }
 
     private static sendErrorResponse(response: Response, statusCode: number, message: string) {
+        response.statusCode = statusCode
         response.status(statusCode).send(message)
     }
 
