@@ -22,16 +22,24 @@ config will look like this
 NODE_ENV=development
 PORT=3002
 COOKIE_SIGNING_KEY=8E5er6YyAO6dIrDTm7BXYWsafBSLxzjb
-BASE_URL=https://nk-gx-compliance.eu.ngrok.io
+BACKEND_BASE_URL=https://backend.example.com
 AUTH_REQUEST_EXPIRES_AFTER_SEC=120
 RP_PRIVATE_KEY_HEX=851eb04ca3e2b2589d6f6a7287565816ee8e3126599bfeede8d3e93c53fb26e3
 RP_DID=did:ion:EiANaYB43B-E9ngU1Z9XLx8zgIJ6SdOcx74sjeeF7KSa2A
 RP_DID_KID="did:ion:EiANaYB43B-E9ngU1Z9XLx8zgIJ6SdOcx74sjeeF7KSa2A#auth-key"
 ```
 
-Except for the IP address/hostname in the `BASE_URL` this is a valid configuration to test with. You will need to replace it with the public IP
+Except for the IP address/hostname in the `BACKEND_BASE_URL` this is a valid configuration to test with. You will need to replace it with the public IP
 interface/address or ideally hostname where the
 backend will be running and make sure it is accessible from your phone and the port is open in the firewall.
+
+#### Update REACT_APP_BASE_URL in frontend .env
+Update the REACT_APP_BASE_URL value in .env or a new .env.local file in the siopv2-openid4vp-example-frontend directory
+It should have the same value as the `BACKEND_BASE_URL` above
+
+````json
+proxy: https://backend.example.com
+````
 
 #### Build & start
 We use pnpm. Currently you cannot use regular npm or yarn to build this project!

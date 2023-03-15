@@ -4,7 +4,7 @@ declare global {
       NODE_ENV: "development" | "production"
       PORT?: string
 
-      BASE_URL: string
+      BACKEND_BASE_URL: string
       COOKIE_SIGNING_KEY: string
       // REDIRECT_URL_BASE: string
       RP_DID: string
