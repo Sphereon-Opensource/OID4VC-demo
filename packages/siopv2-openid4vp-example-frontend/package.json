@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
-    "@sphereon/siopv2-openid4vp-example-shared": "0.1.0",
+    "@sphereon/siopv2-openid4vp-example-shared": "workspace:*",
     "@sphereon/did-auth-siop": "^0.3.0-unstable.30",
     "@sphereon/ssi-sdk-qr-react": "0.9.1-next.17",
     "@sphereon/ssi-types": "0.9.1-next.17",
