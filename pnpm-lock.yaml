@@ -48,7 +48,7 @@ importers:
       '@sphereon/pex': ^2.0.0-unstable.12
       '@sphereon/pex-models': ^1.2.2
       '@sphereon/react-native-argon2': ^2.0.9
-      '@sphereon/siopv2-openid4vp-example-shared': ^0.1.0
+      '@sphereon/siopv2-openid4vp-example-shared': workspace:*
       '@sphereon/ssi-sdk-data-store-common': 0.9.1-next.17
       '@sphereon/ssi-sdk-did-utils': 0.9.1-next.17
       '@sphereon/ssi-sdk-jwk-did-provider': 0.9.1-next.17
@@ -83,7 +83,7 @@ importers:
       did-resolver: ^4.0.1
       dotenv-flow: ^3.2.0
       expiry-map: ^1.1.0
-      express: ^4.17.1
+      express: ^4.18.2
       express-http-proxy: ^1.6.3
       secp256k1: ^4.0.2
       short-uuid: ^4.2.0
@@ -149,7 +149,7 @@ importers:
     specifiers:
       '@material-ui/core': ^4.12.4
       '@sphereon/did-auth-siop': ^0.3.0-unstable.30
-      '@sphereon/siopv2-openid4vp-example-shared': 0.1.0
+      '@sphereon/siopv2-openid4vp-example-shared': workspace:*
       '@sphereon/ssi-sdk-qr-react': 0.9.1-next.17
       '@sphereon/ssi-types': 0.9.1-next.17
       '@testing-library/jest-dom': ^5.11.4
@@ -6555,7 +6555,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
     transitivePeerDependencies:
       - debug
     dev: false
@@ -10310,6 +10310,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: false
 
   /filesize/6.1.0:
@@ -10442,6 +10443,16 @@ packages:
     dependencies:
       inherits: 2.0.4
       readable-stream: 2.3.8
+    dev: false
+
+  /follow-redirects/1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /follow-redirects/1.15.2_debug@4.3.4:
