@@ -86,7 +86,7 @@ function entraAndSphereonCompatibleDefinition(): IPresentationDefinition {
               ],
               filter: {
                 "type": "string",
-                "pattern": "did:key:z6Mko7jcpj8eeUXPbrtKGrSsYzjjuV84HnzuhSkbngpFnMrV"
+                "pattern": "did.*"
               }
             }
           ]
