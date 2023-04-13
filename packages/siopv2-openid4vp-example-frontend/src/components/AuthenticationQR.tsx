@@ -1,10 +1,10 @@
 import React, {Component} from "react"
 import axios from "axios"
 import {BallTriangle} from "react-loader-spinner"
-import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/siopv2-openid4vp-example-shared"
-import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-react";
+import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-code-generator";
 import agent, {uriWithBase} from '../agent';
 import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
+import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/ssi-sdk-siopv2-oid4vp-common"
 
 export type AuthenticationQRProps = {
     onAuthRequestRetrieved: () => void
@@ -18,7 +18,7 @@ export interface AuthenticationQRState {
 
 export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
-    state: AuthenticationQRState = {}
+    public state: AuthenticationQRState = {}
 
     private registerStateSent: boolean = false
     private refreshTimerHandle?: NodeJS.Timeout
@@ -30,10 +30,10 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
 
     componentDidMount() {
-        this.qrExpirationMs = parseInt(process.env.REACT_APP_QR_CODE_EXPIRES_AFTER_SEC ?? 120) * 1000
+        this.qrExpirationMs = parseInt(process.env.REACT_APP_QR_CODE_EXPIRES_AFTER_SEC ?? 1200) * 1000
         // actually since the QR points to a JWT it has its own expiration value as well.
 
-        if (!this.state.qrCode) {
+        if (!this.state.authRequestURIResponse || !this.state?.qrCode) {
             this.generateNewQRCode();
             this.refreshTimerHandle = setTimeout(() => this.refreshQRCode(), this.qrExpirationMs)
         }
@@ -42,7 +42,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     private generateNewQRCode() {
         this.generateAuthRequestURI().then(authRequestURIResponse => {
-            agent.uriElement(this.createQRCodeElement(authRequestURIResponse)).then(qrCode => {
+            agent.qrURIElement(this.createQRCodeElement(authRequestURIResponse)).then((qrCode) => {
                 this.registerState(authRequestURIResponse, qrCode)
                 // return this.setState({authRequestURIResponse, qrCode})
             })
@@ -77,6 +77,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         if (this.refreshTimerHandle) {
             clearTimeout(this.refreshTimerHandle)
         }
+        this.setState({})
         this._isMounted = false
     }
 
@@ -89,7 +90,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     /* Get the parameters that need to go into the QR code from the server */
     private generateAuthRequestURI = async (): Promise<GenerateAuthRequestURIResponse> => {
-        const response = await axios.get(uriWithBase(`/webapp/definitions/${this.definitionId}/auth-request-uri`))
+        const response = await axios.post(uriWithBase(`/webapp/definitions/${this.definitionId}/auth-requests`))
         const generateResponse = await response.data
         if (response.status !== 200) {
             throw Error(generateResponse.message)
@@ -101,7 +102,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     private refreshQRCode = () => {
         console.log("Timeout expired, refreshing QR code...")
         if (this.qrExpirationMs > 0) {
-            if (this.state) {
+            if (this.state.authRequestURIResponse) {
                 this.timedOutRequestMappings.add(this.state)
             }
             this.registerStateSent = false
@@ -120,9 +121,9 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             this.timedOutRequestMappings.add({authRequestURIResponse, qrCode})
         }
         this.setState({qrCode, authRequestURIResponse})
-    /*    this.state.qrCode = qrCode
-        this.state.authRequestURIResponse = authRequestURIResponse
-*/
+        /*    this.state.qrCode = qrCode
+            this.state.authRequestURIResponse = authRequestURIResponse
+    */
         this.pollAuthStatus(authRequestURIResponse)
     }
 
@@ -135,10 +136,14 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         })
 
         const interval = setInterval(async args => {
-            const authStatus:  AuthStatusResponse = pollingResponse.data
-            if (!this.state.qrCode) {
+            const authStatus: AuthStatusResponse = pollingResponse.data
+            /*if (!this.state) {
                 clearInterval(interval)
-                return this.generateNewQRCode()
+                return
+            }*/
+            if (!this.state.qrCode || !this.state.authRequestURIResponse) {
+                clearInterval(interval)
+                // return this.generateNewQRCode()
             } else if (!authStatus) {
                 return
             } else if (this.timedOutRequestMappings.has(this.state)) {
@@ -146,6 +151,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
                     console.log("Cancelling timed out auth request.")
                     await axios.delete(uriWithBase(`/webapp/definitions/${this.state?.authRequestURIResponse?.definitionId}/auth-requests/${this.state?.authRequestURIResponse?.correlationId}`))
                     this.timedOutRequestMappings.delete(this.state) // only delete after deleted remotely
+                    clearInterval(interval)
                 } catch (error) {
                     console.log(error)
                 }
@@ -168,6 +174,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
                 definitionId: this.state?.authRequestURIResponse?.definitionId
             })
             console.log(JSON.stringify(pollingResponse))
-        }, 2000)
+        }, 5000)
     }
 }

@@ -1,5 +1,5 @@
 import {createAgent} from '@veramo/core'
-import {IQRCodeGenerator, QrCodeProvider} from "@sphereon/ssi-sdk-qr-react";
+import {IQRCodeGenerator, QrCodeProvider} from "@sphereon/ssi-sdk-qr-code-generator";
 
 const agent = createAgent<IQRCodeGenerator>({
   plugins: [

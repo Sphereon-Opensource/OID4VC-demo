@@ -44,9 +44,6 @@
     "dist/**"
   ],
   "references": [
-    {
-      "path": "../siopv2-openid4vp-example-shared"
-    }
   ]
  /* // other settings...
   "ts-node": {

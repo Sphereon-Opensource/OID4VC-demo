@@ -29,8 +29,5 @@
     "./src/**/*"
   ],
   "references": [
-    {
-      "path": "../siopv2-openid4vp-example-shared"
-    }
   ]
 }
