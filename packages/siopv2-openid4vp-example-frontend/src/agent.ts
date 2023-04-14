@@ -1,5 +1,6 @@
 import {createAgent} from '@veramo/core'
 import {IQRCodeGenerator, QrCodeProvider} from "@sphereon/ssi-sdk-qr-code-generator";
+import {uriWithBase} from "@sphereon/ssi-sdk-siopv2-oid4vp-common";
 
 const agent = createAgent<IQRCodeGenerator>({
   plugins: [
@@ -10,7 +11,8 @@ const agent = createAgent<IQRCodeGenerator>({
 
 
 
-export function uriWithBase(path: string) {
-  return /*${process.env.REACT_APP_BACKEND_BASE_URL}*/`${process.env.REACT_APP_BACKEND_BASE_URL}${path.startsWith('/') ? path : '/' + path}`;
+
+export function createURI(path: string) {
+  return uriWithBase(path, { baseURI: process.env.REACT_APP_BACKEND_BASE_URI})
 }
 export default agent

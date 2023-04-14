@@ -2,9 +2,8 @@ import React, {Component} from "react"
 import axios from "axios"
 import {BallTriangle} from "react-loader-spinner"
 import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-code-generator";
-import agent, {uriWithBase} from '../agent';
-import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
-import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/ssi-sdk-siopv2-oid4vp-common"
+import agent, {createURI} from '../agent';
+import {AuthorizationResponsePayload, AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/ssi-sdk-siopv2-oid4vp-common"
 
 export type AuthenticationQRProps = {
     onAuthRequestRetrieved: () => void
@@ -90,7 +89,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     /* Get the parameters that need to go into the QR code from the server */
     private generateAuthRequestURI = async (): Promise<GenerateAuthRequestURIResponse> => {
-        const response = await axios.post(uriWithBase(`/webapp/definitions/${this.definitionId}/auth-requests`))
+        const response = await axios.post(createURI(`/webapp/definitions/${this.definitionId}/auth-requests`))
         const generateResponse = await response.data
         if (response.status !== 200) {
             throw Error(generateResponse.message)
@@ -130,7 +129,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
     private pollAuthStatus = async (authRequestURIResponse: GenerateAuthRequestURIResponse) => {
-        let pollingResponse = await axios.post(uriWithBase("/webapp/auth-status"), {
+        let pollingResponse = await axios.post(createURI("/webapp/auth-status"), {
             correlationId: authRequestURIResponse?.correlationId,
             definitionId: authRequestURIResponse.definitionId
         })
@@ -149,7 +148,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             } else if (this.timedOutRequestMappings.has(this.state)) {
                 try {
                     console.log("Cancelling timed out auth request.")
-                    await axios.delete(uriWithBase(`/webapp/definitions/${this.state?.authRequestURIResponse?.definitionId}/auth-requests/${this.state?.authRequestURIResponse?.correlationId}`))
+                    await axios.delete(createURI(`/webapp/definitions/${this.state?.authRequestURIResponse?.definitionId}/auth-requests/${this.state?.authRequestURIResponse?.correlationId}`))
                     this.timedOutRequestMappings.delete(this.state) // only delete after deleted remotely
                     clearInterval(interval)
                 } catch (error) {
@@ -169,7 +168,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             }
 
             // Use the state, as that gets updated by the qr code
-            pollingResponse = await axios.post(uriWithBase("/webapp/auth-status"), {
+            pollingResponse = await axios.post(createURI("/webapp/auth-status"), {
                 correlationId: this.state?.authRequestURIResponse?.correlationId,
                 definitionId: this.state?.authRequestURIResponse?.definitionId
             })
