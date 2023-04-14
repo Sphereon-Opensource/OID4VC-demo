@@ -1,20 +1,20 @@
 import EventEmitter from "events";
 import {
-    CheckLinkedDomain,
-    InMemoryRPSessionManager,
-    IRPSessionManager,
-    PassBy,
-    PropertyTarget,
-    ResponseMode,
-    ResponseType,
-    RevocationVerification,
-    RP,
-    Scope,
-    SigningAlgo,
-    SubjectType,
-    SupportedVersion
+  CheckLinkedDomain,
+  InMemoryRPSessionManager,
+  IRPSessionManager,
+  PassBy,
+  PresentationVerificationResult,
+  PropertyTarget,
+  ResponseMode,
+  ResponseType,
+  RevocationVerification,
+  RP,
+  Scope,
+  SigningAlgo,
+  SubjectType,
+  SupportedVersion
 } from "@sphereon/did-auth-siop";
-import {PresentationVerificationResult} from "@sphereon/did-auth-siop/dist/main/authorization-response/types";
 
 import agent, {resolver} from "./agent";
 import {DefinitionIds, getPresentationDefinition} from "./presentationDefinitions";
