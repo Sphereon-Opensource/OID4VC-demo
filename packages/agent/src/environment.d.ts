@@ -7,10 +7,6 @@ declare global {
             BACKEND_BASE_URI: string
             SIOP_BASE_URI: string
             COOKIE_SIGNING_KEY: string
-            // REDIRECT_URL_BASE: string
-           /* RP_DID?: string
-            RP_PRIVATE_HEX_KEY?: string
-            AUTH_REQUEST_EXPIRES_AFTER_SEC?: string*/
         }
     }
 }

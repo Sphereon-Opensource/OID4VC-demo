@@ -1,14 +1,14 @@
 {
-  "name": "@sphereon/siopv2-openid4vp-example-backend",
+  "name": "@sphereon/siopv2-oid4vp-example-agent",
   "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "start:prod": "node build/index.js",
-    "start:dev": "ts-node src/RestAPI.ts",
-    "start2": "node --experimental-specifier-resolution=node --loader ts-node/esm src/RestAPI.ts"
+    "start:prod": "node dist/index.js",
+    "start:dev": "ts-node src/agent.ts",
+    "start:dev-esm": "node --experimental-specifier-resolution=node --loader ts-node/esm src/agent.ts"
   },
   "keywords": [],
   "author": "Sphereon <dev@sphereon.com>",
@@ -21,14 +21,17 @@
     "@sphereon/pex": "2.0.0-unstable.14",
     "@sphereon/pex-models": "^1.2.2",
     "@sphereon/react-native-argon2": "^2.0.9",
-    "@sphereon/ssi-sdk-did-utils": "0.9.1-unstable.117",
-    "@sphereon/ssi-sdk-jwk-did-provider": "0.9.1-unstable.117",
-    "@sphereon/ssi-sdk-presentation-exchange": "^0.9.1-unstable.117",
-    "@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth": "0.9.1-unstable.117",
-    "@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api": "0.9.1-unstable.117",
-    "@sphereon/ssi-sdk-vc-handler-ld-local": "0.9.1-unstable.117",
-    "@sphereon/ssi-sdk-data-store": "^0.9.1-unstable.117",
-    "@sphereon/ssi-types": "0.9.1-unstable.117",
+    "@sphereon/ssi-sdk-did-utils": "0.9.1-unstable.130",
+    "@sphereon/ssi-sdk-jwk-did-provider": "0.9.1-unstable.130",
+    "@sphereon/ssi-sdk-presentation-exchange": "^0.9.1-unstable.130",
+    "@sphereon/ssi-sdk-siopv2-oid4vp-common": "0.9.1-unstable.130",
+    "@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth": "0.9.1-unstable.130",
+    "@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api": "0.9.1-unstable.130",
+    "@sphereon/ssi-sdk-vc-handler-ld-local": "0.9.1-unstable.130",
+    "@sphereon/ssi-sdk-data-store": "^0.9.1-unstable.130",
+    "@sphereon/wellknown-dids-client": "^0.1.3",
+    "@sphereon/ssi-sdk-core": "^0.9.1-unstable.130",
+    "@sphereon/ssi-types": "0.9.1-unstable.130",
     "@transmute/lds-ecdsa-secp256k1-recovery2020": "^0.0.7",
     "@veramo/core": "4.2.0",
     "@veramo/credential-w3c": "4.2.0",
@@ -42,12 +45,15 @@
     "@veramo/kms-local": "4.2.0",
     "@veramo/kv-store": "file:.yalc/@veramo/kv-store",
     "@veramo/utils": "4.2.0",
+    "@veramo/did-discovery": "4.2.0",
+    "@veramo/message-handler": "4.2.0",
     "ajv": "^8.12.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "did-resolver": "^4.0.1",
     "dotenv-flow": "^3.2.0",
+    "debug": "^4.3.4",
     "expiry-map": "^1.1.0",
     "express": "^4.18.2",
     "express-http-proxy": "^1.6.3",
@@ -56,7 +62,8 @@
     "sqlite3": "^5.1.4",
     "typeorm": "0.3.12",
     "typescript": "4.6.4",
-    "uint8arrays": "3.1.1"
+    "uint8arrays": "3.1.1",
+    "did-jwt": "^6.11.6"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
@@ -71,7 +78,11 @@
     "ts-node": "^10.9.1"
   },
   "files": [
-    "/dist"
+    "dist/**/*",
+    "src/**/*",
+    "README.md",
+    "plugin.schema.json",
+    "LICENSE"
   ],
   "engines": {
     "node": ">= 16.0.0"

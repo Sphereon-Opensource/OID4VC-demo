@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "preserveConstEnums": true,
+    "baseUrl": ".",
     "sourceMap": true,
     "target": "esnext",
     "module": "esnext",
@@ -14,7 +15,8 @@
     "useUnknownInCatchVariables": false,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "preserveSymlinks": true
   },
   "ts-node": {
     "compilerOptions": {

@@ -1,9 +1,12 @@
 import React, {Component} from "react"
 import {BallTriangle} from "react-loader-spinner"
-import {AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/siopv2-openid4vp-example-shared"
 import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-code-generator";
-import agent, {createURI} from '../agent';
-import {AuthorizationResponsePayload, AuthStatusResponse, GenerateAuthRequestURIResponse} from "@sphereon/ssi-sdk-siopv2-oid4vp-common"
+import agent from '../agent';
+import {
+    AuthorizationResponsePayload,
+    AuthStatusResponse,
+    GenerateAuthRequestURIResponse
+} from "@sphereon/ssi-sdk-siopv2-oid4vp-common"
 
 export type AuthenticationQRProps = {
     onAuthRequestRetrieved: () => void
@@ -167,6 +170,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
               definitionId: authRequestURIResponse.definitionId
             })
             console.log(JSON.stringify(authStatus))
-        }, 5000)
+        }, 500)
     }
 }

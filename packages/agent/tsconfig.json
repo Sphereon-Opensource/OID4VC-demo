@@ -1,17 +1,18 @@
 {
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "esnext",
-    "moduleResolution": "Node",
+    "target": "ES6" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */,
+    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+    "moduleResolution": "node",
     "declaration": true,
+    "baseUrl": "./",
     "outDir": "./dist",
-    "declarationMap": false,
+    "declarationMap": true,
     "esModuleInterop": true,
     /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "resolveJsonModule": true
     /* Include modules imported with .json extension. */,
     "strict": true /* Enable all strict type-checking options. */,
+    "skipLibCheck": true,
     /* Additional Checks */
     "noUnusedLocals": false
     /* Report errors on unused locals. */,
@@ -29,20 +30,14 @@
     "listFiles": false
     /* Print names of files part of the compilation. */,
     "pretty": true,
-
-    "types": ["node"]
+    "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
+    "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
+    "preserveConstEnums": true,
+    "composite": true,
+    "rootDir": "./src"
   },
-  "include": [
-    "src/**/*",
-    "test/**/*",
-    "README.md",
-    "CHANGELOG.md"
-  ],
-  "exclude": [
-    "node_modules/**",
-    "coverage/**",
-    "dist/**"
-  ],
+  "include": ["./src/**/*"],
+  "exclude": ["**/__tests__/**/*", "./dist/**/*", "**/.yalc/**/*"],
   "references": [
   ]
  /* // other settings...

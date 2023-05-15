@@ -15,7 +15,7 @@ It is a quite simple implementation to show how the SIOPv2 and OpenID4VP technol
 
 #### Configure environment
 
-In the **./siopv2-openidvp-example-backend folder**, update the file called .env and populate it using .env as example. A valid
+In the `./packages/agent folder`, update the file called .env and populate it using .env as example. A valid
 config will look like this
 
 ```dotenv
@@ -32,7 +32,7 @@ interface/address or ideally hostname where the
 backend will be running and make sure it is accessible from your phone and the port is open in the firewall.
 
 #### Update REACT_APP_BACKEND_BASE_URI in frontend .env
-Update the REACT_APP_BACKEND_BASE_URI value in .env or a new .env.local file in the siopv2-openid4vp-example-frontend directory
+Update the REACT_APP_BACKEND_BASE_URI value in .env or a new .env.local file in the `packages/frontend` directory
 It should have the same value as the `BACKEND_BASE_URI` above
 
 #### Build & start
@@ -73,7 +73,7 @@ After a successful login two extra page will appear in the menu navigation.
 From the root folder run:
 
 ```bash
-docker build -t siopv2-openidvp-example .
+docker build -t siopv2-oid4vp-example .
 docker run -it -p 5001:5001 -p 3000:3000 onto-web-demo
 ```
 

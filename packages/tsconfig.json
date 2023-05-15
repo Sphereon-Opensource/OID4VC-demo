@@ -2,10 +2,10 @@
   "files": [],
   "references": [
     {
-      "path": "siopv2-openid4vp-example-backend"
+      "path": "agent"
     },
     {
-      "path": "siopv2-openid4vp-example-frontend"
+      "path": "frontend"
     }
   ]
 }

@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 overrides:
-  '@sphereon/ssi-sdk-connection-manager': 0.9.1-unstable.117
-  '@sphereon/ssi-types': 0.9.1-unstable.117
-  '@sphereon/ssi-sdk-core': 0.9.1-unstable.117
-  '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.117
-  '@sphereon/ssi-sdk-data-store': 0.9.1-unstable.117
+  '@sphereon/ssi-sdk-connection-manager': 0.9.1-unstable.130
+  '@sphereon/ssi-types': 0.9.1-unstable.130
+  '@sphereon/ssi-sdk-core': 0.9.1-unstable.130
+  '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.130
+  '@sphereon/ssi-sdk-data-store': 0.9.1-unstable.130
   '@veramo/core': 4.2.0
   '@veramo/credential-w3c': 4.2.0
   '@veramo/data-store': 4.2.0
@@ -34,13 +34,14 @@ importers:
   .:
     specifiers:
       concurrently: ^1.0.0
-      dotenv-flow: ^3.2.0
-    dependencies:
-      dotenv-flow: 3.2.0
+      rimraf: ^5.0.0
+      typescript: 4.9.4
     devDependencies:
       concurrently: 1.0.0
+      rimraf: 5.0.0
+      typescript: 4.9.4
 
-  packages/siopv2-openid4vp-example-backend:
+  packages/agent:
     specifiers:
       '@sphereon/bls-kms-local': ^0.10.2
       '@sphereon/did-auth-siop': 0.3.0-unstable.33
@@ -48,14 +49,17 @@ importers:
       '@sphereon/pex': ^2.0.0-unstable.14
       '@sphereon/pex-models': ^1.2.2
       '@sphereon/react-native-argon2': ^2.0.9
-      '@sphereon/ssi-sdk-data-store': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-jwk-did-provider': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-presentation-exchange': ^0.9.1-unstable.117
-      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-vc-handler-ld-local': 0.9.1-unstable.117
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-core': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-data-store': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-jwk-did-provider': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-presentation-exchange': ^0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-vc-handler-ld-local': 0.9.1-unstable.130
+      '@sphereon/ssi-types': 0.9.1-unstable.130
+      '@sphereon/wellknown-dids-client': ^0.1.3
       '@transmute/lds-ecdsa-secp256k1-recovery2020': ^0.0.7
       '@types/body-parser': ^1.19.2
       '@types/cookie-parser': ^1.4.3
@@ -69,6 +73,7 @@ importers:
       '@veramo/core': 4.2.0
       '@veramo/credential-w3c': 4.2.0
       '@veramo/data-store': 4.2.0
+      '@veramo/did-discovery': 4.2.0
       '@veramo/did-manager': 4.2.0
       '@veramo/did-provider-ethr': 4.2.0
       '@veramo/did-provider-ion': 4.2.0
@@ -77,11 +82,14 @@ importers:
       '@veramo/key-manager': 4.2.0
       '@veramo/kms-local': 4.2.0
       '@veramo/kv-store': file:.yalc/@veramo/kv-store
+      '@veramo/message-handler': 4.2.0
       '@veramo/utils': 4.2.0
       ajv: ^8.12.0
       body-parser: ^1.19.0
       cookie-parser: ^1.4.5
       cors: ^2.8.5
+      debug: ^4.3.4
+      did-jwt: ^6.11.6
       did-resolver: ^4.0.1
       dotenv-flow: ^3.2.0
       expiry-map: ^1.1.0
@@ -101,18 +109,22 @@ importers:
       '@sphereon/pex': 2.0.0-unstable.14
       '@sphereon/pex-models': 1.2.2
       '@sphereon/react-native-argon2': 2.0.9
-      '@sphereon/ssi-sdk-data-store': 0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-jwk-did-provider': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-presentation-exchange': 0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth': 0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api': 0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk-vc-handler-ld-local': 0.9.1-unstable.117_typescript@4.6.4
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-core': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-data-store': 0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-jwk-did-provider': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-presentation-exchange': 0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth': 0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api': 0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk-vc-handler-ld-local': 0.9.1-unstable.130_typescript@4.6.4
+      '@sphereon/ssi-types': 0.9.1-unstable.130
+      '@sphereon/wellknown-dids-client': 0.1.3
       '@transmute/lds-ecdsa-secp256k1-recovery2020': 0.0.7
       '@veramo/core': 4.2.0
       '@veramo/credential-w3c': 4.2.0
       '@veramo/data-store': 4.2.0_msutuh5o5mva4v7tuio44omxmq
+      '@veramo/did-discovery': 4.2.0
       '@veramo/did-manager': 4.2.0
       '@veramo/did-provider-ethr': 4.2.0
       '@veramo/did-provider-ion': 4.2.0_kujnog3nrdwhttrj6mjleqboq4
@@ -120,12 +132,15 @@ importers:
       '@veramo/did-resolver': 4.2.0
       '@veramo/key-manager': 4.2.0
       '@veramo/kms-local': 4.2.0
-      '@veramo/kv-store': file:packages/siopv2-openid4vp-example-backend/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
+      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
+      '@veramo/message-handler': 4.2.0
       '@veramo/utils': 4.2.0
       ajv: 8.12.0
       body-parser: 1.20.2
       cookie-parser: 1.4.6
       cors: 2.8.5
+      debug: 4.3.4
+      did-jwt: 6.11.6
       did-resolver: 4.1.0
       dotenv-flow: 3.2.0
       expiry-map: 1.1.0
@@ -149,13 +164,13 @@ importers:
       '@types/react': 17.0.58
       ts-node: 10.9.1_2u2ujxfxadr3ymebaaqocuqj54
 
-  packages/siopv2-openid4vp-example-frontend:
+  packages/frontend:
     specifiers:
       '@material-ui/core': ^4.12.4
-      '@sphereon/did-auth-siop': ^0.3.0-unstable.33
-      '@sphereon/ssi-sdk-qr-code-generator': ^0.9.1-unstable.117
-      '@sphereon/ssi-sdk-siopv2-oid4vp-common': ^0.9.1-unstable.117
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-qr-code-generator': ^0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-common': ^0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-client': ^0.9.1-unstable.130
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@testing-library/jest-dom': ^5.11.4
       '@testing-library/react': ^11.1.0
       '@testing-library/user-event': ^12.1.10
@@ -171,7 +186,6 @@ importers:
       '@types/react-router-dom': ^5.1.9
       '@types/underscore.string': ^0.0.38
       '@veramo/core': 4.2.0
-      axios: ^0.21.4
       bootstrap: ^5.1.1
       jsonpack: ^1.1.5
       node-polyfill-webpack-plugin: ^2.0.1
@@ -188,12 +202,11 @@ importers:
       web-vitals: ^1.0.1
     dependencies:
       '@material-ui/core': 4.12.4_wsldad6nghbaz27nd5ik6opowq
-      '@sphereon/did-auth-siop': 0.3.0-unstable.33
-      '@sphereon/ssi-sdk-qr-code-generator': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.117
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-qr-code-generator': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-client': 0.9.1-unstable.130
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@veramo/core': 4.2.0
-      axios: 0.21.4
       bootstrap: 5.2.3
       jsonpack: 1.1.5
       node-polyfill-webpack-plugin: 2.0.1
@@ -216,7 +229,7 @@ importers:
       '@types/jest': 29.5.0
       '@types/js-cookie': 2.2.7
       '@types/jsonpack': 1.1.2
-      '@types/lodash': 4.14.192
+      '@types/lodash': 4.14.194
       '@types/node': 16.18.23
       '@types/react': 17.0.58
       '@types/react-dom': 17.0.19
@@ -377,7 +390,7 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
       debug: 4.3.4
       lodash.debounce: 4.0.8
-      resolve: 1.22.2
+      resolve: 1.22.3
       semver: 6.3.0
     transitivePeerDependencies:
       - supports-color
@@ -1657,8 +1670,8 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  /@csstools/normalize.css/10.1.0:
-    resolution: {integrity: sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==}
+  /@csstools/normalize.css/12.0.0:
+    resolution: {integrity: sha512-M0qqxAcwCsIVfpFQSlGN5XjXWu8l5JDZN+fPt1LeW5SZexQTgnaEvgXAY+CeygRw0EeppWHi12JxESWiWrB0Sg==}
     dev: false
 
   /@csstools/postcss-cascade-layers/1.1.1_postcss@8.4.21:
@@ -3164,7 +3177,7 @@ packages:
       builtin-modules: 3.3.0
       deepmerge: 4.3.1
       is-module: 1.0.0
-      resolve: 1.22.2
+      resolve: 1.22.3
       rollup: 2.79.1
     dev: false
 
@@ -3223,7 +3236,7 @@ packages:
     dependencies:
       '@mattrglobal/bbs-signatures': 1.1.0
       '@sphereon/isomorphic-webcrypto': 2.4.0-unstable.4
-      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.130
       '@trust/keyto': 2.0.0-alpha1
       '@veramo/core': 4.2.0
     transitivePeerDependencies:
@@ -3242,7 +3255,7 @@ packages:
       '@sphereon/did-uni-client': 0.6.0
       '@sphereon/pex': 2.0.0-unstable.14
       '@sphereon/pex-models': 1.2.2
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@sphereon/wellknown-dids-client': 0.1.3
       '@stablelib/ed25519': 1.0.3
       '@stablelib/random': 1.0.2
@@ -3258,7 +3271,7 @@ packages:
       elliptic: 6.5.4
       eth-crypto: 2.6.0
       events: 3.3.0
-      jose: 4.13.2
+      jose: 4.14.0
       js-sha3: 0.8.0
       language-tags: 1.0.8
       multiformats: 11.0.2
@@ -3358,7 +3371,7 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@sphereon/pex-models': 1.2.2
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       ajv: 8.12.0
       ajv-formats: 2.1.1_ajv@8.12.0
       jsonpath: 1.1.1
@@ -3373,18 +3386,18 @@ packages:
       react-native: '>=0.67.0'
     dev: false
 
-  /@sphereon/ssi-sdk-core/0.9.1-unstable.117:
-    resolution: {integrity: sha512-R0kzjZPgA2O1UlI8wduyNmNLd2iaykbtQYFgET3nhIQDK53NStBI5qoNN6y+Rdunmeso2sBvr27D2cblrFgtSg==}
+  /@sphereon/ssi-sdk-core/0.9.1-unstable.130:
+    resolution: {integrity: sha512-iPAt/VrH1k+ONmg7/SiRY8TkF8ca2mDsTH7VMX0XbFrv4eBu6QzYAI2ikY9mNGk0sOfU6CNCmb2n1KxtU6WtTg==}
     dependencies:
       '@scure/base': 1.1.1
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@veramo/core': 4.2.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk-data-store/0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-34hU/NSwLO4cDY9s1s/8Ax5KnQ1T9ljh2fczrzfesu6JlfQpwiIHsv4tM6K8MitKDAFnK41X1ABfN+J0durbuA==}
+  /@sphereon/ssi-sdk-data-store/0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-v+R/p9Mb07wKMpdpcmBN8do3RQPu5C05Tobc+LQb/8WcZQ1lu2ujfzWvc1P48bSoDbCn3ahRg026zYdSGwpzcQ==}
     dependencies:
       '@veramo/core': 4.2.0
       '@veramo/utils': 4.2.0
@@ -3413,12 +3426,12 @@ packages:
       - typeorm-aurora-data-api-driver
     dev: false
 
-  /@sphereon/ssi-sdk-did-utils/0.9.1-unstable.117:
-    resolution: {integrity: sha512-DsQrveiBkeJzsCC9Uo2xrBQBL6dqpoeFGVuMj/jQKUHzvDKAQaw/KCyfsE565x2m3dPKyPDpcCHDR9zJVUD0gA==}
+  /@sphereon/ssi-sdk-did-utils/0.9.1-unstable.130:
+    resolution: {integrity: sha512-D5/La9h/mlpeD6yOOLIWJA4BTRg67XvWQ/ug5bL6SqTTjlPA2cJJs3qzTX7n6eTGj4arSNyUi4XU/9N7LuMkTQ==}
     dependencies:
       '@sphereon/did-uni-client': 0.6.0
-      '@sphereon/ssi-sdk-core': 0.9.1-unstable.117
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-core': 0.9.1-unstable.130
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@veramo/core': 4.2.0
       '@veramo/utils': 4.2.0
       did-jwt: 6.11.6
@@ -3430,11 +3443,11 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk-jwk-did-provider/0.9.1-unstable.117:
-    resolution: {integrity: sha512-hCTbTT/8voBgNH9Zf3ccFnmQYr8kF81ZEz4EoJJ44oa4XG+XKKKSRxS1735gPGkfJ0R1y+pHKo8IYOsxMeWrAA==}
+  /@sphereon/ssi-sdk-jwk-did-provider/0.9.1-unstable.130:
+    resolution: {integrity: sha512-Z2QXArcIRGBxMF4yJBEv31msnVqq2EpFUG32KfP4TaeGlY6+jCcK+i3Cjs/ut87GvMoZtCxQByeqvs3eMQn6Nw==}
     dependencies:
       '@ethersproject/random': 5.7.0
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@stablelib/ed25519': 1.0.3
       '@veramo/core': 4.2.0
       '@veramo/did-manager': 4.2.0
@@ -3445,15 +3458,15 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk-presentation-exchange/0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-FFfAPnL5e5YBMAjVtC+uWwr82sXaqktA0y4RA+xddw/Rkev2fIe3Jorhc7zTS1YgVvcIxKIXjmxtrdl/O9t5Lw==}
+  /@sphereon/ssi-sdk-presentation-exchange/0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-KGjUET+o2PJsM1RPVyJ2kY9RZBPUN6vN23BsVuWdQZPc2Igc40Q5dA3a7tftHGu2JqrRQL0LNgVETV+Gxr/Fow==}
     dependencies:
       '@sphereon/pex': 2.0.0-unstable.14
       '@sphereon/pex-models': 1.2.2
-      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.117
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.130
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@veramo/core': 4.2.0
-      '@veramo/kv-store': file:packages/siopv2-openid4vp-example-backend/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
+      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
     transitivePeerDependencies:
       - '@google-cloud/spanner'
       - '@sap/hana-client'
@@ -3476,8 +3489,8 @@ packages:
       - typeorm-aurora-data-api-driver
     dev: false
 
-  /@sphereon/ssi-sdk-qr-code-generator/0.9.1-unstable.117:
-    resolution: {integrity: sha512-KH7Lbox6WcxnHULv9+ukCLP5Iy+bae4WGlsWRPMhd5p0qULtIv/+Y+9xFv1dzy1K4MaP8PuaLPKqGAtec1N2ug==}
+  /@sphereon/ssi-sdk-qr-code-generator/0.9.1-unstable.130:
+    resolution: {integrity: sha512-ZUQq46Ai34V3p9bgdjE250zVbeGut6yHiEDaAd3H4fJCcaH6GEYhsLusy7jcrCaULa7Lt3Zubgr3b7G6+wyqNQ==}
     dependencies:
       '@veramo/core': 4.2.0
       base64url: 3.0.1
@@ -3488,8 +3501,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk-siopv2-oid4vp-common/0.9.1-unstable.117:
-    resolution: {integrity: sha512-/xioUWkI/qhJ2+DVEY2mtd7RBKU6bMe9bLdNN0L8ndwrvQ0bQ/CAPGv1Gx3qT/z5aMAw84qaYl3z7ZLs7pxbIw==}
+  /@sphereon/ssi-sdk-siopv2-oid4vp-common/0.9.1-unstable.130:
+    resolution: {integrity: sha512-wYXwTVJmmamHBRSsMBb1K3YMyLN6bwTsTeTi8pupxKa44lmWLkpp+QBQeAYXBd02NRiYfaRSpOLOQtfBNcGtMw==}
     dependencies:
       '@sphereon/did-auth-siop': 0.3.0-unstable.33
     transitivePeerDependencies:
@@ -3498,21 +3511,21 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth/0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-083S+zahpDj0aiNInaM1gDh403GBNyTVfOPcPxCVzYqvENDudx0/SZpc2Qoa9Uj+IMkF8gNRWmcYCGKtGan50Q==}
+  /@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth/0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-Fiio23L64QpOfXEc8h6pdiSRwXCBzHFIWTdoER//+JZd7LTnbI9Js9lqdFxepDZ3PmpubAxYGX/9mgGSqbHrUw==}
     dependencies:
       '@sphereon/did-auth-siop': 0.3.0-unstable.33
       '@sphereon/pex': 2.0.0-unstable.14
-      '@sphereon/ssi-sdk-core': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-presentation-exchange': 0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.117
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-core': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-presentation-exchange': 0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.130
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@sphereon/wellknown-dids-client': 0.1.3
       '@types/uuid': 9.0.1
       '@veramo/core': 4.2.0
       '@veramo/credential-w3c': 4.2.0
-      '@veramo/kv-store': file:packages/siopv2-openid4vp-example-backend/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
+      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
       cross-fetch: 3.1.5
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -3543,16 +3556,16 @@ packages:
       - web-streams-polyfill
     dev: false
 
-  /@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api/0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-4SFK7pMZVh7MEtmgzziY506jJCuAXdPHdezVUu55Pl689CFUBu5MOQetEc0/ZoZkhoRKA8pB1XJahG+uHHKqzA==}
+  /@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api/0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-wBU/M2dNo5tZaR1i6DJiw4/DxC1Lh4AE+q0bm9skxrg/9ZaJGgS0yB3SZtgPBgCnQPjk1Yb9pJReFKlDqs1pzQ==}
     dependencies:
-      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth': 0.9.1-unstable.117_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth': 0.9.1-unstable.130_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       '@types/uuid': 9.0.1
       '@veramo/core': 4.2.0
       '@veramo/credential-w3c': 4.2.0
-      '@veramo/kv-store': file:packages/siopv2-openid4vp-example-backend/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
+      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
       body-parser: 1.20.2
       cookie-parser: 1.4.6
       cors: 2.8.5
@@ -3589,8 +3602,21 @@ packages:
       - web-streams-polyfill
     dev: false
 
-  /@sphereon/ssi-sdk-vc-handler-ld-local/0.9.1-unstable.117_typescript@4.6.4:
-    resolution: {integrity: sha512-nsH8Hu4FUIcegsOEqpgzKE6uvF+lusOx8EjaqCLdwGJ6LZvlcskGTSNlXG5bwXf4NE7GwB6dOSvXKzaP7jr98g==}
+  /@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-client/0.9.1-unstable.130:
+    resolution: {integrity: sha512-En6jDJt8nPuQxfIKyoM1EwglVB3CQ88X7rph4j9VKoGnsXhR6EsnlhhvKamF0BzFomB7ubqroq2w9Yok7nVokA==}
+    dependencies:
+      '@sphereon/ssi-sdk-siopv2-oid4vp-common': 0.9.1-unstable.130
+      '@veramo/core': 4.2.0
+      cross-fetch: 3.1.5
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /@sphereon/ssi-sdk-vc-handler-ld-local/0.9.1-unstable.130_typescript@4.6.4:
+    resolution: {integrity: sha512-3CjowTv3Zy65xFrXJlyK/Z2IKGEmuNmrud08kTa2rRkktMO6Arpew4g6BgLPUFcBP2wt01neIC0QvQdB8vwgyg==}
     peerDependencies:
       react-native-securerandom: ^1.0.1
     dependencies:
@@ -3606,8 +3632,8 @@ packages:
       '@mattrglobal/jsonld-signatures-bbs': 1.1.2
       '@sphereon/ed25519-signature-2018': 0.7.0-unstable.2
       '@sphereon/isomorphic-webcrypto': 2.4.0-unstable.4
-      '@sphereon/ssi-sdk-core': 0.9.1-unstable.117
-      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.117
+      '@sphereon/ssi-sdk-core': 0.9.1-unstable.130
+      '@sphereon/ssi-sdk-did-utils': 0.9.1-unstable.130
       '@transmute/ed25519-key-pair': 0.7.0-unstable.80
       '@transmute/jose-ld': 0.7.0-unstable.80
       '@transmute/jsonld': 0.0.4
@@ -3640,8 +3666,8 @@ packages:
       - web-streams-polyfill
     dev: false
 
-  /@sphereon/ssi-types/0.9.1-unstable.117:
-    resolution: {integrity: sha512-no6C9E1XlDxGRr93itT4b6n2gTj7Pv1Z8tch7t3/1tn7UU04ekjWUMEPxFO4ukBHdXc25w7m+X3p1qpsKUxDbA==}
+  /@sphereon/ssi-types/0.9.1-unstable.130:
+    resolution: {integrity: sha512-AaEwCZNvwvG8aH4w8LHTX+92MoJTWDAJxB1O8NztP7hTpo5xtTVkeRWhJPNdTIa02Cqg5Ad9GDIc9o5NXm8ePw==}
     dependencies:
       jwt-decode: 3.1.2
     dev: false
@@ -3649,7 +3675,7 @@ packages:
   /@sphereon/wellknown-dids-client/0.1.3:
     resolution: {integrity: sha512-TAT24L3RoXD8ocrkTcsz7HuJmgjNjdoV6IXP1p3DdaI/GqkynytXE3J1+F7vUFMRYwY5nW2RaXSgDQhrFJemaA==}
     dependencies:
-      '@sphereon/ssi-types': 0.9.1-unstable.117
+      '@sphereon/ssi-types': 0.9.1-unstable.130
       cross-fetch: 3.1.5
       jwt-decode: 3.1.2
     transitivePeerDependencies:
@@ -4197,7 +4223,7 @@ packages:
       '@stablelib/aes-kw': 1.0.1
       '@stablelib/xchacha20poly1305': 1.0.1
       base64url: 3.0.1
-      jose: 4.13.2
+      jose: 4.14.0
       web-streams-polyfill: 3.2.1
     dev: false
 
@@ -4506,12 +4532,12 @@ packages:
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
-      '@types/eslint': 7.29.0
+      '@types/eslint': 8.37.0
       '@types/estree': 1.0.0
     dev: false
 
-  /@types/eslint/7.29.0:
-    resolution: {integrity: sha512-VNcvioYDH8/FxaeTKkM4/TiTwt6pBV9E3OfGmvaw8tPl0rrHCJ4Ll15HRT+pMiFAf/MLQvAzC+6RzUMEL9Ceng==}
+  /@types/eslint/8.37.0:
+    resolution: {integrity: sha512-Piet7dG2JBuDIfohBngQ3rCt7MgO9xCO4xIMKxBThCq5PNRB91IjlJ10eJVwfoNtvTErmxLzwBZ7rHZtbOMmFQ==}
     dependencies:
       '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
@@ -4606,8 +4632,8 @@ packages:
     resolution: {integrity: sha512-RkPuyS9Z1PozxmeGj1OeaDRYWZ/1DPnmqcvCS/7DAjwYy/LJN6SdovqA1fQUROX/IZE6hmercg3u6KfEEdIQtA==}
     dev: true
 
-  /@types/lodash/4.14.192:
-    resolution: {integrity: sha512-km+Vyn3BYm5ytMO13k9KTp27O75rbQ0NFw+U//g+PX7VZyjCioXaRFisqSIJRECljcTv73G3i6BpglNGHgUQ5A==}
+  /@types/lodash/4.14.194:
+    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
     dev: true
 
   /@types/mime/3.0.1:
@@ -5405,9 +5431,9 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  /address/1.1.2:
-    resolution: {integrity: sha512-aT6camzM4xEA54YVJYSqxz1kv4IHnQZRtThJJHhUMRExaU5spC7jX5ugSwTaTgJliIgs4VhZOk7htClvQ/LmRA==}
-    engines: {node: '>= 0.12.0'}
+  /address/1.2.2:
+    resolution: {integrity: sha512-4B/qKCfeE/ODUaAUpSwfzazo5x29WD4r3vXiWsB7I2mSDAihwEqKO+g8GELZUQSSAo5e1XTYh3ZVfLyxBc12nA==}
+    engines: {node: '>= 10.0.0'}
     dev: false
 
   /adjust-sourcemap-loader/4.0.0:
@@ -5835,14 +5861,6 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /axios/0.21.4:
-    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
-    dependencies:
-      follow-redirects: 1.15.2
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /axobject-query/3.1.1:
     resolution: {integrity: sha512-goKlv8DZrK9hUh975fnHzhNIO4jUnFCfv/dszV5VwUGDFjI6vQ2VwoyjYjYNEbBE8AH87TduWP5uyDR1D+Iteg==}
     dependencies:
@@ -5924,7 +5942,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.0
       cosmiconfig: 7.1.0
-      resolve: 1.22.2
+      resolve: 1.22.3
     dev: false
 
   /babel-plugin-named-asset-import/0.3.8_@babel+core@7.21.4:
@@ -6049,7 +6067,6 @@ packages:
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
-    dev: false
 
   /base-58/0.0.1:
     resolution: {integrity: sha512-denlKTnozZTVWuh1QkbXf10kkFNc+0/eno29RR+6g5al0yGI+iAOFt/cIA2tvnKoADlUFLZHs50ZdWF+c9WBnw==}
@@ -6252,7 +6269,6 @@ packages:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
     dependencies:
       balanced-match: 1.0.2
-    dev: false
 
   /braces/3.0.2:
     resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==}
@@ -6329,7 +6345,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001478
-      electron-to-chromium: 1.4.362
+      electron-to-chromium: 1.4.364
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: false
@@ -6582,7 +6598,6 @@ packages:
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
     engines: {node: '>= 8.10.0'}
-    requiresBuild: true
     dependencies:
       anymatch: 3.1.3
       braces: 3.0.2
@@ -7596,7 +7611,7 @@ packages:
     engines: {node: '>= 4.2.1'}
     hasBin: true
     dependencies:
-      address: 1.1.2
+      address: 1.2.2
       debug: 2.6.9
     transitivePeerDependencies:
       - supports-color
@@ -7862,8 +7877,8 @@ packages:
       jake: 10.8.5
     dev: false
 
-  /electron-to-chromium/1.4.362:
-    resolution: {integrity: sha512-PYzAoScDfUcAwZfJQvr6hK2xXzLsMocj/Wuz6LpW6TZQNVv9TflBSB+UoEPuFujc478BgAxCoCFarcVPmjzsog==}
+  /electron-to-chromium/1.4.364:
+    resolution: {integrity: sha512-v6GxKdF57qfweXSfnne9nw1vS/86G4+UtscEe+3HQF+zhhrjAY4+9A4gstIQO56gyZvVrt9MZwt9aevCz/tohQ==}
     dev: false
 
   /elliptic/6.5.4:
@@ -8130,13 +8145,13 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.0
-      resolve: 1.22.2
+      resolve: 1.22.3
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /eslint-module-utils/2.7.4_qzpqtbgst6rl3av2ypjpwzqujy:
-    resolution: {integrity: sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==}
+  /eslint-module-utils/2.8.0_qzpqtbgst6rl3av2ypjpwzqujy:
+    resolution: {integrity: sha512-aWajIYfsqCKRDgUfjEXNN/JlrzauMuSEy5sbd7WXbtW3EH6A6MpwEh42c7qD+MqQo9QMJ6fWLAeIJynx0g6OAw==}
     engines: {node: '>=4'}
     peerDependencies:
       '@typescript-eslint/parser': '*'
@@ -8195,13 +8210,13 @@ packages:
       doctrine: 2.1.0
       eslint: 8.38.0
       eslint-import-resolver-node: 0.3.7
-      eslint-module-utils: 2.7.4_qzpqtbgst6rl3av2ypjpwzqujy
+      eslint-module-utils: 2.8.0_qzpqtbgst6rl3av2ypjpwzqujy
       has: 1.0.3
       is-core-module: 2.12.0
       is-glob: 4.0.3
       minimatch: 3.1.2
       object.values: 1.1.6
-      resolve: 1.22.2
+      resolve: 1.22.3
       semver: 6.3.0
       tsconfig-paths: 3.14.2
     transitivePeerDependencies:
@@ -8336,7 +8351,7 @@ packages:
       eslint: ^7.0.0 || ^8.0.0
       webpack: ^5.0.0
     dependencies:
-      '@types/eslint': 7.29.0
+      '@types/eslint': 8.37.0
       eslint: 8.38.0
       jest-worker: 28.1.3
       micromatch: 4.0.5
@@ -9084,7 +9099,6 @@ packages:
 
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
-    dev: false
 
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
@@ -9227,6 +9241,16 @@ packages:
   /glob-to-regexp/0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
     dev: false
+
+  /glob/10.0.0:
+    resolution: {integrity: sha512-zmp9ZDC6NpDNLujV2W2n+3lH+BafIVZ4/ct+Yj3BMZTH/+bgm/eVjHzeFLwxJrrIGgjjS2eiQLlpurHsNlEAtQ==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    dependencies:
+      fs.realpath: 1.0.0
+      minimatch: 9.0.0
+      minipass: 5.0.0
+      path-scurry: 1.6.4
+    dev: true
 
   /glob/7.1.6:
     resolution: {integrity: sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==}
@@ -10513,7 +10537,7 @@ packages:
       jest-pnp-resolver: 1.2.3_jest-resolve@27.5.1
       jest-util: 27.5.1
       jest-validate: 27.5.1
-      resolve: 1.22.2
+      resolve: 1.22.3
       resolve.exports: 1.1.1
       slash: 3.0.0
     dev: false
@@ -10769,8 +10793,8 @@ packages:
       '@panva/asn1.js': 1.0.0
     dev: false
 
-  /jose/4.13.2:
-    resolution: {integrity: sha512-GMUKtV+l05F6NY/06nM7rucHM6Ktvw6sxnyRqINBNWS/hCM/bBk7kanOEckRP8xtC/jzuGfTRVZvkjjuy+g4dA==}
+  /jose/4.14.0:
+    resolution: {integrity: sha512-LSA/XenLPwqk6e2L+PSUNuuY9G4NGsvjRWz6sJcUBmzTLEPJqQh46FHSUxnAQ64AWOkRO6bSXpy3yXuEKZkbIA==}
     dev: false
 
   /js-sdsl/4.4.0:
@@ -11361,6 +11385,11 @@ packages:
       yallist: 4.0.0
     dev: false
 
+  /lru-cache/9.0.3:
+    resolution: {integrity: sha512-cyjNRew29d4kbgnz1sjDqxg7qg8NW4s+HQzCGjeon7DV5T2yDije16W9HaUFV1dhVEMh+SjrOcK0TomBmf3Egg==}
+    engines: {node: 14 || >=16.14}
+    dev: true
+
   /lz-string/1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -11558,12 +11587,6 @@ packages:
     resolution: {integrity: sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==}
     dev: false
 
-  /minimatch/3.0.4:
-    resolution: {integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==}
-    dependencies:
-      brace-expansion: 1.1.11
-    dev: false
-
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
@@ -11576,6 +11599,13 @@ packages:
     dependencies:
       brace-expansion: 2.0.1
     dev: false
+
+  /minimatch/9.0.0:
+    resolution: {integrity: sha512-0jJj8AvgKqWN05mrwuqi8QYKx1WmYSUoKSxu5Qhs9prezTz10sxAHGNZe9J9cqIJzta8DWsleh2KaVaLl6Ru2w==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    dependencies:
+      brace-expansion: 2.0.1
+    dev: true
 
   /minimist-options/3.0.2:
     resolution: {integrity: sha512-FyBrT/d0d4+uiZRbqznPXqw3IpZZG3gl3wKWiX784FycUKVwBt0uLBFkQrtE4tZOrgo78nZp2jnKz3L65T5LdQ==}
@@ -11652,6 +11682,11 @@ packages:
     resolution: {integrity: sha512-fNzuVyifolSLFL4NzpF+wEF4qrgqaaKX0haXPQEdQ7NKAN+WecoKMHV09YcuL/DHxrUsYQOK3MiuDf7Ip2OXfQ==}
     engines: {node: '>=8'}
     dev: false
+
+  /minipass/5.0.0:
+    resolution: {integrity: sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ==}
+    engines: {node: '>=8'}
+    dev: true
 
   /minizlib/1.3.3:
     resolution: {integrity: sha512-6ZYMOEnmVsdCeTJVE0W9ZD+pVnE8h9Hma/iOwwRDsdQoePpoX56/8B6z3P9VNwppJuBKNRuFDRNRqRWexT9G9Q==}
@@ -12031,7 +12066,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.2
+      resolve: 1.22.3
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: false
@@ -12481,6 +12516,14 @@ packages:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
     dev: false
 
+  /path-scurry/1.6.4:
+    resolution: {integrity: sha512-Qp/9IHkdNiXJ3/Kon++At2nVpnhRiPq/aSvQN+H3U1WZbvNRK0RIQK/o4HMqPoXjpuGJUEWpHSs6Mnjxqh3TQg==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    dependencies:
+      lru-cache: 9.0.3
+      minipass: 5.0.0
+    dev: true
+
   /path-to-regexp/0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
     dev: false
@@ -12819,7 +12862,7 @@ packages:
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
-      resolve: 1.22.2
+      resolve: 1.22.3
     dev: false
 
   /postcss-initial/4.0.1_postcss@8.4.21:
@@ -13128,11 +13171,11 @@ packages:
       browserslist: '>= 4'
       postcss: '>= 8'
     dependencies:
-      '@csstools/normalize.css': 10.1.0
+      '@csstools/normalize.css': 12.0.0
       browserslist: 4.21.5
       postcss: 8.4.21
       postcss-browser-comments: 4.0.0_jrpp4geoaqu5dz2gragkckznb4
-      sanitize.css: 10.0.0
+      sanitize.css: 13.0.0
     dev: false
 
   /postcss-opacity-percentage/1.1.3_postcss@8.4.21:
@@ -13687,7 +13730,7 @@ packages:
         optional: true
     dependencies:
       '@babel/code-frame': 7.21.4
-      address: 1.1.2
+      address: 1.2.2
       browserslist: 4.21.5
       chalk: 4.1.2
       cross-spawn: 7.0.3
@@ -13706,7 +13749,7 @@ packages:
       pkg-up: 3.1.0
       prompts: 2.4.2
       react-error-overlay: 6.0.11
-      recursive-readdir: 2.2.2
+      recursive-readdir: 2.2.3
       shell-quote: 1.8.1
       strip-ansi: 6.0.1
       text-table: 0.2.0
@@ -13885,7 +13928,7 @@ packages:
       react-app-polyfill: 3.0.0
       react-dev-utils: 12.0.1_dnx6zg275gb4w5syrhi7fwln4e
       react-refresh: 0.11.0
-      resolve: 1.22.2
+      resolve: 1.22.3
       resolve-url-loader: 4.0.0
       sass-loader: 12.6.0_webpack@5.79.0
       semver: 7.4.0
@@ -14023,11 +14066,11 @@ packages:
       picomatch: 2.3.1
     dev: false
 
-  /recursive-readdir/2.2.2:
-    resolution: {integrity: sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==}
-    engines: {node: '>=0.10.0'}
+  /recursive-readdir/2.2.3:
+    resolution: {integrity: sha512-8HrF5ZsXk5FAH9dgsx3BlUer73nIhuj+9OrQwEbLTPOBzGkL1lsFCR01am+v+0m2Cmbs1nP12hLDl5FA7EszKA==}
+    engines: {node: '>=6.0.0'}
     dependencies:
-      minimatch: 3.0.4
+      minimatch: 3.1.2
     dev: false
 
   /redent/2.0.0:
@@ -14208,8 +14251,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /resolve/1.22.2:
-    resolution: {integrity: sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==}
+  /resolve/1.22.3:
+    resolution: {integrity: sha512-P8ur/gp/AmbEzjr729bZnLjXK5Z+4P0zhIJgBgzqRih7hL7BOukHGtSTA3ACMY467GRFz3duQsi0bDZdR7DKdw==}
     hasBin: true
     dependencies:
       is-core-module: 2.12.0
@@ -14269,6 +14312,14 @@ packages:
     dependencies:
       glob: 7.2.3
     dev: false
+
+  /rimraf/5.0.0:
+    resolution: {integrity: sha512-Jf9llaP+RvaEVS5nPShYFhtXIrb3LRKP281ib3So0KkeZKo2wIKyq0Re7TOSwanasA423PSr6CCIL4bP6T040g==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      glob: 10.0.0
+    dev: true
 
   /ripemd160/2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
@@ -14349,8 +14400,8 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: false
 
-  /sanitize.css/10.0.0:
-    resolution: {integrity: sha512-vTxrZz4dX5W86M6oVWVdOVe72ZiPs41Oi7Z6Km4W5Turyz28mrXSJhhEBZoRtzJWIv3833WKVwLSDWWkEfupMg==}
+  /sanitize.css/13.0.0:
+    resolution: {integrity: sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==}
     dev: false
 
   /sass-loader/12.6.0_webpack@5.79.0:
@@ -15282,7 +15333,7 @@ packages:
       postcss-selector-parser: 6.0.11
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
-      resolve: 1.22.2
+      resolve: 1.22.3
       sucrase: 3.32.0
     transitivePeerDependencies:
       - ts-node
@@ -15792,6 +15843,12 @@ packages:
     resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
 
   /typical/4.0.0:
     resolution: {integrity: sha512-VAH4IvQ7BDFYglMd7BPRDfLgxZZX4O4TFcRDA6EN5X7erNJJq+McIEp8np9aVtxrCJ6qx4GTYVfOWNjcqwZgRw==}
@@ -16739,9 +16796,9 @@ packages:
       commander: 9.5.0
     dev: false
 
-  file:packages/siopv2-openid4vp-example-backend/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {directory: packages/siopv2-openid4vp-example-backend/.yalc/@veramo/kv-store, type: directory}
-    id: file:packages/siopv2-openid4vp-example-backend/.yalc/@veramo/kv-store
+  file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {directory: packages/agent/.yalc/@veramo/kv-store, type: directory}
+    id: file:packages/agent/.yalc/@veramo/kv-store
     name: '@veramo/kv-store'
     version: 4.3.0
     dependencies:
