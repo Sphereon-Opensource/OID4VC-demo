@@ -15,11 +15,10 @@
     "publish:unstable": "lerna publish --conventional-prerelease --force-publish --canary --no-git-tag-version --include-merged-tags --preid unstable --pre-dist-tag unstable --yes --registry \"https://registry.npmjs.org/:_authToken=${NPM_TOKEN}\""
   },
   "resolutions": {
-    "@sphereon/ssi-sdk-connection-manager": "0.9.1-unstable.130",
-    "@sphereon/ssi-types": "0.9.1-unstable.130",
-    "@sphereon/ssi-sdk-core": "0.9.1-unstable.130",
-    "@sphereon/ssi-sdk-did-utils": "0.9.1-unstable.130",
-    "@sphereon/ssi-sdk-data-store": "0.9.1-unstable.130",
+    "@sphereon/ssi-types": "0.11.1-unstable.64",
+    "@sphereon/ssi-sdk.core": "0.11.1-unstable.64",
+    "@sphereon/ssi-sdk.data-store": "0.11.1-unstable.64",
+    "@sphereon/ssi-sdk-ext.did-utils": "0.12.0",
     "@veramo/core": "4.2.0",
     "@veramo/credential-w3c": "4.2.0",
     "@veramo/data-store": "4.2.0",

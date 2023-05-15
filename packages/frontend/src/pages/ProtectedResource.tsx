@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {AuthorizationResponsePayload} from "@sphereon/ssi-sdk-siopv2-oid4vp-common";
+import {AuthorizationResponsePayload} from "@sphereon/ssi-sdk.siopv2-oid4vp-common";
 
 
 export type ProtectedResourceProps = {

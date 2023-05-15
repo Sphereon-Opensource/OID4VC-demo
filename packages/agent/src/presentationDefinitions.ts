@@ -11,14 +11,14 @@ export const entraAndSphereonCompatibleDef: IPresentationDefinition = {
       min: 0,
       max: 1,
       from: 'A',
-    } ,
+    }/* ,
     {
       name: 'Accademic Award',
       rule: Rules.Pick,
       min: 1,
       max: 1,
       from: 'B',
-    },
+    },*/
   ],
   input_descriptors: [
     {
@@ -28,7 +28,7 @@ export const entraAndSphereonCompatibleDef: IPresentationDefinition = {
       group: ['A'],
       schema: [{ uri: 'https://sphereon-opensource.github.io/ssi-mobile-wallet/context/sphereon-wallet-identity-v1.jsonld' }],
     },
-    {
+   /* {
       id: 'Academic Award',
       name: 'Academic Award',
       group: ['B'],
@@ -50,7 +50,7 @@ export const entraAndSphereonCompatibleDef: IPresentationDefinition = {
           },
         ],
       },
-    },
+    },*/
   ],
 }
 

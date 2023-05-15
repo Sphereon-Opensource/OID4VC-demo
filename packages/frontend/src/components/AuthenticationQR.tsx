@@ -1,12 +1,12 @@
 import React, {Component} from "react"
 import {BallTriangle} from "react-loader-spinner"
-import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk-qr-code-generator";
+import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk.qr-code-generator";
 import agent from '../agent';
 import {
     AuthorizationResponsePayload,
     AuthStatusResponse,
     GenerateAuthRequestURIResponse
-} from "@sphereon/ssi-sdk-siopv2-oid4vp-common"
+} from "@sphereon/ssi-sdk.siopv2-oid4vp-common"
 
 export type AuthenticationQRProps = {
     onAuthRequestRetrieved: () => void
@@ -28,7 +28,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     private timedOutRequestMappings: Set<AuthenticationQRState> = new Set<AuthenticationQRState>()
     private _isMounted: boolean = false
 
-    private readonly definitionId = process.env.PRESENTATION_DEF_ID || '9449e2db-791f-407c-b086-c21cc677d2e0'
+    private readonly definitionId = process.env.REACT_APP_PRESENTATION_DEF_ID || 'sphereon'
 
 
     componentDidMount() {
@@ -92,7 +92,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     /* Get the parameters that need to go into the QR code from the server */
     private generateAuthRequestURI = async (): Promise<GenerateAuthRequestURIResponse> => {
-        return await agent.siopClientGenerateAuthRequest({
+        return await agent.siopClientCreateAuthRequest({
           definitionId: this.definitionId
         })
     }
@@ -142,10 +142,12 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             } else if (this.timedOutRequestMappings.has(this.state)) {
                 try {
                     console.log("Cancelling timed out auth request.")
-                    await agent.siopClientRemoveAuthRequestSession({
-                      correlationId: this.state?.authRequestURIResponse?.correlationId,
-                      definitionId: this.state?.authRequestURIResponse?.definitionId
-                    })
+                    if (this.state?.authRequestURIResponse) {
+                        await agent.siopClientRemoveAuthRequestSession({
+                            correlationId: this.state.authRequestURIResponse.correlationId,
+                            definitionId: this.state.authRequestURIResponse.definitionId
+                        })
+                    }
                     this.timedOutRequestMappings.delete(this.state) // only delete after deleted remotely
                     clearInterval(interval)
                 } catch (error) {
@@ -170,6 +172,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
               definitionId: authRequestURIResponse.definitionId
             })
             console.log(JSON.stringify(authStatus))
-        }, 500)
+        }, 1000)
     }
 }

@@ -8,7 +8,7 @@ import {
   SphereonEd25519Signature2018,
   SphereonEd25519Signature2020,
   SphereonJsonWebSignature2020,
-} from '@sphereon/ssi-sdk-vc-handler-ld-local'
+} from '@sphereon/ssi-sdk.vc-handler-ld-local'
 import {CredentialPlugin} from '@veramo/credential-w3c'
 import {DataStore, DataStoreORM, DIDStore, KeyStore, PrivateKeyStore} from '@veramo/data-store'
 import {DIDManager} from '@veramo/did-manager'
@@ -20,14 +20,14 @@ import {KeyManager} from '@veramo/key-manager'
 import {KeyManagementSystem, SecretBox} from '@veramo/kms-local'
 import {Resolver} from 'did-resolver'
 import {DB_CONNECTION_NAME, DB_ENCRYPTION_KEY, getDbConnection} from './database'
-import {ISIOPv2RP, SIOPv2RP} from '@sphereon/ssi-sdk-siopv2-oid4vp-rp-auth'
-import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk-presentation-exchange'
+import {ISIOPv2RP, SIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
+import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {entraAndSphereonCompatibleDef, entraVerifiedIdPresentation} from './presentationDefinitions'
-import {ISIOPv2RPRestAPIOpts, SIOPv2RPRestAPI} from "@sphereon/ssi-sdk-siopv2-oid4vp-rp-rest-api";
+import {ISIOPv2RPRestAPIOpts, SIOPv2RPRestAPI} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
 
 
 import * as dotenv from "dotenv-flow";
-import {CheckLinkedDomain} from '@sphereon/ssi-sdk-siopv2-oid4vp-common'
+import {CheckLinkedDomain} from '@sphereon/ssi-sdk.siopv2-oid4vp-common'
 
 dotenv.config()
 export const DIF_UNIRESOLVER_RESOLVE_URL = 'https://dev.uniresolver.io/1.0/identifiers'
@@ -195,11 +195,13 @@ agent
 export default agent
 
 
+const port = process.env.PORT ? Number.parseInt(process.env.PORT) : 5000
+
 const opts: ISIOPv2RPRestAPIOpts = {
     hostname: process.env.HOSTNAME ?? '0.0.0.0',
-    port: process.env.PORT ? Number.parseInt(process.env.PORT) : 5000,
-    webappBaseURI: process.env.BACKEND_BASE_URI ?? 'http://192.168.2.18:5000',
-    siopBaseURI: process.env.SIOP_BASE_URI ?? 'http://192.168.2.18:5000',
+    port,
+    webappBaseURI: process.env.BACKEND_BASE_URI ?? `http://localhost:${port}`,
+    siopBaseURI: process.env.SIOP_BASE_URI ?? `http://localhost:${port}`,
 }
 
 new SIOPv2RPRestAPI({agent, opts})

@@ -10,7 +10,7 @@ import SecretPage from "./pages/SecretPage"
 import ClassifiedPage from "./pages/ClassifiedPage"
 import {Col, Container, Row} from "react-bootstrap"
 import {CredentialMapper} from "@sphereon/ssi-types";
-import {AuthorizationResponsePayload} from "@sphereon/ssi-sdk-siopv2-oid4vp-common";
+import {AuthorizationResponsePayload} from "@sphereon/ssi-sdk.siopv2-oid4vp-common";
 
 
 export type AppState = {
