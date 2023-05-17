@@ -1,9 +1,9 @@
 lockfileVersion: 5.4
 
 overrides:
-  '@sphereon/ssi-types': 0.11.1-unstable.64
-  '@sphereon/ssi-sdk.core': 0.11.1-unstable.64
-  '@sphereon/ssi-sdk.data-store': 0.11.1-unstable.64
+  '@sphereon/ssi-types': 0.11.1-next.70
+  '@sphereon/ssi-sdk.core': 0.11.1-next.70
+  '@sphereon/ssi-sdk.data-store': 0.11.1-next.70
   '@sphereon/ssi-sdk-ext.did-utils': 0.12.0
   '@veramo/core': 4.2.0
   '@veramo/credential-w3c': 4.2.0
@@ -26,7 +26,7 @@ overrides:
   '@veramo/remote-server': 4.2.0
   '@veramo/selective-disclosure': 4.2.0
   '@veramo/url-handler': 4.2.0
-  '@sphereon/pex': ^2.0.0-unstable.14
+  '@sphereon/pex': 2.0.1
 
 importers:
 
@@ -44,20 +44,21 @@ importers:
     specifiers:
       '@sphereon/did-auth-siop': 0.3.1-unstable.1
       '@sphereon/did-uni-client': ^0.6.0
-      '@sphereon/pex': ^2.0.0-unstable.14
+      '@sphereon/pex': 2.0.1
       '@sphereon/pex-models': ^2.0.2
       '@sphereon/react-native-argon2': ^2.0.9
       '@sphereon/ssi-sdk-ext.did-provider-jwk': ^0.12.0
       '@sphereon/ssi-sdk-ext.did-utils': 0.12.0
       '@sphereon/ssi-sdk-ext.kms-local': ^0.12.0
-      '@sphereon/ssi-sdk.core': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.data-store': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.vc-handler-ld-local': 0.11.1-unstable.64
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.core': 0.11.1-next.70
+      '@sphereon/ssi-sdk.data-store': 0.11.1-next.70
+      '@sphereon/ssi-sdk.kv-store-temp': 0.11.1-next.70
+      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api': 0.11.1-next.70
+      '@sphereon/ssi-sdk.vc-handler-ld-local': 0.11.1-next.70
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@sphereon/wellknown-dids-client': ^0.1.3
       '@transmute/lds-ecdsa-secp256k1-recovery2020': ^0.0.7
       '@types/body-parser': ^1.19.2
@@ -80,7 +81,6 @@ importers:
       '@veramo/did-resolver': 4.2.0
       '@veramo/key-manager': 4.2.0
       '@veramo/kms-local': 4.2.0
-      '@veramo/kv-store': file:.yalc/@veramo/kv-store
       '@veramo/message-handler': 4.2.0
       '@veramo/utils': 4.2.0
       ajv: ^8.12.0
@@ -110,14 +110,15 @@ importers:
       '@sphereon/ssi-sdk-ext.did-provider-jwk': 0.12.0
       '@sphereon/ssi-sdk-ext.did-utils': 0.12.0
       '@sphereon/ssi-sdk-ext.kms-local': 0.12.0
-      '@sphereon/ssi-sdk.core': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.data-store': 0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth': 0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api': 0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk.vc-handler-ld-local': 0.11.1-unstable.64
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.core': 0.11.1-next.70
+      '@sphereon/ssi-sdk.data-store': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.kv-store-temp': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.vc-handler-ld-local': 0.11.1-next.70
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@sphereon/wellknown-dids-client': 0.1.3
       '@transmute/lds-ecdsa-secp256k1-recovery2020': 0.0.7
       '@veramo/core': 4.2.0
@@ -131,7 +132,6 @@ importers:
       '@veramo/did-resolver': 4.2.0
       '@veramo/key-manager': 4.2.0
       '@veramo/kms-local': 4.2.0
-      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
       '@veramo/message-handler': 4.2.0
       '@veramo/utils': 4.2.0
       ajv: 8.12.0
@@ -166,10 +166,10 @@ importers:
   packages/frontend:
     specifiers:
       '@material-ui/core': ^4.12.4
-      '@sphereon/ssi-sdk.qr-code-generator': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client': 0.11.1-unstable.64
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.qr-code-generator': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client': 0.11.1-next.70
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@testing-library/jest-dom': ^5.11.4
       '@testing-library/react': ^11.1.0
       '@testing-library/user-event': ^12.1.10
@@ -201,10 +201,10 @@ importers:
       web-vitals: ^1.0.1
     dependencies:
       '@material-ui/core': 4.12.4_67ls2tg6s4m7k3le76ov6hhyyu
-      '@sphereon/ssi-sdk.qr-code-generator': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client': 0.11.1-unstable.64
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.qr-code-generator': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client': 0.11.1-next.70
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@veramo/core': 4.2.0
       bootstrap: 5.2.3
       jsonpack: 1.1.5
@@ -3170,7 +3170,7 @@ packages:
       '@sphereon/did-uni-client': 0.6.0
       '@sphereon/pex': 2.0.1
       '@sphereon/pex-models': 2.0.2
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@sphereon/wellknown-dids-client': 0.1.3
       cross-fetch: 3.1.6
       did-jwt: 6.11.6
@@ -3275,7 +3275,7 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@sphereon/pex-models': 2.0.2
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-types': 0.11.1-next.70
       ajv: 8.12.0
       ajv-formats: 2.1.1_ajv@8.12.0
       jsonpath: 1.1.1
@@ -3295,7 +3295,7 @@ packages:
     dependencies:
       '@ethersproject/random': 5.7.0
       '@sphereon/ssi-sdk-ext.key-utils': 0.12.0
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@stablelib/ed25519': 1.0.3
       '@veramo/core': 4.2.0
       '@veramo/did-manager': 4.2.0
@@ -3364,20 +3364,20 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk.core/0.11.1-unstable.64:
-    resolution: {integrity: sha512-ctmd9OS200RyOc0eAlgq79+LW4psXRo85nMXhbpbHZhHxb+rE8K6p+4hozYLAi1bD+Rw4uWLhlbZ5+NQS7J3gg==}
+  /@sphereon/ssi-sdk.core/0.11.1-next.70:
+    resolution: {integrity: sha512-RfsYQNiyImQWwm0/WtMyRVud43Xg4LxP9yq0sLUrbe86Zxzwo7H7sOUgAPDhlN+Dn+i9FEkYAqDcIO4WDGM5DQ==}
     dependencies:
       '@scure/base': 1.1.1
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@veramo/core': 4.2.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk.data-store/0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-/okcwgFLXSAflY6IPqpPYNhEzp52AIxGu3h4elUKcx+p0K6DRW5MyJeH4k8cEaa1yuXMs9PzF9Pgvpc24+UNQw==}
+  /@sphereon/ssi-sdk.data-store/0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-pnca7KjL30KMamOLhXf6LDp/wKHRt0qf6akKuuMAPWQJxWjHa4ddSXQWB0Owrx5B6xtl7sjayhCIWJKtlIzOMQ==}
     dependencies:
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@veramo/core': 4.2.0
       class-validator: 0.14.0
       debug: 4.3.4
@@ -3403,15 +3403,15 @@ packages:
       - typeorm-aurora-data-api-driver
     dev: false
 
-  /@sphereon/ssi-sdk.presentation-exchange/0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-daVB70VjyfZ11bWZCCfeLQqT0h+EkYcL2RbLPUG26fsz73oZdgOp3luJBDDzxnBp9pYLYcxpCXfZX2SPzFwY2Q==}
+  /@sphereon/ssi-sdk.kv-store-temp/0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-p1dKaAJTveaT4q9EzNrwiyVJQMs0vWaDmctPig4rbOV5+gbSaHftllHwLK62UGfYI/iLvesd3TgpYBkE9CkYig==}
     dependencies:
-      '@sphereon/pex': 2.0.1
-      '@sphereon/pex-models': 2.0.2
-      '@sphereon/ssi-sdk-ext.did-utils': 0.12.0
-      '@sphereon/ssi-types': 0.11.1-unstable.64
-      '@veramo/core': 4.2.0
-      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
+      '@veramo/utils': 4.2.0
+      debug: 4.3.4
+      events: 3.3.0
+      json-buffer: 3.0.1
+      typeorm: 0.3.12_msutuh5o5mva4v7tuio44omxmq
+      uint8arrays: 3.1.1
     transitivePeerDependencies:
       - '@google-cloud/spanner'
       - '@sap/hana-client'
@@ -3434,8 +3434,39 @@ packages:
       - typeorm-aurora-data-api-driver
     dev: false
 
-  /@sphereon/ssi-sdk.qr-code-generator/0.11.1-unstable.64:
-    resolution: {integrity: sha512-tQKr4RStfQbZRYJ35WaOp1pudgn9R7bDR4AWZOpV+0wqS+Yc8XKOQ8rMojSzP5pO4IGbRTET2Hs3xE0JSwrIpw==}
+  /@sphereon/ssi-sdk.presentation-exchange/0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-GGWVzX9tKsbTawtoHIHRZqiGpog40yaXWtfQIew9OvmRk/7y3h+fx4xxC+Mf/QrMwoGzRpy85vyWTo3PPrxeog==}
+    dependencies:
+      '@sphereon/pex': 2.0.1
+      '@sphereon/pex-models': 2.0.2
+      '@sphereon/ssi-sdk-ext.did-utils': 0.12.0
+      '@sphereon/ssi-sdk.kv-store-temp': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-types': 0.11.1-next.70
+      '@veramo/core': 4.2.0
+    transitivePeerDependencies:
+      - '@google-cloud/spanner'
+      - '@sap/hana-client'
+      - better-sqlite3
+      - encoding
+      - hdb-pool
+      - ioredis
+      - mongodb
+      - mssql
+      - mysql2
+      - oracledb
+      - pg
+      - pg-native
+      - pg-query-stream
+      - redis
+      - sql.js
+      - sqlite3
+      - supports-color
+      - ts-node
+      - typeorm-aurora-data-api-driver
+    dev: false
+
+  /@sphereon/ssi-sdk.qr-code-generator/0.11.1-next.70:
+    resolution: {integrity: sha512-NujmFpNeu2qGPDuJFi3VFpOixqZ/o+KAjHjGrHy8WTGAFjZmUpiIzsgAnNrXsFXXOBeYp1GVf7VuISMJvAt//w==}
     dependencies:
       '@veramo/core': 4.2.0
       base64url: 3.0.1
@@ -3446,8 +3477,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk.siopv2-oid4vp-common/0.11.1-unstable.64:
-    resolution: {integrity: sha512-nG8E2z57azJbbbM88sPXQaFItEL54bGIWc7HahFtQ7ZyGmD8GHjKidaUTFbqHvMshTELoaMQRMNeTLDSWF+wbA==}
+  /@sphereon/ssi-sdk.siopv2-oid4vp-common/0.11.1-next.70:
+    resolution: {integrity: sha512-qMMmxC69UPRS1lbc26wfYrg3BIQ8xOkWRDp8ASaZHIoVBZBXGqat+ycvlh9io977m/jkDSsMx8gUGkI7xm3Txg==}
     dependencies:
       '@sphereon/did-auth-siop': 0.3.1-unstable.1
       uint8arrays: 3.1.1
@@ -3455,21 +3486,21 @@ packages:
       - encoding
     dev: false
 
-  /@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-B+Fq2ja5UecgfCqlk+OuStP2FaQ0ZoshS2qAiQNjnx6hT+RUNA7Aja/lCxcZTEnH+85jC3WJYy+r5quXJhRIyw==}
+  /@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-kxK0kpH52Q/7nsRNP+jw493rN7B2xbJG1laDQpY35MFEKjGm1RvIpZxwft1cshl6ZGjA8EZd5BMfufNJMx7Bww==}
     dependencies:
       '@sphereon/did-auth-siop': 0.3.1-unstable.1
       '@sphereon/pex': 2.0.1
       '@sphereon/ssi-sdk-ext.did-utils': 0.12.0
-      '@sphereon/ssi-sdk.core': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-unstable.64
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.core': 0.11.1-next.70
+      '@sphereon/ssi-sdk.kv-store-temp': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-next.70
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@sphereon/wellknown-dids-client': 0.1.3
       '@types/uuid': 9.0.1
       '@veramo/core': 4.2.0
       '@veramo/credential-w3c': 4.2.0
-      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
       cross-fetch: 3.1.6
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -3498,18 +3529,18 @@ packages:
       - web-streams-polyfill
     dev: false
 
-  /@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api/0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {integrity: sha512-dM1pTd6rnRb4S9MjkBJc0DDNkHE1QU2Md5nNJcFdw4IZtc5wTGqeaIUj+Rwr2pOBFcWHqdBla4PqAJPkkKxHuQ==}
+  /@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api/0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq:
+    resolution: {integrity: sha512-hryv3K2ebVzzwF1wkSEEwpbDcDrkI4bMlGd4hdjymdvBqoTw1svjfDY16WlP8bisvkD6/xS55WSfn6FXrM0dfw==}
     dependencies:
       '@sphereon/did-auth-siop': 0.3.1-unstable.1
-      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-unstable.64
-      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth': 0.11.1-unstable.64_msutuh5o5mva4v7tuio44omxmq
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.kv-store-temp': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.presentation-exchange': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-next.70
+      '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth': 0.11.1-next.70_msutuh5o5mva4v7tuio44omxmq
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@types/uuid': 9.0.1
       '@veramo/core': 4.2.0
       '@veramo/credential-w3c': 4.2.0
-      '@veramo/kv-store': file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq
       body-parser: 1.20.2
       cookie-parser: 1.4.6
       cors: 2.8.5
@@ -3544,10 +3575,10 @@ packages:
       - web-streams-polyfill
     dev: false
 
-  /@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client/0.11.1-unstable.64:
-    resolution: {integrity: sha512-4ntdWaddZWCdNe9qKTxB+OcFkWCQsLVSYMU2QpTmIcm0fmysTp6w0Wdj6rTWzXz1+9H2y7EJQeChKquAZ7EXiA==}
+  /@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client/0.11.1-next.70:
+    resolution: {integrity: sha512-19dy4M6tk0CkfhZqMG6rr5ArEQi5QuU6YdwrQQJ+P02QESv+w0+sComVTW5hzJNBgJ9jHBP3+9ILwQ8pR2wlzg==}
     dependencies:
-      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.11.1-next.70
       '@veramo/core': 4.2.0
       cross-fetch: 3.1.6
     transitivePeerDependencies:
@@ -3555,8 +3586,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-sdk.vc-handler-ld-local/0.11.1-unstable.64:
-    resolution: {integrity: sha512-xhvHvXdrLuUDHYHsTyUjjNtwWeHVhhvJ1cN+3QRnqpZ6BZhoSvOhz3uy7NHpi2bKy2eneR1EAjbZXSgmTiS4kA==}
+  /@sphereon/ssi-sdk.vc-handler-ld-local/0.11.1-next.70:
+    resolution: {integrity: sha512-/hE+5npK4gZZbWU29vRaF6Y+tY9l7hHx5++fpftf0Y23j7tY0sB/O9uLycfQ7N979x5/2nn231BTjx0k3dpanQ==}
     peerDependencies:
       react-native-securerandom: ^1.0.1
     dependencies:
@@ -3571,8 +3602,8 @@ packages:
       '@sphereon/ed25519-signature-2018': 0.7.0-unstable.6
       '@sphereon/isomorphic-webcrypto': 2.4.0-unstable.4
       '@sphereon/ssi-sdk-ext.did-utils': 0.12.0
-      '@sphereon/ssi-sdk.core': 0.11.1-unstable.64
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-sdk.core': 0.11.1-next.70
+      '@sphereon/ssi-types': 0.11.1-next.70
       '@transmute/ed25519-key-pair': 0.7.0-unstable.80
       '@transmute/jose-ld': 0.7.0-unstable.80
       '@transmute/jsonld': 0.0.4
@@ -3602,8 +3633,8 @@ packages:
       - web-streams-polyfill
     dev: false
 
-  /@sphereon/ssi-types/0.11.1-unstable.64:
-    resolution: {integrity: sha512-JUuIGMiIQHMyUtMeDtswhjIE1xXKdxiJR+9wCynCYJ9rpECbRm6cojF2ao3zriCdXgk7NoDJLpd8rjWwXWwRHw==}
+  /@sphereon/ssi-types/0.11.1-next.70:
+    resolution: {integrity: sha512-+BPKiXjumU0unByh7uX0ae3toQ2TVJ1WChJJYeypxy5bx/rcz+z9mM4MYPs+S9c1w6JWhuIHZ7G4UC6NK8ZlQQ==}
     dependencies:
       jwt-decode: 3.1.2
     dev: false
@@ -3611,7 +3642,7 @@ packages:
   /@sphereon/wellknown-dids-client/0.1.3:
     resolution: {integrity: sha512-TAT24L3RoXD8ocrkTcsz7HuJmgjNjdoV6IXP1p3DdaI/GqkynytXE3J1+F7vUFMRYwY5nW2RaXSgDQhrFJemaA==}
     dependencies:
-      '@sphereon/ssi-types': 0.11.1-unstable.64
+      '@sphereon/ssi-types': 0.11.1-next.70
       cross-fetch: 3.1.6
       jwt-decode: 3.1.2
     transitivePeerDependencies:
@@ -16564,40 +16595,6 @@ packages:
       validator: 13.9.0
     optionalDependencies:
       commander: 9.5.0
-    dev: false
-
-  file:packages/agent/.yalc/@veramo/kv-store_msutuh5o5mva4v7tuio44omxmq:
-    resolution: {directory: packages/agent/.yalc/@veramo/kv-store, type: directory}
-    id: file:packages/agent/.yalc/@veramo/kv-store
-    name: '@veramo/kv-store'
-    version: 4.3.0
-    dependencies:
-      '@veramo/utils': 4.2.0
-      debug: 4.3.4
-      events: 3.3.0
-      json-buffer: 3.0.1
-      typeorm: 0.3.12_msutuh5o5mva4v7tuio44omxmq
-      uint8arrays: 3.1.1
-    transitivePeerDependencies:
-      - '@google-cloud/spanner'
-      - '@sap/hana-client'
-      - better-sqlite3
-      - encoding
-      - hdb-pool
-      - ioredis
-      - mongodb
-      - mssql
-      - mysql2
-      - oracledb
-      - pg
-      - pg-native
-      - pg-query-stream
-      - redis
-      - sql.js
-      - sqlite3
-      - supports-color
-      - ts-node
-      - typeorm-aurora-data-api-driver
     dev: false
 
   github.com/uport-project/EcdsaSecp256k1RecoverySignature2020/ab0db52de6f4e6663ef271a48009ba26e688ef9b:
