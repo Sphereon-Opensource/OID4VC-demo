@@ -3,6 +3,7 @@
 *.iml
 .nyc_output
 build
+!.yalc/**/build
 dist
 node_modules
 coverage
