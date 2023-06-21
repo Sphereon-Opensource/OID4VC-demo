@@ -42,15 +42,15 @@ export const fmaGuestDef: IPresentationDefinition = {
             "purpose": "You need to provide a FMA Guest Credential.",
             "schema": [
                 {
-                    "uri": "FMAGuest"
+                    "uri": "GuestCredential"
                 }
             ],
             "constraints": {
                 "fields": [
                     {
                         "path": [
-                            "$.credentialSubject.name",
-                            "$.vc.credentialSubject.name"
+                            "$.credentialSubject.type",
+                            "$.vc.credentialSubject.type"
                         ],
                         "filter": {
                             "type": "string",
@@ -62,6 +62,39 @@ export const fmaGuestDef: IPresentationDefinition = {
         }
     ]
 }
+
+
+export const triallGuestDef: IPresentationDefinition = {
+    "id": "0101f45c-614f-4076-b13b-15c920ab1d0c",
+    "purpose": "For this portal we need your e-mail address and name from a Triall guest or DBC Conference credential",
+    "input_descriptors": [
+        {
+            "id": "4cf7cff1-0234-4f35-9d21-251668a60950",
+            "name": "Triall Guest",
+            "purpose": "You need to provide a Guest Credential.",
+            "schema": [
+                {
+                    "uri": "GuestCredential"
+                }
+            ],
+            "constraints": {
+                "fields": [
+                    {
+                        "path": [
+                            "$.credentialSubject.type",
+                            "$.vc.credentialSubject.type"
+                        ],
+                        "filter": {
+                            "type": "string",
+                            "pattern": "Triall Guest"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
 
 
 export const entraAndSphereonCompatibleDef: IPresentationDefinition = {

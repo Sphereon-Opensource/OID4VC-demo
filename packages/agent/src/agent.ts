@@ -26,7 +26,7 @@ import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.pre
 import {
     dbcConferenceAttendeeDef,
     entraAndSphereonCompatibleDef,
-    entraVerifiedIdPresentation, fmaGuestDef
+    entraVerifiedIdPresentation, fmaGuestDef, triallGuestDef
 } from './presentationDefinitions'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPRestAPI} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
 
@@ -135,7 +135,7 @@ const agent = createAgent<ISIOPv2RP & IPresentationExchange & IDIDManager>({
             },
             instanceOpts: [
                 {
-                    definitionId: 'dbc',
+                    definitionId: 'dbc2023',
                     definition: dbcConferenceAttendeeDef,
                     rpOpts: {
                         didOpts: {
@@ -161,7 +161,33 @@ const agent = createAgent<ISIOPv2RP & IPresentationExchange & IDIDManager>({
                     }
                 },
                 {
-                    definitionId: 'fma',
+                    definitionId: 'triall2023',
+                    definition: triallGuestDef,
+                    rpOpts: {
+                        didOpts: {
+                            checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
+                            identifierOpts: {
+                                identifier: RP_DID_WEB,
+                                kid: RP_DID_WEB_KID,
+                            },
+                        },
+                    }
+                },
+                {
+                    definitionId: triallGuestDef.id,
+                    definition: triallGuestDef,
+                    rpOpts: {
+                        didOpts: {
+                            checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
+                            identifierOpts: {
+                                identifier: RP_DID_WEB,
+                                kid: RP_DID_WEB_KID,
+                            },
+                        },
+                    }
+                },
+                {
+                    definitionId: 'fma2023',
                     definition: fmaGuestDef,
                     rpOpts: {
                         didOpts: {
