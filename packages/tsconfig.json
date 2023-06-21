@@ -5,7 +5,7 @@
       "path": "agent"
     },
     {
-      "path": "frontend"
+      "path": "oid4vp-demo-frontend"
     }
   ]
 }

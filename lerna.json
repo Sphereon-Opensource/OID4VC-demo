@@ -2,7 +2,7 @@
   "version": "0.1.0",
   "npmClient": "pnpm",
   "changelog": {
-    "repo": "sphereon-opensource/siopv2-oid4vp-example",
+    "repo": "sphereon-opensource/oid4vc-demo",
     "cacheDir": ".changelog"
   },
   "command": {
