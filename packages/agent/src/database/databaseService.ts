@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm'
 
 import { sqliteConfig } from './config'
 
-const debug = Debug(`demo:databaseService`)
+const debug = Debug(`sphereon:demo:db`)
 
 /**
  * Todo, move to a class

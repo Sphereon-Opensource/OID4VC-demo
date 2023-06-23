@@ -1,0 +1,12 @@
+{
+  "privateKeyHex": "f4446e5eb1201a7769cb35f02f24b06c0ac3ff49eb085f8562f06fc6c42e68cd",
+  "did": "did:jwk:eyJhbGciOiJFUzI1NiIsInVzZSI6InNpZyIsImt0eSI6IkVDIiwiY3J2IjoiUC0yNTYiLCJ4IjoiVEcySDJ4MmRXWE4zdUNxWnBxRjF5c0FQUVZESkVOX0gtQ010YmdqYi1OZyIsInkiOiI5TThOeGQwUE4yMk05bFBEeGRwRHBvVEx6MTV3ZnlaSnM2WmhLSVVKMzM4In0",
+  "createArgs": {
+    "provider": "did:jwk",
+    "options": {
+      "kid": "4c6d87db1d9d597377b82a99a6a175cac00f4150c910dfc7f8232d6e08dbf8d8",
+      "type": "Secp256r1",
+      "keyType": "Secp256r1"
+    }
+  }
+}

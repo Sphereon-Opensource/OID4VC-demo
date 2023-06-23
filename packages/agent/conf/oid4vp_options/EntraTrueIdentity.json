@@ -1,0 +1,8 @@
+{
+  "definitionId": "EntraTrueIdentity",
+  "rpOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "EntraTrueIdentity",
+  "input_descriptors": [
+    {
+      "id": "TrueIdentity",
+      "name": "TrueIdentity",
+      "purpose": "To verify your demo identity",
+      "schema": [
+        {
+          "uri": "TrueIdentity"
+        }
+      ],
+      "constraints": {
+        "fields": [
+          {
+            "path": [
+              "$.issuer",
+              "$.vc.issuer",
+              "$.iss"
+            ],
+            "filter": {
+              "type": "string",
+              "pattern": "did.*"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

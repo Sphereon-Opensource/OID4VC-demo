@@ -23,11 +23,11 @@ NODE_ENV=development
 PORT=3002
 COOKIE_SIGNING_KEY=8E5er6YyAO6dIrDTm7BXYWsafBSLxzjb
 BACKEND_BASE_URI=https://backend.example.com
-SIOP_BASE_URI=https://backend.example.com
+OID4VP_AGENT_BASE_URI=https://backend.example.com
 AUTH_REQUEST_EXPIRES_AFTER_SEC=180
 ```
 
-Except for the IP address/hostname in the `BACKEND_BASE_URI` and `SIOP_BASE_URI` this is a valid configuration to test with. You will need to replace it with the public IP
+Except for the IP address/hostname in the `BACKEND_BASE_URI` and `OID4VP_AGENT_BASE_URI` this is a valid configuration to test with. You will need to replace it with the public IP
 interface/address or ideally hostname where the
 backend will be running and make sure it is accessible from your phone and the port is open in the firewall.
 
