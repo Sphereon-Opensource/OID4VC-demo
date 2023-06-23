@@ -22,7 +22,7 @@ import {
     generatePrivateKeyHex,
     privateKeyHexFromPEM,
     publicKeyHexFromPEM,
-    TKeyType
+    TKeyType, toJwk
 } from "@sphereon/ssi-sdk-ext.key-utils";
 
 
@@ -116,6 +116,7 @@ export async function getOrCreateDIDs(): Promise<IDIDResult[]> {
             if (identifier) {
                 console.log(`Identifier exists for DID ${did}`)
                 console.log(`${JSON.stringify(identifier)}`)
+                identifier.keys.map(key => console.log(`kid: ${key.kid}:\r\n ` +JSON.stringify(toJwk(key.publicKeyHex, key.type), null, 2)))
             } else {
                 console.log(`No identifier for DID ${did} exists yet. Will create the DID...`)
                 if (did?.startsWith('did:web') && opts.importArgs) {
@@ -155,6 +156,7 @@ export async function getOrCreateDIDs(): Promise<IDIDResult[]> {
                         throw Error('Exit. Please see instructions')
 
                     }
+                    identifier.keys.map(key => console.log(`kid: ${key.kid}:\r\n ` +JSON.stringify(toJwk(key.publicKeyHex, key.type), null, 2)))
                 }
                 console.log(`Identifier created for DID ${did}`)
                 console.log(`${JSON.stringify(identifier, null, 2)}`)
