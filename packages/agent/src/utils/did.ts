@@ -127,7 +127,7 @@ export async function getOrCreateDIDs(): Promise<IDIDResult[]> {
                     }
 
 
-                    if (!privateKeyHex) {
+                    if (!privateKeyHex && !did?.startsWith('did:web')) {
                         // @ts-ignore
                         privateKeyHex = generatePrivateKeyHex((args.options?.type ?? args.options.keyType ?? "Secp256k1") as TKeyType)
                         console.log("This really is a demo and should not be used in production!")
