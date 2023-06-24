@@ -116,15 +116,31 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 },
             },
         } as unknown as CredentialDataSupplierResult)
+    } else {
+        return Promise.resolve({
+            format: 'jwt_vc_json',
+            credential: {
+                '@context': ['https://www.w3.org/2018/credentials/v1'],
+                type: ['VerifiableCredential', 'GuestCredential'],
+                expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
+                credentialSubject: {
+                    firstName,
+                    lastName,
+                    email,
+                    type: 'Sphereon Guest',
+                },
+            },
+        } as unknown as CredentialDataSupplierResult)
     }
     throw Error(`${JSON.stringify(request.types)} not supported by this issuer`)
 }
 
 
 export const allCredentialDataSupliers: Record<string, CredentialDataSupplier> = {
-    'https://ssi.dutchblockchaincoalition.org/issuer': credentialDataSupplierDBCConference2023
+    'https://ssi.dutchblockchaincoalition.org/issuer': credentialDataSupplierDBCConference2023,
+    'http://localhost:5000/niels': credentialDataSupplierDBCConference2023
 }
 
-export function getCredentialDataSupplier(id: string): CredentialDataSupplier | undefined {
-    return allCredentialDataSupliers[id]
+export function getCredentialDataSupplier(id: string): CredentialDataSupplier {
+    return allCredentialDataSupliers[id] ?? credentialDataSupplierSphereon
 }

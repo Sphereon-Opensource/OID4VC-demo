@@ -187,7 +187,7 @@ if (IS_OID4VCI_ENABLED) {
                 const host = process.env.INTERNAL_HOSTNAME_OR_IP ?? '0.0.0.0'
                 const port = process.env.PORT ? Number.parseInt(process.env.PORT) : 5000
                 const oid4vciRest = await OID4VCIRestAPI.init({
-                        context: {...agent.context, agent: agent as TAgent<TAgentTypes>},
+                        context,
                         opts: {
                             serverOpts: {
                                 app: express,
@@ -199,7 +199,7 @@ if (IS_OID4VCI_ENABLED) {
                         issuerInstanceArgs: {
                             ...instanceOpt
                         },
-                        credentialDataSupplier: instanceOpt?.metadata?.credential_issuer ? getCredentialDataSupplier(instanceOpt.metadata.credential_issuer) : undefined
+                        credentialDataSupplier: getCredentialDataSupplier(instanceOpt.credentialIssuer)
                     }
                 )
                 console.log(`[OID4VCI] Started at ${host}:${port}, with issuer ${oid4vciRest.issuer.issuerMetadata.credential_issuer}`)

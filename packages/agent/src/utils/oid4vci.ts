@@ -75,7 +75,7 @@ export async function issuerPersistToInstanceOpts(opt: IIssuerOptsPersistArgs): 
         issuerOpts,
         storeId: opt.storeId,
         storeNamespace: opt.namespace
-    } as IIssuerInstanceOptions
+    }
 }
 
 export async function createOID4VCIStore() {
