@@ -1,33 +1,31 @@
-import {IPresentationDefinition} from '@sphereon/pex'
-import {IRPDefaultOpts, SIOPv2RP} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth";
-import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/src/types/ISIOPv2RP";
 import {
-    definitionsOpts, getDefaultDID, getDefaultKid, getIdentifier,
-    IS_OID4VP_ENABLED,
-    OID4VP_DEFINITIONS,
-    OID4VPInstanceOpts,
-    oid4vpInstanceOpts
+    createDidResolver,
+    getDefaultDID,
+    getDefaultKid,
+    getIdentifier,
+    IS_OID4VCI_ENABLED,
+    oid4vciInstanceOpts,
+    oid4vciMetadataOpts
 } from "../index";
-import {CheckLinkedDomain} from "@sphereon/did-auth-siop";
+import {IIssuerDefaultOpts, OID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
+import {Resolver} from "did-resolver";
+import {
+    IIssuerInstanceOptions,
+    IIssuerOptions,
+    IIssuerOptsPersistArgs,
+    OID4VCIStore
+} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
+import * as process from "process";
+import {IIssuerOptsImportArgs} from "@sphereon/ssi-sdk.oid4vci-issuer-store/src/types/IOID4VCIStore";
 
 
-function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definitions: IPresentationDefinition[]): IPEXInstanceOptions[] {
-    const result: IPEXInstanceOptions[] = []
-    oid4vpInstanceOpts.map(opt => {
-        const definition = definitions.find(pd => pd.id === opt.definitionId || pd.name === opt.definitionId)
-        if (definition) {
-            if (OID4VP_DEFINITIONS.length === 0 || OID4VP_DEFINITIONS.includes(definition.id) || (definition.name && OID4VP_DEFINITIONS.includes(definition.name))) {
-                console.log(`[OID4VP] Enabling Presentation Definition with name '${definition.name ?? '<none>'}' and id '${definition.id}'`)
-                result.push({...opt, definition})
-            }
-        }
-    })
-    return result
+export function toImportIssuerOptions(args?: { oid4vciInstanceOpts: IIssuerOptsImportArgs[] }): IIssuerOptsImportArgs[] {
+    return args?.oid4vciInstanceOpts ?? oid4vciInstanceOpts.asArray
 }
 
 
-export async function getDefaultOID4VPRPOptions(args?: { did?: string }): Promise<IRPDefaultOpts | undefined> {
-    if (!IS_OID4VP_ENABLED) {
+export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string }): Promise<IIssuerDefaultOpts | undefined> {
+    if (!IS_OID4VCI_ENABLED) {
         return
     }
     const did = args?.did ?? await getDefaultDID()
@@ -39,8 +37,8 @@ export async function getDefaultOID4VPRPOptions(args?: { did?: string }): Promis
         return
     }
     return {
+        userPinRequired: process.env.OID4VCI_DEFAULTS_USER_PIN_REQUIRED?.toLowerCase() !== 'false' ?? false,
         didOpts: {
-            checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
             identifierOpts: {
                 identifier,
                 kid: await getDefaultKid({did})
@@ -50,21 +48,62 @@ export async function getDefaultOID4VPRPOptions(args?: { did?: string }): Promis
 
 }
 
-export async function createOID4VPRP() {
-    if (!IS_OID4VP_ENABLED) {
+
+export async function addDefaultsToOpts(issuerOpts: IIssuerOptions) {
+    const defaultOpts = await getDefaultOID4VCIIssuerOptions()
+    let identifierOpts = issuerOpts?.didOpts?.identifierOpts ?? defaultOpts?.didOpts.identifierOpts
+    let resolveOpts = issuerOpts.didOpts.resolveOpts ?? defaultOpts?.didOpts.resolveOpts
+    if (!issuerOpts.didOpts) {
+        issuerOpts.didOpts = {
+            identifierOpts,
+            resolveOpts
+        }
+    }
+    if (!issuerOpts.didOpts.identifierOpts) {
+        issuerOpts.didOpts.identifierOpts = identifierOpts
+    }
+    if (!issuerOpts.didOpts.resolveOpts) {
+        issuerOpts.didOpts.resolveOpts = resolveOpts
+    }
+    return issuerOpts;
+}
+
+export async function issuerPersistToInstanceOpts(opt: IIssuerOptsPersistArgs): Promise<IIssuerInstanceOptions> {
+    const issuerOpts = await addDefaultsToOpts(opt.issuerOpts);
+    return {
+        credentialIssuer: opt.correlationId,
+        issuerOpts,
+        storeId: opt.storeId,
+        storeNamespace: opt.namespace
+    } as IIssuerInstanceOptions
+}
+
+export async function createOID4VCIStore() {
+    if (!IS_OID4VCI_ENABLED) {
         return
     }
-    return new SIOPv2RP({
-        /*defaultOpts: await getDefaultOID4VPRPOptions()*//*: {
+    const importIssuerOpts = toImportIssuerOptions()
+    return new OID4VCIStore({
 
-        didOpts: {
-            checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-            identifierOpts: {
-                identifier: RP_DID_WEB,
-                kid: RP_DID_WEB_KID,
-            },
+        importIssuerOpts,
+        importMetadatas: oid4vciMetadataOpts.asArray,
+        // instanceOpts: await Promise.all(importIssuerOpts.map(async opt => issuerPersistToInstanceOpts(opt)))
+    })
+}
+
+export async function createOID4VCIIssuer(opts?: { resolver?: Resolver }) {
+    if (!IS_OID4VCI_ENABLED) {
+        return
+    }
+    return new OID4VCIIssuer({
+        returnSessions: true,
+        resolveOpts: {
+            resolver: opts?.resolver ?? await createDidResolver(),
         },
-    }*/
+    })
+}
+
+/*
         instanceOpts: toPexInstanceOptions(oid4vpInstanceOpts.asArray, definitionsOpts.asArray)
         /*instanceOpts: [
             {
@@ -162,6 +201,3 @@ export async function createOID4VPRP() {
                 definition: entraVerifiedIdPresentation,
             },
         ],*/
-    })
-
-}

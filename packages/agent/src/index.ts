@@ -4,6 +4,11 @@ import {loadJsonFiles} from "./utils";
 import {IPresentationDefinition} from "@sphereon/pex";
 import {IRPDefaultOpts} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth";
 import {IDIDOpts, OID4VPInstanceOpts} from "./types";
+import {IIssuerInstanceOptions, IMetadataPersistArgs} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
+import {
+    IIssuerOptsImportArgs,
+    IMetadataImportArgs
+} from "@sphereon/ssi-sdk.oid4vci-issuer-store/src/types/IOID4VCIStore";
 
 await dotenvConfig()
 
@@ -21,12 +26,19 @@ export const DID_OPTIONS_PATH = `${CONF_PATH}/dids`
 export const OID4VP_DEFINITIONS: string[] = process.env.OID4VP_DEFINITIONS ? process.env.OID4VP_DEFINITIONS.split(/[, ]/).map(val => val.trim()) : []
 export const OID4VP_PRESENTATION_DEFINITION_PATH = `${CONF_PATH}/presentation_definitions`;
 export const OID4VP_RP_OPTIONS_PATH = `${CONF_PATH}/oid4vp_options`;
+
+export const OID4VCI_ISSUER_OPTIONS_PATH = `${CONF_PATH}/oid4vci_options`;
+export const OID4VCI_ISSUER_METADATA_PATH = `${CONF_PATH}/oid4vci_metadata`;
 export const UNIVERSAL_RESOLVER_RESOLVE_URL = process.env.UNIVERSAL_RESOLVER_RESOLVE_URL ?? 'https://dev.uniresolver.io/1.0/identifiers'
 
 export const oid4vpInstanceOpts = loadJsonFiles<OID4VPInstanceOpts>({path: OID4VP_RP_OPTIONS_PATH})
+
+export const oid4vciInstanceOpts = loadJsonFiles<IIssuerOptsImportArgs>({path: OID4VCI_ISSUER_OPTIONS_PATH})
+export const oid4vciMetadataOpts = loadJsonFiles<IMetadataImportArgs>({path: OID4VCI_ISSUER_METADATA_PATH})
 export const definitionsOpts = loadJsonFiles<IPresentationDefinition>({path: OID4VP_PRESENTATION_DEFINITION_PATH})
 export const didOptConfigs = loadJsonFiles<IDIDOpts>({path: DID_OPTIONS_PATH})
 export const IS_OID4VP_ENABLED = process.env.OID4VP_ENABLED === undefined || process.env.OID4VP_ENABLED
+export const IS_OID4VCI_ENABLED = process.env.OID4VCI_ENABLED === undefined || process.env.OID4VCI_ENABLED
 
 
 export * from './types'

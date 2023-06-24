@@ -9,6 +9,8 @@ declare global {
             OID4VP_WEBAPP_BASE_URI?: string
             OID4VP_AGENT_BASE_URI?: string
             OID4VP_DEFINITIONS?: string
+            OID4VCI_ENABLED?: boolean
+            OID4VCI_DEFAULTS_USER_PIN_REQUIRED?: string
             COOKIE_SIGNING_KEY?: string
             DEFAULT_DID?: string
             DEFAULT_KID?: string
