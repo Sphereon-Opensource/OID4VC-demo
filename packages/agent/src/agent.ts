@@ -12,8 +12,9 @@ import {CredentialPlugin} from '@veramo/credential-w3c'
 import {DataStore, DataStoreORM, DIDStore, KeyStore, PrivateKeyStore} from '@veramo/data-store'
 import {DIDManager} from '@veramo/did-manager'
 import {DIDResolverPlugin} from '@veramo/did-resolver'
-import {KeyManager} from '@veramo/key-manager'
-import {KeyManagementSystem, SecretBox} from '@veramo/kms-local'
+import {SphereonKeyManager} from '@sphereon/ssi-sdk-ext.key-manager'
+import {SecretBox} from '@veramo/kms-local'
+import {SphereonKeyManagementSystem} from '@sphereon/ssi-sdk-ext.kms-local'
 import {getDbConnection} from './database'
 import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
@@ -54,10 +55,10 @@ const agent = createAgent<TAgentTypes>({
     plugins: [
         new DataStore(dbConnection),
         new DataStoreORM(dbConnection),
-        new KeyManager({
+        new SphereonKeyManager({
             store: new KeyStore(dbConnection),
             kms: {
-                local: new KeyManagementSystem(privateKeyStore),
+                local: new SphereonKeyManagementSystem(privateKeyStore),
             },
         }),
         new DIDManager({

@@ -4,7 +4,7 @@
   "createArgs": {
     "provider": "did:jwk",
     "options": {
-      "kid": "4c6d87db1d9d597377b82a99a6a175cac00f4150c910dfc7f8232d6e08dbf8d8",
+      "kid": "03f9478ffb86fb6142795d4da9b2653c55d7d6bdb3e82a551e1f0bd022b7bf9768",
       "type": "Secp256r1",
       "keyType": "Secp256r1"
     }

@@ -10,3 +10,4 @@ coverage
 *.log
 /conf-test/
 /database/
+/conf-niels/
