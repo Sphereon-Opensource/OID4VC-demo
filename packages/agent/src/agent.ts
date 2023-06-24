@@ -60,6 +60,8 @@ import {
 import {IPlugins, OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import * as process from "process";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
+import {Express} from "express";
+import {setupExpress} from "./utils/express";
 
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
 const privateKeyStore: PrivateKeyStore = new PrivateKeyStore(dbConnection, new SecretBox(DB_ENCRYPTION_KEY))
@@ -153,6 +155,10 @@ if (oid4vpOpts && oid4vpRP) {
 
 getOrCreateDIDs().catch(e => console.log(e))
 
+let express: Express | undefined
+if (IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED) {
+    express = setupExpress()
+}
 
 if (IS_OID4VP_ENABLED) {
     const opts: ISIOPv2RPRestAPIOpts = {
@@ -161,7 +167,8 @@ if (IS_OID4VP_ENABLED) {
         webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
         siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
     }
-    new SIOPv2RPRestAPI({agent, opts})
+    new SIOPv2RPRestAPI({agent, express, opts})
+    console.log('[OID4VP] SIOPv2 and OID4VP started: ' + process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}}`)
 }
 
 if (IS_OID4VCI_ENABLED) {
@@ -176,22 +183,27 @@ if (IS_OID4VCI_ENABLED) {
         oid4vciStore.importIssuerOpts(importIssuerPersistArgs)
 
     }
-    oid4vciInstanceOpts.asArray.map(async opts => issuerPersistToInstanceOpts(opts).then(instanceOpt =>
-            OID4VCIRestAPI.init({
-                    context: {...agent.context, agent: agent as TAgent<TAgentTypes>},
-                    opts: {
-                        serverOpts: {
-                            host: process.env.INTERNAL_HOSTNAME_OR_IP ?? '0.0.0.0',
-                            port: /*process.env.PORT ? Number.parseInt(process.env.PORT) :*/ 5001,
-                            baseUrl: process.env.EXTERNAL_HOSTNAME ? new URL(process.env.EXTERNAL_HOSTNAME).toString() : undefined
+    oid4vciInstanceOpts.asArray.map(async opts => issuerPersistToInstanceOpts(opts).then(async instanceOpt => {
+                const host = process.env.INTERNAL_HOSTNAME_OR_IP ?? '0.0.0.0'
+                const port = process.env.PORT ? Number.parseInt(process.env.PORT) : 5000
+                const oid4vciRest = await OID4VCIRestAPI.init({
+                        context: {...agent.context, agent: agent as TAgent<TAgentTypes>},
+                        opts: {
+                            serverOpts: {
+                                app: express,
+                                host,
+                                port,
+                                baseUrl: process.env.EXTERNAL_HOSTNAME ? new URL(process.env.EXTERNAL_HOSTNAME).toString() : undefined
+                            },
                         },
-                    },
-                    issuerInstanceArgs: {
-                        ...instanceOpt
-                    },
-                    credentialDataSupplier: instanceOpt?.metadata?.credential_issuer ? getCredentialDataSupplier(instanceOpt.metadata.credential_issuer) : undefined
-                }
-            )
+                        issuerInstanceArgs: {
+                            ...instanceOpt
+                        },
+                        credentialDataSupplier: instanceOpt?.metadata?.credential_issuer ? getCredentialDataSupplier(instanceOpt.metadata.credential_issuer) : undefined
+                    }
+                )
+                console.log(`[OID4VCI] Started at ${host}:${port}, with issuer ${oid4vciRest.issuer.issuerMetadata.credential_issuer}`)
+            }
         )
     )
 
