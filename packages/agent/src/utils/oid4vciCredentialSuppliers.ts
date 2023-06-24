@@ -74,6 +74,27 @@ const credentialDataSupplierTriallGuest2023: CredentialDataSupplier = (args: Cre
     } as unknown as CredentialDataSupplierResult)
 }
 
+const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'EnergySHR'
+    const email = args.credentialDataSupplierInput?.email ?? 'energyshr@example.com'
+
+    return Promise.resolve({
+        format: 'jwt_vc_json',
+        credential: {
+            '@context': ['https://www.w3.org/2018/credentials/v1'],
+            type: ['VerifiableCredential', 'GuestCredential'],
+            expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
+            credentialSubject: {
+                firstName,
+                lastName,
+                email,
+                type: 'EnergySHR Guest',
+            },
+        },
+    } as unknown as CredentialDataSupplierResult)
+}
+
 const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
     const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
     const lastName = args.credentialDataSupplierInput?.lastName ?? 'Sphereon'
@@ -142,5 +163,22 @@ export const allCredentialDataSupliers: Record<string, CredentialDataSupplier> =
 }
 
 export function getCredentialDataSupplier(id: string): CredentialDataSupplier {
-    return allCredentialDataSupliers[id] ?? credentialDataSupplierSphereon
+
+    // Yes we really need to create a template
+    let supplier = allCredentialDataSupliers[id]
+    if (typeof supplier !== 'function') {
+        if (id.match(/(future)|(fma2023)|(fmdm2023)/)) {
+            supplier = credentialDataSupplierFMAGuest2023
+        } else if (id.match(/(dbc)|(blockchain)/)) {
+            supplier = credentialDataSupplierDBCConference2023
+        } else if (id.match(/(triall)|(cix)/)) {
+            return credentialDataSupplierTriallGuest2023
+        } else if (id.match(/(energy)/)) {
+            return credentialDataSupplierEnergySHRGuest2023
+        }
+    }
+    if (typeof supplier !== 'function') {
+        supplier = credentialDataSupplierSphereon
+    }
+    return supplier
 }
