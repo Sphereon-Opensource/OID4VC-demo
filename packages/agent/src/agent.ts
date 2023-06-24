@@ -148,7 +148,7 @@ if (!defaultDID || !defaultKid || !(await getIdentifier(defaultDID))) {
     console.log('TODO create identifier and write config')
     // create Identifier
 }
-getOrCreateDIDs().catch(e => console.log(e))
+await getOrCreateDIDs().catch(e => console.log(e))
 const oid4vpOpts = await getDefaultOID4VPRPOptions({did: defaultDID})
 if (oid4vpOpts && oid4vpRP) {
     oid4vpRP.setDefaultOpts(oid4vpOpts)
