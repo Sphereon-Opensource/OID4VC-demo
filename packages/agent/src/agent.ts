@@ -148,12 +148,12 @@ if (!defaultDID || !defaultKid || !(await getIdentifier(defaultDID))) {
     console.log('TODO create identifier and write config')
     // create Identifier
 }
+getOrCreateDIDs().catch(e => console.log(e))
 const oid4vpOpts = await getDefaultOID4VPRPOptions({did: defaultDID})
 if (oid4vpOpts && oid4vpRP) {
     oid4vpRP.setDefaultOpts(oid4vpOpts)
-}
 
-getOrCreateDIDs().catch(e => console.log(e))
+}
 
 let express: Express | undefined
 if (IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED) {

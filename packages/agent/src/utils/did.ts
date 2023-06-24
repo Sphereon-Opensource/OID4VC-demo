@@ -110,6 +110,7 @@ export async function getDefaultKid({did, verificationMethodName, verificationMe
 
 export async function getOrCreateDIDs(): Promise<IDIDResult[]> {
     const result = didOptConfigs.asArray.map(async opts => {
+            console.log(`DID config found for: ${opts.did}`)
             const did = opts.did
             let identifier = did ? await getIdentifier(did) : undefined
             let privateKeyHex = opts.privateKeyHex
