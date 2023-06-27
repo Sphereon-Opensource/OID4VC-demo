@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deepLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: rgba(11, 129, 255, 0.1);
+    border: 1px solid #0B81FF;
+    border-radius: 4px;
+    width: 150px;
+    height: 25px;
+}
+
+a.deepLink {
+    color: #0B81FF;
+}

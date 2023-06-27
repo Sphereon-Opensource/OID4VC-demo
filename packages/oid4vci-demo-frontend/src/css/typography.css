@@ -1,0 +1,64 @@
+.poppins-normal-9 {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 9px !important;
+    line-height: 14px !important;
+}
+
+.poppins-normal-10 {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    line-height: 15px !important;
+    letter-spacing: 0 !important;
+}
+
+.poppins-normal-14 {
+    font-family: 'Poppins', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 21px !important;
+}
+
+.poppins-normal-16, div.poppins-normal-16 > p {
+    font-family: 'Poppins', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+}
+
+.poppins-medium-36, div.poppins-medium-36 > p {
+    font-family: 'Poppins', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 36px !important;
+    line-height: 54px !important;
+}
+
+.poppins-semi-bold-14, .poppins-semi-bold-14 > p {
+    font-family: Poppins, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.poppins-semi-bold-16, div.poppins-semi-bold-16 > p {
+    font-family: Poppins, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    text-align: center !important;
+}
+
+.inter-normal-24 {
+    font-family: 'Inter', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 24px !important;
+    line-height: 29px !important;
+}
+
+.normal-400 {
+    font-weight: 400 !important;
+}

@@ -6,6 +6,9 @@
     },
     {
       "path": "oid4vp-demo-frontend"
+    },
+    {
+      "path": "oid4vci-demo-frontend"
     }
   ]
 }

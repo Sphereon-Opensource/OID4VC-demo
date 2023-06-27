@@ -1,0 +1,158 @@
+{
+  "general": {
+    "credentialName": "Conference Attendee",
+    "issueCredentialType": "dbc2023",
+    "baseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
+    "verifierUrlCaption": "DBC website",
+    "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
+  },
+  "pages": {
+    "SSIDownloadPage": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "SSICredentialVerifyRequestPage": {
+      "photoLeft":"dbc/DBC.png"
+    },
+    "SSICredentialIssuedSuccessPage": {
+      "photoLeft": "dbc/DBC.png",
+      "photoRight": "fmdm/undraw_messenger_re_8bky_grey.svg.svg"
+    },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "fmdm/wallet.svg",
+      "photoRight": "fmdm/undraw_certification_re_ifll_grey.svg"
+    },
+    "SSICredentialIssueRequestPage": {
+      "photoManual": "dbc/DBC.png",
+      "photoWallet": "dbc/DBC.png"
+    },
+    "SSIInformationRequestPage": {
+      "photo":"dbc/DBC.png",
+      "text_top_of_image": "common_left_pane_title",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
+    },
+    "SSILandingPage": {
+      "photoLeft": "fmdm/landing_manual_grey.svg",
+      "photoRight": "fmdm/landing_wallet_grey.svg",
+      "logo": {
+        "src": "dbc/dbc_logo.png",
+        "alt": "dbc",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#073340"
+        },
+        "leftCardView": {
+          "textColor": "#FBFBFB",
+          "backgroundColor": "#266B81"
+        },
+        "rightCardView": {
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#FBFBFB",
+          "textColor": "#303030"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#266B81"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#266B81"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

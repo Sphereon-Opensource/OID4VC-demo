@@ -1,0 +1,159 @@
+{
+  "general": {
+    "credentialName": "FMA Guest",
+    "issueCredentialType": "fmdm2023",
+    "baseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
+    "verifierUrl": "https://marketplace.future-mobility-alliance.org",
+    "verifierUrlCaption": "FMDM marketplace",
+    "downloadUrl": "https://ssi.future-mobility-alliance.org/demo/issuer/#/download"
+  },
+  "pages": {
+    "SSIDownloadPage": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "SSICredentialVerifyRequestPage": {
+      "photoLeft":"fmdm/Brandingcard_FMDM.svg"
+    },
+    "SSICredentialIssuedSuccessPage": {
+      "photoLeft": "fmdm/wallet.svg",
+      "photoRight": "fmdm/undraw_messenger_re_8bky_grey.svg.svg"
+    },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "fmdm/wallet.svg",
+      "photoRight": "fmdm/undraw_certification_re_ifll_grey.svg"
+    },
+    "SSICredentialIssueRequestPage": {
+      "photoManual": "fmdm/Brandingcard_FMDM.svg",
+      "photoWallet": "fmdm/Brandingcard_FMDM.svg"
+    },
+    "SSIInformationRequestPage": {
+      "photo":"fmdm/Brandingcard_FMDM.svg",
+      "text_top_of_image": "common_left_pane_title",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
+    },
+    "SSILandingPage": {
+      "photoLeft": "fmdm/landing_manual_grey.svg",
+      "photoRight": "fmdm/landing_wallet_grey.svg",
+      "logo": {
+        "src": "fmdm/fmdm-logo.svg",
+        "alt": "fmdm",
+        "width": 260,
+        "height": 55
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "white"
+        },
+        "leftCardView": {
+          "textColor": "#FBFBFB",
+          "backgroundColor": "#062058"
+        },
+        "rightCardView": {
+          "textColor": "#FBFBFB",
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#3E6CE2",
+          "textColor": "#FBFBFB"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#062058"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#062058"
+        }
+      }
+    },
+    "Text": {}
+  }
+}
