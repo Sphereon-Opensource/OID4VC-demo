@@ -116,9 +116,9 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             return
         }
 
-        if (!this.timedOutRequestMappings.has({authRequestURIResponse, qrCode})) {
+        /*if (!this.timedOutRequestMappings.has({authRequestURIResponse, qrCode})) {
             this.timedOutRequestMappings.add({authRequestURIResponse, qrCode})
-        }
+        }*/
         this.setState({qrCode, authRequestURIResponse})
         /*    this.state.qrCode = qrCode
             this.state.authRequestURIResponse = authRequestURIResponse
@@ -140,15 +140,16 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             } else if (!authStatus) {
                 return
             } else if (this.timedOutRequestMappings.has(this.state)) {
+                const timedoutState = this.state
                 try {
                     console.log("Cancelling timed out auth request.")
-                    if (this.state?.authRequestURIResponse) {
+                    if (timedoutState?.authRequestURIResponse) {
                         await agent.siopClientRemoveAuthRequestSession({
-                            correlationId: this.state.authRequestURIResponse.correlationId,
-                            definitionId: this.state.authRequestURIResponse.definitionId
+                            correlationId: timedoutState.authRequestURIResponse.correlationId,
+                            definitionId: timedoutState.authRequestURIResponse.definitionId
                         })
+                        this.timedOutRequestMappings.delete(timedoutState) // only delete after deleted remotely
                     }
-                    this.timedOutRequestMappings.delete(this.state) // only delete after deleted remotely
                     clearInterval(interval)
                 } catch (error) {
                     console.log(error)

@@ -53,7 +53,7 @@ demo. https://ssi.dutchblockchaincoalition.org/demo/issuer hosts a different int
 
 You should be greeted with the introduction screen
 
-<img src="resources/issuer-demo-intro.png" width="500">
+<img src="resources/issuer-demo-intro.png" width="500"/>
 
 There are 2 flows. One is a manual flow, where you will fill out some information (the information will not be
 shared/stored) in order to receive a credential. The other flow is using your wallet to request the information
@@ -167,7 +167,11 @@ docker-compose up
 
 The build phase might take a few minutes. If you run the docker-compose up command 3 services will be running. The ssi-agent, oid4vci-demo-frontend and oid4vp-frontend.
 
-You should now be able to go to http://localhost:5001 and http://localhost:5002 respectively to test the issuer and verifier demo's.
+You should now be able to go to http://host.docker.internal:5001 and http://host.docker.internal:5002 respectively to test the issuer and verifier demo's.
+
+Please note that you might have to configure your docker environment to expose the host.docker.internal like the image below. If you cannot make that work you could adjust the config/docker and docker/*.env files to suit your needs
+
+<img src="resources/docker_settings.png" width="500" />
 
 #### Environment variables and configuration for docker.
 Please note that the environment variables for the 3 images come from the ./docker folder. You will have to copy the 3 example files and remove the .example suffix.

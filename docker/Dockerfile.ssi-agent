@@ -7,8 +7,6 @@ WORKDIR /opt/ssi-agent
 COPY ./ .
 RUN pnpm install -r
 RUN pnpm build
-RUN cd /opt/ssi-agent/packages/agent
-RUN ls -al
 
 WORKDIR /opt/ssi-agent/packages/agent
-ENTRYPOINT ["pnpm", "start:prod"]
+ENTRYPOINT ["pnpm", "start:dev"]

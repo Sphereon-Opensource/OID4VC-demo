@@ -1,0 +1,148 @@
+{
+  "correlationId": "http://192.168.2.90:5000/sphereon2023",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "http://192.168.2.90:5000/sphereon2023",
+    "credential_endpoint": "http://192.168.2.90:5000/sphereon2023/credentials",
+    "display": [
+      {
+        "name": "Sphereon International",
+        "description": "Sphereon International"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Sphereon guest",
+            "description": "Sphereon guest credential for demo purposes.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Sphereon guest",
+            "description": "Sphereon guest credential for demo purposes.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Sphereon gast",
+            "description": "Sphereon gast credential wordt uitgegeven voor demo doeleinden.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "email",
+          "type"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "FirstName"
+              },
+              {
+                "name": "FirstName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "LastName"
+              },
+              {
+                "name": "LastName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "email": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email"
+              },
+              {
+                "name": "Email",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "type": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Type"
+              },
+              {
+                "name": "Type",
+                "locale": "en-US"
+              },
+              {
+                "name": "Type",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "sphereon2023",
+        "types": [
+          "VerifiableCredential",
+          "GuestCredential"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      }
+    ]
+  }
+}
