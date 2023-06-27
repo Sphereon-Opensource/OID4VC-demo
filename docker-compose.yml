@@ -1,12 +1,37 @@
 version: '3.8'
 
 services:
-  ssi-backend:
+  ssi-agent:
+    container_name: ssi-agent
+    env_file:
+      - ./docker/.env.ssi-agent
     tty: true
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/Dockerfile.ssi-agent
     ports:
-      - 5001:5001
-      - 5002:5002
-      - 3000:3000
+      - "5000:5000"
+  oid4vci-demo-frontend:
+    container_name: oid4vci-demo-frontend
+    env_file:
+      - ./docker/.env.oid4vci-demo-frontend
+    depends_on:
+      - ssi-agent
+    tty: true
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile.oid4vci-demo-frontend
+    ports:
+      - "5001:5001"
+  oid4vp-demo-frontend:
+    container_name: oid4vp-demo-frontend
+    env_file:
+      - ./docker/.env.oid4vp-demo-frontend
+    depends_on:
+      - ssi-agent
+    tty: true
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile.oid4vp-demo-frontend
+    ports:
+      - "5002:5002"

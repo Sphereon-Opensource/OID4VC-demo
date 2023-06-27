@@ -41,14 +41,15 @@ The most prominent low-level libraries are:
 ## Wallet Prerequisites
 
 You will need an OID4VC capable wallet, that supports SIOPv2, OID4VP, OID4VCI and Presentation Exchange. You can use our
-Open-Source wallet from the stores. See https://github.com/Sphereon-OpenSource/ssi-mobile-wallet
+Open-Source wallet from the stores. See our wallet [Github](https://github.com/Sphereon-OpenSource/ssi-mobile-wallet) or
+our [Wallet demo instructions](https://sphereon.com/sphereon-products/sphereon-wallet/sphereon-wallet-demo-instructions/)
 
 ## Issuer demo
 
 If you run `pnpm run start:dev` the Issuer frontend, the verifier frontend and the agent will be started. Your browser
 should automatically
 open https://localhost:5001. You can also go to https://ssi.sphereon.com/demo/issuer, for an online hosted
-demo. https://ssi.dutchblockchaincoalition.org/demo/issuer hosts a different integration/use case.
+demo. https://ssi.dutchblockchaincoalition.org/demo/issuer hosts a different integration/use case you can test with.
 
 You should be greeted with the introduction screen
 
@@ -155,20 +156,20 @@ and https://localhost:5002 for the verifier
 
 Once the demo site has loaded, you should see the following screen:
 
-#### Docker
+### Docker
 
 From the root folder run:
 
 ```bash
-docker build -t sphereon-oid4vci-demo .
-docker run -it -p 5000:5000 -p 5001:5001 -p 5002:5002 sphereon-oid4vci-demo
-```
-
-### Docker compose
-
-From the root folder run:
-
-```bash
+docker-compose build
 docker-compose up
 ```
 
+The build phase might take a few minutes. If you run the docker-compose up command 3 services will be running. The ssi-agent, oid4vci-demo-frontend and oid4vp-frontend.
+
+You should now be able to go to http://localhost:5001 and http://localhost:5002 respectively to test the issuer and verifier demo's.
+
+#### Environment variables and configuration for docker.
+Please note that the environment variables for the 3 images come from the ./docker folder. You will have to copy the 3 example files and remove the .example suffix.
+
+The configuration files are copied over to the agent image. So the above explained configuration options also apply when running in docker.

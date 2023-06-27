@@ -1,13 +1,11 @@
-FROM node:16-bullseye
+FROM node:lts-bullseye
 SHELL ["/bin/bash", "-c"]
 RUN npm -g install pnpm && SHELL=bash pnpm setup && source /root/.bashrc && pnpm add -g pnpm
 RUN pnpm add typescript tslib
-WORKDIR /usr/src/app
+WORKDIR /opt/oid4vci-demo-frontend
 
-COPY . .
+COPY ./packages/oid4vci-demo-frontend .
 RUN pnpm install -r
-RUN rm -rf node_modules/.pnpm/did-jwt@7.2.2
-RUN rm -rf packages/agent/node_modules/.pnpm/did-jwt@7.2.2
 RUN pnpm build
-WORKDIR /usr/src/app/packages/agent
+WORKDIR /opt/oid4vci-demo-frontend
 ENTRYPOINT ["pnpm", "start:prod"]
