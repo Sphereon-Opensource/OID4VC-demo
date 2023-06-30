@@ -63,6 +63,7 @@ import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {Express} from "express";
 import {setupExpress} from "./utils/express";
 
+const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
 const privateKeyStore: PrivateKeyStore = new PrivateKeyStore(dbConnection, new SecretBox(DB_ENCRYPTION_KEY))
 type TAgentTypes = ISIOPv2RP &
@@ -114,7 +115,7 @@ const plugins: IAgentPlugin[] = [
         keyStore: privateKeyStore,
     }),
 ]
-const oid4vpRP = await createOID4VPRP();
+const oid4vpRP = await createOID4VPRP({resolver});
 if (IS_OID4VP_ENABLED) {
     if (oid4vpRP) {
         plugins.push(oid4vpRP)

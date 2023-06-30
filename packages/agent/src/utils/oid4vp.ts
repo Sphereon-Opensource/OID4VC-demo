@@ -2,6 +2,7 @@ import {IPresentationDefinition} from '@sphereon/pex'
 import {IRPDefaultOpts, SIOPv2RP} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth";
 import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/src/types/ISIOPv2RP";
 import {
+    createDidResolver,
     definitionsOpts, getDefaultDID, getDefaultKid, getIdentifier,
     IS_OID4VP_ENABLED,
     OID4VP_DEFINITIONS,
@@ -9,12 +10,23 @@ import {
     oid4vpInstanceOpts
 } from "../index";
 import {CheckLinkedDomain} from "@sphereon/did-auth-siop";
+import {Resolvable} from "did-resolver";
 
 
-function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definitions: IPresentationDefinition[]): IPEXInstanceOptions[] {
+function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definitions: IPresentationDefinition[], opts?: {
+    resolver: Resolvable
+}): IPEXInstanceOptions[] {
     const result: IPEXInstanceOptions[] = []
     oid4vpInstanceOpts.map(opt => {
         const definition = definitions.find(pd => pd.id === opt.definitionId || pd.name === opt.definitionId)
+        if (opt.rpOpts && !opt.rpOpts.didOpts?.resolveOpts && opts?.resolver) {
+            if (!opt.rpOpts.didOpts) {
+                // @ts-ignore
+                opt.rpOpts.didOpts = {resolveOpts: {resolver: opts.resolver}}
+            }
+            opt.rpOpts.didOpts.resolveOpts = opt.rpOpts.didOpts.resolveOpts ?? {}
+            opt.rpOpts.didOpts.resolveOpts.resolver = opts.resolver
+        }
         if (definition) {
             if (OID4VP_DEFINITIONS.length === 0 || OID4VP_DEFINITIONS.includes(definition.id) || (definition.name && OID4VP_DEFINITIONS.includes(definition.name))) {
                 console.log(`[OID4VP] Enabling Presentation Definition with name '${definition.name ?? '<none>'}' and id '${definition.id}'`)
@@ -26,7 +38,10 @@ function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definiti
 }
 
 
-export async function getDefaultOID4VPRPOptions(args?: { did?: string }): Promise<IRPDefaultOpts | undefined> {
+export async function getDefaultOID4VPRPOptions(args?: {
+    did?: string,
+    resolver?: Resolvable
+}): Promise<IRPDefaultOpts | undefined> {
     if (!IS_OID4VP_ENABLED) {
         return
     }
@@ -38,8 +53,12 @@ export async function getDefaultOID4VPRPOptions(args?: { did?: string }): Promis
     if (!identifier) {
         return
     }
+    const resolver = args?.resolver ?? createDidResolver()
     return {
         didOpts: {
+            resolveOpts: {
+                resolver
+            },
             checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
             identifierOpts: {
                 identifier,
@@ -50,118 +69,12 @@ export async function getDefaultOID4VPRPOptions(args?: { did?: string }): Promis
 
 }
 
-export async function createOID4VPRP() {
+export async function createOID4VPRP(opts?: { resolver: Resolvable }) {
     if (!IS_OID4VP_ENABLED) {
         return
     }
     return new SIOPv2RP({
-        /*defaultOpts: await getDefaultOID4VPRPOptions()*//*: {
-
-        didOpts: {
-            checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-            identifierOpts: {
-                identifier: RP_DID_WEB,
-                kid: RP_DID_WEB_KID,
-            },
-        },
-    }*/
-        instanceOpts: toPexInstanceOptions(oid4vpInstanceOpts.asArray, definitionsOpts.asArray)
-        /*instanceOpts: [
-            {
-                definitionId: 'dbc2023',
-                definition: dbcConferenceAttendeeDef,
-                rpOpts: {
-                    didOpts: {
-                        checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-                        identifierOpts: {
-                            identifier: RP_DID_WEB,
-                            kid: RP_DID_WEB_KID,
-                        },
-                    },
-                }
-            },
-            {
-                definitionId: dbcConferenceAttendeeDef.id,
-                definition: dbcConferenceAttendeeDef,
-                rpOpts: {
-                    didOpts: {
-                        checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-                        identifierOpts: {
-                            identifier: RP_DID_WEB,
-                            kid: RP_DID_WEB_KID,
-                        },
-                    },
-                }
-            },
-            {
-                definitionId: 'triall2023',
-                definition: triallGuestDef,
-                rpOpts: {
-                    didOpts: {
-                        checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-                        identifierOpts: {
-                            identifier: RP_DID_WEB,
-                            kid: RP_DID_WEB_KID,
-                        },
-                    },
-                }
-            },
-            {
-                definitionId: triallGuestDef.id,
-                definition: triallGuestDef,
-                rpOpts: {
-                    didOpts: {
-                        checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-                        identifierOpts: {
-                            identifier: RP_DID_WEB,
-                            kid: RP_DID_WEB_KID,
-                        },
-                    },
-                }
-            },
-            {
-                definitionId: 'fma2023',
-                definition: fmaGuestDef,
-                rpOpts: {
-                    didOpts: {
-                        checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-                        identifierOpts: {
-                            identifier: RP_DID_WEB,
-                            kid: RP_DID_WEB_KID,
-                        },
-                    },
-                }
-            },
-            {
-                definitionId: fmaGuestDef.id,
-                definition: fmaGuestDef,
-                rpOpts: {
-                    didOpts: {
-                        checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-                        identifierOpts: {
-                            identifier: RP_DID_WEB,
-                            kid: RP_DID_WEB_KID,
-                        },
-                    },
-                }
-            },
-            {
-                definitionId: entraAndSphereonCompatibleDef.id,
-                definition: entraAndSphereonCompatibleDef,
-            },
-            {
-                definitionId: 'sphereon',
-                definition: entraAndSphereonCompatibleDef,
-            },
-            {
-                definitionId: entraVerifiedIdPresentation.id,
-                definition: entraVerifiedIdPresentation,
-            },
-            {
-                definitionId: 'entra',
-                definition: entraVerifiedIdPresentation,
-            },
-        ],*/
+        instanceOpts: toPexInstanceOptions(oid4vpInstanceOpts.asArray, definitionsOpts.asArray, opts)
     })
 
 }
