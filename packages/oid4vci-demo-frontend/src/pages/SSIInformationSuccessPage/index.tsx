@@ -103,7 +103,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                             style={{width: '100%'}}
                             onClick={async () => {
                                 const shortUuid = short.generate()
-                                /*const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
+                                const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
                                     grants: {
                                         'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
                                             'pre-authorized_code': shortUuid,
@@ -116,10 +116,10 @@ const SSIInformationSuccessPage: React.FC = () => {
                                         email: state?.emailAddress,
                                     },
                                     credentials: [generalConfig.issueCredentialType],
-                                })*/
+                                })
 
                                 const qrState = {
-                                    uri: "http://192.168.178.11:5000/my-credential-offer.",//uriData.uri,
+                                    uri:  uriData.uri,
                                     preAuthCode: shortUuid,
                                     isManualIdentification: state?.isManualIdentification,
                                 };
