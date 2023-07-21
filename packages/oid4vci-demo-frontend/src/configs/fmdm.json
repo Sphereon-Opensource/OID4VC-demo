@@ -87,7 +87,8 @@
       }
     },
     "SSICredentialVerifyRequestPage": {
-      "photoLeft":"fmdm/Brandingcard_FMDM.svg"
+      "photoLeft":"fmdm/Brandingcard_FMDM.svg",
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
     },
     "SSICredentialIssuedSuccessPage": {
       "photoLeft": "fmdm/wallet.svg",
@@ -95,6 +96,7 @@
     },
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "fmdm/wallet.svg",
+      "photoLeftManual": "fmdm/wallet.svg",
       "photoRight": "fmdm/undraw_certification_re_ifll_grey.svg"
     },
     "SSICredentialIssueRequestPage": {
@@ -103,6 +105,7 @@
     },
     "SSIInformationRequestPage": {
       "photo":"fmdm/Brandingcard_FMDM.svg",
+      "photoManual":"fmdm/Brandingcard_FMDM.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
     },

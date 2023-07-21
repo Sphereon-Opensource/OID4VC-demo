@@ -1,0 +1,164 @@
+{
+  "general": {
+    "credentialName": "Conference Attendee",
+    "issueCredentialType": "dbc2023",
+    "baseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
+    "verifierUrlCaption": "Energy SHR website",
+    "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
+  },
+  "pages": {
+    "SSIDownloadPage": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "SSICredentialVerifyRequestPage": {
+      "photoLeft": "energyshr/ImageEnergySHR.svg",
+      "photoRight": "energyshr/undraw_messenger_re_8bky_grey.svg"
+    },
+    "SSICredentialIssuedSuccessPage": {
+      "photoLeft": "energyshr/ImageEnergySHR.svg",
+      "photoRight": "energyshr/undraw_messenger_re_8bky_grey.svg"
+    },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "image_2.svg",
+      "photoLeftManual": "energyshr/wallet.svg",
+      "leftTextHideManual": true,
+      "textLeft": "common_left_pane_title",
+      "photoRight": "energyshr/undraw_certification_re_ifll_grey.svg",
+      "textRight": "sharing_data_success_right_pane_paragraph_short"
+    },
+    "SSICredentialIssueRequestPage": {
+      "photoManual": "energyshr/ImageEnergySHR.svg",
+      "photoWallet": "energyshr/ImageEnergySHR.svg"
+    },
+    "SSIInformationRequestPage": {
+      "photo": "image_4.svg",
+      "photoManual": "energyshr/ImageEnergySHR.svg",
+      "text_top_of_image": "common_left_pane_title",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
+    },
+    "SSILandingPage": {
+      "photoLeft": "energyshr/landing_manual_grey.svg",
+      "photoRight": "energyshr/landing_wallet_grey.svg",
+      "logo": {
+        "src": "energyshr/energyshr_logo.svg",
+        "alt": "energyshr",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "white"
+        },
+        "leftCardView": {
+          "textColor": "white",
+          "backgroundColor": "#49A5ED"
+        },
+        "rightCardView": {
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#00D0BA",
+          "textColor": "#303030"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#49A5ED"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#266B81"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

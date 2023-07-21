@@ -96,6 +96,7 @@
     },
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "triall/guest_credential.svg",
+      "photoLeftManual": "triall/guest_credential.svg",
       "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
     },
     "SSICredentialIssueRequestPage": {
@@ -104,6 +105,7 @@
     },
     "SSIInformationRequestPage": {
       "photo":"triall/guest_credential.svg",
+      "photoManual":"triall/guest_credential.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
     },

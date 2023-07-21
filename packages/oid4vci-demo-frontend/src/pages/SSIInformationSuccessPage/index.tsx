@@ -46,7 +46,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                             flex: 1,
                             display: 'flex',
                             flexDirection: 'column',
-                            background: 'url("/image_2.svg")',
+                            background: `url(${config.photoLeft})`,
                             backgroundSize: 'cover',
                         }}
                     >
@@ -84,7 +84,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 textAlign: 'center'
                             }}
                             title={t('sharing_data_success_right_pane_title', {firstName: state?.firstName}).split('\n')}
-                            lines={t('sharing_data_success_right_pane_paragraph', {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
+                            lines={t(`${config.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
                         />
                     </Trans>
                     <div style={{
@@ -95,15 +95,15 @@ const SSIInformationSuccessPage: React.FC = () => {
                         <img src={config.photoRight} alt="success"/>
                     </div>
                     <div style={{
-                        width: '20%',
-                        alignSelf: 'flex-end'
+                        width: '100%',
+                        alignSelf: 'flex-end',
                     }}>
                         <SSIPrimaryButton
                             caption={t('sharing_data_success_right_pane_button_caption')}
-                            style={{width: 150}}
+                            style={{width: '100%'}}
                             onClick={async () => {
                                 const shortUuid = short.generate()
-                                const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
+                                /*const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
                                     grants: {
                                         'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
                                             'pre-authorized_code': shortUuid,
@@ -116,10 +116,10 @@ const SSIInformationSuccessPage: React.FC = () => {
                                         email: state?.emailAddress,
                                     },
                                     credentials: [generalConfig.issueCredentialType],
-                                })
+                                })*/
 
                                 const qrState = {
-                                    uri: uriData.uri,
+                                    uri: "http://192.168.178.11:5000/my-credential-offer.",//uriData.uri,
                                     preAuthCode: shortUuid,
                                     isManualIdentification: state?.isManualIdentification,
                                 };
@@ -139,14 +139,36 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const {t} = useTranslation()
     if (getCurrentEcosystem() !== VCIEcosystem.sphereon) {
         return (<div style={{
-            maxHeight: "fit-content",
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            background: `url(${config.photoLeft})`,
-            backgroundSize: 'cover',
-            backgroundColor: '#202537'
-        }}/>)
+              maxHeight: "fit-content",
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              background: `url(${config.photoLeftManual})`,
+              backgroundSize: 'cover',
+              backgroundColor: '#202537',
+              position: 'relative'
+            }}>
+              {(config.textLeft && !config.leftTextHideManual) &&
+                  <div style={{
+                    position: "absolute",
+                    top: "77%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    color: "#ffffff",
+                    width: "calc(100% - 20rem)",
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    paddingLeft: "7rem",
+                    paddingRight: "7rem",
+                    fontSize: "xx-large",
+                  }}>
+                    {t(config.textLeft)}
+                  </div>
+              }
+            </div>
+
+
+        )
     }
     return (<div style={{
         maxHeight: "fit-content",
