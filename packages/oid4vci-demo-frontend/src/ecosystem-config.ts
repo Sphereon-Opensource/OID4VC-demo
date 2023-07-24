@@ -1,8 +1,9 @@
 import {ImageProperties, VCIEcosystem} from "./types";
-import fmdm from "./configs/fmdm.json";
 import dbc from "./configs/dbc.json";
-import triall from "./configs/triall.json";
+import energy_shr from "./configs/energy_shr.json";
+import fmdm from "./configs/fmdm.json";
 import sphereon from "./configs/sphereon.json";
+import triall from "./configs/triall.json";
 import {CSSProperties} from "react";
 import {IProps} from "./components/SSISecondaryButton";
 
@@ -14,6 +15,8 @@ export function getCurrentEcosystem(): VCIEcosystem {
             return VCIEcosystem.dbc;
         case VCIEcosystem.triall:
             return VCIEcosystem.triall;
+        case VCIEcosystem.energy_shr:
+            return VCIEcosystem.energy_shr;
         default:
             return VCIEcosystem.sphereon;
     }
@@ -33,6 +36,8 @@ export function getCurrentEcosystemConfig(): VCIConfig {
             return fmdm as VCIConfig;
         case VCIEcosystem.dbc:
             return dbc as VCIConfig;
+        case VCIEcosystem.energy_shr:
+            return energy_shr as VCIConfig;
         default:
             return sphereon as VCIConfig;
     }
@@ -46,6 +51,8 @@ export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string
             return getEcosystemPageOrComponentConfig(pageOrComponent, dbc as VCIConfig);
         case VCIEcosystem.triall:
             return getEcosystemPageOrComponentConfig(pageOrComponent, triall as VCIConfig);
+      case VCIEcosystem.energy_shr:
+        return getEcosystemPageOrComponentConfig(pageOrComponent, energy_shr as VCIConfig);
         default:
             return getEcosystemPageOrComponentConfig(pageOrComponent, sphereon as VCIConfig)
     }
@@ -85,7 +92,11 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentCon
 
 export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentConfig {
     photoLeft: string
+    photoLeftManual: string
+    leftTextHideManual?: boolean
+    textLeft?: string
     photoRight: string
+    textRight?: string
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConfig {
@@ -95,6 +106,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConf
 
 export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     photo: string
+    photoManual: string
     text_top_of_image: string
     sharing_data_right_pane_title: string
 }

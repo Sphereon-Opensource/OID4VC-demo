@@ -1,0 +1,9 @@
+{
+  "definitionId": "energySHR2023",
+  "correlationId": "https://ssi.energyshr.test.sphereon.com/issuer",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}
