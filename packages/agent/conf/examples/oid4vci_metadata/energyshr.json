@@ -1,67 +1,68 @@
 {
-  "correlationId": "https://ssi.dutchblockchaincoalition.org/issuer",
+  "correlationId": "https://ssi.energyshr.test.sphereon.com/issuer",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.dutchblockchaincoalition.org/issuer",
-    "credential_endpoint": "https://ssi.dutchblockchaincoalition.org/issuer/credentials",
+    "credential_issuer": "https://ssi.energyshr.test.sphereon.com/issuer",
+    "credential_endpoint": "https://ssi.energyshr.test.sphereon.com/issuer/credentials",
     "display": [
       {
-        "name": "Dutch Blockchain Coalition",
-        "description": "Dutch Blockchain Coalition Issuer"
+        "name": "EnergySHR",
+        "description": "EnergySHR Issuer"
       }
     ],
     "credentials_supported": [
       {
         "display": [
           {
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "name": "EnergySHR Guest",
+            "description": "EnergySHR Guest credential for demo purposes.",
             "background_color": "#3B6F6D",
             "text_color": "#FFFFFF",
-            "logo": {
-              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
-              "alt_text": "An orange block shape, with the text Dutch Blockchain Coalition next to it, portraying the logo of the Dutch Blockchain Coalition."
-            },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
-              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
+              "url": "https://i.ibb.co/P9SpRDX/fmdm.png",
+              "alt_text": "Multiple green bikes in a row as the card background"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/vkfZCvr/FMDM-card-logo.png",
+              "alt_text": "A green and blue circle shape, with the text Future Mobility Data Marketplace next to it, portraying the logo of the Future Mobility Alliance."
             }
           },
           {
             "locale": "en-US",
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "name": "EnergySHR Guest",
+            "description": "Future Mobility Data Marketplace Guest credential for demo purposes.",
             "background_color": "#3B6F6D",
             "text_color": "#FFFFFF",
-            "logo": {
-              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
-              "alt_text": "An orange block shape, with the text Dutch Blockchain Coalition next to it, portraying the logo of the Dutch Blockchain Coalition."
-            },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
-              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
+              "url": "https://i.ibb.co/P9SpRDX/fmdm.png",
+              "alt_text": "Multiple green bikes in a row as the card background"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/vkfZCvr/FMDM-card-logo.png",
+              "alt_text": "A green and blue circle shape, with the text Future Mobility Data Marketplace next to it, portraying the logo of the Future Mobility Alliance."
             }
           },
           {
             "locale": "nl-NL",
-            "name": "Conferentie Deelnemer",
-            "description": "De DBC Conferentie Deelnemer credential wordt uitgegeven aan alle bezoekers van de DBC conferentie.",
+            "name": "EnergySHR gast",
+            "description": "EnergySHR gast credential wordt uitgegeven voor demo doeleinden.",
             "background_color": "#3B6F6D",
             "text_color": "#FFFFFF",
-            "logo": {
-              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
-              "alt_text": "Aaneengesloten open blokken in de kleur blauw, met een blok in de kleur oranje, die tesamen de achtergrond van de kaart vormen."
-            },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
-              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
+              "url": "https://i.ibb.co/P9SpRDX/fmdm.png",
+              "alt_text": "Meerdere groene fietsen op een rij die samen de kaart achtergrond vormen"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/vkfZCvr/FMDM-card-logo.png",
+              "alt_text": "An green and blue circle shape, with the text Future Mobility Data Marketplace next to it, portraying the logo of the Future Mobility Alliance."
             }
           }
         ],
         "order": [
           "firstName",
           "lastName",
-          "email"
+          "email",
+          "type"
         ],
         "credentialSubject": {
           "firstName": {
@@ -111,12 +112,28 @@
                 "locale": "nl-NL"
               }
             ]
+          },
+          "type": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Type"
+              },
+              {
+                "name": "Type",
+                "locale": "en-US"
+              },
+              {
+                "name": "Type",
+                "locale": "nl-NL"
+              }
+            ]
           }
         },
-        "id": "dbc2023",
+        "id": "energySHR2023",
         "types": [
           "VerifiableCredential",
-          "DBCConferenceAttendee"
+          "GuestCredential"
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [

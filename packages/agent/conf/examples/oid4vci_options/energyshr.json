@@ -1,6 +1,6 @@
 {
   "definitionId": "energySHR2023",
-  "correlationId": "https://ssi.dutchblockchaincoalition.org/issuer",
+  "correlationId": "https://ssi.energyshr.test.sphereon.com/issuer",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"
