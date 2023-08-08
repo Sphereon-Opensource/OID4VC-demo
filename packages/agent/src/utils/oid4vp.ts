@@ -19,18 +19,22 @@ function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definiti
     const result: IPEXInstanceOptions[] = []
     oid4vpInstanceOpts.map(opt => {
         const definition = definitions.find(pd => pd.id === opt.definitionId || pd.name === opt.definitionId)
-        if (opt.rpOpts && !opt.rpOpts.didOpts?.resolveOpts && opts?.resolver) {
+        if (opt.rpOpts && !opt.rpOpts.didOpts?.resolveOpts) {
             if (!opt.rpOpts.didOpts) {
                 // @ts-ignore
-                opt.rpOpts.didOpts = {resolveOpts: {resolver: opts.resolver}}
+                opt.rpOpts.didOpts = {resolveOpts: {resolver: opts?.resolver ?? createDidResolver()}}
             }
-            opt.rpOpts.didOpts.resolveOpts = opt.rpOpts.didOpts.resolveOpts ?? {}
-            opt.rpOpts.didOpts.resolveOpts.resolver = opts.resolver
+            opt.rpOpts.didOpts.resolveOpts = {...opt.rpOpts.didOpts.resolveOpts}
+            if (!opt.rpOpts.didOpts.resolveOpts.resolver) {
+                opt.rpOpts.didOpts.resolveOpts.resolver = opts?.resolver ?? createDidResolver()
+            }
         }
         if (definition) {
             if (OID4VP_DEFINITIONS.length === 0 || OID4VP_DEFINITIONS.includes(definition.id) || (definition.name && OID4VP_DEFINITIONS.includes(definition.name))) {
                 console.log(`[OID4VP] Enabling Presentation Definition with name '${definition.name ?? '<none>'}' and id '${definition.id}'`)
-                result.push({...opt, definition})
+                const rpOpts = opt.rpOpts
+                // we handle rpOpts separately, because it contains a resolver function of which the prototype would get lost
+                result.push({...opt, definition, rpOpts})
             }
         }
     })

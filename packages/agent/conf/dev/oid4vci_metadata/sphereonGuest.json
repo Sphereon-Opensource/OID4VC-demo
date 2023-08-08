@@ -1,9 +1,9 @@
 {
-  "correlationId": "http://192.168.2.90:5000/sphereon2023",
+  "correlationId": "http://192.168.2.90:5000/sphereonGuest",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://192.168.2.90:5000/sphereon2023",
-    "credential_endpoint": "http://192.168.2.90:5000/sphereon2023/credentials",
+    "credential_issuer": "http://192.168.2.90:5000/sphereonGuest",
+    "credential_endpoint": "http://192.168.2.90:5000/sphereonGuest/credentials",
     "display": [
       {
         "name": "Sphereon International",

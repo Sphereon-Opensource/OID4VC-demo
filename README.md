@@ -49,7 +49,7 @@ our [Wallet demo instructions](https://sphereon.com/sphereon-products/sphereon-w
 If you run `pnpm run start:dev` the Issuer frontend, the verifier frontend and the agent will be started. Your browser
 should automatically
 open https://localhost:5001. You can also go to https://ssi.sphereon.com/demo/issuer, for an online hosted
-demo. https://ssi.dutchblockchaincoalition.org/demo/issuer hosts a different integration/use case you can test with.
+demo. https://ssi.dutchblockchaincoalition.org/demo/issuer, https://ssi.triall.io/demo/issuer hosts different integration/use cases you can test with.
 
 You should be greeted with the introduction screen
 
@@ -123,9 +123,9 @@ CONF_PATH="./my-config-path" #Allows you to set a custom configuration path
 
 ```dotenv
 REACT_APP_OID4VP_AGENT_BASE_URL=http://192.168.2.90:5000 # The ip/hostname and port where the frontend will contact the agent
-REACT_APP_OID4VP_PRESENTATION_DEF_ID=sphereon # The presentation definition ID as recognized by the SSI-SDK agent verifier
-REACT_APP_OID4VCI_AGENT_BASE_URL='http://192.168.2.90:5000/sphereon2023' # The base url of the SSI-SDK agent. The agent can support multiple VCI issuers at the same time depending on their config
-REACT_APP_ENVIRONMENT=sphereon # The branding and built in credential defnitions and metadata to use. Supported values: sphereon, dbc, triall, fmdm
+REACT_APP_OID4VP_PRESENTATION_DEF_ID=sphereonWalletIdentity # The presentation definition ID as recognized by the SSI-SDK agent verifier
+REACT_APP_OID4VCI_AGENT_BASE_URL='http://192.168.2.90:5000/sphereonGuest' # The base url of the SSI-SDK agent. The agent can support multiple VCI issuers at the same time depending on their config
+REACT_APP_ENVIRONMENT=sphereon # The branding and built in credential defnitions and metadata to use. Supported values: sphereon, dbc, triall, fmdm, energyshr
 PORT=5001 # The port to use when running pnpm run start:dev. Please note that you can also build the project, and host it on a regular webserver.
 ```
 
@@ -133,7 +133,7 @@ PORT=5001 # The port to use when running pnpm run start:dev. Please note that yo
 
 ```dotenv
 REACT_APP_QR_CODE_EXPIRES_AFTER_SEC=300 # How long with the authentication session be valid
-REACT_APP_PRESENTATION_DEF_ID=sphereon2023 # The presentation definition ID supported by the SSI-SDK agent (the agent can support multiple definitions)
+REACT_APP_PRESENTATION_DEF_ID=sphereonGuest # The presentation definition ID supported by the SSI-SDK agent (the agent can support multiple definitions)
 REACT_APP_BACKEND_BASE_URI=http://192.168.2.90:5000 # The base URL of the agent, needs to be resolvable by the wallet! 
 PORT=5002 # The port to use when running pnpm run start:dev. Please note that you can also build the project, and host it on a regular webserver.
 ```

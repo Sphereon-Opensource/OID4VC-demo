@@ -1,4 +1,5 @@
 import {
+    asDID,
     createDidResolver,
     getDefaultDID,
     getDefaultKid,
@@ -8,7 +9,7 @@ import {
     oid4vciMetadataOpts
 } from "../index";
 import {IIssuerDefaultOpts, OID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
-import {Resolver} from "did-resolver";
+import {Resolvable, Resolver} from "did-resolver";
 import {
     IIssuerInstanceOptions,
     IIssuerOptions,
@@ -24,7 +25,7 @@ export function toImportIssuerOptions(args?: { oid4vciInstanceOpts: IIssuerOptsI
 }
 
 
-export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string }): Promise<IIssuerDefaultOpts | undefined> {
+export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string, resolver?: Resolvable }): Promise<IIssuerDefaultOpts | undefined> {
     if (!IS_OID4VCI_ENABLED) {
         return
     }
@@ -39,6 +40,9 @@ export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string }): P
     return {
         userPinRequired: process.env.OID4VCI_DEFAULTS_USER_PIN_REQUIRED?.toLowerCase() !== 'false' ?? false,
         didOpts: {
+            resolveOpts: {
+                resolver: args?.resolver ?? createDidResolver()
+            },
             identifierOpts: {
                 identifier,
                 kid: await getDefaultKid({did})
@@ -50,7 +54,7 @@ export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string }): P
 
 
 export async function addDefaultsToOpts(issuerOpts: IIssuerOptions) {
-    const defaultOpts = await getDefaultOID4VCIIssuerOptions()
+    const defaultOpts = await getDefaultOID4VCIIssuerOptions({resolver: issuerOpts?.didOpts?.resolveOpts?.resolver})
     let identifierOpts = issuerOpts?.didOpts?.identifierOpts ?? defaultOpts?.didOpts.identifierOpts
     let resolveOpts = issuerOpts.didOpts.resolveOpts ?? defaultOpts?.didOpts.resolveOpts
     if (!issuerOpts.didOpts) {
@@ -91,14 +95,14 @@ export async function createOID4VCIStore() {
     })
 }
 
-export async function createOID4VCIIssuer(opts?: { resolver?: Resolver }) {
+export async function createOID4VCIIssuer(opts?: { resolver?: Resolvable }) {
     if (!IS_OID4VCI_ENABLED) {
         return
     }
     return new OID4VCIIssuer({
         returnSessions: true,
         resolveOpts: {
-            resolver: opts?.resolver ?? await createDidResolver(),
+            resolver: opts?.resolver ?? createDidResolver(),
         },
     })
 }

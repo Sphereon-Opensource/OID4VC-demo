@@ -27,7 +27,7 @@ import {SphereonKeyManagementSystem} from '@sphereon/ssi-sdk-ext.kms-local'
 import {getDbConnection} from './database'
 import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
-import {ISIOPv2RPRestAPIOpts, SIOPv2RPRestAPI} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
+import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
 import {
     createDidProviders,
     createDidResolver,
@@ -57,11 +57,9 @@ import {
     getDefaultOID4VCIIssuerOptions,
     issuerPersistToInstanceOpts, toImportIssuerOptions
 } from "./utils/oid4vci";
-import {IPlugins, OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
-import * as process from "process";
+import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
-import {Express} from "express";
-import {setupExpress} from "./utils/express";
+import {ExpressBuilder, ExpressCorsConfigurer, ExpressSupport} from "@sphereon/ssi-express-support";
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -94,7 +92,7 @@ const plugins: IAgentPlugin[] = [
         providers: createDidProviders(),
     }),
     new DIDResolverPlugin({
-        resolver: createDidResolver(),
+        resolver,
     }),
     new PresentationExchange(),
 
@@ -125,7 +123,7 @@ if (IS_OID4VP_ENABLED) {
 let oid4vciStore: OID4VCIStore | undefined
 if (IS_OID4VCI_ENABLED) {
     oid4vciStore = await createOID4VCIStore();
-    const oid4vciIssuer = await createOID4VCIIssuer();
+    const oid4vciIssuer = await createOID4VCIIssuer({resolver});
     if (oid4vciStore) {
         plugins.push(oid4vciStore)
     }
@@ -156,25 +154,37 @@ if (oid4vpOpts && oid4vpRP) {
 
 }
 
-let express: Express | undefined
+let expressSupport: ExpressSupport | undefined
 if (IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED) {
-    express = setupExpress()
+    expressSupport = ExpressBuilder.fromServerOpts({
+        hostname: INTERNAL_HOSTNAME_OR_IP,
+        port: INTERNAL_PORT,
+        basePath: process.env.EXTERNAL_HOSTNAME ? new URL(process.env.EXTERNAL_HOSTNAME).toString() : undefined
+    })
+        .withCorsConfigurer(new ExpressCorsConfigurer({}).allowOrigin('*').allowCredentials(true))
+        .build({startListening: false})
 }
 
 if (IS_OID4VP_ENABLED) {
-    const opts: ISIOPv2RPRestAPIOpts = {
-        hostname: INTERNAL_HOSTNAME_OR_IP,
-        port: INTERNAL_PORT,
-        webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
-        siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+    if (!expressSupport) {
+        throw Error('Express support needs to be configured when exposing OID4VP')
     }
-    new SIOPv2RPRestAPI({agent, express, opts})
+    const opts: ISIOPv2RPRestAPIOpts = {
+        enableFeatures: ['siop', 'rp-status'],
+        endpointOpts: {
+            webappCreateAuthRequest: {
+                webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            }
+        }
+    }
+    new SIOPv2RPApiServer({agent, expressSupport, opts})
     console.log('[OID4VP] SIOPv2 and OID4VP started: ' + process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}}`)
 }
 
 if (IS_OID4VCI_ENABLED) {
     if (oid4vciStore) {
-        const defaultOpts = await getDefaultOID4VCIIssuerOptions()
+        const defaultOpts = await getDefaultOID4VCIIssuerOptions({resolver})
         const importIssuerPersistArgs = toImportIssuerOptions()
         for (const opt of importIssuerPersistArgs) {
             await addDefaultsToOpts(opt.issuerOpts);
@@ -189,14 +199,7 @@ if (IS_OID4VCI_ENABLED) {
                 const port = process.env.PORT ? Number.parseInt(process.env.PORT) : 5000
                 const oid4vciRest = await OID4VCIRestAPI.init({
                         context,
-                        opts: {
-                            serverOpts: {
-                                app: express,
-                                host,
-                                port,
-                                baseUrl: process.env.EXTERNAL_HOSTNAME ? new URL(process.env.EXTERNAL_HOSTNAME).toString() : undefined
-                            },
-                        },
+                        expressSupport,
                         issuerInstanceArgs: {
                             ...instanceOpt
                         },
@@ -207,5 +210,6 @@ if (IS_OID4VCI_ENABLED) {
             }
         )
     )
-
 }
+
+expressSupport?.start()
