@@ -30,6 +30,7 @@ interface Payload {
 
 type State = {
     data?: any
+    isManualIdentification?: boolean
 }
 
 const SSIInformationRequestPage: React.FC = () => {
@@ -155,17 +156,17 @@ const SSIInformationRequestPage: React.FC = () => {
                     display: 'flex',
                     width: '60%',
                     height: '100%',
-                    background: `url(${config.photo})`,
+                    background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`})`,
                     backgroundSize: 'cover',
                     flexDirection: 'column',
                     alignItems: 'center'
                 }}>
-                    <text
-                        className={"poppins-medium-36"}
-                        style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
-                    >
-                        {t(`${config.text_top_of_image}`)}
-                    </text>
+                  {!isManualIdentification && <text
+                      className={"poppins-medium-36"}
+                      style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
+                  >
+                    {t(`${config.text_top_of_image}`)}
+                  </text>}
                 </div>
             </NonMobile>
             <div style={{

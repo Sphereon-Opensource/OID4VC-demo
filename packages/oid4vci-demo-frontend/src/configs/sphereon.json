@@ -87,7 +87,8 @@
       }
     },
     "SSICredentialVerifyRequestPage": {
-      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png"
+      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
+      "photoRight": "undraw_messenger_re_8bky_1.svg"
     },
     "SSICredentialIssuedSuccessPage": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
@@ -95,6 +96,7 @@
     },
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "image_4.svg",
+      "photoLeftManual": "image_4.svg",
       "photoRight": "undraw_certification_re_ifll_1.svg"
     },
     "SSICredentialIssueRequestPage": {
@@ -103,6 +105,7 @@
     },
     "SSIInformationRequestPage": {
       "photo": "image_4.svg",
+      "photoManual": "image_4.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "sharing_data_right_pane_title"
     },

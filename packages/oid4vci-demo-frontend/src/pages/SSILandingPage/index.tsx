@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import {NavigateOptions, useNavigate} from 'react-router-dom';
 import SSICardView from '../../components/SSICardView';
 import {ButtonType} from '../../types';
 import {useTranslation} from 'react-i18next';
@@ -16,7 +16,8 @@ const SSILandingPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const onManualIdentificationClick = async (): Promise<void> => {
-        navigate('/information/request');
+      const params = {isManualIdentification: true}
+      navigate('/information/request', params as NavigateOptions);
     }
 
     const onWalletIdentificationClick = async (): Promise<void> => {
