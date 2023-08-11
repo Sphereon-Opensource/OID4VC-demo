@@ -59,7 +59,7 @@ import {
 } from "./utils/oid4vci";
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
-import {ExpressBuilder, ExpressCorsConfigurer, ExpressSupport} from "@sphereon/ssi-express-support";
+import {ExpressBuilder, ExpressCorsConfigurer, ExpressSupport, StaticBearerAuth} from "@sphereon/ssi-express-support";
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -154,16 +154,21 @@ if (oid4vpOpts && oid4vpRP) {
 
 }
 
-let expressSupport: ExpressSupport | undefined
-if (IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED) {
-    expressSupport = ExpressBuilder.fromServerOpts({
+
+
+StaticBearerAuth.init('bearer-auth').addUser({name: 'demo', id: 'demo', token: 'demo'}).connectPassport()
+
+const expressSupport = IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED ?
+    ExpressBuilder.fromServerOpts({
         hostname: INTERNAL_HOSTNAME_OR_IP,
         port: INTERNAL_PORT,
         basePath: process.env.EXTERNAL_HOSTNAME ? new URL(process.env.EXTERNAL_HOSTNAME).toString() : undefined
     })
         .withCorsConfigurer(new ExpressCorsConfigurer({}).allowOrigin('*').allowCredentials(true))
-        .build({startListening: false})
-}
+        .withPassportAuth(true)
+        .withMorganLogging()
+        .build({startListening: false}) : undefined
+
 
 if (IS_OID4VP_ENABLED) {
     if (!expressSupport) {
@@ -172,6 +177,13 @@ if (IS_OID4VP_ENABLED) {
     const opts: ISIOPv2RPRestAPIOpts = {
         enableFeatures: ['siop', 'rp-status'],
         endpointOpts: {
+            globalAuth: {
+                authentication: {
+                    enabled: true,
+                    strategy: 'bearer-auth'
+                },
+                secureSiopEndpoints: false
+            },
             webappCreateAuthRequest: {
                 webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
                 siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
@@ -183,6 +195,9 @@ if (IS_OID4VP_ENABLED) {
 }
 
 if (IS_OID4VCI_ENABLED) {
+    if (!expressSupport) {
+        throw Error('Express support needs to be configured when exposing OID4VP')
+    }
     if (oid4vciStore) {
         const defaultOpts = await getDefaultOID4VCIIssuerOptions({resolver})
         const importIssuerPersistArgs = toImportIssuerOptions()
@@ -195,18 +210,25 @@ if (IS_OID4VCI_ENABLED) {
 
     }
     oid4vciInstanceOpts.asArray.map(async opts => issuerPersistToInstanceOpts(opts).then(async instanceOpt => {
-                const host = process.env.INTERNAL_HOSTNAME_OR_IP ?? '0.0.0.0'
-                const port = process.env.PORT ? Number.parseInt(process.env.PORT) : 5000
                 const oid4vciRest = await OID4VCIRestAPI.init({
                         context,
                         expressSupport,
                         issuerInstanceArgs: {
                             ...instanceOpt
                         },
+                        /*opts: {
+                            // baseUrl: '',
+                            endpointOpts: {
+                                tokenEndpointOpts: {
+                                    accessTokenSignerCallback:
+                                }
+                            }
+
+                            },*/
                         credentialDataSupplier: getCredentialDataSupplier(instanceOpt.credentialIssuer)
                     }
                 )
-                console.log(`[OID4VCI] Started at ${host}:${port}, with issuer ${oid4vciRest.issuer.issuerMetadata.credential_issuer}`)
+                console.log(`[OID4VCI] Started at ${expressSupport.hostname}:${expressSupport.port}, with issuer ${oid4vciRest.issuer.issuerMetadata.credential_issuer}`)
             }
         )
     )

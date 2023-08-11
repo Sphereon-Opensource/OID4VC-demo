@@ -1,5 +1,4 @@
 import {
-    asDID,
     createDidResolver,
     getDefaultDID,
     getDefaultKid,
@@ -16,7 +15,6 @@ import {
     IIssuerOptsPersistArgs,
     OID4VCIStore
 } from "@sphereon/ssi-sdk.oid4vci-issuer-store";
-import * as process from "process";
 import {IIssuerOptsImportArgs} from "@sphereon/ssi-sdk.oid4vci-issuer-store/src/types/IOID4VCIStore";
 
 

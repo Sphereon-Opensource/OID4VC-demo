@@ -1,5 +1,6 @@
 {
   "id": "sphereonWalletIdentity",
+  "name": "Sphereon Wallet Identity",
   "purpose": "To onboard you we need your firstname, lastname and e-mail",
   "input_descriptors": [
     {

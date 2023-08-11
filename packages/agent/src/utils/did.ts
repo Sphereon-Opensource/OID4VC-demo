@@ -5,7 +5,7 @@ import {getDidIonResolver, IonDIDProvider} from "@veramo/did-provider-ion";
 import {getDidJwkResolver} from "@sphereon/ssi-sdk-ext.did-resolver-jwk";
 import {getResolver as getDidWebResolver} from "web-did-resolver";
 import {EthrDIDProvider} from "@veramo/did-provider-ethr";
-import {WebDIDProvider} from "@veramo/did-provider-web";
+import {WebDIDProvider} from "@sphereon/ssi-sdk-ext.did-provider-web";
 import {JwkDIDProvider} from "@sphereon/ssi-sdk-ext.did-provider-jwk";
 import agent, {context} from "../agent";
 import {DIDDocumentSection, IIdentifier} from "@veramo/core";
@@ -14,15 +14,12 @@ import {
     DIDMethods,
     didOptConfigs,
     IDIDResult,
-    IImportX509DIDArg,
     KMS,
     UNIVERSAL_RESOLVER_RESOLVE_URL
 } from "../index";
 import {mapIdentifierKeysToDocWithJwkSupport} from "@sphereon/ssi-sdk-ext.did-utils";
 import {
     generatePrivateKeyHex,
-    privateKeyHexFromPEM,
-    publicKeyHexFromPEM,
     TKeyType, toJwk
 } from "@sphereon/ssi-sdk-ext.key-utils";
 
@@ -118,48 +115,42 @@ export async function getOrCreateDIDs(): Promise<IDIDResult[]> {
             if (identifier) {
                 console.log(`Identifier exists for DID ${did}`)
                 console.log(`${JSON.stringify(identifier)}`)
-                identifier.keys.map(key => console.log(`kid: ${key.kid}:\r\n ` +JSON.stringify(toJwk(key.publicKeyHex, key.type), null, 2)))
+                identifier.keys.map(key => console.log(`kid: ${key.kid}:\r\n ` + JSON.stringify(toJwk(key.publicKeyHex, key.type), null, 2)))
             } else {
                 console.log(`No identifier for DID ${did} exists yet. Will create the DID...`)
-                if (did?.startsWith('did:web') && opts.importArgs) {
-                    identifier = await createDIDFromX509({...opts.importArgs})
-                } else {
-                    let args = opts.createArgs
-                    if (!args) {
-                        args = {options: {}}
-                    }
 
-
-                    if (!privateKeyHex && !did?.startsWith('did:web')) {
-                        // @ts-ignore
-                        privateKeyHex = generatePrivateKeyHex((args.options?.type ?? args.options.keyType ?? "Secp256k1") as TKeyType)
-                        console.log("This really is a demo and should not be used in production!")
-                        console.log(`privateKeyHex:: ${privateKeyHex}`)
-                    }
-
-                    if (privateKeyHex) {
-                        if (did?.startsWith('did:web')) {
-                            throw Error('Cannot import a did:web with privateKey at the moment. Please remove from config')
-                        }
-                        if (args.options && !('key' in args.options)) {
-                            // @ts-ignore
-                            args.options['key'] = {privateKeyHex}
-                            // @ts-ignore
-                        } else if (args.options && 'key' in args.options && args.options.key && typeof args.options?.key === 'object' && !('privateKeyHex' in args.options.key)) {
-                            // @ts-ignore
-                            args.options.key['privateKeyHex'] = privateKeyHex
-                        }
-                    }
-                    identifier = await agent.didManagerCreate(args)
-                    if (!did) {
-                        console.error('TODO: write did config object to did folder')
-                        console.error('Please adjust your did config file and add the "did" value to it: "did": "' + identifier.did + '"')
-                        console.error(JSON.stringify(identifier, null, 2))
-                        throw Error('Exit. Please see instructions')
-
-                    }
-                    identifier.keys.map(key => console.log(`kid: ${key.kid}:\r\n ` +JSON.stringify(toJwk(key.publicKeyHex, key.type), null, 2)))
+                let args = opts.createArgs
+                if (!args) {
+                    args = {options: {}}
                 }
+
+                if (!privateKeyHex && !('privateKeyPem' in opts)) {
+                    // @ts-ignore
+                    privateKeyHex = generatePrivateKeyHex((args.options?.type ?? args.options.keyType ?? "Secp256k1") as TKeyType)
+                    console.log("This really is a demo and should not be used in production!")
+                    console.log(`privateKeyHex: ${privateKeyHex}`)
+                }
+
+                if (privateKeyHex) {
+                    if (args.options && !('key' in args.options)) {
+                        // @ts-ignore
+                        args.options['key'] = {privateKeyHex}
+                        // @ts-ignore
+                    } else if (args.options && 'key' in args.options && args.options.key && typeof args.options?.key === 'object' && !('privateKeyHex' in args.options.key)) {
+                        // @ts-ignore
+                        args.options.key['privateKeyHex'] = privateKeyHex
+                    }
+                }
+                identifier = await agent.didManagerCreate(args)
+                if (!did) {
+                    console.error('TODO: write did config object to did folder')
+                    console.error('Please adjust your did config file and add the "did" value to it: "did": "' + identifier.did + '"')
+                    console.error(JSON.stringify(identifier, null, 2))
+                    throw Error('Exit. Please see instructions')
+
+                }
+                identifier.keys.map(key => console.log(`kid: ${key.kid}:\r\n ` + JSON.stringify(toJwk(key.publicKeyHex, key.type), null, 2)))
+
                 console.log(`Identifier created for DID ${did}`)
                 console.log(`${JSON.stringify(identifier, null, 2)}`)
             }
@@ -168,45 +159,4 @@ export async function getOrCreateDIDs(): Promise<IDIDResult[]> {
         }
     )
     return Promise.all(result)
-}
-
-export async function createDIDFromX509(
-    {domain, privateKeyPEM, certificatePEM, certificateChainPEM, certificateChainURL, kms, kid}: IImportX509DIDArg,
-): Promise<IIdentifier> {
-    const x509 = {
-        cn: domain,
-        certificatePEM,
-        certificateChainPEM,
-        privateKeyPEM,
-        certificateChainURL,
-    }
-    const privateKeyHex = privateKeyHexFromPEM(privateKeyPEM)
-    const meta = {x509}
-    const kidResult = kid ? kid : publicKeyHexFromPEM(privateKeyPEM)
-    const controllerKeyId = kidResult //kid ? (kidResult.includes(domain) ? kidResult : `${domain}#${kid}`) : `${domain}#JWK2020-RSA`
-
-    return await context.agent.didManagerImport({
-        did: await asDID(domain),
-        provider: 'did:web',
-        alias: domain,
-        // @ts-ignore
-        keys: [{kid: kid ? kid : kidResult, privateKeyHex, type: 'RSA' as TKeyType, meta, kms: kms ? kms : 'local'}],
-        controllerKeyId,
-    })
-}
-
-export async function asDID(input?: string, show?: boolean): Promise<string> {
-    let did = input ?? await getDefaultDID()
-    if (!did) {
-        throw Error(
-            'Domain or DID expected, but received nothing. Either provide an argument, set a `particpantDID` in the agent.yml, or create a single DID'
-        )
-    }
-    if (show) {
-        console.log(did)
-    }
-    if (did.startsWith('did:web:')) {
-        return did
-    }
-    return `did:web:${did.replace(/https?:\/\/([^/?#]+).*/i, '$1').toLowerCase()}`
 }

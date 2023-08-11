@@ -164,7 +164,7 @@ export const allCredentialDataSupliers: Record<string, CredentialDataSupplier> =
 
 export function getCredentialDataSupplier(id: string): CredentialDataSupplier {
 
-    // Yes we really need to create a template
+    // Yes we really need to create templates, so we do not have to use this hardcoding
     let supplier = allCredentialDataSupliers[id]
     if (typeof supplier !== 'function') {
         if (id.match(/(future)|(fma2023)|(fmdm2023)/)) {

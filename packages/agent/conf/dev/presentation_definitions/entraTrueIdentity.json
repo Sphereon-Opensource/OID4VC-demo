@@ -1,5 +1,6 @@
 {
   "id": "EntraTrueIdentity",
+  "name": "Entra True Identity",
   "input_descriptors": [
     {
       "id": "TrueIdentity",
