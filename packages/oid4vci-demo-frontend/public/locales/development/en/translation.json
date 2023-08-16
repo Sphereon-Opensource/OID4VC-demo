@@ -31,10 +31,9 @@
   "sharing_data_right_pane_paragraph": "Almost there!\n Please fill out any missing data.\r\nTo claim your {{credentialName}}\ncredential.",
   "sharing_data_right_pane_title": "Share your data",
   "manual_fill_data_right_pane_title": "Manually fill out details",
-  "sharing_data_success_right_pane_button_caption": "Next",
-  "sharing_data_success_right_pane_paragraph": "for providing the information. We are now ready\r\n to issue a new credential to you.\r\n\nIf you do not yet have a wallet please download\r\none of the compliant wallets on the left.",
-  "sharing_data_success_right_pane_paragraph_short": "for providing the information. We are now ready\r\n to issue a new credential to you.",
-  "sharing_data_success_right_pane_title": "Thank you {{firstName}}!",
-  "sharing_data_success_get_mobile_app_message": "Get the Sphereon Wallet",
-  "action_open_wallet_caption": "Open in wallet"
+  "action_open_wallet_caption": "Open in wallet",
+  "select_credential_title1": "Select the",
+  "select_credential_title2": "credential",
+  "select_credential_title3": "you’d like to",
+  "select_credential_title4": "collect"
 }

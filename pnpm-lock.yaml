@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -295,6 +295,9 @@ importers:
       '@sphereon/oid4vci-common':
         specifier: 0.6.1-next.8
         version: 0.6.1-next.8
+      '@sphereon/ssi-sdk.data-store':
+        specifier: 0.15.2-next.6
+        version: 0.15.2-next.6(sqlite3@5.1.6)(ts-node@10.9.1)
       '@sphereon/ssi-sdk.oid4vci-issuer-rest-client':
         specifier: 0.15.2-next.6
         version: 0.15.2-next.6
@@ -307,6 +310,9 @@ importers:
       '@sphereon/ssi-types':
         specifier: 0.15.2-next.6
         version: 0.15.2-next.6
+      '@sphereon/ui-components.ssi-react':
+        specifier: ^0.1.1
+        version: 0.1.1(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       '@veramo/core':
         specifier: 4.2.0
         version: 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
@@ -334,6 +340,9 @@ importers:
       react-i18next:
         specifier: ^12.3.1
         version: 12.3.1(i18next@22.5.1)(react-dom@18.2.0)(react@18.2.0)
+      react-indiana-drag-scroll:
+        specifier: ^2.2.0
+        version: 2.2.0(react-dom@18.2.0)(react@18.2.0)
       react-loader-spinner:
         specifier: ^5.3.4
         version: 5.3.4(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0)
@@ -430,7 +439,7 @@ importers:
         version: 5.3.4(react@17.0.2)
       react-scripts:
         specifier: ^5.0.1
-        version: 5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.5)(eslint@8.46.0)(react@17.0.2)(typescript@4.9.5)
+        version: 5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.5)(debug@4.3.4)(eslint@8.46.0)(react@18.2.0)(typescript@4.9.5)
       ts-loader:
         specifier: ^9.4.4
         version: 9.4.4(typescript@4.9.5)(webpack@5.88.2)
@@ -3042,7 +3051,7 @@ packages:
       '@expo/json-file': 8.2.37
       debug: 4.3.4(supports-color@5.5.0)
       expo-modules-autolinking: 1.5.0
-      fs-extra: 9.0.0
+      fs-extra: 9.1.0
       resolve-from: 5.0.0
       semver: 7.5.3
       xml2js: 0.6.0
@@ -5062,6 +5071,35 @@ packages:
       jwt-decode: 3.1.2
     dev: false
 
+  /@sphereon/ui-components.core@0.1.1(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-6zl4kpKBru1PfOTc7KO6lym3THvs8HXfUvAvo89YYLnVwsk2c8TXYBrVm7dEmb7mSoiU/iAVb+yueFhG6G20ig==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      i18n-js: 3.9.2
+      lodash.memoize: 4.1.2
+      react: 18.2.0
+      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - react-dom
+      - react-is
+    dev: false
+
+  /@sphereon/ui-components.ssi-react@0.1.1(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-QVnp/f9lISQqVRp98vZISgazZXcTYvSjT5YPZbsxI+GDt7DiBCTckceS1oPVwgLCwJItvjm3Br2ITj73FRRSjA==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      '@sphereon/ui-components.core': 0.1.1(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - react-dom
+      - react-is
+    dev: false
+
   /@sphereon/wellknown-dids-client@0.1.3:
     resolution: {integrity: sha512-TAT24L3RoXD8ocrkTcsz7HuJmgjNjdoV6IXP1p3DdaI/GqkynytXE3J1+F7vUFMRYwY5nW2RaXSgDQhrFJemaA==}
     dependencies:
@@ -5694,7 +5732,7 @@ packages:
       crypto-ld: 3.9.0
       ethereum-public-key-to-address: 0.0.2
       json-stringify-deterministic: 1.0.10
-      jsonld: link:node_modules/.pnpm/@digitalcredentials+jsonld@5.2.1/node_modules/@digitalcredentials/jsonld
+      jsonld: 3.3.2
       jsonld-signatures: 5.2.0
     dev: false
 
@@ -7550,7 +7588,7 @@ packages:
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.10)
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.11(@babel/core@7.22.10)(react-dom@17.0.2)(react-is@18.2.0)(react@17.0.2)
     transitivePeerDependencies:
       - '@babel/core'
     dev: false
@@ -9270,6 +9308,10 @@ packages:
     resolution: {integrity: sha512-QvzAURSbQ0pKdIye2txOzNaHmxtUBXerpY0FJsFXUMKbIZeFm5ht1LS/jFsrncjnmtv8HsG0W2g6c0zUjZWmpA==}
     dev: false
 
+  /debounce@1.2.1:
+    resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
+    dev: false
+
   /debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     peerDependencies:
@@ -9724,6 +9766,10 @@ packages:
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
+
+  /easy-bem@1.1.1:
+    resolution: {integrity: sha512-GJRqdiy2h+EXy6a8E6R+ubmqUM08BK0FWNq41k24fup6045biQ8NXxoXimiwegMQvFFV3t1emADdGNL1TlS61A==}
+    dev: false
 
   /ecc-jsbn@0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
@@ -11905,6 +11951,10 @@ packages:
 
   /hyphenate-style-name@1.0.4:
     resolution: {integrity: sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==}
+    dev: false
+
+  /i18n-js@3.9.2:
+    resolution: {integrity: sha512-+Gm8h5HL0emzKhRx2avMKX+nKiVPXeaOZm7Euf2/pbbFcLQoJ3zZYiUykAzoRasijCoWos2Kl1tslmScTgAQKw==}
     dev: false
 
   /i18next-browser-languagedetector@7.1.0:
@@ -17065,6 +17115,20 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /react-indiana-drag-scroll@2.2.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+W/3B2OQV0FrbdnsoIo4dww/xpH0MUQJz6ziQb7H+oBko3OCbXuzDFYnho6v6yhGrYDNWYPuFUewb89IONEl/A==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      classnames: 2.3.2
+      debounce: 1.2.1
+      easy-bem: 1.1.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -17337,103 +17401,6 @@ packages:
       postcss-preset-env: 7.8.3(postcss@8.4.27)
       prompts: 2.4.2
       react: 18.2.0
-      react-app-polyfill: 3.0.0
-      react-dev-utils: 12.0.1(eslint@8.46.0)(typescript@4.9.5)(webpack@5.88.2)
-      react-refresh: 0.11.0
-      resolve: 1.22.4
-      resolve-url-loader: 4.0.0
-      sass-loader: 12.6.0(webpack@5.88.2)
-      semver: 7.5.4
-      source-map-loader: 3.0.2(webpack@5.88.2)
-      style-loader: 3.3.3(webpack@5.88.2)
-      tailwindcss: 3.3.3
-      terser-webpack-plugin: 5.3.9(webpack@5.88.2)
-      typescript: 4.9.5
-      webpack: 5.88.2
-      webpack-dev-server: 4.15.1(debug@4.3.4)(webpack@5.88.2)
-      webpack-manifest-plugin: 4.1.1(webpack@5.88.2)
-      workbox-webpack-plugin: 6.6.0(webpack@5.88.2)
-    optionalDependencies:
-      fsevents: 2.3.2
-    transitivePeerDependencies:
-      - '@babel/plugin-syntax-flow'
-      - '@babel/plugin-transform-react-jsx'
-      - '@parcel/css'
-      - '@swc/core'
-      - '@types/babel__core'
-      - '@types/webpack'
-      - bufferutil
-      - canvas
-      - clean-css
-      - csso
-      - debug
-      - esbuild
-      - eslint-import-resolver-typescript
-      - eslint-import-resolver-webpack
-      - fibers
-      - node-notifier
-      - node-sass
-      - rework
-      - rework-visit
-      - sass
-      - sass-embedded
-      - sockjs-client
-      - supports-color
-      - ts-node
-      - type-fest
-      - uglify-js
-      - utf-8-validate
-      - vue-template-compiler
-      - webpack-cli
-      - webpack-hot-middleware
-      - webpack-plugin-serve
-    dev: false
-
-  /react-scripts@5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.5)(eslint@8.46.0)(react@17.0.2)(typescript@4.9.5):
-    resolution: {integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    peerDependencies:
-      eslint: '*'
-      react: '>= 16'
-      typescript: ^3.2.1 || ^4
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@babel/core': 7.22.10
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.10(react-refresh@0.11.0)(webpack-dev-server@4.15.1)(webpack@5.88.2)
-      '@svgr/webpack': 5.5.0
-      babel-jest: 27.5.1(@babel/core@7.22.10)
-      babel-loader: 8.3.0(@babel/core@7.22.10)(webpack@5.88.2)
-      babel-plugin-named-asset-import: 0.3.8(@babel/core@7.22.10)
-      babel-preset-react-app: 10.0.1
-      bfj: 7.0.2
-      browserslist: 4.21.10
-      camelcase: 6.3.0
-      case-sensitive-paths-webpack-plugin: 2.4.0
-      css-loader: 6.8.1(webpack@5.88.2)
-      css-minimizer-webpack-plugin: 3.4.1(webpack@5.88.2)
-      dotenv: 10.0.0
-      dotenv-expand: 5.1.0
-      eslint: 8.46.0
-      eslint-config-react-app: 7.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.5)(eslint@8.46.0)(jest@27.5.1)(typescript@4.9.5)
-      eslint-webpack-plugin: 3.2.0(eslint@8.46.0)(webpack@5.88.2)
-      file-loader: 6.2.0(webpack@5.88.2)
-      fs-extra: 10.1.0
-      html-webpack-plugin: 5.5.3(webpack@5.88.2)
-      identity-obj-proxy: 3.0.0
-      jest: 27.5.1
-      jest-resolve: 27.5.1
-      jest-watch-typeahead: 1.1.0(jest@27.5.1)
-      mini-css-extract-plugin: 2.7.6(webpack@5.88.2)
-      postcss: 8.4.27
-      postcss-flexbugs-fixes: 5.0.2(postcss@8.4.27)
-      postcss-loader: 6.2.1(postcss@8.4.27)(webpack@5.88.2)
-      postcss-normalize: 10.0.1(browserslist@4.21.10)(postcss@8.4.27)
-      postcss-preset-env: 7.8.3(postcss@8.4.27)
-      prompts: 2.4.2
-      react: 17.0.2
       react-app-polyfill: 3.0.0
       react-dev-utils: 12.0.1(eslint@8.46.0)(typescript@4.9.5)(webpack@5.88.2)
       react-refresh: 0.11.0
