@@ -55,7 +55,7 @@ export async function addDefaultsToOpts(issuerOpts: IIssuerOptions) {
     const defaultOpts = await getDefaultOID4VCIIssuerOptions({resolver: issuerOpts?.didOpts?.resolveOpts?.resolver})
     let identifierOpts = issuerOpts?.didOpts?.identifierOpts ?? defaultOpts?.didOpts.identifierOpts
     let resolveOpts = issuerOpts?.didOpts.resolveOpts ?? defaultOpts?.didOpts.resolveOpts
-    if (!issuerOpts.didOpts) {
+    if (!issuerOpts?.didOpts) {
         issuerOpts.didOpts = {
             identifierOpts,
             resolveOpts
