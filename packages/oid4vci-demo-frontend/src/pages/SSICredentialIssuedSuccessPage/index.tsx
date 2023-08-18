@@ -9,6 +9,7 @@ import {
 } from "../../ecosystem-config";
 import {NonMobile} from "../../index";
 import {useMediaQuery} from "react-responsive";
+import SSISecondaryButton from "../../components/SSISecondaryButton";
 
 const SSICredentialIssuedSuccessPage: React.FC = () => {
     const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssuedSuccessPage') as SSICredentialIssuedSuccessPageConfig
@@ -60,13 +61,10 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                     }}>
                         <img src={config.photoRight} alt="success"/>
                     </div>
-                    <div style={{
-                        width: 327
-                    }}>
+                    <div style={{display: 'flex',flexDirection: 'row'}}>
                         <SSIPrimaryButton
-                            caption={t('credentials_success_right_pane_button_caption', {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
-                            // style={{width: '250px'}}
-                            onClick={async () => window.location.href = generalConfig.verifierUrl ?? generalConfig.baseUrl ?? 'https://sphereon.com'}
+                            caption={t('credentials_success_right_pane_back_button_caption')}
+                            onClick={async () => window.history.go(-2) }
                         />
                     </div>
                 </div>

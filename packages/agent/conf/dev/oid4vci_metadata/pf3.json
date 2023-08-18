@@ -14,6 +14,48 @@
       {
         "display": [
           {
+            "name": "Example University Degree",
+            "description": "JFF Plugfest 3 OpenBadge (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#1763c1",
+            "logo": {
+              "url": "https://w3c-ccg.github.io/vc-ed/plugfest-1-2022/images/JFF_LogoLockup.png",
+              "alt_text": "Red, magenta and yellow vertical lines with 3 black dots and the text JFF, depicting the Jobs For the Future logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Example University Degree",
+            "description": "JFF Plugfest 3 OpenBadge (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#1763c1",
+            "logo": {
+              "url": "https://w3c-ccg.github.io/vc-ed/plugfest-1-2022/images/JFF_LogoLockup.png",
+              "alt_text": "Red, magenta and yellow vertical lines with 3 black dots and the text JFF, depicting the Jobs For the Future logo."
+            }
+          }
+        ],
+        "id": "OpenBadgeCredentialJwt",
+        "types": [
+          "VerifiableCredential",
+          "OpenBadgeCredential"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:ion",
+          "did:key",
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
             "name": "Permanent Resident Card",
             "description": "Government of Kakapo (JWT)",
             "text_color": "#FFFFFF",
@@ -35,13 +77,15 @@
             }
           }
         ],
-        "id": "PermantResidentCardJwt",
+        "id": "PermanentResidentCardJwt",
         "types": [
           "VerifiableCredential",
           "PermanentResidentCard"
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
+          "did:ion",
+          "did:key",
           "did:web",
           "did:jwk"
         ],
@@ -174,6 +218,8 @@
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
+          "did:ion",
+          "did:key",
           "did:web",
           "did:jwk"
         ],

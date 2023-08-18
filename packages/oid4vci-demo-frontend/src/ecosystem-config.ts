@@ -196,6 +196,7 @@ export interface SSIPrimaryButtonConfig extends PageOrComponentConfig {
 export interface SSISecondaryButtonConfig extends PageOrComponentConfig {
     styles: {
         mainContainer: {
+            backgroundColor?: string
             color: string
         }
     }
@@ -204,6 +205,7 @@ export interface SSISecondaryButtonConfig extends PageOrComponentConfig {
 export interface EcosystemGeneralConfig {
     baseUrl?: string
     verifierUrl?: string
+    backCaption?: string
     verifierUrlCaption?: string
     downloadUrl?: string
     credentialName: string
