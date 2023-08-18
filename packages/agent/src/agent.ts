@@ -47,9 +47,9 @@ import {
     INTERNAL_PORT,
     IS_OID4VCI_ENABLED,
     IS_OID4VP_ENABLED, oid4vciInstanceOpts
-} from "./index";
+} from "./environment";
 import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
-import {IOID4VCIIssuer, OID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
+import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
 import {
     addDefaultsToOpts,
     createOID4VCIIssuer,

@@ -78,6 +78,7 @@ const SSISelectCredentialPage: React.FC = () => {
                         <SSICardView
                             header={{
                                 credentialTitle: value[0].alias,
+                                credentialSubtitle: value[0].description,
                                 ...((value[0].logo && value[0].logo.uri) && {
                                     logo: {...value[0].logo,
                                         dimensions: await getImageDimensions(value[0].logo.uri)
@@ -161,9 +162,9 @@ const SSISelectCredentialPage: React.FC = () => {
             </div>
 
             <div style={{marginTop: 126}}>
-                {/* FIXME type issue */}
+                {/* FIXME type issue. TODO: For now we adjust the size of the scroll container to shows the start of the 4th credential so the user knows there is something there. Would be nice to show some arrows/handles */}
                 {/*// @ts-ignore*/}
-                <ScrollContainer style={{maxWidth: 1031, paddingRight: 50, display: 'flex', cursor: 'grab'}}>
+                <ScrollContainer style={{maxWidth: cardElements.length > 3 ? 1131 : 1031, paddingRight: 50, display: 'flex', cursor: 'grab'}}>
                     <div style={{ gap: 50, display: 'flex', flexDirection: isTabletOrMobile ? 'column' : 'row' }}>
                         {cardElements}
                     </div>

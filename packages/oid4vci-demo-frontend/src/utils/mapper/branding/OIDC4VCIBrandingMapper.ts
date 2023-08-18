@@ -2,6 +2,7 @@ import {CredentialsSupportedDisplay} from '@sphereon/oid4vci-common';
 import {IBasicCredentialLocaleBranding} from '@sphereon/ssi-sdk.data-store';
 
 export const credentialLocaleBrandingFrom = async (credentialDisplay: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> => {
+  console.log(JSON.stringify(credentialDisplay, null, 2))
   return {
     ...(credentialDisplay.name && {
       alias: credentialDisplay.name,
@@ -39,8 +40,8 @@ export const credentialLocaleBrandingFrom = async (credentialDisplay: Credential
               alt: credentialDisplay.background_image?.alt_text,
             }),
           },
-          color: credentialDisplay.background_color,
         }),
+        color: credentialDisplay.background_color,
       },
     }),
   };
