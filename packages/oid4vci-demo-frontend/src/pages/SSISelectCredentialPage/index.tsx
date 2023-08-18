@@ -2,7 +2,10 @@ import React, {ReactElement, useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import ScrollContainer from "react-indiana-drag-scroll";
 import {SSICardView} from '@sphereon/ui-components.ssi-react';
-import {getCurrentEcosystemPageOrComponentConfig, SSILandingPageConfig} from '../../ecosystem-config';
+import {
+    getCurrentEcosystemPageOrComponentConfig,
+    SSISelectCredentialPageConfig
+} from '../../ecosystem-config';
 import {MetadataClient} from '@sphereon/oid4vci-client';
 import {
     CredentialsSupportedDisplay,
@@ -35,7 +38,7 @@ const SSISelectCredentialPage: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const state: State | undefined = location.state;
-    const config: SSILandingPageConfig = getCurrentEcosystemPageOrComponentConfig('SSILandingPage') as SSILandingPageConfig
+    const config: SSISelectCredentialPageConfig = getCurrentEcosystemPageOrComponentConfig('SSISelectCredentialPage') as SSISelectCredentialPageConfig
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
@@ -153,12 +156,29 @@ const SSISelectCredentialPage: React.FC = () => {
 
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: '#202537', alignItems: 'center'}}>
+        <div style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: config.styles.mainContainer.backgroundColor, alignItems: 'center'}}>
             <div style={{display: 'flex', flexDirection: 'row', gap: 13, marginTop: 244, whiteSpace: 'nowrap'}}>
                 <p className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title1')}</p>
-                <p className={`${inputStyle.gradientText} inter-normal-48`}>{t('select_credential_title2')}</p>
+                <p className={`inter-normal-48`}
+
+                   style={{
+                       background: config.styles.mainContainer.textGradient,
+                       backgroundClip: 'text',
+                       WebkitBackgroundClip: 'text',
+                       WebkitTextFillColor: 'transparent',
+                }}
+
+                >{t('select_credential_title2')}</p>
                 <p className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title3')}</p>
-                <p className={`${inputStyle.gradientText} inter-normal-48`}>{t('select_credential_title4')}</p>
+                <p className={`inter-normal-48`}
+                   style={{
+                       background: config.styles.mainContainer.textGradient,
+                       backgroundClip: 'text',
+                       WebkitBackgroundClip: 'text',
+                       WebkitTextFillColor: 'transparent',
+                   }}
+
+                >{t('select_credential_title4')}</p>
             </div>
 
             <div style={{marginTop: 126}}>

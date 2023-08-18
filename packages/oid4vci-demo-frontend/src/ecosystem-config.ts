@@ -157,6 +157,16 @@ export interface SSILandingPageConfig extends PageOrComponentConfig {
     }
 }
 
+export interface SSISelectCredentialPageConfig extends PageOrComponentConfig {
+    logo: ImageProperties,
+    styles: {
+        mainContainer: {
+            backgroundColor: string
+            textGradient: string
+        },
+    }
+}
+
 export interface SSICardConfig extends PageOrComponentConfig {
 }
 
@@ -211,6 +221,7 @@ export interface VCIConfigPages {
     SSICredentialIssueRequestPage: SSICredentialIssueRequestPageConfig
     SSIInformationRequestPage: SSIInformationRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
+    SSISelectCredentialPage: SSISelectCredentialPageConfig
 }
 
 export interface VCIConfigComponents {
