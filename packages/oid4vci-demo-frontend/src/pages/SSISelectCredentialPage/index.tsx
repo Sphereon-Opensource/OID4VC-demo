@@ -1,24 +1,20 @@
 import React, {ReactElement, useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
-import ScrollContainer from "react-indiana-drag-scroll";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './index.module.css'
 import {SSICardView} from '@sphereon/ui-components.ssi-react';
-import {
-    getCurrentEcosystemPageOrComponentConfig,
-    SSISelectCredentialPageConfig
-} from '../../ecosystem-config';
+import {getCurrentEcosystemPageOrComponentConfig, SSISelectCredentialPageConfig} from '../../ecosystem-config';
 import {MetadataClient} from '@sphereon/oid4vci-client';
-import {
-    CredentialsSupportedDisplay,
-    EndpointMetadata,
-    CredentialSupported
-} from '@sphereon/oid4vci-common';
+import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadata} from '@sphereon/oid4vci-common';
 import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store';
 import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper';
 import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client";
 import agent from '../../agent';
 import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "react-responsive";
-import inputStyle from './index.module.css';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {Pagination} from 'swiper';
 
 const short = require('short-uuid');
 
@@ -73,34 +69,37 @@ const SSISelectCredentialPage: React.FC = () => {
             const cardElements: Array<ReactElement> = []
             for (const [key, value] of supportedCredentials) {
                 cardElements.push(
-                    <div
-                        key={short.generate()}
-                        style={{cursor: 'pointer'}}
-                        onClick={() => onSelectCredential(key)}
-                    >
-                        <SSICardView
-                            header={{
-                                credentialTitle: value[0].alias,
-                                credentialSubtitle: value[0].description,
-                                ...((value[0].logo && value[0].logo.uri) && {
-                                    logo: {...value[0].logo,
-                                        dimensions: await getImageDimensions(value[0].logo.uri)
-                                    },
-                                })
-                            }}
-                            body={{
-                                issuerName: endpointMetadata?.issuerMetadata?.display?.[0]?.name
-                            }}
-                            footer={{
-                                expirationDate: getExpirationDate(),
-                            }}
-                            display={{
-                                backgroundColor: value[0].background?.color,
-                                backgroundImage: value[0].background?.image,
-                                textColor: value[0].text?.color,
-                            }}
-                        />
-                    </div>
+                    <SwiperSlide>
+                        <div
+                            key={short.generate()}
+                            style={{cursor: 'pointer', width: '325px'}}
+                            onClick={() => onSelectCredential(key)}
+                        >
+                            <SSICardView
+                                header={{
+                                    credentialTitle: value[0].alias,
+                                    credentialSubtitle: value[0].description,
+                                    ...((value[0].logo && value[0].logo.uri) && {
+                                        logo: {
+                                            ...value[0].logo,
+                                            dimensions: await getImageDimensions(value[0].logo.uri)
+                                        },
+                                    })
+                                }}
+                                body={{
+                                    issuerName: endpointMetadata?.issuerMetadata?.display?.[0]?.name
+                                }}
+                                footer={{
+                                    expirationDate: getExpirationDate(),
+                                }}
+                                display={{
+                                    backgroundColor: value[0].background?.color,
+                                    backgroundImage: value[0].background?.image,
+                                    textColor: value[0].text?.color,
+                                }}
+                            />
+                        </div>
+                    </SwiperSlide>
                 )
             }
 
@@ -148,29 +147,21 @@ const SSISelectCredentialPage: React.FC = () => {
         return new Promise((resolve): void => {
             const image: HTMLImageElement = new Image()
             image.onload = function (): void {
-                resolve({ width: image.width, height: image.height })
+                resolve({width: image.width, height: image.height})
             }
             image.src = uri
         })
     }
 
 
+    // @ts-ignore
     return (
-        <div style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: config.styles.mainContainer.backgroundColor, alignItems: 'center'}}>
-            <div style={{display: 'flex', flexDirection: 'row', gap: 13, marginTop: 244, whiteSpace: 'nowrap'}}>
-                <p className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title1')}</p>
-                <p className={`inter-normal-48`}
+        <div
+            style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: config.styles.mainContainer.backgroundColor, alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{display: 'flex', flexDirection: 'row', maxWidth: isTabletOrMobile ? 327 : 1075, gap: 13, marginTop: isTabletOrMobile ? 25: 244, justifyContent: 'center'}}>
+                <p className={'inter-normal-48'} style={{color: '#FBFBFB', alignContent: 'center', textAlign: 'center'}}>{t('select_credential_title1') + ' '}
+                <span className={`inter-normal-48`}
 
-                   style={{
-                       background: config.styles.mainContainer.textGradient,
-                       backgroundClip: 'text',
-                       WebkitBackgroundClip: 'text',
-                       WebkitTextFillColor: 'transparent',
-                }}
-
-                >{t('select_credential_title2')}</p>
-                <p className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title3')}</p>
-                <p className={`inter-normal-48`}
                    style={{
                        background: config.styles.mainContainer.textGradient,
                        backgroundClip: 'text',
@@ -178,20 +169,52 @@ const SSISelectCredentialPage: React.FC = () => {
                        WebkitTextFillColor: 'transparent',
                    }}
 
-                >{t('select_credential_title4')}</p>
+                >{t('select_credential_title2') + ' '}</span>
+                <span className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title3') + ' '}</span>
+                <span className={`inter-normal-48`}
+                   style={{
+                       background: config.styles.mainContainer.textGradient,
+                       backgroundClip: 'text',
+                       WebkitBackgroundClip: 'text',
+                       WebkitTextFillColor: 'transparent',
+                   }}
+
+                >{t('select_credential_title4')}</span></p>
             </div>
 
-            <div style={{marginTop: 126}}>
-                {/* FIXME type issue. TODO: For now we adjust the size of the scroll container to shows the start of the 4th credential so the user knows there is something there. Would be nice to show some arrows/handles */}
-                {/*// @ts-ignore*/}
-                <ScrollContainer style={{maxWidth: cardElements.length > 3 ? 1131 : 1031, paddingRight: 50, display: 'flex', cursor: 'grab'}}>
-                    <div style={{ gap: 50, display: 'flex', flexDirection: isTabletOrMobile ? 'column' : 'row' }}>
-                        {cardElements}
-                    </div>
-                </ScrollContainer>
+            <div style={{width: '100%', maxWidth: isTabletOrMobile ? 327 : 1075, marginTop: 126}}>
+                <Swiper
+                    slidesPerView={1}
+                    spaceBetween={10}
+                    /*navigation={true}*/
+                    pagination={{
+                        el: '.swiper-sphereon-pagination',
+                        clickable: true,
+                    }}
+                    breakpoints={{
+                        325: {
+                            slidesPerView: 1,
+                            spaceBetween: 0,
+                        },
+                        650: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        975: {
+                            slidesPerView: 3,
+                            spaceBetween: 40,
+                        },
+                    }}
+                    modules={[Pagination/*, Navigation*/]}
+
+                >
+                    {cardElements}
+                </Swiper>
             </div>
+            <div className="swiper-sphereon-pagination" style={{textAlign: 'center', margin: '20px', marginBottom: '50px'}}/>
+
             <img
-                style={{marginTop: 'auto', marginBottom: 85}}
+                style={{marginTop: isTabletOrMobile ? 'initial': 'auto', marginBottom: isTabletOrMobile ? 15: 85}}
                 src={config.logo.src}
                 alt={config.logo.alt}
                 width={config.logo.width}

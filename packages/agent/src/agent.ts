@@ -1,3 +1,4 @@
+import passport from 'passport'
 import {
     createAgent,
     IAgentContext,
@@ -157,7 +158,12 @@ if (oid4vpOpts && oid4vpRP) {
 
 
 StaticBearerAuth.init('bearer-auth').addUser({name: 'demo', id: 'demo', token: 'demo'}).connectPassport()
-
+passport.serializeUser(function (user, done) {
+    done(null, user)
+})
+passport.deserializeUser(function (user, done) {
+    done(null, user!)
+})
 const expressSupport = IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED ?
     ExpressBuilder.fromServerOpts({
         hostname: INTERNAL_HOSTNAME_OR_IP,
@@ -166,6 +172,7 @@ const expressSupport = IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED ?
     })
         .withCorsConfigurer(new ExpressCorsConfigurer({}).allowOrigin('*').allowCredentials(true))
         .withPassportAuth(true)
+        .withSessionOptions({secret: 'demo'})
         .withMorganLogging()
         .build({startListening: false}) : undefined
 

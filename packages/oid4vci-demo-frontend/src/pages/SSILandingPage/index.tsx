@@ -47,8 +47,9 @@ const SSILandingPage: React.FC = () => {
             flexDirection: 'column'
         }}>
             <div style={{
-                maxWidth: 810,
+                maxWidth: isTabletOrMobile ? 405 : 810,
                 justifyContent: 'space-between',
+                alignContent: 'center',
                 flexDirection: `${isTabletOrMobile ? 'column' : 'row'}`,
                 display: 'flex',
                 width: '100%'
@@ -82,9 +83,10 @@ const SSILandingPage: React.FC = () => {
                     }}
                     {...optionalRightCardViewProps}
                 />
+
             </div>
             <img
-                style={{marginTop: 116}}
+                style={{marginTop: isTabletOrMobile ? 10 : 116}}
                 src={config.logo.src}
                 alt={config.logo.alt}
                 width={config.logo.width}
