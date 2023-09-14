@@ -25,6 +25,10 @@ const agent = createAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient & IOID4VC
     }),
     new OID4VCIRestClient({
       baseUrl: process.env.REACT_APP_OID4VCI_AGENT_BASE_URL ?? 'https://ssi.sphereon.com/issuer',
+      authentication: {
+        enabled: process.env.REACT_APP_AUTHENTICATION_ENABLED === "true" || process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN !== undefined,
+        staticBearerToken: process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN
+      }
     }),
   ]
 })
