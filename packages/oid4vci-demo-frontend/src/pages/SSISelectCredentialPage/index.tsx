@@ -6,7 +6,12 @@ import './index.module.css'
 import {SSICardView} from '@sphereon/ui-components.ssi-react';
 import {getCurrentEcosystemPageOrComponentConfig, SSISelectCredentialPageConfig} from '../../ecosystem-config';
 import {MetadataClient} from '@sphereon/oid4vci-client';
-import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadata} from '@sphereon/oid4vci-common';
+import {
+    CredentialsSupportedDisplay,
+    CredentialSupported,
+    EndpointMetadata,
+    EndpointMetadataResult
+} from '@sphereon/oid4vci-common';
 import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store';
 import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper';
 import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client";
@@ -25,10 +30,8 @@ type State = {
     isManualIdentification: boolean
 }
 
-// TODO VDX-250 add branding for the different parties that use this demo. mainly the background color of this page
-
 const SSISelectCredentialPage: React.FC = () => {
-    const [endpointMetadata, setEndpointMetadata] = useState<EndpointMetadata>()
+    const [endpointMetadata, setEndpointMetadata] = useState<EndpointMetadataResult>()
     const [supportedCredentials, setSupportedCredentials] = useState<Map<string, Array<IBasicCredentialLocaleBranding>>>(new Map())
     const [cardElements, setCardElements] = useState<Array<ReactElement>>([])
     const navigate = useNavigate();
@@ -39,12 +42,12 @@ const SSISelectCredentialPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     useEffect((): void => {
-        MetadataClient.retrieveAllMetadata(process.env.REACT_APP_OID4VCI_AGENT_BASE_URL!).then(async (metadata: EndpointMetadata): Promise<void> => {
+        MetadataClient.retrieveAllMetadata(process.env.REACT_APP_OID4VCI_AGENT_BASE_URL!).then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
 
             const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>();
             Promise.all(
-                (metadata.issuerMetadata?.credentials_supported as CredentialSupported[]).map(async (metadata: CredentialSupported): Promise<void> => {
+                (metadata.credentialIssuerMetadata?.credentials_supported as CredentialSupported[]).map(async (metadata: CredentialSupported): Promise<void> => {
                     const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
                         (metadata.display ?? []).map(
                             async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
@@ -87,7 +90,7 @@ const SSISelectCredentialPage: React.FC = () => {
                                     })
                                 }}
                                 body={{
-                                    issuerName: endpointMetadata?.issuerMetadata?.display?.[0]?.name
+                                    issuerName: endpointMetadata?.credentialIssuerMetadata?.display?.[0]?.name
                                 }}
                                 footer={{
                                     expirationDate: getExpirationDate(),
