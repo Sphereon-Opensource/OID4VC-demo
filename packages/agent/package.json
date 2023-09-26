@@ -76,7 +76,8 @@
     "sqlite3": "^5.1.6",
     "typeorm": "0.3.12",
     "uint8arrays": "3.1.1",
-    "web-did-resolver": "2.0.24"
+    "web-did-resolver": "2.0.24",
+    "handlebars": "^4.7.8"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
@@ -88,6 +89,7 @@
     "@types/express-http-proxy": "^1.6.3",
     "@types/node": "^18.17.3",
     "@types/react": "^17.0.62",
+    "@types/handlebars": "^4.1.0",
     "ts-node": "^10.9.1",
     "typescript": "4.9.5"
   },
