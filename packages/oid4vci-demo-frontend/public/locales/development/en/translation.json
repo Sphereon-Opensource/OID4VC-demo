@@ -36,5 +36,12 @@
   "sharing_data_success_right_pane_paragraph_short": "for providing the information. We are now ready\r\n to issue a new credential to you.",
   "sharing_data_success_right_pane_title": "Thank you {{firstName}}!",
   "sharing_data_success_get_mobile_app_message": "Get the Sphereon Wallet",
-  "action_open_wallet_caption": "Open in wallet"
+  "action_open_wallet_caption": "Open in wallet",
+  "ssi_information_request_page_form_company_name_title": "Company name",
+  "ssi_information_request_page_form_coc_number_title": "KVK number",
+  "ssi_information_request_page_form_company_location_title": "Location of company",
+  "ssi_information_request_page_form_first_name_title": "First name director",
+  "ssi_information_request_page_form_last_name_title": "Last name",
+  "ssi_information_request_page_form_place_of_birth_title": "Place of birth",
+  "ssi_information_request_page_form_date_of_birth_title": "Date of birth"
 }

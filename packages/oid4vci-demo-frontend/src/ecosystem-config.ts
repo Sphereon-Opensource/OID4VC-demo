@@ -2,6 +2,7 @@ import {ImageProperties, VCIEcosystem} from "./types";
 import dbc from "./configs/dbc.json";
 import energy_shr from "./configs/energy_shr.json";
 import fmdm from "./configs/fmdm.json";
+import notary from "./configs/notary.json";
 import sphereon from "./configs/sphereon.json";
 import triall from "./configs/triall.json";
 import {CSSProperties} from "react";
@@ -17,6 +18,8 @@ export function getCurrentEcosystem(): VCIEcosystem {
             return VCIEcosystem.triall;
         case VCIEcosystem.energy_shr:
             return VCIEcosystem.energy_shr;
+      case VCIEcosystem.notary:
+        return VCIEcosystem.notary;
         default:
             return VCIEcosystem.sphereon;
     }
@@ -38,12 +41,15 @@ export function getCurrentEcosystemConfig(): VCIConfig {
             return dbc as VCIConfig;
         case VCIEcosystem.energy_shr:
             return energy_shr as VCIConfig;
+      case VCIEcosystem.notary:
+            return notary as VCIConfig;
         default:
             return sphereon as VCIConfig;
     }
 }
 
 export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
+    console.log(getCurrentEcosystem())
     switch (getCurrentEcosystem()) {
         case VCIEcosystem.fmdm:
             return getEcosystemPageOrComponentConfig(pageOrComponent, fmdm as VCIConfig);
@@ -53,6 +59,8 @@ export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string
             return getEcosystemPageOrComponentConfig(pageOrComponent, triall as VCIConfig);
       case VCIEcosystem.energy_shr:
         return getEcosystemPageOrComponentConfig(pageOrComponent, energy_shr as VCIConfig);
+      case VCIEcosystem.notary:
+        return getEcosystemPageOrComponentConfig(pageOrComponent, notary as VCIConfig);
         default:
             return getEcosystemPageOrComponentConfig(pageOrComponent, sphereon as VCIConfig)
     }
@@ -109,7 +117,20 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     photoManual: string
     text_top_of_image: string
     sharing_data_right_pane_title: string
+    form?: DataFormRow[]
 }
+
+export type DataFormRow = DataFormElement[];
+
+export interface DataFormElement {
+  id: string;
+  title: string;
+  key: string;
+  type: DataFormInputType;
+  required: boolean;
+}
+
+type DataFormInputType = 'string' | 'date';
 
 export interface SSIDownloadPageConfig extends PageOrComponentConfig {
     rightPane: {
