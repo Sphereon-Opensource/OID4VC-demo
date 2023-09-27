@@ -3,12 +3,12 @@ import {
     CredentialDataSupplierArgs,
     CredentialDataSupplierResult
 } from "@sphereon/oid4vci-issuer"
-import {CredentialRequestJwtVcJson} from "@sphereon/oid4vci-common"
 import {TemplateVCGenerator} from "./template-manager"
 import {CONF_PATH} from "../index"
+import {CredentialRequestJwtVc} from "@sphereon/oid4vci-common"
 
 
-// TODO: Create generic supplier with template support.
+const templateVCGenerator = new TemplateVCGenerator()
 
 const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
     const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
@@ -97,104 +97,123 @@ const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: 
     } as unknown as CredentialDataSupplierResult)
 }
 
+const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'Sphereon'
+    const email = args.credentialDataSupplierInput?.email ?? 'sphereon@example.com'
 
-const templateVCGenerator = new TemplateVCGenerator()
-
-class TemplateCredentialDataSupplier {
-    private templateId: string
-
-    constructor(templateId: string) {
-        this.templateId = templateId
+    if (args.credentialRequest.format !== 'jwt_vc_json') {
+        throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
     }
 
-    public async generateCredentialData(args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> {
-        if (args.credentialRequest.format !== 'jwt_vc_json') {
-            throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
-        }
-
-        const templatePath = `${CONF_PATH}/templates/${this.templateId}.hbs`
-        const credential = templateVCGenerator.generateCredential(templatePath, args.credentialDataSupplierInput)
+    const request = args.credentialRequest as CredentialRequestJwtVc
+    if (request.types.includes('VerifiedEmployee')) {
         return Promise.resolve({
-            format: args.credentialRequest.format,
-            credential: credential
+            format: 'jwt_vc_json',
+            credential: {
+                '@context': ['https://www.w3.org/2018/credentials/v1'],
+                type: ['VerifiableCredential', 'VerifiedEmployee'],
+                expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
+                credentialSubject: {
+                    givenName: firstName,
+                    surname: lastName,
+                    mail: email,
+                    displayName: `${firstName} ${lastName}`,
+                    jobTitle: 'Chief Credential Issuer',
+                    preferredLanguage: 'en_US',
+                },
+            },
+        } as unknown as CredentialDataSupplierResult)
+    } else if (request.types.includes('MembershipExample')) {
+        return Promise.resolve({
+            format: 'jwt_vc_json',
+            credential: {
+                '@context': ['https://www.w3.org/2018/credentials/v1'],
+                type: ['VerifiableCredential', 'MembershipExample'],
+                expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
+                credentialSubject: {
+                    firstName,
+                    lastName,
+                    email,
+                    type: 'Membership Example',
+                },
+            },
+        } as unknown as CredentialDataSupplierResult)
+    } else {
+        return Promise.resolve({
+            format: 'jwt_vc_json',
+            credential: {
+                '@context': ['https://www.w3.org/2018/credentials/v1'],
+                type: ['VerifiableCredential', 'GuestCredential'],
+                expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
+                credentialSubject: {
+                    firstName,
+                    lastName,
+                    email,
+                    type: 'Sphereon Guest',
+                },
+            },
         } as unknown as CredentialDataSupplierResult)
     }
+    throw Error(`${JSON.stringify(request.types)} not supported by this issuer`)
 }
-
-/*  const request = args.credentialRequest as CredentialRequestJwtVcJson
-  if (request.types.includes('VerifiedEmployee')) {
-      return Promise.resolve({
-          format: 'jwt_vc_json',
-          credential: {
-              '@context': ['https://www.w3.org/2018/credentials/v1'],
-              type: ['VerifiableCredential', 'VerifiedEmployee'],
-              expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
-              credentialSubject: {
-                  givenName: firstName,
-                  surname: lastName,
-                  mail: email,
-                  displayName: `${firstName} ${lastName}`,
-                  jobTitle: 'Chief Credential Issuer',
-                  preferredLanguage: 'en_US',
-              },
-          },
-      } as unknown as CredentialDataSupplierResult)
-  } else if (request.types.includes('MembershipExample')) {
-      return Promise.resolve({
-          format: 'jwt_vc_json',
-          credential: {
-              '@context': ['https://www.w3.org/2018/credentials/v1'],
-              type: ['VerifiableCredential', 'MembershipExample'],
-              expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
-              credentialSubject: {
-                  firstName,
-                  lastName,
-                  email,
-                  type: 'Membership Example',
-              },
-          },
-      } as unknown as CredentialDataSupplierResult)
-  } else {
-      return Promise.resolve({
-          format: 'jwt_vc_json',
-          credential: {
-              '@context': ['https://www.w3.org/2018/credentials/v1'],
-              type: ['VerifiableCredential', 'GuestCredential'],
-              expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
-              credentialSubject: {
-                  firstName,
-                  lastName,
-                  email,
-                  type: 'Sphereon Guest',
-              },
-          },
-      } as unknown as CredentialDataSupplierResult)
-  }
-
-  */
 
 export const allCredentialDataSupliers: Record<string, CredentialDataSupplier> = {
     'https://ssi.dutchblockchaincoalition.org/issuer': credentialDataSupplierDBCConference2023,
     'http://localhost:5000/niels': credentialDataSupplierDBCConference2023
 }
 
-export function getCredentialDataSupplier(id: string): CredentialDataSupplier {
 
-    // Yes we really need to create templates, so we do not have to use this hardcoding
-    let supplier = allCredentialDataSupliers[id]
-    if (typeof supplier !== 'function') {
-        if (id.match(/(future)|(fma2023)|(fmdm2023)/)) {
-            supplier = credentialDataSupplierFMAGuest2023
-        } else if (id.match(/(dbc)|(blockchain)/)) {
-            supplier = credentialDataSupplierDBCConference2023
-        } else if (id.match(/(triall)|(cix)/)) {
-            return credentialDataSupplierTriallGuest2023
-        } else if (id.match(/(energy)/)) {
-            return credentialDataSupplierEnergySHRGuest2023
-        } else {
-            const templateCredentialDataSupplier = new TemplateCredentialDataSupplier(id)
-            supplier = templateCredentialDataSupplier.generateCredentialData.bind(templateCredentialDataSupplier)
-        }
+export function getCredentialDataSupplier(issuerCorrelationId: string): CredentialDataSupplier {
+    const templateCredentialDataSupplier = new TemplateCredentialDataSupplier(issuerCorrelationId)
+    return templateCredentialDataSupplier.generateCredentialData.bind(templateCredentialDataSupplier)
+}
+
+class TemplateCredentialDataSupplier {
+    private readonly issuerCorrelationId: string
+
+    constructor(templateId: string) {
+        this.issuerCorrelationId = templateId
     }
-    return supplier
+
+    public async generateCredentialData(args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> {
+        console.log("generateCredentialData", args)
+        if (!args.templatePath) {
+            return this.selectHardCodedSupplier(this.issuerCorrelationId, args)
+        }
+
+        if (args.credentialRequest.format !== 'jwt_vc_json') {
+            throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
+        }
+
+        const templatePath = `${CONF_PATH}/${args.templatePath}`
+        const credential = templateVCGenerator.generateCredential(templatePath, args.credentialDataSupplierInput)
+        return Promise.resolve({
+            format: args.credentialRequest.format,
+            credential: credential
+        } as unknown as CredentialDataSupplierResult)
+    }
+
+    private selectHardCodedSupplier(issuerCorrelationId: string, args: CredentialDataSupplierArgs) {
+        let supplier = allCredentialDataSupliers[issuerCorrelationId]
+        if (typeof supplier !== 'function') {
+            switch (true) {
+                case /(future)|(fma2023)|(fmdm2023)/.test(issuerCorrelationId):
+                    supplier = credentialDataSupplierFMAGuest2023
+                    break
+                case /(dbc)|(blockchain)/.test(issuerCorrelationId):
+                    supplier = credentialDataSupplierDBCConference2023
+                    break
+                case /(triall)|(cix)/.test(issuerCorrelationId):
+                    supplier = credentialDataSupplierTriallGuest2023
+                    break
+                case /(energy)/.test(issuerCorrelationId):
+                    supplier = credentialDataSupplierEnergySHRGuest2023
+                    break
+                default:
+                    supplier = credentialDataSupplierSphereon
+            }
+        }
+        return supplier.call(this, args)
+    }
 }

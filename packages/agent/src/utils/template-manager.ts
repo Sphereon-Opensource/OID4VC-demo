@@ -1,12 +1,12 @@
 import {format} from 'date-fns'
-import * as Handlebars from 'handlebars'
+import Handlebars from 'handlebars'
 import fs from "fs"
 import {ICredential} from "@sphereon/ssi-types"
 
 export class TemplateVCGenerator {
     private readonly handlebars: typeof Handlebars
     private readonly timeFormatPattern: string
-    private template: HandlebarsTemplateDelegate
+    private template?: HandlebarsTemplateDelegate
     private lastTemplatePath?: string
 
     public constructor(timeFormatPattern?: string) {
@@ -24,7 +24,7 @@ export class TemplateVCGenerator {
         if (templatePath != this.lastTemplatePath) {
             this.loadTemplate(templatePath)
         }
-        return this.template(inputData)
+        return this.template!(inputData)
     }
 
     private loadTemplate(templatePath: string) {
