@@ -104,7 +104,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    height: '70%'
+                    height: '60%'
                 }}>
                     <Text style={{textAlign: 'center'}}
                           className={style.pReduceLineSpace}
@@ -113,26 +113,25 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '55%',
-                        marginBottom: '15%',
-                        marginTop: '15%'
+                        height: '70%',
+                        marginBottom: '25%',
+                        marginTop: '25%'
                     }}>
-                        <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
+                        <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
                             {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
                                                        onSignInComplete={onSignInComplete}
                                                        setQrCodeData={setDeepLink}/>}
                         </div>
                         <DeepLink style={{flexGrow: 1}} link={deepLink}/>
+                        <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                              lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
                     </div>
-                    <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                          lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
                     <div style={{
-                        width: '20%',
-                        alignSelf: 'flex-end'
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}>
                         <SSIPrimaryButton
                             caption={t('credential_verify_request_right_pane_button_caption')}
-                            style={{width: 200}}
                             onClick={async () => {
                                 navigate('/information/request');
                             }}

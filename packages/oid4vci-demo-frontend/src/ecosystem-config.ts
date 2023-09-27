@@ -157,6 +157,16 @@ export interface SSILandingPageConfig extends PageOrComponentConfig {
     }
 }
 
+export interface SSISelectCredentialPageConfig extends PageOrComponentConfig {
+    logo: ImageProperties,
+    styles: {
+        mainContainer: {
+            backgroundColor: string
+            textGradient: string
+        },
+    }
+}
+
 export interface SSICardConfig extends PageOrComponentConfig {
 }
 
@@ -186,6 +196,7 @@ export interface SSIPrimaryButtonConfig extends PageOrComponentConfig {
 export interface SSISecondaryButtonConfig extends PageOrComponentConfig {
     styles: {
         mainContainer: {
+            backgroundColor?: string
             color: string
         }
     }
@@ -194,6 +205,7 @@ export interface SSISecondaryButtonConfig extends PageOrComponentConfig {
 export interface EcosystemGeneralConfig {
     baseUrl?: string
     verifierUrl?: string
+    backCaption?: string
     verifierUrlCaption?: string
     downloadUrl?: string
     credentialName: string
@@ -211,6 +223,7 @@ export interface VCIConfigPages {
     SSICredentialIssueRequestPage: SSICredentialIssueRequestPageConfig
     SSIInformationRequestPage: SSIInformationRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
+    SSISelectCredentialPage: SSISelectCredentialPageConfig
 }
 
 export interface VCIConfigComponents {

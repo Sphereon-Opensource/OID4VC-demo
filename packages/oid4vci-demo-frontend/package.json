@@ -26,8 +26,10 @@
     "react-responsive": "^9.0.2",
     "react-router": "^6.16.0",
     "react-router-dom": "^6.16.0",
+    "react-indiana-drag-scroll": "^2.2.0",
     "react-scripts": "5.0.1",
-    "short-uuid": "^4.2.2"
+    "short-uuid": "^4.2.2",
+    "swiper": "^9.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -38,7 +40,7 @@
     "@types/node": "^16.18.54",
     "@types/react": "^18.2.23",
     "@types/react-dom": "^18.2.7",
-    "typescript": "^4.9.5"
+    "typescript": "4.9.5"
   },
   "scripts": {
     "start:dev": "react-scripts start",

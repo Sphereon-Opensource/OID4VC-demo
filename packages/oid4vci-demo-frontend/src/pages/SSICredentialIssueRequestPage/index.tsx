@@ -1,17 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React, {ReactElement, useEffect, useState} from 'react'
 import {Text} from "../../components/Text";
 import style from '../../components/Text/Text.module.css'
 import {useTranslation} from "react-i18next";
 import {useLocation, useNavigate} from 'react-router-dom';
 import agent from '../../agent';
 import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator';
-import SSISecondaryButton from '../../components/SSISecondaryButton';
 import {
     EcosystemGeneralConfig,
     getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
-    SSICredentialIssueRequestPageConfig,
-    SSISecondaryButtonConfig
+    SSICredentialIssueRequestPageConfig
 } from "../../ecosystem-config";
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
@@ -28,12 +26,10 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const navigate = useNavigate();
     const config: SSICredentialIssueRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssueRequestPage') as SSICredentialIssueRequestPageConfig
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
-    const buttonConfig = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const location = useLocation();
     const state: State | undefined = location.state;
-    const [qrCode, setQrCode] = useState<JSX.Element>();
-
+    const [qrCode, setQrCode] = useState<ReactElement>();
 
     useEffect(() => {
         const intervalId = setInterval(() => {

@@ -130,6 +130,20 @@
           "buttonType": "primary"
         }
       }
+    },
+    "SSISelectCredentialPage": {
+      "logo": {
+        "src": "wallets/sphereon_logo.svg",
+        "alt": "sphereon.com",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#202537",
+          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
+        }
+      }
     }
   },
   "components": {

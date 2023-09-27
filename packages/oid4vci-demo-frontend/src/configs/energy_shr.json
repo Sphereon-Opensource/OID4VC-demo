@@ -133,6 +133,20 @@
           "buttonType": "primary"
         }
       }
+    },
+    "SSISelectCredentialPage": {
+      "logo": {
+        "src": "energyshr/energyshr_logo.svg",
+        "alt": "energyshr",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#48A5ED",
+          "textGradient": "linear-gradient(166deg, #09EC83 0%, #03C069 100%)"
+        }
+      }
     }
   },
   "components": {
