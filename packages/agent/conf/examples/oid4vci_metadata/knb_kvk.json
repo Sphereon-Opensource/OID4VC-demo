@@ -14,8 +14,8 @@
       {
         "display": [
           {
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "name": "KVK Credential",
+            "description": "KVK Credential",
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
@@ -29,8 +29,8 @@
           },
           {
             "locale": "en-US",
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "name": "KVK Credential",
+            "description": "KVK Credential",
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
@@ -44,8 +44,8 @@
           },
           {
             "locale": "nl-NL",
-            "name": "Conferentie Deelnemer",
-            "description": "De DBC Conferentie Deelnemer credential wordt uitgegeven aan alle bezoekers van de DBC conferentie.",
+            "name": "KVK Credential",
+            "description": "KVK Credential",
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {

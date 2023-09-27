@@ -14,8 +14,8 @@
       {
         "display": [
           {
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "name": "Company information by Notary",
+            "description": "Company information by Notary",
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
@@ -29,8 +29,8 @@
           },
           {
             "locale": "en-US",
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "name": "Company information by Notary",
+            "description": "Company information by Notary",
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
@@ -44,8 +44,8 @@
           },
           {
             "locale": "nl-NL",
-            "name": "Conferentie Deelnemer",
-            "description": "De DBC Conferentie Deelnemer credential wordt uitgegeven aan alle bezoekers van de DBC conferentie.",
+            "name": "Bedrijfsinformatie door Notaris",
+            "description": "Bedrijfsinformatie door Notaris",
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
