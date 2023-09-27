@@ -1,0 +1,168 @@
+{
+  "correlationId": "https://ssi.dutchblockchaincoalition.org/issuer",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://ssi.dutchblockchaincoalition.org/issuer",
+    "credential_endpoint": "https://ssi.dutchblockchaincoalition.org/issuer/credentials",
+    "display": [
+      {
+        "name": "Kamer van koophandel",
+        "description": "Kamer van koophandel Issuer"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Conference Attendee",
+            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/kvk_logo.png",
+              "alt_text": "KVK logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/kvk_bg.png",
+              "alt_text": "Crops background"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Conference Attendee",
+            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/kvk_logo.png",
+              "alt_text": "KVK logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/kvk_bg.png",
+              "alt_text": "Crops background"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Conferentie Deelnemer",
+            "description": "De DBC Conferentie Deelnemer credential wordt uitgegeven aan alle bezoekers van de DBC conferentie.",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/kvk_logo.png",
+              "alt_text": "KVK logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/kvk_bg.png",
+              "alt_text": "Crops background"
+            }
+          }
+        ],
+        "order": [
+          "description",
+          "issuerName",
+          "companyName",
+          "kvkNumber",
+          "location"
+        ],
+        "credentialSubject": {
+          "description": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Description"
+              },
+              {
+                "name": "Description",
+                "locale": "en-US"
+              },
+              {
+                "name": "Beschrijving",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "issuerName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "IssuerName"
+              },
+              {
+                "name": "IssuerName",
+                "locale": "en-US"
+              },
+              {
+                "name": "NaamVanDeUitgever",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "companyName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "CompanyName"
+              },
+              {
+                "name": "CompanyName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Bedrijfsnaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "kvkNumber": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "KVKNumber"
+              },
+              {
+                "name": "KVKNumber",
+                "locale": "en-US"
+              },
+              {
+                "name": "KVKNummer",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "location": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Location"
+              },
+              {
+                "name": "Location",
+                "locale": "en-US"
+              },
+              {
+                "name": "Plaats",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "Kvk2023",
+        "types": [
+          "VerifiableCredential",
+          "DBCConferenceAttendee"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      }
+    ]
+  }
+}
