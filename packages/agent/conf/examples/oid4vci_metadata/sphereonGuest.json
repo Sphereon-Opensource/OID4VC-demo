@@ -1,9 +1,9 @@
 {
-  "correlationId": "http://192.168.2.90:5000/sphereonGuest",
+  "correlationId": "http://maarten.home.sphereon.com:5000/sphereonGuest",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://192.168.2.90:5000/sphereonGuest",
-    "credential_endpoint": "http://192.168.2.90:5000/sphereonGuest/credentials",
+    "credential_issuer": "http://maarten.home.sphereon.com:5000/sphereonGuest",
+    "credential_endpoint": "http://maarten.home.sphereon.com:5000/sphereonGuest/credentials",
     "display": [
       {
         "name": "Sphereon International",

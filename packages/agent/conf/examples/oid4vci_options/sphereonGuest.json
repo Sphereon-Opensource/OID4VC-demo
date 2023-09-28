@@ -1,6 +1,6 @@
 {
   "definitionId": "sphereonGuest",
-  "correlationId": "http://192.168.2.90:5000/sphereonGuest",
+  "correlationId": "http://maarten.home.sphereon.com:5000/sphereonGuest",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

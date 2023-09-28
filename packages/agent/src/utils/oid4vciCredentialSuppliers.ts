@@ -3,9 +3,9 @@ import {
     CredentialDataSupplierArgs,
     CredentialDataSupplierResult
 } from "@sphereon/oid4vci-issuer"
-import {TemplateVCGenerator} from "./template-manager"
+import {TemplateVCGenerator} from "./templateManager"
 import {getTypesFromRequest} from "@sphereon/oid4vci-common"
-import {CONF_PATH} from "../environment"
+import {CONF_PATH, CredentialSupplierConfigWithTemplateSupport} from "../environment"
 
 
 const templateVCGenerator = new TemplateVCGenerator()
@@ -172,17 +172,16 @@ const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: 
     } as unknown as CredentialDataSupplierResult)
 }
 
-const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
+const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {
     const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
     const lastName = args.credentialDataSupplierInput?.lastName ?? 'Sphereon'
     const email = args.credentialDataSupplierInput?.email ?? 'sphereon@example.com'
 
-    if (args.credentialRequest.format !== 'jwt_vc_json') {
-        throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
-    }
-
     const types = getTypesFromRequest(args.credentialRequest)
     if (types.includes('VerifiedEmployee')) {
+        if (args.credentialRequest.format !== 'jwt_vc_json') {
+            throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
+        }
         return Promise.resolve({
             format: args.credentialRequest.format,
             credential: {
@@ -200,6 +199,9 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
             },
         } as unknown as CredentialDataSupplierResult)
     } else if (types.includes('MembershipExample')) {
+        if (args.credentialRequest.format !== 'jwt_vc_json') {
+            throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
+        }
         return Promise.resolve({
             format: args.credentialRequest.format,
             credential: {
@@ -215,7 +217,13 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
             },
         } as unknown as CredentialDataSupplierResult)
     } else {
-        return Promise.resolve({
+/*
+        //  We have a template for this one now
+        if (args.credentialRequest.format !== 'jwt_vc_json') {
+            throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
+        }
+
+        const r = {
             format: 'jwt_vc_json',
             credential: {
                 '@context': ['https://www.w3.org/2018/credentials/v1'],
@@ -228,9 +236,10 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                     type: 'Sphereon Guest',
                 },
             },
-        } as unknown as CredentialDataSupplierResult)
+        } as unknown as CredentialDataSupplierResult
+*/
+        return Promise.resolve({} as unknown as CredentialDataSupplierResult)
     }
-    throw Error(`${JSON.stringify(types)} not supported by this issuer`)
 }
 
 const supplierByType = async (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {
@@ -253,29 +262,39 @@ export function getCredentialDataSupplier(issuerCorrelationId: string): Credenti
 class TemplateCredentialDataSupplier {
     private readonly issuerCorrelationId: string
 
-    constructor(templateId: string) {
-        this.issuerCorrelationId = templateId
+    constructor(correlationId: string) {
+        this.issuerCorrelationId = correlationId
     }
 
     public async generateCredentialData(args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> {
-        console.log("generateCredentialData", args)
-        if (!args.templatePath) {
-            return this.selectHardCodedSupplier(this.issuerCorrelationId, args)
+        const hardCodedSupplierResult = await this.getHardCodedSupplierCredential(this.issuerCorrelationId, args)
+        if (hardCodedSupplierResult.credential) {
+            return Promise.resolve(hardCodedSupplierResult)
         }
 
-        if (args.credentialRequest.format !== 'jwt_vc_json') {
-            throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
+        const types: string[] = getTypesFromRequest(args.credentialRequest)
+        const credentialSupplierConfig = args.credentialSupplierConfig as CredentialSupplierConfigWithTemplateSupport
+        if (credentialSupplierConfig.template_mappings) {
+            const templateMapping = credentialSupplierConfig.template_mappings
+                .find(mapping => mapping.credential_types.some(type => types.includes(type)))
+            if (templateMapping) {
+                const templatePath = `${CONF_PATH}/${credentialSupplierConfig.templates_base_dir}/${templateMapping.template_path}`
+                const credential = templateVCGenerator.generateCredential(templatePath, args.credentialDataSupplierInput)
+                if(!credential) {
+                    throw new Error(`Credential generation failed for template ${templatePath}`)
+                }
+                return Promise.resolve({
+                    format: templateMapping.format || args.credentialRequest.format,
+                    credential: credential
+                } as unknown as CredentialDataSupplierResult)
+            } else {
+                throw new Error(`No template mapping could be found for types ${types.join(', ')}`)
+            }
         }
-
-        const templatePath = `${CONF_PATH}/${args.templatePath}`
-        const credential = templateVCGenerator.generateCredential(templatePath, args.credentialDataSupplierInput)
-        return Promise.resolve({
-            format: args.credentialRequest.format,
-            credential: credential
-        } as unknown as CredentialDataSupplierResult)
+        throw new Error(`No supplier credential be found for types ${types.join(', ')} and correlationId ${this.issuerCorrelationId}`)
     }
 
-    private selectHardCodedSupplier(issuerCorrelationId: string, args: CredentialDataSupplierArgs) {
+    private getHardCodedSupplierCredential(issuerCorrelationId: string, args: CredentialDataSupplierArgs) {
         let supplier: CredentialDataSupplier
         switch (true) {
             case /(future)|(fma2023)|(fmdm2023)/.test(issuerCorrelationId):

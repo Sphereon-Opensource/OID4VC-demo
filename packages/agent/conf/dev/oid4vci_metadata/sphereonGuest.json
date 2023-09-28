@@ -1,9 +1,9 @@
 {
-  "correlationId": "http://localhost:5001/sphereonGuest",
+  "correlationId": "http://maarten.home.sphereon.com:5000/sphereonGuest",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://localhost:5001/sphereonGuest",
-    "credential_endpoint": "http://localhost:5001/sphereonGuest/credentials",
+    "credential_issuer": "http://maarten.home.sphereon.com:5000/sphereonGuest",
+    "credential_endpoint": "http://maarten.home.sphereon.com:5000/sphereonGuest/credentials",
     "display": [
       {
         "name": "Sphereon International",
@@ -143,6 +143,19 @@
           "EdDSA"
         ]
       }
-    ]
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/sphereonGuest",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "GuestCredential"
+          ],
+          "template_path": "GuestCredential.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
   }
 }
+

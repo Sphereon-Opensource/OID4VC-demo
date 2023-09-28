@@ -1,4 +1,4 @@
-import {format} from 'date-fns'
+import {add, format} from 'date-fns'
 import Handlebars from 'handlebars'
 import fs from "fs"
 import {ICredential} from "@sphereon/ssi-types"
@@ -38,6 +38,9 @@ export class TemplateVCGenerator {
         this.handlebars.registerHelper('currentDateTime', () => {
             return format(new Date(), this.timeFormatPattern)
         })
+        this.handlebars.registerHelper('dateTimeAfterDays', (days: number) => {
+            return format(add(new Date(), {days: days}), this.timeFormatPattern)
+        })
 
 
         this.handlebars.registerHelper('collectionOf', function () {
@@ -47,4 +50,4 @@ export class TemplateVCGenerator {
     }
 }
 
-const defaultTimeFormat = (): string => "yyyy-MM-dd HH:mm:ss.SSS"
+const defaultTimeFormat = (): string => 'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'' // Default ISO string format for date-fns
