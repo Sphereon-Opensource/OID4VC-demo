@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://ssi.dutchblockchaincoalition.org/issuer",
+  "correlationId": "https://notary.demo.sphereon.com/issuer",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.dutchblockchaincoalition.org/issuer",
-    "credential_endpoint": "https://ssi.dutchblockchaincoalition.org/issuer/credentials",
+    "credential_issuer": "https://notary.demo.sphereon.com/issuer",
+    "credential_endpoint": "https://notary.demo.sphereon.com/issuer/credentials",
     "display": [
       {
         "name": "Van Auckland notaries",
@@ -19,11 +19,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
-              "url": "https://${issuer}/assets/images/icons/van_auckland_logo.png",
+              "url": "https://ibb.co/zmzgLjL",
               "alt_text": "Van Auckland notaries logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/van_auckland_card.png",
+              "url": "https://ibb.co/LgwRDFz",
               "alt_text": "Silver card background"
             }
           },
@@ -34,11 +34,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
-              "url": "https://${issuer}/assets/images/icons/van_auckland_logo.png",
+              "url": "https://ibb.co/zmzgLjL",
               "alt_text": "Van Auckland notaries logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/van_auckland_card.png",
+              "url": "https://ibb.co/LgwRDFz",
               "alt_text": "Silver card background"
             }
           },
@@ -49,21 +49,20 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
-              "url": "https://${issuer}/assets/images/icons/van_auckland_logo.png",
+              "url": "https://ibb.co/zmzgLjL",
               "alt_text": "Van Auckland notaries logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/van_auckland_card.png",
+              "url": "https://ibb.co/LgwRDFz",
               "alt_text": "Silver card background"
             }
           }
         ],
         "order": [
           "description",
-          "issuerName",
-          "companyName",
-          "kvkNumber",
-          "location"
+          "bedrijdsnaam",
+          "kvknummer",
+          "plaats"
         ],
         "credentialSubject": {
           "description": {
@@ -82,27 +81,11 @@
               }
             ]
           },
-          "issuerName": {
+          "bedrijdsnaam": {
             "value_type": "string",
             "display": [
               {
-                "name": "IssuerName"
-              },
-              {
-                "name": "IssuerName",
-                "locale": "en-US"
-              },
-              {
-                "name": "NaamVanDeUitgever",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "companyName": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "CompanyName"
+                "name": "Bedrijfsnaam"
               },
               {
                 "name": "CompanyName",
@@ -114,11 +97,11 @@
               }
             ]
           },
-          "kvkNumber": {
+          "kvknummer": {
             "value_type": "string",
             "display": [
               {
-                "name": "KVKNumber"
+                "name": "KVKNummer"
               },
               {
                 "name": "KVKNumber",
@@ -130,11 +113,11 @@
               }
             ]
           },
-          "location": {
+          "plaats": {
             "value_type": "string",
             "display": [
               {
-                "name": "Location"
+                "name": "Plaats"
               },
               {
                 "name": "Location",

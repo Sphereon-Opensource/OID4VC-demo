@@ -60,9 +60,9 @@
         ],
         "order": [
           "description",
-          "companyName",
-          "kvkNumber",
-          "location"
+          "bedrijdsnaam",
+          "kvknummer",
+          "plaats"
         ],
         "credentialSubject": {
           "description": {
@@ -81,11 +81,11 @@
               }
             ]
           },
-          "companyName": {
+          "bedrijdsnaam": {
             "value_type": "string",
             "display": [
               {
-                "name": "CompanyName"
+                "name": "Bedrijdsnaam"
               },
               {
                 "name": "CompanyName",
@@ -97,11 +97,11 @@
               }
             ]
           },
-          "kvkNumber": {
+          "kvknummer": {
             "value_type": "string",
             "display": [
               {
-                "name": "KVKNumber"
+                "name": "KVKNummer"
               },
               {
                 "name": "KVKNumber",
@@ -113,11 +113,11 @@
               }
             ]
           },
-          "location": {
+          "plaats": {
             "value_type": "string",
             "display": [
               {
-                "name": "Location"
+                "name": "Plaats"
               },
               {
                 "name": "Location",
