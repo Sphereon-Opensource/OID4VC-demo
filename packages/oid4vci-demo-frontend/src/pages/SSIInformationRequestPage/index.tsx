@@ -21,7 +21,7 @@ import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
-import {NonMobile} from "../../index";
+import {Mobile, NonMobile} from "../../index";
 import { extractRequiredKeys, transformDataToObject } from "../../utils/ObjectUtils";
 
 type Payload = Record<string, string>
@@ -223,7 +223,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             className={"poppins-normal-14"}
                             style={{maxWidth: 313, textAlign: 'center'}}
                         >
-                            {t('sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
+                            {t(config.sharing_data_right_pane_paragraph? config.sharing_data_right_pane_paragraph: 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
                         </text>
                     </div>
                     <div/>
@@ -368,6 +368,15 @@ const SSIInformationRequestPage: React.FC = () => {
                             }}
                         />
                     </div>
+                  {config.mobile?.logo && <Mobile>
+                    <img
+                        style={{marginTop: 116}}
+                        src={config.mobile.logo.src}
+                        alt={config.mobile.logo.alt}
+                        width={config.mobile.logo?.width ?? 150}
+                        height={config.mobile.logo?.height ?? 150}
+                    />
+                  </Mobile>}
                 </div>
             </div>
         </div>

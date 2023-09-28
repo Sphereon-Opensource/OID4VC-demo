@@ -117,7 +117,11 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     photoManual: string
     text_top_of_image: string
     sharing_data_right_pane_title: string
+    sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
+    mobile?: {
+      logo: ImageProperties
+    }
 }
 
 export type DataFormRow = DataFormElement[];

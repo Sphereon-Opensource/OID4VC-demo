@@ -29,6 +29,7 @@
   "sharing_data_manually_right_pane_button_caption": "Share",
   "sharing_data_right_pane_button_caption": "Next",
   "sharing_data_right_pane_paragraph": "Almost there!\n Please fill out any missing data.\r\nTo claim your {{credentialName}}\ncredential.",
+  "sharing_data_fill_out_right_pane_paragraph": "To get started, please provide us with your details",
   "sharing_data_right_pane_title": "Share your data",
   "manual_fill_data_right_pane_title": "Manually fill out details",
   "sharing_data_success_right_pane_button_caption": "Next",

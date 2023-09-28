@@ -1,11 +1,11 @@
-{
+  {
   "general": {
-    "credentialName": "Triall Guest",
-    "issueCredentialType": "triall2023",
-    "baseUrl": "https://ssi.triall.io/demo/issuer",
-    "verifierUrl": "https://cix.triall.io",
-    "verifierUrlCaption": "Clinical Insights Exchange",
-    "downloadUrl": "https://ssi.triall.io/demo/issuer/#/download"
+    "credentialName": "Notary credential",
+    "issueCredentialType": "notary2023",
+    "baseUrl": "https://ssi.sphereon.com/demo/notary/issuer",
+    "verifierUrl": "https://sphereon.com",
+    "verifierUrlCaption": "Notary credential",
+    "downloadUrl": "https://ssi.sphereon.com/demo/notary/issuer/#/download"
   },
   "pages": {
     "SSIDownloadPage": {
@@ -87,27 +87,28 @@
       }
     },
     "SSICredentialVerifyRequestPage": {
-      "photoLeft": "triall/guest_credential.svg",
-      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+      "photoLeft": "notary/guest_credential.svg",
+      "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
     },
     "SSICredentialIssuedSuccessPage": {
-      "photoLeft": "triall/guest_credential.svg",
-      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+      "photoLeft": "notary/guest_credential.svg",
+      "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
     },
     "SSIInformationSharedSuccessPage": {
-      "photoLeft": "triall/guest_credential.svg",
-      "photoLeftManual": "triall/guest_credential.svg",
+      "photoLeft": "notary/guest_credential.svg",
+      "photoLeftManual": "notary/guest_credential.svg",
       "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
     },
     "SSICredentialIssueRequestPage": {
-      "photoManual":"triall/guest_credential.svg",
-      "photoWallet":"triall/guest_credential.svg"
+      "photoManual":"notary/guest_credential.svg",
+      "photoWallet":"notary/guest_credential.svg"
     },
     "SSIInformationRequestPage": {
-      "photo":"triall/guest_credential.svg",
-      "photoManual":"triall/guest_credential.svg",
+      "photo":"notary/guest_credential.svg",
+      "photoManual":"notary/guest_credential.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
       "form": [
         [{
           "id": "ssi_information_request_page_form_company_name",
@@ -160,16 +161,24 @@
           "type": "date",
           "required": true
         }]
-      ]
+      ],
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 150,
+          "height": 150
+        }
+      }
     },
     "SSILandingPage": {
       "photoLeft": "triall/landing_manual_grey.svg",
       "photoRight": "triall/landing_wallet_grey.svg",
       "logo": {
-        "src": "triall/logo.svg",
-        "alt": "triall",
-        "width": 260,
-        "height": 55
+        "src": "notary/logo.svg",
+        "alt": "notary",
+        "width": 125,
+        "height": 125
       },
       "styles": {
         "mainContainer": {
