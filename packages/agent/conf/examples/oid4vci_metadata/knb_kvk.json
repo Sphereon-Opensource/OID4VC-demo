@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://ssi.dutchblockchaincoalition.org/issuer",
+  "correlationId": "https://kvk.demo.sphereon.com/issuer",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.dutchblockchaincoalition.org/issuer",
-    "credential_endpoint": "https://ssi.dutchblockchaincoalition.org/issuer/credentials",
+    "credential_issuer": "https://kvk.demo.sphereon.com/issuer",
+    "credential_endpoint": "https://kvk.demo.sphereon.com/issuer/credentials",
     "display": [
       {
         "name": "Kamer van koophandel",
@@ -19,11 +19,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://dutchblockchaincoalition.org/assets/images/icons/kvk_logo.png",
+              "url": "https://ibb.co/5Kjqr3j",
               "alt_text": "KVK logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/kvk_bg.png",
+              "url": "https://ibb.co/L6DR6L8",
               "alt_text": "Crops background"
             }
           },
@@ -34,11 +34,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://dutchblockchaincoalition.org/assets/images/icons/kvk_logo.png",
+              "url": "https://ibb.co/5Kjqr3j",
               "alt_text": "KVK logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/kvk_bg.png",
+              "url": "https://ibb.co/L6DR6L8",
               "alt_text": "Crops background"
             }
           },
@@ -49,18 +49,17 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://dutchblockchaincoalition.org/assets/images/icons/kvk_logo.png",
+              "url": "https://ibb.co/5Kjqr3j",
               "alt_text": "KVK logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/CHqjxrJ/kvk_bg.png",
+              "url": "https://ibb.co/L6DR6L8",
               "alt_text": "Crops background"
             }
           }
         ],
         "order": [
           "description",
-          "issuerName",
           "companyName",
           "kvkNumber",
           "location"
@@ -78,22 +77,6 @@
               },
               {
                 "name": "Beschrijving",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "issuerName": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "IssuerName"
-              },
-              {
-                "name": "IssuerName",
-                "locale": "en-US"
-              },
-              {
-                "name": "NaamVanDeUitgever",
                 "locale": "nl-NL"
               }
             ]
@@ -147,7 +130,7 @@
             ]
           }
         },
-        "id": "Kvk2023",
+        "id": "KVK2023",
         "types": [
           "VerifiableCredential",
           "DBCConferenceAttendee"
