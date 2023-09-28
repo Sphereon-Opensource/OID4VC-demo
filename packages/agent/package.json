@@ -18,9 +18,9 @@
   "dependencies": {
     "@sphereon/did-auth-siop": "0.3.2-unstable.10",
     "@sphereon/did-uni-client": "^0.6.0",
-    "@sphereon/oid4vci-common": "0.7.1-next.16",
-    "@sphereon/oid4vci-issuer": "0.7.1-next.16",
-    "@sphereon/oid4vci-issuer-server": "0.7.1-next.16",
+    "@sphereon/oid4vci-common": "0.7.1-next.26",
+    "@sphereon/oid4vci-issuer": "0.7.1-next.26",
+    "@sphereon/oid4vci-issuer-server": "0.7.1-next.26",
     "@sphereon/pex": "2.1.0",
     "@sphereon/pex-models": "^2.0.3",
     "@sphereon/react-native-argon2": "^2.0.9",

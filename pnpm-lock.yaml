@@ -14,10 +14,10 @@ overrides:
   '@sphereon/ssi-sdk-ext.key-utils': 0.14.1-next.6
   '@sphereon/ssi-sdk-ext.did-utils': 0.14.1-next.6
   '@sphereon/did-auth-siop': 0.3.2-unstable.11
-  '@sphereon/oid4vci-client': 0.7.1-next.16
-  '@sphereon/oid4vci-common': 0.7.1-next.16
-  '@sphereon/oid4vci-issuer': 0.7.1-next.16
-  '@sphereon/oid4vci-issuer-server': 0.7.1-next.16
+  '@sphereon/oid4vci-client': 0.7.1-next.26
+  '@sphereon/oid4vci-common': 0.7.1-next.26
+  '@sphereon/oid4vci-issuer': 0.7.1-next.26
+  '@sphereon/oid4vci-issuer-server': 0.7.1-next.26
   '@veramo/core': 4.2.0
   '@veramo/credential-w3c': 4.2.0
   '@veramo/data-store': 4.2.0
@@ -79,14 +79,14 @@ importers:
         specifier: ^0.6.0
         version: 0.6.0
       '@sphereon/oid4vci-common':
-        specifier: 0.7.1-next.16
-        version: 0.7.1-next.16
+        specifier: 0.7.1-next.26
+        version: 0.7.1-next.26
       '@sphereon/oid4vci-issuer':
-        specifier: 0.7.1-next.16
-        version: 0.7.1-next.16
+        specifier: 0.7.1-next.26
+        version: 0.7.1-next.26
       '@sphereon/oid4vci-issuer-server':
-        specifier: 0.7.1-next.16
-        version: 0.7.1-next.16(passport-http-bearer@1.0.1)
+        specifier: 0.7.1-next.26
+        version: 0.7.1-next.26(passport-http-bearer@1.0.1)
       '@sphereon/pex':
         specifier: 2.1.0
         version: 2.1.0
@@ -311,11 +311,11 @@ importers:
         specifier: 0.3.2-unstable.11
         version: 0.3.2-unstable.11
       '@sphereon/oid4vci-client':
-        specifier: 0.7.1-next.16
-        version: 0.7.1-next.16
+        specifier: 0.7.1-next.26
+        version: 0.7.1-next.26
       '@sphereon/oid4vci-common':
-        specifier: 0.7.1-next.16
-        version: 0.7.1-next.16
+        specifier: 0.7.1-next.26
+        version: 0.7.1-next.26
       '@sphereon/ssi-sdk.data-store':
         specifier: 0.15.2-next.118
         version: 0.15.2-next.118(sqlite3@5.1.6)(ts-node@10.9.1)
@@ -912,7 +912,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.23.0
-      '@babel/helper-environment-visitor': 7.22.5
+      '@babel/helper-environment-visitor': 7.22.20
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/helper-remap-async-to-generator': 7.22.17(@babel/core@7.23.0)
       '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.23.0)
@@ -4221,7 +4221,7 @@ packages:
     peerDependencies:
       '@babel/preset-env': ^7.1.6
     dependencies:
-      '@babel/parser': 7.22.16
+      '@babel/parser': 7.23.0
       '@babel/preset-env': 7.22.15(@babel/core@7.23.0)
       flow-parser: 0.206.0
       jscodeshift: 0.14.0(@babel/preset-env@7.22.15)
@@ -4497,11 +4497,11 @@ packages:
       webcrypto-shim: 0.1.7
     dev: false
 
-  /@sphereon/oid4vci-client@0.7.1-next.16:
-    resolution: {integrity: sha512-iIqCwxQCSWQduQ0kHPhVMVOtXmVw+C/zv+bbumXKZ6aW3iJXQPkJXpSWTRT04AEpnGqSIJhHbV++TfPwnAiUFw==}
+  /@sphereon/oid4vci-client@0.7.1-next.26:
+    resolution: {integrity: sha512-xxDvL5n4pFmwgg/rRh41uBJqcKG5XgNyn/lPDOim7rNnO1zW3AHNyQl9YhiL7M2a7LUQyC0aKk8rebhCJzr0Ig==}
     engines: {node: '>=16'}
     dependencies:
-      '@sphereon/oid4vci-common': 0.7.1-next.16
+      '@sphereon/oid4vci-common': 0.7.1-next.26
       '@sphereon/ssi-types': 0.15.2-next.118
       cross-fetch: 3.1.8
       debug: 4.3.4(supports-color@5.5.0)
@@ -4510,8 +4510,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/oid4vci-common@0.7.1-next.16:
-    resolution: {integrity: sha512-nfn6qNhjm+FJJnxbPbmdvy4DJKeQtPXV1MKWFUxWlTEz8awCO21lEPV4ZH95sknC2d0iSq7cly2kNPvNTztCYg==}
+  /@sphereon/oid4vci-common@0.7.1-next.26:
+    resolution: {integrity: sha512-hguddpBANlq6pnXHl2/XdMuA6lfdcWs2TJeLuBrSlokedi04ADlUF6Lv0uL7Egzr/SIsgbJ1eVd5kTRoOGrSOg==}
     engines: {node: '>=16'}
     dependencies:
       '@sphereon/ssi-types': 0.15.2-next.118
@@ -4521,12 +4521,12 @@ packages:
       - encoding
     dev: false
 
-  /@sphereon/oid4vci-issuer-server@0.7.1-next.16(passport-http-bearer@1.0.1):
-    resolution: {integrity: sha512-iAkMu3PODvqB0mivjwXx4j8GtrqnF6jsQ6HHEoIbCZZnN/6hfGjC0bOizJ+9SLHAUe8hukfmr+7A6PpB4eMe3Q==}
+  /@sphereon/oid4vci-issuer-server@0.7.1-next.26(passport-http-bearer@1.0.1):
+    resolution: {integrity: sha512-uE0iHBFCfVf9aVL7swpKeP+i1YZmLhDG7EQmTtsx+Lv1lkUv2sohVJJYdRyjpfTPRoOxA2/nYfrSVp7LUZIEFg==}
     engines: {node: '>=16'}
     dependencies:
-      '@sphereon/oid4vci-common': 0.7.1-next.16
-      '@sphereon/oid4vci-issuer': 0.7.1-next.16
+      '@sphereon/oid4vci-common': 0.7.1-next.26
+      '@sphereon/oid4vci-issuer': 0.7.1-next.26
       '@sphereon/ssi-express-support': 0.15.1(passport-http-bearer@1.0.1)
       '@sphereon/ssi-types': 0.15.2-next.118
       body-parser: 1.20.2
@@ -4544,11 +4544,11 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/oid4vci-issuer@0.7.1-next.16:
-    resolution: {integrity: sha512-jJ8sp8qUBjJhTxEXn4CshYNBLGvmI84g/3QpGFeKsBh1Xf52dHPB1xtI7MhakKwhUehxl0hO0MUiAtAOhdzgvg==}
+  /@sphereon/oid4vci-issuer@0.7.1-next.26:
+    resolution: {integrity: sha512-CPiFu91VNMJUwwWyvXZX8vhdBV8Aisf35Uo91iP7wRlMbWLYB1ooNRa67C1zXS0v75aE8WAitbEoURyIQDyQ8g==}
     engines: {node: '>=16'}
     dependencies:
-      '@sphereon/oid4vci-common': 0.7.1-next.16
+      '@sphereon/oid4vci-common': 0.7.1-next.26
       '@sphereon/ssi-types': 0.15.2-next.118
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -4889,9 +4889,9 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer-rest-api@0.15.2-next.97(expo-crypto@12.6.0)(expo@49.0.10)(msrcrypto@1.5.8)(passport-http-bearer@1.0.1)(react-native-securerandom@1.0.1)(react-native@0.72.4)(sqlite3@5.1.6)(ts-node@10.9.1):
     resolution: {integrity: sha512-bVahMg/jVwMeBe6b7u0twVhgo6SzHnwLdX6T0tqmj5A2MN7g+KtXfEmGb4UDmDtwQFgY7NBiCQ6FnYVftwvF6w==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.7.1-next.16
-      '@sphereon/oid4vci-issuer': 0.7.1-next.16
-      '@sphereon/oid4vci-issuer-server': 0.7.1-next.16(passport-http-bearer@1.0.1)
+      '@sphereon/oid4vci-common': 0.7.1-next.26
+      '@sphereon/oid4vci-issuer': 0.7.1-next.26
+      '@sphereon/oid4vci-issuer-server': 0.7.1-next.26(passport-http-bearer@1.0.1)
       '@sphereon/ssi-express-support': 0.15.2-next.97(@noble/hashes@1.3.2)(passport-http-bearer@1.0.1)
       '@sphereon/ssi-sdk.kv-store-temp': 0.15.2-next.97(sqlite3@5.1.6)(ts-node@10.9.1)
       '@sphereon/ssi-sdk.oid4vci-issuer': 0.15.2-next.97(expo-crypto@12.6.0)(expo@49.0.10)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.72.4)(sqlite3@5.1.6)(ts-node@10.9.1)
@@ -4942,7 +4942,7 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer-rest-client@0.15.2-next.118:
     resolution: {integrity: sha512-qb4vvkxBsXRYTNZC365/aSZo5HC/inRb19cUPycO5Z32uZeKtSZwoXLkuftVAIu0oQ6cyHpnReWZl4PsRj3fVw==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.7.1-next.16
+      '@sphereon/oid4vci-common': 0.7.1-next.26
       '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
       cross-fetch: 3.1.8
     transitivePeerDependencies:
@@ -4953,7 +4953,7 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer-store@0.15.2-next.97(expo-crypto@12.6.0)(expo@49.0.10)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.72.4)(sqlite3@5.1.6)(ts-node@10.9.1):
     resolution: {integrity: sha512-eyTAcbNfqehtzemTrVuPRaVqgUMyg0oxNRkdt4wuJolSPWuFIokxAaP+rmXzGTrLOe+Kx3RTC24Ik5mu10b1nQ==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.7.1-next.16
+      '@sphereon/oid4vci-common': 0.7.1-next.26
       '@sphereon/ssi-sdk-ext.did-utils': 0.14.1-next.6(expo-crypto@12.6.0)(expo@49.0.10)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)
       '@sphereon/ssi-sdk.kv-store-temp': 0.15.2-next.97(sqlite3@5.1.6)(ts-node@10.9.1)
       '@types/uuid': 9.0.4
@@ -4992,8 +4992,8 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer@0.15.2-next.97(expo-crypto@12.6.0)(expo@49.0.10)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.72.4)(sqlite3@5.1.6)(ts-node@10.9.1):
     resolution: {integrity: sha512-ENSIzpjrdVu45fhUyOJpsUAiEU2Admtx2mmONtUeS1ZD8HVXOA8uJUaBgT3k9DDHa7GQXKkyK+fNvQUaTnAb6Q==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.7.1-next.16
-      '@sphereon/oid4vci-issuer': 0.7.1-next.16
+      '@sphereon/oid4vci-common': 0.7.1-next.26
+      '@sphereon/oid4vci-issuer': 0.7.1-next.26
       '@sphereon/ssi-sdk-ext.did-utils': 0.14.1-next.6(expo-crypto@12.6.0)(expo@49.0.10)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)
       '@sphereon/ssi-sdk.core': 0.15.2-next.118
       '@sphereon/ssi-sdk.kv-store-temp': 0.15.2-next.97(sqlite3@5.1.6)(ts-node@10.9.1)
@@ -13634,7 +13634,7 @@ packages:
       '@babel/preset-env': ^7.1.6
     dependencies:
       '@babel/core': 7.23.0
-      '@babel/parser': 7.22.16
+      '@babel/parser': 7.23.0
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.23.0)
       '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6(@babel/core@7.23.0)
       '@babel/plugin-proposal-optional-chaining': 7.21.0(@babel/core@7.23.0)
@@ -14849,8 +14849,8 @@ packages:
     resolution: {integrity: sha512-Prhx7PeRV1LuogT0Kn5VjCuFu9fVD68eefntdWabrksmNY6mXK8pRqzvNJOhTojh6nek+RxBzZeD6MIOOyXS6w==}
     engines: {node: '>=16'}
     dependencies:
-      '@babel/traverse': 7.22.19(supports-color@5.5.0)
-      '@babel/types': 7.22.19
+      '@babel/traverse': 7.23.0
+      '@babel/types': 7.23.0
       invariant: 2.2.4
       metro-symbolicate: 0.76.7
       nullthrows: 1.1.1
@@ -14865,8 +14865,8 @@ packages:
     resolution: {integrity: sha512-Hh0ncPsHPVf6wXQSqJqB3K9Zbudht4aUtNpNXYXSxH+pteWqGAXnjtPsRAnCsCWl38wL0jYF0rJDdMajUI3BDw==}
     engines: {node: '>=16'}
     dependencies:
-      '@babel/traverse': 7.22.19(supports-color@5.5.0)
-      '@babel/types': 7.22.19
+      '@babel/traverse': 7.23.0
+      '@babel/types': 7.23.0
       invariant: 2.2.4
       metro-symbolicate: 0.76.8
       nullthrows: 1.1.1
@@ -14912,9 +14912,9 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@babel/core': 7.23.0
-      '@babel/generator': 7.22.15
+      '@babel/generator': 7.23.0
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.22.19(supports-color@5.5.0)
+      '@babel/traverse': 7.23.0
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - supports-color
@@ -14925,9 +14925,9 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@babel/core': 7.23.0
-      '@babel/generator': 7.22.15
-      '@babel/parser': 7.22.16
-      '@babel/types': 7.22.19
+      '@babel/generator': 7.23.0
+      '@babel/parser': 7.23.0
+      '@babel/types': 7.23.0
       babel-preset-fbjs: 3.4.0(@babel/core@7.23.0)
       metro: 0.76.7
       metro-babel-transformer: 0.76.7
@@ -14950,11 +14950,11 @@ packages:
     dependencies:
       '@babel/code-frame': 7.22.13
       '@babel/core': 7.23.0
-      '@babel/generator': 7.22.15
-      '@babel/parser': 7.22.16
+      '@babel/generator': 7.23.0
+      '@babel/parser': 7.23.0
       '@babel/template': 7.22.15
-      '@babel/traverse': 7.22.19(supports-color@5.5.0)
-      '@babel/types': 7.22.19
+      '@babel/traverse': 7.23.0
+      '@babel/types': 7.23.0
       accepts: 1.3.8
       async: 3.2.4
       chalk: 4.1.2

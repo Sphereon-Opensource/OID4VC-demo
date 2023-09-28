@@ -4,9 +4,9 @@
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
-    "@sphereon/did-auth-siop": "0.3.2-unstable.10",
-    "@sphereon/oid4vci-client": "0.7.1-next.16",
-    "@sphereon/oid4vci-common": "0.7.1-next.16",
+    "@sphereon/did-auth-siop": "0.3.2-unstable.11",
+    "@sphereon/oid4vci-client": "0.7.1-next.26",
+    "@sphereon/oid4vci-common": "0.7.1-next.26",
     "@sphereon/ssi-sdk.data-store": "0.15.2-next.118",
     "@sphereon/ssi-sdk.oid4vci-issuer-rest-client": "0.15.2-next.118",
     "@sphereon/ssi-sdk.qr-code-generator": "0.15.2-next.118",
