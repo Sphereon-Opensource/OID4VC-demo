@@ -141,21 +141,20 @@
           "ES256",
           "ES256K",
           "EdDSA"
-        ]
-      }
-    ],
-    "credential_supplier_config": {
-      "templates_base_dir": "templates/sphereonGuest",
-      "template_mappings": [
-        {
-          "credential_types": [
-            "GuestCredential"
-          ],
-          "template_path": "GuestCredential.hbs",
-          "format": "jwt_vc_json"
+        ],
+        "credential_supplier_config": {
+          "templates_base_dir": "templates/sphereonGuest",
+          "template_mappings": [
+            {
+              "credential_types": [
+                "GuestCredential"
+              ],
+              "template_path": "GuestCredential.hbs",
+              "format": "jwt_vc_json"
+            }
+          ]
         }
-      ]
-    }
+      }
+    ]
   }
 }
-
