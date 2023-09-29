@@ -216,8 +216,7 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 },
             },
         } as unknown as CredentialDataSupplierResult)
-    } else {
-/*
+    } /* else {
         //  We have a template for this one now
         if (args.credentialRequest.format !== 'jwt_vc_json') {
             throw Error(`Format ${args.credentialRequest.format} is not configured on this issuer`)
@@ -237,9 +236,8 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 },
             },
         } as unknown as CredentialDataSupplierResult
-*/
-        return Promise.resolve({} as unknown as CredentialDataSupplierResult)
-    }
+    } */
+    return Promise.resolve({} as unknown as CredentialDataSupplierResult) // return empty result so the code will start looking for templates
 }
 
 const supplierByType = async (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {
@@ -278,7 +276,8 @@ class TemplateCredentialDataSupplier {
             const templateMapping = credentialSupplierConfig.template_mappings
                 .find(mapping => mapping.credential_types.some(type => types.includes(type)))
             if (templateMapping) {
-                const templatePath = `${CONF_PATH}/${credentialSupplierConfig.templates_base_dir}/${templateMapping.template_path}`
+                const baseDir = credentialSupplierConfig?.templates_base_dir ? `/${credentialSupplierConfig.templates_base_dir}` : '';
+                const templatePath = `${CONF_PATH}${baseDir}/${templateMapping.template_path}`;
                 const credential = templateVCGenerator.generateCredential(templatePath, args.credentialDataSupplierInput)
                 if(!credential) {
                     throw new Error(`Credential generation failed for template ${templatePath}`)
