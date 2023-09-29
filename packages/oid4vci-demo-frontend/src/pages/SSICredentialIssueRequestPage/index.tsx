@@ -27,7 +27,7 @@ type State = {
 const SSICredentialIssueRequestPage: React.FC = () => {
     const navigate = useNavigate();
     const config: SSICredentialIssueRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssueRequestPage') as SSICredentialIssueRequestPageConfig
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
     const buttonConfig = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const location = useLocation();
