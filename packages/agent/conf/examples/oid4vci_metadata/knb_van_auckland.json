@@ -60,7 +60,7 @@
         ],
         "order": [
           "description",
-          "bedrijdsnaam",
+          "bedrijfsnaam",
           "kvknummer",
           "plaats"
         ],
@@ -81,7 +81,7 @@
               }
             ]
           },
-          "bedrijdsnaam": {
+          "bedrijfsnaam": {
             "value_type": "string",
             "display": [
               {
@@ -101,14 +101,14 @@
             "value_type": "string",
             "display": [
               {
-                "name": "KVKNummer"
+                "name": "KVK nummer"
               },
               {
-                "name": "KVKNumber",
+                "name": "COC Number",
                 "locale": "en-US"
               },
               {
-                "name": "KVKNummer",
+                "name": "KVK nummer",
                 "locale": "nl-NL"
               }
             ]
@@ -133,7 +133,7 @@
         "id": "VanAuckland2023",
         "types": [
           "VerifiableCredential",
-          "DBCConferenceAttendee"
+          "NotaryCompanyVerification"
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [

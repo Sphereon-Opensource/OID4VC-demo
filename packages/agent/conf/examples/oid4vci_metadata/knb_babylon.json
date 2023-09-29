@@ -60,7 +60,7 @@
         ],
         "order": [
           "description",
-          "bedrijdsnaam",
+          "bedrijfsnaam",
           "bankrekeningnummer",
           "kvknummer"
         ],
@@ -81,7 +81,7 @@
               }
             ]
           },
-          "bedrijdsnaam": {
+          "bedrijfsnaam": {
             "value_type": "string",
             "display": [
               {
@@ -101,14 +101,14 @@
             "value_type": "string",
             "display": [
               {
-                "name": "KVKNummer"
+                "name": "KVK nummer"
               },
               {
-                "name": "KVKNumber",
+                "name": "COC Number",
                 "locale": "en-US"
               },
               {
-                "name": "KVKNummer",
+                "name": "KVK nummer",
                 "locale": "nl-NL"
               }
             ]
