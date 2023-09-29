@@ -1,9 +1,0 @@
-{
-  "definitionId": "sphereonGuest",
-  "correlationId": "http://maarten.home.sphereon.com:5000/sphereonGuest",
-  "issuerOpts": {
-    "didOpts": {
-      "checkLinkedDomains": "if_present"
-    }
-  }
-}
