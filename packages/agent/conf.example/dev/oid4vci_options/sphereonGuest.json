@@ -1,0 +1,9 @@
+{
+  "definitionId": "sphereonGuest",
+  "correlationId": "http://<internet available host>:5000/sphereonGuest",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}
