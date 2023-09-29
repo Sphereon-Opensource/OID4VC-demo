@@ -22,5 +22,6 @@ export enum VCIEcosystem {
   sphereon = 'sphereon',
   fmdm = 'fmdm',
   triall = 'triall',
-  energy_shr = 'energy_shr'
+  energy_shr = 'energy_shr',
+  notary = 'notary'
 }

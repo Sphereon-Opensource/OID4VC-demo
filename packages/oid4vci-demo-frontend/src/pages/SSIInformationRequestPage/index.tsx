@@ -12,25 +12,50 @@ import {
 
 import '../../css/typography.css'
 import {
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSIInformationRequestPageConfig
+  DataFormRow,
+  getCurrentEcosystemGeneralConfig,
+  getCurrentEcosystemPageOrComponentConfig,
+  SSIInformationRequestPageConfig
 } from "../../ecosystem-config";
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
-import {NonMobile} from "../../index";
+import {Mobile, NonMobile} from "../../index";
+import { extractRequiredKeys, transformDataToObject } from "../../utils/ObjectUtils";
 
-interface Payload {
-    firstName?: string
-    lastName?: string
-    emailAddress?: string
-}
+type Payload = Record<string, string>
 
 type State = {
     data?: any
     isManualIdentification?: boolean
+}
+
+function getInitialState(form: DataFormRow[] | undefined) {
+  if (!form) {
+    return {
+      firstName: '',
+      lastName: '',
+      emailAddress: ''
+    }
+  }
+  return form.flat().reduce((acc, field) => {
+    acc[field.key] = '';
+    return acc;
+  }, {} as Record<string, string>);
+}
+
+function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
+  let requiredFields = ['firstName', 'lastName', 'email']
+  if (form) {
+    requiredFields = extractRequiredKeys(form)
+  }
+  for (let field of requiredFields) {
+    if (!payload[field] || payload[field].toString().trim() === '') {
+      return false;
+    }
+  }
+  return true;
 }
 
 const SSIInformationRequestPage: React.FC = () => {
@@ -39,11 +64,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const location = useLocation();
     const state: State | undefined = location.state;
     const {t} = useTranslation()
-    const [payload, setPayload] = useState<Payload>({
-        firstName: '',
-        lastName: '',
-        emailAddress: ''
-    })
+    const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
 
@@ -80,16 +101,19 @@ const SSIInformationRequestPage: React.FC = () => {
         const decodeBase64 = async (jwt: string, kid?: string): Promise<any> => {
             return JSON.parse(Buffer.from(jwt.split('.')[1], 'base64').toString())
         }
-        const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims): Payload => {
-            if (!cs.firstName && !cs.lastName && !cs.emailAddress) {
-                return {}
-            }
+        const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims, form?: DataFormRow[]): Payload => {
+            if (!form) {
+                if (!cs.firstName && !cs.lastName && !cs.emailAddress) {
+                    return {} as Record<string, string>;
+                }
 
-            return {
-                firstName: cs.firstName,
-                lastName: cs.lastName,
-                emailAddress: cs.emailAddress
+                return {
+                    firstName: cs.firstName,
+                    lastName: cs.lastName,
+                    emailAddress: cs.emailAddress
+                } as Record<string, string>;
             }
+            return transformDataToObject(form)
         }
 
         const handleCredential = async (vc: W3CVerifiableCredential): Promise<Payload[]> => {
@@ -103,9 +127,9 @@ const SSIInformationRequestPage: React.FC = () => {
                 return []
             }
             if (Array.isArray(verifiableCredential.credentialSubject)) {
-                return verifiableCredential.credentialSubject.flatMap(handleCredentialSubject)
+              return (verifiableCredential.credentialSubject as (ICredentialSubject & AdditionalClaims)[]).map(cs => handleCredentialSubject(cs, config.form));
             }
-            return [handleCredentialSubject(verifiableCredential.credentialSubject)]
+            return [handleCredentialSubject(verifiableCredential.credentialSubject, config.form)]
         }
 
         const handleVP = async (vp: W3CVerifiablePresentation): Promise<Payload[]> => {
@@ -199,82 +223,140 @@ const SSIInformationRequestPage: React.FC = () => {
                             className={"poppins-normal-14"}
                             style={{maxWidth: 313, textAlign: 'center'}}
                         >
-                            {t('sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
+                            {t(config.sharing_data_right_pane_paragraph? config.sharing_data_right_pane_paragraph: 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
                         </text>
                     </div>
                     <div/>
+                  {config.form && (
+                      <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            textAlign: 'left',
+                            width: '327px',
+                            paddingTop: '48px',
+                            paddingBottom: '48px',
+                            gap: 23,
+                          }}
+                      >
+                        {config.form.map((row) => {
+                          const fieldWidth = 100 / row.length;
+                          return (
+                              <div
+                                  style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    gap: 12,
+                                  }}
+                              >
+                                {row.map((field) => (
+                                    <div
+                                        key={field.id}
+                                        style={{
+                                          display: 'flex',
+                                          flexDirection: 'column',
+                                          gap: 6,
+                                          width: `${fieldWidth}%`
+                                        }}
+                                    >
+                                      <label className="poppins-normal-10" htmlFor={field.id}>
+                                        {t(field.title)}
+                                      </label>
+                                      <input
+                                          id={field.id}
+                                          type={field.type === 'date' ? 'date' : field.type || 'text'}
+                                          style={{ width: '100%' }}
+                                          readOnly={!!payload[field.key] && !!state?.data?.vp_token}
+                                          className={`${!!payload[field.key] && !!state?.data?.vp_token ? '' : inputStyle.enabled}`}
+                                          defaultValue={payload[field.key]}
+                                          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                              setPayload((prevPayload) => ({
+                                                ...prevPayload,
+                                                [field.key]: event.target.value,
+                                              }))
+                                          }
+                                      />
+                                    </div>
+                                ))}
+                              </div>
+                          );
+                        })}
+                      </div>
+                  )}
+
+                  {!config.form && <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    textAlign: 'left',
+                    width: '327px',
+                    height: isManualIdentification ? '40%' : '186px',
+                    gap: 23
+                  }}>
                     <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        textAlign: 'left',
-                        width: '327px',
-                        height: isManualIdentification ? '40%' : '186px',
-                        gap: 23
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6
                     }}>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 6
-                        }}>
-                            <label className='poppins-normal-10' htmlFor="firstName">First name</label>
-                            <input
-                                id="firstName"
-                                type="text"
-                                placeholder='First name'
-                                readOnly={!!payload.firstName && !!state?.data?.vp_token}
-                                className={`${(!!payload.firstName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                                defaultValue={payload.firstName}
-                                onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
-                                    ...payload,
-                                    firstName: event.target.value
-                                })}
-                            />
-                        </div>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 6
-                        }}>
-                            <label className='poppins-normal-10' htmlFor="lastName">Last name</label>
-                            <input
-                                id="lastName"
-                                type="text"
-                                placeholder='Last name'
-                                readOnly={!!payload?.lastName && !!state?.data?.vp_token}
-                                className={`${(!!payload.lastName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                                defaultValue={payload.lastName}
-                                onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
-                                    ...payload,
-                                    lastName: event.target.value
-                                })}
-                            />
-                        </div>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 6
-                        }}>
-                            <label className='poppins-normal-10' htmlFor="email">Email address</label>
-                            <input
-                                style={{...(isInvalidEmail && {borderColor: 'red'})}}
-                                id="email"
-                                type="email"
-                                placeholder='Email address'
-                                readOnly={!!payload?.emailAddress && !!state?.data?.vp_token}
-                                className={`${(!!payload.emailAddress && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                                defaultValue={payload.emailAddress}
-                                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                    setIsInvalidEmail(false)
-                                    setPayload({...payload, emailAddress: event.target.value})
-                                }}
-                                onBlur={onEmailValidation}
-                            />
-                        </div>
+                      <label className='poppins-normal-10' htmlFor="firstName">First name</label>
+                      <input
+                          id="firstName"
+                          type="text"
+                          placeholder='First name'
+                          readOnly={!!payload.firstName && !!state?.data?.vp_token}
+                          className={`${(!!payload.firstName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
+                          defaultValue={payload.firstName}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
+                            ...payload,
+                            firstName: event.target.value
+                          })}
+                      />
                     </div>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6
+                    }}>
+                      <label className='poppins-normal-10' htmlFor="lastName">Last name</label>
+                      <input
+                          id="lastName"
+                          type="text"
+                          placeholder='Last name'
+                          readOnly={!!payload?.lastName && !!state?.data?.vp_token}
+                          className={`${(!!payload.lastName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
+                          defaultValue={payload.lastName}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
+                            ...payload,
+                            lastName: event.target.value
+                          })}
+                      />
+                    </div>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6
+                    }}>
+                      <label className='poppins-normal-10' htmlFor="email">Email address</label>
+                      <input
+                          style={{...(isInvalidEmail && {borderColor: 'red'})}}
+                          id="email"
+                          type="email"
+                          placeholder='Email address'
+                          readOnly={!!payload?.emailAddress && !!state?.data?.vp_token}
+                          className={`${(!!payload.emailAddress && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
+                          defaultValue={payload.emailAddress}
+                          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            setIsInvalidEmail(false)
+                            setPayload({...payload, emailAddress: event.target.value})
+                          }}
+                          onBlur={onEmailValidation}
+                      />
+                    </div>
+                  </div>}
                     <div>
                         <SSIPrimaryButton
                             caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
                             style={{width: 327}}
+                            disabled={!isPayloadValid(payload, config.form)}
                             onClick={async () => {
 
                                 const state = {
@@ -286,6 +368,15 @@ const SSIInformationRequestPage: React.FC = () => {
                             }}
                         />
                     </div>
+                  {config.mobile?.logo && <Mobile>
+                    <img
+                        style={{marginTop: 116}}
+                        src={config.mobile.logo.src}
+                        alt={config.mobile.logo.alt}
+                        width={config.mobile.logo?.width ?? 150}
+                        height={config.mobile.logo?.height ?? 150}
+                    />
+                  </Mobile>}
                 </div>
             </div>
         </div>
