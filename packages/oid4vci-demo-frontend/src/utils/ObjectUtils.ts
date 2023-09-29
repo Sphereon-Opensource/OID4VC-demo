@@ -11,7 +11,7 @@ export const extractRequiredKeys = (data: DataFormRow[]): string[] => {
   );
 };
 
-export const transformDataToObject = (data: DataFormRow[]): Record<string, string> => {
+export const transformFormConfigToEmptyObject = (data: DataFormRow[]): Record<string, string> => {
   const keyValuePairs = data.flatMap(item => item.map(field => [field.key, '']));
   return Object.fromEntries(keyValuePairs);
 };
