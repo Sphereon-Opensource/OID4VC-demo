@@ -25,7 +25,7 @@ import {SphereonKeyManager} from '@sphereon/ssi-sdk-ext.key-manager'
 import {SecretBox} from '@veramo/kms-local'
 import {SphereonKeyManagementSystem} from '@sphereon/ssi-sdk-ext.kms-local'
 import {getDbConnection} from './database'
-import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
+import {ISIOPv2RP, SIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
 import {
@@ -113,8 +113,9 @@ const plugins: IAgentPlugin[] = [
         keyStore: privateKeyStore,
     }),
 ]
-const oid4vpRP = await createOID4VPRP({resolver});
+let oid4vpRP : SIOPv2RP | undefined
 if (IS_OID4VP_ENABLED) {
+    oid4vpRP = await createOID4VPRP({resolver});
     if (oid4vpRP) {
         plugins.push(oid4vpRP)
     }
