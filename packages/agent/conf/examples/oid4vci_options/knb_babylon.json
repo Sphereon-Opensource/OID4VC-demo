@@ -1,0 +1,9 @@
+{
+  "definitionId": "knb-babylon",
+  "correlationId": "https://babylon.demo.sphereon.com/issuer",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}
