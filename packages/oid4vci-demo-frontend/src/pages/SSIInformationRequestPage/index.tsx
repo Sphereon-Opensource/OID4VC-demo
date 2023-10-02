@@ -12,6 +12,7 @@ import {
 
 import '../../css/typography.css'
 import {
+  DataFormElement,
   DataFormRow,
   getCurrentEcosystemGeneralConfig,
   getCurrentEcosystemPageOrComponentConfig,
@@ -177,7 +178,30 @@ const SSIInformationRequestPage: React.FC = () => {
         }
     }, []);
 
-    return (
+  const generateFieldInput = (field: DataFormElement, readOnly: boolean) => (
+      <div key={field.id} style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
+        <label className="poppins-normal-10" htmlFor={field.id}>
+          {t(field.title)}
+        </label>
+        <input
+            id={field.id}
+            type={field.type === 'date' ? 'date' : field.type || 'text'}
+            style={{ width: '100%' }}
+            readOnly={readOnly}
+            className={readOnly ? '' : inputStyle.enabled}
+            defaultValue={payload[field.key]}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setPayload((prevPayload) => ({
+                  ...prevPayload,
+                  [field.key]: event.target.value,
+                }))
+            }
+        />
+      </div>
+  );
+
+
+  return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
                 <div id={"photo"} style={{
@@ -231,62 +255,41 @@ const SSIInformationRequestPage: React.FC = () => {
                         </text>
                     </div>
                     <div/>
-                  {config.form && (
-                      <div
-                          style={{
+                    {config.form && (
+                        <NonMobile>
+                          <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '327px', paddingTop: '48px', paddingBottom: '48px', gap: 23 }}>
+                            {config.form.map((row) => {
+                              const fieldWidth = 100 / row.length;
+                              return (
+                                  <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
+                                    {row.map((field) => (
+                                        <div style={{ width: `${fieldWidth}%` }}>
+                                          {generateFieldInput(field, !!state?.data?.vp_token)}
+                                        </div>
+                                    ))}
+                                  </div>
+                              );
+                            })}
+                          </div>
+                        </NonMobile>
+                    )}
+
+                    {config.form && (
+                        <Mobile>
+                          <div style={{
                             display: 'flex',
                             flexDirection: 'column',
                             textAlign: 'left',
                             width: '327px',
                             paddingTop: '48px',
                             paddingBottom: '48px',
-                            gap: 23,
+                            gap: 23
                           }}
-                      >
-                        {config.form.map((row) => {
-                          const fieldWidth = 100 / row.length;
-                          return (
-                              <div
-                                  style={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 12,
-                                  }}
-                              >
-                                {row.map((field) => (
-                                    <div
-                                        key={field.id}
-                                        style={{
-                                          display: 'flex',
-                                          flexDirection: 'column',
-                                          gap: 6,
-                                          width: `${fieldWidth}%`
-                                        }}
-                                    >
-                                      <label className="poppins-normal-10" htmlFor={field.id}>
-                                        {t(field.title)}
-                                      </label>
-                                      <input
-                                          id={field.id}
-                                          type={field.type === 'date' ? 'date' : field.type || 'text'}
-                                          style={{ width: '100%' }}
-                                          readOnly={!!payload[field.key] && !!state?.data?.vp_token}
-                                          className={`${!!payload[field.key] && !!state?.data?.vp_token ? '' : inputStyle.enabled}`}
-                                          defaultValue={payload[field.key]}
-                                          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                              setPayload((prevPayload) => ({
-                                                ...prevPayload,
-                                                [field.key]: event.target.value,
-                                              }))
-                                          }
-                                      />
-                                    </div>
-                                ))}
-                              </div>
-                          );
-                        })}
-                      </div>
-                  )}
+                          >
+                            {config.form.flatMap((row) => row).map((field) => generateFieldInput(field, !!state?.data?.vp_token))}
+                          </div>
+                        </Mobile>
+                    )}
 
                   {!config.form && <div style={{
                     display: 'flex',
