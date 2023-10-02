@@ -12,17 +12,20 @@ import {
 
 import '../../css/typography.css'
 import {
-  DataFormRow,
-  getCurrentEcosystemGeneralConfig,
-  getCurrentEcosystemPageOrComponentConfig,
-  SSIInformationRequestPageConfig
-} from "../../ecosystem-config";
+    DataFormRow, EcosystemGeneralConfig,
+    getCurrentEcosystemGeneralConfig,
+    getCurrentEcosystemPageOrComponentConfig,
+    SSIInformationRequestPageConfig
+} from "../../ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
 import {Mobile, NonMobile} from "../../index";
 import { extractRequiredKeys, transformFormConfigToEmptyObject } from "../../utils/ObjectUtils";
+import short from "short-uuid"
+import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
+import agent from "../../agent"
 
 type Payload = Record<string, string>
 
@@ -63,7 +66,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const {t} = useTranslation()
     const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
 
     const [isInvalidEmail, setIsInvalidEmail] = useState(false)
     const EMAIL_ADDRESS_VALIDATION_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -374,13 +377,33 @@ const SSIInformationRequestPage: React.FC = () => {
                             disabled={!isPayloadValid(payload, config.form)}
                             onClick={async () => {
 
-                                const state = {
+                                /*const state = {
                                     ...payload,
                                     isManualIdentification
                                 }
+                                navigate('/information/success', {state});
+*/
+                                const shortUuid = short.generate()
+                                const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
+                                    grants: {
+                                        'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
+                                            'pre-authorized_code': shortUuid,
+                                            user_pin_required: false,
+                                        },
+                                    },
+                                    credentialDataSupplierInput: {
+                                        ...payload
+                                    },
+                                    credentials: [generalConfig.issueCredentialType],
+                                })
 
-                                //navigate('/information/success', {state});
-                                navigate('/credentials/issue/request', {state}); // For notary demo skip where
+                                const qrState = {
+                                    uri:  uriData.uri,
+                                    preAuthCode: shortUuid,
+                                    isManualIdentification: state?.isManualIdentification,
+                                };
+
+                                navigate('/credentials/issue/request', {state: qrState});
                             }}
                         />
                     </div>
