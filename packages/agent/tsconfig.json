@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "declaration": true,
     "baseUrl": "./",
-    "outDir": "./dist",
+    "outDir": "dist",
     "declarationMap": true,
     "esModuleInterop": true,
     /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
@@ -34,15 +34,8 @@
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
     "preserveConstEnums": true,
     "composite": true,
-    "rootDir": "./src"
+    "rootDir": "src"
   },
   "include": ["./src/**/*"],
-  "exclude": ["**/__tests__/**/*", "./dist/**/*", "**/.yalc/**/*"],
-  "references": [
-  ]
- /* // other settings...
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  }*/
+  "exclude": ["**/__tests__/**/*", "./dist/**/*", "**/.yalc/**/*"]
 }

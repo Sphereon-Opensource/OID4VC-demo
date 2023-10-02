@@ -8,7 +8,7 @@ import {
     OID4VP_DEFINITIONS,
     OID4VPInstanceOpts,
     oid4vpInstanceOpts
-} from "../index";
+} from "../environment";
 import {CheckLinkedDomain} from "@sphereon/did-auth-siop";
 import {Resolvable} from "did-resolver";
 
@@ -22,7 +22,7 @@ function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definiti
         if (opt.rpOpts && !opt.rpOpts.didOpts?.resolveOpts) {
             if (!opt.rpOpts.didOpts) {
                 // @ts-ignore
-                opt.rpOpts.didOpts = {resolveOpts: {resolver: opts?.resolver ?? createDidResolver()}}
+                opt.rpOpts.didOpts = {}
             }
             opt.rpOpts.didOpts.resolveOpts = {...opt.rpOpts.didOpts.resolveOpts}
             if (!opt.rpOpts.didOpts.resolveOpts.resolver) {
@@ -57,7 +57,7 @@ export async function getDefaultOID4VPRPOptions(args?: {
     if (!identifier) {
         return
     }
-    const resolver = args?.resolver ?? createDidResolver()
+    const resolver = args?.resolver  ?? createDidResolver()
     return {
         didOpts: {
             resolveOpts: {
