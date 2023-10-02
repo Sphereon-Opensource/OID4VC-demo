@@ -379,7 +379,8 @@ const SSIInformationRequestPage: React.FC = () => {
                                     isManualIdentification
                                 }
 
-                                navigate('/information/success', {state});
+                                //navigate('/information/success', {state});
+                                navigate('/credentials/issue/request', {state}); // For notary demo skip where
                             }}
                         />
                     </div>

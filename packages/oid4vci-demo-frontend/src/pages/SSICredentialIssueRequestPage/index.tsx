@@ -9,8 +9,8 @@ import {
     EcosystemGeneralConfig,
     getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
-    SSICredentialIssueRequestPageConfig
-} from "../../ecosystem-config";
+    SSICredentialIssueRequestPageConfig, SSISecondaryButtonConfig
+} from "../../ecosystem-config"
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
 import { NonMobile } from '../..';

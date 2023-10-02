@@ -1,7 +1,6 @@
 import {IDIDManagerCreateArgs, IIdentifier} from "@veramo/core";
 import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth";
 import {CredentialIssuerMetadataOpts, CredentialSupplierConfig} from "@sphereon/oid4vci-common"
-import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth";
 
 export enum KMS {
     LOCAL = 'local',

@@ -4,8 +4,8 @@
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
-    "@sphereon/oid4vci-client": "0.7.3",
-    "@sphereon/oid4vci-common": "0.7.3",
+    "@sphereon/oid4vci-client": "0.7.4-next.3",
+    "@sphereon/oid4vci-common": "0.7.4-next.3",
     "@sphereon/did-auth-siop": "0.4.2",
     "@sphereon/ssi-sdk.data-store": "0.17.5",
     "@sphereon/ssi-sdk.oid4vci-issuer-rest-client": "0.17.5",
