@@ -210,7 +210,7 @@ const SSIInformationRequestPage: React.FC = () => {
                     height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    ...((config.photo || config.photoManual) && { backgroundSize: 'cover', background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`})`}),
+                    ...((config.photo || config.photoManual) && { background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`}) 0% 0% / cover`}),
                     ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
                     ...(config.logo && { justifyContent: 'center' })
                 }}>
