@@ -5,6 +5,7 @@ import fmdm from "./configs/fmdm.json";
 import notary from "./configs/notary.json";
 import sphereon from "./configs/sphereon.json";
 import triall from "./configs/triall.json";
+import coc from "./configs/coc.json";
 import {CSSProperties} from "react";
 import {IProps} from "./components/SSISecondaryButton";
 
@@ -28,6 +29,8 @@ export function getCurrentEcosystemConfig(): VCIConfig {
       return notary as VCIConfig;
     case 'triall':
       return triall as VCIConfig;
+    case 'coc':
+      return coc as VCIConfig;
     default:
       return sphereon as VCIConfig;
   }
@@ -61,8 +64,10 @@ export interface PageOrComponentConfig {
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
-    photoLeft: string
+    photoLeft?: string
     photoRight: string
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
@@ -80,20 +85,25 @@ export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentCo
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConfig {
-    photoManual: string
-    photoWallet: string
+    photoManual?: string
+    photoWallet?: string
+    textLeft?: string
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
-    photo: string
-    photoManual: string
-    text_top_of_image: string
+    photo?: string
+    photoManual?: string
+    text_top_of_image?: string
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
     mobile?: {
       logo: ImageProperties
-    }
+    },
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export type DataFormRow = DataFormElement[];
