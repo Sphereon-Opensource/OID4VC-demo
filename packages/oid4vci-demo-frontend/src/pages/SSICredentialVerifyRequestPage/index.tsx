@@ -85,11 +85,19 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     display: 'flex',
                     width: '60%',
                     height: '100%',
-                    background: `url(${config.photoLeft})`,
-                    backgroundSize: 'cover',
-                    flexDirection: 'column'
+                    flexDirection: 'column',
+                    ...(config.photoLeft && { backgroundSize: 'cover', background: `url(${config.photoLeft})`}),
+                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
+                    ...(config.logo && { justifyContent: 'center', alignItems: 'center' })
                 }}>
-
+                    { config.logo &&
+                        <img
+                            src={config.logo.src}
+                            alt={config.logo.alt}
+                            width={config.logo.width}
+                            height={config.logo.height}
+                        />
+                    }
                 </div>
             </NonMobile>
             <div style={{

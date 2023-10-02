@@ -1,0 +1,179 @@
+{
+  "general": {
+    "credentialName": "Sphereon Guest",
+    "issueCredentialType": "GuestCredential",
+    "baseUrl": "https://ssi.sphereon.com/demo/issuer",
+    "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
+    "verifierUrlCaption": "Sphereon demo",
+    "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
+  },
+  "pages": {
+    "SSIDownloadPage": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "SSICredentialVerifyRequestPage": {
+      "photoRight": "undraw_messenger_re_8bky_1.svg",
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      }
+    },
+    "SSICredentialIssuedSuccessPage": {
+      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
+      "photoRight": "undraw_messenger_re_8bky_1.svg"
+    },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "image_4.svg",
+      "photoLeftManual": "image_4.svg",
+      "photoRight": "undraw_certification_re_ifll_1.svg"
+    },
+    "SSICredentialIssueRequestPage": {
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      }
+    },
+    "SSIInformationRequestPage": {
+      "sharing_data_right_pane_title": "sharing_data_right_pane_title",
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      }
+    },
+    "SSILandingPage": {
+      "photoLeft": "landing_manual.svg",
+      "photoRight": "landing_wallet.svg",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#202537"
+        },
+        "leftCardView": {
+          "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
+        },
+        "rightCardView": {
+          "textColor": "#303030",
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#FBFBFB",
+          "textColor": "#FBFBFB"
+        },
+        "secondaryButton": {
+          "backgroundColor": "#062058"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#005371"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#062058"
+        }
+      }
+    },
+    "Text": {}
+  }
+}
