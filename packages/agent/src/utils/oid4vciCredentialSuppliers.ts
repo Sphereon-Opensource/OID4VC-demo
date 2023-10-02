@@ -10,6 +10,7 @@ import {CONF_PATH, CredentialSupplierConfigWithTemplateSupport} from "../environ
 
 const templateVCGenerator = new TemplateVCGenerator()
 
+
 const credentialDataSupplierPermantResidentCard: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
     const firstName = args.credentialDataSupplierInput?.firstName ?? 'Jane'
     const lastName = args.credentialDataSupplierInput?.lastName ?? 'Doe'
