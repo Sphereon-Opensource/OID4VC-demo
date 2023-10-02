@@ -301,7 +301,7 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="firstName">First name</label>
+                      <label className='poppins-normal-10' htmlFor="firstName">{t('ssi_information_request_page_form_name_title')}</label>
                       <input
                           id="firstName"
                           type="text"
@@ -320,7 +320,7 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="lastName">Last name</label>
+                      <label className='poppins-normal-10' htmlFor="lastName">{t('ssi_information_request_page_form_last_name_title')}</label>
                       <input
                           id="lastName"
                           type="text"
@@ -339,7 +339,7 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="email">Email address</label>
+                      <label className='poppins-normal-10' htmlFor="email">{t('ssi_information_request_page_form_email_title')}</label>
                       <input
                           style={{...(isInvalidEmail && {borderColor: 'red'})}}
                           id="email"

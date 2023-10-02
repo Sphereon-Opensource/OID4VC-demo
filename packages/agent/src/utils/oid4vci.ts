@@ -6,9 +6,9 @@ import {
     IS_OID4VCI_ENABLED,
     oid4vciInstanceOpts,
     oid4vciMetadataOpts
-} from "../index";
+} from "../environment";
 import {IIssuerDefaultOpts, OID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
-import {Resolvable, Resolver} from "did-resolver";
+import {Resolvable} from "did-resolver";
 import {
     IIssuerInstanceOptions,
     IIssuerOptions,
@@ -54,8 +54,8 @@ export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string, reso
 export async function addDefaultsToOpts(issuerOpts: IIssuerOptions) {
     const defaultOpts = await getDefaultOID4VCIIssuerOptions({resolver: issuerOpts?.didOpts?.resolveOpts?.resolver})
     let identifierOpts = issuerOpts?.didOpts?.identifierOpts ?? defaultOpts?.didOpts.identifierOpts
-    let resolveOpts = issuerOpts.didOpts.resolveOpts ?? defaultOpts?.didOpts.resolveOpts
-    if (!issuerOpts.didOpts) {
+    let resolveOpts = issuerOpts?.didOpts.resolveOpts ?? defaultOpts?.didOpts.resolveOpts
+    if (!issuerOpts?.didOpts) {
         issuerOpts.didOpts = {
             identifierOpts,
             resolveOpts

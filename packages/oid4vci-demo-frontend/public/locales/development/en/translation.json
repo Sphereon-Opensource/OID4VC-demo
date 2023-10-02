@@ -39,6 +39,8 @@
   "sharing_data_success_get_mobile_app_message": "Get the Sphereon Wallet",
   "action_open_wallet_caption": "Open in wallet",
   "ssi_information_request_page_form_company_name_title": "Company name",
+  "ssi_information_request_page_form_name_title": "First name",
+  "ssi_information_request_page_form_email_title": "Email address",
   "ssi_information_request_page_form_coc_number_title": "CoC number",
   "ssi_information_request_page_form_company_location_title": "Location of company",
   "ssi_information_request_page_form_first_name_title": "First name director",
