@@ -22,7 +22,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
 import {Mobile, NonMobile} from "../../index";
-import { extractRequiredKeys, transformDataToObject } from "../../utils/ObjectUtils";
+import { extractRequiredKeys, transformFormConfigToEmptyObject } from "../../utils/ObjectUtils";
 
 type Payload = Record<string, string>
 
@@ -39,10 +39,7 @@ function getInitialState(form: DataFormRow[] | undefined) {
       emailAddress: ''
     }
   }
-  return form.flat().reduce((acc, field) => {
-    acc[field.key] = '';
-    return acc;
-  }, {} as Record<string, string>);
+  return transformFormConfigToEmptyObject(form)
 }
 
 function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
@@ -113,7 +110,14 @@ const SSIInformationRequestPage: React.FC = () => {
                     emailAddress: cs.emailAddress
                 } as Record<string, string>;
             }
-            return transformDataToObject(form)
+            const payload = transformFormConfigToEmptyObject(form);
+            for (const payloadKey in payload) {
+                if (payloadKey in cs) {
+                    // TODO: since this code is based on the manual flow, we have to revisit it for the wallet flow
+                    payload[payloadKey] = cs[payloadKey];
+                }
+            }
+            return payload;
         }
 
         const handleCredential = async (vc: W3CVerifiableCredential): Promise<Payload[]> => {

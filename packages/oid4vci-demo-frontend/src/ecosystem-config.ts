@@ -1,29 +1,6 @@
-import {ImageProperties, VCIEcosystem} from "./types";
-import dbc from "./configs/dbc.json";
-import energy_shr from "./configs/energy_shr.json";
-import fmdm from "./configs/fmdm.json";
-import notary from "./configs/notary.json";
-import sphereon from "./configs/sphereon.json";
-import triall from "./configs/triall.json";
+import {ImageProperties} from "./types";
 import {CSSProperties} from "react";
 import {IProps} from "./components/SSISecondaryButton";
-
-export function getCurrentEcosystem(): VCIEcosystem {
-    switch (process.env.REACT_APP_ENVIRONMENT) {
-        case VCIEcosystem.fmdm:
-            return VCIEcosystem.fmdm;
-        case VCIEcosystem.dbc:
-            return VCIEcosystem.dbc;
-        case VCIEcosystem.triall:
-            return VCIEcosystem.triall;
-        case VCIEcosystem.energy_shr:
-            return VCIEcosystem.energy_shr;
-      case VCIEcosystem.notary:
-        return VCIEcosystem.notary;
-        default:
-            return VCIEcosystem.sphereon;
-    }
-}
 
 interface VCIConfig {
     general: EcosystemGeneralConfig
@@ -32,38 +9,13 @@ interface VCIConfig {
 }
 
 export function getCurrentEcosystemConfig(): VCIConfig {
-    switch (getCurrentEcosystem()) {
-        case VCIEcosystem.triall:
-            return triall as VCIConfig;
-        case VCIEcosystem.fmdm:
-            return fmdm as VCIConfig;
-        case VCIEcosystem.dbc:
-            return dbc as VCIConfig;
-        case VCIEcosystem.energy_shr:
-            return energy_shr as VCIConfig;
-      case VCIEcosystem.notary:
-            return notary as VCIConfig;
-        default:
-            return sphereon as VCIConfig;
-    }
+  const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon';
+  return require(`./configs/${ecosystem}.json`);
 }
 
 export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
-    console.log(getCurrentEcosystem())
-    switch (getCurrentEcosystem()) {
-        case VCIEcosystem.fmdm:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, fmdm as VCIConfig);
-        case VCIEcosystem.dbc:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, dbc as VCIConfig);
-        case VCIEcosystem.triall:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, triall as VCIConfig);
-      case VCIEcosystem.energy_shr:
-        return getEcosystemPageOrComponentConfig(pageOrComponent, energy_shr as VCIConfig);
-      case VCIEcosystem.notary:
-        return getEcosystemPageOrComponentConfig(pageOrComponent, notary as VCIConfig);
-        default:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, sphereon as VCIConfig)
-    }
+    const config = getCurrentEcosystemConfig()
+    return getEcosystemPageOrComponentConfig(pageOrComponent, config);
 }
 
 export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
