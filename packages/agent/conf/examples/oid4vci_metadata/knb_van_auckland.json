@@ -19,11 +19,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
-              "url": "https://ibb.co/zmzgLjL",
+              "url": "https://i.ibb.co/K5JgQRQ/van-auckland-logo.png",
               "alt_text": "Van Auckland notaries logo"
             },
             "background_image": {
-              "url": "https://ibb.co/LgwRDFz",
+              "url": "https://i.ibb.co/VCy901W/van-auckland-card.png",
               "alt_text": "Silver card background"
             }
           },
@@ -34,11 +34,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
-              "url": "https://ibb.co/zmzgLjL",
+              "url": "https://i.ibb.co/K5JgQRQ/van-auckland-logo.png",
               "alt_text": "Van Auckland notaries logo"
             },
             "background_image": {
-              "url": "https://ibb.co/LgwRDFz",
+              "url": "https://i.ibb.co/VCy901W/van-auckland-card.png",
               "alt_text": "Silver card background"
             }
           },
@@ -49,11 +49,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#303030",
             "logo": {
-              "url": "https://ibb.co/zmzgLjL",
+              "url": "https://i.ibb.co/K5JgQRQ/van-auckland-logo.png",
               "alt_text": "Van Auckland notaries logo"
             },
             "background_image": {
-              "url": "https://ibb.co/LgwRDFz",
+              "url": "https://i.ibb.co/VCy901W/van-auckland-card.png",
               "alt_text": "Silver card background"
             }
           }
@@ -146,6 +146,18 @@
           "EdDSA"
         ]
       }
-    ]
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/auckland",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "NotaryCompanyVerification"
+          ],
+          "template_path": "NotaryCompanyVerification.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
   }
 }

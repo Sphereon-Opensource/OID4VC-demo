@@ -1,11 +1,11 @@
 {
   "general": {
     "credentialName": "Notary credential",
-    "issueCredentialType": "notary2023",
-    "baseUrl": "https://ssi.sphereon.com/demo/notary/issuer",
+    "issueCredentialType": "VanAuckland2023",
+    "baseUrl": "https://notary.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Notary credential",
-    "downloadUrl": "https://ssi.sphereon.com/demo/notary/issuer/#/download"
+    "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download"
   },
   "pages": {
     "SSIDownloadPage": {
@@ -107,14 +107,6 @@
     "SSICredentialIssuedSuccessPage": {
       "photoLeft": "notary/guest_credential.svg",
       "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
-    },
-    "SSIInformationSharedSuccessPage": {
-      "photoLeft": "notary/guest_credential.svg",
-      "photoLeftManual": "notary/guest_credential.svg",
-      "photoRight": "triall/undraw_certification_re_ifll_grey.svg",
-      "sharing_data_success_right_pane_title": "Congratulations!",
-      "sharing_data_success_right_pane_paragraph": "Your {{credentialName}} credential has been\nsuccessfully issued to you.\n\nYou can use it to verify your identity whenever you\ninteract with other parties.",
-      "sharing_data_success_right_pane_button_caption": "Ok"
     },
     "SSICredentialIssueRequestPage": {
       "photoManual": "notary/guest_credential.svg",
