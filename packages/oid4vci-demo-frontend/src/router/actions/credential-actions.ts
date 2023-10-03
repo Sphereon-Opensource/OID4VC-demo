@@ -1,7 +1,7 @@
 import short from "short-uuid"
 import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
-import agent from "../agent"
-import {getCurrentEcosystemGeneralConfig} from "../ecosystem-config"
+import agent from "../../agent"
+import {getCurrentEcosystemGeneralConfig} from "../../ecosystem-config"
 
 const generalConfig = getCurrentEcosystemGeneralConfig()
 

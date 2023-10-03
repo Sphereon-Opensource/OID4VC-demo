@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom"
 import short from "short-uuid"
 import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
 import agent from "../agent"
-import {createCredentialOffer} from "../actions/credential-actions"
+import {createCredentialOffer} from "./actions/credential-actions"
 
 
 export class Sequencer {
