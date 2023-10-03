@@ -215,19 +215,25 @@
     }
   },
   "sequence": [
-  {
-    "operation": "navigate",
-    "path": "/information/request"
-  },
-  {
-    "operation": "execute",
-    "action": "create-credential-offer"
-  },
-  {
-    "operation": "navigate",
-    "path": "/credentials/verify/request"
-  }
-],
+    {
+      "id": "infoRequest",
+      "operation": "navigate",
+      "path": "/information/request",
+      "nextId": "credentialOffer",
+      "isDefaultRoute": true
+    },
+    {
+      "id": "credentialOffer",
+      "operation": "execute",
+      "action": "create-credential-offer",
+      "nextId": "verifyRequest"
+    },
+    {
+      "id": "verifyRequest",
+      "operation": "navigate",
+      "path": "/credentials/verify/request"
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

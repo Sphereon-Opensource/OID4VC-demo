@@ -18,14 +18,12 @@ import {
     SSIInformationRequestPageConfig
 } from "../../ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
 import {Mobile, NonMobile} from "../../index";
 import { extractRequiredKeys, transformFormConfigToEmptyObject } from "../../utils/ObjectUtils";
-import short from "short-uuid"
-import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
-import agent from "../../agent"
+import {Sequencer} from "../../router/sequencer"
 
 type Payload = Record<string, string>
 
@@ -60,7 +58,7 @@ function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
 
 const SSIInformationRequestPage: React.FC = () => {
     const config: SSIInformationRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationRequestPage') as SSIInformationRequestPageConfig;
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation();
     const state: State | undefined = location.state;
     const {t} = useTranslation()
@@ -178,6 +176,7 @@ const SSIInformationRequestPage: React.FC = () => {
         if (state?.data?.vp_token) {
             processVPToken().catch(console.log)
         }
+        sequencer.setCurrentRoute(location.pathname)
     }, []);
 
     return (
@@ -376,34 +375,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, config.form)}
                             onClick={async () => {
-
-                                /*const state = {
-                                    ...payload,
-                                    isManualIdentification
-                                }
-                                navigate('/information/success', {state});
-*/
-                                const shortUuid = short.generate()
-                                const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
-                                    grants: {
-                                        'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
-                                            'pre-authorized_code': shortUuid,
-                                            user_pin_required: false,
-                                        },
-                                    },
-                                    credentialDataSupplierInput: {
-                                        ...payload
-                                    },
-                                    credentials: [generalConfig.issueCredentialType],
-                                })
-
-                                const qrState = {
-                                    uri:  uriData.uri,
-                                    preAuthCode: shortUuid,
-                                    isManualIdentification: state?.isManualIdentification,
-                                };
-
-                                navigate('/credentials/issue/request', {state: qrState});
+                                sequencer.next()
                             }}
                         />
                     </div>

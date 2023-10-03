@@ -38,6 +38,13 @@ function getEcosystemPageOrComponentConfig(pageOrComponent: string, config?: VCI
     throw new Error("config for this page/component doesn't exist")
 }
 
+export function getEcosystemSequenceConfig(config?: VCIConfig): VCIConfigSequence {
+    if (!config) {
+        config = getCurrentEcosystemConfig()
+    }
+    return config.sequence
+}
+
 export interface PageOrComponentConfig {
 }
 
@@ -212,11 +219,7 @@ export interface VCIConfigPages {
 }
 
 export interface VCIConfigSequence {
-
-}
-
-export interface VCIConfigSequence {
-    steps: VCINavigationStep | VCIExecuteStep[]
+    steps: VCIConfigSequenceStep[]
 }
 
 export enum VCIOperation {
@@ -228,7 +231,10 @@ export enum VCIAction {
 }
 
 export interface VCIConfigSequenceStep {
+    id: string
     operation: VCIOperation
+    nextId?: string
+    isDefaultRoute? : boolean
 }
 export interface VCINavigationStep extends VCIConfigSequenceStep {
     path: string
