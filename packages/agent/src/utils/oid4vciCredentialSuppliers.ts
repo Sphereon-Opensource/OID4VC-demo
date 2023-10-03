@@ -172,7 +172,7 @@ const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: 
     } as unknown as CredentialDataSupplierResult)
 }
 
-const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult | undefined> => {
+const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {
     const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
     const lastName = args.credentialDataSupplierInput?.lastName ?? 'Sphereon'
     const email = args.credentialDataSupplierInput?.email ?? 'sphereon@example.com'
