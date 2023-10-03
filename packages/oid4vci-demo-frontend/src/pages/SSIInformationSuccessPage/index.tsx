@@ -1,20 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react'
 import {Text} from '../../components/Text';
 import style from '../../components/Text/Text.module.css';
 import {Trans, useTranslation} from "react-i18next";
 import {useLocation, useNavigate} from 'react-router-dom';
 import SSIPrimaryButton from '../../components/SSIPrimaryButton';
-import agent from '../../agent';
-import {IOID4VCIClientCreateOfferUriResponse} from '@sphereon/ssi-sdk.oid4vci-issuer-rest-client';
-import {VCIEcosystem} from "../../types";
 import {
-    EcosystemGeneralConfig,
-    getCurrentEcosystem, getCurrentEcosystemGeneralConfig,
+    EcosystemGeneralConfig, getCurrentEcosystemConfig,
+    getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
     SSIInformationSharedSuccessPageConfig
-} from "../../ecosystem-config";
+} from "../../ecosystem-config"
 import {NonMobile} from '../..';
 import {useMediaQuery} from "react-responsive";
+import {Sequencer} from "../../router/sequencer"
 
 const short = require('short-uuid');
 
@@ -26,7 +24,7 @@ type State = {
 }
 
 const SSIInformationSuccessPage: React.FC = () => {
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
     const location = useLocation();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
@@ -101,31 +99,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={t('sharing_data_success_right_pane_button_caption')}
                             style={{width: '100%'}}
-                            onClick={async () => {
-                                const shortUuid = short.generate()
-                                const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
-                                    grants: {
-                                        'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
-                                            'pre-authorized_code': shortUuid,
-                                            user_pin_required: false,
-                                        },
-                                    },
-                                    credentialDataSupplierInput: {
-                                        firstName: state?.firstName,
-                                        lastName: state?.lastName,
-                                        email: state?.emailAddress,
-                                    },
-                                    credentials: [generalConfig.issueCredentialType],
-                                })
-
-                                const qrState = {
-                                    uri:  uriData.uri,
-                                    preAuthCode: shortUuid,
-                                    isManualIdentification: state?.isManualIdentification,
-                                };
-
-                                navigate('/credentials/issue/request', {state: qrState});
-                            }}
+                            onClick={async () => await sequencer.next()}
                         />
                     </div>
                 </div>

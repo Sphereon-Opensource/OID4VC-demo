@@ -17,6 +17,7 @@ import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useMediaQuery} from "react-responsive";
 import {NonMobile} from "../../index";
 import agent from "../../agent";
+import {Sequencer} from "../../router/sequencer"
 
 export interface QRCodePageProperties {
     setData: React.Dispatch<React.SetStateAction<AuthorizationResponsePayload | undefined>>
@@ -26,7 +27,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialVerifyRequestPage') as SSICredentialVerifyRequestPageConfig
     const {t} = useTranslation()
     const credentialName = getCurrentEcosystemGeneralConfig().credentialName
-    const navigate = useNavigate()
+    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const [qr, setQR] = useState<ReactElement>()
@@ -37,8 +38,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                 vp_token: data.vp_token
             }
         };
-
-        navigate('/information/request', {state});
+        sequencer.next(state)
     }
 
     const createQRCodeElement = (authRequestURIResponse: GenerateAuthRequestURIResponse): CreateElementArgs<QRType.URI, URIData> => {
@@ -141,7 +141,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         <SSIPrimaryButton
                             caption={t('credential_verify_request_right_pane_button_caption')}
                             onClick={async () => {
-                                navigate('/information/request');
+                                sequencer.goToStep('infoRequest');
                             }}
                         />
                     </div>

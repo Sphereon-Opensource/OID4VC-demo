@@ -13,17 +13,17 @@ import {Sequencer} from "../../router/sequencer"
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()
-    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
     const location = useLocation();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const onManualIdentificationClick = async (): Promise<void> => {
         const params = {isManualIdentification: true}
-        sequencer.goToStep('infoRequest', params as NavigateOptions)
+        await sequencer.goToStep('infoRequest', params as NavigateOptions)
     }
 
     const onWalletIdentificationClick = async (): Promise<void> => {
-        sequencer.goToStep('verifyRequest')
+        await sequencer.goToStep('verifyRequest')
     }
 
     const config = getCurrentEcosystemPageOrComponentConfig('SSILandingPage') as SSILandingPageConfig

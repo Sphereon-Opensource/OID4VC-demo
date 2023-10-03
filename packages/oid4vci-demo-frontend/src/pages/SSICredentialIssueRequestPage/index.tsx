@@ -15,6 +15,7 @@ import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
 import { NonMobile } from '../..';
 import {useMediaQuery} from "react-responsive";
+import {Sequencer} from "../../router/sequencer"
 
 type State = {
     uri: string,
@@ -23,7 +24,7 @@ type State = {
 }
 
 const SSICredentialIssueRequestPage: React.FC = () => {
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
     const config: SSICredentialIssueRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssueRequestPage') as SSICredentialIssueRequestPageConfig
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
     const buttonConfig = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
@@ -38,7 +39,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 .then((status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
-                        navigate({pathname: '/credentials/issue/success'});
+                        sequencer.next()
                     } else if (status.status === IssueStatus.ERROR) {
                         // TODO: Add feedback to user
                         console.error(status.error)

@@ -1,5 +1,5 @@
 import React, {FunctionComponent, ReactElement, useState} from 'react'
-import {Routes, Route, HashRouter} from 'react-router-dom'
+import {Routes, Route, HashRouter, useNavigate} from 'react-router-dom'
 import SSICredentialIssueRequestPage from '../pages/SSICredentialIssueRequestPage'
 
 import SSICredentialVerifyRequestPage from '../pages/SSICredentialVerifyRequestPage'
@@ -16,16 +16,16 @@ export const pageMap: Record<string, any> = {
     '/start': SSILandingPage,
     '/information/request': SSIInformationRequestPage,
     '/information/success': SSIInformationSuccessPage,
-    '/information/select-credential': SSISelectCredentialPage,
+    '/credentials/select': SSISelectCredentialPage,
     '/credentials/verify/request': SSICredentialVerifyRequestPage,
     '/credentials/issue/request': SSICredentialIssueRequestPage,
     '/credentials/issue/success': SSICredentialIssuedSuccessPage,
     '/download': SSIDownloadPage
 }
 
-const [sequencer] = useState<Sequencer>(new Sequencer())
 
 const AppRouter: React.FC = () => {
+    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
     const defaultRoute = sequencer.getDefaultRoute()
     return (
         <HashRouter>

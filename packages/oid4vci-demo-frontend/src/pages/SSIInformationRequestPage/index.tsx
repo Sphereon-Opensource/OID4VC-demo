@@ -18,7 +18,7 @@ import {
     SSIInformationRequestPageConfig
 } from "../../ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom"
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
 import {Mobile, NonMobile} from "../../index";
@@ -58,14 +58,13 @@ function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
 
 const SSIInformationRequestPage: React.FC = () => {
     const config: SSIInformationRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationRequestPage') as SSIInformationRequestPageConfig;
-    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
     const location = useLocation();
     const state: State | undefined = location.state;
     const {t} = useTranslation()
     const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
-
+    getCurrentEcosystemGeneralConfig()
     const [isInvalidEmail, setIsInvalidEmail] = useState(false)
     const EMAIL_ADDRESS_VALIDATION_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     // Manually is only when all of them need to be filled by the user
@@ -374,9 +373,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, config.form)}
-                            onClick={async () => {
-                                sequencer.next()
-                            }}
+                            onClick={async () => await sequencer.next()}
                         />
                     </div>
                   {config.mobile?.logo && <Mobile>
