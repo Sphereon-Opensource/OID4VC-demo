@@ -44,9 +44,6 @@ export class TemplateVCGenerator {
         this.handlebars.registerHelper('dateTimeAfterMonths', (months: number) => {
             return format(add(new Date(), {months}), this.timeFormatPattern)
         })
-        this.handlebars.registerHelper('dateTimeAfterMonths', (months: number) => {
-            return format(add(new Date(), {months}), this.timeFormatPattern)
-        })
         this.handlebars.registerHelper('toJSON', (obj) => JSON.stringify(obj));
 
         this.handlebars.registerHelper('collectionOf', function () {
