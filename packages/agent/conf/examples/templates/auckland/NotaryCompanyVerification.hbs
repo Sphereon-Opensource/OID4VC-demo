@@ -1,16 +1,12 @@
 {
-"@context": [
-"https://www.w3.org/2018/credentials/v1"
-],
-"type": [
-"VerifiableCredential",
-"NotaryCompanyVerification"
-],
-"expirationDate": "{{{ dateTimeAfterDays 7 }}}",
-"credentialSubject": {
-"description": "This credential proofs that you represent a notary company",
-"bedrijfsnaam": "{{companyName}}",
-"kvknummer": "{{cocNumber}}",
-"plaats": "{{companyLocation}}"
-}
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1"
+    ],
+    "type": [
+        "VerifiableCredential",
+        "NotaryCompanyVerification"
+    ],
+    "description": "This credential proofs that you represent a notary company",
+    "expirationDate": "{{{ dateTimeAfterMonths 12 }}}",
+    "credentialSubject": {{{toJSON @root}}}
 }
