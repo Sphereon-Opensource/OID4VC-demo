@@ -37,7 +37,11 @@ export class Sequencer {
             switch (step.operation) {
                 case VCIOperation.NAVIGATE:
                     if (step.isDefaultRoute) {
-                        return (step as VCINavigationStep).path
+                        const navStep = step as VCINavigationStep
+                        if (!navStep.path) {
+                            throw new Error(`Field path of navigation step with id ${navStep.id} is empty!`)
+                        }
+                        return navStep.path
                     }
             }
         }
@@ -79,7 +83,7 @@ export class Sequencer {
 
     public async goToStep(stepId: string, state?: any) {
         const nextStep = this.stepsById[stepId]
-        if(!nextStep) {
+        if (!nextStep) {
             throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${this.currentStep?.id}`)
         }
         switch (nextStep.operation) {
