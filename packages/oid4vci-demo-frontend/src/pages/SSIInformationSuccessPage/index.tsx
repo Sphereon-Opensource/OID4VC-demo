@@ -6,10 +6,9 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import SSIPrimaryButton from '../../components/SSIPrimaryButton';
 import agent from '../../agent';
 import {IOID4VCIClientCreateOfferUriResponse} from '@sphereon/ssi-sdk.oid4vci-issuer-rest-client';
-import {VCIEcosystem} from "../../types";
 import {
     EcosystemGeneralConfig,
-    getCurrentEcosystem, getCurrentEcosystemGeneralConfig,
+    getCurrentEcosystemConfig, getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
     SSIInformationSharedSuccessPageConfig
 } from "../../ecosystem-config";
@@ -137,7 +136,7 @@ const SSIInformationSuccessPage: React.FC = () => {
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig
     const {t} = useTranslation()
-    if (getCurrentEcosystem() !== VCIEcosystem.sphereon) {
+    if (process.env.REACT_APP_ENVIRONMENT !== 'sphereon') {
         return (<div style={{
               maxHeight: "fit-content",
               flex: 1,

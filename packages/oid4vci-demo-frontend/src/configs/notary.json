@@ -1,0 +1,215 @@
+{
+  "general": {
+    "credentialName": "Triall Guest",
+    "issueCredentialType": "triall2023",
+    "baseUrl": "https://ssi.triall.io/demo/issuer",
+    "verifierUrl": "https://cix.triall.io",
+    "verifierUrlCaption": "Clinical Insights Exchange",
+    "downloadUrl": "https://ssi.triall.io/demo/issuer/#/download"
+  },
+  "pages": {
+    "SSIDownloadPage": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "SSICredentialVerifyRequestPage": {
+      "photoLeft": "triall/guest_credential.svg",
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+    },
+    "SSICredentialIssuedSuccessPage": {
+      "photoLeft": "triall/guest_credential.svg",
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+    },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "triall/guest_credential.svg",
+      "photoLeftManual": "triall/guest_credential.svg",
+      "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
+    },
+    "SSICredentialIssueRequestPage": {
+      "photoManual":"triall/guest_credential.svg",
+      "photoWallet":"triall/guest_credential.svg"
+    },
+    "SSIInformationRequestPage": {
+      "photo":"triall/guest_credential.svg",
+      "photoManual":"triall/guest_credential.svg",
+      "text_top_of_image": "common_left_pane_title",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "form": [
+        [{
+          "id": "ssi_information_request_page_form_company_name",
+          "key": "companyName",
+          "title": "ssi_information_request_page_form_company_name_title",
+          "type": "string",
+          "required": true
+        }],
+        [{
+          "id": "ssi_information_request_page_form_coc_number",
+          "key": "cocNumber",
+          "title": "ssi_information_request_page_form_coc_number_title",
+          "type": "string",
+          "required": true
+        }],
+        [{
+          "id": "ssi_information_request_page_form_company_location",
+          "key": "companyLocation",
+          "title": "ssi_information_request_page_form_company_location_title",
+          "type": "string",
+          "required": true
+        }],
+        [
+          {
+          "id": "ssi_information_request_page_first_name",
+          "key": "firstName",
+          "title": "ssi_information_request_page_form_first_name_title",
+          "type": "string",
+          "required": true
+          },
+          {
+            "id": "ssi_information_request_page_form_last_name",
+            "key": "lastName",
+            "title": "ssi_information_request_page_form_last_name_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [{
+          "id": "ssi_information_request_page_form_place_of_birth",
+          "key": "placeOfBirth",
+          "title": "ssi_information_request_page_form_place_of_birth_title",
+          "type": "string",
+          "required": true
+        }],
+        [{
+          "id": "ssi_information_request_page_form_date_of_birth",
+          "key": "dataOfBirth",
+          "title": "ssi_information_request_page_form_date_of_birth_title",
+          "type": "date",
+          "required": true
+        }]
+      ]
+    },
+    "SSILandingPage": {
+      "photoLeft": "triall/landing_manual_grey.svg",
+      "photoRight": "triall/landing_wallet_grey.svg",
+      "logo": {
+        "src": "triall/logo.svg",
+        "alt": "triall",
+        "width": 260,
+        "height": 55
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "white"
+        },
+        "leftCardView": {
+          "textColor": "#FBFBFB",
+          "backgroundColor": "#326D85"
+        },
+        "rightCardView": {
+          "textColor": "#FBFBFB",
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#326D85",
+          "textColor": "#FBFBFB"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#E84461"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#E84461"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

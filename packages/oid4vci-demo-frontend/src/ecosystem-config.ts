@@ -1,26 +1,6 @@
-import {ImageProperties, VCIEcosystem} from "./types";
-import dbc from "./configs/dbc.json";
-import energy_shr from "./configs/energy_shr.json";
-import fmdm from "./configs/fmdm.json";
-import sphereon from "./configs/sphereon.json";
-import triall from "./configs/triall.json";
+import {ImageProperties} from "./types";
 import {CSSProperties} from "react";
 import {IProps} from "./components/SSISecondaryButton";
-
-export function getCurrentEcosystem(): VCIEcosystem {
-    switch (process.env.REACT_APP_ENVIRONMENT) {
-        case VCIEcosystem.fmdm:
-            return VCIEcosystem.fmdm;
-        case VCIEcosystem.dbc:
-            return VCIEcosystem.dbc;
-        case VCIEcosystem.triall:
-            return VCIEcosystem.triall;
-        case VCIEcosystem.energy_shr:
-            return VCIEcosystem.energy_shr;
-        default:
-            return VCIEcosystem.sphereon;
-    }
-}
 
 interface VCIConfig {
     general: EcosystemGeneralConfig
@@ -29,33 +9,13 @@ interface VCIConfig {
 }
 
 export function getCurrentEcosystemConfig(): VCIConfig {
-    switch (getCurrentEcosystem()) {
-        case VCIEcosystem.triall:
-            return triall as VCIConfig;
-        case VCIEcosystem.fmdm:
-            return fmdm as VCIConfig;
-        case VCIEcosystem.dbc:
-            return dbc as VCIConfig;
-        case VCIEcosystem.energy_shr:
-            return energy_shr as VCIConfig;
-        default:
-            return sphereon as VCIConfig;
-    }
+  const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon';
+  return require(`./configs/${ecosystem}.json`);
 }
 
 export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
-    switch (getCurrentEcosystem()) {
-        case VCIEcosystem.fmdm:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, fmdm as VCIConfig);
-        case VCIEcosystem.dbc:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, dbc as VCIConfig);
-        case VCIEcosystem.triall:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, triall as VCIConfig);
-      case VCIEcosystem.energy_shr:
-        return getEcosystemPageOrComponentConfig(pageOrComponent, energy_shr as VCIConfig);
-        default:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, sphereon as VCIConfig)
-    }
+    const config = getCurrentEcosystemConfig()
+    return getEcosystemPageOrComponentConfig(pageOrComponent, config);
 }
 
 export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
@@ -109,7 +69,20 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     photoManual: string
     text_top_of_image: string
     sharing_data_right_pane_title: string
+    form?: DataFormRow[]
 }
+
+export type DataFormRow = DataFormElement[];
+
+export interface DataFormElement {
+  id: string;
+  title: string;
+  key: string;
+  type: DataFormInputType;
+  required: boolean;
+}
+
+type DataFormInputType = 'string' | 'date';
 
 export interface SSIDownloadPageConfig extends PageOrComponentConfig {
     rightPane: {
