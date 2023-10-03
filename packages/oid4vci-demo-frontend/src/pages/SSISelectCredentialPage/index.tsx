@@ -1,28 +1,27 @@
-import React, {ReactElement, useEffect, useState} from 'react'
-import {useLocation, useNavigate} from 'react-router-dom'
-import 'swiper/css'
-import 'swiper/css/pagination'
+import React, {ReactElement, useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import './index.module.css'
-import {SSICardView} from '@sphereon/ui-components.ssi-react'
-import {getCurrentEcosystemPageOrComponentConfig, SSISelectCredentialPageConfig} from '../../ecosystem-config'
-import {MetadataClient} from '@sphereon/oid4vci-client'
+import {SSICardView} from '@sphereon/ui-components.ssi-react';
+import {getCurrentEcosystemPageOrComponentConfig, SSISelectCredentialPageConfig} from '../../ecosystem-config';
+import {MetadataClient} from '@sphereon/oid4vci-client';
 import {
     CredentialsSupportedDisplay,
     CredentialSupported,
     EndpointMetadata,
     EndpointMetadataResult
-} from '@sphereon/oid4vci-common'
-import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store'
-import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper'
-import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
-import agent from '../../agent'
-import {useTranslation} from "react-i18next"
-import {useMediaQuery} from "react-responsive"
-import {Swiper, SwiperSlide} from 'swiper/react'
-import {Pagination} from 'swiper'
-import {Sequencer} from "../../router/sequencer"
+} from '@sphereon/oid4vci-common';
+import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store';
+import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper';
+import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client";
+import agent from '../../agent';
+import {useTranslation} from "react-i18next";
+import {useMediaQuery} from "react-responsive";
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {Pagination} from 'swiper';
 
-const short = require('short-uuid')
+const short = require('short-uuid');
 
 type Payload = Record<string, string>
 
@@ -57,19 +56,19 @@ const SSISelectCredentialPage: React.FC = () => {
                             async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
                                 await credentialLocaleBrandingFrom(display)
                         ),
-                    )
+                    );
 
                     const credentialTypes: Array<string> =
                         metadata.types.length > 1
                             ? metadata.types.filter((type: string) => type !== 'VerifiableCredential')
                             : metadata.types.length === 0
                                 ? ['VerifiableCredential']
-                                : metadata.types
+                                : metadata.types;
 
-                    credentialBranding.set(credentialTypes[0], localeBranding) // TODO for now taking the first type
+                    credentialBranding.set(credentialTypes[0], localeBranding); // TODO for now taking the first type
                 })).then(() => setSupportedCredentials(credentialBranding))
         })
-    }, [])
+    }, []);
 
     useEffect((): void => {
         const setCards = async (): Promise<void> => {
@@ -111,10 +110,10 @@ const SSISelectCredentialPage: React.FC = () => {
             }
 
             setCardElements(cardElements)
-        }
+        };
 
         void setCards()
-    }, [supportedCredentials])
+    }, [supportedCredentials]);
 
     const onSelectCredential = async (credentialType: string): Promise<void> => await sequencer.next({
         payload,
@@ -123,9 +122,9 @@ const SSISelectCredentialPage: React.FC = () => {
     })
 
     const getExpirationDate = (): number => {
-        const currentDate: Date = new Date()
-        const expirationDate: Date = new Date(currentDate)
-        expirationDate.setDate(currentDate.getDate() + 30)
+        const currentDate: Date = new Date();
+        const expirationDate: Date = new Date(currentDate);
+        expirationDate.setDate(currentDate.getDate() + 30);
 
         return Math.floor(expirationDate.getTime() / 1000)
     }
