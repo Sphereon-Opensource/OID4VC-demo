@@ -13,8 +13,9 @@ import {
     getCurrentEcosystemPageOrComponentConfig,
     SSICredentialVerifyRequestPageConfig
 } from "../../ecosystem-config";
+import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useMediaQuery} from "react-responsive";
-import {Mobile, NonMobile} from "../../index";
+import {NonMobile} from "../../index";
 import agent from "../../agent";
 
 export interface QRCodePageProperties {
@@ -114,22 +115,29 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         flexDirection: 'column',
                         height: '55%',
                         marginBottom: '15%',
-                        marginTop: '15%',
-                        alignItems: 'center'
+                        marginTop: '15%'
                     }}>
-                        <NonMobile>
-                            <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
-                                {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
-                                                           onSignInComplete={onSignInComplete}
-                                                           setQrCodeData={setDeepLink}/>}
-                            </div>
-                        </NonMobile>
+                        <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
+                            {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
+                                                       onSignInComplete={onSignInComplete}
+                                                       setQrCodeData={setDeepLink}/>}
+                        </div>
                         <DeepLink style={{flexGrow: 1}} link={deepLink}/>
                     </div>
-                    <Mobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                                  lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}/></Mobile>
-                    <NonMobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                                     lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/></NonMobile>
+                    <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                          lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
+                    <div style={{
+                        width: '20%',
+                        alignSelf: 'flex-end'
+                    }}>
+                        <SSIPrimaryButton
+                            caption={t('credential_verify_request_right_pane_button_caption')}
+                            style={{width: 200}}
+                            onClick={async () => {
+                                navigate('/information/request');
+                            }}
+                        />
+                    </div>
                 </div>
 
             </div>
