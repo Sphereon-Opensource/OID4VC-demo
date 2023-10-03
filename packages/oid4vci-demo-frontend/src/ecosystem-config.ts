@@ -5,6 +5,7 @@ import {IProps} from "./components/SSISecondaryButton";
 interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
+    sequence: VCIConfigSequence
     components: VCIConfigComponents
 }
 
@@ -208,6 +209,33 @@ export interface VCIConfigPages {
     SSIInformationRequestPage: SSIInformationRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
+}
+
+export interface VCIConfigSequence {
+
+}
+
+export interface VCIConfigSequence {
+    steps: VCINavigationStep | VCIExecuteStep[]
+}
+
+export enum VCIOperation {
+    NAVIGATE,
+    EXECUTE
+}
+export enum VCIAction {
+    CREATE_CREDENTIAL_OFFER
+}
+
+export interface VCIConfigSequenceStep {
+    operation: VCIOperation
+}
+export interface VCINavigationStep extends VCIConfigSequenceStep {
+    path: string
+}
+
+export interface VCIExecuteStep extends VCIConfigSequenceStep {
+    action: VCIAction
 }
 
 export interface VCIConfigComponents {

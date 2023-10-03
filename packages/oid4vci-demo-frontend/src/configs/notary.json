@@ -214,6 +214,20 @@
       }
     }
   },
+  "sequence": [
+  {
+    "operation": "navigate",
+    "path": "/information/request"
+  },
+  {
+    "operation": "execute",
+    "action": "create-credential-offer"
+  },
+  {
+    "operation": "navigate",
+    "path": "/credentials/verify/request"
+  }
+],
   "components": {
     "DeepLink": {},
     "SSICardView": {
