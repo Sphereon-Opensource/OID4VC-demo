@@ -13,7 +13,6 @@ export default function DeepLink(props: DeepLinkProps): React.ReactElement | nul
       <SSIPrimaryButton
           caption={t('button_open_from_wallet')}
           style={{width: 200, ...style}}
-          disabled={!props.link}
           onClick={async () => {
               window.location.href = props.link
           }}
