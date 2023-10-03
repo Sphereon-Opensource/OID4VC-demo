@@ -8,5 +8,8 @@
     ],
     "description": "This credential proves that the company you represent is registered with KVK",
     "expirationDate": "{{{ dateTimeAfterMonths 12 }}}"
-    "credentialSubject": {{{toJSON @root}}}
+    "credentialSubject": {
+        "description": "Company registered with the KvK",
+        {{{mergeJSON @root}}}
+    }
 }
