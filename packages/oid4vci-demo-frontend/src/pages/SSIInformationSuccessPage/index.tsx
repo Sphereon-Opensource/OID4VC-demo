@@ -135,38 +135,31 @@ const SSIInformationSuccessPage: React.FC = () => {
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig
+    const location = useLocation();
+    const state = location.state;
     const {t} = useTranslation()
     if (process.env.REACT_APP_ENVIRONMENT !== 'sphereon') {
-        return (<div style={{
-              maxHeight: "fit-content",
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              background: `url(${config.photoLeftManual})`,
-              backgroundSize: 'cover',
-              backgroundColor: '#202537',
-              position: 'relative'
-            }}>
-              {(config.textLeft && !config.leftTextHideManual) &&
-                  <div style={{
-                    position: "absolute",
-                    top: "77%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    color: "#ffffff",
-                    width: "calc(100% - 20rem)",
-                    whiteSpace: "normal",
-                    wordWrap: "break-word",
-                    paddingLeft: "7rem",
-                    paddingRight: "7rem",
-                    fontSize: "xx-large",
-                  }}>
-                    {t(config.textLeft)}
-                  </div>
-              }
-            </div>
-
-
+        return (<NonMobile>
+                    <div id={"photo"} style={{
+                        display: 'flex',
+                        width: '60%',
+                        height: '100%',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        ...((config.photoLeft || config.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${config.photoLeftManual}` : `${config.photoLeft}`}) 0% 0% / cover`}),
+                        ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
+                        ...(config.logo && { justifyContent: 'center' })
+                    }}>
+                        { config.logo &&
+                            <img
+                                src={config.logo.src}
+                                alt={config.logo.alt}
+                                width={config.logo.width}
+                                height={config.logo.height}
+                            />
+                        }
+                    </div>
+                </NonMobile>
         )
     }
     return (<div style={{

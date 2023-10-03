@@ -96,8 +96,22 @@
     },
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "notary/guest_credential.svg",
-      "photoLeftManual": "notary/guest_credential.svg",
-      "photoRight": "notary/undraw_certification_re_ifll_grey.svg"
+      "photoRight": "notary/undraw_certification_re_ifll_grey.svg",
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 200,
+          "height": 200
+        }
+      },
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
     },
     "SSICredentialIssueRequestPage": {
       "photoManual":"notary/guest_credential.svg",
