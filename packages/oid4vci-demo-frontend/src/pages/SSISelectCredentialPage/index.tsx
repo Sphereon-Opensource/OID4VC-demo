@@ -45,9 +45,13 @@ const SSISelectCredentialPage: React.FC = () => {
         MetadataClient.retrieveAllMetadata(process.env.REACT_APP_OID4VCI_AGENT_BASE_URL!).then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
 
+            if(!metadata.credentialIssuerMetadata){
+                return
+            }
+
             const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>();
             Promise.all(
-                (metadata.credentialIssuerMetadata?.credentials_supported as CredentialSupported[]).map(async (metadata: CredentialSupported): Promise<void> => {
+                (metadata.credentialIssuerMetadata.credentials_supported as CredentialSupported[]).map(async (metadata: CredentialSupported): Promise<void> => {
                     const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
                         (metadata.display ?? []).map(
                             async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
