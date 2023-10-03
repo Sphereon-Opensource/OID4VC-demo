@@ -26,3 +26,26 @@ export function loadJsonFiles<T>({path}: { path: string }): {
     })
     return {names, fileNames: files, asObject, asArray}
 }
+
+/**
+ * The function builds a file path without missing or excess slashes
+ * @param segments
+ */
+export function normalizeFilePath(...segments: (string | null | undefined)[]): string {
+    let result = '';
+
+    for (let i = 0; i < segments.length; i++) {
+        const segment = segments[i];
+
+        if (segment !== null && segment !== undefined && segment !== '') {
+            if (i === 0) {
+                // For the first non-null and non-empty segment, remove the trailing slash if it exists
+                result += segment.replace(/\/$/, '');
+            } else {
+                // For subsequent segments, ensure all slashes are present
+                result += `/${segment.replace(/^\//, '').replace(/\/$/, '')}`;
+            }
+        }
+    }
+    return result;
+}
