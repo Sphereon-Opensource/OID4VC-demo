@@ -44,6 +44,11 @@ export class Sequencer {
         throw new Error('No navigation steps have been defined in the sequence element of the ecosystem json')
     }
 
+    /*
+        We call setCurrentRoute on every page because
+        a. to get the useNavigate() hook and
+        b. because the user can go to that pages using the browser buttons or history and the sequencer needs to know which page the user is actually on
+    */
     public setCurrentRoute(route: string, navigateFunction: NavigateFunction) {
         this.navigateFunction = navigateFunction
         const defaultRoute = this.getDefaultRoute()
