@@ -12,18 +12,20 @@ import {
 
 import '../../css/typography.css'
 import {
-  DataFormElement,
-  DataFormRow,
-  getCurrentEcosystemGeneralConfig,
-  getCurrentEcosystemPageOrComponentConfig,
-  SSIInformationRequestPageConfig
-} from "../../ecosystem-config";
+    DataFormRow, EcosystemGeneralConfig,
+    getCurrentEcosystemGeneralConfig,
+    getCurrentEcosystemPageOrComponentConfig,
+    SSIInformationRequestPageConfig
+} from "../../ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
 import {Mobile, NonMobile} from "../../index";
 import { extractRequiredKeys, transformFormConfigToEmptyObject } from "../../utils/ObjectUtils";
+import short from "short-uuid"
+import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
+import agent from "../../agent"
 
 type Payload = Record<string, string>
 
@@ -64,7 +66,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const {t} = useTranslation()
     const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
 
     const [isInvalidEmail, setIsInvalidEmail] = useState(false)
     const EMAIL_ADDRESS_VALIDATION_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -178,30 +180,7 @@ const SSIInformationRequestPage: React.FC = () => {
         }
     }, []);
 
-  const generateFieldInput = (field: DataFormElement, readOnly: boolean) => (
-      <div key={field.id} style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
-        <label className="poppins-normal-10" htmlFor={field.id}>
-          {t(field.title)}
-        </label>
-        <input
-            id={field.id}
-            type={field.type === 'date' ? 'date' : field.type || 'text'}
-            style={{ width: '100%' }}
-            readOnly={readOnly}
-            className={readOnly ? '' : inputStyle.enabled}
-            defaultValue={payload[field.key]}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setPayload((prevPayload) => ({
-                  ...prevPayload,
-                  [field.key]: event.target.value,
-                }))
-            }
-        />
-      </div>
-  );
-
-
-  return (
+    return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
                 <div id={"photo"} style={{
@@ -266,41 +245,62 @@ const SSIInformationRequestPage: React.FC = () => {
                         </text>
                     </div>
                     <div/>
-                    {config.form && (
-                        <NonMobile>
-                          <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '327px', paddingTop: '48px', paddingBottom: '48px', gap: 23 }}>
-                            {config.form.map((row) => {
-                              const fieldWidth = 100 / row.length;
-                              return (
-                                  <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
-                                    {row.map((field) => (
-                                        <div style={{ width: `${fieldWidth}%` }}>
-                                          {generateFieldInput(field, !!state?.data?.vp_token)}
-                                        </div>
-                                    ))}
-                                  </div>
-                              );
-                            })}
-                          </div>
-                        </NonMobile>
-                    )}
-
-                    {config.form && (
-                        <Mobile>
-                          <div style={{
+                  {config.form && (
+                      <div
+                          style={{
                             display: 'flex',
                             flexDirection: 'column',
                             textAlign: 'left',
                             width: '327px',
                             paddingTop: '48px',
                             paddingBottom: '48px',
-                            gap: 23
+                            gap: 23,
                           }}
-                          >
-                            {config.form.flatMap((row) => row).map((field) => generateFieldInput(field, !!state?.data?.vp_token))}
-                          </div>
-                        </Mobile>
-                    )}
+                      >
+                        {config.form.map((row) => {
+                          const fieldWidth = 100 / row.length;
+                          return (
+                              <div
+                                  style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    gap: 12,
+                                  }}
+                              >
+                                {row.map((field) => (
+                                    <div
+                                        key={field.id}
+                                        style={{
+                                          display: 'flex',
+                                          flexDirection: 'column',
+                                          gap: 6,
+                                          width: `${fieldWidth}%`
+                                        }}
+                                    >
+                                      <label className="poppins-normal-10" htmlFor={field.id}>
+                                        {t(field.title)}
+                                      </label>
+                                      <input
+                                          id={field.id}
+                                          type={field.type === 'date' ? 'date' : field.type || 'text'}
+                                          style={{ width: '100%' }}
+                                          readOnly={!!payload[field.key] && !!state?.data?.vp_token}
+                                          className={`${!!payload[field.key] && !!state?.data?.vp_token ? '' : inputStyle.enabled}`}
+                                          defaultValue={payload[field.key]}
+                                          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                              setPayload((prevPayload) => ({
+                                                ...prevPayload,
+                                                [field.key]: event.target.value,
+                                              }))
+                                          }
+                                      />
+                                    </div>
+                                ))}
+                              </div>
+                          );
+                        })}
+                      </div>
+                  )}
 
                   {!config.form && <div style={{
                     display: 'flex',
@@ -315,7 +315,7 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="firstName">{t('ssi_information_request_page_form_name_title')}</label>
+                      <label className='poppins-normal-10' htmlFor="firstName">First name</label>
                       <input
                           id="firstName"
                           type="text"
@@ -334,7 +334,7 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="lastName">{t('ssi_information_request_page_form_last_name_title')}</label>
+                      <label className='poppins-normal-10' htmlFor="lastName">Last name</label>
                       <input
                           id="lastName"
                           type="text"
@@ -353,7 +353,7 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="email">{t('ssi_information_request_page_form_email_title')}</label>
+                      <label className='poppins-normal-10' htmlFor="email">Email address</label>
                       <input
                           style={{...(isInvalidEmail && {borderColor: 'red'})}}
                           id="email"
@@ -377,12 +377,33 @@ const SSIInformationRequestPage: React.FC = () => {
                             disabled={!isPayloadValid(payload, config.form)}
                             onClick={async () => {
 
-                                const state = {
+                                /*const state = {
                                     ...payload,
                                     isManualIdentification
                                 }
-
                                 navigate('/information/success', {state});
+*/
+                                const shortUuid = short.generate()
+                                const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
+                                    grants: {
+                                        'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
+                                            'pre-authorized_code': shortUuid,
+                                            user_pin_required: false,
+                                        },
+                                    },
+                                    credentialDataSupplierInput: {
+                                        ...payload
+                                    },
+                                    credentials: [generalConfig.issueCredentialType],
+                                })
+
+                                const qrState = {
+                                    uri:  uriData.uri,
+                                    preAuthCode: shortUuid,
+                                    isManualIdentification: state?.isManualIdentification,
+                                };
+
+                                navigate('/credentials/issue/request', {state: qrState});
                             }}
                         />
                     </div>
