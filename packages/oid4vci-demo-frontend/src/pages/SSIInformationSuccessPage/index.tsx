@@ -1,20 +1,17 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Text} from '../../components/Text';
 import style from '../../components/Text/Text.module.css';
 import {Trans, useTranslation} from "react-i18next";
 import {useLocation, useNavigate} from 'react-router-dom';
 import SSIPrimaryButton from '../../components/SSIPrimaryButton';
 import {
-    EcosystemGeneralConfig, getCurrentEcosystemConfig,
-    getCurrentEcosystemGeneralConfig,
+    EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
     SSIInformationSharedSuccessPageConfig
 } from "../../ecosystem-config"
 import {NonMobile} from '../..';
 import {useMediaQuery} from "react-responsive";
 import {Sequencer} from "../../router/sequencer"
-
-const short = require('short-uuid');
 
 type State = {
     firstName: string
@@ -24,16 +21,21 @@ type State = {
 }
 
 const SSIInformationSuccessPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation();
+    const navigate = useNavigate()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const state: State | undefined = location.state;
 
-
     const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig;
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
     const {t} = useTranslation()
+
+    useEffect(() => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
+    }, [])
+
     return (
         <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none'}}>
             <NonMobile>
@@ -111,7 +113,7 @@ const SSIInformationSuccessPage: React.FC = () => {
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig
     const {t} = useTranslation()
-    if (getCurrentEcosystem() !== VCIEcosystem.sphereon) {
+    if (process.env.REACT_APP_ENVIRONMENT !== 'sphereon') {
         return (<div style={{
               maxHeight: "fit-content",
               flex: 1,

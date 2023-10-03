@@ -24,7 +24,8 @@ type State = {
 }
 
 const SSICredentialIssueRequestPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
+    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const navigate = useNavigate()
     const config: SSICredentialIssueRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssueRequestPage') as SSICredentialIssueRequestPageConfig
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
     const buttonConfig = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
@@ -34,6 +35,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const [qrCode, setQrCode] = useState<ReactElement>();
 
     useEffect(() => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
         const intervalId = setInterval(() => {
             agent.oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
                 .then((status: IssueStatusResponse) => {

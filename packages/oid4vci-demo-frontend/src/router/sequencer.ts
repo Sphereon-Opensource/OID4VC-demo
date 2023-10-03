@@ -5,33 +5,33 @@ import {
     VCINavigationStep,
     VCIOperation
 } from "../ecosystem-config"
-import {useNavigate} from "react-router-dom"
 import {createCredentialOffer} from "./actions/credential-actions"
 
-type NavigateFunction = (params: { pathname: string,  }) => void;
+type NavigateFunction = (path: any, params?: {} | undefined) => void
 
 export class Sequencer {
 
     private sequenceConfig = getEcosystemSequenceConfig()
-    private stepsById: { [key: string]: VCIConfigSequenceStep } = this.sequenceConfig.steps.reduce((map, step) => {
-        map[step.id] = step
-        return map
-    }, {})
 
     private currentStep?: VCIConfigSequenceStep
-    private navigateFunction: NavigateFunction
+    private navigateFunction?: NavigateFunction
+    private readonly stepsById: { [key: string]: VCIConfigSequenceStep }
 
-    constructor(navigateFunction: NavigateFunction) {
+    constructor() {
         if (!this.sequenceConfig) {
             throw new Error('The sequence element is missing in the ecosystem json')
         }
-        if (!this.sequenceConfig.steps || this.sequenceConfig.steps.length == 0) {
+        if (!this.sequenceConfig.steps || this.sequenceConfig.steps.length === 0) {
             throw new Error('The sequence element in the ecosystem json is missing steps')
         }
-        this.navigateFunction =navigateFunction
+
+        this.stepsById = this.sequenceConfig.steps.reduce((map, step) => {
+            map[step.id] = step
+            return map
+        }, {} as { [key: string]: VCIConfigSequenceStep })
     }
 
-    public async getDefaultRoute(state?: any): Promise<string> {
+    public getDefaultRoute(state?: any): string {
         // Take the first navigate step in the list with isDefaultRoute set to true
         for (const step of this.sequenceConfig.steps) {
             switch (step.operation) {
@@ -44,12 +44,16 @@ export class Sequencer {
         throw new Error('No navigation steps have been defined in the sequence element of the ecosystem json')
     }
 
-    public setCurrentRoute(route: string) {
+    public setCurrentRoute(route: string, navigateFunction: NavigateFunction) {
+        this.navigateFunction = navigateFunction
+        const defaultRoute = this.getDefaultRoute()
         for (const step of this.sequenceConfig.steps) {
             switch (step.operation) {
                 case VCIOperation.NAVIGATE:
-                    if ((step as VCINavigationStep).path == route) {
+                    const path = (step as VCINavigationStep).path
+                    if (path === route || (route === '/' && path == defaultRoute)) {
                         this.currentStep = step
+                        return
                     }
                     break
             }
@@ -70,9 +74,12 @@ export class Sequencer {
 
     public async goToStep(stepId: string, state?: any) {
         const nextStep = this.stepsById[stepId]
+        if(!nextStep) {
+            throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${this.currentStep?.id}`)
+        }
         switch (nextStep.operation) {
             case VCIOperation.NAVIGATE:
-                this.navigateFunction.call({pathname: (nextStep as VCINavigationStep).path}, {state})
+                this.navigateFunction!((nextStep as VCINavigationStep).path, {state})
                 break
             case VCIOperation.EXECUTE:
                 await this.execute(nextStep as VCIExecuteStep, state)
@@ -81,11 +88,17 @@ export class Sequencer {
     }
 
     private async execute(executeStep: VCIExecuteStep, inState: any) {
-        this.currentStep = executeStep
-        switch (executeStep.action) {
-            case VCIAction.CREATE_CREDENTIAL_OFFER:
-                await this.next(await createCredentialOffer(inState))
-                break
+        try {
+            let outState
+            switch (executeStep.action) {
+                case VCIAction.CREATE_CREDENTIAL_OFFER:
+                    outState = await createCredentialOffer(inState)
+                    break
+            }
+            this.currentStep = executeStep
+            await this.next(outState)
+        } catch (e: Error) {
+            throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
         }
     }
 }

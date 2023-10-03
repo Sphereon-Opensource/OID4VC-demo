@@ -24,25 +24,24 @@ import {Sequencer} from "../../router/sequencer"
 
 const short = require('short-uuid')
 
-type State = {
-    firstName: string
-    lastName: string
-    emailAddress: string
-    isManualIdentification: boolean
-}
+type Payload = Record<string, string>
 
 const SSISelectCredentialPage: React.FC = () => {
     const [endpointMetadata, setEndpointMetadata] = useState<EndpointMetadataResult>()
     const [supportedCredentials, setSupportedCredentials] = useState<Map<string, Array<IBasicCredentialLocaleBranding>>>(new Map())
     const [cardElements, setCardElements] = useState<Array<ReactElement>>([])
-    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
+    const [payload] = useState<Payload>(null)
+    const [isManualIdentification] = useState<boolean>(false)
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation()
-    const state: State | undefined = location.state
+    const navigate = useNavigate()
     const config: SSISelectCredentialPageConfig = getCurrentEcosystemPageOrComponentConfig('SSISelectCredentialPage') as SSISelectCredentialPageConfig
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     useEffect((): void => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
+
         MetadataClient.retrieveAllMetadata(process.env.REACT_APP_OID4VCI_AGENT_BASE_URL!).then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
 
@@ -117,31 +116,11 @@ const SSISelectCredentialPage: React.FC = () => {
         void setCards()
     }, [supportedCredentials])
 
-    const onSelectCredential = async (credentialType: string): Promise<void> => {
-        const shortUuid = short.generate()
-        const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
-            grants: {
-                'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
-                    'pre-authorized_code': shortUuid,
-                    user_pin_required: false,
-                },
-            },
-            credentialDataSupplierInput: {
-                firstName: state?.firstName,
-                lastName: state?.lastName,
-                email: state?.emailAddress,
-            },
-            credentials: [credentialType],
-        })
-
-        const qrState = {
-            uri: uriData.uri,
-            preAuthCode: shortUuid,
-            isManualIdentification: state?.isManualIdentification,
-        }
-
-        await sequencer.next(qrState)
-    }
+    const onSelectCredential = async (credentialType: string): Promise<void> => await sequencer.next({
+        payload,
+        isManualIdentification,
+        credentialType
+    })
 
     const getExpirationDate = (): number => {
         const currentDate: Date = new Date()

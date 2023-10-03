@@ -13,8 +13,9 @@ import {Sequencer} from "../../router/sequencer"
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()
-    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
-    const location = useLocation();
+    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const location = useLocation()
+    const navigate = useNavigate()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const onManualIdentificationClick = async (): Promise<void> => {
@@ -40,7 +41,7 @@ const SSILandingPage: React.FC = () => {
     }
 
     useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname)
+        sequencer.setCurrentRoute(location.pathname, navigate)
     }, [])
 
     return (

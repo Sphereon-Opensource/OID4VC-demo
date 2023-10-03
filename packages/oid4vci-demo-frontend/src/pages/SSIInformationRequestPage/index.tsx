@@ -58,8 +58,9 @@ function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
 
 const SSIInformationRequestPage: React.FC = () => {
     const config: SSIInformationRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationRequestPage') as SSIInformationRequestPageConfig;
-    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation();
+    const navigate = useNavigate()
     const state: State | undefined = location.state;
     const {t} = useTranslation()
     const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
@@ -175,7 +176,7 @@ const SSIInformationRequestPage: React.FC = () => {
         if (state?.data?.vp_token) {
             processVPToken().catch(console.log)
         }
-        sequencer.setCurrentRoute(location.pathname)
+        sequencer.setCurrentRoute(location.pathname, navigate)
     }, []);
 
     return (
@@ -373,7 +374,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, config.form)}
-                            onClick={async () => await sequencer.next()}
+                            onClick={async () => await sequencer.next({payload, isManualIdentification})}
                         />
                     </div>
                   {config.mobile?.logo && <Mobile>

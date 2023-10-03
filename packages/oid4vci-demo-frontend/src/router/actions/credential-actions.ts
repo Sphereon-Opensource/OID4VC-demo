@@ -10,7 +10,8 @@ type QRState = Record<string, any>
 
 type CredentialOfferState = {
     payload: Payload,
-    isManualIdentification: Boolean
+    isManualIdentification: Boolean,
+    credentialType?: string
 }
 export const createCredentialOffer = async (state: CredentialOfferState): Promise<QRState> => {
     const shortUuid = short.generate()
@@ -24,7 +25,7 @@ export const createCredentialOffer = async (state: CredentialOfferState): Promis
         credentialDataSupplierInput: {
             ...state.payload
         },
-        credentials: [generalConfig.issueCredentialType],
+        credentials: [state.credentialType ?? generalConfig.issueCredentialType],
     })
 
     return {

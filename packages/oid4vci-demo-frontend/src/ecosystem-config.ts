@@ -1,22 +1,22 @@
-import {ImageProperties} from "./types";
-import {CSSProperties} from "react";
-import {IProps} from "./components/SSISecondaryButton";
+import {ImageProperties} from "./types"
+import {CSSProperties} from "react"
+import {IProps} from "./components/SSISecondaryButton"
 
 interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
-    sequence: VCIConfigSequence
+    sequencer: VCIConfigSequence
     components: VCIConfigComponents
 }
 
 export function getCurrentEcosystemConfig(): VCIConfig {
-  const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon';
-  return require(`./configs/${ecosystem}.json`);
+    const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon'
+    return require(`./configs/${ecosystem}.json`)
 }
 
 export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
     const config = getCurrentEcosystemConfig()
-    return getEcosystemPageOrComponentConfig(pageOrComponent, config);
+    return getEcosystemPageOrComponentConfig(pageOrComponent, config)
 }
 
 export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
@@ -30,7 +30,7 @@ function getEcosystemPageOrComponentConfig(pageOrComponent: string, config?: VCI
     if (!config) {
         config = getCurrentEcosystemConfig()
     }
-        if (pageOrComponent in config.pages) {
+    if (pageOrComponent in config.pages) {
         return config.pages[pageOrComponent as keyof VCIConfigPages]
     } else if (pageOrComponent in config.components) {
         return config.components[pageOrComponent as keyof VCIConfigComponents]
@@ -42,7 +42,7 @@ export function getEcosystemSequenceConfig(config?: VCIConfig): VCIConfigSequenc
     if (!config) {
         config = getCurrentEcosystemConfig()
     }
-    return config.sequence
+    return config.sequencer
 }
 
 export interface PageOrComponentConfig {
@@ -85,7 +85,7 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
     mobile?: {
-      logo: ImageProperties
+        logo: ImageProperties
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -94,11 +94,11 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
 export type DataFormRow = DataFormElement[];
 
 export interface DataFormElement {
-  id: string;
-  title: string;
-  key: string;
-  type: DataFormInputType;
-  required: boolean;
+    id: string;
+    title: string;
+    key: string;
+    type: DataFormInputType;
+    required: boolean;
 }
 
 type DataFormInputType = 'string' | 'date';
@@ -223,19 +223,21 @@ export interface VCIConfigSequence {
 }
 
 export enum VCIOperation {
-    NAVIGATE,
-    EXECUTE
+    NAVIGATE = 'navigate',
+    EXECUTE = 'execute'
 }
+
 export enum VCIAction {
-    CREATE_CREDENTIAL_OFFER
+    CREATE_CREDENTIAL_OFFER = 'create-credential-offer'
 }
 
 export interface VCIConfigSequenceStep {
     id: string
     operation: VCIOperation
     nextId?: string
-    isDefaultRoute? : boolean
+    isDefaultRoute?: boolean
 }
+
 export interface VCINavigationStep extends VCIConfigSequenceStep {
     path: string
 }

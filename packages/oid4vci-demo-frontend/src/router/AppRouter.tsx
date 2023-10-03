@@ -13,29 +13,30 @@ import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
 import {Sequencer} from "./sequencer"
 
 export const pageMap: Record<string, any> = {
-    '/start': SSILandingPage,
-    '/information/request': SSIInformationRequestPage,
-    '/information/success': SSIInformationSuccessPage,
-    '/credentials/select': SSISelectCredentialPage,
-    '/credentials/verify/request': SSICredentialVerifyRequestPage,
-    '/credentials/issue/request': SSICredentialIssueRequestPage,
-    '/credentials/issue/success': SSICredentialIssuedSuccessPage,
+    '/start': <SSILandingPage/>,
+    '/information/request': <SSIInformationRequestPage/>,
+    '/information/success': <SSIInformationSuccessPage/>,
+    '/credentials/select': <SSISelectCredentialPage/>,
+    '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
+    '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
+    '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
     '/download': SSIDownloadPage
 }
 
 
 const AppRouter: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const defaultRoute = sequencer.getDefaultRoute()
     return (
         <HashRouter>
             <Routes>
-                {pageMap.filter(entry => entry.key == defaultRoute)
+                {Object.entries(pageMap)
+                    .filter(([path]) => path === defaultRoute)
                     .map(([path, component]) => (
-                        <Route key="/" path={path} component={component}/>
+                        <Route key='/' path='/' element={component}/>
                     ))}
-                {pageMap.map(([path, component]) => (
-                    <Route key={path} path={path} component={component}/>
+                {Object.entries(pageMap).map(([path, component]) => (
+                    <Route key={path} path={path} element={component}/>
                 ))}
             </Routes>
         </HashRouter>

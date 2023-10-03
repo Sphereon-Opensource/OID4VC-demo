@@ -27,7 +27,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialVerifyRequestPage') as SSICredentialVerifyRequestPageConfig
     const {t} = useTranslation()
     const credentialName = getCurrentEcosystemGeneralConfig().credentialName
-    const [sequencer] = useState<Sequencer>(new Sequencer(useNavigate()))
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const [qr, setQR] = useState<ReactElement>()
