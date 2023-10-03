@@ -143,49 +143,29 @@ const SSISelectCredentialPage: React.FC = () => {
     // @ts-ignore
     return (
         <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100vh',
-                userSelect: 'none',
-                backgroundColor: config.styles.mainContainer.backgroundColor,
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                maxWidth: isTabletOrMobile ? 327 : 1075,
-                gap: 13,
-                marginTop: isTabletOrMobile ? 25 : 244,
-                justifyContent: 'center'
-            }}>
-                <p className={'inter-normal-48'} style={{
-                    color: '#FBFBFB',
-                    alignContent: 'center',
-                    textAlign: 'center'
-                }}>{t('select_credential_title1') + ' '}
-                    <span className={`inter-normal-48`}
+            style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: config.styles.mainContainer.backgroundColor, alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{display: 'flex', flexDirection: 'row', maxWidth: isTabletOrMobile ? 327 : 1075, gap: 13, marginTop: isTabletOrMobile ? 25: 244, justifyContent: 'center'}}>
+                <p className={'inter-normal-48'} style={{color: '#FBFBFB', alignContent: 'center', textAlign: 'center'}}>{t('select_credential_title1') + ' '}
+                <span className={`inter-normal-48`}
 
-                          style={{
-                              background: config.styles.mainContainer.textGradient,
-                              backgroundClip: 'text',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                          }}
+                   style={{
+                       background: config.styles.mainContainer.textGradient,
+                       backgroundClip: 'text',
+                       WebkitBackgroundClip: 'text',
+                       WebkitTextFillColor: 'transparent',
+                   }}
 
-                    >{t('select_credential_title2') + ' '}</span>
-                    <span className={'inter-normal-48'}
-                          style={{color: '#FBFBFB'}}>{t('select_credential_title3') + ' '}</span>
-                    <span className={`inter-normal-48`}
-                          style={{
-                              background: config.styles.mainContainer.textGradient,
-                              backgroundClip: 'text',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                          }}
+                >{t('select_credential_title2') + ' '}</span>
+                <span className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title3') + ' '}</span>
+                <span className={`inter-normal-48`}
+                   style={{
+                       background: config.styles.mainContainer.textGradient,
+                       backgroundClip: 'text',
+                       WebkitBackgroundClip: 'text',
+                       WebkitTextFillColor: 'transparent',
+                   }}
 
-                    >{t('select_credential_title4')}</span></p>
+                >{t('select_credential_title4')}</span></p>
             </div>
 
             <div style={{width: '100%', maxWidth: isTabletOrMobile ? 327 : 1075, marginTop: 126}}>
@@ -217,18 +197,17 @@ const SSISelectCredentialPage: React.FC = () => {
                     {cardElements}
                 </Swiper>
             </div>
-            <div className="swiper-sphereon-pagination"
-                 style={{textAlign: 'center', margin: '20px', marginBottom: '50px'}}/>
+            <div className="swiper-sphereon-pagination" style={{textAlign: 'center', margin: '20px', marginBottom: '50px'}}/>
 
             <img
-                style={{marginTop: isTabletOrMobile ? 'initial' : 'auto', marginBottom: isTabletOrMobile ? 15 : 85}}
+                style={{marginTop: isTabletOrMobile ? 'initial': 'auto', marginBottom: isTabletOrMobile ? 15: 85}}
                 src={config.logo.src}
                 alt={config.logo.alt}
                 width={config.logo.width}
                 height={config.logo.height}
             />
         </div>
-    )
+    );
 }
 
 export default SSISelectCredentialPage
