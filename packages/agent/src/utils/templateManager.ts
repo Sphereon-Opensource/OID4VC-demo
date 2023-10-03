@@ -45,6 +45,10 @@ export class TemplateVCGenerator {
             return format(add(new Date(), {months}), this.timeFormatPattern)
         })
         this.handlebars.registerHelper('toJSON', (obj) => JSON.stringify(obj));
+        this.handlebars.registerHelper('mergeJSON', (obj) => {
+            const jsonText = JSON.stringify(obj);
+            return jsonText.substring(1, jsonText.length - 1);
+        });
 
         this.handlebars.registerHelper('collectionOf', function () {
             const lists = Array.prototype.slice.call(arguments, 0, -1) // Remove final argument, which is a Handlebars options object

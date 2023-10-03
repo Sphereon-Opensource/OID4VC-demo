@@ -6,7 +6,9 @@
         "VerifiableCredential",
         "NotaryCompanyVerification"
     ],
-    "description": "This credential proves that the company you represent is registered with the Van Auckland Notary",
     "expirationDate": "{{{ dateTimeAfterMonths 12 }}}",
-    "credentialSubject": {{{toJSON @root}}}
+    "credentialSubject": {
+        "description": "Company has been verified by the notary",
+        {{{mergeJSON @root}}}
+    }
 }
