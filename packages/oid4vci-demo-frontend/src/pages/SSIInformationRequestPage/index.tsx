@@ -208,17 +208,28 @@ const SSIInformationRequestPage: React.FC = () => {
                     display: 'flex',
                     width: '60%',
                     height: '100%',
-                    background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`})`,
-                    backgroundSize: 'cover',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    ...((config.photo || config.photoManual) && { background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`}) 0% 0% / cover`}),
+                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
+                    ...(config.logo && { justifyContent: 'center' })
                 }}>
-                  {!isManualIdentification && <text
-                      className={"poppins-medium-36"}
-                      style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
-                  >
-                    {t(`${config.text_top_of_image}`)}
-                  </text>}
+                    { config.logo &&
+                        <img
+                            src={config.logo.src}
+                            alt={config.logo.alt}
+                            width={config.logo.width}
+                            height={config.logo.height}
+                        />
+                    }
+                    { (config.text_top_of_image && !isManualIdentification) &&
+                         <text
+                             className={"poppins-medium-36"}
+                             style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
+                         >
+                             {t(`${config.text_top_of_image}`)}
+                         </text>
+                    }
                 </div>
             </NonMobile>
             <div style={{
@@ -251,7 +262,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             className={"poppins-normal-14"}
                             style={{maxWidth: 313, textAlign: 'center'}}
                         >
-                            {t(config.sharing_data_right_pane_paragraph? config.sharing_data_right_pane_paragraph: 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
+                            {t(config.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
                         </text>
                     </div>
                     <div/>
