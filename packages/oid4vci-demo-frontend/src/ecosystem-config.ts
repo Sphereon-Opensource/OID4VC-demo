@@ -68,6 +68,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentCon
     photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
+    bottomParagraph?: string
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
@@ -90,6 +91,9 @@ export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConf
     textLeft?: string
     backgroundColor?: string
     logo?: ImageProperties
+    title?: string
+    topParagraph?: string
+    bottomParagraph?: string
 }
 
 export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
@@ -104,6 +108,8 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     },
     backgroundColor?: string
     logo?: ImageProperties
+    title?: string
+    topParagraph?: string
 }
 
 export type DataFormRow = DataFormElement[];

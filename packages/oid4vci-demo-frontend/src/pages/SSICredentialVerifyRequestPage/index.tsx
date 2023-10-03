@@ -132,8 +132,8 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         </div>
                         <DeepLink style={{flexGrow: 1}} link={deepLink}/>
                     </div>
-                    <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                          lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
+                    <Text style={{flexGrow: 1, maxWidth: 378}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                          lines={t(config.bottomParagraph ? config.bottomParagraph : 'credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
                     <div style={{
                         width: '20%',
                         alignSelf: 'flex-end'

@@ -88,6 +88,7 @@
     },
     "SSICredentialVerifyRequestPage": {
       "photoRight": "undraw_messenger_re_8bky_1.svg",
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "backgroundColor": "#005371",
       "logo": {
         "src": "coc/logo.svg",
@@ -106,6 +107,9 @@
       "photoRight": "undraw_certification_re_ifll_1.svg"
     },
     "SSICredentialIssueRequestPage": {
+      "title": "coc_qrcode_right_pane_top_title",
+      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
       "backgroundColor": "#005371",
       "logo": {
         "src": "coc/logo.svg",
@@ -115,7 +119,8 @@
       }
     },
     "SSIInformationRequestPage": {
-      "sharing_data_right_pane_title": "sharing_data_right_pane_title",
+      "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
+      "sharing_data_right_pane_paragraph": "coc_sharing_data_right_pane_top_paragraph",
       "backgroundColor": "#005371",
       "logo": {
         "src": "coc/logo.svg",
@@ -191,8 +196,8 @@
       "logo": {
         "src": "coc/logo.svg",
         "alt": "chamber of commerce logo",
-        "width": 383,
-        "height": 383
+        "width": 150,
+        "height": 150
       },
       "styles": {
         "mainContainer": {
