@@ -117,14 +117,13 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         marginTop: '15%',
                         alignItems: 'center'
                     }}>
-
-                        <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
-                            {/*Whether the QR code is shown (mobile) is handled in the component itself */}
-                            {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
-                                                       onSignInComplete={onSignInComplete}
-                                                       setQrCodeData={setDeepLink}/>}
-                        </div>
-
+                        <NonMobile>
+                            <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
+                                {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
+                                                           onSignInComplete={onSignInComplete}
+                                                           setQrCodeData={setDeepLink}/>}
+                            </div>
+                        </NonMobile>
                         <DeepLink style={{flexGrow: 1}} link={deepLink}/>
                     </div>
                     <Mobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
