@@ -54,12 +54,17 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentCon
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentConfig {
-    photoLeft: string
-    photoLeftManual: string
+    photoLeft?: string
+    photoLeftManual?: string
     leftTextHideManual?: boolean
     textLeft?: string
     photoRight: string
     textRight?: string
+    mobile?: {
+      logo: ImageProperties
+    },
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConfig {
