@@ -88,7 +88,11 @@ export class Sequencer {
         }
         switch (nextStep.operation) {
             case VCIOperation.NAVIGATE:
-                this.navigateFunction!((nextStep as VCINavigationStep).path, {state})
+                const navStep = nextStep as VCINavigationStep
+                if (!navStep.path) {
+                    throw new Error(`Field path of navigation step with id ${navStep.id} is empty!`)
+                }
+                this.navigateFunction!(navStep.path, {state})
                 break
             case VCIOperation.EXECUTE:
                 await this.execute(nextStep as VCIExecuteStep, state)
