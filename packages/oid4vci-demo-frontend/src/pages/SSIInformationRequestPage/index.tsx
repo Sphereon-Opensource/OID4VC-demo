@@ -65,7 +65,6 @@ const SSIInformationRequestPage: React.FC = () => {
     const {t} = useTranslation()
     const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    getCurrentEcosystemGeneralConfig()
     const [isInvalidEmail, setIsInvalidEmail] = useState(false)
     const EMAIL_ADDRESS_VALIDATION_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     // Manually is only when all of them need to be filled by the user
