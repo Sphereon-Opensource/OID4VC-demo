@@ -41,7 +41,7 @@ export class TemplateVCGenerator {
         this.handlebars.registerHelper('dateTimeAfterDays', (days: number) => {
             return format(add(new Date(), {days: days}), this.timeFormatPattern)
         })
-
+        this.handlebars.registerHelper('toJSON', (obj) => JSON.stringify(obj));
 
         this.handlebars.registerHelper('collectionOf', function () {
             const lists = Array.prototype.slice.call(arguments, 0, -1) // Remove final argument, which is a Handlebars options object
