@@ -5,7 +5,7 @@ import {
 } from "@sphereon/oid4vci-issuer"
 import {TemplateVCGenerator} from "./templateManager"
 import {getTypesFromRequest} from "@sphereon/oid4vci-common"
-import {CONF_PATH, CredentialSupplierConfigWithTemplateSupport} from "../environment"
+import {CONF_PATH, CredentialSupplierConfigWithTemplateSupport, normalizeFilePath} from "../environment"
 
 
 const templateVCGenerator = new TemplateVCGenerator()
@@ -276,8 +276,7 @@ class TemplateCredentialDataSupplier {
             const templateMapping = credentialSupplierConfig.template_mappings
                 .find(mapping => mapping.credential_types.some(type => types.includes(type)))
             if (templateMapping) {
-                const baseDir = credentialSupplierConfig?.templates_base_dir ? `/${credentialSupplierConfig.templates_base_dir}` : '';
-                const templatePath = `${CONF_PATH}${baseDir}/${templateMapping.template_path}`;
+                const templatePath = normalizeFilePath(CONF_PATH, credentialSupplierConfig?.templates_base_dir, templateMapping.template_path)
                 const credential = templateVCGenerator.generateCredential(templatePath, args.credentialDataSupplierInput)
                 if(!credential) {
                     throw new Error(`Credential generation failed for template ${templatePath}`)
@@ -290,7 +289,7 @@ class TemplateCredentialDataSupplier {
                 throw new Error(`No template mapping could be found for types ${types.join(', ')}`)
             }
         }
-        throw new Error(`No supplier credential be found for types ${types.join(', ')} and correlationId ${this.issuerCorrelationId}`)
+        throw new Error(`The credential supplier could not find a match for the requested credential types ${types.join(', ')}. The issuer correlationId is ${this.issuerCorrelationId}`)
     }
 
     private getHardCodedSupplierCredential(issuerCorrelationId: string, args: CredentialDataSupplierArgs) {
