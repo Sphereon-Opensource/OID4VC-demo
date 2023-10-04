@@ -148,16 +148,16 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_first_name",
+          "id": "ssi_information_request_page_first_name_director",
             "key": "firstName",
-            "title": "ssi_information_request_page_form_first_name_title",
+          "title": "ssi_information_request_page_form_first_name_director_title",
             "type": "string",
             "required": true
           },
           {
-            "id": "ssi_information_request_page_form_last_name",
+            "id": "ssi_information_request_page_form_last_name_director",
             "key": "lastName",
-            "title": "ssi_information_request_page_form_last_name_title",
+            "title": "ssi_information_request_page_form_last_name_director_title",
             "type": "string",
             "required": true
           }
@@ -185,8 +185,8 @@
         "logo": {
           "src": "notary/logo.svg",
           "alt": "notary",
-          "width": 150,
-          "height": 150
+          "width": 200,
+          "height": 200
         }
       }
     },
