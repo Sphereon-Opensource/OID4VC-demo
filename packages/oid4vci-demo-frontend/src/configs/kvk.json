@@ -136,8 +136,24 @@
       "backgroundColor": "#005371"
     },
     "SSICredentialIssueRequestPage": {
-      "photoManual": "notary/guest_credential.svg",
-      "photoWallet": "notary/guest_credential.svg"
+      "title": "coc_qrcode_right_pane_top_title",
+      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 150,
+          "height": 150
+        }
+      }
     },
     "SSIInformationRequestPage": {
       "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",

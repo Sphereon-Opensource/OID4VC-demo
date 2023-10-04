@@ -54,7 +54,7 @@ export class Sequencer {
         b. because the user can go to that pages using the browser buttons or history and the sequencer needs to know which page the user is actually on
     */
     public setCurrentRoute(route: string, navigateFunction: NavigateFunction) {
-        console.log()
+        console.log('setCurrentRoute', route)
         this.navigateFunction = navigateFunction
         const defaultRoute = this.getDefaultRoute()
         for (const step of this.sequenceConfig.steps) {
@@ -83,6 +83,7 @@ export class Sequencer {
     }
 
     public async goToStep(stepId: string, state?: any) {
+        console.log('goToStep', stepId)
         const nextStep = this.stepsById[stepId]
         if (!nextStep) {
             throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${this.currentStep?.id}`)
