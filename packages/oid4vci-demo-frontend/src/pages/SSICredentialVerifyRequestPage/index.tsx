@@ -131,9 +131,9 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                                        setQrCodeData={setDeepLink}/>}
                         </div>
                         <DeepLink style={{flexGrow: 1}} link={deepLink}/>
-                        <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                              lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
                     </div>
+                    <Text style={{flexGrow: 1, maxWidth: 378}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                          lines={t(config.bottomParagraph ? config.bottomParagraph : 'credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
