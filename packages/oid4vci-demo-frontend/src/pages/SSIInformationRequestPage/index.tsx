@@ -35,8 +35,8 @@ type State = {
 function getInitialState(form: DataFormRow[] | undefined) {
   if (!form) {
     return {
-      firstName: '',
-      lastName: '',
+      Voornaam: '',
+      Achternaam: '',
       emailAddress: ''
     }
   }
@@ -44,7 +44,7 @@ function getInitialState(form: DataFormRow[] | undefined) {
 }
 
 function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
-  let requiredFields = ['firstName', 'lastName', 'email']
+  let requiredFields = ['Voornaam', 'Achternaam', 'email']
   if (form) {
     requiredFields = extractRequiredKeys(form)
   }
@@ -71,7 +71,7 @@ const SSIInformationRequestPage: React.FC = () => {
     // None of them means that our wallet is used
     // Only Email is microsoft entra
     // TODO WAL-546
-    const [isManualIdentification] = useState<boolean>((!payload.firstName || payload.firstName === '') || (!payload.lastName || payload.lastName === '') || !payload.emailAddress || payload.emailAddress === '')
+    const [isManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === '') || !payload.emailAddress || payload.emailAddress === '')
 
     const onEmailValidation = () => {
         if (payload.emailAddress && payload.emailAddress?.length !== 0) {
@@ -101,13 +101,13 @@ const SSIInformationRequestPage: React.FC = () => {
         }
         const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims, form?: DataFormRow[]): Payload => {
             if (!form) {
-                if (!cs.firstName && !cs.lastName && !cs.emailAddress) {
+                if (!cs.Voornaam && !cs.Achternaam && !cs.emailAddress) {
                     return {} as Record<string, string>;
                 }
 
                 return {
-                    firstName: cs.firstName,
-                    lastName: cs.lastName,
+                    Voornaam: cs.Voornaam,
+                    Achternaam: cs.Achternaam,
                     emailAddress: cs.emailAddress
                 } as Record<string, string>;
             }
@@ -314,17 +314,17 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="firstName">First name</label>
+                      <label className='poppins-normal-10' htmlFor="Voornaam">First name</label>
                       <input
-                          id="firstName"
+                          id="Voornaam"
                           type="text"
                           placeholder='First name'
-                          readOnly={!!payload.firstName && !!state?.data?.vp_token}
-                          className={`${(!!payload.firstName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                          defaultValue={payload.firstName}
+                          readOnly={!!payload.Voornaam && !!state?.data?.vp_token}
+                          className={`${(!!payload.Voornaam && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
+                          defaultValue={payload.Voornaam}
                           onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
                             ...payload,
-                            firstName: event.target.value
+                            Voornaam: event.target.value
                           })}
                       />
                     </div>
@@ -333,17 +333,17 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="lastName">Last name</label>
+                      <label className='poppins-normal-10' htmlFor="Achternaam">Last name</label>
                       <input
-                          id="lastName"
+                          id="Achternaam"
                           type="text"
                           placeholder='Last name'
-                          readOnly={!!payload?.lastName && !!state?.data?.vp_token}
-                          className={`${(!!payload.lastName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                          defaultValue={payload.lastName}
+                          readOnly={!!payload?.Achternaam && !!state?.data?.vp_token}
+                          className={`${(!!payload.Achternaam && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
+                          defaultValue={payload.Achternaam}
                           onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
                             ...payload,
-                            lastName: event.target.value
+                            Achternaam: event.target.value
                           })}
                       />
                     </div>

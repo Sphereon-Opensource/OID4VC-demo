@@ -25,7 +25,10 @@ export function loadJsonFiles<T>({path}: { path: string }): {
                 asObject[name] = object
                 asArray.push(object)
             } catch (e) {
-                throw new Error(`An error occurred while reading JSON config file ${jsonFilePath}: ${e.message}`)
+                if (e instanceof Error) {
+                    throw new Error(`An error occurred while reading JSON config file ${jsonFilePath}: ${e.message}`)
+                }
+                throw e
             }
         }
     })

@@ -14,8 +14,8 @@ import {useMediaQuery} from "react-responsive";
 import {Sequencer} from "../../router/sequencer"
 
 type State = {
-    firstName: string
-    lastName: string
+    Voornaam: string
+    Achternaam: string
     emailAddress: string
     isManualIdentification: boolean
 }
@@ -83,7 +83,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 flexGrow: 1,
                                 textAlign: 'center'
                             }}
-                            title={t('sharing_data_success_right_pane_title', {firstName: state?.firstName}).split('\n')}
+                            title={t('sharing_data_success_right_pane_title', {Voornaam: state?.Voornaam}).split('\n')}
                             lines={t(`${config.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
                         />
                     </Trans>

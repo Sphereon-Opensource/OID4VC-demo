@@ -148,7 +148,7 @@
         [
           {
             "id": "ssi_information_request_page_form_company_name",
-            "key": "companyName",
+            "key": "Bedrijfsnaam",
             "title": "ssi_information_request_page_form_company_name_title",
             "type": "string",
             "required": true
@@ -166,7 +166,7 @@
         [
           {
             "id": "ssi_information_request_page_form_company_location",
-            "key": "companyLocation",
+            "key": "Bedrijfslocatie",
             "title": "ssi_information_request_page_form_company_location_title",
             "type": "string",
             "required": true
@@ -175,14 +175,14 @@
         [
           {
           "id": "ssi_information_request_page_first_name_director",
-            "key": "firstName",
+            "key": "Voornaam",
           "title": "ssi_information_request_page_form_first_name_director_title",
             "type": "string",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name_director",
-            "key": "lastName",
+            "key": "Achternaam",
             "title": "ssi_information_request_page_form_last_name_director_title",
             "type": "string",
             "required": true
@@ -200,7 +200,7 @@
         [
           {
             "id": "ssi_information_request_page_form_date_of_birth",
-            "key": "dataOfBirth",
+            "key": "Geboortedatum",
             "title": "ssi_information_request_page_form_date_of_birth_title",
             "type": "date",
             "required": true
