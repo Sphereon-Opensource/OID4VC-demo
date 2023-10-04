@@ -70,6 +70,7 @@ const SSIInformationRequestPage: React.FC = () => {
     // Manually is only when all of them need to be filled by the user
     // None of them means that our wallet is used
     // Only Email is microsoft entra
+    // TODO WAL-546
     const [isManualIdentification] = useState<boolean>((!payload.firstName || payload.firstName === '') || (!payload.lastName || payload.lastName === '') || !payload.emailAddress || payload.emailAddress === '')
 
     const onEmailValidation = () => {
