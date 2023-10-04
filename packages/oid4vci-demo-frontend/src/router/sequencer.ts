@@ -54,6 +54,7 @@ export class Sequencer {
         b. because the user can go to that pages using the browser buttons or history and the sequencer needs to know which page the user is actually on
     */
     public setCurrentRoute(route: string, navigateFunction: NavigateFunction) {
+        console.log()
         this.navigateFunction = navigateFunction
         const defaultRoute = this.getDefaultRoute()
         for (const step of this.sequenceConfig.steps) {

@@ -1,10 +1,10 @@
 {
   "general": {
-    "credentialName": "CoC credential",
+    "credentialName": "KvK Inschrijving",
     "issueCredentialType": "KvkInschrijving",
     "baseUrl": "https://kvk.demo.sphereon.com/agent",
-    "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "CoC credential",
+    "verifierUrl": "https://kvk.demo.sphereon.com/verifier",
+    "verifierUrlCaption": "KvK Inschrijving",
     "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
   },
   "pages": {
@@ -106,18 +106,19 @@
       },
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#202537",
+          "backgroundColor": "#005371",
           "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
         }
       }
     },
     "SSICredentialIssuedSuccessPage": {
-      "photoLeft": "notary/guest_credential.svg",
-      "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
+      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
+      "photoRight": "undraw_messenger_re_8bky_1.svg"
     },
     "SSIInformationSharedSuccessPage": {
-      "photoLeft": "notary/guest_credential.svg",
-      "photoRight": "notary/undraw_certification_re_ifll_grey.svg",
+      "photoLeft": "image_4.svg",
+      "photoLeftManual": "image_4.svg",
+      "photoRight": "undraw_certification_re_ifll_1.svg",
       "mobile": {
         "logo": {
           "src": "notary/logo.svg",
@@ -127,38 +128,41 @@
         }
       },
       "logo": {
-        "src": "notary/guest_credential.svg",
-        "alt": "Van Auckland Notary",
-        "width": 700,
-        "height": 700
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
       },
-      "backgroundColor": "#BEBEBE"
+      "backgroundColor": "#005371"
     },
     "SSICredentialIssueRequestPage": {
       "photoManual": "notary/guest_credential.svg",
       "photoWallet": "notary/guest_credential.svg"
     },
     "SSIInformationRequestPage": {
-      "photo": "notary/guest_credential.svg",
-      "photoManual":"notary/guest_credential.svg",
-      "text_top_of_image": "common_left_pane_title",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
-      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
+      "sharing_data_right_pane_paragraph": "coc_sharing_data_right_pane_top_paragraph",
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 150,
+          "height": 150
+        }
+      },
       "form": [
         [
           {
             "id": "ssi_information_request_page_form_company_name",
             "key": "Bedrijfsnaam",
             "title": "ssi_information_request_page_form_company_name_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_coc_number",
-            "key": "cocNumber",
-            "title": "ssi_information_request_page_form_coc_number_title",
             "type": "string",
             "required": true
           }
@@ -191,7 +195,7 @@
         [
           {
             "id": "ssi_information_request_page_form_place_of_birth",
-            "key": "placeOfBirth",
+            "key": "Geboorteplaats",
             "title": "ssi_information_request_page_form_place_of_birth_title",
             "type": "string",
             "required": true
@@ -200,48 +204,32 @@
         [
           {
             "id": "ssi_information_request_page_form_date_of_birth",
-            "key": "Geboortedatum",
+            "key": "Geboortdatum",
             "title": "ssi_information_request_page_form_date_of_birth_title",
             "type": "date",
             "required": true
           }
         ]
-      ],
-      "mobile": {
-        "logo": {
-          "src": "notary/logo.svg",
-          "alt": "notary",
-          "width": 200,
-          "height": 200
-        }
-      },
-      "logo": {
-        "src": "notary/guest_credential.svg",
-        "alt": "Van Auckland Notary",
-        "width": 700,
-        "height": 700
-      },
-      "backgroundColor": "#BEBEBE"
+      ]
     },
     "SSILandingPage": {
-      "photoLeft": "notary/landing_manual_grey.svg",
-      "photoRight": "notary/landing_wallet_grey.svg",
+      "photoLeft": "landing_manual.svg",
+      "photoRight": "landing_wallet.svg",
       "logo": {
-        "src": "notary/logo.svg",
-        "alt": "notary",
-        "width": 125,
-        "height": 125
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 150,
+        "height": 150
       },
       "styles": {
         "mainContainer": {
-          "backgroundColor": "white"
+          "backgroundColor": "#005371"
         },
         "leftCardView": {
-          "textColor": "#FBFBFB",
-          "backgroundColor": "#326D85"
+          "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
         },
         "rightCardView": {
-          "textColor": "#FBFBFB",
+          "textColor": "#303030",
           "buttonType": "primary"
         }
       }
@@ -286,22 +274,25 @@
     "SSICardView": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#326D85",
+          "backgroundColor": "#FBFBFB",
           "textColor": "#FBFBFB"
+        },
+        "secondaryButton": {
+          "backgroundColor": "#062058"
         }
       }
     },
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#E84461"
+          "backgroundColor": "#005371"
         }
       }
     },
     "SSISecondaryButton": {
       "styles": {
         "mainContainer": {
-          "color": "#E84461"
+          "color": "#062058"
         }
       }
     },

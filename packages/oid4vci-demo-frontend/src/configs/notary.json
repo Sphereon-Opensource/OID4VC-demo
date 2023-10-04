@@ -180,7 +180,7 @@
         [
           {
             "id": "ssi_information_request_page_form_place_of_birth",
-            "key": "placeOfBirth",
+            "key": "Geboorteplaats",
             "title": "ssi_information_request_page_form_place_of_birth_title",
             "type": "string",
             "required": true

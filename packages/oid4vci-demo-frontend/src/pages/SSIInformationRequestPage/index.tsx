@@ -71,7 +71,8 @@ const SSIInformationRequestPage: React.FC = () => {
     // None of them means that our wallet is used
     // Only Email is microsoft entra
     // TODO WAL-546
-    const [isManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === '') || !payload.emailAddress || payload.emailAddress === '')
+    const [isManualIdentification, setManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === ''))
+    //const [isManualIdentification, setManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === '') || !payload.emailAddress || payload.emailAddress === '')
 
     const onEmailValidation = () => {
         if (payload.emailAddress && payload.emailAddress?.length !== 0) {
@@ -169,6 +170,7 @@ const SSIInformationRequestPage: React.FC = () => {
             const max = Math.max(...payload.map(p => Object.keys(p).length))
             const authPayload = payload.filter(p => Object.keys(p).length === max)[0]
             setPayload(authPayload)
+            setManualIdentification((!authPayload.Voornaam || authPayload.Voornaam === '') || (!authPayload.Achternaam || authPayload.Achternaam === '')) // FIXME
         }
     }, [state?.data?.vp_token])
 
