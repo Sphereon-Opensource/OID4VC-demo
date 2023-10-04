@@ -163,7 +163,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         <Text
                             style={{flexGrow: 1}}
                             className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                            lines={t('credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                            lines={t(config.bottomParagraph ? config.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                         />
                     </Mobile>
                 </div>
