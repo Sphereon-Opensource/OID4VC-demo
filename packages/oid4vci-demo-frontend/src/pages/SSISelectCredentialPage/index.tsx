@@ -20,6 +20,7 @@ import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "react-responsive";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Pagination} from 'swiper';
+import {Sequencer} from "../../router/sequencer"
 
 const short = require('short-uuid');
 
@@ -29,7 +30,7 @@ const SSISelectCredentialPage: React.FC = () => {
     const [endpointMetadata, setEndpointMetadata] = useState<EndpointMetadataResult>()
     const [supportedCredentials, setSupportedCredentials] = useState<Map<string, Array<IBasicCredentialLocaleBranding>>>(new Map())
     const [cardElements, setCardElements] = useState<Array<ReactElement>>([])
-    const [payload] = useState<Payload>(null)
+    const [payload] = useState<Payload>({})
     const [isManualIdentification] = useState<boolean>(false)
     const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation()

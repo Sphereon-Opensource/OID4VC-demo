@@ -65,6 +65,7 @@ import {
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
+import * as process from "process"
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -184,13 +185,14 @@ if (IS_OID4VP_ENABLED) {
         endpointOpts: {
             globalAuth: {
                 authentication: {
-                    enabled: true,
+                    enabled: false,
                     strategy: 'bearer-auth'
                 },
                 secureSiopEndpoints: false
             },
             webappCreateAuthRequest: {
                 webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                path: `${process.env.OID4VP_WEBAPP_BASE_PATH}` ?? '', // FIXME
                 siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             }
         }
@@ -212,8 +214,8 @@ if (IS_OID4VCI_ENABLED) {
         // const importIssuerOpts = await Promise.all(importIssuerPersistArgs.map(async opt => issuerPersistToInstanceOpts(opt)))
         oid4vciStore.defaultOpts = defaultOpts
         oid4vciStore.importIssuerOpts(importIssuerPersistArgs)
-
     }
+
     oid4vciInstanceOpts.asArray.map(async opts => issuerPersistToInstanceOpts(opts).then(async instanceOpt => {
                 const oid4vciRest = await OID4VCIRestAPI.init({
                         context,

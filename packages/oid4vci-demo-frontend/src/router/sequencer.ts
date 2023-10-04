@@ -110,7 +110,7 @@ export class Sequencer {
             }
             this.currentStep = executeStep
             await this.next(outState)
-        } catch (e: Error) {
+        } catch (e: any) {
             throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
         }
     }

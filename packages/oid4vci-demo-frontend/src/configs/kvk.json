@@ -1,0 +1,310 @@
+{
+  "general": {
+    "credentialName": "CoC credential",
+    "issueCredentialType": "KvkInschrijving",
+    "baseUrl": "https://kvk.demo.sphereon.com/agent",
+    "verifierUrl": "https://sphereon.com",
+    "verifierUrlCaption": "CoC credential",
+    "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
+  },
+  "pages": {
+    "SSIDownloadPage": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "SSICredentialVerifyRequestPage": {
+      "photoRight": "undraw_messenger_re_8bky_1.svg",
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      }
+    },
+    "SSISelectCredentialPage": {
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "kvk.demo.sphereon.com",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#202537",
+          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
+        }
+      }
+    },
+    "SSICredentialIssuedSuccessPage": {
+      "photoLeft": "notary/guest_credential.svg",
+      "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
+    },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "notary/guest_credential.svg",
+      "photoRight": "notary/undraw_certification_re_ifll_grey.svg",
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 200,
+          "height": 200
+        }
+      },
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
+    },
+    "SSICredentialIssueRequestPage": {
+      "photoManual": "notary/guest_credential.svg",
+      "photoWallet": "notary/guest_credential.svg"
+    },
+    "SSIInformationRequestPage": {
+      "photo": "notary/guest_credential.svg",
+      "photoManual":"notary/guest_credential.svg",
+      "text_top_of_image": "common_left_pane_title",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "form": [
+        [
+          {
+            "id": "ssi_information_request_page_form_company_name",
+            "key": "companyName",
+            "title": "ssi_information_request_page_form_company_name_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_coc_number",
+            "key": "cocNumber",
+            "title": "ssi_information_request_page_form_coc_number_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_company_location",
+            "key": "companyLocation",
+            "title": "ssi_information_request_page_form_company_location_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+          "id": "ssi_information_request_page_first_name_director",
+            "key": "firstName",
+          "title": "ssi_information_request_page_form_first_name_director_title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "id": "ssi_information_request_page_form_last_name_director",
+            "key": "lastName",
+            "title": "ssi_information_request_page_form_last_name_director_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_place_of_birth",
+            "key": "placeOfBirth",
+            "title": "ssi_information_request_page_form_place_of_birth_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_date_of_birth",
+            "key": "dataOfBirth",
+            "title": "ssi_information_request_page_form_date_of_birth_title",
+            "type": "date",
+            "required": true
+          }
+        ]
+      ],
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 200,
+          "height": 200
+        }
+      },
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
+    },
+    "SSILandingPage": {
+      "photoLeft": "notary/landing_manual_grey.svg",
+      "photoRight": "notary/landing_wallet_grey.svg",
+      "logo": {
+        "src": "notary/logo.svg",
+        "alt": "notary",
+        "width": 125,
+        "height": 125
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "white"
+        },
+        "leftCardView": {
+          "textColor": "#FBFBFB",
+          "backgroundColor": "#326D85"
+        },
+        "rightCardView": {
+          "textColor": "#FBFBFB",
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "sequencer": {
+    "steps": [
+      {
+        "id": "verifyRequest",
+        "operation": "navigate",
+        "path": "/credentials/verify/request",
+        "nextId": "infoRequest",
+        "isDefaultRoute": true
+      },
+      {
+        "id": "infoRequest",
+        "operation": "navigate",
+        "path": "/information/request",
+        "nextId": "credentialOffer"
+      },
+      {
+        "id": "credentialOffer",
+        "operation": "execute",
+        "action": "create-credential-offer",
+        "nextId": "issueRequest"
+      },
+      {
+        "id": "issueRequest",
+        "operation": "navigate",
+        "path": "/credentials/issue/request",
+        "nextId": "issueSuccess"
+      },
+      {
+        "id": "issueSuccess",
+        "operation": "navigate",
+        "path": "/credentials/issue/success"
+      }
+    ]
+  },
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#326D85",
+          "textColor": "#FBFBFB"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#E84461"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#E84461"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://kvk.demo.sphereon.com/issuer",
+  "correlationId": "https://kvk.demo.sphereon.com/agent",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://kvk.demo.sphereon.com/issuer",
-    "credential_endpoint": "https://kvk.demo.sphereon.com/issuer/credentials",
+    "credential_issuer": "https://kvk.demo.sphereon.com/agent",
+    "credential_endpoint": "https://kvk.demo.sphereon.com/agent/credentials",
     "display": [
       {
         "name": "Kamer van koophandel",
