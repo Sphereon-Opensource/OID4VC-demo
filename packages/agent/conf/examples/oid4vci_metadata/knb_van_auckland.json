@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://notary.demo.sphereon.com/issuer",
+  "correlationId": "https://notary.demo.sphereon.com/agent",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://notary.demo.sphereon.com/issuer",
-    "credential_endpoint": "https://notary.demo.sphereon.com/issuer/credentials",
+    "credential_issuer": "https://notary.demo.sphereon.com/agent",
+    "credential_endpoint": "https://notary.demo.sphereon.com/agent/credentials",
     "display": [
       {
         "name": "Van Auckland notaries",
