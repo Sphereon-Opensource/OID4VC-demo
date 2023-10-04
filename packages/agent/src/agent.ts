@@ -192,7 +192,7 @@ if (IS_OID4VP_ENABLED) {
             },
             webappCreateAuthRequest: {
                 webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
-                path: `${process.env.OID4VP_WEBAPP_BASE_PATH}` ?? '', // FIXME
+                //path: `${process.env.OID4VP_WEBAPP_BASE_PATH}` ?? '', // FIXME
                 siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             }
         }
