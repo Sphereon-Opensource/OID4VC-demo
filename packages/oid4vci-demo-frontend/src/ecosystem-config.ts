@@ -29,7 +29,7 @@ function getEcosystemPageOrComponentConfig(pageOrComponent: string, config?: VCI
     if (!config) {
         config = getCurrentEcosystemConfig()
     }
-        if (pageOrComponent in config.pages) {
+    if (pageOrComponent in config.pages) {
         return config.pages[pageOrComponent as keyof VCIConfigPages]
     } else if (pageOrComponent in config.components) {
         return config.components[pageOrComponent as keyof VCIConfigComponents]

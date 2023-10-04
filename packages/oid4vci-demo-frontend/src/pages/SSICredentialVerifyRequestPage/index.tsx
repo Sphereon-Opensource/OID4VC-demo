@@ -15,7 +15,7 @@ import {
 } from "../../ecosystem-config";
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useMediaQuery} from "react-responsive";
-import {NonMobile} from "../../index";
+import {Mobile, NonMobile} from "../../index";
 import agent from "../../agent";
 
 export interface QRCodePageProperties {
@@ -123,17 +123,23 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         flexDirection: 'column',
                         height: '70%',
                         marginBottom: '25%',
-                        marginTop: '25%'
+                        marginTop: '25%',
+                        alignItems: 'center'
                     }}>
+
                         <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
+                            {/*Whether the QR code is shown (mobile) is handled in the component itself */}
                             {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
                                                        onSignInComplete={onSignInComplete}
                                                        setQrCodeData={setDeepLink}/>}
                         </div>
+
                         <DeepLink style={{flexGrow: 1}} link={deepLink}/>
                     </div>
-                    <Text style={{flexGrow: 1, maxWidth: 378}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                          lines={t(config.bottomParagraph ? config.bottomParagraph : 'credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
+                    <Mobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                                  lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}/></Mobile>
+                    <NonMobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                                     lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/></NonMobile>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',

@@ -241,7 +241,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             className={"poppins-normal-14"}
                             style={{maxWidth: 313, textAlign: 'center'}}
                         >
-                            {t(config.sharing_data_right_pane_paragraph? config.sharing_data_right_pane_paragraph: 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
+                            {t(config.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
                         </text>
                     </div>
                     <div/>

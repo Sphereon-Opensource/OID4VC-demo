@@ -1,5 +1,6 @@
 {
   "common_left_pane_title": "\"Digital identity is the passport to the\nvirtual world, where convenience and\nconnectivity effortlessly intertwine.\"",
+  "credentials_right_pane_bottom_paragraph_mobile": "Please click the button to store your credential in a wallet.\nGo back to this screen afterwards to continue",
   "credentials_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR\nscanner to accept and store your credential.",
   "credentials_right_pane_top_paragraph": "Let's add a {{credentialName}} Credential\nto your wallet.",
   "credentials_right_pane_top_title": "Secure your {{credentialName}} Credential",
@@ -9,7 +10,9 @@
   "credentials_success_right_pane_title": "Congratulations!",
   "credential_verify_request_right_pane_top_title": "Provide details",
   "credential_verify_request_right_pane_top_paragraph": "In order to issue a credential we need to get\nsome information from your wallet.",
+  "button_open_from_wallet": "Open wallet",
   "credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR\nscanner to provide information.",
+  "credential_verify_request_right_pane_bottom_paragraph_mobile": "Please click the button to open a wallet\nGo back to this screen afterwards to continue.",
   "credential_verify_request_right_pane_button_caption": "To manual entry",
   "download_app_right_pane_button_caption": "Get your credential",
   "download_app_right_pane_paragraph": "Please download one of the below DDIP\ncompliant SSI Wallets if you haven't yet",

@@ -133,7 +133,7 @@
     },
     "SSIInformationRequestPage": {
       "photo": "notary/guest_credential.svg",
-      "photoManual": "notary/guest_credential.svg",
+      "photoManual":"notary/guest_credential.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
@@ -207,11 +207,18 @@
           "width": 200,
           "height": 200
         }
-      }
+      },
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
     },
     "SSILandingPage": {
-      "photoLeft": "triall/landing_manual_grey.svg",
-      "photoRight": "triall/landing_wallet_grey.svg",
+      "photoLeft": "notary/landing_manual_grey.svg",
+      "photoRight": "notary/landing_wallet_grey.svg",
       "logo": {
         "src": "notary/logo.svg",
         "alt": "notary",
