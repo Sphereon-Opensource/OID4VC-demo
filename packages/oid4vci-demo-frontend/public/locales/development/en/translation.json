@@ -57,5 +57,7 @@
   "coc_qrcode_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
   "coc_sharing_data_right_pane_title": "Share your details",
   "coc_sharing_data_right_pane_top_paragraph": "Almost there! Please provide any missing details if necessary.",
-  "coc_credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button."
+  "coc_credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
+  "ssi_credentials_landing_page_title": "Get credentials",
+  "ssi_credentials_landing_page_text": "You can receive the credentials below in your wallet. Select a credential and follow the necessary steps."
 }

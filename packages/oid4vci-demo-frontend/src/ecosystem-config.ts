@@ -56,6 +56,9 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentCon
 
 export interface SSICredentialsLandingPageConfig extends PageOrComponentConfig {
     logo?: ImageProperties
+    mobile?: {
+        logo?: ImageProperties
+    }
     backgroundColor?: string
     pageTitle: string
     text: string
