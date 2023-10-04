@@ -162,6 +162,7 @@ export interface SSICredentialCardConfig extends PageOrComponentConfig {
     route: string
     description?: string
     backgroundColor?: string
+    backgroundImage?: string
     logo?: ImageProperties
 }
 

@@ -235,6 +235,7 @@
           "name": "Notary credential",
           "route": "/information/request",
           "description": "Van Aukland notary",
+          "backgroundImage": "/home/sadjad/programming/vdx/OID4VC-demo/packages/oid4vci-demo-frontend/public/background/notary.svg",
           "logo":{
             "src": "notary/logo.svg",
             "alt": "notary",
@@ -246,6 +247,7 @@
           "name": "KVK credential",
           "route": "https://kvk.demo.sphereon.com",
           "description": "Kamer van Koophandel",
+          "backgroundImage": "/home/sadjad/programming/vdx/OID4VC-demo/packages/oid4vci-demo-frontend/public/background/kvk.svg",
           "logo":{
             "src": "notary/logo.svg",
             "alt": "notary",
@@ -257,6 +259,7 @@
           "name": "Bank account credential",
           "route": "https://babylon.demo.sphereon.com",
           "description": "Babylon bank",
+          "backgroundImage": "/home/sadjad/programming/vdx/OID4VC-demo/packages/oid4vci-demo-frontend/public/background/bank.svg",
           "logo":{
             "src": "notary/logo.svg",
             "alt": "notary",

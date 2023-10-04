@@ -28,7 +28,7 @@ const AppRouter: React.FC = () => {
                         <Route
                                 key={value.name}
                                 path={`/credentials/${value.name}`}
-                                element={<> {window.location.href = value.route} </>}
+                                // element={<> {window.location.href = value.route} </>}
                         />
                 ))}
             </Routes>

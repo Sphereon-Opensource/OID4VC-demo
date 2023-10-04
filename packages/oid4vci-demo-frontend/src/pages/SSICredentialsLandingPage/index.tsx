@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SSICardView from '../../components/SSICardView';
-import {ButtonType} from '../../types';
+import { SSIMiniCardView } from '@sphereon/ui-components.ssi-react';
 import {useTranslation} from 'react-i18next';
 import {
     getCurrentEcosystemPageOrComponentConfig,
@@ -15,11 +14,11 @@ const SSICredentialsLandingPage: React.FC = () => {
     const navigate = useNavigate();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
-    const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialsLandingPage') as SSICredentialsLandingPageConfig
-
+    const config: SSICredentialsLandingPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialsLandingPage') as SSICredentialsLandingPageConfig
     const onCredentialCardClick = async (value: SSICredentialCardConfig): Promise<void> => {
         navigate(`/credentials/${value.name}`);
     }
+    console.log(config)
     return (
             <div style={{
                 display: 'flex',
@@ -27,7 +26,6 @@ const SSICredentialsLandingPage: React.FC = () => {
                 justifyContent: 'center',
                 flex: 1,
                 height: '100vh',
-                // backgroundColor: mainContainerStyle.backgroundColor,
                 flexDirection: 'column'
             }}>
                 <img
@@ -45,18 +43,9 @@ const SSICredentialsLandingPage: React.FC = () => {
                     width: '100%'
                 }}>
                     {config.credentials.map(value => (
-                            <SSICardView
-                                    title={value.name}
-                                    message={value.description?? ''}
-                                    image={{
-                                        src: `${config.logo?.src}`,
-                                        alt: value.name
-                                    }}
-                                    button={{
-                                        caption: t('onboarding_left_card_button_caption'),
-                                        onClick: () => onCredentialCardClick(value),
-                                        type: ButtonType.SECONDARY,
-                                    }}
+                            <SSIMiniCardView
+                                    backgroundImage={{uri: value.backgroundImage as string}}
+                                    logo={{uri: value.logo?.src as string}}
                             />
                     ))}
                 </div>
