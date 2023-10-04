@@ -115,7 +115,14 @@
     },
     "SSICredentialIssueRequestPage": {
       "photoManual":"notary/guest_credential.svg",
-      "photoWallet":"notary/guest_credential.svg"
+      "photoWallet":"notary/guest_credential.svg",
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
     },
     "SSIInformationRequestPage": {
       "photo":"notary/guest_credential.svg",
@@ -213,6 +220,51 @@
           "buttonType": "primary"
         }
       }
+    },
+    "SSICredentialsLandingPage": {
+      "logo": {
+        "src": "notary/logo.svg",
+        "alt": "notary",
+        "width": 200,
+        "height": 200
+      },
+      "pageTitle": "Get credentials",
+      "text": "You can receive the credentials below in your wallet. \u2028Select a credential and follow the necessary steps.",
+      "credentials": [
+        {
+          "name": "Notary credential",
+          "route": "/information/request",
+          "description": "Van Aukland notary",
+          "logo":{
+            "src": "notary/logo.svg",
+            "alt": "notary",
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "name": "KVK credential",
+          "route": "https://kvk.demo.sphereon.com",
+          "description": "Kamer van Koophandel",
+          "logo":{
+            "src": "notary/logo.svg",
+            "alt": "notary",
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "name": "Bank account credential",
+          "route": "https://babylon.demo.sphereon.com",
+          "description": "Babylon bank",
+          "logo":{
+            "src": "notary/logo.svg",
+            "alt": "notary",
+            "width": 200,
+            "height": 200
+          }
+        }
+      ]
     }
   },
   "components": {
