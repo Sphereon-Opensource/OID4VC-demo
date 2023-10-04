@@ -148,7 +148,7 @@ class App extends Component<AppState> {
                     <Row className="align-items-center">
 
                         <Col className="col">
-                            <h5>{subject.firstName} {subject.lastName as string} ({'company' in subject ? subject.company : 'emailAddress' in subject ? subject.emailAddress : "demo"}{!!subject2 && 'awardDetails' in subject2 ? `, ${subject2.awardDetails.awardDescription}`: ""})</h5>
+                            <h5>{subject.Voornaam} {subject.Achternaam as string} ({'company' in subject ? subject.company : 'emailAddress' in subject ? subject.emailAddress : "demo"}{!!subject2 && 'awardDetails' in subject2 ? `, ${subject2.awardDetails.awardDescription}`: ""})</h5>
                         </Col>
                         <Col className="col-1">
                             <Button style={{width: "90%", backgroundColor: 'red', color: "white"}}

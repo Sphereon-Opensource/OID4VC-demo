@@ -1,5 +1,6 @@
 import {IDIDManagerCreateArgs, IIdentifier} from "@veramo/core";
-import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth";
+import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/src/types/ISIOPv2RP";
+import {CredentialSupplierConfig} from "@sphereon/oid4vci-common"
 
 export enum KMS {
     LOCAL = 'local',
@@ -38,3 +39,16 @@ export interface IImportX509DIDArg {
 }
 
 export type OID4VPInstanceOpts = Omit<IPEXInstanceOptions, 'definition'>
+
+
+export interface CredentialSupplierConfigWithTemplateSupport extends CredentialSupplierConfig {
+    templates_base_dir?: string
+    template_mappings?: TemplateMapping[]
+}
+
+interface TemplateMapping {
+    credential_types: string[]
+    template_path: string
+    format?: string
+}
+

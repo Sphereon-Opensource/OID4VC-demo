@@ -4,7 +4,7 @@ import style from '../../components/Text/Text.module.css'
 import DeepLink from "../../components/DeepLink";
 import {useTranslation} from "react-i18next";
 import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom"
 import MemoizedAuthenticationQR from '../../components/AuthenticationQR';
 import {GenerateAuthRequestURIResponse} from '../../components/AuthenticationQR/auth-model';
 import {CreateElementArgs, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator';
@@ -22,10 +22,12 @@ export interface QRCodePageProperties {
 }
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
+    const location = useLocation()
+    const navigate = useNavigate()
     const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialVerifyRequestPage') as SSICredentialVerifyRequestPageConfig
     const {t} = useTranslation()
     const credentialName = getCurrentEcosystemGeneralConfig().credentialName
-    const navigate = useNavigate()
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const [qr, setQR] = useState<ReactElement>()
@@ -36,8 +38,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                 vp_token: data.vp_token
             }
         };
-
-        navigate('/information/request', {state});
+        sequencer.next(state)
     }
 
     const createQRCodeElement = (authRequestURIResponse: GenerateAuthRequestURIResponse): CreateElementArgs<QRType.URI, URIData> => {
@@ -120,9 +121,9 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '55%',
-                        marginBottom: '15%',
-                        marginTop: '15%',
+                        height: '70%',
+                        marginBottom: '25%',
+                        marginTop: '25%',
                         alignItems: 'center'
                     }}>
 

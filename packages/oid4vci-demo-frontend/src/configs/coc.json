@@ -131,7 +131,7 @@
       "form": [
         [{
           "id": "ssi_information_request_page_form_company_name",
-          "key": "companyName",
+          "key": "Bedrijfsnaam",
           "title": "ssi_information_request_page_form_company_name_title",
           "type": "string",
           "required": true
@@ -153,7 +153,7 @@
         [
           {
             "id": "ssi_information_request_page_first_name",
-            "key": "firstName",
+            "key": "Voornaam",
             "title": "ssi_information_request_page_form_first_name_title",
             "type": "string",
             "required": true

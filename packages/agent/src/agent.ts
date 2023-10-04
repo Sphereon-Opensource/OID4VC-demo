@@ -61,6 +61,7 @@ import {
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, ExpressSupport, StaticBearerAuth} from "@sphereon/ssi-express-support";
+import * as process from "process"
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -194,6 +195,18 @@ if (IS_OID4VP_ENABLED) {
             },
             webappCreateAuthRequest: {
                 webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            webappAuthStatus: {
+                webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            webappDeleteAuthRequest: {
+                webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            siopGetAuthRequest: {
+                siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            siopVerifyAuthResponse: {
                 siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             }
         }

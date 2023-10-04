@@ -12,7 +12,9 @@ import {useMediaQuery} from "react-responsive";
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const location = useLocation()
+    const navigate = useNavigate()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const onManualIdentificationClick = async (): Promise<void> => {
@@ -36,6 +38,11 @@ const SSILandingPage: React.FC = () => {
     const optionalRightCardViewProps = {
         ...(rightCardViewConfig.textColor && {textColor: rightCardViewConfig.textColor}),
     }
+
+    useEffect(() => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
+    }, [])
+
     return (
         <div style={{
             display: 'flex',

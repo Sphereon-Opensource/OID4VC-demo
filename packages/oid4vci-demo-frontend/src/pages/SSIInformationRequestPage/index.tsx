@@ -35,8 +35,8 @@ type State = {
 function getInitialState(form: DataFormRow[] | undefined) {
   if (!form) {
     return {
-      firstName: '',
-      lastName: '',
+      Voornaam: '',
+      Achternaam: '',
       emailAddress: ''
     }
   }
@@ -58,8 +58,9 @@ function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
 
 const SSIInformationRequestPage: React.FC = () => {
     const config: SSIInformationRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationRequestPage') as SSIInformationRequestPageConfig;
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation();
+    const navigate = useNavigate()
     const state: State | undefined = location.state;
     const {t} = useTranslation()
     const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
@@ -71,7 +72,9 @@ const SSIInformationRequestPage: React.FC = () => {
     // Manually is only when all of them need to be filled by the user
     // None of them means that our wallet is used
     // Only Email is microsoft entra
-    const [isManualIdentification] = useState<boolean>((!payload.firstName || payload.firstName === '') || (!payload.lastName || payload.lastName === '') || !payload.emailAddress || payload.emailAddress === '')
+    // TODO WAL-546
+    const [isManualIdentification, setManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === ''))
+    //const [isManualIdentification, setManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === '') || !payload.emailAddress || payload.emailAddress === '')
 
     const onEmailValidation = () => {
         if (payload.emailAddress && payload.emailAddress?.length !== 0) {
@@ -101,13 +104,13 @@ const SSIInformationRequestPage: React.FC = () => {
         }
         const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims, form?: DataFormRow[]): Payload => {
             if (!form) {
-                if (!cs.firstName && !cs.lastName && !cs.emailAddress) {
+                if (!cs.Voornaam && !cs.Achternaam && !cs.emailAddress) {
                     return {} as Record<string, string>;
                 }
 
                 return {
-                    firstName: cs.firstName,
-                    lastName: cs.lastName,
+                    Voornaam: cs.Voornaam,
+                    Achternaam: cs.Achternaam,
                     emailAddress: cs.emailAddress
                 } as Record<string, string>;
             }
@@ -169,6 +172,7 @@ const SSIInformationRequestPage: React.FC = () => {
             const max = Math.max(...payload.map(p => Object.keys(p).length))
             const authPayload = payload.filter(p => Object.keys(p).length === max)[0]
             setPayload(authPayload)
+            setManualIdentification((!authPayload.Voornaam || authPayload.Voornaam === '') || (!authPayload.Achternaam || authPayload.Achternaam === '')) // FIXME
         }
     }, [state?.data?.vp_token])
 
@@ -176,6 +180,7 @@ const SSIInformationRequestPage: React.FC = () => {
         if (state?.data?.vp_token) {
             processVPToken().catch(console.log)
         }
+        sequencer.setCurrentRoute(location.pathname, navigate)
     }, []);
 
   const generateFieldInput = (field: DataFormElement, readOnly: boolean) => (
@@ -315,17 +320,17 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="firstName">{t('ssi_information_request_page_form_name_title')}</label>
+                      <label className='poppins-normal-10' htmlFor="Voornaam">First name</label>
                       <input
-                          id="firstName"
+                          id="Voornaam"
                           type="text"
                           placeholder='First name'
-                          readOnly={!!payload.firstName && !!state?.data?.vp_token}
-                          className={`${(!!payload.firstName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                          defaultValue={payload.firstName}
+                          readOnly={!!payload.Voornaam && !!state?.data?.vp_token}
+                          className={`${(!!payload.Voornaam && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
+                          defaultValue={payload.Voornaam}
                           onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
                             ...payload,
-                            firstName: event.target.value
+                            Voornaam: event.target.value
                           })}
                       />
                     </div>
@@ -334,17 +339,17 @@ const SSIInformationRequestPage: React.FC = () => {
                       flexDirection: 'column',
                       gap: 6
                     }}>
-                      <label className='poppins-normal-10' htmlFor="lastName">{t('ssi_information_request_page_form_last_name_title')}</label>
+                      <label className='poppins-normal-10' htmlFor="Achternaam">Last name</label>
                       <input
-                          id="lastName"
+                          id="Achternaam"
                           type="text"
                           placeholder='Last name'
-                          readOnly={!!payload?.lastName && !!state?.data?.vp_token}
-                          className={`${(!!payload.lastName && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                          defaultValue={payload.lastName}
+                          readOnly={!!payload?.Achternaam && !!state?.data?.vp_token}
+                          className={`${(!!payload.Achternaam && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
+                          defaultValue={payload.Achternaam}
                           onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
                             ...payload,
-                            lastName: event.target.value
+                            Achternaam: event.target.value
                           })}
                       />
                     </div>
@@ -375,15 +380,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, config.form)}
-                            onClick={async () => {
-
-                                const state = {
-                                    ...payload,
-                                    isManualIdentification
-                                }
-
-                                navigate('/information/success', {state});
-                            }}
+                            onClick={async () => await sequencer.next({payload, isManualIdentification})}
                         />
                     </div>
                   {config.mobile?.logo && <Mobile>
