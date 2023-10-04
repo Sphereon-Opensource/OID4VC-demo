@@ -51,5 +51,11 @@
   "ssi_information_request_page_form_last_name_title": "Last name",
   "ssi_information_request_page_form_last_name_director_title": "Last name director",
   "ssi_information_request_page_form_place_of_birth_title": "Place of birth",
-  "ssi_information_request_page_form_date_of_birth_title": "Date of birth"
+  "ssi_information_request_page_form_date_of_birth_title": "Date of birth",
+  "coc_qrcode_right_pane_top_title": "Secure your {{credentialName}} credential",
+  "coc_qrcode_right_pane_top_paragraph": "Let’s add the credential to your wallet.",
+  "coc_qrcode_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
+  "coc_sharing_data_right_pane_title": "Share your details",
+  "coc_sharing_data_right_pane_top_paragraph": "Almost there! Please provide any missing details if necessary.",
+  "coc_credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button."
 }
