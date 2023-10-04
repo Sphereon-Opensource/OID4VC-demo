@@ -12,6 +12,7 @@ import {
 
 import '../../css/typography.css'
 import {
+  DataFormElement,
   DataFormRow,
   getCurrentEcosystemGeneralConfig,
   getCurrentEcosystemPageOrComponentConfig,
@@ -21,7 +22,7 @@ import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
-import {NonMobile} from "../../index";
+import {Mobile, NonMobile} from "../../index";
 import { extractRequiredKeys, transformFormConfigToEmptyObject } from "../../utils/ObjectUtils";
 
 type Payload = Record<string, string>
@@ -177,24 +178,58 @@ const SSIInformationRequestPage: React.FC = () => {
         }
     }, []);
 
-    return (
+  const generateFieldInput = (field: DataFormElement, readOnly: boolean) => (
+      <div key={field.id} style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
+        <label className="poppins-normal-10" htmlFor={field.id}>
+          {t(field.title)}
+        </label>
+        <input
+            id={field.id}
+            type={field.type === 'date' ? 'date' : field.type || 'text'}
+            style={{ width: '100%' }}
+            readOnly={readOnly}
+            className={readOnly ? '' : inputStyle.enabled}
+            defaultValue={payload[field.key]}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setPayload((prevPayload) => ({
+                  ...prevPayload,
+                  [field.key]: event.target.value,
+                }))
+            }
+        />
+      </div>
+  );
+
+
+  return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
                     width: '60%',
                     height: '100%',
-                    background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`})`,
-                    backgroundSize: 'cover',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    ...((config.photo || config.photoManual) && { background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`}) 0% 0% / cover`}),
+                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
+                    ...(config.logo && { justifyContent: 'center' })
                 }}>
-                  {!isManualIdentification && <text
-                      className={"poppins-medium-36"}
-                      style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
-                  >
-                    {t(`${config.text_top_of_image}`)}
-                  </text>}
+                    { config.logo &&
+                        <img
+                            src={config.logo.src}
+                            alt={config.logo.alt}
+                            width={config.logo.width}
+                            height={config.logo.height}
+                        />
+                    }
+                    { (config.text_top_of_image && !isManualIdentification) &&
+                         <text
+                             className={"poppins-medium-36"}
+                             style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
+                         >
+                             {t(`${config.text_top_of_image}`)}
+                         </text>
+                    }
                 </div>
             </NonMobile>
             <div style={{
@@ -227,66 +262,45 @@ const SSIInformationRequestPage: React.FC = () => {
                             className={"poppins-normal-14"}
                             style={{maxWidth: 313, textAlign: 'center'}}
                         >
-                            {t('sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
+                            {t(config.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
                         </text>
                     </div>
                     <div/>
-                  {config.form && (
-                      <div
-                          style={{
+                    {config.form && (
+                        <NonMobile>
+                          <div style={{ display: 'flex', flexDirection: 'column', textAlign: 'left', width: '327px', paddingTop: '48px', paddingBottom: '48px', gap: 23 }}>
+                            {config.form.map((row) => {
+                              const fieldWidth = 100 / row.length;
+                              return (
+                                  <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
+                                    {row.map((field) => (
+                                        <div style={{ width: `${fieldWidth}%` }}>
+                                          {generateFieldInput(field, !!state?.data?.vp_token)}
+                                        </div>
+                                    ))}
+                                  </div>
+                              );
+                            })}
+                          </div>
+                        </NonMobile>
+                    )}
+
+                    {config.form && (
+                        <Mobile>
+                          <div style={{
                             display: 'flex',
                             flexDirection: 'column',
                             textAlign: 'left',
                             width: '327px',
                             paddingTop: '48px',
                             paddingBottom: '48px',
-                            gap: 23,
+                            gap: 23
                           }}
-                      >
-                        {config.form.map((row) => {
-                          const fieldWidth = 100 / row.length;
-                          return (
-                              <div
-                                  style={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 12,
-                                  }}
-                              >
-                                {row.map((field) => (
-                                    <div
-                                        key={field.id}
-                                        style={{
-                                          display: 'flex',
-                                          flexDirection: 'column',
-                                          gap: 6,
-                                          width: `${fieldWidth}%`
-                                        }}
-                                    >
-                                      <label className="poppins-normal-10" htmlFor={field.id}>
-                                        {t(field.title)}
-                                      </label>
-                                      <input
-                                          id={field.id}
-                                          type={field.type === 'date' ? 'date' : field.type || 'text'}
-                                          style={{ width: '100%' }}
-                                          readOnly={!!payload[field.key] && !!state?.data?.vp_token}
-                                          className={`${!!payload[field.key] && !!state?.data?.vp_token ? '' : inputStyle.enabled}`}
-                                          defaultValue={payload[field.key]}
-                                          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                              setPayload((prevPayload) => ({
-                                                ...prevPayload,
-                                                [field.key]: event.target.value,
-                                              }))
-                                          }
-                                      />
-                                    </div>
-                                ))}
-                              </div>
-                          );
-                        })}
-                      </div>
-                  )}
+                          >
+                            {config.form.flatMap((row) => row).map((field) => generateFieldInput(field, !!state?.data?.vp_token))}
+                          </div>
+                        </Mobile>
+                    )}
 
                   {!config.form && <div style={{
                     display: 'flex',
@@ -372,6 +386,15 @@ const SSIInformationRequestPage: React.FC = () => {
                             }}
                         />
                     </div>
+                  {config.mobile?.logo && <Mobile>
+                    <img
+                        style={{marginTop: 116}}
+                        src={config.mobile.logo.src}
+                        alt={config.mobile.logo.alt}
+                        width={config.mobile.logo?.width ?? 150}
+                        height={config.mobile.logo?.height ?? 150}
+                    />
+                  </Mobile>}
                 </div>
             </div>
         </div>

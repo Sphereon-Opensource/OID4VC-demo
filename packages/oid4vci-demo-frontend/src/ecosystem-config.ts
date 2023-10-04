@@ -41,8 +41,10 @@ export interface PageOrComponentConfig {
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
-    photoLeft: string
+    photoLeft?: string
     photoRight: string
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
@@ -51,25 +53,39 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentCon
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentConfig {
-    photoLeft: string
-    photoLeftManual: string
+    photoLeft?: string
+    photoLeftManual?: string
     leftTextHideManual?: boolean
     textLeft?: string
     photoRight: string
     textRight?: string
+    mobile?: {
+      logo: ImageProperties
+    },
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConfig {
-    photoManual: string
-    photoWallet: string
+    photoManual?: string
+    photoWallet?: string
+    textLeft?: string
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
-    photo: string
-    photoManual: string
-    text_top_of_image: string
+    photo?: string
+    photoManual?: string
+    text_top_of_image?: string
     sharing_data_right_pane_title: string
+    sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
+    mobile?: {
+      logo: ImageProperties
+    },
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export type DataFormRow = DataFormElement[];

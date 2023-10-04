@@ -32,6 +32,7 @@
   "sharing_data_manually_right_pane_button_caption": "Share",
   "sharing_data_right_pane_button_caption": "Next",
   "sharing_data_right_pane_paragraph": "Almost there!\n Please fill out any missing data.\r\nTo claim your {{credentialName}}\ncredential.",
+  "sharing_data_fill_out_right_pane_paragraph": "To get started, please provide us with your details",
   "sharing_data_right_pane_title": "Share your data",
   "manual_fill_data_right_pane_title": "Manually fill out details",
   "sharing_data_success_right_pane_button_caption": "Next",
@@ -43,10 +44,12 @@
   "ssi_information_request_page_form_company_name_title": "Company name",
   "ssi_information_request_page_form_name_title": "First name",
   "ssi_information_request_page_form_email_title": "Email address",
-  "ssi_information_request_page_form_coc_number_title": "CoC number",
+  "ssi_information_request_page_form_coc_number_title": "Chamber of Commerce Number",
   "ssi_information_request_page_form_company_location_title": "Location of company",
-  "ssi_information_request_page_form_first_name_title": "First name director",
+  "ssi_information_request_page_form_first_name_title": "First name",
+  "ssi_information_request_page_form_first_name_director_title": "First name director",
   "ssi_information_request_page_form_last_name_title": "Last name",
+  "ssi_information_request_page_form_last_name_director_title": "Last name director",
   "ssi_information_request_page_form_place_of_birth_title": "Place of birth",
   "ssi_information_request_page_form_date_of_birth_title": "Date of birth"
 }

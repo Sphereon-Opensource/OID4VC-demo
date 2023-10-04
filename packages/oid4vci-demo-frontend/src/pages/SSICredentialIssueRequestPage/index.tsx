@@ -82,15 +82,24 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     width: '60%',
                     height: '100%',
-                    background: `url(${state?.isManualIdentification ? `${config.photoManual}` : `${config.photoWallet}`})`,
-                    backgroundSize: 'cover',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    ...((config.photoManual || config.photoWallet) && { background: `url(${state?.isManualIdentification? `${config.photoManual}` : `${config.photoWallet}`}) 0% 0% / cover`}),
+                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
+                    ...(config.logo && { justifyContent: 'center' })
                 }}>
-                    {!state?.isManualIdentification && (
+                    { config.logo &&
+                        <img
+                            src={config.logo.src}
+                            alt={config.logo.alt}
+                            width={config.logo.width}
+                            height={config.logo.height}
+                        />
+                    }
+                    {(config.textLeft && !state?.isManualIdentification) && (
                         <text
                             className={"poppins-medium-36"}
-                            style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
+                            style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}} // TODO add this to all except kvk
                         >
                             {t('common_left_pane_title')}
                         </text>
