@@ -5,7 +5,6 @@ import {useTranslation} from "react-i18next";
 import {useLocation, useNavigate} from 'react-router-dom';
 import agent from '../../agent';
 import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator';
-import SSISecondaryButton from '../../components/SSISecondaryButton';
 import {
     EcosystemGeneralConfig,
     getCurrentEcosystemGeneralConfig,
@@ -15,7 +14,7 @@ import {
 } from "../../ecosystem-config";
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
-import { NonMobile } from '../..';
+import {Mobile, NonMobile} from '../..';
 import {useMediaQuery} from "react-responsive";
 
 type State = {
@@ -143,16 +142,27 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         marginTop: '15%',
                         alignItems: 'center'
                     }}>
-                        <div style={{flexGrow: 1, marginBottom: 34}}>
-                            {qrCode}
-                        </div>
+                        <NonMobile>
+                            <div style={{flexGrow: 1, marginBottom: 34}}>
+                                {qrCode}
+                            </div>
+                        </NonMobile>
                         <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
                     </div>
-                    <Text
-                        style={{flexGrow: 1, maxWidth: 378 }}
-                        className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                        lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
-                    />
+                    <NonMobile>
+                        <Text
+                            style={{flexGrow: 1, maxWidth: 378}}
+                            className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                            lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
+                        />
+                    </NonMobile>
+                    <Mobile>
+                        <Text
+                            style={{flexGrow: 1}}
+                            className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                            lines={t(config.bottomParagraph ? config.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                        />
+                    </Mobile>
                 </div>
             </div>
         </div>

@@ -1,11 +1,11 @@
   {
   "general": {
     "credentialName": "Notary credential",
-    "issueCredentialType": "notary2023",
-    "baseUrl": "https://ssi.sphereon.com/demo/notary/issuer",
-    "verifierUrl": "https://sphereon.com",
+    "issueCredentialType": "VanAuckland2023",
+    "baseUrl": "https://notary.demo.sphereon.com/issuer",
+    "verifierUrl": "https://notary.demo.sphereon.com/verifier",
     "verifierUrlCaption": "Notary credential",
-    "downloadUrl": "https://ssi.sphereon.com/demo/notary/issuer/#/download"
+    "downloadUrl": "https://notary.demo.sphereon.com/issuer/#/download"
   },
   "pages": {
     "SSIDownloadPage": {
@@ -96,8 +96,22 @@
     },
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "notary/guest_credential.svg",
-      "photoLeftManual": "notary/guest_credential.svg",
-      "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
+      "photoRight": "notary/undraw_certification_re_ifll_grey.svg",
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 200,
+          "height": 200
+        }
+      },
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
     },
     "SSICredentialIssueRequestPage": {
       "photoManual":"notary/guest_credential.svg",
@@ -105,7 +119,6 @@
     },
     "SSIInformationRequestPage": {
       "photo":"notary/guest_credential.svg",
-      "photoManual":"notary/guest_credential.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
@@ -133,16 +146,16 @@
         }],
         [
           {
-          "id": "ssi_information_request_page_first_name",
+          "id": "ssi_information_request_page_first_name_director",
           "key": "firstName",
-          "title": "ssi_information_request_page_form_first_name_title",
+          "title": "ssi_information_request_page_form_first_name_director_title",
           "type": "string",
           "required": true
           },
           {
-            "id": "ssi_information_request_page_form_last_name",
+            "id": "ssi_information_request_page_form_last_name_director",
             "key": "lastName",
-            "title": "ssi_information_request_page_form_last_name_title",
+            "title": "ssi_information_request_page_form_last_name_director_title",
             "type": "string",
             "required": true
           }
@@ -166,14 +179,21 @@
         "logo": {
           "src": "notary/logo.svg",
           "alt": "notary",
-          "width": 150,
-          "height": 150
+          "width": 200,
+          "height": 200
         }
-      }
+      },
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
     },
     "SSILandingPage": {
-      "photoLeft": "triall/landing_manual_grey.svg",
-      "photoRight": "triall/landing_wallet_grey.svg",
+      "photoLeft": "notary/landing_manual_grey.svg",
+      "photoRight": "notary/landing_wallet_grey.svg",
       "logo": {
         "src": "notary/logo.svg",
         "alt": "notary",

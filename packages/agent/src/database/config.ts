@@ -2,7 +2,6 @@ import { Entities as VeramoDataStoreEntities, migrations as VeramoDataStoreMigra
 import { DataStoreContactEntities, DataStoreMigrations } from '@sphereon/ssi-sdk.data-store'
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
 import { KeyValueStoreEntity, kvStoreMigrations } from '@sphereon/ssi-sdk.kv-store-temp'
-import {DB_SQLITE_FILE} from "../index";
 
 
 
@@ -13,7 +12,7 @@ if (!process.env.DB_ENCRYPTION_KEY) {
 
 const sqliteConfig: SqliteConnectionOptions = {
   type: 'sqlite',
-  database: DB_SQLITE_FILE,
+  database: process.env.DB_SQLITE_FILE ?? 'database/agent_default.sqlite',
   entities: [...VeramoDataStoreEntities, ...DataStoreContactEntities, KeyValueStoreEntity],
   migrations: [...VeramoDataStoreMigrations, ...DataStoreMigrations, ...kvStoreMigrations],
   migrationsRun: false, // We run migrations from code to ensure proper ordering with Redux

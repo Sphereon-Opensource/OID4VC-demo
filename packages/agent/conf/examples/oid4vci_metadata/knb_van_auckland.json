@@ -1,0 +1,151 @@
+{
+  "correlationId": "https://notary.demo.sphereon.com/issuer",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://notary.demo.sphereon.com/issuer",
+    "credential_endpoint": "https://notary.demo.sphereon.com/issuer/credentials",
+    "display": [
+      {
+        "name": "Van Auckland notaries",
+        "description": "Van Auckland notaries Issuer"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Company information by Notary",
+            "description": "Company information by Notary",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#303030",
+            "logo": {
+              "url": "https://ibb.co/zmzgLjL",
+              "alt_text": "Van Auckland notaries logo"
+            },
+            "background_image": {
+              "url": "https://ibb.co/LgwRDFz",
+              "alt_text": "Silver card background"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Company information by Notary",
+            "description": "Company information by Notary",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#303030",
+            "logo": {
+              "url": "https://ibb.co/zmzgLjL",
+              "alt_text": "Van Auckland notaries logo"
+            },
+            "background_image": {
+              "url": "https://ibb.co/LgwRDFz",
+              "alt_text": "Silver card background"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Bedrijfsinformatie door Notaris",
+            "description": "Bedrijfsinformatie door Notaris",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#303030",
+            "logo": {
+              "url": "https://ibb.co/zmzgLjL",
+              "alt_text": "Van Auckland notaries logo"
+            },
+            "background_image": {
+              "url": "https://ibb.co/LgwRDFz",
+              "alt_text": "Silver card background"
+            }
+          }
+        ],
+        "order": [
+          "description",
+          "bedrijfsnaam",
+          "kvknummer",
+          "plaats"
+        ],
+        "credentialSubject": {
+          "description": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Description"
+              },
+              {
+                "name": "Description",
+                "locale": "en-US"
+              },
+              {
+                "name": "Beschrijving",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "bedrijfsnaam": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Bedrijfsnaam"
+              },
+              {
+                "name": "CompanyName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Bedrijfsnaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "kvknummer": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "KVK nummer"
+              },
+              {
+                "name": "COC Number",
+                "locale": "en-US"
+              },
+              {
+                "name": "KVK nummer",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "plaats": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Plaats"
+              },
+              {
+                "name": "Location",
+                "locale": "en-US"
+              },
+              {
+                "name": "Plaats",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "VanAuckland2023",
+        "types": [
+          "VerifiableCredential",
+          "NotaryCompanyVerification"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      }
+    ]
+  }
+}
