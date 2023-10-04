@@ -50,10 +50,10 @@ export interface PageOrComponentConfig {
 
 export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
     photoLeft?: string
-    photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
-    bottomParagraph?: string
+    enableRightPaneButton? : boolean
+    rightPaneButtonStepId? : string
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
@@ -110,6 +110,7 @@ export interface DataFormElement {
     key: string;
     type: DataFormInputType;
     required: boolean;
+    defaultValue?: string
 }
 
 type DataFormInputType = 'string' | 'date';

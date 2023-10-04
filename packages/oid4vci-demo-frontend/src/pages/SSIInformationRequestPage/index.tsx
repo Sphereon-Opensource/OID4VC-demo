@@ -12,6 +12,7 @@ import {
 
 import '../../css/typography.css'
 import {
+    DataFormElement,
     DataFormRow, EcosystemGeneralConfig,
     getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
@@ -26,6 +27,7 @@ import { extractRequiredKeys, transformFormConfigToEmptyObject } from "../../uti
 import {Sequencer} from "../../router/sequencer"
 
 type Payload = Record<string, string>
+type DefaultValueType = string | number | ReadonlyArray<string> | undefined
 
 type State = {
     data?: any
@@ -44,7 +46,7 @@ function getInitialState(form: DataFormRow[] | undefined) {
 }
 
 function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
-  let requiredFields = ['Voornaam', 'Achternaam', 'email']
+  let requiredFields =  Object.keys(payload) // FIXME this should be configurable
   if (form) {
     requiredFields = extractRequiredKeys(form)
   }
@@ -56,7 +58,21 @@ function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
   return true;
 }
 
-const SSIInformationRequestPage: React.FC = () => {
+function evalDefaultValue(field: DataFormElement, payload: Payload): DefaultValueType {
+    const payloadValue = payload[field.key]
+    if (payloadValue) {
+        return payloadValue
+    }
+
+    let defaultValue: DefaultValueType = field.defaultValue
+    if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
+        defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
+    }
+    payload[field.key] = `${defaultValue}`
+    return defaultValue
+}
+
+const SSIInformationRequestPage: React.FC = (defaultValue: string | undefined) => {
     const config: SSIInformationRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationRequestPage') as SSIInformationRequestPageConfig;
     const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation();
@@ -268,35 +284,39 @@ const SSIInformationRequestPage: React.FC = () => {
                                     gap: 12,
                                   }}
                               >
-                                {row.map((field) => (
-                                    <div
-                                        key={field.id}
-                                        style={{
-                                          display: 'flex',
-                                          flexDirection: 'column',
-                                          gap: 6,
-                                          width: `${fieldWidth}%`
-                                        }}
-                                    >
-                                      <label className="poppins-normal-10" htmlFor={field.id}>
-                                        {t(field.title)}
-                                      </label>
-                                      <input
-                                          id={field.id}
-                                          type={field.type === 'date' ? 'date' : field.type || 'text'}
-                                          style={{ width: '100%' }}
-                                          readOnly={!!payload[field.key] && !!state?.data?.vp_token}
-                                          className={`${!!payload[field.key] && !!state?.data?.vp_token ? '' : inputStyle.enabled}`}
-                                          defaultValue={payload[field.key]}
-                                          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                              setPayload((prevPayload) => ({
-                                                ...prevPayload,
-                                                [field.key]: event.target.value,
-                                              }))
-                                          }
-                                      />
-                                    </div>
-                                ))}
+                                {row.map((field) => {
+                                    const defaultFieldValue = evalDefaultValue(field, payload)
+                                    const fieldReadOnly = defaultFieldValue !== undefined && !!state?.data?.vp_token
+                                    return (
+                                        <div
+                                            key={field.id}
+                                            style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                gap: 6,
+                                                width: `${fieldWidth}%`
+                                            }}
+                                        >
+                                            <label className="poppins-normal-10" htmlFor={field.id}>
+                                                {t(field.title)}
+                                            </label>
+                                            <input
+                                                id={field.id}
+                                                type={field.type === 'date' ? 'date' : field.type || 'text'}
+                                                style={{width: '100%'}}
+                                                readOnly={fieldReadOnly}
+                                                className={`${fieldReadOnly ? '' : inputStyle.enabled}`}
+                                                defaultValue={defaultFieldValue}
+                                                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                                    setPayload((prevPayload) => ({
+                                                        ...prevPayload,
+                                                        [field.key]: event.target.value,
+                                                    }))
+                                                }
+                                            />
+                                        </div>
+                                    )
+                                })}
                               </div>
                           );
                         })}

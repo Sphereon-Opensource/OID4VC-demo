@@ -87,8 +87,7 @@
       }
     },
     "SSICredentialVerifyRequestPage": {
-      "photoRight": "undraw_messenger_re_8bky_1.svg",
-      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
+      "enableRightPaneButton" : false,
       "backgroundColor": "#005371",
       "logo": {
         "src": "coc/logo.svg",
@@ -181,6 +180,16 @@
             "title": "ssi_information_request_page_form_company_name_title",
             "type": "string",
             "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_coc_number",
+            "key": "KvkNummer",
+            "title": "ssi_information_request_page_form_coc_number_title",
+            "type": "string",
+            "required": true,
+            "defaultValue": "*RANDOM8"
           }
         ],
         [

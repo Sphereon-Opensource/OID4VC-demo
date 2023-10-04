@@ -13,7 +13,7 @@ import {
 } from "../../ecosystem-config"
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
-import {Mobile, NonMobile} from '../..';
+import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
 import {useMediaQuery} from "react-responsive";
 import {Sequencer} from "../../router/sequencer"
 
@@ -145,12 +145,14 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         marginTop: '15%',
                         alignItems: 'center'
                     }}>
-                        <NonMobile>
+                        <NonMobileOS>
                             <div style={{flexGrow: 1, marginBottom: 34}}>
                                 {qrCode}
                             </div>
-                        </NonMobile>
-                        <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                        </NonMobileOS>
+                        <MobileOS>
+                            <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                        </MobileOS>
                     </div>
                     <NonMobile>
                         <Text

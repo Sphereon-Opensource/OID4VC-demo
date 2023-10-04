@@ -16,6 +16,17 @@ export const NonMobile = ({children}) => {
     const isNotMobile = useMediaQuery({minWidth: 768})
     return isNotMobile ? children : null
 }
+// Mobile/NonMobile are pure screen size based and this may not work on a Galaxy S10 with 1344 x 2992 pixels
+// @ts-ignore
+export const MobileOS = ({children}) => {
+    const userAgent = window.navigator.userAgent;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) ? children : null
+}
+// @ts-ignore
+export const NonMobileOS = ({children}) => {
+    const userAgent = window.navigator.userAgent;
+    return !/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent) ? children : null
+}
 
 ReactDOM.render(
     <React.StrictMode>
