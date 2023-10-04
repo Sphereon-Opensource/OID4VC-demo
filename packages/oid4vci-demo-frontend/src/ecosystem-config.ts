@@ -1,10 +1,4 @@
 import {ImageProperties} from "./types";
-import dbc from "./configs/dbc.json";
-import energy_shr from "./configs/energy_shr.json";
-import fmdm from "./configs/fmdm.json";
-import notary from "./configs/notary.json";
-import sphereon from "./configs/sphereon.json";
-import triall from "./configs/triall.json";
 import coc from "./configs/coc.json";
 import {CSSProperties} from "react";
 import {IProps} from "./components/SSISecondaryButton";
@@ -15,25 +9,9 @@ interface VCIConfig {
     components: VCIConfigComponents
 }
 
-//todo: (VDX-251) come up with a plan to remove this part and resolve the config automatically based on the REACT_APP_ENVIRONMENT value
 export function getCurrentEcosystemConfig(): VCIConfig {
   const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon';
-  switch (ecosystem) {
-    case 'dbc':
-      return dbc as VCIConfig;
-    case 'energy_shr':
-      return energy_shr as VCIConfig;
-    case 'fmdm':
-      return fmdm as VCIConfig;
-    case 'notary':
-      return notary as VCIConfig;
-    case 'triall':
-      return triall as VCIConfig;
-    case 'coc':
-      return coc as VCIConfig;
-    default:
-      return sphereon as VCIConfig;
-  }
+  return require(`./configs/${ecosystem}.json`);
 }
 
 export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
@@ -77,12 +55,17 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentCon
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentConfig {
-    photoLeft: string
-    photoLeftManual: string
+    photoLeft?: string
+    photoLeftManual?: string
     leftTextHideManual?: boolean
     textLeft?: string
     photoRight: string
     textRight?: string
+    mobile?: {
+      logo: ImageProperties
+    },
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConfig {

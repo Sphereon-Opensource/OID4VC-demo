@@ -1,0 +1,151 @@
+{
+  "correlationId": "https://babylon.demo.sphereon.com/issuer",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://babylon.demo.sphereon.com/issuer",
+    "credential_endpoint": "https://babylon.demo.sphereon.com/issuer/credentials",
+    "display": [
+      {
+        "name": "Babylon Bank",
+        "description": "Babylon Bank Issuer"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Bank account credential",
+            "description": "Bank account credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://ibb.co/zmQsPSQ",
+              "alt_text": "Babylon bank logo"
+            },
+            "background_image": {
+              "url": "https://ibb.co/Jn4zM8x",
+              "alt_text": "Waves in shades of blue"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Bank account credential",
+            "description": "Bank account credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://ibb.co/zmQsPSQ",
+              "alt_text": "Babylon bank logo"
+            },
+            "background_image": {
+              "url": "https://ibb.co/Jn4zM8x",
+              "alt_text": "Waves in shades of blue"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Bankrekeninggegevens",
+            "description": "Bankrekeninggegevens",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://ibb.co/zmQsPSQ",
+              "alt_text": "Babylon bank logo"
+            },
+            "background_image": {
+              "url": "https://ibb.co/Jn4zM8x",
+              "alt_text": "Waves in shades of blue"
+            }
+          }
+        ],
+        "order": [
+          "description",
+          "bedrijfsnaam",
+          "bankrekeningnummer",
+          "kvknummer"
+        ],
+        "credentialSubject": {
+          "description": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Description"
+              },
+              {
+                "name": "Description",
+                "locale": "en-US"
+              },
+              {
+                "name": "Beschrijving",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "bedrijfsnaam": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Bedrijfsnaam"
+              },
+              {
+                "name": "CompanyName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Bedrijfsnaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "kvknummer": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "KVK nummer"
+              },
+              {
+                "name": "COC Number",
+                "locale": "en-US"
+              },
+              {
+                "name": "KVK nummer",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "bankrekeningnummer": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Bankrekeningnummer"
+              },
+              {
+                "name": "BankAccountNumber",
+                "locale": "en-US"
+              },
+              {
+                "name": "Bankrekeningnummer",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "BabylonBank2023",
+        "types": [
+          "VerifiableCredential",
+          "BankAccount"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      }
+    ]
+  }
+}

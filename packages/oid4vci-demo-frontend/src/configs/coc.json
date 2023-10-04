@@ -1,11 +1,11 @@
 {
   "general": {
-    "credentialName": "Sphereon Guest",
-    "issueCredentialType": "GuestCredential",
-    "baseUrl": "https://ssi.sphereon.com/demo/issuer",
-    "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
-    "verifierUrlCaption": "Sphereon demo",
-    "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
+    "credentialName": "CoC credential",
+    "issueCredentialType": "KvkInschrijving",
+    "baseUrl": "https://kvk.demo.sphereon.com/agent",
+    "verifierUrl": "https://sphereon.com",
+    "verifierUrlCaption": "CoC credential",
+    "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
   },
   "pages": {
     "SSIDownloadPage": {

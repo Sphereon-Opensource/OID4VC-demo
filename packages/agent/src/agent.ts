@@ -1,3 +1,4 @@
+import passport from 'passport'
 import {
     createAgent,
     IAgentContext,
@@ -25,7 +26,7 @@ import {SphereonKeyManager} from '@sphereon/ssi-sdk-ext.key-manager'
 import {SecretBox} from '@veramo/kms-local'
 import {SphereonKeyManagementSystem} from '@sphereon/ssi-sdk-ext.kms-local'
 import {getDbConnection} from './database'
-import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
+import {ISIOPv2RP, SIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
 import {
@@ -47,9 +48,9 @@ import {
     INTERNAL_PORT,
     IS_OID4VCI_ENABLED,
     IS_OID4VP_ENABLED, oid4vciInstanceOpts
-} from "./index";
+} from "./environment";
 import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
-import {IOID4VCIIssuer, OID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
+import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
 import {
     addDefaultsToOpts,
     createOID4VCIIssuer,
@@ -113,8 +114,9 @@ const plugins: IAgentPlugin[] = [
         keyStore: privateKeyStore,
     }),
 ]
-const oid4vpRP = await createOID4VPRP({resolver});
+let oid4vpRP : SIOPv2RP | undefined
 if (IS_OID4VP_ENABLED) {
+    oid4vpRP = await createOID4VPRP({resolver});
     if (oid4vpRP) {
         plugins.push(oid4vpRP)
     }
@@ -157,7 +159,12 @@ if (oid4vpOpts && oid4vpRP) {
 
 
 StaticBearerAuth.init('bearer-auth').addUser({name: 'demo', id: 'demo', token: 'demo'}).connectPassport()
-
+passport.serializeUser(function (user, done) {
+    done(null, user)
+})
+passport.deserializeUser(function (user, done) {
+    done(null, user!)
+})
 const expressSupport = IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED ?
     ExpressBuilder.fromServerOpts({
         hostname: INTERNAL_HOSTNAME_OR_IP,
@@ -166,6 +173,7 @@ const expressSupport = IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED ?
     })
         .withCorsConfigurer(new ExpressCorsConfigurer({}).allowOrigin('*').allowCredentials(true))
         .withPassportAuth(true)
+        .withSessionOptions({secret: 'demo'})
         .withMorganLogging()
         .build({startListening: false}) : undefined
 
