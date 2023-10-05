@@ -3,9 +3,19 @@
   "purpose": "We hebben informatie nodig van u",
   "input_descriptors": [
     {
-      "id": "01aba20d-6b8d-4ad0-95ae-28ec4267179f",
-      "name": "Rekening openen bij Babylon",
-      "purpose": "We hebben informatie verstrekt door het KvK nodig",
+      "id": "bbbbbbb-0234-4f35-9d21-251668a60950",
+      "name": "Verificatie notaris",
+      "purpose": "We hebben informatie verstrekt door uw notaris nodig",
+      "schema": [
+        {
+          "uri": "NotaryCompanyVerification"
+        }
+      ]
+    },
+    {
+      "id": "aaaaaaaa-0234-4f35-9d21-251668a60950",
+      "name": "KvK inschrijving",
+      "purpose": "We hebben uw KvK inschrijving nodig",
       "schema": [
         {
           "uri": "KvkInschrijving"
