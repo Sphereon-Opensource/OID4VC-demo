@@ -16,7 +16,7 @@ import {
     IDIDResult,
     KMS,
     UNIVERSAL_RESOLVER_RESOLVE_URL
-} from "../environment";
+} from "../index";
 import {mapIdentifierKeysToDocWithJwkSupport} from "@sphereon/ssi-sdk-ext.did-utils";
 import {
     generatePrivateKeyHex,

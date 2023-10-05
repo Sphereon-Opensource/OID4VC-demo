@@ -1,22 +1,24 @@
-import passport from 'passport'
 import {
-    createAgent,
-    IAgentContext,
-    IAgentPlugin, ICredentialIssuer, ICredentialVerifier,
-    IDataStore, IDataStoreORM,
-    IDIDManager,
-    IKeyManager,
-    IResolver,
-    TAgent
+  createAgent,
+  IAgentContext,
+  IAgentPlugin,
+  ICredentialIssuer,
+  ICredentialVerifier,
+  IDataStore,
+  IDataStoreORM,
+  IDIDManager,
+  IKeyManager,
+  IResolver,
+  TAgent
 } from '@veramo/core'
 import {
-    CredentialHandlerLDLocal,
-    LdDefaultContexts,
-    MethodNames,
-    SphereonBbsBlsSignature2020,
-    SphereonEd25519Signature2018,
-    SphereonEd25519Signature2020,
-    SphereonJsonWebSignature2020,
+  CredentialHandlerLDLocal,
+  LdDefaultContexts,
+  MethodNames,
+  SphereonBbsBlsSignature2020,
+  SphereonEd25519Signature2018,
+  SphereonEd25519Signature2020,
+  SphereonJsonWebSignature2020,
 } from '@sphereon/ssi-sdk.vc-handler-ld-local'
 import {CredentialPlugin} from '@veramo/credential-w3c'
 import {DataStore, DataStoreORM, DIDStore, KeyStore, PrivateKeyStore} from '@veramo/data-store'
@@ -26,41 +28,44 @@ import {SphereonKeyManager} from '@sphereon/ssi-sdk-ext.key-manager'
 import {SecretBox} from '@veramo/kms-local'
 import {SphereonKeyManagementSystem} from '@sphereon/ssi-sdk-ext.kms-local'
 import {getDbConnection} from './database'
-import {ISIOPv2RP, SIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
+import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
 import {
-    createDidProviders,
-    createDidResolver,
-    createOID4VPRP,
-    getDefaultDID,
-    getDefaultKid,
-    getDefaultOID4VPRPOptions,
-    getIdentifier,
-    getOrCreateDIDs,
+  createDidProviders,
+  createDidResolver,
+  createOID4VPRP,
+  getDefaultDID,
+  getDefaultKid,
+  getDefaultOID4VPRPOptions,
+  getIdentifier,
+  getOrCreateDIDs,
 } from "./utils";
 import {
-    DB_CONNECTION_NAME,
-    DB_ENCRYPTION_KEY,
-    DID_PREFIX,
-    DIDMethods,
-    INTERNAL_HOSTNAME_OR_IP,
-    INTERNAL_PORT,
-    IS_OID4VCI_ENABLED,
-    IS_OID4VP_ENABLED, oid4vciInstanceOpts
-} from "./environment";
+  DB_CONNECTION_NAME,
+  DB_ENCRYPTION_KEY,
+  DID_PREFIX,
+  DIDMethods,
+  INTERNAL_HOSTNAME_OR_IP,
+  INTERNAL_PORT,
+  IS_OID4VCI_ENABLED,
+  IS_OID4VP_ENABLED,
+  oid4vciInstanceOpts
+} from "./index";
 import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
 import {
-    addDefaultsToOpts,
-    createOID4VCIIssuer,
-    createOID4VCIStore,
-    getDefaultOID4VCIIssuerOptions,
-    issuerPersistToInstanceOpts, toImportIssuerOptions
+  addDefaultsToOpts,
+  createOID4VCIIssuer,
+  createOID4VCIStore,
+  getDefaultOID4VCIIssuerOptions,
+  issuerPersistToInstanceOpts,
+  toImportIssuerOptions
 } from "./utils/oid4vci";
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
-import {ExpressBuilder, ExpressCorsConfigurer, ExpressSupport, StaticBearerAuth} from "@sphereon/ssi-express-support";
+import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
+import * as process from "process"
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -114,9 +119,8 @@ const plugins: IAgentPlugin[] = [
         keyStore: privateKeyStore,
     }),
 ]
-let oid4vpRP : SIOPv2RP | undefined
+const oid4vpRP = await createOID4VPRP({resolver});
 if (IS_OID4VP_ENABLED) {
-    oid4vpRP = await createOID4VPRP({resolver});
     if (oid4vpRP) {
         plugins.push(oid4vpRP)
     }
@@ -159,12 +163,7 @@ if (oid4vpOpts && oid4vpRP) {
 
 
 StaticBearerAuth.init('bearer-auth').addUser({name: 'demo', id: 'demo', token: 'demo'}).connectPassport()
-passport.serializeUser(function (user, done) {
-    done(null, user)
-})
-passport.deserializeUser(function (user, done) {
-    done(null, user!)
-})
+
 const expressSupport = IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED ?
     ExpressBuilder.fromServerOpts({
         hostname: INTERNAL_HOSTNAME_OR_IP,
@@ -173,7 +172,6 @@ const expressSupport = IS_OID4VCI_ENABLED || IS_OID4VP_ENABLED ?
     })
         .withCorsConfigurer(new ExpressCorsConfigurer({}).allowOrigin('*').allowCredentials(true))
         .withPassportAuth(true)
-        .withSessionOptions({secret: 'demo'})
         .withMorganLogging()
         .build({startListening: false}) : undefined
 
@@ -187,13 +185,25 @@ if (IS_OID4VP_ENABLED) {
         endpointOpts: {
             globalAuth: {
                 authentication: {
-                    enabled: true,
+                    enabled: false,
                     strategy: 'bearer-auth'
                 },
                 secureSiopEndpoints: false
             },
             webappCreateAuthRequest: {
                 webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            webappAuthStatus: {
+                webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            webappDeleteAuthRequest: {
+                webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            siopGetAuthRequest: {
+                siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+            },
+            siopVerifyAuthResponse: {
                 siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             }
         }
@@ -215,8 +225,8 @@ if (IS_OID4VCI_ENABLED) {
         // const importIssuerOpts = await Promise.all(importIssuerPersistArgs.map(async opt => issuerPersistToInstanceOpts(opt)))
         oid4vciStore.defaultOpts = defaultOpts
         oid4vciStore.importIssuerOpts(importIssuerPersistArgs)
-
     }
+
     oid4vciInstanceOpts.asArray.map(async opts => issuerPersistToInstanceOpts(opts).then(async instanceOpt => {
                 const oid4vciRest = await OID4VCIRestAPI.init({
                         context,

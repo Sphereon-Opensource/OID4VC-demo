@@ -132,7 +132,7 @@
       "form": [
         [{
           "id": "ssi_information_request_page_form_company_name",
-          "key": "companyName",
+          "key": "Bedrijfsnaam",
           "title": "ssi_information_request_page_form_company_name_title",
           "type": "string",
           "required": true
@@ -146,7 +146,7 @@
         }],
         [{
           "id": "ssi_information_request_page_form_company_location",
-          "key": "companyLocation",
+          "key": "Bedrijfslocatie",
           "title": "ssi_information_request_page_form_company_location_title",
           "type": "string",
           "required": true
@@ -154,14 +154,14 @@
         [
           {
             "id": "ssi_information_request_page_first_name",
-            "key": "firstName",
+            "key": "Voornaam",
             "title": "ssi_information_request_page_form_first_name_title",
             "type": "string",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name",
-            "key": "lastName",
+            "key": "Achternaam",
             "title": "ssi_information_request_page_form_last_name_title",
             "type": "string",
             "required": true
@@ -176,7 +176,7 @@
         }],
         [{
           "id": "ssi_information_request_page_form_date_of_birth",
-          "key": "dataOfBirth",
+          "key": "Geboortedatum",
           "title": "ssi_information_request_page_form_date_of_birth_title",
           "type": "date",
           "required": true
@@ -213,6 +213,52 @@
         }
       }
     }
+  },
+  "sequencer": {
+    "steps": [
+      {
+        "id": "start",
+        "operation": "navigate",
+        "path": "/start",
+        "isDefaultRoute": true
+      },
+      {
+        "id": "infoRequest",
+        "operation": "navigate",
+        "path": "/information/request",
+        "nextId": "credSelect"
+      },
+      {
+        "id": "credSelect",
+        "operation": "navigate",
+        "path": "/credentials/select",
+        "nextId": "verifyRequest"
+      },
+      {
+        "id": "verifyRequest",
+        "operation": "navigate",
+        "path": "/credentials/verify/request",
+        "nextId": "credentialOffer",
+        "isDefaultRoute": true
+      },
+      {
+        "id": "credentialOffer",
+        "operation": "execute",
+        "action": "create-credential-offer",
+        "nextId": "issueRequest"
+      },
+      {
+        "id": "issueRequest",
+        "operation": "navigate",
+        "path": "/credentials/issue/request",
+        "nextId": "issueSuccess"
+      },
+      {
+        "id": "issueSuccess",
+        "operation": "navigate",
+        "path": "/credentials/issue/success"
+      }
+    ]
   },
   "components": {
     "DeepLink": {},

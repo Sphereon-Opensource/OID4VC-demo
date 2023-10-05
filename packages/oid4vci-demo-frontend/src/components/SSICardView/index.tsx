@@ -34,7 +34,9 @@ const SSICardView: React.FC<IProps> = (props: IProps) => {
         <div style={{
             borderRadius: 25,
             background: backgroundColor,
-            maxWidth: 400
+            maxWidth: 400,
+            maxHeight: isTabletOrMobile ? 300 : 700,
+            marginBottom: 20
         }}>
             <div style={{
                 marginLeft: 37,
@@ -62,7 +64,7 @@ const SSICardView: React.FC<IProps> = (props: IProps) => {
                     style={{
                         maxWidth: 313,
                         color: textColor,
-                        marginBottom: 123,
+                        marginBottom: isTabletOrMobile ? 20 : 123,
                         textAlign: 'center', ...(disabled && {opacity: 0.4})
                     }}
                 >

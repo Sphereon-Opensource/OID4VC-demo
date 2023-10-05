@@ -17,7 +17,7 @@ import Debug from 'debug'
 import { DEFINITION_ID_REQUIRED_ERROR } from './constants'
 import agent from "../../agent";
 import {useMediaQuery} from "react-responsive";
-import {NonMobile} from "../../index";
+import {NonMobile, NonMobileOS} from "../../index"
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
@@ -117,7 +117,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   render() {
     // Show the loader until we have details on which parameters to load into the QR code
     return this.state.qrCode ? (
-      <NonMobile><div>{this.state.qrCode}</div></NonMobile>
+      <NonMobileOS><div>{this.state.qrCode}</div></NonMobileOS>
     ) : (
       <BallTriangle color="#352575" height="100" width="100" />
     )
@@ -162,12 +162,10 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       agent.siopClientGetAuthStatus({
         correlationId: authRequestURIResponse?.correlationId,
         definitionId: authRequestURIResponse.definitionId
-      }).then(response => {
+      }).then((response: AuthStatusResponse) => {
         if (response.status === AuthorizationResponseStateStatus.VERIFIED) {
           clearInterval(this.authStatusHandle)
-          if (response?.payload) {
-            this.props.onSignInComplete(response.payload as AuthorizationResponsePayload)
-          }
+          this.props.onSignInComplete(response.payload!)
         }
       }).catch((error: Error) => {
         clearInterval(this.authStatusHandle)
