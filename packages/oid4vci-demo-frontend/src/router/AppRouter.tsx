@@ -22,13 +22,6 @@ const AppRouter: React.FC = () => {
                 <Route path={"/credentials/issue/request"} element={<SSICredentialIssueRequestPage/>}/>
                 <Route path={"/credentials/issue/success"} element={<SSICredentialIssuedSuccessPage/>}/>
                 <Route path={"/download"} element={<SSIDownloadPage/>}/>
-                {config.credentials.map(value => (
-                        <Route
-                                key={value.name}
-                                path={`/credentials/${value.name}`}
-                                // element={<> {window.location.href = value.route} </>}
-                        />
-                ))}
             </Routes>
         </HashRouter>
     );
