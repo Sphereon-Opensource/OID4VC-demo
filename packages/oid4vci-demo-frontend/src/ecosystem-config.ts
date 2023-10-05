@@ -50,10 +50,12 @@ export interface PageOrComponentConfig {
 
 export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
     photoLeft?: string
+    photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
     enableRightPaneButton? : boolean
     rightPaneButtonStepId? : string
+    bottomParagraph?: string
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
@@ -94,7 +96,7 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
     mobile?: {
-        logo: ImageProperties
+      logo: ImageProperties
     },
     backgroundColor?: string
     logo?: ImageProperties
