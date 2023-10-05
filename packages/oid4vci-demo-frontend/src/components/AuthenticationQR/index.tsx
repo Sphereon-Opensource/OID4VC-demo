@@ -1,23 +1,13 @@
-import React, { Component } from 'react'
-import { BallTriangle } from 'react-loader-spinner'
-import {
-  AuthorizationResponseStateStatus,
-  AuthStatusResponse,
-  GenerateAuthRequestURIResponse
-} from './auth-model'
-import {
-  CreateElementArgs,
-  QRType,
-  URIData,
-  ValueResult
-} from '@sphereon/ssi-sdk.qr-code-generator'
+import React, {Component} from 'react'
+import {BallTriangle} from 'react-loader-spinner'
+import {AuthorizationResponseStateStatus, AuthStatusResponse, GenerateAuthRequestURIResponse} from './auth-model'
+import {CreateElementArgs, QRType, URIData, ValueResult} from '@sphereon/ssi-sdk.qr-code-generator'
 
-import { AuthorizationResponsePayload } from '@sphereon/did-auth-siop'
+import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
-import { DEFINITION_ID_REQUIRED_ERROR } from './constants'
+import {DEFINITION_ID_REQUIRED_ERROR} from './constants'
 import agent from "../../agent";
-import {useMediaQuery} from "react-responsive";
-import {NonMobile, NonMobileOS} from "../../index"
+import {NonMobileOS} from "../../index"
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
@@ -49,7 +39,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   componentDidMount() {
     this.qrExpirationMs =
-      parseInt(process.env.REACT_APP_SSI_QR_CODE_EXPIRES_AFTER_SEC ?? '120') *
+      parseInt(process.env.REACT_APP_SSI_QR_CODE_EXPIRES_AFTER_SEC ?? '300') *
       1000
     // actually since the QR points to a JWT it has its own expiration value as well.
 
