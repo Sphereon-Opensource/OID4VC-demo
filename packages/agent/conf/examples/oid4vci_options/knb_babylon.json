@@ -1,6 +1,6 @@
 {
   "definitionId": "knb-babylon",
-  "correlationId": "https://babylon.demo.sphereon.com/issuer",
+  "correlationId": "https://babylon.demo.sphereon.com/agent",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

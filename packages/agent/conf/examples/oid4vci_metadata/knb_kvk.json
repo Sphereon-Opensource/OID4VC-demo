@@ -133,7 +133,7 @@
         "id": "KVK2023",
         "types": [
           "VerifiableCredential",
-          "KVKRegistration"
+          "KvkInschrijving"
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
@@ -152,9 +152,9 @@
       "template_mappings": [
         {
           "credential_types": [
-            "KVKRegistration"
+            "KvkInschrijving"
           ],
-          "template_path": "KVKRegistration.hbs",
+          "template_path": "KvkInschrijving.hbs",
           "format": "jwt_vc_json"
         }
     ]
