@@ -123,8 +123,16 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     <Text
                         style={{textAlign: 'center'}}
                         className={style.pReduceLineSpace}
-                        title={state?.isManualIdentification ? t('credentials_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n') : t('qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')}
-                        lines={state?.isManualIdentification ? t('credentials_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n') : t('qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')}
+                        title={
+                            state?.isManualIdentification
+                                ? t('credentials_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
+                                : t(config.title ? config.title : 'qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
+                        }
+                        lines={
+                            state?.isManualIdentification
+                                ? t('credentials_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
+                                : t(config.topParagraph ? config.topParagraph : 'qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
+                        }
                     />
                     <div style={{
                         display: 'flex',
@@ -143,16 +151,16 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     </div>
                     <NonMobile>
                         <Text
-                            style={{flexGrow: 1}}
+                            style={{flexGrow: 1, maxWidth: 378}}
                             className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                            lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t('qrcode_right_pane_bottom_paragraph').split('\n')}
+                            lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
                         />
                     </NonMobile>
                     <Mobile>
                         <Text
                             style={{flexGrow: 1}}
                             className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                            lines={t('credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                            lines={t(config.bottomParagraph ? config.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                         />
                     </Mobile>
                 </div>
