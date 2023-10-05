@@ -61,7 +61,7 @@ export class Sequencer {
             switch (step.operation) {
                 case VCIOperation.NAVIGATE:
                     const path = (step as VCINavigationStep).path
-                    if (path === route || (route === '/' && path == defaultRoute)) {
+                    if (path === route || (route === '/' && path === defaultRoute)) {
                         this.currentStep = step
                         return
                     }

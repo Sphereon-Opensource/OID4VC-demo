@@ -72,7 +72,7 @@ function evalDefaultValue(field: DataFormElement, payload: Payload): DefaultValu
     return defaultValue
 }
 
-const SSIInformationRequestPage: React.FC = (defaultValue: string | undefined) => {
+const SSIInformationRequestPage: React.FC = () => {
     const config: SSIInformationRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationRequestPage') as SSIInformationRequestPageConfig;
     const [sequencer] = useState<Sequencer>(new Sequencer())
     const location = useLocation();

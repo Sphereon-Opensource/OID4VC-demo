@@ -30,7 +30,7 @@ export const NonMobileOS = ({children}) => {
 
 ReactDOM.render(
     <React.StrictMode>
-      <Suspense>
+      <Suspense  fallback={<div>Loading...</div>}>
         <AppRouter />
       </Suspense>
     </React.StrictMode>,
