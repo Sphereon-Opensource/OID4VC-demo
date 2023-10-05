@@ -157,6 +157,7 @@
           "template_path": "KvkInschrijving.hbs",
           "format": "jwt_vc_json"
         }
-    ]
+      ]
+    }
   }
 }
