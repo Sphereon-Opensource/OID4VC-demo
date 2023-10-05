@@ -87,27 +87,23 @@
       }
     },
     "SSICredentialVerifyRequestPage": {
-      "enableRightPaneButton" : false,
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "backgroundColor": "#005371",
       "logo": {
         "src": "coc/logo.svg",
         "alt": "chamber of commerce logo",
         "width": 383,
         "height": 383
-      }
-    },
-    "SSISelectCredentialPage": {
-      "logo": {
-        "src": "coc/logo.svg",
-        "alt": "kvk.demo.sphereon.com",
-        "width": 167,
-        "height": 70
       },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#005371",
-          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
-        }
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EDEFFF",
+        "image": "undraw_profile_details_re_ch9r 1.svg"
       }
     },
     "SSICredentialIssuedSuccessPage": {
@@ -117,22 +113,7 @@
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "image_4.svg",
       "photoLeftManual": "image_4.svg",
-      "photoRight": "undraw_certification_re_ifll_1.svg",
-      "mobile": {
-        "logo": {
-          "src": "notary/logo.svg",
-          "alt": "notary",
-          "width": 200,
-          "height": 200
-        }
-      },
-      "logo": {
-        "src": "coc/logo.svg",
-        "alt": "chamber of commerce logo",
-        "width": 383,
-        "height": 383
-      },
-      "backgroundColor": "#005371"
+      "photoRight": "undraw_certification_re_ifll_1.svg"
     },
     "SSICredentialIssueRequestPage": {
       "title": "coc_qrcode_right_pane_top_title",
@@ -149,9 +130,11 @@
         "logo": {
           "src": "coc/logo.svg",
           "alt": "chamber of commerce logo",
-          "width": 150,
-          "height": 150
-        }
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EDEFFF",
+        "image": "undraw_certification_re_ifll_1.svg"
       }
     },
     "SSIInformationRequestPage": {
@@ -163,14 +146,6 @@
         "alt": "chamber of commerce logo",
         "width": 383,
         "height": 383
-      },
-      "mobile": {
-        "logo": {
-          "src": "coc/logo.svg",
-          "alt": "chamber of commerce logo",
-          "width": 150,
-          "height": 150
-        }
       },
       "form": [
         [
@@ -203,9 +178,9 @@
         ],
         [
           {
-          "id": "ssi_information_request_page_first_name_director",
+            "id": "ssi_information_request_page_first_name_director",
             "key": "Voornaam",
-          "title": "ssi_information_request_page_form_first_name_director_title",
+            "title": "ssi_information_request_page_form_first_name_director_title",
             "type": "string",
             "required": true
           },
@@ -235,7 +210,16 @@
             "required": true
           }
         ]
-      ]
+      ],
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EDEFFF"
+      }
     },
     "SSILandingPage": {
       "photoLeft": "landing_manual.svg",
@@ -248,7 +232,7 @@
       },
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#005371"
+          "backgroundColor": "#202537"
         },
         "leftCardView": {
           "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
