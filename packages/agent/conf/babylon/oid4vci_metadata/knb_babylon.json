@@ -2,8 +2,8 @@
   "correlationId": "https://bank.demo.sphereon.com/agent",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://bank.demo.sphereon.com/agent/issuer",
-    "credential_endpoint": "https://bank.demo.sphereon.com/agent/issuer/credentials",
+    "credential_issuer": "https://bank.demo.sphereon.com/agent",
+    "credential_endpoint": "https://bank.demo.sphereon.com/agent/credentials",
     "display": [
       {
         "name": "Babylon Bank",
