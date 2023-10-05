@@ -1,6 +1,6 @@
 {
   "common_left_pane_title": "\"Digital identity is the passport to the\nvirtual world, where convenience and\nconnectivity effortlessly intertwine.\"",
-  "credentials_right_pane_bottom_paragraph_mobile": "Please click the button to store your credential in a wallet.\nGo back to this screen afterwards to continue",
+  "credentials_right_pane_bottom_paragraph_mobile": "Please click the button to store your credential.\nGo back to this screen afterwards to continue",
   "credentials_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR\nscanner to accept and store your credential.",
   "credentials_right_pane_top_paragraph": "Let's add a {{credentialName}} Credential\nto your wallet.",
   "credentials_right_pane_top_title": "Secure your {{credentialName}} Credential",

@@ -106,6 +106,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConf
         logo?: ImageProperties
         backgroundColor?: string
         image?: string
+        bottomParagraph?: string
     },
 }
 
