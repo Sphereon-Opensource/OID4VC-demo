@@ -87,7 +87,6 @@
       }
     },
     "SSICredentialVerifyRequestPage": {
-      "photoRight": "undraw_messenger_re_8bky_1.svg",
       "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "backgroundColor": "#005371",
       "logo": {
