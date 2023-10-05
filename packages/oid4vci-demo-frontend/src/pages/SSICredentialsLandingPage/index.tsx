@@ -87,7 +87,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                                     </div>
                                 </Mobile>
                                 <NonMobile>
-                                    <div style={{display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+                                    <div style={{display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>
                                         <SSIMiniCardView
                                                 backgroundImage={{uri: value.backgroundImage}}
                                                 logo={{
