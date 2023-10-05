@@ -59,6 +59,14 @@
     line-height: 29px !important;
 }
 
+.inter-normal-48 {
+    font-family: 'Inter', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 48px !important;
+    line-height: normal !important;
+}
+
 .normal-400 {
     font-weight: 400 !important;
 }

@@ -10,8 +10,8 @@ export interface IButtonProps {
 }
 
 const SSIPrimaryButton: React.FC<IButtonProps> = (props: IButtonProps) => {
-    const config = getCurrentEcosystemPageOrComponentConfig('SSIPrimaryButton') as SSIPrimaryButtonConfig;
-    const mainContainerStyle = config.styles.mainContainer;
+const config = getCurrentEcosystemPageOrComponentConfig('SSIPrimaryButton') as SSIPrimaryButtonConfig;
+const mainContainerStyle = config.styles.mainContainer;
     const {caption, disabled = false, onClick, style} = props
     // TODO text
     return (

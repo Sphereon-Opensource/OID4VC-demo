@@ -1,0 +1,326 @@
+{
+  "general": {
+    "credentialName": "KvK Inschrijving",
+    "issueCredentialType": "KvkInschrijving",
+    "baseUrl": "https://kvk.demo.sphereon.com/agent",
+    "verifierUrl": "https://kvk.demo.sphereon.com/verifier",
+    "verifierUrlCaption": "KvK Inschrijving",
+    "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
+  },
+  "pages": {
+    "SSIDownloadPage": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "SSICredentialVerifyRequestPage": {
+      "enableRightPaneButton" : false,
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      }
+    },
+    "SSISelectCredentialPage": {
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "kvk.demo.sphereon.com",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#005371",
+          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
+        }
+      }
+    },
+    "SSICredentialIssuedSuccessPage": {
+      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
+      "photoRight": "undraw_messenger_re_8bky_1.svg"
+    },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "image_4.svg",
+      "photoLeftManual": "image_4.svg",
+      "photoRight": "undraw_certification_re_ifll_1.svg",
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 200,
+          "height": 200
+        }
+      },
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "backgroundColor": "#005371"
+    },
+    "SSICredentialIssueRequestPage": {
+      "title": "coc_qrcode_right_pane_top_title",
+      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 150,
+          "height": 150
+        }
+      }
+    },
+    "SSIInformationRequestPage": {
+      "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
+      "sharing_data_right_pane_paragraph": "coc_sharing_data_right_pane_top_paragraph",
+      "backgroundColor": "#005371",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 150,
+          "height": 150
+        }
+      },
+      "form": [
+        [
+          {
+            "id": "ssi_information_request_page_form_company_name",
+            "key": "Bedrijfsnaam",
+            "title": "ssi_information_request_page_form_company_name_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_coc_number",
+            "key": "KvkNummer",
+            "title": "ssi_information_request_page_form_coc_number_title",
+            "type": "string",
+            "required": true,
+            "defaultValue": "*RANDOM8"
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_company_location",
+            "key": "Bedrijfslocatie",
+            "title": "ssi_information_request_page_form_company_location_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+          "id": "ssi_information_request_page_first_name_director",
+            "key": "Voornaam",
+          "title": "ssi_information_request_page_form_first_name_director_title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "id": "ssi_information_request_page_form_last_name_director",
+            "key": "Achternaam",
+            "title": "ssi_information_request_page_form_last_name_director_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_place_of_birth",
+            "key": "Geboorteplaats",
+            "title": "ssi_information_request_page_form_place_of_birth_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_date_of_birth",
+            "key": "Geboortdatum",
+            "title": "ssi_information_request_page_form_date_of_birth_title",
+            "type": "date",
+            "required": true
+          }
+        ]
+      ]
+    },
+    "SSILandingPage": {
+      "photoLeft": "landing_manual.svg",
+      "photoRight": "landing_wallet.svg",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 150,
+        "height": 150
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#005371"
+        },
+        "leftCardView": {
+          "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
+        },
+        "rightCardView": {
+          "textColor": "#303030",
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "sequencer": {
+    "steps": [
+      {
+        "id": "verifyRequest",
+        "operation": "navigate",
+        "path": "/credentials/verify/request",
+        "nextId": "infoRequest",
+        "isDefaultRoute": true
+      },
+      {
+        "id": "infoRequest",
+        "operation": "navigate",
+        "path": "/information/request",
+        "nextId": "credentialOffer"
+      },
+      {
+        "id": "credentialOffer",
+        "operation": "execute",
+        "action": "create-credential-offer",
+        "nextId": "issueRequest"
+      },
+      {
+        "id": "issueRequest",
+        "operation": "navigate",
+        "path": "/credentials/issue/request",
+        "nextId": "issueSuccess"
+      },
+      {
+        "id": "issueSuccess",
+        "operation": "navigate",
+        "path": "/credentials/issue/success"
+      }
+    ]
+  },
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#FBFBFB",
+          "textColor": "#FBFBFB"
+        },
+        "secondaryButton": {
+          "backgroundColor": "#062058"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#005371"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#062058"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

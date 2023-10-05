@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {ReactElement, useEffect, useState} from 'react'
 import {Text} from "../../components/Text";
 import style from '../../components/Text/Text.module.css'
 import {useTranslation} from "react-i18next";
@@ -9,13 +9,13 @@ import {
     EcosystemGeneralConfig,
     getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
-    SSICredentialIssueRequestPageConfig,
-    SSISecondaryButtonConfig
-} from "../../ecosystem-config";
+    SSICredentialIssueRequestPageConfig, SSISecondaryButtonConfig
+} from "../../ecosystem-config"
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
-import {Mobile, NonMobile} from '../..';
+import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
 import {useMediaQuery} from "react-responsive";
+import {Sequencer} from "../../router/sequencer"
 
 type State = {
     uri: string,
@@ -24,23 +24,24 @@ type State = {
 }
 
 const SSICredentialIssueRequestPage: React.FC = () => {
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const navigate = useNavigate()
     const config: SSICredentialIssueRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssueRequestPage') as SSICredentialIssueRequestPageConfig
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
     const buttonConfig = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const location = useLocation();
     const state: State | undefined = location.state;
-    const [qrCode, setQrCode] = useState<JSX.Element>();
-
+    const [qrCode, setQrCode] = useState<ReactElement>();
 
     useEffect(() => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
         const intervalId = setInterval(() => {
             agent.oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
                 .then((status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
-                        navigate({pathname: '/credentials/issue/success'});
+                        sequencer.next()
                     } else if (status.status === IssueStatus.ERROR) {
                         // TODO: Add feedback to user
                         console.error(status.error)
@@ -82,6 +83,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     width: '60%',
                     height: '100%',
+                    background: `url(${state?.isManualIdentification ? `${config.photoManual}` : `${config.photoWallet}`})`,
+                    backgroundSize: 'cover',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((config.photoManual || config.photoWallet) && { background: `url(${state?.isManualIdentification? `${config.photoManual}` : `${config.photoWallet}`}) 0% 0% / cover`}),
@@ -142,18 +145,20 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         marginTop: '15%',
                         alignItems: 'center'
                     }}>
-                        <NonMobile>
+                        <NonMobileOS>
                             <div style={{flexGrow: 1, marginBottom: 34}}>
                                 {qrCode}
                             </div>
-                        </NonMobile>
-                        <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                        </NonMobileOS>
+                        <MobileOS>
+                            <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                        </MobileOS>
                     </div>
                     <NonMobile>
                         <Text
-                            style={{flexGrow: 1, maxWidth: 378}}
+                        style={{flexGrow: 1, maxWidth: 378 }}
                             className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                            lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
+                        lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
                         />
                     </NonMobile>
                     <Mobile>
