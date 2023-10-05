@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect, useState} from 'react'
+import React, {ReactElement, useState} from 'react'
 import {Text} from "../../components/Text";
 import style from '../../components/Text/Text.module.css'
 import DeepLink from "../../components/DeepLink";
@@ -6,8 +6,6 @@ import {useTranslation} from "react-i18next";
 import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
 import {useLocation, useNavigate} from "react-router-dom"
 import MemoizedAuthenticationQR from '../../components/AuthenticationQR';
-import {GenerateAuthRequestURIResponse} from '../../components/AuthenticationQR/auth-model';
-import {CreateElementArgs, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator';
 import {
     getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
@@ -16,12 +14,7 @@ import {
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useMediaQuery} from "react-responsive";
 import {Mobile, MobileOS, NonMobile} from "../../index"
-import agent from "../../agent";
 import {Sequencer} from "../../router/sequencer"
-
-export interface QRCodePageProperties {
-    setData: React.Dispatch<React.SetStateAction<AuthorizationResponsePayload | undefined>>
-}
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const location = useLocation()
@@ -32,9 +25,8 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const [sequencer] = useState<Sequencer>(new Sequencer())
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const [qr, setQR] = useState<ReactElement>()
-
     const onSignInComplete = async (data: AuthorizationResponsePayload) => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
         console.log('onSignInComplete')
         const state = {
             data: {
@@ -45,45 +37,8 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
         await sequencer.next(state)
     }
 
-    const createQRCodeElement = (authRequestURIResponse: GenerateAuthRequestURIResponse): CreateElementArgs<QRType.URI, URIData> => {
-        const qrProps: CreateElementArgs<QRType.URI, URIData> = {
-            data: {
-                type: QRType.URI,
-                object: authRequestURIResponse.authRequestURI,
-                id: authRequestURIResponse.correlationId
-            },
-            onGenerate: (/*result: ValueResult<QRType.URI, URIData>*/) => {
-            },
-            renderingProps: {
-                bgColor: 'white',
-                fgColor: '#000000',
-                level: 'L',
-                size: 300,
-                title: 'Sign in'
-            }
-        }
-        return qrProps
-    }
-
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-
-        if (qr) {
-            return
-        }
-        agent
-            .siopClientCreateAuthRequest()
-            .then((authRequestURIResponse) => {
-                //this.props.setQrCodeData(authRequestURIResponse.authRequestURI)
-                agent
-                    .qrURIElement(createQRCodeElement(authRequestURIResponse))
-                    .then((qrCode) => {
-                        setQR(qrCode)
-                    })
-            }).catch(error => console.log(error))
-    }, [qr]);
-
     return (
+
 
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
