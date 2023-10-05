@@ -48,21 +48,21 @@ const SSICredentialsLandingPage: React.FC = () => {
                 </NonMobile>
                 <div style={{
                     maxWidth: 810,
-                    justifyContent: 'space-around',
-                    alignContent: 'space-around',
+                    gap: 14,
                     flexDirection: 'column',
                     display: 'flex',
                     width: '70%',
-                    height: '70%'
+                    height: '70%',
+                    alignItems: 'center'
                 }}>
                     <Mobile>
                         <img
+                                style={{marginBottom: 30}}
                                 src={config.mobile?.logo?.src ?? 'wallets/sphereon_logo.png'}
                                 alt={config.mobile?.logo?.alt ?? 'logo'}
                                 width={config.mobile?.logo?.width ?? 100}
                                 height={config.mobile?.logo?.height ?? 100}
                         />
-
                     </Mobile>
                     <div style={{display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', width: '300px', marginLeft: 'auto', marginRight: 'auto'}}>
                         <span style={{fontWeight: '600', fontSize: '24px'}}>{t(config.pageTitle)}</span><br/>
@@ -71,7 +71,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                     {config.credentials.map(value => (
                             <div onClick={()=>handleCredentialClick(value)}>
                                 <Mobile>
-                                    <div style={{display: 'flex', justifyContent: 'space-evenly', alignContent: 'space-between'}}>
+                                    <div style={{display: 'flex', justifyContent: 'space-evenly', alignContent: 'space-between', cursor: 'pointer'}}>
                                         <SSIMiniCardView
                                             backgroundImage={{uri: value.backgroundImage}}
                                             logo={{

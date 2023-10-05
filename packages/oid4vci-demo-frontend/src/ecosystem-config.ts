@@ -1,5 +1,4 @@
 import {ImageProperties} from "./types";
-import coc from "./configs/coc.json";
 import {CSSProperties} from "react";
 import {IProps} from "./components/SSISecondaryButton";
 
@@ -214,6 +213,7 @@ export interface EcosystemGeneralConfig {
     downloadUrl?: string
     credentialName: string
     issueCredentialType: string
+    redirectUrl?: string
 }
 
 export interface SSITextConfig extends PageOrComponentConfig {

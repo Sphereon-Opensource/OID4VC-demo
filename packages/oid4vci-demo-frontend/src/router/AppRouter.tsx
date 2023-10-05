@@ -4,8 +4,6 @@ import SSICredentialIssueRequestPage from '../pages/SSICredentialIssueRequestPag
 import SSIInformationSuccessPage from '../pages/SSIInformationSuccessPage';
 import SSICredentialVerifyRequestPage from '../pages/SSICredentialVerifyRequestPage';
 import SSICredentialIssuedSuccessPage from '../pages/SSICredentialIssuedSuccessPage';
-import SSILandingPage from '../pages/SSILandingPage';
-
 import SSIInformationRequestPage from '../pages/SSIInformationRequestPage';
 import SSIDownloadPage from "../pages/SSIDownloadPage";
 import {getCurrentEcosystemPageOrComponentConfig, SSICredentialsLandingPageConfig} from "../ecosystem-config";
