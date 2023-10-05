@@ -19,11 +19,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://ibb.co/zmQsPSQ",
+              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
               "alt_text": "Babylon bank logo"
             },
             "background_image": {
-              "url": "https://ibb.co/Jn4zM8x",
+              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
               "alt_text": "Waves in shades of blue"
             }
           },
@@ -34,11 +34,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://ibb.co/zmQsPSQ",
+              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
               "alt_text": "Babylon bank logo"
             },
             "background_image": {
-              "url": "https://ibb.co/Jn4zM8x",
+              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
               "alt_text": "Waves in shades of blue"
             }
           },
@@ -49,11 +49,11 @@
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://ibb.co/zmQsPSQ",
+              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
               "alt_text": "Babylon bank logo"
             },
             "background_image": {
-              "url": "https://ibb.co/Jn4zM8x",
+              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
               "alt_text": "Waves in shades of blue"
             }
           }
@@ -144,7 +144,19 @@
           "ES256",
           "ES256K",
           "EdDSA"
-        ]
+        ],
+        "credential_supplier_config": {
+          "templates_base_dir": "templates/babylon",
+          "template_mappings": [
+            {
+              "credential_types": [
+                "BankAccount"
+              ],
+              "template_path": "BankAccount.hbs",
+              "format": "jwt_vc_json"
+            }
+          ]
+        }
       }
     ]
   }

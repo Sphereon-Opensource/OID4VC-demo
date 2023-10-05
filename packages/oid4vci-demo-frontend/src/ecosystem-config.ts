@@ -107,11 +107,12 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
 export type DataFormRow = DataFormElement[];
 
 export interface DataFormElement {
-  id: string;
-  title: string;
-  key: string;
-  type: DataFormInputType;
-  required: boolean;
+    id: string;
+    title: string;
+    key: string;
+    type: DataFormInputType;
+    required: boolean;
+    defaultValue?: string
 }
 
 type DataFormInputType = 'string' | 'date';
