@@ -5,7 +5,8 @@
     "baseUrl": "https://notary.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Notary credential",
-    "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download"
+    "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download",
+    "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
     "SSIDownloadPage": {
@@ -128,7 +129,8 @@
       "backgroundColor": "#BEBEBE"
     },
     "SSICredentialIssueRequestPage": {
-      "photoWallet": "notary/guest_credential.svg",
+      "photoManual":"notary/guest_credential.svg",
+      "photoWallet":"notary/guest_credential.svg",
       "logo": {
         "src": "notary/guest_credential.svg",
         "alt": "Van Auckland Notary",

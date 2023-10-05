@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from './router/AppRouter';
 import './localization/i18n'
-
 import './index.css';
 import {useMediaQuery} from "react-responsive";
 
@@ -29,6 +28,7 @@ export const NonMobileOS = ({children}) => {
 }
 
 ReactDOM.render(
+    // @ts-ignore
     <React.StrictMode>
       <Suspense  fallback={<div>Loading...</div>}>
         <AppRouter />

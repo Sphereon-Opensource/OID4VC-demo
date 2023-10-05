@@ -102,7 +102,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     {(config.textLeft && !state?.isManualIdentification) && (
                         <text
                             className={"poppins-medium-36"}
-                            style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}} // TODO add this to all except kvk
+                            style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}} // TODO add this to all except knb_kvk
                         >
                             {t('common_left_pane_title')}
                         </text>

@@ -65,7 +65,7 @@
           "plaats"
         ],
         "credentialSubject": {
-          "description": {
+          "Omschrijving": {
             "value_type": "string",
             "display": [
               {
@@ -130,7 +130,7 @@
             ]
           }
         },
-        "id": "KVK2023",
+        "id": "knb-kvk",
         "types": [
           "VerifiableCredential",
           "KvkInschrijving"
@@ -148,7 +148,7 @@
       }
     ],
     "credential_supplier_config": {
-      "templates_base_dir": "templates/auckland",
+      "templates_base_dir": "templates/knb_kvk",
       "template_mappings": [
         {
           "credential_types": [
@@ -157,6 +157,7 @@
           "template_path": "KvkInschrijving.hbs",
           "format": "jwt_vc_json"
         }
-    ]
+      ]
+    }
   }
 }

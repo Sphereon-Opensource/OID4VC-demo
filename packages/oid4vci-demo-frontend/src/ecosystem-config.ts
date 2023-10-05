@@ -35,7 +35,7 @@ function getEcosystemPageOrComponentConfig(pageOrComponent: string, config?: VCI
     } else if (pageOrComponent in config.components) {
         return config.components[pageOrComponent as keyof VCIConfigComponents]
     }
-    throw new Error("config for this page/component doesn't exist")
+    throw new Error(`config for ${pageOrComponent} doesn't exist`)
 }
 
 export function getEcosystemSequenceConfig(config?: VCIConfig): VCIConfigSequence {
@@ -50,15 +50,28 @@ export interface PageOrComponentConfig {
 
 export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
     photoLeft?: string
+    photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
     enableRightPaneButton? : boolean
     rightPaneButtonStepId? : string
+    bottomParagraph?: string
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
     photoLeft: string
     photoRight: string
+}
+
+export interface SSICredentialsLandingPageConfig extends PageOrComponentConfig {
+    logo?: ImageProperties
+    mobile?: {
+        logo?: ImageProperties
+    }
+    backgroundColor?: string
+    pageTitle: string
+    text: string
+    credentials: SSICredentialCardConfig[]
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentConfig {
@@ -94,7 +107,7 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
     mobile?: {
-        logo: ImageProperties
+      logo: ImageProperties
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -174,6 +187,15 @@ export interface SSISelectCredentialPageConfig extends PageOrComponentConfig {
 export interface SSICardConfig extends PageOrComponentConfig {
 }
 
+export interface SSICredentialCardConfig extends PageOrComponentConfig {
+    name: string
+    route: string
+    description?: string
+    backgroundColor?: string
+    backgroundImage?: string
+    logo?: ImageProperties
+}
+
 export interface SSIDeepLinkConfig extends PageOrComponentConfig {
 }
 
@@ -214,6 +236,7 @@ export interface EcosystemGeneralConfig {
     downloadUrl?: string
     credentialName: string
     issueCredentialType: string
+    redirectUrl?: string
 }
 
 export interface SSITextConfig extends PageOrComponentConfig {
@@ -228,6 +251,7 @@ export interface VCIConfigPages {
     SSIInformationRequestPage: SSIInformationRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
+    SSICredentialsLandingPage: SSICredentialsLandingPageConfig
 }
 
 export interface VCIConfigSequence {

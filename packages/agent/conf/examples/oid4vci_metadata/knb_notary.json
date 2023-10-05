@@ -65,18 +65,18 @@
           "plaats"
         ],
         "credentialSubject": {
-          "description": {
+          "Omschrijving": {
             "value_type": "string",
             "display": [
               {
-                "name": "Description"
+                "name": "Omschrijving"
               },
               {
                 "name": "Description",
                 "locale": "en-US"
               },
               {
-                "name": "Beschrijving",
+                "name": "Omschrijving",
                 "locale": "nl-NL"
               }
             ]
@@ -130,7 +130,7 @@
             ]
           }
         },
-        "id": "VanAuckland2023",
+        "id": "knb-notary",
         "types": [
           "VerifiableCredential",
           "NotaryCompanyVerification"
@@ -148,7 +148,7 @@
       }
     ],
     "credential_supplier_config": {
-      "templates_base_dir": "templates/auckland",
+      "templates_base_dir": "templates/knb_notary",
       "template_mappings": [
         {
           "credential_types": [
