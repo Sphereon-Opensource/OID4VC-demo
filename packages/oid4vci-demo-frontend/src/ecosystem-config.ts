@@ -66,6 +66,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentCon
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
     photoLeft: string
     photoRight: string
+    rightPaneButtonStepId? : string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageOrComponentConfig {
@@ -248,7 +249,7 @@ export interface EcosystemGeneralConfig {
     downloadUrl?: string
     credentialName: string
     issueCredentialType: string
-    redirectUrl?: string
+
 }
 
 export interface SSITextConfig extends PageOrComponentConfig {

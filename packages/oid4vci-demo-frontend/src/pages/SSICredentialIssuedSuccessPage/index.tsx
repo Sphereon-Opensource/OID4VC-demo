@@ -75,7 +75,9 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={t('credentials_success_right_pane_button_caption', {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
                             // style={{width: '250px'}}
-                            onClick={async () => window.location.href = generalConfig.redirectUrl ?? generalConfig.verifierUrl ?? generalConfig.baseUrl ?? 'https://sphereon.com'}
+                            onClick={async () => {
+                                config.rightPaneButtonStepId && await sequencer.goToStep(config.rightPaneButtonStepId)
+                            }}
                         />
                     </div>
                 </div>
