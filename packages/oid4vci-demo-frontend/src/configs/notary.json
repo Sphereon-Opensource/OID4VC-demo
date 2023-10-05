@@ -1,10 +1,10 @@
 {
   "general": {
-    "credentialName": "Notary credential",
-    "issueCredentialType": "VanAuckland2023",
+    "credentialName": "Notaris Credential",
+    "issueCredentialType": "NotaryCompanyVerification",
     "baseUrl": "https://notary.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Notary credential",
+    "verifierUrlCaption": "Notaris credential",
     "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
