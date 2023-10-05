@@ -10,6 +10,7 @@ export const Mobile = ({children}) => {
     const isMobile = useMediaQuery({maxWidth: 767})
     return isMobile ? children : null
 }
+
 // @ts-ignore
 export const NonMobile = ({children}) => {
     const isNotMobile = useMediaQuery({minWidth: 768})

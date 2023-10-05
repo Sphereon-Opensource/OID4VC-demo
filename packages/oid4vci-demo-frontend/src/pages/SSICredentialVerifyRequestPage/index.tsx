@@ -38,8 +38,6 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     }
 
     return (
-
-
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
                 <div style={{
@@ -65,10 +63,19 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                 display: 'flex',
                 width: `${isTabletOrMobile ? '100%' : '40%'}`,
                 height: '100%',
-                backgroundColor: '#FFFFFF',
+                flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center'
+                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
+                {(isTabletOrMobile && config?.logo) &&
+                    <img
+                        src={config.mobile?.logo?.src}
+                        alt={config.mobile?.logo?.alt}
+                        width={config.mobile?.logo?.width ?? 150}
+                        height={config.mobile?.logo?.height ?? 150}
+                    />
+                }
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -83,11 +90,10 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         display: 'flex',
                         flexDirection: 'column',
                         height: '70%',
-                        marginBottom: '25%',
-                        marginTop: '25%',
+                        marginBottom: isTabletOrMobile ? 40 : '25%',
+                        marginTop: isTabletOrMobile ? 40 : '25%',
                         alignItems: 'center'
                     }}>
-
                         <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
                             {/*Whether the QR code is shown (mobile) is handled in the component itself */}
                             {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
@@ -95,14 +101,18 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                                        setQrCodeData={setDeepLink}/>}
                         </div>
                         <MobileOS>
-                            <DeepLink style={{flexGrow: 1}} link={deepLink}/>
+                            <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                { config.mobile?.image &&
+                                    <img src={config.mobile?.image} alt="success"/>
+                                }
+                                <DeepLink style={{flexGrow: 1}} link={deepLink}/>
+                            </div>
                         </MobileOS>
                     </div>
                     <Mobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                   lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}/></Mobile>
                     <NonMobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                      lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/></NonMobile>
-
                     {config.enableRightPaneButton && (
                         <div style={{display: 'flex', justifyContent: 'center'}}>
                             <SSIPrimaryButton

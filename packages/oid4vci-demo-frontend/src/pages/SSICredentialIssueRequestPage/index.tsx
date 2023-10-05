@@ -113,18 +113,28 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 display: 'flex',
                 width: `${isTabletOrMobile ? '100%' : '40%'}`,
                 height: '100%',
-                backgroundColor: '#FFFFFF',
                 alignItems: 'center',
-                justifyContent: 'center'
+                flexDirection: 'column',
+                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
+                {(isTabletOrMobile && config.mobile?.logo) &&
+                    <img
+                        src={config.mobile.logo.src}
+                        alt={config.mobile.logo.alt}
+                        width={config.mobile.logo?.width ?? 150}
+                        height={config.mobile.logo?.height ?? 150}
+                    />
+                }
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
+                    ...(isTabletOrMobile && { height: '100%' }),
                     alignItems: 'center'
                 }}>
                     <Text
-                        style={{textAlign: 'center'}}
+                        style={{textAlign: 'center', ...(isTabletOrMobile && { marginRight: 24, marginLeft: 24 })}}
                         className={style.pReduceLineSpace}
                         title={
                             state?.isManualIdentification
@@ -141,8 +151,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         height: '55%',
-                        marginBottom: '15%',
-                        marginTop: '15%',
+                        marginBottom: isTabletOrMobile ? 40 : '15%',
+                        marginTop: isTabletOrMobile ? 40 : '15%',
                         alignItems: 'center'
                     }}>
                         <NonMobileOS>
@@ -151,21 +161,26 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             </div>
                         </NonMobileOS>
                         <MobileOS>
-                            <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                            <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                { config.mobile?.image &&
+                                    <img src={config.mobile?.image} alt="success"/>
+                                }
+                                <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                            </div>
                         </MobileOS>
                     </div>
                     <NonMobile>
-                        <Text
-                        style={{flexGrow: 1, maxWidth: 378 }}
-                            className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                        lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
-                        />
+                            <Text
+                                style={{flexGrow: 1, maxWidth: 378 }}
+                                className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                                lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
+                            />
                     </NonMobile>
                     <Mobile>
                         <Text
-                            style={{flexGrow: 1}}
+                            style={{flexGrow: 1, marginLeft: 24, marginRight: 24}}
                             className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                            lines={t(config.bottomParagraph ? config.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                            lines={t(config.mobile?.bottomParagraph ? config.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                         />
                     </Mobile>
                 </div>
