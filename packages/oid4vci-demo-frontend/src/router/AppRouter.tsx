@@ -1,17 +1,15 @@
 import React, {useState} from 'react'
 import {HashRouter, Route, Routes} from 'react-router-dom'
 import SSICredentialIssueRequestPage from '../pages/SSICredentialIssueRequestPage'
-
 import SSICredentialVerifyRequestPage from '../pages/SSICredentialVerifyRequestPage'
 import SSICredentialIssuedSuccessPage from '../pages/SSICredentialIssuedSuccessPage'
 import SSILandingPage from '../pages/SSILandingPage'
-
 import SSIInformationRequestPage from '../pages/SSIInformationRequestPage'
 import SSIDownloadPage from "../pages/SSIDownloadPage"
 import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
-import {Sequencer} from "./sequencer"
 import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage";
+import {Sequencer} from "./sequencer"
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -24,7 +22,6 @@ export const routes: Record<string, any> = {
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
     '/download': <SSIDownloadPage/>
 }
-
 
 const AppRouter: React.FC = () => {
     const [sequencer] = useState<Sequencer>(new Sequencer())

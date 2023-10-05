@@ -131,6 +131,63 @@
         }
       }
     },
+    "SSICredentialsLandingPage": {
+      "logo": {
+        "src": "wallets/sphereon_logo.svg",
+        "alt": "sphereon.com",
+        "width": 171,
+        "height": 36
+      },
+      "mobile": {
+        "logo": {
+          "src": "wallets/sphereon_logo.png",
+          "alt": "sphereon.com",
+          "width": 171,
+          "height": 36
+        }
+      },
+      "backgroundColor": "#202537",
+      "pageTitle": "ssi_credentials_landing_page_title",
+      "text": "ssi_credentials_landing_page_text",
+      "credentials": [
+        {
+          "name": "Notary credential",
+          "route": "https://notary.demo.sphereon.com",
+          "description": "Van Aukland notary",
+          "backgroundImage": "background/notary.svg",
+          "logo":{
+            "src": "notary/logo.svg",
+            "alt": "notary",
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "name": "KVK credential",
+          "route": "https://kvk.demo.sphereon.com",
+          "description": "Kamer van Koophandel",
+          "backgroundImage": "background/kvk.svg",
+          "logo":{
+            "src": "coc/logo.svg",
+            "alt": "kvk.nl",
+            "width": 50,
+            "height": 50
+          }
+        },
+        {
+          "name": "Bank account credential",
+          "route": "https://bank.demo.sphereon.com",
+          "description": "Babylon bank",
+          "backgroundImage": "background/bank.svg",
+          "logo":{
+            "src": "bank/logo.svg",
+            "alt": "sphereon.com/bank",
+            "width": 200,
+            "height": 200
+          }
+        }
+      ]
+    },
     "SSISelectCredentialPage": {
       "logo": {
         "src": "wallets/sphereon_logo.svg",
@@ -151,44 +208,8 @@
       {
         "id": "start",
         "operation": "navigate",
-        "path": "/start",
+        "path": "/landing",
         "isDefaultRoute": true
-      },
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credSelect"
-      },
-      {
-        "id": "credSelect",
-        "operation": "navigate",
-        "path": "/credentials/select",
-        "nextId": "verifyRequest"
-      },
-      {
-        "id": "verifyRequest",
-        "operation": "navigate",
-        "path": "/credentials/verify/request",
-        "nextId": "credentialOffer",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      },
-      {
-        "id": "issueSuccess",
-        "operation": "navigate",
-        "path": "/credentials/issue/success"
       }
     ]
   },
