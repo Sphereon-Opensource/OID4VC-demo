@@ -330,8 +330,8 @@ importers:
         specifier: 0.17.6-unstable.6
         version: 0.17.6-unstable.6
       '@sphereon/ui-components.ssi-react':
-        specifier: 0.1.3-next.11
-        version: 0.1.3-next.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+        specifier: 0.1.3-next.13
+        version: 0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       '@veramo/core':
         specifier: 4.2.0
         version: 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
@@ -5292,8 +5292,8 @@ packages:
       jwt-decode: 3.1.2
     dev: false
 
-  /@sphereon/ui-components.core@0.1.3-next.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-3aI11KKGo7yw0exfSoHFSsyuLS+IWDnp7tRKM2PXapkKqhx4S9MUq6+ihk134XFp4f6L0TFZqbZsLdVxT0sGbA==}
+  /@sphereon/ui-components.core@0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ds/g5gn6Ftz7zPKMo58kCcfGV/IC75mkWdCRe038Lm8NARXAfKMlALHrgYMkX+n4i0f/oUJ1nmYQOurD3fYH+w==}
     peerDependencies:
       react: '>= 16.8.0'
     dependencies:
@@ -5307,12 +5307,12 @@ packages:
       - react-is
     dev: false
 
-  /@sphereon/ui-components.ssi-react@0.1.3-next.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-eUk8bwv+q6FnSpoqw+v52zXxL05rwc0koqpVcJdrG4UCN8SG1nuN6besUHM9YllJRG3Ez5Z0jaWQlcHzWb2uyg==}
+  /@sphereon/ui-components.ssi-react@0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-l0cmecp702IH5eZxBabSMTqGklS1W0E0D7V5qdp4yR77Y10UfDd88FEIn07Bm0CbqPfIhWupezLwwvxofo16sQ==}
     peerDependencies:
       react: '>= 16.8.0'
     dependencies:
-      '@sphereon/ui-components.core': 0.1.3-next.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      '@sphereon/ui-components.core': 0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       '@tanstack/react-table': 8.10.3(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       styled-components: 5.3.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)

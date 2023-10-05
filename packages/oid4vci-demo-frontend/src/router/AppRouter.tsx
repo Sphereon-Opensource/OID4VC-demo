@@ -1,5 +1,5 @@
-import React, {FunctionComponent, ReactElement, useState} from 'react'
-import {Routes, Route, HashRouter, useNavigate} from 'react-router-dom'
+import React, {useState} from 'react'
+import {HashRouter, Route, Routes} from 'react-router-dom'
 import SSICredentialIssueRequestPage from '../pages/SSICredentialIssueRequestPage'
 
 import SSICredentialVerifyRequestPage from '../pages/SSICredentialVerifyRequestPage'
@@ -11,16 +11,18 @@ import SSIDownloadPage from "../pages/SSIDownloadPage"
 import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
 import {Sequencer} from "./sequencer"
+import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage";
 
-export const pageMap: Record<string, any> = {
+export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
+    '/landing': <SSICredentialsLandingPage/>,
     '/information/request': <SSIInformationRequestPage/>,
     '/information/success': <SSIInformationSuccessPage/>,
     '/credentials/select': <SSISelectCredentialPage/>,
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
     '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
-    '/download': SSIDownloadPage
+    '/download': <SSIDownloadPage/>
 }
 
 
@@ -30,12 +32,12 @@ const AppRouter: React.FC = () => {
     return (
         <HashRouter>
             <Routes>
-                {Object.entries(pageMap)
+                {Object.entries(routes)
                     .filter(([path]) => path === defaultRoute)
                     .map(([path, component]) => (
                         <Route key='/' path='/' element={component}/>
                     ))}
-                {Object.entries(pageMap).map(([path, component]) => (
+                {Object.entries(routes).map(([path, component]) => (
                     <Route key={path} path={path} element={component}/>
                 ))}
             </Routes>
