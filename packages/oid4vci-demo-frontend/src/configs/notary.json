@@ -129,22 +129,26 @@
       "backgroundColor": "#BEBEBE"
     },
     "SSICredentialIssueRequestPage": {
-      "photoWallet": "notary/guest_credential.svg",
+      "title": "coc_qrcode_right_pane_top_title",
+      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
       "logo": {
         "src": "notary/guest_credential.svg",
         "alt": "Van Auckland Notary",
         "width": 700,
         "height": 700
       },
+      "backgroundColor": "#BEBEBE",
       "mobile": {
         "logo": {
           "src": "notary/logo.svg",
-          "alt": "Van Auckland Notary\"",
-          "width": 200,
-          "height": 200
-        }
-      },
-      "backgroundColor": "#BEBEBE"
+          "alt": "notary",
+          "width": 120,
+          "height": 120
+        },
+        "backgroundColor": "#E8EAED",
+        "image": "undraw_certification_re_ifll_1.svg"
+      }
     },
     "SSIInformationRequestPage": {
       "photo": "notary/guest_credential.svg",
@@ -211,7 +215,8 @@
           "alt": "notary",
           "width": 200,
           "height": 200
-        }
+        },
+        "backgroundColor": "#E8EAED"
       },
       "logo": {
         "src": "notary/guest_credential.svg",
@@ -286,7 +291,7 @@
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#E84461"
+          "backgroundColor": "#252E7E"
         }
       }
     },

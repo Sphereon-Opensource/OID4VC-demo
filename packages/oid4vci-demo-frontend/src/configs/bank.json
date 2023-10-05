@@ -99,9 +99,11 @@
         "logo": {
           "src": "bank/logo.svg",
           "alt": "bank",
-          "width": 43,
-          "height": 41
-        }
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EFFFF5",
+        "image": "undraw_profile_details_re_ch9r 1.svg"
       }
     },
     "SSICredentialIssuedSuccessPage": {
@@ -139,6 +141,9 @@
       }
     },
     "SSICredentialIssueRequestPage": {
+      "title": "coc_qrcode_right_pane_top_title",
+      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
       "backgroundColor": "#01224B",
       "logo": {
         "src": "bank/guest_credential.svg",
@@ -149,13 +154,14 @@
         "logo": {
           "src": "bank/logo.svg",
           "alt": "bank",
-          "width": 43,
-          "height": 41
-        }
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EFFFF5",
+        "image": "undraw_profile_details_re_ch9r 1.svg"
       }
     },
     "SSIInformationRequestPage": {
-      "photoManual": "bank/guest_credential.svg",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
       "backgroundColor": "#01224B",
@@ -168,9 +174,11 @@
         "logo": {
           "src": "bank/logo.svg",
           "alt": "bank",
-          "width": 43,
-          "height": 41
-        }
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EFFFF5",
+        "image": "undraw_profile_details_re_ch9r 1.svg"
       },
       "form": [
         [
@@ -193,7 +201,7 @@
         ],
         [
           {
-            "id": "ssi_information_request_pamobilege_form_company_location",
+            "id": "ssi_information_request_page_form_company_location",
             "key": "Bedrijfslocatie",
             "title": "ssi_information_request_page_form_company_location_title",
             "type": "string",

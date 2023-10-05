@@ -83,8 +83,6 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     width: '60%',
                     height: '100%',
-                    background: `url(${state?.isManualIdentification ? `${config.photoManual}` : `${config.photoWallet}`})`,
-                    backgroundSize: 'cover',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((config.photoManual || config.photoWallet) && { background: `url(${state?.isManualIdentification? `${config.photoManual}` : `${config.photoWallet}`}) 0% 0% / cover`}),
