@@ -64,7 +64,7 @@ function evalDefaultValue(field: DataFormElement, payload: Payload): DefaultValu
         return payloadValue
     }
 
-    let defaultValue: DefaultValueType = field.defaultValue
+    let defaultValue: DefaultValueType = field.defaultValue ?? ''
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     }
