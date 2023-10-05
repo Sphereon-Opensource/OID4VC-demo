@@ -144,20 +144,20 @@
           "ES256",
           "ES256K",
           "EdDSA"
-        ],
-        "credential_supplier_config": {
-          "templates_base_dir": "templates/knb_bank",
-          "template_mappings": [
-            {
-              "credential_types": [
-                "BankAccount"
-              ],
-              "template_path": "BankAccount.hbs",
-              "format": "jwt_vc_json"
-            }
-          ]
-        }
+        ]
       }
-    ]
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/knb_bank",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "BankAccount"
+          ],
+          "template_path": "BankAccount.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
   }
 }
