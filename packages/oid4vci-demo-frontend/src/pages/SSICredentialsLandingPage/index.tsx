@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React from 'react';
 import { SSIMiniCardView } from '@sphereon/ui-components.ssi-react';
 import {useTranslation} from 'react-i18next';
 import {
@@ -72,14 +72,19 @@ const SSICredentialsLandingPage: React.FC = () => {
                             <div onClick={()=>handleCredentialClick(value)}>
                                 <Mobile>
                                     <div style={{display: 'flex', justifyContent: 'space-evenly', alignContent: 'space-between'}}>
-                                         <SSIMiniCardView
-                                             style={{
-                                                 ...(value.backgroundImage && {background: `url(${value.backgroundImage})`, backgroundSize: 'cover'})
-                                             }}
-                                             logo={{
-                                                 uri: value.logo?.src as string
-                                             }}
-                                         />
+                                        <SSIMiniCardView
+                                            backgroundImage={{uri: value.backgroundImage}}
+                                            logo={{
+                                                uri: value.logo?.src,
+                                                ...((value.logo?.height && value.logo?.width) && {
+                                                    dimensions: {
+                                                        height: value.logo?.height,
+                                                        width: value.logo?.width,
+                                                    }
+                                                })
+
+                                            }}
+                                        />
                                         <div style={{width: 200, paddingLeft: '5px'}}>
                                             <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span><br/>
                                             <span style={{fontSize: '10px'}}>{value.description}</span>
