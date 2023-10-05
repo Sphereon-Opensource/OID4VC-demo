@@ -1,22 +1,22 @@
-import {ImageProperties} from "./types";
-import coc from "./configs/coc.json";
-import {CSSProperties} from "react";
-import {IProps} from "./components/SSISecondaryButton";
+import {ImageProperties} from "./types"
+import {CSSProperties} from "react"
+import {IProps} from "./components/SSISecondaryButton"
 
 interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
+    sequencer: VCIConfigSequence
     components: VCIConfigComponents
 }
 
 export function getCurrentEcosystemConfig(): VCIConfig {
-  const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon';
-  return require(`./configs/${ecosystem}.json`);
+    const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon'
+    return require(`./configs/${ecosystem}.json`)
 }
 
 export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
     const config = getCurrentEcosystemConfig()
-    return getEcosystemPageOrComponentConfig(pageOrComponent, config);
+    return getEcosystemPageOrComponentConfig(pageOrComponent, config)
 }
 
 export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
@@ -38,15 +38,22 @@ function getEcosystemPageOrComponentConfig(pageOrComponent: string, config?: VCI
     throw new Error("config for this page/component doesn't exist")
 }
 
+export function getEcosystemSequenceConfig(config?: VCIConfig): VCIConfigSequence {
+    if (!config) {
+        config = getCurrentEcosystemConfig()
+    }
+    return config.sequencer
+}
+
 export interface PageOrComponentConfig {
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
     photoLeft?: string
-    photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
-    bottomParagraph?: string
+    enableRightPaneButton? : boolean
+    rightPaneButtonStepId? : string
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
@@ -87,7 +94,7 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
     mobile?: {
-      logo: ImageProperties
+        logo: ImageProperties
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -98,11 +105,12 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
 export type DataFormRow = DataFormElement[];
 
 export interface DataFormElement {
-  id: string;
-  title: string;
-  key: string;
-  type: DataFormInputType;
-  required: boolean;
+    id: string;
+    title: string;
+    key: string;
+    type: DataFormInputType;
+    required: boolean;
+    defaultValue?: string
 }
 
 type DataFormInputType = 'string' | 'date';
@@ -153,6 +161,16 @@ export interface SSILandingPageConfig extends PageOrComponentConfig {
     }
 }
 
+export interface SSISelectCredentialPageConfig extends PageOrComponentConfig {
+    logo: ImageProperties,
+    styles: {
+        mainContainer: {
+            backgroundColor: string
+            textGradient: string
+        },
+    }
+}
+
 export interface SSICardConfig extends PageOrComponentConfig {
 }
 
@@ -182,6 +200,7 @@ export interface SSIPrimaryButtonConfig extends PageOrComponentConfig {
 export interface SSISecondaryButtonConfig extends PageOrComponentConfig {
     styles: {
         mainContainer: {
+            backgroundColor?: string
             color: string
         }
     }
@@ -190,6 +209,7 @@ export interface SSISecondaryButtonConfig extends PageOrComponentConfig {
 export interface EcosystemGeneralConfig {
     baseUrl?: string
     verifierUrl?: string
+    backCaption?: string
     verifierUrlCaption?: string
     downloadUrl?: string
     credentialName: string
@@ -207,6 +227,35 @@ export interface VCIConfigPages {
     SSICredentialIssueRequestPage: SSICredentialIssueRequestPageConfig
     SSIInformationRequestPage: SSIInformationRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
+    SSISelectCredentialPage: SSISelectCredentialPageConfig
+}
+
+export interface VCIConfigSequence {
+    steps: VCIConfigSequenceStep[]
+}
+
+export enum VCIOperation {
+    NAVIGATE = 'navigate',
+    EXECUTE = 'execute'
+}
+
+export enum VCIAction {
+    CREATE_CREDENTIAL_OFFER = 'create-credential-offer'
+}
+
+export interface VCIConfigSequenceStep {
+    id: string
+    operation: VCIOperation
+    nextId?: string
+    isDefaultRoute?: boolean
+}
+
+export interface VCINavigationStep extends VCIConfigSequenceStep {
+    path: string
+}
+
+export interface VCIExecuteStep extends VCIConfigSequenceStep {
+    action: VCIAction
 }
 
 export interface VCIConfigComponents {

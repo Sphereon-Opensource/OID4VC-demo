@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+    getCurrentEcosystemPageOrComponentConfig,
+    SSIPrimaryButtonConfig,
+    SSISecondaryButtonConfig
+} from "../../ecosystem-config";
 
 export interface IProps {
     style?: React.CSSProperties,
@@ -10,12 +15,16 @@ export interface IProps {
 }
 
 const SSISecondaryButton: React.FC<IProps> = (props: IProps) => {
-  const { caption, disabled = false, onClick, style , color = '#FBFBFB'} = props
+    const config = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
+    const mainContainerStyle = config.styles.mainContainer;
+    const { caption, disabled = false, onClick, style} = props
+    const color = props.color ?? '#FBFBFB'
   return (
       <button style={{
                 height: 42,
                 width: 300,
                 borderRadius: 6,
+                background: `${props.style?.backgroundColor ?? mainContainerStyle.backgroundColor ?? 'transparent'}`,
                 border: `1px solid ${color}`,
                 ...style,
                 ...(disabled && { opacity: 0.4 }),
@@ -23,14 +32,14 @@ const SSISecondaryButton: React.FC<IProps> = (props: IProps) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                background: 'transparent'
+
               }}
               onClick={onClick}
               disabled={disabled}
       >
         <text
             className={"poppins-normal-16"}
-            style={{color}}
+            style={{color: color}}
         >
           {caption}
         </text>

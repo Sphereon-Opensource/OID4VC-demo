@@ -1,9 +1,9 @@
 {
-  "correlationId": "http://192.168.2.90:5000/sphereonGuest",
+  "correlationId": "http://internet.or.LAN.host:5000/sphereonGuest",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://192.168.2.90:5000/sphereonGuest",
-    "credential_endpoint": "http://192.168.2.90:5000/sphereonGuest/credentials",
+    "credential_issuer": "http://internet.or.LAN.host:5000/sphereonGuest",
+    "credential_endpoint": "http://internet.or.LAN.host:5000/sphereonGuest/credentials",
     "display": [
       {
         "name": "Sphereon International",
@@ -56,13 +56,13 @@
           }
         ],
         "order": [
-          "firstName",
-          "lastName",
+          "Voornaam",
+          "Achternaam",
           "email",
           "type"
         ],
         "credentialSubject": {
-          "firstName": {
+          "Voornaam": {
             "value_type": "string",
             "display": [
               {
@@ -78,7 +78,7 @@
               }
             ]
           },
-          "lastName": {
+          "Achternaam": {
             "value_type": "string",
             "display": [
               {
@@ -141,7 +141,19 @@
           "ES256",
           "ES256K",
           "EdDSA"
-        ]
+        ],
+        "credential_supplier_config": {
+          "templates_base_dir": "templates/sphereonGuest",
+          "template_mappings": [
+            {
+              "credential_types": [
+                "GuestCredential"
+              ],
+              "template_path": "GuestCredential.hbs",
+              "format": "jwt_vc_json"
+            }
+          ]
+        }
       }
     ]
   }

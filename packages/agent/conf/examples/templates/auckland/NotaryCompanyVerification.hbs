@@ -1,0 +1,14 @@
+{
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1"
+    ],
+    "type": [
+        "VerifiableCredential",
+        "NotaryCompanyVerification"
+    ],
+    "expirationDate": "{{{ dateTimeAfterMonths 12 }}}",
+    "credentialSubject": {
+        "description": "Company has been verified by the notary",
+        {{{mergeJSON @root}}}
+    }
+}

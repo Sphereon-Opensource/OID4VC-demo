@@ -1,5 +1,5 @@
-import React from 'react';
-import {NavigateOptions, useNavigate} from 'react-router-dom';
+import React, {useEffect, useState} from 'react'
+import {NavigateOptions, useLocation, useNavigate} from 'react-router-dom'
 import SSICardView from '../../components/SSICardView';
 import {ButtonType} from '../../types';
 import {useTranslation} from 'react-i18next';
@@ -9,19 +9,22 @@ import {
     SSILandingPageConfig
 } from "../../ecosystem-config";
 import {useMediaQuery} from "react-responsive";
+import {Sequencer} from "../../router/sequencer"
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const location = useLocation()
+    const navigate = useNavigate()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const onManualIdentificationClick = async (): Promise<void> => {
-      const params = {isManualIdentification: true}
-      navigate('/information/request', params as NavigateOptions);
+        const params = {isManualIdentification: true}
+        await sequencer.goToStep('infoRequest', params as NavigateOptions)
     }
 
     const onWalletIdentificationClick = async (): Promise<void> => {
-        navigate({pathname: '/credentials/verify/request'});
+        await sequencer.goToStep('verifyRequest')
     }
 
     const config = getCurrentEcosystemPageOrComponentConfig('SSILandingPage') as SSILandingPageConfig
@@ -36,6 +39,11 @@ const SSILandingPage: React.FC = () => {
     const optionalRightCardViewProps = {
         ...(rightCardViewConfig.textColor && {textColor: rightCardViewConfig.textColor}),
     }
+
+    useEffect(() => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
+    }, [])
+
     return (
         <div style={{
             display: 'flex',
@@ -47,8 +55,9 @@ const SSILandingPage: React.FC = () => {
             flexDirection: 'column'
         }}>
             <div style={{
-                maxWidth: 810,
+                maxWidth: isTabletOrMobile ? 405 : 810,
                 justifyContent: 'space-between',
+                alignContent: 'center',
                 flexDirection: `${isTabletOrMobile ? 'column' : 'row'}`,
                 display: 'flex',
                 width: '100%'
@@ -82,9 +91,10 @@ const SSILandingPage: React.FC = () => {
                     }}
                     {...optionalRightCardViewProps}
                 />
+
             </div>
             <img
-                style={{marginTop: 116}}
+                style={{marginTop: isTabletOrMobile ? 10 : 116}}
                 src={config.logo.src}
                 alt={config.logo.alt}
                 width={config.logo.width}

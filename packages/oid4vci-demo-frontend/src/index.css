@@ -15,3 +15,7 @@ text {
 p {
     margin: 0;
 }
+
+:root {
+    --swiper-theme-color: white;
+}
