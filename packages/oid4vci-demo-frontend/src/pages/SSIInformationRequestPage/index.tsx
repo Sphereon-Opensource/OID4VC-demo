@@ -228,12 +228,24 @@ const SSIInformationRequestPage: React.FC = () => {
                     }
                 </div>
             </NonMobile>
+
             <div style={{
                 display: 'flex',
-                width: isTabletOrMobile ? '100%' : '40%',
+                flexGrow: 1,
+                width: isTabletOrMobile ? '50%' : '40%',
                 alignItems: 'center',
-                justifyContent: 'center'
+                flexDirection: 'column',
+                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
+                {(isTabletOrMobile && config.mobile?.logo) &&
+                    <img
+                        src={config.mobile.logo.src}
+                        alt={config.mobile.logo.alt}
+                        width={config.mobile.logo?.width ?? 150}
+                        height={config.mobile.logo?.height ?? 150}
+                    />
+                }
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -399,15 +411,6 @@ const SSIInformationRequestPage: React.FC = () => {
                             onClick={async () => await sequencer.next({payload, isManualIdentification})}
                         />
                     </div>
-                  {config.mobile?.logo && <Mobile>
-                    <img
-                        style={{marginTop: 116}}
-                        src={config.mobile.logo.src}
-                        alt={config.mobile.logo.alt}
-                        width={config.mobile.logo?.width ?? 150}
-                        height={config.mobile.logo?.height ?? 150}
-                    />
-                  </Mobile>}
                 </div>
             </div>
         </div>

@@ -96,6 +96,16 @@
         "alt": "chamber of commerce logo",
         "width": 383,
         "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EDEFFF",
+        "image": "undraw_profile_details_re_ch9r 1.svg"
       }
     },
     "SSICredentialIssuedSuccessPage": {
@@ -117,6 +127,16 @@
         "alt": "chamber of commerce logo",
         "width": 383,
         "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EDEFFF",
+        "image": "undraw_certification_re_ifll_1.svg"
       }
     },
     "SSIInformationRequestPage": {
@@ -186,9 +206,10 @@
         "logo": {
           "src": "coc/logo.svg",
           "alt": "chamber of commerce logo",
-          "width": 150,
-          "height": 150
-        }
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EDEFFF"
       }
     },
     "SSILandingPage": {
