@@ -5,7 +5,8 @@
     "baseUrl": "https://bank.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Notary credential",
-    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download"
+    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
+    "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
     "SSIDownloadPage": {
