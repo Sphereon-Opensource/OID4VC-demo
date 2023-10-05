@@ -94,7 +94,13 @@ export class Sequencer {
                 if (!navStep.path) {
                     throw new Error(`Field path of navigation step with id ${navStep.id} is empty!`)
                 }
-                this.navigateFunction!(navStep.path, {state})
+                if(navStep.path.includes('://')) {
+                    // eslint-disable-next-line no-restricted-globals
+                    location.href = navStep.path
+                    return
+                } else {
+                    this.navigateFunction!(navStep.path, {state})
+                }
                 break
             case VCIOperation.EXECUTE:
                 await this.execute(nextStep as VCIExecuteStep, state)

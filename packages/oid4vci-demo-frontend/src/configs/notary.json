@@ -129,7 +129,6 @@
       "backgroundColor": "#BEBEBE"
     },
     "SSICredentialIssueRequestPage": {
-      "photoManual":"notary/guest_credential.svg",
       "photoWallet":"notary/guest_credential.svg",
       "logo": {
         "src": "notary/guest_credential.svg",
@@ -262,7 +261,7 @@
       {
         "id": "issueSuccess",
         "operation": "navigate",
-        "path": "/credentials/issue/success"
+        "path": "https://knb.demo.sphereon.com"
       }
     ]
   },

@@ -260,7 +260,7 @@
       {
         "id": "issueSuccess",
         "operation": "navigate",
-        "path": "/credentials/issue/success"
+        "path": "https://knb.demo.sphereon.com"
       }
     ]
   },
