@@ -94,6 +94,14 @@
         "src": "bank/guest_credential.svg",
         "width": 262,
         "height": 249
+      },
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
+        }
       }
     },
     "SSICredentialIssuedSuccessPage": {
@@ -103,6 +111,14 @@
         "src": "bank/guest_credential.svg",
         "width": 262,
         "height": 249
+      },
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
+        }
       }
     },
     "SSIInformationSharedSuccessPage": {
@@ -112,6 +128,14 @@
         "src": "bank/guest_credential.svg",
         "width": 262,
         "height": 249
+      },
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
+        }
       }
     },
     "SSICredentialIssueRequestPage": {
@@ -120,6 +144,14 @@
         "src": "bank/guest_credential.svg",
         "width": 262,
         "height": 249
+      },
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
+        }
       }
     },
     "SSIInformationRequestPage": {
@@ -161,7 +193,7 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_form_company_location",
+            "id": "ssi_information_request_pamobilege_form_company_location",
             "key": "Bedrijfslocatie",
             "title": "ssi_information_request_page_form_company_location_title",
             "type": "string",
