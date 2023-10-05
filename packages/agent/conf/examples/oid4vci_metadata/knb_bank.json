@@ -130,7 +130,7 @@
             ]
           }
         },
-        "id": "BabylonBank2023",
+        "id": "knb-bank",
         "types": [
           "VerifiableCredential",
           "BankAccount"

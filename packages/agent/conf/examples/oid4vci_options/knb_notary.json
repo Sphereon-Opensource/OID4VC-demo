@@ -1,5 +1,5 @@
 {
-  "definitionId": "knb-auckland",
+  "definitionId": "knb-notary",
   "correlationId": "https://notary.demo.sphereon.com/agent",
   "issuerOpts": {
     "didOpts": {
