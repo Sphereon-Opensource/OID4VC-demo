@@ -2,28 +2,28 @@ import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
 import inputStyle from './SSIInformationRequestPage.module.css';
 import {useTranslation} from "react-i18next";
 import {
-    AdditionalClaims,
-    ICredentialSubject,
-    IVerifiableCredential,
-    IVerifiablePresentation,
-    W3CVerifiableCredential,
-    W3CVerifiablePresentation
+  AdditionalClaims,
+  ICredentialSubject,
+  IVerifiableCredential,
+  IVerifiablePresentation,
+  W3CVerifiableCredential,
+  W3CVerifiablePresentation
 } from "@sphereon/ssi-types";
 
 import '../../css/typography.css'
 import {
-    DataFormElement,
-    DataFormRow, EcosystemGeneralConfig,
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSIInformationRequestPageConfig
+  DataFormElement,
+  DataFormRow,
+  getCurrentEcosystemGeneralConfig,
+  getCurrentEcosystemPageOrComponentConfig,
+  SSIInformationRequestPageConfig
 } from "../../ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useLocation, useNavigate} from "react-router-dom"
 import {Buffer} from 'buffer';
 import {useMediaQuery} from "react-responsive";
 import {Mobile, NonMobile} from "../../index";
-import { extractRequiredKeys, transformFormConfigToEmptyObject } from "../../utils/ObjectUtils";
+import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils";
 import {Sequencer} from "../../router/sequencer"
 
 type Payload = Record<string, string>
