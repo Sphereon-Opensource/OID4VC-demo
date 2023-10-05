@@ -5,7 +5,7 @@
     "baseUrl": "http://192.168.2.90:5000/bank",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Bank credential",
-    "downloadUrl": "http://192.168.2.90:5000/bank/#/download",
+    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
