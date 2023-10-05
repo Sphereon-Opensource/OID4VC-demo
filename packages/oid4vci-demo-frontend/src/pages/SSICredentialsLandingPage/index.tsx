@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import { SSIMiniCardView } from '@sphereon/ui-components.ssi-react';
 import {useTranslation} from 'react-i18next';
 import {
@@ -89,14 +89,16 @@ const SSICredentialsLandingPage: React.FC = () => {
                                 <NonMobile>
                                     <div style={{display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
                                         <SSIMiniCardView
-                                                style={{
-                                                    ...(value.backgroundImage && {background: `url(${value.backgroundImage})`,
-                                                        backgroundSize: 'cover',
-                                                        overflow: 'hidden'
-                                                    })
-                                                }}
+                                                backgroundImage={{uri: value.backgroundImage}}
                                                 logo={{
-                                                    uri: value.logo?.src as string
+                                                    uri: value.logo?.src,
+                                                    ...((value.logo?.height && value.logo?.width) && {
+                                                        dimensions: {
+                                                            height: value.logo?.height,
+                                                            width: value.logo?.width,
+                                                        }
+                                                    })
+
                                                 }}
                                         />
                                         <div style={{ width: '350px', textAlign: 'left', paddingLeft: '2%'}}>

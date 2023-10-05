@@ -13,6 +13,6 @@ export enum ButtonType {
 export interface ImageProperties {
   src: string
   alt: string
-  width?: string | number
-  height?: string | number
+  width?: number
+  height?: number
 }
