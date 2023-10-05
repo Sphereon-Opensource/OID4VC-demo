@@ -6,9 +6,9 @@ import {
     IS_OID4VCI_ENABLED,
     oid4vciInstanceOpts,
     oid4vciMetadataOpts
-} from "../index";
+} from "../environment";
 import {IIssuerDefaultOpts, OID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
-import {Resolvable, Resolver} from "did-resolver";
+import {Resolvable} from "did-resolver";
 import {
     IIssuerInstanceOptions,
     IIssuerOptions,

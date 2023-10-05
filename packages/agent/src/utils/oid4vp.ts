@@ -8,7 +8,7 @@ import {
     OID4VP_DEFINITIONS,
     OID4VPInstanceOpts,
     oid4vpInstanceOpts
-} from "../index";
+} from "../environment";
 import {CheckLinkedDomain} from "@sphereon/did-auth-siop";
 import {Resolvable} from "did-resolver";
 
