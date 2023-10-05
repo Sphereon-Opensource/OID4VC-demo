@@ -2,10 +2,10 @@
   "general": {
     "credentialName": "Bank account credential",
     "issueCredentialType": "BabylonBank2023",
-    "baseUrl": "https://babylon.demo.sphereon.com/agent",
+    "baseUrl": "https://bank.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Notary credential",
-    "downloadUrl": "https://babylon.demo.sphereon.com/agent/#/download"
+    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download"
   },
   "pages": {
     "SSIDownloadPage": {
