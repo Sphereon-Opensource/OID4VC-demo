@@ -11,6 +11,10 @@ onto-demo-shared-types/node_modules
 # testing
 /coverage
 
+# scripts and logs
+**/start.sh
+**/*.log
+
 # production
 /build
 
