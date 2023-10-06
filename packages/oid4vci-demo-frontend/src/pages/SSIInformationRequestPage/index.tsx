@@ -201,7 +201,7 @@ const SSIInformationRequestPage: React.FC = () => {
     }, []);
 
     return (
-        <div style={{display: 'flex', width: '100vw', ...(isTabletOrMobile && { ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),}}>
+        <div style={{display: 'flex', width: '100%', ...(isTabletOrMobile && { ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),}}>
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
@@ -272,7 +272,7 @@ const SSIInformationRequestPage: React.FC = () => {
                         </text>
                         <text
                             className={"poppins-normal-14"}
-                            style={{maxWidth: '90vw', textAlign: 'center'}}
+                            style={{maxWidth: '313', textAlign: 'center'}}
                         >
                             {t(config.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
                         </text>
