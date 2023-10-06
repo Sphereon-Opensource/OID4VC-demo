@@ -183,16 +183,6 @@
       "form": [
         [
           {
-            "id": "ssi_information_request_page_form_iban",
-            "key": "IBAN",
-            "title": "ssi_information_request_page_form_iban_title",
-            "type": "string",
-            "required": true,
-            "defaultValue": "*RANDOM-IBAN"
-          }
-        ],
-        [
-          {
             "id": "ssi_information_request_page_form_bedrijfsnaam",
             "key": "Bedrijfsnaam",
             "title": "ssi_information_request_page_form_bedrijfsnaam_title",

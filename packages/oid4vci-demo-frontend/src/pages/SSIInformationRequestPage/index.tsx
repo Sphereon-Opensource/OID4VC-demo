@@ -201,7 +201,7 @@ const SSIInformationRequestPage: React.FC = () => {
     }, []);
 
     return (
-        <div style={{display: 'flex', height: '100vh', width: '100%'}}>
+        <div style={{display: 'flex', width: '100vw', ...(isTabletOrMobile && { ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),}}>
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
@@ -235,10 +235,11 @@ const SSIInformationRequestPage: React.FC = () => {
             <div style={{
                 display: 'flex',
                 flexGrow: 1,
+                height: '100%',
                 width: isTabletOrMobile ? '50%' : '40%',
                 alignItems: 'center',
                 flexDirection: 'column',
-                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                // ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
                 ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
                 {(isTabletOrMobile && config.mobile?.logo) &&
@@ -254,7 +255,7 @@ const SSIInformationRequestPage: React.FC = () => {
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    height: '63%',
+                    height: '100vh'
                 }}>
                     <div
                         style={{
@@ -271,7 +272,7 @@ const SSIInformationRequestPage: React.FC = () => {
                         </text>
                         <text
                             className={"poppins-normal-14"}
-                            style={{maxWidth: 313, textAlign: 'center'}}
+                            style={{maxWidth: '90vw', textAlign: 'center'}}
                         >
                             {t(config.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
                         </text>
@@ -283,7 +284,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             display: 'flex',
                             flexDirection: 'column',
                             textAlign: 'left',
-                            width: '327px',
+                            width: '90vw',
                             paddingTop: '48px',
                             paddingBottom: '48px',
                             gap: 23,
@@ -342,7 +343,7 @@ const SSIInformationRequestPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     textAlign: 'left',
-                    width: '327px',
+                    width: '90vw',
                     height: isManualIdentification ? '40%' : '186px',
                     gap: 23
                   }}>

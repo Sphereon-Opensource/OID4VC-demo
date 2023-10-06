@@ -148,25 +148,26 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '55%',
+                        height: '50vh',
                         marginBottom: isTabletOrMobile ? 40 : '15%',
-                        marginTop: isTabletOrMobile ? 40 : '15%',
+                        marginTop: isTabletOrMobile ? 20 : '15%',
                         alignItems: 'center'
                     }}>
-                        <NonMobileOS>
+                        <NonMobile>
                             <div style={{flexGrow: 1, marginBottom: 34}}>
                                 {qrCode}
                             </div>
-                        </NonMobileOS>
-                        <MobileOS>
-                            <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                        </NonMobile>
+                        <Mobile>
+                            <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
                                 { config.mobile?.image &&
-                                    <img src={config.mobile?.image} alt="success"/>
+                                    <img src={config.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
                                 }
-                                <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                                <DeepLink style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
                             </div>
-                        </MobileOS>
+                        </Mobile>
                     </div>
+                    <div style={{marginTop: "20px"}}>
                     <NonMobile>
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378 }}
@@ -181,6 +182,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             lines={t(config.mobile?.bottomParagraph ? config.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                         />
                     </Mobile>
+                    </div>
                 </div>
             </div>
         </div>

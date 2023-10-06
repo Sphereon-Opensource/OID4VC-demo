@@ -89,9 +89,9 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '70%',
+                        height: '50vh',
                         marginBottom: isTabletOrMobile ? 40 : '25%',
-                        marginTop: isTabletOrMobile ? 40 : '25%',
+                        marginTop: isTabletOrMobile ? 20 : '25%',
                         alignItems: 'center'
                     }}>
                         <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
@@ -101,14 +101,15 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                                        setQrCodeData={setDeepLink}/>}
                         </div>
                         <MobileOS>
-                            <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
                                 { config.mobile?.image &&
-                                    <img src={config.mobile?.image} alt="success"/>
+                                    <img src={config.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
                                 }
                                 <DeepLink style={{flexGrow: 1}} link={deepLink}/>
                             </div>
                         </MobileOS>
                     </div>
+                    <div style={{marginTop: "20"}}>
                     <Mobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                   lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}/></Mobile>
                     <NonMobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
@@ -123,6 +124,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                             />
                         </div>
                     )}
+                    </div>
                 </div>
             </div>
         </div>
