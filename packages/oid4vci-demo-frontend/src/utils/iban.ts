@@ -1,4 +1,4 @@
-function generateRandomIBAN(): string {
+export function generateRandomIBAN(): string {
     const countryCode = "NL10";
     const bankCode = "BAB";
     const accountNumber = generateRandomAccountNumber();
