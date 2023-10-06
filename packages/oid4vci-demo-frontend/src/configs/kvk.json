@@ -113,7 +113,22 @@
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "image_4.svg",
       "photoLeftManual": "image_4.svg",
-      "photoRight": "undraw_certification_re_ifll_1.svg"
+      "photoRight": "undraw_certification_re_ifll_1.svg",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 65,
+          "height": 65
+        }
+      },
+      "backgroundColor": "#005371"
     },
     "SSICredentialIssueRequestPage": {
       "title": "coc_qrcode_right_pane_top_title",
@@ -146,6 +161,15 @@
         "alt": "chamber of commerce logo",
         "width": 383,
         "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EDEFFF"
       },
       "form": [
         [
@@ -210,16 +234,7 @@
             "required": true
           }
         ]
-      ],
-      "mobile": {
-        "logo": {
-          "src": "coc/logo.svg",
-          "alt": "chamber of commerce logo",
-          "width": 65,
-          "height": 65
-        },
-        "backgroundColor": "#EDEFFF"
-      }
+      ]
     },
     "SSILandingPage": {
       "photoLeft": "landing_manual.svg",
