@@ -45,6 +45,7 @@
   "ssi_information_request_page_form_name_title": "Voornaam",
   "ssi_information_request_page_form_email_title": "E-mailadres",
   "ssi_information_request_page_form_coc_number_title": "KVK Nummer",
+  "ssi_information_request_page_form_iban_title": "IBAN",
   "ssi_information_request_page_form_company_location_title": "Locatie van bedrijf",
   "ssi_information_request_page_form_first_name_title": "Voornaam",
   "ssi_information_request_page_form_last_name_title": "Achternaam",

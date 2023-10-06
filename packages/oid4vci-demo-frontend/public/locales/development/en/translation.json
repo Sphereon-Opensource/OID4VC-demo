@@ -45,6 +45,7 @@
   "ssi_information_request_page_form_name_title": "First name",
   "ssi_information_request_page_form_email_title": "Email address",
   "ssi_information_request_page_form_coc_number_title": "Chamber of Commerce Number",
+  "ssi_information_request_page_form_iban_title": "IBAN",
   "ssi_information_request_page_form_company_location_title": "Location of company",
   "ssi_information_request_page_form_first_name_title": "First name",
   "ssi_information_request_page_form_first_name_director_title": "First name director",
