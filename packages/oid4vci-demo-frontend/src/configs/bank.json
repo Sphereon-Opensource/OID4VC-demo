@@ -113,6 +113,14 @@
         "src": "bank/guest_credential.svg",
         "width": 262,
         "height": 249
+      },
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
+        }
       }
     },
     "SSIInformationSharedSuccessPage": {
@@ -122,6 +130,14 @@
         "src": "bank/guest_credential.svg",
         "width": 262,
         "height": 249
+      },
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
+        }
       }
     },
     "SSICredentialIssueRequestPage": {

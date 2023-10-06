@@ -1,10 +1,10 @@
 {
   "general": {
-    "credentialName": "Notary credential",
-    "issueCredentialType": "VanAuckland2023",
+    "credentialName": "Notaris Credential",
+    "issueCredentialType": "NotaryCompanyVerification",
     "baseUrl": "https://notary.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Notary credential",
+    "verifierUrlCaption": "Notaris credential",
     "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
@@ -112,6 +112,12 @@
     "SSIInformationSharedSuccessPage": {
       "photoLeft": "notary/guest_credential.svg",
       "photoRight": "notary/undraw_certification_re_ifll_grey.svg",
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
       "mobile": {
         "logo": {
           "src": "notary/logo.svg",
@@ -119,12 +125,6 @@
           "width": 200,
           "height": 200
         }
-      },
-      "logo": {
-        "src": "notary/guest_credential.svg",
-        "alt": "Van Auckland Notary",
-        "width": 700,
-        "height": 700
       },
       "backgroundColor": "#BEBEBE"
     },
@@ -176,9 +176,9 @@
         ],
         [
           {
-          "id": "ssi_information_request_page_first_name_director",
+            "id": "ssi_information_request_page_first_name_director",
             "key": "Voornaam",
-          "title": "ssi_information_request_page_form_first_name_director_title",
+            "title": "ssi_information_request_page_form_first_name_director_title",
             "type": "string",
             "required": true
           },
