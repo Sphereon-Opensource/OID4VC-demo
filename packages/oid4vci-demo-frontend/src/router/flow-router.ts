@@ -10,7 +10,7 @@ import {
     VCINavigationStep,
     VCIOperation
 } from "../ecosystem-config"
-import {useMemo, useState} from "react"
+import {useEffect, useMemo, useRef, useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
 
 
@@ -42,13 +42,13 @@ export function useFlowRouter() {
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
-    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(() => {
-        if (currentStep === undefined) {
-            return determineCurrentStep();
-        } else {
-            return currentStep;
-        }
-    });
+    const currentStepRef = useRef<VCIConfigRouteStep | undefined>()
+    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>()
+
+    useEffect(() => {
+        currentStepRef.current = determineCurrentStep()
+        setCurrentStep(currentStepRef.current)
+    }, [])
     const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStep))
 
 
