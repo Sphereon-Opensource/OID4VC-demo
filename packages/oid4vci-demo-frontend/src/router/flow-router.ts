@@ -75,6 +75,7 @@ export function useFlowRouter() {
             throw new Error('current route/step is unknown')
         }
         console.log('currentStep', JSON.stringify(currentStep))
+        console.log('currentStep.nextId', JSON.stringify(currentStep.nextId))
         if (currentStep.nextId) {
             await goToStep(currentStep.nextId, state)
         } else {
