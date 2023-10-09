@@ -51,6 +51,11 @@ export function useFlowRouter() {
     }
 
     function determineCurrentStep(): VCIConfigRouteStep {
+        console.log('determineCurrentStep, currentStop:', currentStep)
+        if(currentStep && currentStep.operation == VCIOperation.EXECUTE) {
+            return currentStep
+        }
+
         const currentLocation = pageLocation.pathname
         const defaultLocation = getDefaultLocation()
         for (const step of Object.values(stepsById)) {
