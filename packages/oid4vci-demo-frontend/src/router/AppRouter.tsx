@@ -9,7 +9,7 @@ import SSIDownloadPage from "../pages/SSIDownloadPage"
 import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
 import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage";
-import {Sequencer} from "./sequencer"
+import {useFlowAppRouter, useFlowRouter} from "./flow-router"
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -24,8 +24,7 @@ export const routes: Record<string, any> = {
 }
 
 const AppRouter: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const defaultRoute = sequencer.getDefaultRoute()
+    const defaultRoute = useFlowAppRouter().getDefaultLocation()
     return (
         <HashRouter>
             <Routes>

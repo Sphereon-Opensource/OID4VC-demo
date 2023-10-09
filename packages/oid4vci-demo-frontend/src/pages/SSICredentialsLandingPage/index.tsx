@@ -2,12 +2,14 @@ import React from 'react';
 import {SSIMiniCardView} from '@sphereon/ui-components.ssi-react';
 import {useTranslation} from 'react-i18next';
 import {
-    getCurrentEcosystemPageOrComponentConfig,
+    
     SSICredentialCardConfig,
     SSICredentialsLandingPageConfig
 } from "../../ecosystem-config";
 import {Mobile, NonMobile} from "../../index";
 import {useMediaQuery} from "react-responsive";
+import {useFlowRouter} from "../../router/flow-router"
+import {useLocation} from "react-router-dom"
 
 function handleCredentialClick(value: SSICredentialCardConfig) {
     window.location.href = value.route
@@ -16,8 +18,9 @@ function handleCredentialClick(value: SSICredentialCardConfig) {
 const SSICredentialsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+    const flowRouter = useFlowRouter()
+    const config: SSICredentialsLandingPageConfig = flowRouter.getConfig() as SSICredentialsLandingPageConfig
 
-    const config: SSICredentialsLandingPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialsLandingPage') as SSICredentialsLandingPageConfig
     return (
         <div style={{
             display: 'flex',

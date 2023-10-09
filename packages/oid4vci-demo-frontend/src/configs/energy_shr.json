@@ -148,52 +148,56 @@
         }
       }
     }
-  },  "sequencer": {
-  "steps": [
+  },
+  "routes": [
     {
-      "id": "start",
-      "operation": "navigate",
-      "path": "/start",
-      "isDefaultRoute": true
-    },
-    {
-      "id": "infoRequest",
-      "operation": "navigate",
-      "path": "/information/request",
-      "nextId": "credSelect"
-    },
-    {
-      "id": "credSelect",
-      "operation": "navigate",
-      "path": "/credentials/select",
-      "nextId": "verifyRequest"
-    },
-    {
-      "id": "verifyRequest",
-      "operation": "navigate",
-      "path": "/credentials/verify/request",
-      "nextId": "credentialOffer",
-      "isDefaultRoute": true
-    },
-    {
-      "id": "credentialOffer",
-      "operation": "execute",
-      "action": "create-credential-offer",
-      "nextId": "issueRequest"
-    },
-    {
-      "id": "issueRequest",
-      "operation": "navigate",
-      "path": "/credentials/issue/request",
-      "nextId": "issueSuccess"
-    },
-    {
-      "id": "issueSuccess",
-      "operation": "navigate",
-      "path": "/credentials/issue/success"
+      "id": "default",
+      "steps": [
+        {
+          "id": "start",
+          "operation": "navigate",
+          "path": "/start",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/request",
+          "nextId": "credSelect"
+        },
+        {
+          "id": "credSelect",
+          "operation": "navigate",
+          "path": "/credentials/select",
+          "nextId": "verifyRequest"
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success"
+        }
+      ]
     }
-  ]
-},
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

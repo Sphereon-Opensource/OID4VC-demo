@@ -155,7 +155,7 @@
           "route": "https://notary.demo.sphereon.com",
           "description": "Van Aukland notary",
           "backgroundImage": "background/notary.svg",
-          "logo":{
+          "logo": {
             "src": "notary/logo.svg",
             "alt": "notary",
             "width": 200,
@@ -167,7 +167,7 @@
           "route": "https://kvk.demo.sphereon.com",
           "description": "Kamer van Koophandel",
           "backgroundImage": "background/kvk.svg",
-          "logo":{
+          "logo": {
             "src": "coc/logo.svg",
             "alt": "kvk.nl",
             "width": 50,
@@ -179,7 +179,7 @@
           "route": "https://bank.demo.sphereon.com",
           "description": "Babylon bank",
           "backgroundImage": "background/bank.svg",
-          "logo":{
+          "logo": {
             "src": "bank/logo.svg",
             "alt": "sphereon.com/bank",
             "width": 200,
@@ -203,16 +203,19 @@
       }
     }
   },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "start",
-        "operation": "navigate",
-        "path": "/landing",
-        "isDefaultRoute": true
-      }
-    ]
-  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "start",
+          "operation": "navigate",
+          "path": "/landing",
+          "isDefaultRoute": true
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {
