@@ -10,11 +10,15 @@ import {
     VCINavigationStep,
     VCIOperation
 } from "../ecosystem-config"
-import {useEffect, useMemo, useState} from "react"
+import {useMemo, useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
 
 
 type StepsByIdType = { [key: string]: VCIConfigRouteStep };
+
+interface CurrentStepData {
+    currentStep?: VCIConfigRouteStep
+}
 
 export function useFlowAppRouter() {
     const routes = getEcosystemRoutes()
@@ -42,14 +46,14 @@ export function useFlowRouter() {
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
-    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(() => determineCurrentStep())
-    const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStep))
+    const currentStepData = useMemo<CurrentStepData>(() => determineCurrentStep(), [pageLocation.pathname])
+    const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStepData))
 
     function getRouteId(): string {
         return currentRouteId != '' ? currentRouteId : 'default'
     }
 
-    function determineCurrentStep(): VCIConfigRouteStep {
+    function determineCurrentStep(): CurrentStepData {
         const currentLocation = pageLocation.pathname
         const defaultLocation = getDefaultLocation()
         for (const step of Object.values(stepsById)) {
@@ -58,7 +62,7 @@ export function useFlowRouter() {
                     const path = (step as VCINavigationStep).path
                     if (path === currentLocation || (currentLocation === '/' && path === defaultLocation)) {
                         console.log('determined current step: ', step.id)
-                        return step
+                        return {currentStep: step}
                     }
                     break
             }
@@ -71,7 +75,8 @@ export function useFlowRouter() {
     }
 
     async function next(state ?: any) {
-        if (currentStep === undefined) {
+        const currentStep = currentStepData.currentStep
+        if (!currentStep) {
             throw new Error('current route/step is unknown')
         }
         console.log('currentStep', JSON.stringify(currentStep))
@@ -87,7 +92,7 @@ export function useFlowRouter() {
         console.log('goToStep', stepId)
         const nextStep = stepsById[stepId]
         if (!nextStep) {
-            throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${currentStep?.id}`)
+            throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${currentStepData.currentStep?.id}`)
         }
         switch (nextStep.operation) {
             case VCIOperation.NAVIGATE:
@@ -123,7 +128,7 @@ export function useFlowRouter() {
                     break
             }
             console.log('setCurrentStep', JSON.stringify(executeStep))
-            await setCurrentStep(executeStep)
+            currentStepData.currentStep = executeStep
             await next(outState)
         } catch (e: any) {
             throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
@@ -132,7 +137,7 @@ export function useFlowRouter() {
 
     function getConfig(): PageConfig {
         if (!pageConfig) {
-            throw new Error(`Config not found for step ${currentStep.id} in route ${currentRouteId}`)
+            throw new Error(`Config not found for step ${currentStepData.currentStep?.id} in route ${currentRouteId}`)
         }
         return pageConfig as PageConfig
     }
@@ -178,9 +183,9 @@ function defaultLocation(stepsById: StepsByIdType) {
     throw new Error('No navigation steps have been defined in the sequence element of the ecosystem json')
 }
 
-function initConfig(currentStep: VCIConfigRouteStep): (PageConfig | undefined) {
-    if (currentStep.operation == VCIOperation.NAVIGATE) {
-        return getCurrentEcosystemPageConfig(currentStep.id)
+function initConfig(currentStepData: CurrentStepData): (PageConfig | undefined) {
+    if (currentStepData.currentStep?.operation == VCIOperation.NAVIGATE) {
+        return getCurrentEcosystemPageConfig(currentStepData.currentStep.id)
     }
     return undefined
 }
