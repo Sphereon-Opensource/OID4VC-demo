@@ -33,7 +33,7 @@ const SSISelectCredentialPage: React.FC = () => {
     const [payload] = useState<Payload>({})
     const [isManualIdentification] = useState<boolean>(false)
     const flowRouter = useFlowRouter()
-    const config: SSISelectCredentialPageConfig = flowRouter.getConfig() as SSISelectCredentialPageConfig
+    const config: SSISelectCredentialPageConfig = flowRouter.getPageConfig() as SSISelectCredentialPageConfig
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
@@ -113,7 +113,7 @@ const SSISelectCredentialPage: React.FC = () => {
         void setCards()
     }, [supportedCredentials]);
 
-    const onSelectCredential = async (credentialType: string): Promise<void> => await flowRouter.next({
+    const onSelectCredential = async (credentialType: string): Promise<void> => await flowRouter.nextStep({
         payload,
         isManualIdentification,
         credentialType

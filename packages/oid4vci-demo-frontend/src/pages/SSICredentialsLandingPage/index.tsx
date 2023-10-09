@@ -19,7 +19,7 @@ const SSICredentialsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const flowRouter = useFlowRouter()
-    const config: SSICredentialsLandingPageConfig = flowRouter.getConfig() as SSICredentialsLandingPageConfig
+    const config: SSICredentialsLandingPageConfig = flowRouter.getPageConfig() as SSICredentialsLandingPageConfig
 
     return (
         <div style={{

@@ -17,7 +17,7 @@ import {useLocation} from "react-router-dom"
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const flowRouter = useFlowRouter()
-    const config = flowRouter.getConfig() as SSICredentialVerifyRequestPageConfig
+    const config = flowRouter.getPageConfig() as SSICredentialVerifyRequestPageConfig
     const {t} = useTranslation()
     const credentialName = getCurrentEcosystemGeneralConfig().credentialName
     const [deepLink, setDeepLink] = useState<string>('')
@@ -30,7 +30,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
             }
         };
         console.debug('calling pageRouter.next')
-        await flowRouter.next(state)
+        await flowRouter.nextStep(state)
     }
 
     return (

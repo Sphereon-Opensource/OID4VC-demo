@@ -15,7 +15,7 @@ import {useLocation} from "react-router-dom"
 
 const SSIDownloadPage: React.FC = () => {
     const flowRouter = useFlowRouter()
-    const config = flowRouter.getConfig() as SSIDownloadPageConfig
+    const config = flowRouter.getPageConfig() as SSIDownloadPageConfig
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()

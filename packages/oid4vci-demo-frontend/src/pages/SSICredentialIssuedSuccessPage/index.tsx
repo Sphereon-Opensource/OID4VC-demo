@@ -14,7 +14,7 @@ import {useFlowRouter} from "../../router/flow-router"
 
 const SSICredentialIssuedSuccessPage: React.FC = () => {
     const flowRouter = useFlowRouter()
-    const config = flowRouter.getConfig() as SSICredentialIssuedSuccessPageConfig
+    const config = flowRouter.getPageConfig() as SSICredentialIssuedSuccessPageConfig
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()

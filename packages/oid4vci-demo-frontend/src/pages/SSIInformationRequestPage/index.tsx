@@ -77,7 +77,7 @@ function evalDefaultValue(field: DataFormElement, payload: Payload): DefaultValu
 
 const SSIInformationRequestPage: React.FC = () => {
     const flowRouter = useFlowRouter()
-    const config: SSIInformationRequestPageConfig = flowRouter.getConfig() as SSIInformationRequestPageConfig;
+    const config: SSIInformationRequestPageConfig = flowRouter.getPageConfig() as SSIInformationRequestPageConfig;
     const location = useLocation();
     const state: State | undefined = location.state;
     const {t} = useTranslation()
@@ -409,7 +409,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, config.form)}
-                            onClick={async () => await flowRouter.next({payload, isManualIdentification})}
+                            onClick={async () => await flowRouter.nextStep({payload, isManualIdentification})}
                         />
                     </div>
                 </div>

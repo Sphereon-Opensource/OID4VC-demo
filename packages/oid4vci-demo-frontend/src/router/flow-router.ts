@@ -139,7 +139,7 @@ export function useFlowRouter() {
         }
     }
 
-    function getConfig(): PageConfig {
+    function getPageConfig(): PageConfig {
         if (!stepState.pageConfig) {
             throw new Error(`Config not found for step ${stepState.currentStep?.id} in route ${currentRouteId}`)
         }
@@ -147,9 +147,9 @@ export function useFlowRouter() {
     }
 
     return {
-        getConfig,
+        getPageConfig,
         goToStep,
-        next: nextStep,
+        nextStep,
         setCurrentRouteId
     }
 }

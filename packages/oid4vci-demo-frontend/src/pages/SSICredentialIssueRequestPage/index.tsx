@@ -27,7 +27,7 @@ type State = {
 const SSICredentialIssueRequestPage: React.FC = () => {
     const location = useLocation();
     const flowRouter = useFlowRouter()
-    const config: SSICredentialIssueRequestPageConfig = flowRouter.getConfig() as SSICredentialIssueRequestPageConfig
+    const config: SSICredentialIssueRequestPageConfig = flowRouter.getPageConfig() as SSICredentialIssueRequestPageConfig
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
     const buttonConfig = getCurrentEcosystemComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
@@ -40,7 +40,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 .then((status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
-                        flowRouter.next()
+                        flowRouter.nextStep()
                     } else if (status.status === IssueStatus.ERROR) {
                         // TODO: Add feedback to user
                         console.error(status.error)

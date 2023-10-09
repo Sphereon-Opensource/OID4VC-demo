@@ -26,7 +26,7 @@ const SSIInformationSuccessPage: React.FC = () => {
 
     const state: State | undefined = location.state;
 
-    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getConfig() as SSIInformationSharedSuccessPageConfig;
+    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getPageConfig() as SSIInformationSharedSuccessPageConfig;
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
     const {t} = useTranslation()
 
@@ -95,7 +95,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={t('sharing_data_success_right_pane_button_caption')}
                             style={{width: '100%'}}
-                            onClick={async () => await flowRouter.next()}
+                            onClick={async () => await flowRouter.nextStep()}
                         />
                     </div>
                 </div>
@@ -106,7 +106,7 @@ const SSIInformationSuccessPage: React.FC = () => {
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const flowRouter = useFlowRouter()
-    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getConfig() as SSIInformationSharedSuccessPageConfig
+    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getPageConfig() as SSIInformationSharedSuccessPageConfig
     const location = useLocation();
     const state = location.state;
     const {t} = useTranslation()
