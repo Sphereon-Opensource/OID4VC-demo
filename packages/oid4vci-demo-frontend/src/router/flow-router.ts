@@ -39,10 +39,10 @@ export function useFlowAppRouter() {
 export function useFlowRouter() {
     const navigate = useNavigate()
     const pageLocation = useLocation()
-    const initialStep = useMemo(() => determineCurrentStep(), [pageLocation]);
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
+    const initialStep = useMemo(() => determineCurrentStep(), [pageLocation]);
     const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(initialStep)
     const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStep))
 
