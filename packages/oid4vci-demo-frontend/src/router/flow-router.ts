@@ -10,7 +10,7 @@ import {
     VCINavigationStep,
     VCIOperation
 } from "../ecosystem-config"
-import {useState} from "react"
+import {useMemo, useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
 
 
@@ -39,10 +39,11 @@ export function useFlowAppRouter() {
 export function useFlowRouter() {
     const navigate = useNavigate()
     const pageLocation = useLocation()
+    const initialStep = useMemo(() => determineCurrentStep(), [pageLocation]);
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
-    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(determineCurrentStep())
+    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(initialStep)
     const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStep))
 
 
@@ -51,11 +52,6 @@ export function useFlowRouter() {
     }
 
     function determineCurrentStep(): VCIConfigRouteStep {
-        console.log('determineCurrentStep, currentStop:', currentStep)
-        if(currentStep && currentStep.operation == VCIOperation.EXECUTE) {
-            return currentStep
-        }
-
         const currentLocation = pageLocation.pathname
         const defaultLocation = getDefaultLocation()
         for (const step of Object.values(stepsById)) {
