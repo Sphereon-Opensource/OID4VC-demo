@@ -58,6 +58,7 @@ export function useFlowRouter() {
                 case VCIOperation.NAVIGATE:
                     const path = (step as VCINavigationStep).path
                     if (path === currentLocation || (currentLocation === '/' && path === defaultLocation)) {
+                        console.log('determined current step: ', step.id)
                         return step
                     }
                     break
