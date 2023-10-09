@@ -16,8 +16,9 @@ import {createCredentialOffer} from "./actions/credential-actions"
 
 type StepsByIdType = { [key: string]: VCIConfigRouteStep };
 
-interface CurrentStepData {
+interface StepState {
     currentStep?: VCIConfigRouteStep
+    pageConfig?: PageConfig
 }
 
 export function useFlowAppRouter() {
@@ -46,29 +47,34 @@ export function useFlowRouter() {
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
-    const currentStepData = useMemo<CurrentStepData>(() => determineCurrentStep(), [pageLocation.pathname])
-    const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStepData))
+    const stepState = useMemo<StepState>(() => initStepState(), [pageLocation.pathname])
 
     function getRouteId(): string {
         return currentRouteId != '' ? currentRouteId : 'default'
     }
 
-    function determineCurrentStep(): CurrentStepData {
+    function initStepState(): StepState {
+        const stepState = {} as StepState
+
         const currentLocation = pageLocation.pathname
-        console.log('determineCurrentStep() for page ', currentLocation)
         const defaultLocation = getDefaultLocation()
         for (const step of Object.values(stepsById)) {
             switch (step.operation) {
                 case VCIOperation.NAVIGATE:
                     const path = (step as VCINavigationStep).path
                     if (path === currentLocation || (currentLocation === '/' && path === defaultLocation)) {
-                        console.log('determined current step: ', step.id)
-                        return {currentStep: step}
+                        stepState.currentStep = step
                     }
                     break
             }
         }
-        throw new Error(`can't determine current step for location path ${currentLocation}`)
+        const currentStep = stepState.currentStep
+        if (!currentStep) {
+            throw new Error(`can't determine current step for location path ${currentLocation}`)
+        }
+
+        stepState.pageConfig = getCurrentEcosystemPageConfig(currentStep.id)
+        return stepState
     }
 
     function getDefaultLocation(state?: any): string {
@@ -76,12 +82,10 @@ export function useFlowRouter() {
     }
 
     async function next(state ?: any) {
-        const currentStep = currentStepData.currentStep
+        const currentStep = stepState.currentStep
         if (!currentStep) {
             throw new Error('current route/step is unknown')
         }
-        console.log('currentStep', JSON.stringify(currentStep))
-        console.log('currentStep.nextId', JSON.stringify(currentStep.nextId))
         if (currentStep.nextId) {
             await goToStep(currentStep.nextId, state)
         } else {
@@ -90,11 +94,12 @@ export function useFlowRouter() {
     }
 
     async function goToStep(stepId: string, state?: any) {
-        console.log('goToStep', stepId)
         const nextStep = stepsById[stepId]
         if (!nextStep) {
-            throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${currentStepData.currentStep?.id}`)
+            throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${stepState.currentStep?.id}`)
         }
+
+        console.debug('transitioning to step', stepId)
         switch (nextStep.operation) {
             case VCIOperation.NAVIGATE:
                 const navStep = nextStep as VCINavigationStep
@@ -120,16 +125,14 @@ export function useFlowRouter() {
 
     async function execute(executeStep: VCIExecuteStep, inState: any) {
         try {
+            console.debug('executing step', executeStep.id)
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
-                    console.log('createCredentialOffer', JSON.stringify(inState))
                     outState = await createCredentialOffer(inState)
-                    console.log('createCredentialOffer returned', JSON.stringify(outState))
                     break
             }
-            console.log('setCurrentStep', JSON.stringify(executeStep))
-            currentStepData.currentStep = executeStep
+            stepState.currentStep = executeStep
             await next(outState)
         } catch (e: any) {
             throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
@@ -137,10 +140,10 @@ export function useFlowRouter() {
     }
 
     function getConfig(): PageConfig {
-        if (!pageConfig) {
-            throw new Error(`Config not found for step ${currentStepData.currentStep?.id} in route ${currentRouteId}`)
+        if (!stepState.pageConfig) {
+            throw new Error(`Config not found for step ${stepState.currentStep?.id} in route ${currentRouteId}`)
         }
-        return pageConfig as PageConfig
+        return stepState.pageConfig as PageConfig
     }
 
     return {
@@ -184,9 +187,3 @@ function defaultLocation(stepsById: StepsByIdType) {
     throw new Error('No navigation steps have been defined in the sequence element of the ecosystem json')
 }
 
-function initConfig(currentStepData: CurrentStepData): (PageConfig | undefined) {
-    if (currentStepData.currentStep?.operation == VCIOperation.NAVIGATE) {
-        return getCurrentEcosystemPageConfig(currentStepData.currentStep.id)
-    }
-    return undefined
-}
