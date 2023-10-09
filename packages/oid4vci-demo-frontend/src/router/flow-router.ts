@@ -10,7 +10,7 @@ import {
     VCINavigationStep,
     VCIOperation
 } from "../ecosystem-config"
-import {useMemo, useState} from "react"
+import {useEffect, useMemo, useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
 
 
@@ -124,7 +124,9 @@ export function useFlowRouter() {
             }
             console.log('setCurrentStep', JSON.stringify(executeStep))
             await setCurrentStep(executeStep)
-            await next(outState)
+            useEffect(() => {
+                await next(outState)
+            })
         } catch (e: any) {
             throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
         }
