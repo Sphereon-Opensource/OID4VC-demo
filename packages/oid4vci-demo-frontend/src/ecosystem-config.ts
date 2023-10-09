@@ -31,7 +31,7 @@ export function getCurrentEcosystemComponentConfig(component: string, config?: V
     throw new Error(`config for ${component} doesn't exist`)
 }
 
-export function geCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
+export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
     if (!config) {
         config = getCurrentEcosystemConfig()
     }

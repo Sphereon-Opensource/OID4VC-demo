@@ -1,8 +1,14 @@
 import {useLocation, useNavigate} from "react-router-dom"
 import {
-    getEcosystemRoutes, ComponentConfig, VCIAction, VCIConfigRouteStep, VCIExecuteStep,
+    getCurrentEcosystemPageConfig,
+    getEcosystemRoutes,
+    PageConfig,
+    VCIAction,
+    VCIConfigRoute,
+    VCIConfigRouteStep,
+    VCIExecuteStep,
     VCINavigationStep,
-    VCIOperation, geCurrentEcosystemPageConfig, VCIConfigRoute
+    VCIOperation
 } from "../ecosystem-config"
 import {useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
@@ -37,7 +43,8 @@ export function useFlowRouter() {
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
     const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(determineCurrentStep())
-    const [pageConfig] = useState<ComponentConfig>(geCurrentEcosystemPageConfig(currentStep.id))
+    const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStep))
+
 
     function getRouteId(): string {
         return currentRouteId != '' ? currentRouteId : 'default'
@@ -58,7 +65,6 @@ export function useFlowRouter() {
         }
         throw new Error(`can't determine current step for location path ${currentLocation}`)
     }
-
 
     function getDefaultLocation(state?: any): string {
         return defaultLocation(stepsById)
@@ -119,8 +125,11 @@ export function useFlowRouter() {
         }
     }
 
-    function getConfig(): ComponentConfig {
-        return pageConfig
+    function getConfig(): PageConfig {
+        if (!pageConfig) {
+            throw new Error(`Config not found for step ${currentStep.id} in route ${currentRouteId}`)
+        }
+        return pageConfig as PageConfig
     }
 
     return {
@@ -162,4 +171,11 @@ function defaultLocation(stepsById: StepsByIdType) {
         }
     }
     throw new Error('No navigation steps have been defined in the sequence element of the ecosystem json')
+}
+
+function initConfig(currentStep: VCIConfigRouteStep): (PageConfig | undefined) {
+    if (currentStep.operation == VCIOperation.NAVIGATE) {
+        return getCurrentEcosystemPageConfig(currentStep.id)
+    }
+    return undefined
 }
