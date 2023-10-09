@@ -1,40 +1,36 @@
-import React, {ReactElement, useState} from 'react'
+import React, {ReactElement, useEffect, useState} from 'react'
 import {Text} from "../../components/Text";
 import style from '../../components/Text/Text.module.css'
 import DeepLink from "../../components/DeepLink";
 import {useTranslation} from "react-i18next";
 import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
-import {useLocation, useNavigate} from "react-router-dom"
 import MemoizedAuthenticationQR from '../../components/AuthenticationQR';
 import {
     getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
     SSICredentialVerifyRequestPageConfig
 } from "../../ecosystem-config";
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
 import {useMediaQuery} from "react-responsive";
 import {Mobile, MobileOS, NonMobile} from "../../index"
-import {Sequencer} from "../../router/sequencer"
+import {useFlowRouter} from "../../router/flow-router"
+import {useLocation} from "react-router-dom"
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
-    const location = useLocation()
-    const navigate = useNavigate()
-    const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialVerifyRequestPage') as SSICredentialVerifyRequestPageConfig
+    const flowRouter = useFlowRouter()
+    const config = flowRouter.getConfig() as SSICredentialVerifyRequestPageConfig
     const {t} = useTranslation()
     const credentialName = getCurrentEcosystemGeneralConfig().credentialName
-    const [sequencer] = useState<Sequencer>(new Sequencer())
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const onSignInComplete = async (data: AuthorizationResponsePayload) => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-        console.log('onSignInComplete')
+        console.debug('onSignInComplete')
         const state = {
             data: {
                 vp_token: data.vp_token
             }
         };
-        console.log('calling sequencer.next')
-        await sequencer.next(state)
+        console.debug('calling pageRouter.next')
+        await flowRouter.next(state)
     }
 
     return (
@@ -119,7 +115,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                             <SSIPrimaryButton
                                 caption={t('credential_verify_request_right_pane_button_caption')}
                                 onClick={async () => {
-                                    sequencer.goToStep(config.rightPaneButtonStepId ?? 'infoRequest')
+                                    flowRouter.goToStep(config.rightPaneButtonStepId ?? 'infoRequest')
                                 }}
                             />
                         </div>

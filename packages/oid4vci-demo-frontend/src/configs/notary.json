@@ -9,7 +9,7 @@
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
-    "SSIDownloadPage": {
+    "download": {
       "rightPane": {
         "paradymWalletQRCode": {
           "style": {
@@ -250,34 +250,42 @@
       }
     }
   },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credentialOffer",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      },
-      {
-        "id": "issueSuccess",
-        "operation": "navigate",
-        "path": "https://knb.demo.sphereon.com"
-      }
-    ]
-  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://knb.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

@@ -6,12 +6,11 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import SSIPrimaryButton from '../../components/SSIPrimaryButton';
 import {
     EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
     SSIInformationSharedSuccessPageConfig
 } from "../../ecosystem-config"
 import {NonMobile} from '../..';
 import {useMediaQuery} from "react-responsive";
-import {Sequencer} from "../../router/sequencer"
+import {useFlowRouter} from "../../router/flow-router"
 
 type State = {
     Voornaam: string
@@ -21,20 +20,15 @@ type State = {
 }
 
 const SSIInformationSuccessPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const flowRouter = useFlowRouter()
     const location = useLocation();
-    const navigate = useNavigate()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const state: State | undefined = location.state;
 
-    const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig;
+    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getConfig() as SSIInformationSharedSuccessPageConfig;
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
     const {t} = useTranslation()
-
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-    }, [])
 
     return (
         <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none'}}>
@@ -101,7 +95,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={t('sharing_data_success_right_pane_button_caption')}
                             style={{width: '100%'}}
-                            onClick={async () => await sequencer.next()}
+                            onClick={async () => await flowRouter.next()}
                         />
                     </div>
                 </div>
@@ -111,7 +105,8 @@ const SSIInformationSuccessPage: React.FC = () => {
 }
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
-    const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig
+    const flowRouter = useFlowRouter()
+    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getConfig() as SSIInformationSharedSuccessPageConfig
     const location = useLocation();
     const state = location.state;
     const {t} = useTranslation()

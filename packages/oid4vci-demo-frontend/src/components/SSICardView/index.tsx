@@ -2,7 +2,10 @@ import React from 'react';
 import {ButtonType, IButton, ImageProperties} from '../../types';
 import SSIPrimaryButton from '../SSIPrimaryButton';
 import SSISecondaryButton from '../SSISecondaryButton';
-import {getCurrentEcosystemPageOrComponentConfig, SSICardViewConfig} from "../../ecosystem-config";
+import {
+    getCurrentEcosystemComponentConfig,
+    SSICardViewConfig
+} from "../../ecosystem-config"
 import {NonMobile} from "../../index";
 import {useMediaQuery} from "react-responsive";
 
@@ -17,7 +20,7 @@ interface IProps {
 }
 
 const SSICardView: React.FC<IProps> = (props: IProps) => {
-    const config = getCurrentEcosystemPageOrComponentConfig('SSICardView') as SSICardViewConfig;
+    const config = getCurrentEcosystemComponentConfig('SSICardView') as SSICardViewConfig;
     const mainContainerStyle = config.styles.mainContainer
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {

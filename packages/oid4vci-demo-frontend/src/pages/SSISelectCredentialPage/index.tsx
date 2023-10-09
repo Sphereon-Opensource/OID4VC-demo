@@ -1,10 +1,9 @@
 import React, {ReactElement, useEffect, useState} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './index.module.css'
 import {SSICardView} from '@sphereon/ui-components.ssi-react';
-import {getCurrentEcosystemPageOrComponentConfig, SSISelectCredentialPageConfig} from '../../ecosystem-config';
+import {SSISelectCredentialPageConfig} from '../../ecosystem-config';
 import {MetadataClient} from '@sphereon/oid4vci-client';
 import {
     CredentialsSupportedDisplay,
@@ -20,7 +19,8 @@ import {useTranslation} from "react-i18next";
 import {useMediaQuery} from "react-responsive";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {Pagination} from 'swiper';
-import {Sequencer} from "../../router/sequencer"
+import {useFlowRouter} from "../../router/flow-router"
+import {useLocation} from "react-router-dom"
 
 const short = require('short-uuid');
 
@@ -32,15 +32,12 @@ const SSISelectCredentialPage: React.FC = () => {
     const [cardElements, setCardElements] = useState<Array<ReactElement>>([])
     const [payload] = useState<Payload>({})
     const [isManualIdentification] = useState<boolean>(false)
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const location = useLocation()
-    const navigate = useNavigate()
-    const config: SSISelectCredentialPageConfig = getCurrentEcosystemPageOrComponentConfig('SSISelectCredentialPage') as SSISelectCredentialPageConfig
+    const flowRouter = useFlowRouter()
+    const config: SSISelectCredentialPageConfig = flowRouter.getConfig() as SSISelectCredentialPageConfig
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     useEffect((): void => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
 
         MetadataClient.retrieveAllMetadata(process.env.REACT_APP_OID4VCI_AGENT_BASE_URL!).then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
@@ -116,7 +113,7 @@ const SSISelectCredentialPage: React.FC = () => {
         void setCards()
     }, [supportedCredentials]);
 
-    const onSelectCredential = async (credentialType: string): Promise<void> => await sequencer.next({
+    const onSelectCredential = async (credentialType: string): Promise<void> => await flowRouter.next({
         payload,
         isManualIdentification,
         credentialType
