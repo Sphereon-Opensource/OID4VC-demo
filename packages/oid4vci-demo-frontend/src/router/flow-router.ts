@@ -42,7 +42,13 @@ export function useFlowRouter() {
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
-    const [currentStep, setCurrentStep] = useMemo<VCIConfigRouteStep>(() => determineCurrentStep(), [])
+    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(() => {
+        if (currentStep === undefined) {
+            return determineCurrentStep();
+        } else {
+            return currentStep;
+        }
+    });
     const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStep))
 
 
