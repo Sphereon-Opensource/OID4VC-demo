@@ -42,10 +42,8 @@ export function useFlowRouter() {
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
-    const initialStep = useMemo(() => determineCurrentStep(), []);
-    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(initialStep)
+    const [currentStep, setCurrentStep] = useState<VCIConfigRouteStep>(() => determineCurrentStep())
     const [pageConfig] = useState<(() => PageConfig | undefined) | PageConfig | undefined>(() => initConfig(currentStep))
-
 
     function getRouteId(): string {
         return currentRouteId != '' ? currentRouteId : 'default'
