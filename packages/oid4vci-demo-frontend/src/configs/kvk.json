@@ -8,6 +8,84 @@
     "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
   },
   "pages": {
+    "download": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
     "verifyRequest": {
       "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "backgroundColor": "#005371",
@@ -31,6 +109,26 @@
     "issueSuccess": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
       "photoRight": "undraw_messenger_re_8bky_1.svg"
+    },
+    "infoSharedSuccess": {
+      "photoLeft": "image_4.svg",
+      "photoLeftManual": "image_4.svg",
+      "photoRight": "undraw_certification_re_ifll_1.svg",
+      "logo": {
+        "src": "coc/logo.svg",
+        "alt": "chamber of commerce logo",
+        "width": 383,
+        "height": 383
+      },
+      "mobile": {
+        "logo": {
+          "src": "coc/logo.svg",
+          "alt": "chamber of commerce logo",
+          "width": 65,
+          "height": 65
+        }
+      },
+      "backgroundColor": "#005371"
     },
     "issueRequest": {
       "title": "coc_qrcode_right_pane_top_title",
@@ -172,6 +270,11 @@
           "id": "issueSuccess",
           "operation": "navigate",
           "path": "https://knb.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
         }
       ]
     }

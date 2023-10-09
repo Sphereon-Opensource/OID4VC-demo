@@ -9,7 +9,7 @@
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
-    "SSIDownloadPage": {
+    "download": {
       "rightPane": {
         "paradymWalletQRCode": {
           "style": {
@@ -277,6 +277,11 @@
           "id": "issueSuccess",
           "operation": "navigate",
           "path": "https://knb.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
         }
       ]
     }
