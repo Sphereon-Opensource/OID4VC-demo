@@ -55,6 +55,7 @@ export function useFlowRouter() {
 
     function determineCurrentStep(): CurrentStepData {
         const currentLocation = pageLocation.pathname
+        console.log('determineCurrentStep() for page ', currentLocation)
         const defaultLocation = getDefaultLocation()
         for (const step of Object.values(stepsById)) {
             switch (step.operation) {
