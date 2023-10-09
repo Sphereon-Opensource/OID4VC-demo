@@ -124,9 +124,9 @@ export function useFlowRouter() {
             }
             console.log('setCurrentStep', JSON.stringify(executeStep))
             await setCurrentStep(executeStep)
-            useEffect(() => {
+            setTimeout(() => {
                 next(outState)
-            })
+            }, 1)
         } catch (e: any) {
             throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
         }
