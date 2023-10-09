@@ -74,7 +74,7 @@ export function useFlowRouter() {
         if (currentStep === undefined) {
             throw new Error('current route/step is unknown')
         }
-        console.log('currentStep.nextId', currentStep.nextId)
+        console.log('currentStep', JSON.stringify(currentStep))
         if (currentStep.nextId) {
             await goToStep(currentStep.nextId, state)
         } else {
@@ -122,7 +122,7 @@ export function useFlowRouter() {
                     break
             }
             console.log('setCurrentStep', JSON.stringify(executeStep))
-            setCurrentStep(executeStep)
+            await setCurrentStep(executeStep)
             await next(outState)
         } catch (e: any) {
             throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
