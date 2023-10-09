@@ -74,6 +74,7 @@ export function useFlowRouter() {
         if (currentStep === undefined) {
             throw new Error('current route/step is unknown')
         }
+        console.log('currentStep.nextId', currentStep.nextId)
         if (currentStep.nextId) {
             await goToStep(currentStep.nextId, state)
         } else {
@@ -115,9 +116,12 @@ export function useFlowRouter() {
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
+                    console.log('createCredentialOffer', JSON.stringify(inState))
                     outState = await createCredentialOffer(inState)
+                    console.log('createCredentialOffer returned', JSON.stringify(outState))
                     break
             }
+            console.log('setCurrentStep', JSON.stringify(executeStep))
             setCurrentStep(executeStep)
             await next(outState)
         } catch (e: any) {
