@@ -81,7 +81,7 @@ export function useFlowRouter() {
         return defaultLocation(stepsById)
     }
 
-    async function next(state ?: any) {
+    async function nextStep(state ?: any) {
         const currentStep = stepState.currentStep
         if (!currentStep) {
             throw new Error('current route/step is unknown')
@@ -133,7 +133,7 @@ export function useFlowRouter() {
                     break
             }
             stepState.currentStep = executeStep
-            await next(outState)
+            await nextStep(outState)
         } catch (e: any) {
             throw new Error(`An error occurred while executing action ${executeStep.action} of step ${executeStep.id}. Error:\n${e.message}`)
         }
@@ -149,7 +149,7 @@ export function useFlowRouter() {
     return {
         getConfig,
         goToStep,
-        next,
+        next: nextStep,
         setCurrentRouteId
     }
 }

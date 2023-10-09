@@ -23,13 +23,13 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const onSignInComplete = async (data: AuthorizationResponsePayload) => {
-        console.log('onSignInComplete')
+        console.debug('onSignInComplete')
         const state = {
             data: {
                 vp_token: data.vp_token
             }
         };
-        console.log('calling pageRouter.next')
+        console.debug('calling pageRouter.next')
         await flowRouter.next(state)
     }
 
