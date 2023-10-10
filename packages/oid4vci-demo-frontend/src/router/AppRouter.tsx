@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {HashRouter, Route, Routes} from 'react-router-dom'
 import SSICredentialIssueRequestPage from '../pages/SSICredentialIssueRequestPage'
 import SSICredentialVerifyRequestPage from '../pages/SSICredentialVerifyRequestPage'
@@ -8,9 +8,9 @@ import SSIInformationRequestPage from '../pages/SSIInformationRequestPage'
 import SSIDownloadPage from "../pages/SSIDownloadPage"
 import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
-import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage";
-import {Sequencer} from "./sequencer"
+import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage"
 import SphereonWalletPage from "../pages/SphereonWalletPage"
+import {useFlowAppRouter} from "./flow-router"
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -26,8 +26,7 @@ export const routes: Record<string, any> = {
 }
 
 const AppRouter: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const defaultRoute = sequencer.getDefaultRoute()
+    const defaultRoute = useFlowAppRouter().getDefaultLocation()
     return (
         <HashRouter>
             <Routes>

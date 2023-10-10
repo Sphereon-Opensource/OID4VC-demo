@@ -2,13 +2,13 @@
   "general": {
     "credentialName": "KvK Inschrijving",
     "issueCredentialType": "KvkInschrijving",
-    "baseUrl": "http://192.168.1.200:5001",
+    "baseUrl": "https://kvk.demo.sphereon.com/agent",
     "verifierUrl": "https://kvk.demo.sphereon.com/verifier",
     "verifierUrlCaption": "KvK Inschrijving",
-    "downloadUrl": "http://192.168.1.200:5001/#/download"
+    "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
   },
   "pages": {
-    "SSIDownloadPage": {
+    "download": {
       "rightPane": {
         "paradymWalletQRCode": {
           "style": {
@@ -86,7 +86,7 @@
         }
       }
     },
-    "SSICredentialVerifyRequestPage": {
+    "verifyRequest": {
       "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "backgroundColor": "#005371",
       "logo": {
@@ -106,11 +106,11 @@
         "image": "undraw_profile_details_re_ch9r 1.svg"
       }
     },
-    "SSICredentialIssuedSuccessPage": {
+    "issueSuccess": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
       "photoRight": "undraw_messenger_re_8bky_1.svg"
     },
-    "SSIInformationSharedSuccessPage": {
+    "infoSharedSuccess": {
       "photoLeft": "image_4.svg",
       "photoLeftManual": "image_4.svg",
       "photoRight": "undraw_certification_re_ifll_1.svg",
@@ -130,7 +130,7 @@
       },
       "backgroundColor": "#005371"
     },
-    "SSICredentialIssueRequestPage": {
+    "issueRequest": {
       "title": "coc_qrcode_right_pane_top_title",
       "topParagraph": "coc_qrcode_right_pane_top_paragraph",
       "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
@@ -152,7 +152,7 @@
         "image": "undraw_certification_re_ifll_1.svg"
       }
     },
-    "SSIInformationRequestPage": {
+    "infoRequest": {
       "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "coc_sharing_data_right_pane_top_paragraph",
       "backgroundColor": "#005371",
@@ -235,69 +235,55 @@
           }
         ]
       ]
-    },
-    "SSILandingPage": {
-      "photoLeft": "landing_manual.svg",
-      "photoRight": "landing_wallet.svg",
-      "logo": {
-        "src": "coc/logo.svg",
-        "alt": "chamber of commerce logo",
-        "width": 150,
-        "height": 150
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#202537"
-        },
-        "leftCardView": {
-          "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
-        },
-        "rightCardView": {
-          "textColor": "#303030",
-          "buttonType": "primary"
-        }
-      }
     }
   },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "download",
-        "operation": "navigate",
-        "path": "/download"
-      },
-      {
-        "id": "verifyRequest",
-        "operation": "navigate",
-        "path": "/credentials/verify/request",
-        "nextId": "infoRequest",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credentialOffer"
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      },
-      {
-        "id": "issueSuccess",
-        "operation": "navigate",
-        "path": "https://knb.demo.sphereon.com"
-      }
-    ]
-  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "infoRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/request",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://knb.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {
