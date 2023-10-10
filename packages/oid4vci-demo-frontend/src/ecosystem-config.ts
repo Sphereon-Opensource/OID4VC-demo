@@ -38,7 +38,7 @@ export function hasCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig
     return stepId in config.pages;
 }
 
-export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig | undefined{
+export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
     if (!config) {
         config = getCurrentEcosystemConfig()
     }
