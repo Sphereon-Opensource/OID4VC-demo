@@ -1,26 +1,18 @@
-import React, {ReactElement, useEffect, useState} from 'react';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import React, {ReactElement, useEffect, useState} from 'react'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import './index.module.css'
-import {SSICardView} from '@sphereon/ui-components.ssi-react';
-import {SSISelectCredentialPageConfig} from '../../ecosystem-config';
-import {MetadataClient} from '@sphereon/oid4vci-client';
-import {
-    CredentialsSupportedDisplay,
-    CredentialSupported,
-    EndpointMetadata,
-    EndpointMetadataResult
-} from '@sphereon/oid4vci-common';
-import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store';
-import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper';
-import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client";
-import agent from '../../agent';
-import {useTranslation} from "react-i18next";
-import {useMediaQuery} from "react-responsive";
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {Pagination} from 'swiper';
+import {SSICardView} from '@sphereon/ui-components.ssi-react'
+import {SSISelectCredentialPageConfig} from '../../ecosystem-config'
+import {MetadataClient} from '@sphereon/oid4vci-client'
+import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadataResult} from '@sphereon/oid4vci-common'
+import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store'
+import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper'
+import {useTranslation} from "react-i18next"
+import {useMediaQuery} from "react-responsive"
+import {Swiper, SwiperSlide} from 'swiper/react'
+import {Pagination} from 'swiper'
 import {useFlowRouter} from "../../router/flow-router"
-import {useLocation} from "react-router-dom"
 
 const short = require('short-uuid');
 

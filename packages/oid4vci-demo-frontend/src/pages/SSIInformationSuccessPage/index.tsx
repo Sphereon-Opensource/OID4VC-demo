@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react'
-import {Text} from '../../components/Text';
-import style from '../../components/Text/Text.module.css';
-import {Trans, useTranslation} from "react-i18next";
-import {useLocation, useNavigate} from 'react-router-dom';
-import SSIPrimaryButton from '../../components/SSIPrimaryButton';
+import React from 'react'
+import {Text} from '../../components/Text'
+import style from '../../components/Text/Text.module.css'
+import {Trans, useTranslation} from "react-i18next"
+import {useLocation} from 'react-router-dom'
+import SSIPrimaryButton from '../../components/SSIPrimaryButton'
 import {
-    EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig,
+    EcosystemGeneralConfig,
+    getCurrentEcosystemGeneralConfig,
     SSIInformationSharedSuccessPageConfig
 } from "../../ecosystem-config"
-import {NonMobile} from '../..';
-import {useMediaQuery} from "react-responsive";
+import {NonMobile} from '../..'
+import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 
 type State = {

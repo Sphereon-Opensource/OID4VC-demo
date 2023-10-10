@@ -1,29 +1,28 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
-import inputStyle from './SSIInformationRequestPage.module.css';
-import {useTranslation} from "react-i18next";
+import inputStyle from './SSIInformationRequestPage.module.css'
+import {useTranslation} from "react-i18next"
 import {
-  AdditionalClaims,
-  ICredentialSubject,
-  IVerifiableCredential,
-  IVerifiablePresentation,
-  W3CVerifiableCredential,
-  W3CVerifiablePresentation
-} from "@sphereon/ssi-types";
+    AdditionalClaims,
+    ICredentialSubject,
+    IVerifiableCredential,
+    IVerifiablePresentation,
+    W3CVerifiableCredential,
+    W3CVerifiablePresentation
+} from "@sphereon/ssi-types"
 
 import '../../css/typography.css'
 import {
-  DataFormElement,
-  DataFormRow,
-  getCurrentEcosystemGeneralConfig,
-  
-  SSIInformationRequestPageConfig
+    DataFormElement,
+    DataFormRow,
+    getCurrentEcosystemGeneralConfig,
+    SSIInformationRequestPageConfig
 } from "../../ecosystem-config"
-import SSIPrimaryButton from "../../components/SSIPrimaryButton";
+import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useLocation} from "react-router-dom"
-import {Buffer} from 'buffer';
-import {useMediaQuery} from "react-responsive";
-import {Mobile, NonMobile} from "../../index";
-import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils";
+import {Buffer} from 'buffer'
+import {useMediaQuery} from "react-responsive"
+import {NonMobile} from "../../index"
+import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils"
 import {generateRandomIBAN} from "../../utils/iban"
 import {useFlowRouter} from "../../router/flow-router"
 

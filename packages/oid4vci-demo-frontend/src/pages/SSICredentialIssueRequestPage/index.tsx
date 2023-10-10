@@ -1,20 +1,21 @@
 import React, {ReactElement, useEffect, useState} from 'react'
-import {Text} from "../../components/Text";
+import {Text} from "../../components/Text"
 import style from '../../components/Text/Text.module.css'
-import {useTranslation} from "react-i18next";
-import {useLocation, useNavigate} from 'react-router-dom';
-import agent from '../../agent';
-import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator';
+import {useTranslation} from "react-i18next"
+import {useLocation} from 'react-router-dom'
+import agent from '../../agent'
+import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator'
 import {
-    EcosystemGeneralConfig, getCurrentEcosystemComponentConfig,
+    EcosystemGeneralConfig,
+    getCurrentEcosystemComponentConfig,
     getCurrentEcosystemGeneralConfig,
-    
-    SSICredentialIssueRequestPageConfig, SSISecondaryButtonConfig
+    SSICredentialIssueRequestPageConfig,
+    SSISecondaryButtonConfig
 } from "../../ecosystem-config"
-import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
-import DeepLink from "../../components/DeepLink";
-import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
-import {useMediaQuery} from "react-responsive";
+import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
+import DeepLink from "../../components/DeepLink"
+import {Mobile, NonMobile} from '../..'
+import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 
 

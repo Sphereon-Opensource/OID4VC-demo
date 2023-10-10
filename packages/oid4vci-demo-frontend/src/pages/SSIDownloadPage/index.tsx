@@ -1,17 +1,12 @@
-import React, {useEffect, useState} from "react"
-import {Text} from "../../components/Text";
-import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {
-    getCurrentEcosystemGeneralConfig,
-    
-    SSIDownloadPageConfig
-} from "../../ecosystem-config";
-import {useTranslation} from "react-i18next";
-import SSIWalletQRCode from "../../components/SSIWalletQRCode";
-import {NonMobile} from "../../index";
-import {useMediaQuery} from "react-responsive";
+import React from "react"
+import {Text} from "../../components/Text"
+import SSIPrimaryButton from "../../components/SSIPrimaryButton"
+import {getCurrentEcosystemGeneralConfig, SSIDownloadPageConfig} from "../../ecosystem-config"
+import {useTranslation} from "react-i18next"
+import SSIWalletQRCode from "../../components/SSIWalletQRCode"
+import {NonMobile} from "../../index"
+import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
-import {useLocation} from "react-router-dom"
 
 const SSIDownloadPage: React.FC = () => {
     const flowRouter = useFlowRouter()

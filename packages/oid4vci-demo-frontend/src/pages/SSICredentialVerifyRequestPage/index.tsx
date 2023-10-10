@@ -1,19 +1,15 @@
-import React, {ReactElement, useEffect, useState} from 'react'
-import {Text} from "../../components/Text";
+import React, {useState} from 'react'
+import {Text} from "../../components/Text"
 import style from '../../components/Text/Text.module.css'
-import DeepLink from "../../components/DeepLink";
-import {useTranslation} from "react-i18next";
-import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop";
-import MemoizedAuthenticationQR from '../../components/AuthenticationQR';
-import {
-    getCurrentEcosystemGeneralConfig,
-    SSICredentialVerifyRequestPageConfig
-} from "../../ecosystem-config";
-import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {useMediaQuery} from "react-responsive";
+import DeepLink from "../../components/DeepLink"
+import {useTranslation} from "react-i18next"
+import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop"
+import MemoizedAuthenticationQR from '../../components/AuthenticationQR'
+import {getCurrentEcosystemGeneralConfig, SSICredentialVerifyRequestPageConfig} from "../../ecosystem-config"
+import SSIPrimaryButton from "../../components/SSIPrimaryButton"
+import {useMediaQuery} from "react-responsive"
 import {Mobile, MobileOS, NonMobile} from "../../index"
 import {useFlowRouter} from "../../router/flow-router"
-import {useLocation} from "react-router-dom"
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const flowRouter = useFlowRouter()

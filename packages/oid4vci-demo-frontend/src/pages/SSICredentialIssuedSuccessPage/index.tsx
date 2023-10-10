@@ -1,15 +1,10 @@
-import React, {useEffect, useState} from "react"
-import {Text} from "../../components/Text";
-import {useTranslation} from "react-i18next";
-import SSIPrimaryButton from '../../components/SSIPrimaryButton';
-import {
-    getCurrentEcosystemGeneralConfig,
-    
-    SSICredentialIssuedSuccessPageConfig
-} from "../../ecosystem-config";
-import {NonMobile} from "../../index";
-import {useMediaQuery} from "react-responsive";
-import {useLocation, useNavigate} from "react-router-dom"
+import React from "react"
+import {Text} from "../../components/Text"
+import {useTranslation} from "react-i18next"
+import SSIPrimaryButton from '../../components/SSIPrimaryButton'
+import {getCurrentEcosystemGeneralConfig, SSICredentialIssuedSuccessPageConfig} from "../../ecosystem-config"
+import {NonMobile} from "../../index"
+import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 
 const SSICredentialIssuedSuccessPage: React.FC = () => {
