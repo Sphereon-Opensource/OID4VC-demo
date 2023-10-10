@@ -53,7 +53,8 @@
           },
           "downloadUrl": "https://qrco.de/be5xfh"
         },
-        "enableNextButton": true
+        "enablePrimaryButton": true,
+        "primaryButtonResourceId": "label_continue"
       }
     },
     "SSICredentialVerifyRequestPage": {
@@ -131,82 +132,46 @@
     "SSIInformationRequestPage": {
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
-      "backgroundColor": "#01224B",
+      "primaryButtonResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
+        "src": "banqup/logo.svg",
+        "width": 230,
+        "height": 350
       },
       "mobile": {
         "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
+          "src": "banqup/logo.svg",
+          "alt": "banqup",
           "width": 65,
           "height": 65
         },
-        "backgroundColor": "#EFFFF5",
-        "image": "undraw_profile_details_re_ch9r 1.svg"
+        "backgroundColor": "#EFFFF5"
       },
       "form": [
         [
           {
-            "id": "ssi_information_request_page_form_bedrijfsnaam",
-            "key": "Bedrijfsnaam",
-            "title": "ssi_information_request_page_form_bedrijfsnaam_title",
+            "id": "ssi_information_request_page_form_first_name",
+            "key": "firstName",
+            "title": "ssi_information_request_page_form_first_name_title",
             "type": "string",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_kvknummer",
-            "key": "KvkNummer",
-            "title": "ssi_information_request_page_form_kvknummer_title",
+            "id": "ssi_information_request_page_form_first_name",
+            "key": "lastName",
+            "title": "ssi_information_request_page_form_last_name_title",
             "type": "string",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_company_location",
-            "key": "Bedrijfslocatie",
-            "title": "ssi_information_request_page_form_company_location_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_first_name_director",
-            "key": "Voornaam",
-            "title": "ssi_information_request_page_form_first_name_director_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_last_name_director",
-            "key": "Achternaam",
-            "title": "ssi_information_request_page_form_last_name_director_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_place_of_birth",
-            "key": "Geboorteplaats",
-            "title": "ssi_information_request_page_form_place_of_birth_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_date_of_birth",
+            "id": "ssi_information_request_page_form_email",
             "key": "Geboortedatum",
-            "title": "ssi_information_request_page_form_date_of_birth_title",
+            "title": "ssi_information_request_page_form_email_title",
             "type": "date",
             "required": true
           }
@@ -245,12 +210,6 @@
         "path": "/download/sphereon-wallet",
         "nextId": "verifyCredential",
         "isDefaultRoute": true
-      },
-      {
-        "id": "verifyCredential",
-        "operation": "navigate",
-        "path": "/credentials/verify/request",
-        "nextId": "infoRequest"
       },
       {
         "id": "infoRequest",

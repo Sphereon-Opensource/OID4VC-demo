@@ -408,7 +408,9 @@ const SSIInformationRequestPage: React.FC = () => {
                   </div>}
                     <div>
                         <SSIPrimaryButton
-                            caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
+                            caption={isManualIdentification
+                                ? t(config.primaryButtonManualResourceId ?? 'label_share')
+                                : t(config.primaryButtonResourceId ?? 'label_continue')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, config.form)}
                             onClick={async () => await sequencer.next({payload, isManualIdentification})}

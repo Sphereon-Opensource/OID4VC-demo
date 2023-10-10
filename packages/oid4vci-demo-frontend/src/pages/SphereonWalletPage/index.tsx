@@ -19,11 +19,9 @@ import {ImageProperties} from "../../types"
 export default function SphereonWalletPage(): React.ReactElement | null {
     const location = useLocation()
     const navigate = useNavigate()
-    const config = getCurrentEcosystemPageOrComponentConfig('downloadSphereonWallet') as SphereonWalletPageConfig
+    const config = getCurrentEcosystemPageOrComponentConfig('downloadSphereonWallet') as SphereonWalletPageConfig // FIXME after VDX-259
     const {t} = useTranslation()
-    const credentialName = getCurrentEcosystemGeneralConfig().credentialName
     const [sequencer] = useState<Sequencer>(new Sequencer())
-    const [deepLink, setDeepLink] = useState<string>('')
     const isNarrowScreen = useMediaQuery({query: '(max-width: 767px)'})
 
     useEffect(() => {
@@ -114,13 +112,17 @@ export default function SphereonWalletPage(): React.ReactElement | null {
                         marginTop: "8px",
                         marginBottom: isNarrowScreen ? 40 : '20%',
                     }}>
-                        {config.rightPane.enableNextButton && (
+                        {config.rightPane.enablePrimaryButton && (
                             <div style={{display: 'flex', justifyContent: 'center'}}>
                                 <SSIPrimaryButton
-                                    caption={t('sphereon_wallet_right_pane_button_caption')}
+                                    caption={t(config.rightPane.primaryButtonResourceId ?? 'label_continue')}
                                     style={sphereonWalletQRCode.button.style}
                                     onClick={async () => {
-                                        sequencer.goToStep(config.rightPane.nextButtonStepId ?? 'infoRequest')
+                                        if (config.rightPane.primaryButtonStepId) {
+                                            await sequencer.goToStep(config.rightPane.primaryButtonStepId)
+                                        } else {
+                                            await sequencer.next()
+                                        }
                                     }}
                                 />
                             </div>

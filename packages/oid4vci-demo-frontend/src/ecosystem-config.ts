@@ -117,6 +117,8 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     text_top_of_image?: string
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
+    primaryButtonResourceId?: string
+    primaryButtonManualResourceId?: string
     form?: DataFormRow[]
     mobile?: {
       logo?: ImageProperties
@@ -191,8 +193,9 @@ export interface SphereonWalletPageConfig extends PageOrComponentConfig {
             button: IProps & { style: CSSProperties }
             downloadUrl: string
         }
-        enableNextButton? : boolean
-        nextButtonStepId? : string
+        enablePrimaryButton? : boolean
+        primaryButtonResourceId? : string
+        primaryButtonStepId? : string
     }
 }
 

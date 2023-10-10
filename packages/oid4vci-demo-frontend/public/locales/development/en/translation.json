@@ -25,7 +25,6 @@
   "sphereon_wallet_right_pane_paragraph": "",
   "sphereon_wallet_right_pane_sphereon_qrcode_text": "",
   "sphereon_wallet_right_pane_sphereon_qrcode_button_caption": "Try Sphereon Wallet for free",
-  "sphereon_wallet_right_pane_button_caption": "Continue",
   "onboarding_left_card_button_caption": "Manually",
   "onboarding_left_card_paragraph": "When you opt to manually enter your data,\nplease fill in your first- and lastname, along\nwith your email address to get the\n{{credentialName}} credential(s)",
   "onboarding_left_card_title": "Manually fill out details",
@@ -35,8 +34,6 @@
   "qrcode_right_pane_bottom_paragraph": "Simply scan the QR code using\nyour wallet's QR scanner.",
   "qrcode_right_pane_top_paragraph": "A hassle-free way to share your personal\ninformation using your digital wallet.",
   "qrcode_right_pane_top_title": "Use your Digital Identity",
-  "sharing_data_manually_right_pane_button_caption": "Share",
-  "sharing_data_right_pane_button_caption": "Next",
   "sharing_data_right_pane_paragraph": "Almost there!\n Please fill out any missing data.\r\nTo claim your {{credentialName}}\ncredential(s). The content will not be stored! It is used to personalize the credentials",
   "sharing_data_fill_out_right_pane_paragraph": "To get started, please provide us with your details",
   "sharing_data_right_pane_title": "Provide your data",
@@ -67,5 +64,9 @@
   "coc_sharing_data_right_pane_top_paragraph": "Almost there! Please provide any missing details if necessary.",
   "coc_credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
   "ssi_credentials_landing_page_title": "Get credentials",
-  "ssi_credentials_landing_page_text": "You can receive the credentials below in your wallet. Select a credential and follow the necessary steps."
+  "ssi_credentials_landing_page_text": "You can receive the credentials below in your wallet. Select a credential and follow the necessary steps.",
+  "label_share": "Share",
+  "label_next": "Next",
+  "label_continue": "Continue",
+  "title_personal_details": "Personal Details"
 }
