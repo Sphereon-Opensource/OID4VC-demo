@@ -168,6 +168,34 @@ export interface SSIDownloadPageConfig extends PageOrComponentConfig {
     }
 }
 
+export interface SphereonWalletPageConfig extends PageOrComponentConfig {
+    leftPane: {
+        image?: string
+        backgroundColor?: string
+        width?: string
+        logo?: ImageProperties,
+        mobile?: {
+            logo?: ImageProperties
+            backgroundColor?: string
+            image?: string
+        },
+    }
+    rightPane: {
+        image: string
+        width?: string
+        backgroundColor?: string
+        sphereonWalletQRCode: {
+            enableQR? : boolean
+            style: CSSProperties,
+            image: ImageProperties & { style: CSSProperties }
+            button: IProps & { style: CSSProperties }
+            downloadUrl: string
+        }
+        enableNextButton? : boolean
+        nextButtonStepId? : string
+    }
+}
+
 export interface SSILandingPageConfig extends PageOrComponentConfig {
     photoRight: string
     photoLeft: string

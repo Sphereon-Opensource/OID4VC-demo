@@ -2,10 +2,10 @@
   "general": {
     "credentialName": "KvK Inschrijving",
     "issueCredentialType": "KvkInschrijving",
-    "baseUrl": "https://kvk.demo.sphereon.com/agent",
+    "baseUrl": "http://192.168.1.200:5001",
     "verifierUrl": "https://kvk.demo.sphereon.com/verifier",
     "verifierUrlCaption": "KvK Inschrijving",
-    "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
+    "downloadUrl": "http://192.168.1.200:5001/#/download"
   },
   "pages": {
     "SSIDownloadPage": {
@@ -261,6 +261,11 @@
   },
   "sequencer": {
     "steps": [
+      {
+        "id": "download",
+        "operation": "navigate",
+        "path": "/download"
+      },
       {
         "id": "verifyRequest",
         "operation": "navigate",

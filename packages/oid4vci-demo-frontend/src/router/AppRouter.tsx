@@ -10,6 +10,7 @@ import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
 import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage";
 import {Sequencer} from "./sequencer"
+import SphereonWalletPage from "../pages/SphereonWalletPage"
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -20,6 +21,7 @@ export const routes: Record<string, any> = {
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
     '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
+    '/download/sphereon-wallet': <SphereonWalletPage/>,
     '/download': <SSIDownloadPage/>
 }
 

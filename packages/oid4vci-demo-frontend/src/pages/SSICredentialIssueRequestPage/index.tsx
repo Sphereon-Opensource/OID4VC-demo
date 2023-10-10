@@ -13,7 +13,7 @@ import {
 } from "../../ecosystem-config"
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
-import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
+import {Mobile, NonMobile} from '../..'
 import {useMediaQuery} from "react-responsive";
 import {Sequencer} from "../../router/sequencer"
 
