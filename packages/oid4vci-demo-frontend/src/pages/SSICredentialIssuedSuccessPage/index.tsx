@@ -1,30 +1,18 @@
-import React, {useEffect, useState} from "react"
-import {Text} from "../../components/Text";
-import {useTranslation} from "react-i18next";
-import SSIPrimaryButton from '../../components/SSIPrimaryButton';
-import {
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSICredentialIssuedSuccessPageConfig
-} from "../../ecosystem-config";
-import {NonMobile} from "../../index";
-import {useMediaQuery} from "react-responsive";
-import SSISecondaryButton from "../../components/SSISecondaryButton";
-import {useLocation, useNavigate} from "react-router-dom"
-import {Sequencer} from "../../router/sequencer"
+import React from "react"
+import {Text} from "../../components/Text"
+import {useTranslation} from "react-i18next"
+import SSIPrimaryButton from '../../components/SSIPrimaryButton'
+import {getCurrentEcosystemGeneralConfig, SSICredentialIssuedSuccessPageConfig} from "../../ecosystem-config"
+import {NonMobile} from "../../index"
+import {useMediaQuery} from "react-responsive"
+import {useFlowRouter} from "../../router/flow-router"
 
 const SSICredentialIssuedSuccessPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const location = useLocation();
-    const navigate = useNavigate()
-    const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssuedSuccessPage') as SSICredentialIssuedSuccessPageConfig
+    const flowRouter = useFlowRouter()
+    const config = flowRouter.getPageConfig() as SSICredentialIssuedSuccessPageConfig
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
-
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-    }, [])
 
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
@@ -76,7 +64,7 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                             caption={t('credentials_success_right_pane_button_caption', {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
                             // style={{width: '250px'}}
                             onClick={async () => {
-                                config.rightPaneButtonStepId && await sequencer.goToStep(config.rightPaneButtonStepId)
+                                config.rightPaneButtonStepId && await flowRouter.goToStep(config.rightPaneButtonStepId)
                             }}
                         />
                     </div>
