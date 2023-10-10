@@ -9,9 +9,9 @@ import {useFlowRouter} from "../../router/flow-router"
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()
-    const flowRouter = useFlowRouter()
+    const flowRouter = useFlowRouter<SSILandingPageConfig>()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const config = flowRouter.getPageConfig() as SSILandingPageConfig
+    const config = flowRouter.getPageConfig()
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const mainContainerStyle = config.styles!.mainContainer
     const leftCardViewConfig = config.styles!.leftCardView

@@ -24,8 +24,8 @@ const SSISelectCredentialPage: React.FC = () => {
     const [cardElements, setCardElements] = useState<Array<ReactElement>>([])
     const [payload] = useState<Payload>({})
     const [isManualIdentification] = useState<boolean>(false)
-    const flowRouter = useFlowRouter()
-    const config: SSISelectCredentialPageConfig = flowRouter.getPageConfig() as SSISelectCredentialPageConfig
+    const flowRouter = useFlowRouter<SSISelectCredentialPageConfig>()
+    const config: SSISelectCredentialPageConfig = flowRouter.getPageConfig()
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 

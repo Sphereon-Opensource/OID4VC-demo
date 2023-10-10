@@ -13,8 +13,8 @@ function handleCredentialClick(value: SSICredentialCardConfig) {
 const SSICredentialsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const flowRouter = useFlowRouter()
-    const config: SSICredentialsLandingPageConfig = flowRouter.getPageConfig() as SSICredentialsLandingPageConfig
+    const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
+    const config= flowRouter.getPageConfig()
 
     return (
         <div style={{

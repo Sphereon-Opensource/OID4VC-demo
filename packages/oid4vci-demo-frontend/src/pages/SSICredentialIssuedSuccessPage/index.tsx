@@ -8,8 +8,8 @@ import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 
 const SSICredentialIssuedSuccessPage: React.FC = () => {
-    const flowRouter = useFlowRouter()
-    const config = flowRouter.getPageConfig() as SSICredentialIssuedSuccessPageConfig
+    const flowRouter = useFlowRouter<SSICredentialIssuedSuccessPageConfig>()
+    const config = flowRouter.getPageConfig()
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()

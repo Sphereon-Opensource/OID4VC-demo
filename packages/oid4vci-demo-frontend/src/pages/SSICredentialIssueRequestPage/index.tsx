@@ -8,8 +8,7 @@ import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-co
 import {
     EcosystemGeneralConfig,
     getCurrentEcosystemComponentConfig,
-    getCurrentEcosystemGeneralConfig,
-    SSICredentialIssueRequestPageConfig,
+    getCurrentEcosystemGeneralConfig, SSICredentialIssueRequestPageConfig,
     SSISecondaryButtonConfig
 } from "../../ecosystem-config"
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
@@ -27,8 +26,8 @@ type State = {
 
 const SSICredentialIssueRequestPage: React.FC = () => {
     const location = useLocation();
-    const flowRouter = useFlowRouter()
-    const config: SSICredentialIssueRequestPageConfig = flowRouter.getPageConfig() as SSICredentialIssueRequestPageConfig
+    const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
+    const config = flowRouter.getPageConfig()
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
     const buttonConfig = getCurrentEcosystemComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})

@@ -12,8 +12,8 @@ import {Mobile, MobileOS, NonMobile} from "../../index"
 import {useFlowRouter} from "../../router/flow-router"
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
-    const flowRouter = useFlowRouter()
-    const config = flowRouter.getPageConfig() as SSICredentialVerifyRequestPageConfig
+    const flowRouter = useFlowRouter<SSICredentialVerifyRequestPageConfig>()
+    const config = flowRouter.getPageConfig()
     const {t} = useTranslation()
     const credentialName = getCurrentEcosystemGeneralConfig().credentialName
     const [deepLink, setDeepLink] = useState<string>('')

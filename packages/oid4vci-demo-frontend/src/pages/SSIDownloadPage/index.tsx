@@ -9,8 +9,8 @@ import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 
 const SSIDownloadPage: React.FC = () => {
-    const flowRouter = useFlowRouter()
-    const config = flowRouter.getPageConfig() as SSIDownloadPageConfig
+    const flowRouter = useFlowRouter<SSIDownloadPageConfig>()
+    const config = flowRouter.getPageConfig()
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
