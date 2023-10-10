@@ -38,10 +38,10 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             agent.oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
-                .then((status: IssueStatusResponse) => {
+                .then(async (status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
-                        flowRouter.nextStep()
+                        await flowRouter.nextStep()
                     } else if (status.status === IssueStatus.ERROR) {
                         // TODO: Add feedback to user
                         console.error(status.error)

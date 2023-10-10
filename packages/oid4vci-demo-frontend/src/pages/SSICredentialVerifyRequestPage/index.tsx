@@ -111,7 +111,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                             <SSIPrimaryButton
                                 caption={t('credential_verify_request_right_pane_button_caption')}
                                 onClick={async () => {
-                                    flowRouter.goToStep(config.rightPaneButtonStepId ?? 'infoRequest')
+                                    await flowRouter.goToStep(config.rightPaneButtonStepId ?? 'infoRequest')
                                 }}
                             />
                         </div>
