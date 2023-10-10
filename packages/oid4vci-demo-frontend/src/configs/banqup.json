@@ -130,9 +130,11 @@
       }
     },
     "SSIInformationRequestPage": {
+      "width": "40%",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
       "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
       "logo": {
         "src": "banqup/logo.svg",
@@ -170,9 +172,9 @@
         [
           {
             "id": "ssi_information_request_page_form_email",
-            "key": "Geboortedatum",
+            "key": "email",
             "title": "ssi_information_request_page_form_email_title",
-            "type": "date",
+            "type": "string",
             "required": true
           }
         ]
@@ -208,7 +210,7 @@
         "id": "downloadSphereonWallet",
         "operation": "navigate",
         "path": "/download/sphereon-wallet",
-        "nextId": "verifyCredential",
+        "nextId": "infoRequest",
         "isDefaultRoute": true
       },
       {
@@ -249,7 +251,7 @@
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#71B344"
+          "backgroundColor": "#252E7E"
         }
       }
     },

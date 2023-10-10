@@ -200,12 +200,19 @@ const SSIInformationRequestPage: React.FC = () => {
         sequencer.setCurrentRoute(location.pathname, navigate)
     }, []);
 
+    function determineWidth() {
+        if(config.width && config.width.includes('%')) {
+            return '100%'
+        }
+        return isTabletOrMobile ? '50%' : '40%'
+    }
+
     return (
         <div style={{display: 'flex',  height: "100vh", width: '100vw',  ...(isTabletOrMobile && { overflowX: "hidden", ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) })}}>
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
-                    width: '60%',
+                    width: config.width ?? '60%',
                     height: isTabletOrMobile ? '100%': '100vh',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -235,7 +242,7 @@ const SSIInformationRequestPage: React.FC = () => {
             <div style={{
                 display: 'flex',
                 flexGrow: 1,
-                width: isTabletOrMobile ? '50%' : '40%',
+                width: determineWidth(),
                 alignItems: 'center',
                 flexDirection: 'column',
                 ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),

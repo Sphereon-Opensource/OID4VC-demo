@@ -112,6 +112,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConf
 }
 
 export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
+    width? : string
     photo?: string
     photoManual?: string
     text_top_of_image?: string
