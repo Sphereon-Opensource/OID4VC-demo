@@ -1,31 +1,30 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
-import inputStyle from './SSIInformationRequestPage.module.css';
-import {useTranslation} from "react-i18next";
+import inputStyle from './SSIInformationRequestPage.module.css'
+import {useTranslation} from "react-i18next"
 import {
-  AdditionalClaims,
-  ICredentialSubject,
-  IVerifiableCredential,
-  IVerifiablePresentation,
-  W3CVerifiableCredential,
-  W3CVerifiablePresentation
-} from "@sphereon/ssi-types";
+    AdditionalClaims,
+    ICredentialSubject,
+    IVerifiableCredential,
+    IVerifiablePresentation,
+    W3CVerifiableCredential,
+    W3CVerifiablePresentation
+} from "@sphereon/ssi-types"
 
 import '../../css/typography.css'
 import {
-  DataFormElement,
-  DataFormRow,
-  getCurrentEcosystemGeneralConfig,
-  getCurrentEcosystemPageOrComponentConfig,
-  SSIInformationRequestPageConfig
+    DataFormElement,
+    DataFormRow,
+    getCurrentEcosystemGeneralConfig,
+    SSIInformationRequestPageConfig
 } from "../../ecosystem-config"
-import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {useLocation, useNavigate} from "react-router-dom"
-import {Buffer} from 'buffer';
-import {useMediaQuery} from "react-responsive";
-import {Mobile, NonMobile} from "../../index";
-import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils";
-import {Sequencer} from "../../router/sequencer"
+import SSIPrimaryButton from "../../components/SSIPrimaryButton"
+import {useLocation} from "react-router-dom"
+import {Buffer} from 'buffer'
+import {useMediaQuery} from "react-responsive"
+import {NonMobile} from "../../index"
+import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils"
 import {generateRandomIBAN} from "../../utils/iban"
+import {useFlowRouter} from "../../router/flow-router"
 
 type Payload = Record<string, string>
 type DefaultValueType = string | number | ReadonlyArray<string> | undefined
@@ -76,10 +75,9 @@ function evalDefaultValue(field: DataFormElement, payload: Payload): DefaultValu
 }
 
 const SSIInformationRequestPage: React.FC = () => {
-    const config: SSIInformationRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationRequestPage') as SSIInformationRequestPageConfig;
-    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const flowRouter = useFlowRouter<SSIInformationRequestPageConfig>()
+    const config = flowRouter.getPageConfig();
     const location = useLocation();
-    const navigate = useNavigate()
     const state: State | undefined = location.state;
     const {t} = useTranslation()
     const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
@@ -197,7 +195,6 @@ const SSIInformationRequestPage: React.FC = () => {
         if (state?.data?.vp_token) {
             processVPToken().catch(console.log)
         }
-        sequencer.setCurrentRoute(location.pathname, navigate)
     }, []);
 
     return (
@@ -411,7 +408,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, config.form)}
-                            onClick={async () => await sequencer.next({payload, isManualIdentification})}
+                            onClick={async () => await flowRouter.nextStep({payload, isManualIdentification})}
                         />
                     </div>
                 </div>

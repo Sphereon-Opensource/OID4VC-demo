@@ -5,18 +5,13 @@ import {IProps} from "./components/SSISecondaryButton"
 interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
-    sequencer: VCIConfigSequence
+    routes: VCIConfigRoute[]
     components: VCIConfigComponents
 }
 
 export function getCurrentEcosystemConfig(): VCIConfig {
     const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon'
     return require(`./configs/${ecosystem}.json`)
-}
-
-export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
-    const config = getCurrentEcosystemConfig()
-    return getEcosystemPageOrComponentConfig(pageOrComponent, config)
 }
 
 export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
@@ -26,29 +21,53 @@ export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemG
     return config.general
 }
 
-function getEcosystemPageOrComponentConfig(pageOrComponent: string, config?: VCIConfig): PageOrComponentConfig {
+export function getCurrentEcosystemComponentConfig(component: string, config?: VCIConfig): ComponentConfig {
     if (!config) {
         config = getCurrentEcosystemConfig()
     }
-    if (pageOrComponent in config.pages) {
-        return config.pages[pageOrComponent as keyof VCIConfigPages]
-    } else if (pageOrComponent in config.components) {
-        return config.components[pageOrComponent as keyof VCIConfigComponents]
+    if (component in config.components) {
+        return config.components[component as keyof VCIConfigComponents]
     }
-    throw new Error(`config for ${pageOrComponent} doesn't exist`)
+    throw new Error(`config for ${component} doesn't exist`)
 }
 
-export function getEcosystemSequenceConfig(config?: VCIConfig): VCIConfigSequence {
+export function hasCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): boolean {
     if (!config) {
         config = getCurrentEcosystemConfig()
     }
-    return config.sequencer
+    return stepId in config.pages;
 }
 
-export interface PageOrComponentConfig {
+export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
+    if (!config) {
+        config = getCurrentEcosystemConfig()
+    }
+    if (stepId in config.pages) {
+        return config.pages[stepId as keyof VCIConfigPages]
+    }
+    throw new Error(`Page config for step ${stepId} doesn't exist`)
 }
 
-export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
+export function getEcosystemRoutes(config?: VCIConfig): VCIConfigRoute[] {
+    if (!config) {
+        config = getCurrentEcosystemConfig()
+    }
+    if (!config.routes) {
+        throw new Error('The routes element is missing in the ecosystem json')
+    }
+    if (config.routes.length === 0) {
+        throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
+    }
+    return config.routes
+}
+
+export interface ComponentConfig {
+}
+
+export interface PageConfig {
+}
+
+export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     photoLeft?: string
     photoRight: string
     backgroundColor?: string
@@ -63,13 +82,13 @@ export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentCon
     },
 }
 
-export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
+export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     photoLeft: string
     photoRight: string
     rightPaneButtonStepId? : string
 }
 
-export interface SSICredentialsLandingPageConfig extends PageOrComponentConfig {
+export interface SSICredentialsLandingPageConfig extends PageConfig {
     logo?: ImageProperties
     mobile?: {
         logo?: ImageProperties
@@ -80,7 +99,7 @@ export interface SSICredentialsLandingPageConfig extends PageOrComponentConfig {
     credentials: SSICredentialCardConfig[]
 }
 
-export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentConfig {
+export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
     photoLeft?: string
     photoLeftManual?: string
     leftTextHideManual?: boolean
@@ -94,7 +113,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentCo
     logo?: ImageProperties
 }
 
-export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConfig {
+export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     photoManual?: string
     photoWallet?: string
     textLeft?: string
@@ -111,7 +130,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConf
     },
 }
 
-export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
+export interface SSIInformationRequestPageConfig extends PageConfig {
     photo?: string
     photoManual?: string
     text_top_of_image?: string
@@ -141,7 +160,7 @@ export interface DataFormElement {
 
 type DataFormInputType = 'string' | 'date';
 
-export interface SSIDownloadPageConfig extends PageOrComponentConfig {
+export interface SSIDownloadPageConfig extends PageConfig {
     rightPane: {
         paradymWalletQRCode: {
             style: CSSProperties,
@@ -168,7 +187,7 @@ export interface SSIDownloadPageConfig extends PageOrComponentConfig {
     }
 }
 
-export interface SSILandingPageConfig extends PageOrComponentConfig {
+export interface SSILandingPageConfig extends PageConfig {
     photoRight: string
     photoLeft: string
     logo: ImageProperties,
@@ -187,7 +206,7 @@ export interface SSILandingPageConfig extends PageOrComponentConfig {
     }
 }
 
-export interface SSISelectCredentialPageConfig extends PageOrComponentConfig {
+export interface SSISelectCredentialPageConfig extends PageConfig {
     logo: ImageProperties,
     styles: {
         mainContainer: {
@@ -197,10 +216,10 @@ export interface SSISelectCredentialPageConfig extends PageOrComponentConfig {
     }
 }
 
-export interface SSICardConfig extends PageOrComponentConfig {
+export interface SSICardConfig extends ComponentConfig {
 }
 
-export interface SSICredentialCardConfig extends PageOrComponentConfig {
+export interface SSICredentialCardConfig extends ComponentConfig {
     name: string
     route: string
     description?: string
@@ -209,10 +228,10 @@ export interface SSICredentialCardConfig extends PageOrComponentConfig {
     logo?: ImageProperties
 }
 
-export interface SSIDeepLinkConfig extends PageOrComponentConfig {
+export interface SSIDeepLinkConfig extends ComponentConfig {
 }
 
-export interface SSICardViewConfig extends PageOrComponentConfig {
+export interface SSICardViewConfig extends ComponentConfig {
     styles: {
         mainContainer: {
             backgroundColor: string,
@@ -224,7 +243,7 @@ export interface SSICardViewConfig extends PageOrComponentConfig {
     }
 }
 
-export interface SSIPrimaryButtonConfig extends PageOrComponentConfig {
+export interface SSIPrimaryButtonConfig extends ComponentConfig {
     styles: {
         mainContainer: {
             backgroundColor: string
@@ -232,7 +251,7 @@ export interface SSIPrimaryButtonConfig extends PageOrComponentConfig {
     }
 }
 
-export interface SSISecondaryButtonConfig extends PageOrComponentConfig {
+export interface SSISecondaryButtonConfig extends ComponentConfig {
     styles: {
         mainContainer: {
             backgroundColor?: string
@@ -252,7 +271,7 @@ export interface EcosystemGeneralConfig {
 
 }
 
-export interface SSITextConfig extends PageOrComponentConfig {
+export interface SSITextConfig extends ComponentConfig {
 }
 
 export interface VCIConfigPages {
@@ -267,8 +286,9 @@ export interface VCIConfigPages {
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
 }
 
-export interface VCIConfigSequence {
-    steps: VCIConfigSequenceStep[]
+export interface VCIConfigRoute {
+    id?: string
+    steps: VCIConfigRouteStep[]
 }
 
 export enum VCIOperation {
@@ -280,18 +300,18 @@ export enum VCIAction {
     CREATE_CREDENTIAL_OFFER = 'create-credential-offer'
 }
 
-export interface VCIConfigSequenceStep {
+export interface VCIConfigRouteStep {
     id: string
     operation: VCIOperation
     nextId?: string
     isDefaultRoute?: boolean
 }
 
-export interface VCINavigationStep extends VCIConfigSequenceStep {
+export interface VCINavigationStep extends VCIConfigRouteStep {
     path: string
 }
 
-export interface VCIExecuteStep extends VCIConfigSequenceStep {
+export interface VCIExecuteStep extends VCIConfigRouteStep {
     action: VCIAction
 }
 
