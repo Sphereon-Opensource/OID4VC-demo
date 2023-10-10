@@ -1,11 +1,12 @@
 {
   "general": {
-    "credentialName": "Notary credential",
-    "issueCredentialType": "VanAuckland2023",
+    "credentialName": "Notaris Credential",
+    "issueCredentialType": "NotaryCompanyVerification",
     "baseUrl": "https://notary.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Notary credential",
-    "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download"
+    "verifierUrlCaption": "Notaris credential",
+    "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download",
+    "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
     "SSIDownloadPage": {
@@ -108,13 +109,49 @@
       "photoLeft": "notary/guest_credential.svg",
       "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
     },
+    "SSIInformationSharedSuccessPage": {
+      "photoLeft": "notary/guest_credential.svg",
+      "photoRight": "notary/undraw_certification_re_ifll_grey.svg",
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 200,
+          "height": 200
+        }
+      },
+      "backgroundColor": "#BEBEBE"
+    },
     "SSICredentialIssueRequestPage": {
-      "photoManual": "notary/guest_credential.svg",
-      "photoWallet": "notary/guest_credential.svg"
+      "title": "coc_qrcode_right_pane_top_title",
+      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE",
+      "mobile": {
+        "logo": {
+          "src": "notary/logo.svg",
+          "alt": "notary",
+          "width": 120,
+          "height": 120
+        },
+        "backgroundColor": "#E8EAED",
+        "image": "undraw_certification_re_ifll_1.svg"
+      }
     },
     "SSIInformationRequestPage": {
       "photo": "notary/guest_credential.svg",
-      "photoManual": "notary/guest_credential.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
@@ -122,7 +159,7 @@
         [
           {
             "id": "ssi_information_request_page_form_company_name",
-            "key": "companyName",
+            "key": "Bedrijfsnaam",
             "title": "ssi_information_request_page_form_company_name_title",
             "type": "string",
             "required": true
@@ -130,17 +167,8 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_form_coc_number",
-            "key": "cocNumber",
-            "title": "ssi_information_request_page_form_coc_number_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
             "id": "ssi_information_request_page_form_company_location",
-            "key": "companyLocation",
+            "key": "Bedrijfslocatie",
             "title": "ssi_information_request_page_form_company_location_title",
             "type": "string",
             "required": true
@@ -148,16 +176,16 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_first_name",
-            "key": "firstName",
-            "title": "ssi_information_request_page_form_first_name_title",
+            "id": "ssi_information_request_page_first_name_director",
+            "key": "Voornaam",
+            "title": "ssi_information_request_page_form_first_name_director_title",
             "type": "string",
             "required": true
           },
           {
-            "id": "ssi_information_request_page_form_last_name",
-            "key": "lastName",
-            "title": "ssi_information_request_page_form_last_name_title",
+            "id": "ssi_information_request_page_form_last_name_director",
+            "key": "Achternaam",
+            "title": "ssi_information_request_page_form_last_name_director_title",
             "type": "string",
             "required": true
           }
@@ -165,7 +193,7 @@
         [
           {
             "id": "ssi_information_request_page_form_place_of_birth",
-            "key": "placeOfBirth",
+            "key": "Geboorteplaats",
             "title": "ssi_information_request_page_form_place_of_birth_title",
             "type": "string",
             "required": true
@@ -174,7 +202,7 @@
         [
           {
             "id": "ssi_information_request_page_form_date_of_birth",
-            "key": "dataOfBirth",
+            "key": "Geboortedatum",
             "title": "ssi_information_request_page_form_date_of_birth_title",
             "type": "date",
             "required": true
@@ -185,14 +213,22 @@
         "logo": {
           "src": "notary/logo.svg",
           "alt": "notary",
-          "width": 150,
-          "height": 150
-        }
-      }
+          "width": 200,
+          "height": 200
+        },
+        "backgroundColor": "#E8EAED"
+      },
+      "logo": {
+        "src": "notary/guest_credential.svg",
+        "alt": "Van Auckland Notary",
+        "width": 700,
+        "height": 700
+      },
+      "backgroundColor": "#BEBEBE"
     },
     "SSILandingPage": {
-      "photoLeft": "triall/landing_manual_grey.svg",
-      "photoRight": "triall/landing_wallet_grey.svg",
+      "photoLeft": "notary/landing_manual_grey.svg",
+      "photoRight": "notary/landing_wallet_grey.svg",
       "logo": {
         "src": "notary/logo.svg",
         "alt": "notary",
@@ -214,6 +250,34 @@
       }
     }
   },
+  "sequencer": {
+    "steps": [
+      {
+        "id": "infoRequest",
+        "operation": "navigate",
+        "path": "/information/request",
+        "nextId": "credentialOffer",
+        "isDefaultRoute": true
+      },
+      {
+        "id": "credentialOffer",
+        "operation": "execute",
+        "action": "create-credential-offer",
+        "nextId": "issueRequest"
+      },
+      {
+        "id": "issueRequest",
+        "operation": "navigate",
+        "path": "/credentials/issue/request",
+        "nextId": "issueSuccess"
+      },
+      {
+        "id": "issueSuccess",
+        "operation": "navigate",
+        "path": "https://knb.demo.sphereon.com"
+      }
+    ]
+  },
   "components": {
     "DeepLink": {},
     "SSICardView": {
@@ -227,7 +291,7 @@
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#E84461"
+          "backgroundColor": "#252E7E"
         }
       }
     },

@@ -1,4 +1,3 @@
-import {DB_SQLITE_FILE} from './environment'
 export * from './types'
 export * from './utils'
 export * from './database'

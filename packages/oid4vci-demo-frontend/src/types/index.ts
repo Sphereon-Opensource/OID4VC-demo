@@ -13,14 +13,6 @@ export enum ButtonType {
 export interface ImageProperties {
   src: string
   alt: string
-  width?: string | number
-  height?: string | number
-}
-
-export enum VCIEcosystem {
-  dbc = 'dbc',
-  sphereon = 'sphereon',
-  fmdm = 'fmdm',
-  triall = 'triall',
-  energy_shr = 'energy_shr'
+  width?: number
+  height?: number
 }

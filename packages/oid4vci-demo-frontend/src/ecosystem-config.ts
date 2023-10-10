@@ -1,61 +1,22 @@
-import {ImageProperties, VCIEcosystem} from "./types";
-import dbc from "./configs/dbc.json";
-import energy_shr from "./configs/energy_shr.json";
-import fmdm from "./configs/fmdm.json";
-import sphereon from "./configs/sphereon.json";
-import triall from "./configs/triall.json";
-import {CSSProperties} from "react";
-import {IProps} from "./components/SSISecondaryButton";
-
-export function getCurrentEcosystem(): VCIEcosystem {
-    switch (process.env.REACT_APP_ENVIRONMENT) {
-        case VCIEcosystem.fmdm:
-            return VCIEcosystem.fmdm;
-        case VCIEcosystem.dbc:
-            return VCIEcosystem.dbc;
-        case VCIEcosystem.triall:
-            return VCIEcosystem.triall;
-        case VCIEcosystem.energy_shr:
-            return VCIEcosystem.energy_shr;
-        default:
-            return VCIEcosystem.sphereon;
-    }
-}
+import {ImageProperties} from "./types"
+import {CSSProperties} from "react"
+import {IProps} from "./components/SSISecondaryButton"
 
 interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
+    sequencer: VCIConfigSequence
     components: VCIConfigComponents
 }
 
 export function getCurrentEcosystemConfig(): VCIConfig {
-    switch (getCurrentEcosystem()) {
-        case VCIEcosystem.triall:
-            return triall as VCIConfig;
-        case VCIEcosystem.fmdm:
-            return fmdm as VCIConfig;
-        case VCIEcosystem.dbc:
-            return dbc as VCIConfig;
-        case VCIEcosystem.energy_shr:
-            return energy_shr as VCIConfig;
-        default:
-            return sphereon as VCIConfig;
-    }
+    const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon'
+    return require(`./configs/${ecosystem}.json`)
 }
 
 export function getCurrentEcosystemPageOrComponentConfig(pageOrComponent: string): PageOrComponentConfig {
-    switch (getCurrentEcosystem()) {
-        case VCIEcosystem.fmdm:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, fmdm as VCIConfig);
-        case VCIEcosystem.dbc:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, dbc as VCIConfig);
-        case VCIEcosystem.triall:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, triall as VCIConfig);
-      case VCIEcosystem.energy_shr:
-        return getEcosystemPageOrComponentConfig(pageOrComponent, energy_shr as VCIConfig);
-        default:
-            return getEcosystemPageOrComponentConfig(pageOrComponent, sphereon as VCIConfig)
-    }
+    const config = getCurrentEcosystemConfig()
+    return getEcosystemPageOrComponentConfig(pageOrComponent, config)
 }
 
 export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
@@ -74,42 +35,111 @@ function getEcosystemPageOrComponentConfig(pageOrComponent: string, config?: VCI
     } else if (pageOrComponent in config.components) {
         return config.components[pageOrComponent as keyof VCIConfigComponents]
     }
-    throw new Error("config for this page/component doesn't exist")
+    throw new Error(`config for ${pageOrComponent} doesn't exist`)
+}
+
+export function getEcosystemSequenceConfig(config?: VCIConfig): VCIConfigSequence {
+    if (!config) {
+        config = getCurrentEcosystemConfig()
+    }
+    return config.sequencer
 }
 
 export interface PageOrComponentConfig {
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageOrComponentConfig {
-    photoLeft: string
+    photoLeft?: string
     photoRight: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    enableRightPaneButton? : boolean
+    rightPaneButtonStepId? : string
+    bottomParagraph?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageOrComponentConfig {
     photoLeft: string
     photoRight: string
+    rightPaneButtonStepId? : string
+}
+
+export interface SSICredentialsLandingPageConfig extends PageOrComponentConfig {
+    logo?: ImageProperties
+    mobile?: {
+        logo?: ImageProperties
+    }
+    backgroundColor?: string
+    pageTitle: string
+    text: string
+    credentials: SSICredentialCardConfig[]
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageOrComponentConfig {
-    photoLeft: string
-    photoLeftManual: string
+    photoLeft?: string
+    photoLeftManual?: string
     leftTextHideManual?: boolean
     textLeft?: string
     photoRight: string
     textRight?: string
+    mobile?: {
+      logo: ImageProperties
+    },
+    backgroundColor?: string
+    logo?: ImageProperties
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageOrComponentConfig {
-    photoManual: string
-    photoWallet: string
+    photoManual?: string
+    photoWallet?: string
+    textLeft?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    title?: string
+    topParagraph?: string
+    bottomParagraph?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+        bottomParagraph?: string
+    },
 }
 
 export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
-    photo: string
-    photoManual: string
-    text_top_of_image: string
+    photo?: string
+    photoManual?: string
+    text_top_of_image?: string
     sharing_data_right_pane_title: string
+    sharing_data_right_pane_paragraph?: string
+    form?: DataFormRow[]
+    mobile?: {
+      logo?: ImageProperties
+      backgroundColor?: string,
+    },
+    backgroundColor?: string
+    logo?: ImageProperties
+    title?: string
+    topParagraph?: string
 }
+
+export type DataFormRow = DataFormElement[];
+
+export interface DataFormElement {
+    id: string;
+    title: string;
+    key: string;
+    type: DataFormInputType;
+    required: boolean;
+    defaultValue?: string
+}
+
+type DataFormInputType = 'string' | 'date';
 
 export interface SSIDownloadPageConfig extends PageOrComponentConfig {
     rightPane: {
@@ -170,6 +200,15 @@ export interface SSISelectCredentialPageConfig extends PageOrComponentConfig {
 export interface SSICardConfig extends PageOrComponentConfig {
 }
 
+export interface SSICredentialCardConfig extends PageOrComponentConfig {
+    name: string
+    route: string
+    description?: string
+    backgroundColor?: string
+    backgroundImage?: string
+    logo?: ImageProperties
+}
+
 export interface SSIDeepLinkConfig extends PageOrComponentConfig {
 }
 
@@ -210,6 +249,7 @@ export interface EcosystemGeneralConfig {
     downloadUrl?: string
     credentialName: string
     issueCredentialType: string
+
 }
 
 export interface SSITextConfig extends PageOrComponentConfig {
@@ -224,6 +264,35 @@ export interface VCIConfigPages {
     SSIInformationRequestPage: SSIInformationRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
+    SSICredentialsLandingPage: SSICredentialsLandingPageConfig
+}
+
+export interface VCIConfigSequence {
+    steps: VCIConfigSequenceStep[]
+}
+
+export enum VCIOperation {
+    NAVIGATE = 'navigate',
+    EXECUTE = 'execute'
+}
+
+export enum VCIAction {
+    CREATE_CREDENTIAL_OFFER = 'create-credential-offer'
+}
+
+export interface VCIConfigSequenceStep {
+    id: string
+    operation: VCIOperation
+    nextId?: string
+    isDefaultRoute?: boolean
+}
+
+export interface VCINavigationStep extends VCIConfigSequenceStep {
+    path: string
+}
+
+export interface VCIExecuteStep extends VCIConfigSequenceStep {
+    action: VCIAction
 }
 
 export interface VCIConfigComponents {

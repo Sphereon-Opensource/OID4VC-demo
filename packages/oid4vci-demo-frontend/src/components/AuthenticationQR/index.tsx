@@ -1,21 +1,13 @@
-import React, { Component } from 'react'
-import { BallTriangle } from 'react-loader-spinner'
-import {
-  AuthorizationResponseStateStatus,
-  AuthStatusResponse,
-  GenerateAuthRequestURIResponse
-} from './auth-model'
-import {
-  CreateElementArgs,
-  QRType,
-  URIData,
-  ValueResult
-} from '@sphereon/ssi-sdk.qr-code-generator'
+import React, {Component} from 'react'
+import {BallTriangle} from 'react-loader-spinner'
+import {AuthorizationResponseStateStatus, AuthStatusResponse, GenerateAuthRequestURIResponse} from './auth-model'
+import {CreateElementArgs, QRType, URIData, ValueResult} from '@sphereon/ssi-sdk.qr-code-generator'
 
-import { AuthorizationResponsePayload } from '@sphereon/did-auth-siop'
+import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
-import { DEFINITION_ID_REQUIRED_ERROR } from './constants'
+import {DEFINITION_ID_REQUIRED_ERROR} from './constants'
 import agent from "../../agent";
+import {NonMobileOS} from "../../index"
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
@@ -47,7 +39,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   componentDidMount() {
     this.qrExpirationMs =
-      parseInt(process.env.REACT_APP_SSI_QR_CODE_EXPIRES_AFTER_SEC ?? '120') *
+      parseInt(process.env.REACT_APP_SSI_QR_CODE_EXPIRES_AFTER_SEC ?? '300') *
       1000
     // actually since the QR points to a JWT it has its own expiration value as well.
 
@@ -115,7 +107,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   render() {
     // Show the loader until we have details on which parameters to load into the QR code
     return this.state.qrCode ? (
-      <div>{this.state.qrCode}</div>
+      <NonMobileOS><div>{this.state.qrCode}</div></NonMobileOS>
     ) : (
       <BallTriangle color="#352575" height="100" width="100" />
     )
@@ -160,12 +152,10 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       agent.siopClientGetAuthStatus({
         correlationId: authRequestURIResponse?.correlationId,
         definitionId: authRequestURIResponse.definitionId
-      }).then(response => {
+      }).then((response: AuthStatusResponse) => {
         if (response.status === AuthorizationResponseStateStatus.VERIFIED) {
           clearInterval(this.authStatusHandle)
-          if (response?.payload) {
-            this.props.onSignInComplete(response.payload as AuthorizationResponsePayload)
-          }
+          this.props.onSignInComplete(response.payload!)
         }
       }).catch((error: Error) => {
         clearInterval(this.authStatusHandle)

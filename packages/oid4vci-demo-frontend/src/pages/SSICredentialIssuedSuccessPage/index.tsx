@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react"
 import {Text} from "../../components/Text";
 import {useTranslation} from "react-i18next";
 import SSIPrimaryButton from '../../components/SSIPrimaryButton';
@@ -10,12 +10,22 @@ import {
 import {NonMobile} from "../../index";
 import {useMediaQuery} from "react-responsive";
 import SSISecondaryButton from "../../components/SSISecondaryButton";
+import {useLocation, useNavigate} from "react-router-dom"
+import {Sequencer} from "../../router/sequencer"
 
 const SSICredentialIssuedSuccessPage: React.FC = () => {
+    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const location = useLocation();
+    const navigate = useNavigate()
     const config = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssuedSuccessPage') as SSICredentialIssuedSuccessPageConfig
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
+
+    useEffect(() => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
+    }, [])
+
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
@@ -63,8 +73,11 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                     </div>
                     <div style={{display: 'flex',flexDirection: 'row'}}>
                         <SSIPrimaryButton
-                            caption={t('credentials_success_right_pane_back_button_caption')}
-                            onClick={async () => window.history.go(-2) }
+                            caption={t('credentials_success_right_pane_button_caption', {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
+                            // style={{width: '250px'}}
+                            onClick={async () => {
+                                config.rightPaneButtonStepId && await sequencer.goToStep(config.rightPaneButtonStepId)
+                            }}
                         />
                     </div>
                 </div>

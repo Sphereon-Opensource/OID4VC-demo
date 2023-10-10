@@ -59,13 +59,13 @@
           }
         ],
         "order": [
-          "firstName",
-          "lastName",
+          "Voornaam",
+          "Achternaam",
           "email",
           "type"
         ],
         "credentialSubject": {
-          "firstName": {
+          "Voornaam": {
             "value_type": "string",
             "display": [
               {
@@ -81,7 +81,7 @@
               }
             ]
           },
-          "lastName": {
+          "Achternaam": {
             "value_type": "string",
             "display": [
               {

@@ -10,10 +10,9 @@ import {CONF_PATH, CredentialSupplierConfigWithTemplateSupport, normalizeFilePat
 
 const templateVCGenerator = new TemplateVCGenerator()
 
-
 const credentialDataSupplierPermantResidentCard: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Jane'
-    const lastName = args.credentialDataSupplierInput?.lastName ?? 'Doe'
+    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Jane'
+    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'Doe'
 
     return Promise.resolve({
         format: args.credentialRequest.format,
@@ -30,8 +29,8 @@ const credentialDataSupplierPermantResidentCard: CredentialDataSupplier = (args:
             "expirationDate": "2029-12-03T12:19:52Z",
             "credentialSubject": {
                 "type": ["PermanentResident", "Person"],
-                "givenName": firstName,
-                "familyName": lastName,
+                "givenName": Voornaam,
+                "familyName": Achternaam,
                 "gender": "Male",
                 "residentSince": "2015-01-01",
                 "lprCategory": "C09",
@@ -87,8 +86,8 @@ const credentialDataSupplierOpenBadgeJwtJson: CredentialDataSupplier = (args: Cr
 }
 
 const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
-    const lastName = args.credentialDataSupplierInput?.lastName ?? 'DBC'
+    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
+    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'DBC'
     const email = args.credentialDataSupplierInput?.email ?? 'dbc@example.com'
 
     return Promise.resolve({
@@ -98,8 +97,8 @@ const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: C
             type: ['VerifiableCredential', 'DBCConferenceAttendee'],
             expirationDate: '2023-07-26T00:00:00Z',
             credentialSubject: {
-                firstName,
-                lastName,
+                Voornaam,
+                Achternaam,
                 email,
                 event: {
                     name: 'DBC Conference 2023',
@@ -111,8 +110,8 @@ const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: C
 }
 
 const credentialDataSupplierFMAGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
-    const lastName = args.credentialDataSupplierInput?.lastName ?? 'FMA'
+    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
+    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'FMA'
     const email = args.credentialDataSupplierInput?.email ?? 'fma@example.com'
 
     return Promise.resolve({
@@ -122,8 +121,8 @@ const credentialDataSupplierFMAGuest2023: CredentialDataSupplier = (args: Creden
             type: ['VerifiableCredential', 'GuestCredential'],
             expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
             credentialSubject: {
-                firstName,
-                lastName,
+                Voornaam,
+                Achternaam,
                 email,
                 type: 'Future Mobility Alliance Guest',
             },
@@ -132,8 +131,8 @@ const credentialDataSupplierFMAGuest2023: CredentialDataSupplier = (args: Creden
 }
 
 const credentialDataSupplierTriallGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
-    const lastName = args.credentialDataSupplierInput?.lastName ?? 'Triall'
+    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
+    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'Triall'
     const email = args.credentialDataSupplierInput?.email ?? 'triall@example.com'
 
     return Promise.resolve({
@@ -143,8 +142,8 @@ const credentialDataSupplierTriallGuest2023: CredentialDataSupplier = (args: Cre
             type: ['VerifiableCredential', 'GuestCredential'],
             expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
             credentialSubject: {
-                firstName,
-                lastName,
+                Voornaam,
+                Achternaam,
                 email,
                 type: 'Triall Guest',
             },
@@ -153,8 +152,8 @@ const credentialDataSupplierTriallGuest2023: CredentialDataSupplier = (args: Cre
 }
 
 const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
-    const lastName = args.credentialDataSupplierInput?.lastName ?? 'EnergySHR'
+    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
+    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'EnergySHR'
     const email = args.credentialDataSupplierInput?.email ?? 'energyshr@example.com'
 
     return Promise.resolve({
@@ -164,8 +163,8 @@ const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: 
             type: ['VerifiableCredential', 'GuestCredential'],
             expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
             credentialSubject: {
-                firstName,
-                lastName,
+                Voornaam,
+                Achternaam,
                 email,
                 type: 'EnergySHR Guest',
             },
@@ -174,8 +173,8 @@ const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: 
 }
 
 const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {
-    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
-    const lastName = args.credentialDataSupplierInput?.lastName ?? 'Sphereon'
+    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
+    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'Sphereon'
     const email = args.credentialDataSupplierInput?.email ?? 'sphereon@example.com'
 
     const types = getTypesFromRequest(args.credentialRequest)
@@ -190,10 +189,10 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 type: ['VerifiableCredential', 'VerifiedEmployee'],
                 expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
                 credentialSubject: {
-                    givenName: firstName,
-                    surname: lastName,
+                    givenName: Voornaam,
+                    surname: Achternaam,
                     mail: email,
-                    displayName: `${firstName} ${lastName}`,
+                    displayName: `${Voornaam} ${Achternaam}`,
                     jobTitle: 'Chief Credential Issuer',
                     preferredLanguage: 'en_US',
                 },
@@ -210,8 +209,8 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 type: ['VerifiableCredential', 'MembershipExample'],
                 expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
                 credentialSubject: {
-                    firstName,
-                    lastName,
+                    Voornaam,
+                    Achternaam,
                     email,
                     type: 'Membership Example',
                 },
@@ -230,8 +229,8 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 type: ['VerifiableCredential', 'GuestCredential'],
                 expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
                 credentialSubject: {
-                    firstName,
-                    lastName,
+                    Voornaam,
+                    Achternaam,
                     email,
                     type: 'Sphereon Guest',
                 },

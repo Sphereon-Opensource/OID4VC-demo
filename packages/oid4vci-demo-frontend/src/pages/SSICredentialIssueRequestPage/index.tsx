@@ -9,12 +9,13 @@ import {
     EcosystemGeneralConfig,
     getCurrentEcosystemGeneralConfig,
     getCurrentEcosystemPageOrComponentConfig,
-    SSICredentialIssueRequestPageConfig
-} from "../../ecosystem-config";
+    SSICredentialIssueRequestPageConfig, SSISecondaryButtonConfig
+} from "../../ecosystem-config"
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
 import DeepLink from "../../components/DeepLink";
-import { NonMobile } from '../..';
+import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
 import {useMediaQuery} from "react-responsive";
+import {Sequencer} from "../../router/sequencer"
 
 type State = {
     uri: string,
@@ -23,21 +24,24 @@ type State = {
 }
 
 const SSICredentialIssueRequestPage: React.FC = () => {
-    const navigate = useNavigate();
+    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const navigate = useNavigate()
     const config: SSICredentialIssueRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssueRequestPage') as SSICredentialIssueRequestPageConfig
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
+    const buttonConfig = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const location = useLocation();
     const state: State | undefined = location.state;
     const [qrCode, setQrCode] = useState<ReactElement>();
 
     useEffect(() => {
+        sequencer.setCurrentRoute(location.pathname, navigate)
         const intervalId = setInterval(() => {
             agent.oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
                 .then((status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
-                        navigate({pathname: '/credentials/issue/success'});
+                        sequencer.next()
                     } else if (status.status === IssueStatus.ERROR) {
                         // TODO: Add feedback to user
                         console.error(status.error)
@@ -79,15 +83,24 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     width: '60%',
                     height: '100%',
-                    background: `url(${state?.isManualIdentification ? `${config.photoManual}` : `${config.photoWallet}`})`,
-                    backgroundSize: 'cover',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    ...((config.photoManual || config.photoWallet) && { background: `url(${state?.isManualIdentification? `${config.photoManual}` : `${config.photoWallet}`}) 0% 0% / cover`}),
+                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
+                    ...(config.logo && { justifyContent: 'center' })
                 }}>
-                    {!state?.isManualIdentification && (
+                    { config.logo &&
+                        <img
+                            src={config.logo.src}
+                            alt={config.logo.alt}
+                            width={config.logo.width}
+                            height={config.logo.height}
+                        />
+                    }
+                    {(config.textLeft && !state?.isManualIdentification) && (
                         <text
                             className={"poppins-medium-36"}
-                            style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
+                            style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}} // TODO add this to all except knb_kvk
                         >
                             {t('common_left_pane_title')}
                         </text>
@@ -98,40 +111,78 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 display: 'flex',
                 width: `${isTabletOrMobile ? '100%' : '40%'}`,
                 height: '100%',
-                backgroundColor: '#FFFFFF',
                 alignItems: 'center',
-                justifyContent: 'center'
+                flexDirection: 'column',
+                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
+                {(isTabletOrMobile && config.mobile?.logo) &&
+                    <img
+                        src={config.mobile.logo.src}
+                        alt={config.mobile.logo.alt}
+                        width={config.mobile.logo?.width ?? 150}
+                        height={config.mobile.logo?.height ?? 150}
+                    />
+                }
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
+                    ...(isTabletOrMobile && { height: '100%' }),
                     alignItems: 'center'
                 }}>
                     <Text
-                        style={{textAlign: 'center'}}
+                        style={{textAlign: 'center', ...(isTabletOrMobile && { marginRight: 24, marginLeft: 24 })}}
                         className={style.pReduceLineSpace}
-                        title={state?.isManualIdentification ? t('credentials_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n') : t('qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')}
-                        lines={state?.isManualIdentification ? t('credentials_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n') : t('qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')}
+                        title={
+                            state?.isManualIdentification
+                                ? t('credentials_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
+                                : t(config.title ? config.title : 'qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
+                        }
+                        lines={
+                            state?.isManualIdentification
+                                ? t('credentials_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
+                                : t(config.topParagraph ? config.topParagraph : 'qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
+                        }
                     />
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '55%',
-                        marginBottom: '15%',
-                        marginTop: '15%',
+                        height: '50vh',
+                        marginBottom: isTabletOrMobile ? 40 : '15%',
+                        marginTop: isTabletOrMobile ? 20 : '15%',
                         alignItems: 'center'
                     }}>
-                        <div style={{flexGrow: 1, marginBottom: 34}}>
-                            {qrCode}
-                        </div>
-                        <DeepLink style={{flexGrow: 1}} link={state?.uri!}/>
+                        <NonMobile>
+                            <div style={{flexGrow: 1, marginBottom: 34}}>
+                                {qrCode}
+                            </div>
+                        </NonMobile>
+                        <Mobile>
+                            <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
+                                { config.mobile?.image &&
+                                    <img src={config.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
+                                }
+                                <DeepLink style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
+                            </div>
+                        </Mobile>
                     </div>
-                    <Text
-                        style={{flexGrow: 1}}
-                        className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                        lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t('qrcode_right_pane_bottom_paragraph').split('\n')}
-                    />
+                    <div style={{marginTop: "20px"}}>
+                    <NonMobile>
+                            <Text
+                                style={{flexGrow: 1, maxWidth: 378 }}
+                                className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                                lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
+                            />
+                    </NonMobile>
+                    <Mobile>
+                        <Text
+                            style={{flexGrow: 1, marginLeft: 24, marginRight: 24}}
+                            className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                            lines={t(config.mobile?.bottomParagraph ? config.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                        />
+                    </Mobile>
+                    </div>
                 </div>
             </div>
         </div>
