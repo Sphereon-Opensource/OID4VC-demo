@@ -132,7 +132,7 @@
     },
     "issueRequest": {
       "title": "coc_qrcode_right_pane_top_title",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#005371",
       "logo": {

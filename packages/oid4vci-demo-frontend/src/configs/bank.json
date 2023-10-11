@@ -142,7 +142,7 @@
     },
     "issueRequest": {
       "title": "title_secure_your_credential",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
+      "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#01224B",
       "logo": {
