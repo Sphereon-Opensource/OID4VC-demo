@@ -17,9 +17,9 @@ const SSIWalletQRCode: React.FC<SSIWalletQRCodeProps> = (props: SSIWalletQRCodeP
         textAlign: "center",
         ...props.style
       }} className={props.className}>
-        <p>{props.text}</p>
-        <img {...props.image}/>
-        <SSISecondaryButton {...props.button} />
+          {props.text && (<p>{props.text}</p>)}
+          {props.image && (<img {...props.image}/>)}
+          <SSISecondaryButton {...props.button} />
       </div>
   )
 }

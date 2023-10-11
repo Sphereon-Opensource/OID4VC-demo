@@ -32,16 +32,8 @@
         "image": "banqup/flyng-iphone.svg",
         "width": "100%",
         "sphereonWalletQRCode": {
+          "enableQR": true,
           "style": {
-          },
-          "image": {
-            "src": "wallets/sphereon_qrcode.svg",
-            "alt": "Sphereon Wallet",
-            "width": 201,
-            "height": 201,
-            "style": {
-              "flexGrow": 1
-            }
           },
           "button": {
             "style": {

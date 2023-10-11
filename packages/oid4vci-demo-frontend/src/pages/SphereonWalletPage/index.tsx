@@ -84,7 +84,7 @@ const SphereonWalletPage: React.FC = () => {
                         alignItems: 'center'
                     }}>
                         <SSIWalletQRCode
-                            image={sphereonWalletQRCode.enableQR ? sphereonWalletQRCode.image : {} as ImageProperties}
+                            image={sphereonWalletQRCode.image}
                             className="poppins-semi-bold-14"
                             text={t('sphereon_wallet_right_pane_sphereon_qrcode_text') as string}
                             style={sphereonWalletQRCode.style}

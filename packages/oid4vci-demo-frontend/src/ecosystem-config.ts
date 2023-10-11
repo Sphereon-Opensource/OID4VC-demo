@@ -212,7 +212,6 @@ export interface SphereonWalletPageConfig extends PageConfig {
         width?: string
         backgroundColor?: string
         sphereonWalletQRCode: {
-            enableQR? : boolean
             style: CSSProperties,
             image: ImageProperties & { style: CSSProperties }
             button: IProps & { style: CSSProperties }
