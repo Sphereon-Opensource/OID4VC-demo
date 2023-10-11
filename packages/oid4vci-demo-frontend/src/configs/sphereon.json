@@ -95,7 +95,8 @@
       },
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#FBFBFB"
+          "backgroundColor": "#202537",
+          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
         }
       }
     },
