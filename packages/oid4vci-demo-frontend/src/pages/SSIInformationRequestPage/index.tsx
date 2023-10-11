@@ -198,7 +198,7 @@ const SSIInformationRequestPage: React.FC = () => {
     }, []);
 
     function determineWidth() {
-        if(config.width && config.width.includes('%')) {
+        if(config.leftPaneWidth && config.leftPaneWidth.includes('%')) {
             return '100%'
         }
         return isTabletOrMobile ? '50%' : '40%'
@@ -209,7 +209,7 @@ const SSIInformationRequestPage: React.FC = () => {
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
-                    width: config.width ?? '60%',
+                    width: config.leftPaneWidth ?? '60%',
                     height: isTabletOrMobile ? '100%': '100vh',
                     flexDirection: 'column',
                     alignItems: 'center',

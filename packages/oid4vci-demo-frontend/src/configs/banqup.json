@@ -33,7 +33,6 @@
         "width": "100%",
         "sphereonWalletQRCode": {
           "style": {
-
           },
           "image": {
             "src": "wallets/sphereon_qrcode.svg",
@@ -57,24 +56,7 @@
         "primaryButtonResourceId": "label_continue"
       }
     },
-    "SSICredentialVerifyRequestPage": {
-      "backgroundColor": "#01224B",
-      "logo": {
-        "src": "banqup/logo.svg",
-        "width": 208,
-        "height": 259
-      },
-      "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
-        "backgroundColor": "#EFFFF5"
-      }
-    },
-    "SSICredentialIssuedSuccessPage": {
+    "issueSuccess": {
       "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
       "backgroundColor": "#01224B",
       "logo": {
@@ -91,46 +73,8 @@
         }
       }
     },
-    "SSIInformationSharedSuccessPage": {
-      "photoRight": "bank/undraw_certification_re_ifll_1.svg",
-      "backgroundColor": "#01224B",
-      "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
-      },
-      "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 43,
-          "height": 41
-        }
-      }
-    },
-    "SSICredentialIssueRequestPage": {
-      "title": "coc_qrcode_right_pane_top_title",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
-      "backgroundColor": "#01224B",
-      "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
-      },
-      "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 65,
-          "height": 65
-        },
-        "backgroundColor": "#EFFFF5",
-        "image": "undraw_profile_details_re_ch9r 1.svg"
-      }
-    },
-    "SSIInformationRequestPage": {
-      "width": "40%",
+    "infoRequest": {
+      "leftPaneWidth": "40%",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
       "primaryButtonResourceId": "label_continue",
@@ -149,95 +93,95 @@
           "height": 65
         },
         "backgroundColor": "#EFFFF5"
-      },
-      "form": [
-        [
-          {
-            "id": "ssi_information_request_page_form_first_name",
-            "key": "firstName",
-            "title": "ssi_information_request_page_form_first_name_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_first_name",
-            "key": "lastName",
-            "title": "ssi_information_request_page_form_last_name_title",
-            "type": "string",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_email",
-            "key": "email",
-            "title": "ssi_information_request_page_form_email_title",
-            "type": "string",
-            "required": true
-          }
-        ]
-      ]
+      }
     },
-    "SSILandingPage": {
-      "photoLeft": "bank/landing_manual_grey.svg",
-      "photoRight": "bank/landing_wallet_grey.svg",
+    "issueRequest": {
+      "leftPaneWidth": "40%",
+      "title": "title_secure_your_personal_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
+      "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "bank/logo.svg",
-        "alt": "bank",
-        "width": 125,
-        "height": 125
+        "src": "banqup/logo.svg",
+        "width": 230,
+        "height": 350
       },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "white"
-        },
-        "leftCardView": {
-          "textColor": "#FBFBFB",
-          "backgroundColor": "#326D85"
-        },
-        "rightCardView": {
-          "textColor": "#FBFBFB",
-          "buttonType": "primary"
+      "mobile": {
+        "logo": {
+          "src": "banqup/logo.svg",
+          "alt": "banqup",
+          "width": 65,
+          "height": 65
         }
       }
-    }
-  },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "downloadSphereonWallet",
-        "operation": "navigate",
-        "path": "/download/sphereon-wallet",
-        "nextId": "infoRequest",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credentialOffer"
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      },
-      {
-        "id": "issueSuccess",
-        "operation": "navigate",
-        "path": "https://knb.demo.sphereon.com"
-      }
+    },
+    "form": [
+      [
+        {
+          "id": "ssi_information_request_page_form_first_name",
+          "key": "firstName",
+          "title": "ssi_information_request_page_form_first_name_title",
+          "type": "string",
+          "required": true
+        }
+      ],
+      [
+        {
+          "id": "ssi_information_request_page_form_first_name",
+          "key": "lastName",
+          "title": "ssi_information_request_page_form_last_name_title",
+          "type": "string",
+          "required": true
+        }
+      ],
+      [
+        {
+          "id": "ssi_information_request_page_form_email",
+          "key": "email",
+          "title": "ssi_information_request_page_form_email_title",
+          "type": "string",
+          "required": true
+        }
+      ]
     ]
   },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "downloadSphereonWallet",
+          "operation": "navigate",
+          "path": "/download/sphereon-wallet",
+          "nextId": "infoRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/request",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://knb.demo.sphereon.com"
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

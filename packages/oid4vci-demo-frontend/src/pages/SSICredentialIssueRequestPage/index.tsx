@@ -29,7 +29,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const config = flowRouter.getPageConfig()
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
     const buttonConfig = getCurrentEcosystemComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
-    const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+    const isNarrowScreen = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state;
     const [qrCode, setQrCode] = useState<ReactElement>();
 
@@ -73,13 +73,20 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         }).then((qrCode: JSX.Element) => setQrCode(qrCode))
     }, []);
 
+    function determineWidth() {
+        if(config.leftPaneWidth && config.leftPaneWidth.includes('%')) {
+            return '100%'
+        }
+        return isNarrowScreen ? '50%' : '40%'
+    }
+
     const {t} = useTranslation()
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: '60%',
+                    width: config.leftPaneWidth ?? '60%',
                     height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -107,14 +114,14 @@ const SSICredentialIssueRequestPage: React.FC = () => {
             </NonMobile>
             <div style={{
                 display: 'flex',
-                width: `${isTabletOrMobile ? '100%' : '40%'}`,
+                width: determineWidth(),
                 height: '100%',
                 alignItems: 'center',
                 flexDirection: 'column',
-                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
-                ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
+                ...(isNarrowScreen && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(!isNarrowScreen && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
-                {(isTabletOrMobile && config.mobile?.logo) &&
+                {(isNarrowScreen && config.mobile?.logo) &&
                     <img
                         src={config.mobile.logo.src}
                         alt={config.mobile.logo.alt}
@@ -126,20 +133,20 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    ...(isTabletOrMobile && { height: '100%' }),
+                    ...(isNarrowScreen && { height: '100%' }),
                     alignItems: 'center'
                 }}>
                     <Text
-                        style={{textAlign: 'center', ...(isTabletOrMobile && { marginRight: 24, marginLeft: 24 })}}
+                        style={{textAlign: 'center', ...(isNarrowScreen && { marginRight: 24, marginLeft: 24 })}}
                         className={style.pReduceLineSpace}
                         title={
                             state?.isManualIdentification
-                                ? t('credentials_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
+                                ? t(config.title ? config.title : 'credentials_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
                                 : t(config.title ? config.title : 'qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
                         }
                         lines={
                             state?.isManualIdentification
-                                ? t('credentials_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
+                                ? t(config.topParagraph ? config.topParagraph : 'credentials_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
                                 : t(config.topParagraph ? config.topParagraph : 'qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
                         }
                     />
@@ -147,8 +154,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         height: '50vh',
-                        marginBottom: isTabletOrMobile ? 40 : '15%',
-                        marginTop: isTabletOrMobile ? 20 : '15%',
+                        marginBottom: isNarrowScreen ? 40 : '15%',
+                        marginTop: isNarrowScreen ? 20 : '15%',
                         alignItems: 'center'
                     }}>
                         <NonMobile>

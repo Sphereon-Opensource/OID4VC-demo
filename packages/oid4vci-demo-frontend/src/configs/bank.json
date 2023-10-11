@@ -141,9 +141,9 @@
       }
     },
     "issueRequest": {
-      "title": "coc_qrcode_right_pane_top_title",
+      "title": "title_secure_your_credential",
       "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#01224B",
       "logo": {
         "src": "bank/guest_credential.svg",

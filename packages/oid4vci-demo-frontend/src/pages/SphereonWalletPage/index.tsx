@@ -1,34 +1,22 @@
-import React, {ReactElement, useEffect, useState} from 'react'
+import React from 'react'
 import {Text} from "../../components/Text"
-import style from '../../components/Text/Text.module.css'
-import DeepLink from "../../components/DeepLink"
 import {useTranslation} from "react-i18next"
-import {useLocation, useNavigate} from "react-router-dom"
-import MemoizedAuthenticationQR from '../../components/AuthenticationQR'
-import {
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig, SphereonWalletPageConfig
-} from "../../ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useMediaQuery} from "react-responsive"
-import {Mobile, MobileOS, NonMobile} from "../../index"
-import {Sequencer} from "../../router/sequencer"
+import {NonMobile} from "../../index"
 import SSIWalletQRCode from "../../components/SSIWalletQRCode"
 import {ImageProperties} from "../../types"
+import {useFlowRouter} from "../../router/flow-router"
+import {SphereonWalletPageConfig} from "../../ecosystem-config"
 
-export default function SphereonWalletPage(): React.ReactElement | null {
-    const location = useLocation()
-    const navigate = useNavigate()
-    const config = getCurrentEcosystemPageOrComponentConfig('downloadSphereonWallet') as SphereonWalletPageConfig // FIXME after VDX-259
+
+const SphereonWalletPage: React.FC = () => {
+    const flowRouter = useFlowRouter<SphereonWalletPageConfig>()
+    const config = flowRouter.getPageConfig()
     const {t} = useTranslation()
-    const [sequencer] = useState<Sequencer>(new Sequencer())
     const isNarrowScreen = useMediaQuery({query: '(max-width: 767px)'})
-
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-    })
-
     const sphereonWalletQRCode = config.rightPane.sphereonWalletQRCode
+
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
@@ -119,9 +107,9 @@ export default function SphereonWalletPage(): React.ReactElement | null {
                                     style={sphereonWalletQRCode.button.style}
                                     onClick={async () => {
                                         if (config.rightPane.primaryButtonStepId) {
-                                            await sequencer.goToStep(config.rightPane.primaryButtonStepId)
+                                            await flowRouter.goToStep(config.rightPane.primaryButtonStepId)
                                         } else {
-                                            await sequencer.next()
+                                            await flowRouter.nextStep()
                                         }
                                     }}
                                 />
@@ -134,3 +122,5 @@ export default function SphereonWalletPage(): React.ReactElement | null {
     )
 }
 
+
+export default SphereonWalletPage

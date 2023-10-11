@@ -68,6 +68,7 @@ export interface PageConfig {
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft?: string
     photoRight: string
     backgroundColor?: string
@@ -83,6 +84,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft: string
     photoRight: string
     rightPaneButtonStepId? : string
@@ -100,6 +102,7 @@ export interface SSICredentialsLandingPageConfig extends PageConfig {
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft?: string
     photoLeftManual?: string
     leftTextHideManual?: boolean
@@ -114,6 +117,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoManual?: string
     photoWallet?: string
     textLeft?: string
@@ -131,6 +135,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
 }
 
 export interface SSIInformationRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photo?: string
     photoManual?: string
     text_top_of_image?: string
@@ -178,6 +183,7 @@ export interface SSIDownloadPageConfig extends PageConfig {
         }
     }
     leftPane: {
+        width?: string
         leftPhone: {
             logo: ImageProperties
             image: ImageProperties
@@ -189,7 +195,7 @@ export interface SSIDownloadPageConfig extends PageConfig {
     }
 }
 
-export interface SSILandingPageConfig extends PageConfig {
+export interface SphereonWalletPageConfig extends PageConfig {
     leftPane: {
         image?: string
         backgroundColor?: string

@@ -133,7 +133,7 @@
     "issueRequest": {
       "title": "coc_qrcode_right_pane_top_title",
       "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#005371",
       "logo": {
         "src": "coc/logo.svg",
