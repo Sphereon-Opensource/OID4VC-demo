@@ -1,7 +1,7 @@
 import {useLocation, useNavigate} from "react-router-dom"
 import {
     getCurrentEcosystemPageConfig,
-    getEcosystemRoutes,
+    getEcosystemRoutes, hasCurrentEcosystemPageConfig,
     PageConfig,
     VCIAction,
     VCIConfigRoute,
@@ -23,12 +23,12 @@ interface StepState {
 
 export function useFlowAppRouter() {
     const routes = getEcosystemRoutes()
-    const [currentRouteId, setCurrentRouteId] = useState<string>('')
+    const [currentRouteId, setCurrentRouteId] = useState<string>('default')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
 
 
     function getRouteId(): string {
-        return currentRouteId != '' ? currentRouteId : 'default'
+        return currentRouteId
     }
 
     function getDefaultLocation(state?: any): string {
@@ -41,16 +41,16 @@ export function useFlowAppRouter() {
     }
 }
 
-export function useFlowRouter() {
+export function useFlowRouter<T extends PageConfig>() {
     const navigate = useNavigate()
     const pageLocation = useLocation()
     const routes = getEcosystemRoutes()
-    const [currentRouteId, setCurrentRouteId] = useState<string>('')
+    const [currentRouteId, setCurrentRouteId] = useState<string>('default')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
     const stepState = useMemo<StepState>(() => initStepState(), [pageLocation.pathname])
 
     function getRouteId(): string {
-        return currentRouteId != '' ? currentRouteId : 'default'
+        return currentRouteId
     }
 
     function initStepState(): StepState {
@@ -72,8 +72,9 @@ export function useFlowRouter() {
         if (!currentStep) {
             throw new Error(`can't determine current step for location path ${currentLocation}`)
         }
-
-        stepState.pageConfig = getCurrentEcosystemPageConfig(currentStep.id)
+        if(hasCurrentEcosystemPageConfig(currentStep.id)) {
+            stepState.pageConfig = getCurrentEcosystemPageConfig(currentStep.id)
+        }
         return stepState
     }
 
@@ -139,11 +140,11 @@ export function useFlowRouter() {
         }
     }
 
-    function getPageConfig(): PageConfig {
+    function getPageConfig(): T {
         if (!stepState.pageConfig) {
             throw new Error(`Config not found for step ${stepState.currentStep?.id} in route ${currentRouteId}`)
         }
-        return stepState.pageConfig as PageConfig
+        return stepState.pageConfig as T
     }
 
     return {

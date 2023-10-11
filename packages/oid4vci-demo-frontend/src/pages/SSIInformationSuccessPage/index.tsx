@@ -6,8 +6,7 @@ import {useLocation} from 'react-router-dom'
 import SSIPrimaryButton from '../../components/SSIPrimaryButton'
 import {
     EcosystemGeneralConfig,
-    getCurrentEcosystemGeneralConfig,
-    SSIInformationSharedSuccessPageConfig
+    getCurrentEcosystemGeneralConfig, SSIInformationSharedSuccessPageConfig
 } from "../../ecosystem-config"
 import {NonMobile} from '../..'
 import {useMediaQuery} from "react-responsive"
@@ -21,13 +20,13 @@ type State = {
 }
 
 const SSIInformationSuccessPage: React.FC = () => {
-    const flowRouter = useFlowRouter()
+    const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
     const location = useLocation();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const state: State | undefined = location.state;
 
-    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getPageConfig() as SSIInformationSharedSuccessPageConfig;
+    const config= flowRouter.getPageConfig()
     const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
     const {t} = useTranslation()
 
@@ -106,8 +105,8 @@ const SSIInformationSuccessPage: React.FC = () => {
 }
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
-    const flowRouter = useFlowRouter()
-    const config: SSIInformationSharedSuccessPageConfig = flowRouter.getPageConfig() as SSIInformationSharedSuccessPageConfig
+    const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
+    const config = flowRouter.getPageConfig()
     const location = useLocation();
     const state = location.state;
     const {t} = useTranslation()

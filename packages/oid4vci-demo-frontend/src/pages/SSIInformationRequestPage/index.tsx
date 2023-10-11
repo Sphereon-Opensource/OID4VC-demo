@@ -75,8 +75,8 @@ function evalDefaultValue(field: DataFormElement, payload: Payload): DefaultValu
 }
 
 const SSIInformationRequestPage: React.FC = () => {
-    const flowRouter = useFlowRouter()
-    const config: SSIInformationRequestPageConfig = flowRouter.getPageConfig() as SSIInformationRequestPageConfig;
+    const flowRouter = useFlowRouter<SSIInformationRequestPageConfig>()
+    const config = flowRouter.getPageConfig();
     const location = useLocation();
     const state: State | undefined = location.state;
     const {t} = useTranslation()

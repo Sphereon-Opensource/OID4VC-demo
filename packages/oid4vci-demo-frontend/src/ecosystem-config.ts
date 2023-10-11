@@ -31,14 +31,21 @@ export function getCurrentEcosystemComponentConfig(component: string, config?: V
     throw new Error(`config for ${component} doesn't exist`)
 }
 
-export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig | undefined{
+export function hasCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): boolean {
+    if (!config) {
+        config = getCurrentEcosystemConfig()
+    }
+    return stepId in config.pages;
+}
+
+export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
     if (!config) {
         config = getCurrentEcosystemConfig()
     }
     if (stepId in config.pages) {
         return config.pages[stepId as keyof VCIConfigPages]
     }
-    return undefined
+    throw new Error(`Page config for step ${stepId} doesn't exist`)
 }
 
 export function getEcosystemRoutes(config?: VCIConfig): VCIConfigRoute[] {
