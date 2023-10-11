@@ -83,7 +83,36 @@
           "height": 65
         },
         "backgroundColor": "#EFFFF5"
-      }
+      },
+      "form": [
+        [
+          {
+            "id": "ssi_information_request_page_form_first_name",
+            "key": "firstName",
+            "title": "ssi_information_request_page_form_first_name_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_first_name",
+            "key": "lastName",
+            "title": "ssi_information_request_page_form_last_name_title",
+            "type": "string",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_email",
+            "key": "email",
+            "title": "ssi_information_request_page_form_email_title",
+            "type": "string",
+            "required": true
+          }
+        ]
+      ]
     },
     "issueRequest": {
       "leftPaneWidth": "40%",
@@ -104,36 +133,7 @@
           "height": 65
         }
       }
-    },
-    "form": [
-      [
-        {
-          "id": "ssi_information_request_page_form_first_name",
-          "key": "firstName",
-          "title": "ssi_information_request_page_form_first_name_title",
-          "type": "string",
-          "required": true
-        }
-      ],
-      [
-        {
-          "id": "ssi_information_request_page_form_first_name",
-          "key": "lastName",
-          "title": "ssi_information_request_page_form_last_name_title",
-          "type": "string",
-          "required": true
-        }
-      ],
-      [
-        {
-          "id": "ssi_information_request_page_form_email",
-          "key": "email",
-          "title": "ssi_information_request_page_form_email_title",
-          "type": "string",
-          "required": true
-        }
-      ]
-    ]
+    }
   },
   "routes": [
     {
