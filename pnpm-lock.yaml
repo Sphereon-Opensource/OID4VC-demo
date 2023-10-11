@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -330,8 +330,8 @@ importers:
         specifier: 0.17.6-unstable.6
         version: 0.17.6-unstable.6
       '@sphereon/ui-components.ssi-react':
-        specifier: 0.1.3-next.13
-        version: 0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+        specifier: file://C:\Git\Sphereon-Opensource\UI-Components\packages\ssi-react\sphereon-ui-components.ssi-react-109.1.2.tgz
+        version: file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-109.1.2.tgz(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       '@veramo/core':
         specifier: 4.2.0
         version: 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
@@ -461,7 +461,7 @@ importers:
         version: 5.3.4(react@17.0.2)
       react-scripts:
         specifier: ^5.0.1
-        version: 5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(eslint@8.50.0)(react@17.0.2)(typescript@4.9.5)
+        version: 5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(debug@4.3.4)(eslint@8.50.0)(react@18.2.0)(typescript@4.9.5)
       ts-loader:
         specifier: ^9.4.4
         version: 9.4.4(typescript@4.9.5)(webpack@5.88.2)
@@ -5290,36 +5290,6 @@ packages:
     resolution: {integrity: sha512-NOt81LKn7zmOK9G+OMQVR+0bRVVmQmzhRWxUpBYdwPdPGVW3TQqtJnYOYLPL5hb0368DvoJvE/1Ic70P3048rQ==}
     dependencies:
       jwt-decode: 3.1.2
-    dev: false
-
-  /@sphereon/ui-components.core@0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-ds/g5gn6Ftz7zPKMo58kCcfGV/IC75mkWdCRe038Lm8NARXAfKMlALHrgYMkX+n4i0f/oUJ1nmYQOurD3fYH+w==}
-    peerDependencies:
-      react: '>= 16.8.0'
-    dependencies:
-      i18n-js: 3.9.2
-      lodash.memoize: 4.1.2
-      react: 18.2.0
-      styled-components: 5.3.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - react-dom
-      - react-is
-    dev: false
-
-  /@sphereon/ui-components.ssi-react@0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-l0cmecp702IH5eZxBabSMTqGklS1W0E0D7V5qdp4yR77Y10UfDd88FEIn07Bm0CbqPfIhWupezLwwvxofo16sQ==}
-    peerDependencies:
-      react: '>= 16.8.0'
-    dependencies:
-      '@sphereon/ui-components.core': 0.1.3-next.13(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      '@tanstack/react-table': 8.10.3(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      styled-components: 5.3.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - react-dom
-      - react-is
     dev: false
 
   /@sphereon/vc-status-list@7.0.0-next.0(expo@49.0.13)(react-native@0.72.5):
@@ -17610,103 +17580,6 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /react-scripts@5.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(eslint@8.50.0)(react@17.0.2)(typescript@4.9.5):
-    resolution: {integrity: sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    peerDependencies:
-      eslint: '*'
-      react: '>= 16'
-      typescript: ^3.2.1 || ^4
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@babel/core': 7.23.0
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.11(react-refresh@0.11.0)(webpack-dev-server@4.15.1)(webpack@5.88.2)
-      '@svgr/webpack': 5.5.0
-      babel-jest: 27.5.1(@babel/core@7.23.0)
-      babel-loader: 8.3.0(@babel/core@7.23.0)(webpack@5.88.2)
-      babel-plugin-named-asset-import: 0.3.8(@babel/core@7.23.0)
-      babel-preset-react-app: 10.0.1
-      bfj: 7.1.0
-      browserslist: 4.22.1
-      camelcase: 6.3.0
-      case-sensitive-paths-webpack-plugin: 2.4.0
-      css-loader: 6.8.1(webpack@5.88.2)
-      css-minimizer-webpack-plugin: 3.4.1(webpack@5.88.2)
-      dotenv: 10.0.0
-      dotenv-expand: 5.1.0
-      eslint: 8.50.0
-      eslint-config-react-app: 7.0.1(@babel/plugin-syntax-flow@7.22.5)(@babel/plugin-transform-react-jsx@7.22.15)(eslint@8.50.0)(jest@27.5.1)(typescript@4.9.5)
-      eslint-webpack-plugin: 3.2.0(eslint@8.50.0)(webpack@5.88.2)
-      file-loader: 6.2.0(webpack@5.88.2)
-      fs-extra: 10.1.0
-      html-webpack-plugin: 5.5.3(webpack@5.88.2)
-      identity-obj-proxy: 3.0.0
-      jest: 27.5.1
-      jest-resolve: 27.5.1
-      jest-watch-typeahead: 1.1.0(jest@27.5.1)
-      mini-css-extract-plugin: 2.7.6(webpack@5.88.2)
-      postcss: 8.4.31
-      postcss-flexbugs-fixes: 5.0.2(postcss@8.4.31)
-      postcss-loader: 6.2.1(postcss@8.4.31)(webpack@5.88.2)
-      postcss-normalize: 10.0.1(browserslist@4.22.1)(postcss@8.4.31)
-      postcss-preset-env: 7.8.3(postcss@8.4.31)
-      prompts: 2.4.2
-      react: 17.0.2
-      react-app-polyfill: 3.0.0
-      react-dev-utils: 12.0.1(eslint@8.50.0)(typescript@4.9.5)(webpack@5.88.2)
-      react-refresh: 0.11.0
-      resolve: 1.22.6
-      resolve-url-loader: 4.0.0
-      sass-loader: 12.6.0(webpack@5.88.2)
-      semver: 7.5.4
-      source-map-loader: 3.0.2(webpack@5.88.2)
-      style-loader: 3.3.3(webpack@5.88.2)
-      tailwindcss: 3.3.3
-      terser-webpack-plugin: 5.3.9(webpack@5.88.2)
-      typescript: 4.9.5
-      webpack: 5.88.2
-      webpack-dev-server: 4.15.1(debug@4.3.4)(webpack@5.88.2)
-      webpack-manifest-plugin: 4.1.1(webpack@5.88.2)
-      workbox-webpack-plugin: 6.6.0(webpack@5.88.2)
-    optionalDependencies:
-      fsevents: 2.3.3
-    transitivePeerDependencies:
-      - '@babel/plugin-syntax-flow'
-      - '@babel/plugin-transform-react-jsx'
-      - '@parcel/css'
-      - '@swc/core'
-      - '@types/babel__core'
-      - '@types/webpack'
-      - bufferutil
-      - canvas
-      - clean-css
-      - csso
-      - debug
-      - esbuild
-      - eslint-import-resolver-typescript
-      - eslint-import-resolver-webpack
-      - fibers
-      - node-notifier
-      - node-sass
-      - rework
-      - rework-visit
-      - sass
-      - sass-embedded
-      - sockjs-client
-      - supports-color
-      - ts-node
-      - type-fest
-      - uglify-js
-      - utf-8-validate
-      - vue-template-compiler
-      - webpack-cli
-      - webpack-hot-middleware
-      - webpack-plugin-serve
-    dev: false
-
   /react-shallow-renderer@16.15.0(react@18.2.0):
     resolution: {integrity: sha512-oScf2FqQ9LFVQgA73vr86xl2NaOIX73rh+YFqcOp68CWj56tSfgtGKrEbyhCj0rSijyG9M1CYprTh39fBi5hzA==}
     peerDependencies:
@@ -21085,6 +20958,42 @@ packages:
       validator: 13.11.0
     optionalDependencies:
       commander: 9.5.0
+    dev: false
+
+  file:../UI-Components/packages/core/sphereon-ui-components.core-101.1.2.tgz(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-X6isc5MKl8LXRL1IpKeHcJv7fRs2T6rHllatmyrljfdtMq7eDHDgTaCa8QECBAvGd+ggOpWJCdfmqEncgz1HTQ==, tarball: file:../UI-Components/packages/core/sphereon-ui-components.core-101.1.2.tgz}
+    id: file:../UI-Components/packages/core/sphereon-ui-components.core-101.1.2.tgz
+    name: '@sphereon/ui-components.core'
+    version: 101.1.2
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      i18n-js: 3.9.2
+      lodash.memoize: 4.1.2
+      react: 18.2.0
+      styled-components: 5.3.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - react-dom
+      - react-is
+    dev: false
+
+  file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-109.1.2.tgz(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-JKk9+rgVH+mpUX76kA48Q1EklsLAqbee5vEmdug96ejX1/mBipb2CWGqQlTAmyimC54ga4iWTlIQici4XxkBFg==, tarball: file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-109.1.2.tgz}
+    id: file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-109.1.2.tgz
+    name: '@sphereon/ui-components.ssi-react'
+    version: 109.1.2
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      '@sphereon/ui-components.core': file:../UI-Components/packages/core/sphereon-ui-components.core-101.1.2.tgz(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      '@tanstack/react-table': 8.10.3(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      styled-components: 5.3.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - react-dom
+      - react-is
     dev: false
 
   github.com/uport-project/EcdsaSecp256k1RecoverySignature2020/ab0db52de6f4e6663ef271a48009ba26e688ef9b(expo@49.0.13)(react-native@0.72.5):

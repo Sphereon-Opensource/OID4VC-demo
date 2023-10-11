@@ -1,5 +1,5 @@
 import {ImageProperties} from "./types"
-import {CSSProperties} from "react"
+import {CSSProperties, HTMLInputTypeAttribute} from "react"
 import {IProps} from "./components/SSISecondaryButton"
 
 interface VCIConfig {
@@ -117,7 +117,7 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
     text_top_of_image?: string
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
-    form?: DataFormRow[]
+    form: DataFormRow[]
     mobile?: {
       logo?: ImageProperties
       backgroundColor?: string,
@@ -131,15 +131,22 @@ export interface SSIInformationRequestPageConfig extends PageOrComponentConfig {
 export type DataFormRow = DataFormElement[];
 
 export interface DataFormElement {
-    id: string;
-    title: string;
-    key: string;
-    type: DataFormInputType;
-    required: boolean;
+    id: string
+    key: string
+    type: HTMLInputTypeAttribute
+    required?: boolean
     defaultValue?: string
+    label?: string
+    // FIXME can be placed better but for now this was the easiest. when there is a url for the label (and this is only possible for a checkbox) we use an element for the label to be displayed
+    labelUrl?: LabelUrl
+    readonly?: boolean
+    customValidation?: string
 }
 
-type DataFormInputType = 'string' | 'date';
+export type LabelUrl = {
+    text: string
+    url: string
+}
 
 export interface SSIDownloadPageConfig extends PageOrComponentConfig {
     rightPane: {

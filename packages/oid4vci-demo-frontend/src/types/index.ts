@@ -16,3 +16,6 @@ export interface ImageProperties {
   width?: number
   height?: number
 }
+
+export type FormData = Record<string, FormFieldValue>
+export type FormFieldValue = string | number | ReadonlyArray<string> | boolean | undefined

@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './index.module.css'
-import {SSICardView} from '@sphereon/ui-components.ssi-react';
+import {SSICredentialCardView} from '@sphereon/ui-components.ssi-react';
 import {getCurrentEcosystemPageOrComponentConfig, SSISelectCredentialPageConfig} from '../../ecosystem-config';
 import {MetadataClient} from '@sphereon/oid4vci-client';
 import {
@@ -82,7 +82,7 @@ const SSISelectCredentialPage: React.FC = () => {
                             style={{cursor: 'pointer', width: '325px'}}
                             onClick={() => onSelectCredential(key)}
                         >
-                            <SSICardView
+                            <SSICredentialCardView
                                 header={{
                                     credentialTitle: value[0].alias,
                                     credentialSubtitle: value[0].description,
