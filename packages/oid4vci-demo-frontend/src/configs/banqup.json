@@ -45,10 +45,8 @@
           },
           "button": {
             "style": {
-              "backgroundColor": "#252E7E",
               "width": 250
-            },
-            "color": "#FFFFFF"
+            }
           },
           "downloadUrl": "https://qrco.de/be5xfh"
         },
@@ -202,7 +200,7 @@
     "SSISecondaryButton": {
       "styles": {
         "mainContainer": {
-          "color": "#E84461"
+          "backgroundColor": "#353438"
         }
       }
     },
