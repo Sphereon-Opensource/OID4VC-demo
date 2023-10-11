@@ -9,6 +9,7 @@ import SSIDownloadPage from "../pages/SSIDownloadPage"
 import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
 import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage"
+import SphereonWalletPage from "../pages/SphereonWalletPage"
 import {useFlowAppRouter} from "./flow-router"
 
 export const routes: Record<string, any> = {
@@ -20,6 +21,7 @@ export const routes: Record<string, any> = {
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
     '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
+    '/download/sphereon-wallet': <SphereonWalletPage/>,
     '/download': <SSIDownloadPage/>
 }
 

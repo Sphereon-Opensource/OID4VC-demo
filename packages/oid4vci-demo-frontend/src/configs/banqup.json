@@ -9,101 +9,41 @@
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
-    "download": {
-      "rightPane": {
-        "paradymWalletQRCode": {
-          "style": {
-            "width": 201,
-            "height": 287
-          },
-          "image": {
-            "src": "wallets/paradym_qrcode.svg",
-            "alt": "Paradym Wallet",
-            "width": 181,
-            "height": 181,
-            "style": {
-              "flexGrow": 1
-            }
-          },
-          "button": {
-            "style": {
-              "width": 198
-            },
-            "color": "#062058"
-          },
-          "downloadUrl": "https://qrco.de/be76fT"
+    "downloadSphereonWallet": {
+      "leftPane": {
+        "backgroundColor": "#0E0B31",
+        "width": "40%",
+        "logo": {
+          "src": "banqup/logo.svg",
+          "width": 230,
+          "height": 350
         },
-        "sphereonWalletQRCode": {
-          "style": {
-            "width": 201,
-            "height": 287
+        "mobile": {
+          "logo": {
+            "src": "banqup/logo.svg",
+            "alt": "banqup",
+            "width": 65,
+            "height": 65
           },
-          "image": {
-            "src": "wallets/sphereon_qrcode.svg",
-            "alt": "Sphereon Wallet",
-            "width": 201,
-            "height": 201,
-            "style": {
-              "flexGrow": 1
-            }
+          "backgroundColor": "#EFFFF5"
+        }
+      },
+      "rightPane": {
+        "image": "banqup/flyng-iphone.svg",
+        "width": "100%",
+        "sphereonWalletQRCode": {
+          "enableQR": true,
+          "style": {
           },
           "button": {
             "style": {
-              "width": 198
-            },
-            "color": "#062058"
+              "width": 250
+            }
           },
           "downloadUrl": "https://qrco.de/be5xfh"
-        }
-      },
-      "leftPane": {
-        "leftPhone": {
-          "logo": {
-            "src": "wallets/paradym_logo.png",
-            "alt": "Paradym",
-            "width": 151,
-            "height": 59
-          },
-          "image": {
-            "src": "wallets/paradym_wallet.svg",
-            "alt": "Paradym Wallet",
-            "width": 392,
-            "height": 796
-          }
         },
-        "rightPhone": {
-          "logo": {
-            "src": "wallets/sphereon_logo.png",
-            "alt": "Sphereon",
-            "width": 204,
-            "height": 43
-          },
-          "image": {
-            "src": "wallets/sphereon_wallet.svg",
-            "alt": "Sphereon Wallet",
-            "width": 392,
-            "height": 796
-          }
-        }
-      }
-    },
-    "verifyRequest": {
-      "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
-      "backgroundColor": "#01224B",
-      "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
-      },
-      "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 65,
-          "height": 65
-        },
-        "backgroundColor": "#EFFFF5",
-        "image": "undraw_profile_details_re_ch9r 1.svg"
+        "enablePrimaryButton": true,
+        "primaryButtonResourceId": "label_continue"
       }
     },
     "issueSuccess": {
@@ -123,62 +63,26 @@
         }
       }
     },
-    "infoSharedSuccess": {
-      "photoRight": "bank/undraw_certification_re_ifll_1.svg",
-      "backgroundColor": "#01224B",
-      "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
-      },
-      "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 43,
-          "height": 41
-        }
-      }
-    },
-    "issueRequest": {
-      "title": "coc_qrcode_right_pane_top_title",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
-      "backgroundColor": "#01224B",
-      "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
-      },
-      "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 65,
-          "height": 65
-        },
-        "backgroundColor": "#EFFFF5",
-        "image": "undraw_profile_details_re_ch9r 1.svg"
-      }
-    },
     "infoRequest": {
+      "leftPaneWidth": "40%",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
-      "backgroundColor": "#01224B",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
+        "src": "banqup/logo.svg",
+        "width": 230,
+        "height": 350
       },
       "mobile": {
         "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
+          "src": "banqup/logo.svg",
+          "alt": "banqup",
           "width": 65,
           "height": 65
         },
-        "backgroundColor": "#EFFFF5",
-        "image": "undraw_profile_details_re_ch9r 1.svg"
+        "backgroundColor": "#EFFFF5"
       },
       "form": [
         [
@@ -223,6 +127,26 @@
           }
         ]
       ]
+    },
+    "issueRequest": {
+      "leftPaneWidth": "40%",
+      "title": "title_secure_your_personal_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg",
+        "width": 230,
+        "height": 350
+      },
+      "mobile": {
+        "logo": {
+          "src": "banqup/logo.svg",
+          "alt": "banqup",
+          "width": 65,
+          "height": 65
+        }
+      }
     }
   },
   "routes": [
@@ -230,9 +154,9 @@
       "id": "default",
       "steps": [
         {
-          "id": "verifyRequest",
+          "id": "downloadSphereonWallet",
           "operation": "navigate",
-          "path": "/credentials/verify/request",
+          "path": "/download/sphereon-wallet",
           "nextId": "infoRequest",
           "isDefaultRoute": true
         },
@@ -258,11 +182,6 @@
           "id": "issueSuccess",
           "operation": "navigate",
           "path": "https://knb.demo.sphereon.com"
-        },
-        {
-          "id": "download",
-          "operation": "navigate",
-          "path": "/download"
         }
       ]
     }
@@ -280,14 +199,14 @@
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#71B344"
+          "backgroundColor": "#252E7E"
         }
       }
     },
     "SSISecondaryButton": {
       "styles": {
         "mainContainer": {
-          "color": "#E84461"
+          "backgroundColor": "#353438"
         }
       }
     },
