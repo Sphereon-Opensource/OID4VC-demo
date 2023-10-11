@@ -1,30 +1,19 @@
-import React, {useEffect, useState} from "react"
-import {Text} from "../../components/Text";
-import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSIDownloadPageConfig
-} from "../../ecosystem-config";
-import {useTranslation} from "react-i18next";
-import SSIWalletQRCode from "../../components/SSIWalletQRCode";
-import {NonMobile} from "../../index";
-import {useMediaQuery} from "react-responsive";
-import {Sequencer} from "../../router/sequencer"
-import {useLocation, useNavigate} from "react-router-dom"
+import React from "react"
+import {Text} from "../../components/Text"
+import SSIPrimaryButton from "../../components/SSIPrimaryButton"
+import {getCurrentEcosystemGeneralConfig, SSIDownloadPageConfig} from "../../ecosystem-config"
+import {useTranslation} from "react-i18next"
+import SSIWalletQRCode from "../../components/SSIWalletQRCode"
+import {NonMobile} from "../../index"
+import {useMediaQuery} from "react-responsive"
+import {useFlowRouter} from "../../router/flow-router"
 
 const SSIDownloadPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const location = useLocation()
-    const navigate = useNavigate()
-    const config = getCurrentEcosystemPageOrComponentConfig('SSIDownloadPage') as SSIDownloadPageConfig
+    const flowRouter = useFlowRouter<SSIDownloadPageConfig>()
+    const config = flowRouter.getPageConfig()
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
-
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-    }, [])
 
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>

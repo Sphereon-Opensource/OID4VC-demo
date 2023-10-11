@@ -1,14 +1,15 @@
 {
   "general": {
-    "credentialName": "KvK Inschrijving",
-    "issueCredentialType": "KvkInschrijving",
-    "baseUrl": "https://kvk.demo.sphereon.com/agent",
-    "verifierUrl": "https://kvk.demo.sphereon.com/verifier",
-    "verifierUrlCaption": "KvK Inschrijving",
-    "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
+    "credentialName": "Bank account credential",
+    "issueCredentialType": "BankAccount",
+    "baseUrl": "http://192.168.2.90:5000/bank",
+    "verifierUrl": "https://sphereon.com",
+    "verifierUrlCaption": "Bank credential",
+    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
+    "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
-    "SSIDownloadPage": {
+    "download": {
       "rightPane": {
         "paradymWalletQRCode": {
           "style": {
@@ -86,90 +87,98 @@
         }
       }
     },
-    "SSICredentialVerifyRequestPage": {
-      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
-      "backgroundColor": "#005371",
+    "verifyRequest": {
+      "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
+      "backgroundColor": "#01224B",
       "logo": {
-        "src": "coc/logo.svg",
-        "alt": "chamber of commerce logo",
-        "width": 383,
-        "height": 383
+        "src": "bank/guest_credential.svg",
+        "width": 262,
+        "height": 249
       },
       "mobile": {
         "logo": {
-          "src": "coc/logo.svg",
-          "alt": "chamber of commerce logo",
+          "src": "bank/logo.svg",
+          "alt": "bank",
           "width": 65,
           "height": 65
         },
-        "backgroundColor": "#EDEFFF",
+        "backgroundColor": "#EFFFF5",
         "image": "undraw_profile_details_re_ch9r 1.svg"
       }
     },
-    "SSICredentialIssuedSuccessPage": {
-      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
-      "photoRight": "undraw_messenger_re_8bky_1.svg"
-    },
-    "SSIInformationSharedSuccessPage": {
-      "photoLeft": "image_4.svg",
-      "photoLeftManual": "image_4.svg",
-      "photoRight": "undraw_certification_re_ifll_1.svg",
+    "issueSuccess": {
+      "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
+      "backgroundColor": "#01224B",
       "logo": {
-        "src": "coc/logo.svg",
-        "alt": "chamber of commerce logo",
-        "width": 383,
-        "height": 383
+        "src": "bank/guest_credential.svg",
+        "width": 262,
+        "height": 249
       },
       "mobile": {
         "logo": {
-          "src": "coc/logo.svg",
-          "alt": "chamber of commerce logo",
-          "width": 65,
-          "height": 65
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
         }
-      },
-      "backgroundColor": "#005371"
+      }
     },
-    "SSICredentialIssueRequestPage": {
+    "infoSharedSuccess": {
+      "photoRight": "bank/undraw_certification_re_ifll_1.svg",
+      "backgroundColor": "#01224B",
+      "logo": {
+        "src": "bank/guest_credential.svg",
+        "width": 262,
+        "height": 249
+      },
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 43,
+          "height": 41
+        }
+      }
+    },
+    "issueRequest": {
       "title": "coc_qrcode_right_pane_top_title",
       "topParagraph": "coc_qrcode_right_pane_top_paragraph",
       "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
-      "backgroundColor": "#005371",
+      "backgroundColor": "#01224B",
       "logo": {
-        "src": "coc/logo.svg",
-        "alt": "chamber of commerce logo",
-        "width": 383,
-        "height": 383
+        "src": "bank/guest_credential.svg",
+        "width": 262,
+        "height": 249
       },
       "mobile": {
         "logo": {
-          "src": "coc/logo.svg",
-          "alt": "chamber of commerce logo",
+          "src": "bank/logo.svg",
+          "alt": "bank",
           "width": 65,
           "height": 65
         },
-        "backgroundColor": "#EDEFFF",
-        "image": "undraw_certification_re_ifll_1.svg"
+        "backgroundColor": "#EFFFF5",
+        "image": "undraw_profile_details_re_ch9r 1.svg"
       }
     },
-    "SSIInformationRequestPage": {
-      "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
-      "sharing_data_right_pane_paragraph": "coc_sharing_data_right_pane_top_paragraph",
-      "backgroundColor": "#005371",
+    "infoRequest": {
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "backgroundColor": "#01224B",
       "logo": {
-        "src": "coc/logo.svg",
-        "alt": "chamber of commerce logo",
-        "width": 383,
-        "height": 383
+        "src": "bank/guest_credential.svg",
+        "width": 262,
+        "height": 249
       },
       "mobile": {
         "logo": {
-          "src": "coc/logo.svg",
-          "alt": "chamber of commerce logo",
+          "src": "bank/logo.svg",
+          "alt": "bank",
           "width": 65,
           "height": 65
         },
-        "backgroundColor": "#EDEFFF"
+        "backgroundColor": "#EFFFF5",
+        "image": "undraw_profile_details_re_ch9r 1.svg"
       },
       "form": [
         [
@@ -214,83 +223,71 @@
           }
         ]
       ]
-    },
-    "SSILandingPage": {
-      "photoLeft": "landing_manual.svg",
-      "photoRight": "landing_wallet.svg",
-      "logo": {
-        "src": "coc/logo.svg",
-        "alt": "chamber of commerce logo",
-        "width": 150,
-        "height": 150
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#202537"
-        },
-        "leftCardView": {
-          "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
-        },
-        "rightCardView": {
-          "textColor": "#303030",
-          "buttonType": "primary"
-        }
-      }
     }
   },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "download",
-        "operation": "navigate",
-        "path": "/download",
-        "nextId": "infoRequest",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credentialOffer"
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      }
-    ]
-  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "infoRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/request",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://knb.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#FBFBFB",
+          "backgroundColor": "#326D85",
           "textColor": "#FBFBFB"
-        },
-        "secondaryButton": {
-          "backgroundColor": "#062058"
         }
       }
     },
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#005371"
+          "backgroundColor": "#71B344"
         }
       }
     },
     "SSISecondaryButton": {
       "styles": {
         "mainContainer": {
-          "color": "#062058"
+          "color": "#E84461"
         }
       }
     },

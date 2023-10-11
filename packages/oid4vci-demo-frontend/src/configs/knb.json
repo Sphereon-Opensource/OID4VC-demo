@@ -8,130 +8,7 @@
     "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
   },
   "pages": {
-    "SSIDownloadPage": {
-      "rightPane": {
-        "paradymWalletQRCode": {
-          "style": {
-            "width": 201,
-            "height": 287
-          },
-          "image": {
-            "src": "wallets/paradym_qrcode.svg",
-            "alt": "Paradym Wallet",
-            "width": 181,
-            "height": 181,
-            "style": {
-              "flexGrow": 1
-            }
-          },
-          "button": {
-            "style": {
-              "width": 198
-            },
-            "color": "#062058"
-          },
-          "downloadUrl": "https://qrco.de/be76fT"
-        },
-        "sphereonWalletQRCode": {
-          "style": {
-            "width": 201,
-            "height": 287
-          },
-          "image": {
-            "src": "wallets/sphereon_qrcode.svg",
-            "alt": "Sphereon Wallet",
-            "width": 201,
-            "height": 201,
-            "style": {
-              "flexGrow": 1
-            }
-          },
-          "button": {
-            "style": {
-              "width": 198
-            },
-            "color": "#062058"
-          },
-          "downloadUrl": "https://qrco.de/be5xfh"
-        }
-      },
-      "leftPane": {
-        "leftPhone": {
-          "logo": {
-            "src": "wallets/paradym_logo.png",
-            "alt": "Paradym",
-            "width": 151,
-            "height": 59
-          },
-          "image": {
-            "src": "wallets/paradym_wallet.svg",
-            "alt": "Paradym Wallet",
-            "width": 392,
-            "height": 796
-          }
-        },
-        "rightPhone": {
-          "logo": {
-            "src": "wallets/sphereon_logo.png",
-            "alt": "Sphereon",
-            "width": 204,
-            "height": 43
-          },
-          "image": {
-            "src": "wallets/sphereon_wallet.svg",
-            "alt": "Sphereon Wallet",
-            "width": 392,
-            "height": 796
-          }
-        }
-      }
-    },
-    "SSICredentialVerifyRequestPage": {
-      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
-      "photoRight": "undraw_messenger_re_8bky_1.svg"
-    },
-    "SSICredentialIssuedSuccessPage": {
-      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
-      "photoRight": "undraw_messenger_re_8bky_1.svg"
-    },
-    "SSIInformationSharedSuccessPage": {
-      "photoLeft": "image_4.svg",
-      "photoLeftManual": "image_4.svg",
-      "photoRight": "undraw_certification_re_ifll_1.svg"
-    },
-    "SSICredentialIssueRequestPage": {
-      "photoManual": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
-      "photoWallet": "image_4.svg"
-    },
-    "SSIInformationRequestPage": {
-      "photo": "image_4.svg",
-      "photoManual": "image_4.svg",
-      "text_top_of_image": "common_left_pane_title",
-      "sharing_data_right_pane_title": "sharing_data_right_pane_title"
-    },
-    "SSILandingPage": {
-      "photoLeft": "landing_manual.svg",
-      "photoRight": "landing_wallet.svg",
-      "logo": {
-        "src": "wallets/sphereon_logo.svg",
-        "alt": "sphereon.com",
-        "width": 167,
-        "height": 70
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#202537"
-        },
-        "leftCardView": {
-          "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
-        },
-        "rightCardView": {
-          "textColor": "#303030",
-          "buttonType": "primary"
-        }
-      }
-    },
-    "SSICredentialsLandingPage": {
+    "landingPage": {
       "logo": {
         "src": "wallets/sphereon_logo.svg",
         "alt": "sphereon.com",
@@ -155,7 +32,7 @@
           "route": "https://notary.demo.sphereon.com",
           "description": "Van Aukland notary",
           "backgroundImage": "background/notary.svg",
-          "logo":{
+          "logo": {
             "src": "notary/logo.svg",
             "alt": "notary",
             "width": 200,
@@ -167,7 +44,7 @@
           "route": "https://kvk.demo.sphereon.com",
           "description": "Kamer van Koophandel",
           "backgroundImage": "background/kvk.svg",
-          "logo":{
+          "logo": {
             "src": "coc/logo.svg",
             "alt": "kvk.nl",
             "width": 50,
@@ -179,7 +56,7 @@
           "route": "https://bank.demo.sphereon.com",
           "description": "Babylon bank",
           "backgroundImage": "background/bank.svg",
-          "logo":{
+          "logo": {
             "src": "bank/logo.svg",
             "alt": "sphereon.com/bank",
             "width": 200,
@@ -187,32 +64,21 @@
           }
         }
       ]
-    },
-    "SSISelectCredentialPage": {
-      "logo": {
-        "src": "wallets/sphereon_logo.svg",
-        "alt": "sphereon.com",
-        "width": 167,
-        "height": 70
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#202537",
-          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
-        }
-      }
     }
   },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "start",
-        "operation": "navigate",
-        "path": "/landing",
-        "isDefaultRoute": true
-      }
-    ]
-  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "start",
+          "operation": "navigate",
+          "path": "/landing",
+          "isDefaultRoute": true
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

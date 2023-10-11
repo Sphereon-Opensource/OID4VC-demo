@@ -1,33 +1,17 @@
-import React, {useEffect, useState} from 'react'
-import {NavigateOptions, useLocation, useNavigate} from 'react-router-dom'
-import SSICardView from '../../components/SSICardView';
-import {ButtonType} from '../../types';
-import {useTranslation} from 'react-i18next';
-import {
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSILandingPageConfig
-} from "../../ecosystem-config";
-import {useMediaQuery} from "react-responsive";
-import {Sequencer} from "../../router/sequencer"
+import React from 'react'
+import {NavigateOptions} from 'react-router-dom'
+import SSICardView from '../../components/SSICardView'
+import {ButtonType} from '../../types'
+import {useTranslation} from 'react-i18next'
+import {getCurrentEcosystemGeneralConfig, SSILandingPageConfig} from "../../ecosystem-config"
+import {useMediaQuery} from "react-responsive"
+import {useFlowRouter} from "../../router/flow-router"
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const location = useLocation()
-    const navigate = useNavigate()
+    const flowRouter = useFlowRouter<SSILandingPageConfig>()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-
-    const onManualIdentificationClick = async (): Promise<void> => {
-        const params = {isManualIdentification: true}
-        await sequencer.goToStep('infoRequest', params as NavigateOptions)
-    }
-
-    const onWalletIdentificationClick = async (): Promise<void> => {
-        await sequencer.goToStep('verifyRequest')
-    }
-
-    const config = getCurrentEcosystemPageOrComponentConfig('SSILandingPage') as SSILandingPageConfig
+    const config = flowRouter.getPageConfig()
     const generalConfig = getCurrentEcosystemGeneralConfig()
     const mainContainerStyle = config.styles!.mainContainer
     const leftCardViewConfig = config.styles!.leftCardView
@@ -40,9 +24,14 @@ const SSILandingPage: React.FC = () => {
         ...(rightCardViewConfig.textColor && {textColor: rightCardViewConfig.textColor}),
     }
 
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-    }, [])
+    const onManualIdentificationClick = async (): Promise<void> => {
+        const params = {isManualIdentification: true}
+        await flowRouter.goToStep('infoRequest', params as NavigateOptions)  // TODO create config prop for stepId
+    }
+
+    const onWalletIdentificationClick = async (): Promise<void> => {
+        await flowRouter.goToStep('verifyRequest') // TODO create config prop for stepId
+    }
 
     return (
         <div style={{

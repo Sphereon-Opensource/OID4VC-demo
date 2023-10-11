@@ -1,21 +1,22 @@
 import React, {ReactElement, useEffect, useState} from 'react'
-import {Text} from "../../components/Text";
+import {Text} from "../../components/Text"
 import style from '../../components/Text/Text.module.css'
-import {useTranslation} from "react-i18next";
-import {useLocation, useNavigate} from 'react-router-dom';
-import agent from '../../agent';
-import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator';
+import {useTranslation} from "react-i18next"
+import {useLocation} from 'react-router-dom'
+import agent from '../../agent'
+import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator'
 import {
     EcosystemGeneralConfig,
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSICredentialIssueRequestPageConfig, SSISecondaryButtonConfig
+    getCurrentEcosystemComponentConfig,
+    getCurrentEcosystemGeneralConfig, SSICredentialIssueRequestPageConfig,
+    SSISecondaryButtonConfig
 } from "../../ecosystem-config"
-import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common";
-import DeepLink from "../../components/DeepLink";
-import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
-import {useMediaQuery} from "react-responsive";
-import {Sequencer} from "../../router/sequencer"
+import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
+import DeepLink from "../../components/DeepLink"
+import {Mobile, NonMobile} from '../..'
+import {useMediaQuery} from "react-responsive"
+import {useFlowRouter} from "../../router/flow-router"
+
 
 type State = {
     uri: string,
@@ -24,24 +25,22 @@ type State = {
 }
 
 const SSICredentialIssueRequestPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const navigate = useNavigate()
-    const config: SSICredentialIssueRequestPageConfig = getCurrentEcosystemPageOrComponentConfig('SSICredentialIssueRequestPage') as SSICredentialIssueRequestPageConfig
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
-    const buttonConfig = getCurrentEcosystemPageOrComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
-    const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const location = useLocation();
+    const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
+    const config = flowRouter.getPageConfig()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
+    const buttonConfig = getCurrentEcosystemComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
+    const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state;
     const [qrCode, setQrCode] = useState<ReactElement>();
 
     useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
         const intervalId = setInterval(() => {
             agent.oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
-                .then((status: IssueStatusResponse) => {
+                .then(async (status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
-                        sequencer.next()
+                        await flowRouter.nextStep()
                     } else if (status.status === IssueStatus.ERROR) {
                         // TODO: Add feedback to user
                         console.error(status.error)
