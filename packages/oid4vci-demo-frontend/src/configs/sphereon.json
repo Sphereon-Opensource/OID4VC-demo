@@ -86,6 +86,19 @@
         }
       }
     },
+    "credSelect": {
+      "logo": {
+        "src": "wallets/sphereon_logo.png",
+        "alt": "sphereon",
+        "width": 204,
+        "height": 43
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#FBFBFB"
+        }
+      }
+    },
     "verifyRequest": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
       "photoRight": "undraw_messenger_re_8bky_1.svg"
