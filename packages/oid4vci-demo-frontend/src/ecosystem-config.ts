@@ -65,6 +65,7 @@ export interface ComponentConfig {
 }
 
 export interface PageConfig {
+    vpDefinitionId?: string
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
@@ -261,7 +262,10 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
 }
 
 export interface EcosystemGeneralConfig {
-    baseUrl?: string
+    agentVpBaseUrl?: string
+    agentVciBaseUrl?: string
+    authenticationEnabled?: boolean
+    authenticationStaticToken?: string
     verifierUrl?: string
     backCaption?: string
     verifierUrlCaption?: string
@@ -288,6 +292,7 @@ export interface VCIConfigPages {
 
 export interface VCIConfigRoute {
     id?: string
+    vpDefinitionId?: string
     steps: VCIConfigRouteStep[]
 }
 

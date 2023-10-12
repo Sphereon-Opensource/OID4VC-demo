@@ -88,7 +88,8 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     }}>
                         <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
                             {/*Whether the QR code is shown (mobile) is handled in the component itself */}
-                            {<MemoizedAuthenticationQR onAuthRequestRetrieved={console.log}
+                            {<MemoizedAuthenticationQR vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                       onAuthRequestRetrieved={console.log}
                                                        onSignInComplete={onSignInComplete}
                                                        setQrCodeData={setDeepLink}/>}
                         </div>

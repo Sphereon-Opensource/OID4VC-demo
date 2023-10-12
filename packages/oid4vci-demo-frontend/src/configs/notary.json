@@ -2,7 +2,8 @@
   "general": {
     "credentialName": "Notaris Credential",
     "issueCredentialType": "NotaryCompanyVerification",
-    "baseUrl": "https://notary.demo.sphereon.com/agent",
+    "agentVpBaseUrl": "https://notary.demo.sphereon.com/agent",
+    "agentVciBaseUrl": "https://notary.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Notaris credential",
     "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download",

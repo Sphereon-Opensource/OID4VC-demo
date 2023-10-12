@@ -5,13 +5,13 @@ import {CreateElementArgs, QRType, URIData, ValueResult} from '@sphereon/ssi-sdk
 
 import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
-import {DEFINITION_ID_REQUIRED_ERROR} from './constants'
 import agent from "../../agent";
 import {NonMobileOS} from "../../index"
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
 export type AuthenticationQRProps = {
+  vpDefinitionId: string
   onAuthRequestRetrieved: () => void
   onSignInComplete: (payload: AuthorizationResponsePayload) => void
   setQrCodeData: (text: string) => void
@@ -34,8 +34,6 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
 
   private _isMounted = false
 
-  private readonly definitionId =
-    process.env.REACT_APP_OID4VP_PRESENTATION_DEF_ID
 
   componentDidMount() {
     this.qrExpirationMs =
@@ -51,14 +49,14 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       )
     }
     this._isMounted = true
-    if (!this.definitionId) {
-      throw new Error(DEFINITION_ID_REQUIRED_ERROR)
+    if (!this.props.vpDefinitionId) {
+      throw new Error('Prop vpDefinitionId is required')
     }
   }
 
   private generateNewQRCode() {
     agent
-      .siopClientCreateAuthRequest()
+      .siopClientCreateAuthRequest({definitionId: this.props.vpDefinitionId})
       .then((authRequestURIResponse) => {
         this.props.setQrCodeData(authRequestURIResponse.authRequestURI)
         agent
@@ -148,15 +146,16 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   private pollAuthStatus = async (
     authRequestURIResponse: GenerateAuthRequestURIResponse
   ) => {
-    this.authStatusHandle = setInterval(async (args) => {
+    this.authStatusHandle = setInterval(async () => {
       agent.siopClientGetAuthStatus({
-        correlationId: authRequestURIResponse?.correlationId,
+        correlationId: authRequestURIResponse.correlationId,
         definitionId: authRequestURIResponse.definitionId
-      }).then((response: AuthStatusResponse) => {
+      }).then((response: AuthStatusResponse): Promise<void> => {
         if (response.status === AuthorizationResponseStateStatus.VERIFIED) {
           clearInterval(this.authStatusHandle)
           this.props.onSignInComplete(response.payload!)
         }
+        return Promise.resolve()
       }).catch((error: Error) => {
         clearInterval(this.authStatusHandle)
         console.log(`ERROR: ${error.message}`)
