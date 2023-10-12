@@ -15,7 +15,6 @@
         "display": [
           {
             "name": "Account Credential",
-            "description": "Account Credential",
             "background_color": "#322577",
             "logo": {
               "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
@@ -25,7 +24,6 @@
           {
             "locale": "en-US",
             "name": "Account Credential",
-            "description": "Account Credential",
             "background_color": "#322577",
             "logo": {
               "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
@@ -35,7 +33,6 @@
           {
             "locale": "nl-NL",
             "name": "Account Credential",
-            "description": "Account Credential",
             "background_color": "#322577",
             "logo": {
               "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
