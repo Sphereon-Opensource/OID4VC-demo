@@ -14,9 +14,7 @@
         "backgroundColor": "#0E0B31",
         "width": "40%",
         "logo": {
-          "src": "banqup/logo.svg",
-          "width": 230,
-          "height": 350
+          "src": "banqup/logo.svg"
         },
         "mobile": {
           "logo": {
@@ -50,9 +48,7 @@
       "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
       "backgroundColor": "#01224B",
       "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
+        "src": "bank/guest_credential.svg"
       },
       "mobile": {
         "logo": {
@@ -71,9 +67,7 @@
       "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "banqup/logo.svg",
-        "width": 230,
-        "height": 350
+        "src": "banqup/logo.svg"
       },
       "mobile": {
         "logo": {
@@ -121,9 +115,7 @@
       "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "banqup/logo.svg",
-        "width": 230,
-        "height": 350
+        "src": "banqup/logo.svg"
       },
       "mobile": {
         "logo": {
