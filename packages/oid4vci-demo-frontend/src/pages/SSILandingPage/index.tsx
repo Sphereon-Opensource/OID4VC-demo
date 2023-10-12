@@ -1,22 +1,22 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {NavigateOptions} from 'react-router-dom'
 import SSICardView from '../../components/SSICardView'
 import {ButtonType} from '../../types'
 import {useTranslation} from 'react-i18next'
-import {EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig, SSILandingPageConfig} from "../../ecosystem-config"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
+import {EcosystemGeneralConfig, SSILandingPageConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()
     const flowRouter = useFlowRouter<SSILandingPageConfig>()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const config = flowRouter.getPageConfig()
-    const [currentEcosystemId] = useState<string>()
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
-    const mainContainerStyle = config.styles!.mainContainer
-    const leftCardViewConfig = config.styles!.leftCardView
-    const rightCardViewConfig = config.styles!.rightCardView
+    const pageConfig = flowRouter.getPageConfig()
+    const generalConfig: EcosystemGeneralConfig = useEcosystem().getGeneralConfig()
+    const mainContainerStyle = pageConfig.styles!.mainContainer
+    const leftCardViewConfig = pageConfig.styles!.leftCardView
+    const rightCardViewConfig = pageConfig.styles!.rightCardView
     const optionalLeftCardViewProps = {
         ...(leftCardViewConfig.textColor && {textColor: leftCardViewConfig.textColor}),
         ...(leftCardViewConfig.backgroundColor && {backgroundColor: leftCardViewConfig.backgroundColor})
@@ -56,7 +56,7 @@ const SSILandingPage: React.FC = () => {
                     title={t('onboarding_left_card_title')}
                     message={t('onboarding_left_card_paragraph', {credentialName: generalConfig.credentialName})}
                     image={{
-                        src: `${config.photoLeft}`,
+                        src: `${pageConfig.photoLeft}`,
                         alt: 'manually'
                     }}
                     button={{
@@ -71,7 +71,7 @@ const SSILandingPage: React.FC = () => {
                     title={t('onboarding_right_card_title')}
                     message={t('onboarding_right_card_paragraph', {credentialName: generalConfig.credentialName})}
                     image={{
-                        src: `${config.photoRight}`,
+                        src: `${pageConfig.photoRight}`,
                         alt: 'wallet'
                     }}
                     button={{
@@ -85,10 +85,10 @@ const SSILandingPage: React.FC = () => {
             </div>
             <img
                 style={{marginTop: isTabletOrMobile ? 10 : 116}}
-                src={config.logo.src}
-                alt={config.logo.alt}
-                width={config.logo.width}
-                height={config.logo.height}
+                src={pageConfig.logo.src}
+                alt={pageConfig.logo.alt}
+                width={pageConfig.logo.width}
+                height={pageConfig.logo.height}
             />
         </div>
     );

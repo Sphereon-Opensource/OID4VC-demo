@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
-import {
-    getCurrentEcosystemComponentConfig,
-    
-    SSIPrimaryButtonConfig
-} from "../../ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSIPrimaryButtonConfig} from "../../ecosystem/ecosystem-config"
 
 export interface IButtonProps {
     style?: React.CSSProperties,
@@ -14,8 +11,8 @@ export interface IButtonProps {
 }
 
 const SSIPrimaryButton: React.FC<IButtonProps> = (props: IButtonProps) => {
-    const [currentEcosystemId] = useState<string>()
-    const config = getCurrentEcosystemComponentConfig('SSIPrimaryButton', currentEcosystemId) as SSIPrimaryButtonConfig;
+    const ecosystem = useEcosystem()
+    const config = ecosystem.getComponentConfig('SSIPrimaryButton') as SSIPrimaryButtonConfig;
     const mainContainerStyle = config.styles.mainContainer;
     const {caption, disabled = false, onClick, style} = props
     // TODO text

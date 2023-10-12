@@ -2,12 +2,10 @@ import React, {useState} from 'react'
 import {ButtonType, IButton, ImageProperties} from '../../types';
 import SSIPrimaryButton from '../SSIPrimaryButton';
 import SSISecondaryButton from '../SSISecondaryButton';
-import {
-    getCurrentEcosystemComponentConfig,
-    SSICardViewConfig
-} from "../../ecosystem-config"
 import {NonMobile} from "../../index";
 import {useMediaQuery} from "react-responsive";
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSICardViewConfig} from "../../ecosystem/ecosystem-config"
 
 interface IProps {
     image: ImageProperties
@@ -20,8 +18,8 @@ interface IProps {
 }
 
 const SSICardView: React.FC<IProps> = (props: IProps) => {
-    const [currentEcosystemId] = useState<string>()
-    const config = getCurrentEcosystemComponentConfig('SSICardView', currentEcosystemId) as SSICardViewConfig;
+    const ecosystem = useEcosystem()
+    const config = ecosystem.getComponentConfig('SSICardView') as SSICardViewConfig;
     const mainContainerStyle = config.styles.mainContainer
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {

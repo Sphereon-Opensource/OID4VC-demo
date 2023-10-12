@@ -1,16 +1,15 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Text} from '../../components/Text'
 import style from '../../components/Text/Text.module.css'
 import {Trans, useTranslation} from "react-i18next"
 import {useLocation} from 'react-router-dom'
 import SSIPrimaryButton from '../../components/SSIPrimaryButton'
-import {
-    EcosystemGeneralConfig,
-    getCurrentEcosystemGeneralConfig, SSIInformationSharedSuccessPageConfig
-} from "../../ecosystem-config"
+
 import {NonMobile} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
+import {EcosystemGeneralConfig, SSIInformationSharedSuccessPageConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
 
 type State = {
     Voornaam: string
@@ -23,12 +22,9 @@ const SSIInformationSuccessPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
     const location = useLocation();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-
     const state: State | undefined = location.state;
-
-    const config= flowRouter.getPageConfig()
-    const [currentEcosystemId] = useState<string>()
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
+    const pageConfig= flowRouter.getPageConfig()
+    const generalConfig: EcosystemGeneralConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
 
     return (
@@ -41,7 +37,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                             flex: 1,
                             display: 'flex',
                             flexDirection: 'column',
-                            background: `url(${config.photoLeft})`,
+                            background: `url(${pageConfig.photoLeft})`,
                             backgroundSize: 'cover',
                         }}
                     >
@@ -79,7 +75,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 textAlign: 'center'
                             }}
                             title={t('sharing_data_success_right_pane_title', {Voornaam: state?.Voornaam}).split('\n')}
-                            lines={t(`${config.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
+                            lines={t(`${pageConfig.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
                         />
                     </Trans>
                     <div style={{
@@ -87,7 +83,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                         height: '397px',
                         flexGrow: 1
                     }}>
-                        <img src={config.photoRight} alt="success"/>
+                        <img src={pageConfig.photoRight} alt="success"/>
                     </div>
                     <div style={{
                         width: '100%',

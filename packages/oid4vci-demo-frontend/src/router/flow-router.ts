@@ -1,7 +1,5 @@
 import {useLocation, useNavigate} from "react-router-dom"
 import {
-    getCurrentEcosystemPageConfig,
-    getEcosystemRoutes, hasCurrentEcosystemPageConfig,
     PageConfig,
     VCIAction,
     VCIConfigRoute,
@@ -9,9 +7,10 @@ import {
     VCIExecuteStep,
     VCINavigationStep,
     VCIOperation
-} from "../ecosystem-config"
+} from "../ecosystem/ecosystem-config"
 import {useMemo, useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
+import {useEcosystem} from "../ecosystem/ecosystem"
 
 
 type StepsByIdType = { [key: string]: VCIConfigRouteStep };
@@ -22,8 +21,8 @@ interface StepState {
 }
 
 export function useFlowAppRouter() {
-    const [currentEcosystemId] = useState<string>()
-    const routes = getEcosystemRoutes(currentEcosystemId)
+    const ecosystem = useEcosystem()
+    const routes = ecosystem.getRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(getCurrentRoute(routes, currentRouteId)))
 
@@ -41,8 +40,8 @@ export function useFlowAppRouter() {
 export function useFlowRouter<T extends PageConfig>() {
     const navigate = useNavigate()
     const pageLocation = useLocation()
-    const [currentEcosystemId] = useState<string>()
-    const routes = getEcosystemRoutes(currentEcosystemId)
+    const ecosystem = useEcosystem()
+    const routes = ecosystem.getRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
     const currentRoute = useMemo<VCIConfigRoute>(() => getCurrentRoute(routes, currentRouteId), [currentRouteId])
     const stepsById = useMemo<StepsByIdType>(() => buildStepsByIdMap(currentRoute), [currentRouteId])
@@ -67,8 +66,8 @@ export function useFlowRouter<T extends PageConfig>() {
         if (!currentStep) {
             throw new Error(`can't determine current step for location path ${currentLocation}`)
         }
-        if(hasCurrentEcosystemPageConfig(currentStep.id, currentEcosystemId)) {
-            stepState.pageConfig = getCurrentEcosystemPageConfig(currentStep.id, currentEcosystemId)
+        if(ecosystem.hasPageConfig(currentStep.id)) {
+            stepState.pageConfig = ecosystem.getPageConfig(currentStep.id)
         }
         return stepState
     }
@@ -125,7 +124,7 @@ export function useFlowRouter<T extends PageConfig>() {
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
-                    outState = await createCredentialOffer(inState, currentEcosystemId)
+                    outState = await createCredentialOffer(inState, ecosystem)
                     break
             }
             stepState.currentStep = executeStep

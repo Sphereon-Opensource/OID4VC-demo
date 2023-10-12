@@ -408,6 +408,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.7
         version: 18.2.8
+      process:
+        specifier: ^0.11.10
+        version: 0.11.10
       typescript:
         specifier: 4.9.5
         version: 4.9.5
@@ -16877,7 +16880,6 @@ packages:
   /process@0.11.10:
     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
-    dev: false
 
   /progress@2.0.3:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}

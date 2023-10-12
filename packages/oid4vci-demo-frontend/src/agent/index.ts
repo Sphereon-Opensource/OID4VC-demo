@@ -1,23 +1,14 @@
 import {createAgent} from '@veramo/core'
-import {
-    IQRCodeGenerator,
-    QrCodeProvider
-} from '@sphereon/ssi-sdk.qr-code-generator'
-import {
-    ISIOPv2OID4VPRPRestClient,
-    SIOPv2OID4VPRPRestClient
-} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client'
-import {
-    IOID4VCIRestClient,
-    OID4VCIRestClient
-} from '@sphereon/ssi-sdk.oid4vci-issuer-rest-client'
-import {EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig, VCIConfigRouteStep} from "../ecosystem-config"
+import {IQRCodeGenerator, QrCodeProvider} from '@sphereon/ssi-sdk.qr-code-generator'
+import {ISIOPv2OID4VPRPRestClient, SIOPv2OID4VPRPRestClient} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client'
+import {IOID4VCIRestClient, OID4VCIRestClient} from '@sphereon/ssi-sdk.oid4vci-issuer-rest-client'
 import {TAgent} from "@veramo/core/src/types/IAgent"
 import {
     Siopv2RestClientAuthenticationOpts
 } from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client/src/types/ISIOPv2OID4VPRPRestClient"
+import {EcosystemGeneralConfig} from "../ecosystem/ecosystem-config"
 
-type VCIAgentType = TAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient & IOID4VCIRestClient>
+export type VCIAgentType = TAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient & IOID4VCIRestClient>
 type AgentMap = { [key: string]: VCIAgentType };
 
 const agentByEcosystemId: AgentMap = {}
@@ -28,15 +19,11 @@ const buildAuthentication = (generalConfig: EcosystemGeneralConfig): Siopv2RestC
     staticBearerToken: generalConfig.authenticationStaticToken ?? ''
 })
 
-const getAgent = (ecoSystemId?: string): VCIAgentType => {
-    if(!ecoSystemId) {
-        ecoSystemId = 'sphereon'
-    }
+const getOrCreateAgent = (ecoSystemId: string, generalConfig: EcosystemGeneralConfig): VCIAgentType => {
     if (ecoSystemId in agentByEcosystemId) {
         return agentByEcosystemId[ecoSystemId]
     }
 
-    const generalConfig = getCurrentEcosystemGeneralConfig(ecoSystemId)
     const agent = createAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient & IOID4VCIRestClient>({
         plugins: [
             new QrCodeProvider(),
@@ -50,8 +37,8 @@ const getAgent = (ecoSystemId?: string): VCIAgentType => {
             }),
         ]
     })
-    agentByEcosystemId[agentByEcosystemId] = agent
+    agentByEcosystemId[ecoSystemId] = agent
     return agent
 }
 
-export default getAgent
+export default getOrCreateAgent

@@ -1,65 +1,15 @@
-import {ImageProperties} from "./types"
+import {ImageProperties} from "../types"
 import {CSSProperties} from "react"
-import {IProps} from "./components/SSISecondaryButton"
+import {IProps} from "../components/SSISecondaryButton"
 
-interface VCIConfig {
+
+export interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
     routes: VCIConfigRoute[]
     components: VCIConfigComponents
 }
 
-export function getCurrentEcosystemConfig(ecoSystemId: string | undefined): VCIConfig {
-    const ecosystem = ecoSystemId ?? process.env.REACT_APP_DEFAULT_ENVIRONMENT ?? 'sphereon'
-    return require(`./configs/${ecosystem}.json`)
-}
-
-export function getCurrentEcosystemGeneralConfig(ecoSystemId: string | undefined, config?: VCIConfig): EcosystemGeneralConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig(ecoSystemId)
-    }
-    return config.general
-}
-
-export function getCurrentEcosystemComponentConfig(component: string, ecoSystemId: string | undefined, config?: VCIConfig): ComponentConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig(ecoSystemId)
-    }
-    if (component in config.components) {
-        return config.components[component as keyof VCIConfigComponents]
-    }
-    throw new Error(`config for ${component} doesn't exist`)
-}
-
-export function hasCurrentEcosystemPageConfig(stepId: string, ecoSystemId: string | undefined, config?: VCIConfig): boolean {
-    if (!config) {
-        config = getCurrentEcosystemConfig(ecoSystemId)
-    }
-    return stepId in config.pages;
-}
-
-export function getCurrentEcosystemPageConfig(stepId: string, ecoSystemId: string | undefined, config?: VCIConfig): PageConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig(ecoSystemId)
-    }
-    if (stepId in config.pages) {
-        return config.pages[stepId as keyof VCIConfigPages]
-    }
-    throw new Error(`Page config for step ${stepId} doesn't exist`)
-}
-
-export function getEcosystemRoutes(ecoSystemId: string, config?: VCIConfig): VCIConfigRoute[] {
-    if (!config) {
-        config = getCurrentEcosystemConfig(ecoSystemId)
-    }
-    if (!config.routes) {
-        throw new Error('The routes element is missing in the ecosystem json')
-    }
-    if (config.routes.length === 0) {
-        throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
-    }
-    return config.routes
-}
 
 export interface ComponentConfig {
 }
@@ -73,8 +23,8 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
-    enableRightPaneButton? : boolean
-    rightPaneButtonStepId? : string
+    enableRightPaneButton?: boolean
+    rightPaneButtonStepId?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
@@ -86,7 +36,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     photoLeft: string
     photoRight: string
-    rightPaneButtonStepId? : string
+    rightPaneButtonStepId?: string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
@@ -108,7 +58,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
     photoRight: string
     textRight?: string
     mobile?: {
-      logo: ImageProperties
+        logo: ImageProperties
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -139,8 +89,8 @@ export interface SSIInformationRequestPageConfig extends PageConfig {
     sharing_data_right_pane_paragraph?: string
     form?: DataFormRow[]
     mobile?: {
-      logo?: ImageProperties
-      backgroundColor?: string,
+        logo?: ImageProperties
+        backgroundColor?: string,
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -328,3 +278,16 @@ export interface VCIConfigComponents {
     Text: SSITextConfig
 }
 
+export function getEcosystemRootConfig(ecosystemId: string): VCIConfig {
+    return require(`../configs/${ecosystemId}.json`)
+}
+
+export function getEcosystemRoutes(config: VCIConfig): VCIConfigRoute[] {
+    if (!config.routes) {
+        throw new Error('The routes element is missing in the ecosystem json')
+    }
+    if (config.routes.length === 0) {
+        throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
+    }
+    return config.routes
+}

@@ -3,20 +3,14 @@ import {Text} from "../../components/Text"
 import style from '../../components/Text/Text.module.css'
 import {useTranslation} from "react-i18next"
 import {useLocation} from 'react-router-dom'
-import agent from '../../agent'
 import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator'
-import {
-    EcosystemGeneralConfig,
-    getCurrentEcosystemComponentConfig,
-    getCurrentEcosystemGeneralConfig, SSICredentialIssueRequestPageConfig,
-    SSISecondaryButtonConfig
-} from "../../ecosystem-config"
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
 import DeepLink from "../../components/DeepLink"
 import {Mobile, NonMobile} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
-import getAgent from "../../agent"
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSICredentialIssueRequestPageConfig, SSISecondaryButtonConfig} from "../../ecosystem/ecosystem-config"
 
 
 type State = {
@@ -27,18 +21,18 @@ type State = {
 
 const SSICredentialIssueRequestPage: React.FC = () => {
     const location = useLocation();
+    const ecosystem = useEcosystem()
     const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
-    const config = flowRouter.getPageConfig()
-    const [currentEcosystemId] = useState<string>()
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
-    const buttonConfig = getCurrentEcosystemComponentConfig('SSISecondaryButton', currentEcosystemId) as SSISecondaryButtonConfig;
+    const pageConfig = flowRouter.getPageConfig()
+    const generalConfig = ecosystem.getGeneralConfig()
+    const buttonConfig = ecosystem.getComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state;
     const [qrCode, setQrCode] = useState<ReactElement>();
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            getAgent(currentEcosystemId).oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
+            ecosystem.getAgent().oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
                 .then(async (status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
@@ -70,7 +64,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     }
 
     useEffect(() => {
-        getAgent(currentEcosystemId).qrURIElement({
+        ecosystem.getAgent().qrURIElement({
             data: qrData,
             renderingProps
         }).then((qrCode: JSX.Element) => setQrCode(qrCode))
@@ -86,19 +80,19 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    ...((config.photoManual || config.photoWallet) && { background: `url(${state?.isManualIdentification? `${config.photoManual}` : `${config.photoWallet}`}) 0% 0% / cover`}),
-                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
-                    ...(config.logo && { justifyContent: 'center' })
+                    ...((pageConfig.photoManual || pageConfig.photoWallet) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoManual}` : `${pageConfig.photoWallet}`}) 0% 0% / cover`}),
+                    ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                    ...(pageConfig.logo && { justifyContent: 'center' })
                 }}>
-                    { config.logo &&
+                    { pageConfig.logo &&
                         <img
-                            src={config.logo.src}
-                            alt={config.logo.alt}
-                            width={config.logo.width}
-                            height={config.logo.height}
+                            src={pageConfig.logo.src}
+                            alt={pageConfig.logo.alt}
+                            width={pageConfig.logo.width}
+                            height={pageConfig.logo.height}
                         />
                     }
-                    {(config.textLeft && !state?.isManualIdentification) && (
+                    {(pageConfig.textLeft && !state?.isManualIdentification) && (
                         <text
                             className={"poppins-medium-36"}
                             style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}} // TODO add this to all except knb_kvk
@@ -114,15 +108,15 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 height: '100%',
                 alignItems: 'center',
                 flexDirection: 'column',
-                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
                 ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
-                {(isTabletOrMobile && config.mobile?.logo) &&
+                {(isTabletOrMobile && pageConfig.mobile?.logo) &&
                     <img
-                        src={config.mobile.logo.src}
-                        alt={config.mobile.logo.alt}
-                        width={config.mobile.logo?.width ?? 150}
-                        height={config.mobile.logo?.height ?? 150}
+                        src={pageConfig.mobile.logo.src}
+                        alt={pageConfig.mobile.logo.alt}
+                        width={pageConfig.mobile.logo?.width ?? 150}
+                        height={pageConfig.mobile.logo?.height ?? 150}
                     />
                 }
                 <div style={{
@@ -138,12 +132,12 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         title={
                             state?.isManualIdentification
                                 ? t('credentials_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
-                                : t(config.title ? config.title : 'qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
+                                : t(pageConfig.title ? pageConfig.title : 'qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
                         }
                         lines={
                             state?.isManualIdentification
                                 ? t('credentials_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
-                                : t(config.topParagraph ? config.topParagraph : 'qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
+                                : t(pageConfig.topParagraph ? pageConfig.topParagraph : 'qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
                         }
                     />
                     <div style={{
@@ -161,8 +155,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         </NonMobile>
                         <Mobile>
                             <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
-                                { config.mobile?.image &&
-                                    <img src={config.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
+                                { pageConfig.mobile?.image &&
+                                    <img src={pageConfig.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
                                 }
                                 <DeepLink style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
                             </div>
@@ -173,14 +167,14 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378 }}
                                 className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                                lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(config.bottomParagraph ? config.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
+                                lines={state?.isManualIdentification ? t('credentials_right_pane_bottom_paragraph').split('\n') : t(pageConfig.bottomParagraph ? pageConfig.bottomParagraph : 'qrcode_right_pane_bottom_paragraph').split('\n')}
                             />
                     </NonMobile>
                     <Mobile>
                         <Text
                             style={{flexGrow: 1, marginLeft: 24, marginRight: 24}}
                             className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                            lines={t(config.mobile?.bottomParagraph ? config.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                            lines={t(pageConfig.mobile?.bottomParagraph ? pageConfig.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                         />
                     </Mobile>
                     </div>

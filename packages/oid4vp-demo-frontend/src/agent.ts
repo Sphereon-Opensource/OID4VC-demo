@@ -1,6 +1,7 @@
 import {createAgent} from '@veramo/core'
 import {IQRCodeGenerator, QrCodeProvider} from "@sphereon/ssi-sdk.qr-code-generator";
 import {ISIOPv2OID4VPRPRestClient, SIOPv2OID4VPRPRestClient} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client";
+import * as process from "process"
 
 
 

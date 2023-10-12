@@ -5,18 +5,20 @@ import DeepLink from "../../components/DeepLink"
 import {useTranslation} from "react-i18next"
 import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop"
 import MemoizedAuthenticationQR from '../../components/AuthenticationQR'
-import {getCurrentEcosystemGeneralConfig, SSICredentialVerifyRequestPageConfig} from "../../ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useMediaQuery} from "react-responsive"
 import {Mobile, MobileOS, NonMobile} from "../../index"
 import {useFlowRouter} from "../../router/flow-router"
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSICredentialVerifyRequestPageConfig} from "../../ecosystem/ecosystem-config"
+import {useLocation} from "react-router-dom"
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
+    const ecosystem = useEcosystem()
     const flowRouter = useFlowRouter<SSICredentialVerifyRequestPageConfig>()
-    const config = flowRouter.getPageConfig()
+    const pageConfig = flowRouter.getPageConfig()
     const {t} = useTranslation()
-    const [currentEcosystemId] = useState<string>()
-    const credentialName = getCurrentEcosystemGeneralConfig(currentEcosystemId).credentialName
+    const credentialName = useEcosystem().getGeneralConfig().credentialName
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const onSignInComplete = async (data: AuthorizationResponsePayload) => {
@@ -38,16 +40,16 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     width: '60%',
                     height: '100%',
                     flexDirection: 'column',
-                    ...(config.photoLeft && { background: `url(${config.photoLeft}) 0% 0% / cover`}),
-                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
-                    ...(config.logo && { justifyContent: 'center', alignItems: 'center' })
+                    ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+                    ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                    ...(pageConfig.logo && { justifyContent: 'center', alignItems: 'center' })
                 }}>
-                    { config.logo &&
+                    { pageConfig.logo &&
                         <img
-                            src={config.logo.src}
-                            alt={config.logo.alt}
-                            width={config.logo.width}
-                            height={config.logo.height}
+                            src={pageConfig.logo.src}
+                            alt={pageConfig.logo.alt}
+                            width={pageConfig.logo.width}
+                            height={pageConfig.logo.height}
                         />
                     }
                 </div>
@@ -58,15 +60,15 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                 height: '100%',
                 flexDirection: 'column',
                 alignItems: 'center',
-                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
                 ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
-                {(isTabletOrMobile && config?.logo) &&
+                {(isTabletOrMobile && pageConfig?.logo) &&
                     <img
-                        src={config.mobile?.logo?.src}
-                        alt={config.mobile?.logo?.alt}
-                        width={config.mobile?.logo?.width ?? 150}
-                        height={config.mobile?.logo?.height ?? 150}
+                        src={pageConfig.mobile?.logo?.src}
+                        alt={pageConfig.mobile?.logo?.alt}
+                        width={pageConfig.mobile?.logo?.width ?? 150}
+                        height={pageConfig.mobile?.logo?.height ?? 150}
                     />
                 }
                 <div style={{
@@ -89,15 +91,16 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     }}>
                         <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
                             {/*Whether the QR code is shown (mobile) is handled in the component itself */}
-                            {<MemoizedAuthenticationQR vpDefinitionId={flowRouter.getVpDefinitionId()}
+                            {<MemoizedAuthenticationQR ecosystem={ecosystem}
+                                                       vpDefinitionId={flowRouter.getVpDefinitionId()}
                                                        onAuthRequestRetrieved={console.log}
                                                        onSignInComplete={onSignInComplete}
                                                        setQrCodeData={setDeepLink}/>}
                         </div>
                         <MobileOS>
                             <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
-                                { config.mobile?.image &&
-                                    <img src={config.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
+                                { pageConfig.mobile?.image &&
+                                    <img src={pageConfig.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
                                 }
                                 <DeepLink style={{flexGrow: 1}} link={deepLink}/>
                             </div>
@@ -108,12 +111,12 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                   lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}/></Mobile>
                     <NonMobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                      lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/></NonMobile>
-                    {config.enableRightPaneButton && (
+                    {pageConfig.enableRightPaneButton && (
                         <div style={{display: 'flex', justifyContent: 'center'}}>
                             <SSIPrimaryButton
                                 caption={t('credential_verify_request_right_pane_button_caption')}
                                 onClick={async () => {
-                                    await flowRouter.goToStep(config.rightPaneButtonStepId ?? 'infoRequest')
+                                    await flowRouter.goToStep(pageConfig.rightPaneButtonStepId ?? 'infoRequest')
                                 }}
                             />
                         </div>
