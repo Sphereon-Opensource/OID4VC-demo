@@ -22,6 +22,7 @@ import {
     generatePrivateKeyHex,
     TKeyType, toJwk
 } from "@sphereon/ssi-sdk-ext.key-utils";
+import * as process from "process"
 
 
 export function createDidResolver() {

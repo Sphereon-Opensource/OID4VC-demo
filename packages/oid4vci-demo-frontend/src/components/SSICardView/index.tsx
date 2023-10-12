@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react'
 import {ButtonType, IButton, ImageProperties} from '../../types';
 import SSIPrimaryButton from '../SSIPrimaryButton';
 import SSISecondaryButton from '../SSISecondaryButton';
@@ -20,7 +20,8 @@ interface IProps {
 }
 
 const SSICardView: React.FC<IProps> = (props: IProps) => {
-    const config = getCurrentEcosystemComponentConfig('SSICardView') as SSICardViewConfig;
+    const [currentEcosystemId] = useState<string>()
+    const config = getCurrentEcosystemComponentConfig('SSICardView', currentEcosystemId) as SSICardViewConfig;
     const mainContainerStyle = config.styles.mainContainer
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {

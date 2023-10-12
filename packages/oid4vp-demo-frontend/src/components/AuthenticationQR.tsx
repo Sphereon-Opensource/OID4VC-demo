@@ -1,14 +1,16 @@
 import React, {Component} from "react"
 import {BallTriangle} from "react-loader-spinner"
 import {CreateElementArgs, QRType, URIData, ValueResult} from "@sphereon/ssi-sdk.qr-code-generator";
-import agent from '../agent';
+import getAgent from '../agent';
 import {
     AuthorizationResponsePayload,
     AuthStatusResponse,
     GenerateAuthRequestURIResponse
 } from "@sphereon/ssi-sdk.siopv2-oid4vp-common"
+import * as process from "process"
 
 export type AuthenticationQRProps = {
+    ecosystemId: string
     onAuthRequestRetrieved: () => void
     onSignInComplete: (payload: AuthorizationResponsePayload) => void
 }
@@ -40,11 +42,15 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             this.refreshTimerHandle = setTimeout(() => this.refreshQRCode(), this.qrExpirationMs)
         }
         this._isMounted = true
+        if (!this.props.ecosystemId) {
+            throw new Error('Prop ecosystemId is required')
+        }
     }
 
     private generateNewQRCode() {
         this.generateAuthRequestURI().then(authRequestURIResponse => {
-            agent.qrURIElement(this.createQRCodeElement(authRequestURIResponse)).then((qrCode) => {
+            getAgent(this.props.currentEcosystemId)
+                .qrURIElement(this.createQRCodeElement(authRequestURIResponse)).then((qrCode) => {
                 this.registerState(authRequestURIResponse, qrCode)
                 // return this.setState({authRequestURIResponse, qrCode})
             })
@@ -53,7 +59,6 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     createQRCodeElement(authRequestURIResponse: GenerateAuthRequestURIResponse): CreateElementArgs<QRType.URI, URIData> {
         const qrProps: CreateElementArgs<QRType.URI, URIData> = {
-
             data: {
                 type: QRType.URI,
                 object: authRequestURIResponse.authRequestURI,
@@ -92,7 +97,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     /* Get the parameters that need to go into the QR code from the server */
     private generateAuthRequestURI = async (): Promise<GenerateAuthRequestURIResponse> => {
-        return await agent.siopClientCreateAuthRequest({
+        return await getAgent(this.props.ecosystemId).siopClientCreateAuthRequest({
           definitionId: this.definitionId
         })
     }
@@ -129,7 +134,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
     /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
     private pollAuthStatus = async (authRequestURIResponse: GenerateAuthRequestURIResponse) => {
-        let authStatus:  AuthStatusResponse = await agent.siopClientGetAuthStatus({
+        let authStatus:  AuthStatusResponse = await getAgent(this.props.ecosystemId).siopClientGetAuthStatus({
           correlationId: authRequestURIResponse?.correlationId,
           definitionId: authRequestURIResponse.definitionId
         })
@@ -144,7 +149,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
                 try {
                     console.log("Cancelling timed out auth request.")
                     if (timedoutState?.authRequestURIResponse) {
-                        await agent.siopClientRemoveAuthRequestSession({
+                        await getAgent(this.props.ecosystemId).siopClientRemoveAuthRequestSession({
                             correlationId: timedoutState.authRequestURIResponse.correlationId,
                             definitionId: timedoutState.authRequestURIResponse.definitionId
                         })
@@ -168,7 +173,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
             }
 
             // Use the state, as that gets updated by the qr code
-            authStatus = await agent.siopClientGetAuthStatus({
+            authStatus = await getAgent(this.props.ecosystemId).siopClientGetAuthStatus({
               correlationId: authRequestURIResponse?.correlationId,
               definitionId: authRequestURIResponse.definitionId
             })

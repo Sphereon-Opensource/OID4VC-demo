@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react'
 import {
     getCurrentEcosystemComponentConfig,
     
@@ -14,8 +14,9 @@ export interface IButtonProps {
 }
 
 const SSIPrimaryButton: React.FC<IButtonProps> = (props: IButtonProps) => {
-const config = getCurrentEcosystemComponentConfig('SSIPrimaryButton') as SSIPrimaryButtonConfig;
-const mainContainerStyle = config.styles.mainContainer;
+    const [currentEcosystemId] = useState<string>()
+    const config = getCurrentEcosystemComponentConfig('SSIPrimaryButton', currentEcosystemId) as SSIPrimaryButtonConfig;
+    const mainContainerStyle = config.styles.mainContainer;
     const {caption, disabled = false, onClick, style} = props
     // TODO text
     return (

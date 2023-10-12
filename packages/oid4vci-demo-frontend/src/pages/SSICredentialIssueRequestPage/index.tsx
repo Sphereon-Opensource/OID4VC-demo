@@ -16,6 +16,7 @@ import DeepLink from "../../components/DeepLink"
 import {Mobile, NonMobile} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
+import getAgent from "../../agent"
 
 
 type State = {
@@ -28,15 +29,16 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const location = useLocation();
     const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
     const config = flowRouter.getPageConfig()
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig();
-    const buttonConfig = getCurrentEcosystemComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
+    const [currentEcosystemId] = useState<string>()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
+    const buttonConfig = getCurrentEcosystemComponentConfig('SSISecondaryButton', currentEcosystemId) as SSISecondaryButtonConfig;
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state;
     const [qrCode, setQrCode] = useState<ReactElement>();
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            agent.oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
+            getAgent(currentEcosystemId).oid4vciClientGetIssueStatus({id: state?.preAuthCode!})
                 .then(async (status: IssueStatusResponse) => {
                     if (status.status === IssueStatus.CREDENTIAL_ISSUED) {
                         clearInterval(intervalId);
@@ -68,7 +70,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     }
 
     useEffect(() => {
-        agent.qrURIElement({
+        getAgent(currentEcosystemId).qrURIElement({
             data: qrData,
             renderingProps
         }).then((qrCode: JSX.Element) => setQrCode(qrCode))

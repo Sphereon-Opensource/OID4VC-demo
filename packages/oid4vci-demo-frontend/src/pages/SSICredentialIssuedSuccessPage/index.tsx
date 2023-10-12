@@ -1,8 +1,12 @@
-import React from "react"
+import React, {useState} from "react"
 import {Text} from "../../components/Text"
 import {useTranslation} from "react-i18next"
 import SSIPrimaryButton from '../../components/SSIPrimaryButton'
-import {getCurrentEcosystemGeneralConfig, SSICredentialIssuedSuccessPageConfig} from "../../ecosystem-config"
+import {
+    EcosystemGeneralConfig,
+    getCurrentEcosystemGeneralConfig,
+    SSICredentialIssuedSuccessPageConfig
+} from "../../ecosystem-config"
 import {NonMobile} from "../../index"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
@@ -10,7 +14,8 @@ import {useFlowRouter} from "../../router/flow-router"
 const SSICredentialIssuedSuccessPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSICredentialIssuedSuccessPageConfig>()
     const config = flowRouter.getPageConfig()
-    const generalConfig = getCurrentEcosystemGeneralConfig()
+    const [currentEcosystemId] = useState<string>()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
 

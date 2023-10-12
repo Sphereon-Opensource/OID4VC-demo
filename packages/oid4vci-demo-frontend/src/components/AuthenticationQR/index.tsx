@@ -7,10 +7,13 @@ import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
 import agent from "../../agent";
 import {NonMobileOS} from "../../index"
+import getAgent from "../../agent"
+import * as process from "process"
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
 export type AuthenticationQRProps = {
+  ecosystemId: string
   vpDefinitionId: string
   onAuthRequestRetrieved: () => void
   onSignInComplete: (payload: AuthorizationResponsePayload) => void
@@ -49,13 +52,16 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       )
     }
     this._isMounted = true
+    if (!this.props.ecosystemId) {
+      throw new Error('Prop ecosystemId is required')
+    }
     if (!this.props.vpDefinitionId) {
       throw new Error('Prop vpDefinitionId is required')
     }
   }
 
   private generateNewQRCode() {
-    agent
+    getAgent(this.props.ecosystemId)
       .siopClientCreateAuthRequest({definitionId: this.props.vpDefinitionId})
       .then((authRequestURIResponse) => {
         this.props.setQrCodeData(authRequestURIResponse.authRequestURI)
@@ -147,7 +153,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
     authRequestURIResponse: GenerateAuthRequestURIResponse
   ) => {
     this.authStatusHandle = setInterval(async (args) => {
-      agent.siopClientGetAuthStatus({
+      getAgent().siopClientGetAuthStatus({
         correlationId: authRequestURIResponse.correlationId,
         definitionId: authRequestURIResponse.definitionId
       }).then((response: AuthStatusResponse): Promise<void> => {

@@ -22,7 +22,8 @@ interface StepState {
 }
 
 export function useFlowAppRouter() {
-    const routes = getEcosystemRoutes()
+    const [currentEcosystemId] = useState<string>()
+    const routes = getEcosystemRoutes(currentEcosystemId)
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(getCurrentRoute(routes, currentRouteId)))
 
@@ -40,7 +41,8 @@ export function useFlowAppRouter() {
 export function useFlowRouter<T extends PageConfig>() {
     const navigate = useNavigate()
     const pageLocation = useLocation()
-    const routes = getEcosystemRoutes()
+    const [currentEcosystemId] = useState<string>()
+    const routes = getEcosystemRoutes(currentEcosystemId)
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
     const currentRoute = useMemo<VCIConfigRoute>(() => getCurrentRoute(routes, currentRouteId), [currentRouteId])
     const stepsById = useMemo<StepsByIdType>(() => buildStepsByIdMap(currentRoute), [currentRouteId])
@@ -65,8 +67,8 @@ export function useFlowRouter<T extends PageConfig>() {
         if (!currentStep) {
             throw new Error(`can't determine current step for location path ${currentLocation}`)
         }
-        if(hasCurrentEcosystemPageConfig(currentStep.id)) {
-            stepState.pageConfig = getCurrentEcosystemPageConfig(currentStep.id)
+        if(hasCurrentEcosystemPageConfig(currentStep.id, currentEcosystemId)) {
+            stepState.pageConfig = getCurrentEcosystemPageConfig(currentStep.id, currentEcosystemId)
         }
         return stepState
     }
@@ -123,7 +125,7 @@ export function useFlowRouter<T extends PageConfig>() {
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
-                    outState = await createCredentialOffer(inState)
+                    outState = await createCredentialOffer(inState, currentEcosystemId)
                     break
             }
             stepState.currentStep = executeStep

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {NavigateOptions} from 'react-router-dom'
 import SSICardView from '../../components/SSICardView'
 import {ButtonType} from '../../types'
 import {useTranslation} from 'react-i18next'
-import {getCurrentEcosystemGeneralConfig, SSILandingPageConfig} from "../../ecosystem-config"
+import {EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig, SSILandingPageConfig} from "../../ecosystem-config"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 
@@ -12,7 +12,8 @@ const SSILandingPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSILandingPageConfig>()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const config = flowRouter.getPageConfig()
-    const generalConfig = getCurrentEcosystemGeneralConfig()
+    const [currentEcosystemId] = useState<string>()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
     const mainContainerStyle = config.styles!.mainContainer
     const leftCardViewConfig = config.styles!.leftCardView
     const rightCardViewConfig = config.styles!.rightCardView

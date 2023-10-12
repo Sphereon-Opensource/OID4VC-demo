@@ -15,7 +15,8 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const flowRouter = useFlowRouter<SSICredentialVerifyRequestPageConfig>()
     const config = flowRouter.getPageConfig()
     const {t} = useTranslation()
-    const credentialName = getCurrentEcosystemGeneralConfig().credentialName
+    const [currentEcosystemId] = useState<string>()
+    const credentialName = getCurrentEcosystemGeneralConfig(currentEcosystemId).credentialName
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const onSignInComplete = async (data: AuthorizationResponsePayload) => {

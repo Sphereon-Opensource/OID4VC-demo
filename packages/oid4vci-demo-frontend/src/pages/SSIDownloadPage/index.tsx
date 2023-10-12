@@ -1,7 +1,7 @@
-import React from "react"
+import React, {useState} from "react"
 import {Text} from "../../components/Text"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
-import {getCurrentEcosystemGeneralConfig, SSIDownloadPageConfig} from "../../ecosystem-config"
+import {EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig, SSIDownloadPageConfig} from "../../ecosystem-config"
 import {useTranslation} from "react-i18next"
 import SSIWalletQRCode from "../../components/SSIWalletQRCode"
 import {NonMobile} from "../../index"
@@ -11,7 +11,8 @@ import {useFlowRouter} from "../../router/flow-router"
 const SSIDownloadPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIDownloadPageConfig>()
     const config = flowRouter.getPageConfig()
-    const generalConfig = getCurrentEcosystemGeneralConfig()
+    const [currentEcosystemId] = useState<string>()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
 

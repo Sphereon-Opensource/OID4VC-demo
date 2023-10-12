@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react'
 import {
     getCurrentEcosystemComponentConfig,
     SSIPrimaryButtonConfig,
@@ -15,7 +15,8 @@ export interface IProps {
 }
 
 const SSISecondaryButton: React.FC<IProps> = (props: IProps) => {
-    const config = getCurrentEcosystemComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
+    const [currentEcosystemId] = useState<string>()
+    const config = getCurrentEcosystemComponentConfig('SSISecondaryButton', currentEcosystemId) as SSISecondaryButtonConfig;
     const mainContainerStyle = config.styles.mainContainer;
     const { caption, disabled = false, onClick, style} = props
     const color = props.color ?? '#FBFBFB'

@@ -9,21 +9,21 @@ interface VCIConfig {
     components: VCIConfigComponents
 }
 
-export function getCurrentEcosystemConfig(): VCIConfig {
-    const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon'
+export function getCurrentEcosystemConfig(ecoSystemId: string | undefined): VCIConfig {
+    const ecosystem = ecoSystemId ?? process.env.REACT_APP_DEFAULT_ENVIRONMENT ?? 'sphereon'
     return require(`./configs/${ecosystem}.json`)
 }
 
-export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
+export function getCurrentEcosystemGeneralConfig(ecoSystemId: string | undefined, config?: VCIConfig): EcosystemGeneralConfig {
     if (!config) {
-        config = getCurrentEcosystemConfig()
+        config = getCurrentEcosystemConfig(ecoSystemId)
     }
     return config.general
 }
 
-export function getCurrentEcosystemComponentConfig(component: string, config?: VCIConfig): ComponentConfig {
+export function getCurrentEcosystemComponentConfig(component: string, ecoSystemId: string | undefined, config?: VCIConfig): ComponentConfig {
     if (!config) {
-        config = getCurrentEcosystemConfig()
+        config = getCurrentEcosystemConfig(ecoSystemId)
     }
     if (component in config.components) {
         return config.components[component as keyof VCIConfigComponents]
@@ -31,16 +31,16 @@ export function getCurrentEcosystemComponentConfig(component: string, config?: V
     throw new Error(`config for ${component} doesn't exist`)
 }
 
-export function hasCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): boolean {
+export function hasCurrentEcosystemPageConfig(stepId: string, ecoSystemId: string | undefined, config?: VCIConfig): boolean {
     if (!config) {
-        config = getCurrentEcosystemConfig()
+        config = getCurrentEcosystemConfig(ecoSystemId)
     }
     return stepId in config.pages;
 }
 
-export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
+export function getCurrentEcosystemPageConfig(stepId: string, ecoSystemId: string | undefined, config?: VCIConfig): PageConfig {
     if (!config) {
-        config = getCurrentEcosystemConfig()
+        config = getCurrentEcosystemConfig(ecoSystemId)
     }
     if (stepId in config.pages) {
         return config.pages[stepId as keyof VCIConfigPages]
@@ -48,9 +48,9 @@ export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig
     throw new Error(`Page config for step ${stepId} doesn't exist`)
 }
 
-export function getEcosystemRoutes(config?: VCIConfig): VCIConfigRoute[] {
+export function getEcosystemRoutes(ecoSystemId: string, config?: VCIConfig): VCIConfigRoute[] {
     if (!config) {
-        config = getCurrentEcosystemConfig()
+        config = getCurrentEcosystemConfig(ecoSystemId)
     }
     if (!config.routes) {
         throw new Error('The routes element is missing in the ecosystem json')

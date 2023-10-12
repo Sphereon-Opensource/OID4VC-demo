@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Text} from '../../components/Text'
 import style from '../../components/Text/Text.module.css'
 import {Trans, useTranslation} from "react-i18next"
@@ -27,7 +27,8 @@ const SSIInformationSuccessPage: React.FC = () => {
     const state: State | undefined = location.state;
 
     const config= flowRouter.getPageConfig()
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
+    const [currentEcosystemId] = useState<string>()
+    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig(currentEcosystemId);
     const {t} = useTranslation()
 
     return (
