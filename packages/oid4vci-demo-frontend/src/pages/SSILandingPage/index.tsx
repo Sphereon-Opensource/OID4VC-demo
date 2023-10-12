@@ -1,13 +1,22 @@
-import React from 'react'
-import {NavigateOptions} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavigateOptions } from 'react-router-dom'
 import SSICardView from '../../components/SSICardView'
-import {ButtonType} from '../../types'
-import {useTranslation} from 'react-i18next'
-import {getCurrentEcosystemGeneralConfig, SSILandingPageConfig} from "../../ecosystem-config"
-import {useMediaQuery} from "react-responsive"
-import {useFlowRouter} from "../../router/flow-router"
+import { ButtonType } from '../../types'
+import { useTranslation } from 'react-i18next'
+import { getCurrentEcosystemGeneralConfig, SSILandingPageConfig } from '../../ecosystem-config'
+import { useMediaQuery } from 'react-responsive'
+import { useFlowRouter } from '../../router/flow-router'
+import { showToast } from '@sphereon/ui-components.ssi-react'
 
 const SSILandingPage: React.FC = () => {
+    const [toastShown, setToastShown] = useState(false);
+
+    useEffect(() => {
+        if (!toastShown) {
+            showToast('success', "landing");
+            setToastShown(true);
+        }
+    }, [toastShown]);
     const {t} = useTranslation()
     const flowRouter = useFlowRouter<SSILandingPageConfig>()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
@@ -34,62 +43,62 @@ const SSILandingPage: React.FC = () => {
     }
 
     return (
-        <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 1,
-            height: '100vh',
-            backgroundColor: mainContainerStyle.backgroundColor,
-            flexDirection: 'column'
-        }}>
             <div style={{
-                maxWidth: isTabletOrMobile ? 405 : 810,
-                justifyContent: 'space-between',
-                alignContent: 'center',
-                flexDirection: `${isTabletOrMobile ? 'column' : 'row'}`,
                 display: 'flex',
-                width: '100%'
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+                height: '100vh',
+                backgroundColor: mainContainerStyle.backgroundColor,
+                flexDirection: 'column'
             }}>
-                <SSICardView
-                    title={t('onboarding_left_card_title')}
-                    message={t('onboarding_left_card_paragraph', {credentialName: generalConfig.credentialName})}
-                    image={{
-                        src: `${config.photoLeft}`,
-                        alt: 'manually'
-                    }}
-                    button={{
-                        caption: t('onboarding_left_card_button_caption'),
-                        onClick: onManualIdentificationClick,
-                        type: ButtonType.SECONDARY,
-                    }}
-                    {...optionalLeftCardViewProps}
-                />
+                <div style={{
+                    maxWidth: isTabletOrMobile ? 405 : 810,
+                    justifyContent: 'space-between',
+                    alignContent: 'center',
+                    flexDirection: `${isTabletOrMobile ? 'column' : 'row'}`,
+                    display: 'flex',
+                    width: '100%'
+                }}>
+                    <SSICardView
+                            title={t('onboarding_left_card_title')}
+                            message={t('onboarding_left_card_paragraph', {credentialName: generalConfig.credentialName})}
+                            image={{
+                                src: `${config.photoLeft}`,
+                                alt: 'manually'
+                            }}
+                            button={{
+                                caption: t('onboarding_left_card_button_caption'),
+                                onClick: onManualIdentificationClick,
+                                type: ButtonType.SECONDARY,
+                            }}
+                            {...optionalLeftCardViewProps}
+                    />
 
-                <SSICardView
-                    title={t('onboarding_right_card_title')}
-                    message={t('onboarding_right_card_paragraph', {credentialName: generalConfig.credentialName})}
-                    image={{
-                        src: `${config.photoRight}`,
-                        alt: 'wallet'
-                    }}
-                    button={{
-                        caption: t('onboarding_right_card_button_caption'),
-                        onClick: onWalletIdentificationClick,
-                        type: `${rightCardViewConfig.buttonType}` as ButtonType,
-                    }}
-                    {...optionalRightCardViewProps}
-                />
+                    <SSICardView
+                            title={t('onboarding_right_card_title')}
+                            message={t('onboarding_right_card_paragraph', {credentialName: generalConfig.credentialName})}
+                            image={{
+                                src: `${config.photoRight}`,
+                                alt: 'wallet'
+                            }}
+                            button={{
+                                caption: t('onboarding_right_card_button_caption'),
+                                onClick: onWalletIdentificationClick,
+                                type: `${rightCardViewConfig.buttonType}` as ButtonType,
+                            }}
+                            {...optionalRightCardViewProps}
+                    />
 
+                </div>
+                <img
+                        style={{marginTop: isTabletOrMobile ? 10 : 116}}
+                        src={config.logo.src}
+                        alt={config.logo.alt}
+                        width={config.logo.width}
+                        height={config.logo.height}
+                />
             </div>
-            <img
-                style={{marginTop: isTabletOrMobile ? 10 : 116}}
-                src={config.logo.src}
-                alt={config.logo.alt}
-                width={config.logo.width}
-                height={config.logo.height}
-            />
-        </div>
     );
 };
 

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import AppRouter from './router/AppRouter';
 import './localization/i18n'
 import './index.css';
-import {useMediaQuery} from "react-responsive";
+import {useMediaQuery} from 'react-responsive'
+import { ToastContainerComponent } from '@sphereon/ui-components.ssi-react'
 
 // @ts-ignore
 export const Mobile = ({children}) => {
@@ -33,6 +34,7 @@ ReactDOM.render(
     <React.StrictMode>
       <Suspense  fallback={<div>Loading...</div>}>
         <AppRouter />
+        <ToastContainerComponent />
       </Suspense>
     </React.StrictMode>,
     document.getElementById('root')
