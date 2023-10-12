@@ -20,7 +20,7 @@ const SSIDownloadPage: React.FC = () => {
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: '60%',
+                    width: config.leftPane.width ?? '60%',
                     height: '100%',
                     background: 'linear-gradient(315deg, #FFF 0%, #E6E6E6 100%)',
                     backgroundSize: 'cover',

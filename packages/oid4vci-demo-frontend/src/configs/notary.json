@@ -129,9 +129,9 @@
       "backgroundColor": "#BEBEBE"
     },
     "SSICredentialIssueRequestPage": {
-      "title": "coc_qrcode_right_pane_top_title",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "title": "title_secure_your_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
       "logo": {
         "src": "notary/guest_credential.svg",
         "alt": "Van Auckland Notary",
