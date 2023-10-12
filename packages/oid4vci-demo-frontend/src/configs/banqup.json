@@ -112,8 +112,8 @@
           {
             "id": "ssi_information_request_page_form_first_name",
             "key": "firstName",
-            "title": "ssi_information_request_page_form_first_name_title",
-            "type": "string",
+            "label": "ssi_information_request_page_form_first_name_label",
+            "type": "text",
             "required": true
           }
         ],
@@ -121,8 +121,8 @@
           {
             "id": "ssi_information_request_page_form_first_name",
             "key": "lastName",
-            "title": "ssi_information_request_page_form_last_name_title",
-            "type": "string",
+            "label": "ssi_information_request_page_form_last_name_label",
+            "type": "text",
             "required": true
           }
         ],
@@ -130,17 +130,31 @@
           {
             "id": "ssi_information_request_page_form_email",
             "key": "email",
-            "title": "ssi_information_request_page_form_email_title",
-            "type": "string",
-            "required": true
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true,
+            "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
           }
         ],
         [
           {
             "id": "ssi_information_request_page_form_bsn_number",
             "key": "bsnNumber",
-            "title": "ssi_information_request_page_form_bsn_number_title",
-            "type": "string",
+            "label": "ssi_information_request_page_form_bsn_number_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_terms_and_conditions_label",
+            "key": "termsAndConditions",
+            "label": "ssi_information_request_page_form_terms_and_conditions_label",
+            "labelUrl": {
+              "text": "ssi_information_request_page_form_terms_and_conditions_url_text",
+              "url": "https://google.com"
+            },
+            "type": "checkbox",
             "required": true
           }
         ]

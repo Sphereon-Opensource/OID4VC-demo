@@ -41,15 +41,15 @@
   "sharing_data_success_right_pane_title": "Bedankt {{Voornaam}}!",
   "sharing_data_success_get_mobile_app_message": "Haal de Sphereon Wallet",
   "action_open_wallet_caption": "Openen in wallet",
-  "ssi_information_request_page_form_bsn_number_title": "BSN Nummer",
+  "ssi_information_request_page_form_bsn_number_label": "BSN Nummer",
   "ssi_information_request_page_form_company_name_title": "Bedrijfsnaam",
   "ssi_information_request_page_form_name_title": "Voornaam",
-  "ssi_information_request_page_form_email_title": "E-mailadres",
+  "ssi_information_request_page_form_email_label": "E-mailadres",
   "ssi_information_request_page_form_coc_number_title": "KVK Nummer",
   "ssi_information_request_page_form_iban_title": "IBAN",
   "ssi_information_request_page_form_company_location_title": "Locatie van bedrijf",
-  "ssi_information_request_page_form_first_name_title": "Voornaam",
-  "ssi_information_request_page_form_last_name_title": "Achternaam",
+  "ssi_information_request_page_form_first_name_label": "Voornaam",
+  "ssi_information_request_page_form_last_name_label": "Achternaam",
   "ssi_information_request_page_form_first_name_director_title": "Voornaam directeur",
   "ssi_information_request_page_form_last_name_director_title": "Achternaam directeur",
   "ssi_information_request_page_form_place_of_birth_title": "Geboorteplaats",
@@ -61,5 +61,7 @@
   "coc_sharing_data_right_pane_top_paragraph": "Bijna klaar! Verstrek alstublieft ontbrekende gegevens indien nodig.",
   "coc_credential_verify_request_right_pane_bottom_paragraph": "Scan deze QR-code met de QR-scanner van uw wallet. Als u al op uw telefoon bent, open dan uw wallet door op de knop 'Openen in wallet' te klikken.",
   "ssi_credentials_landing_page_title": "Ontvang credentials",
-  "ssi_credentials_landing_page_text": "Je kunt de onderstaande credentials in je wallet ontvangen. Selecteer een credential en volg de vereiste stappen."
+  "ssi_credentials_landing_page_text": "Je kunt de onderstaande credentials in je wallet ontvangen. Selecteer een credential en volg de vereiste stappen.",
+  "ssi_information_request_page_form_terms_and_conditions_label": "I agree to the",
+  "ssi_information_request_page_form_terms_and_conditions_url_text": "terms & conditions"
 }
