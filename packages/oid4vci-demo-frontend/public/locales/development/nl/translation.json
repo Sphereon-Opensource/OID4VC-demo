@@ -41,6 +41,7 @@
   "sharing_data_success_right_pane_title": "Bedankt {{Voornaam}}!",
   "sharing_data_success_get_mobile_app_message": "Haal de Sphereon Wallet",
   "action_open_wallet_caption": "Openen in wallet",
+  "ssi_information_request_page_form_bsn_number_title": "BSN Nummer",
   "ssi_information_request_page_form_company_name_title": "Bedrijfsnaam",
   "ssi_information_request_page_form_name_title": "Voornaam",
   "ssi_information_request_page_form_email_title": "E-mailadres",

@@ -41,6 +41,7 @@
   "select_credential_title2": "credential",
   "select_credential_title3": "you’d like to",
   "select_credential_title4": "collect",
+  "ssi_information_request_page_form_bsn_number_title": "BSN Number",
   "ssi_information_request_page_form_company_name_title": "Company name",
   "ssi_information_request_page_form_name_title": "First name",
   "ssi_information_request_page_form_email_title": "Email address",
