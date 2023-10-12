@@ -69,7 +69,7 @@ const SphereonWalletPage: React.FC = () => {
                               flexGrow: 1
                           }}
                           title={t('sphereon_wallet_right_pane_title').split('\n')}
-                          lines={t('sphereon_wallet_right_pane_paragraph').split('\n')}/>
+                          lines={config.rightPane.paragraphResourceId ? t(config.rightPane.paragraphResourceId).split('\n') : []}/>
                     <div style={{
                         flexGrow: 1,
                         display: 'contents',
@@ -86,7 +86,7 @@ const SphereonWalletPage: React.FC = () => {
                         <SSIWalletQRCode
                             image={sphereonWalletQRCode.image}
                             className="poppins-semi-bold-14"
-                            text={t('sphereon_wallet_right_pane_sphereon_qrcode_text') as string}
+                            text={config.rightPane.qrTextResourceId ? t(config.rightPane.qrTextResourceId) as string : ''}
                             style={sphereonWalletQRCode.style}
                             button={{
                                 style: sphereonWalletQRCode.button.style,

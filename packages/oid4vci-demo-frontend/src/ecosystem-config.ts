@@ -220,6 +220,8 @@ export interface SphereonWalletPageConfig extends PageConfig {
         enablePrimaryButton? : boolean
         primaryButtonResourceId? : string
         primaryButtonStepId? : string
+        paragraphResourceId? : string
+        qrTextResourceId? : string
     }
 }
 
