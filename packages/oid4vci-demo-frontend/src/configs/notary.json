@@ -253,7 +253,7 @@
   },
   "routes": [
     {
-      "id": "default",
+      "vpDefinitionId": "knb-auckland",
       "steps": [
         {
           "id": "infoRequest",

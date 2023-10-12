@@ -251,6 +251,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "knb-babylon",
       "steps": [
         {
           "id": "verifyCredential",

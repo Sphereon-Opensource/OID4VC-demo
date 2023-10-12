@@ -150,6 +150,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "sphereonGuest",
       "steps": [
         {
           "id": "startPage",

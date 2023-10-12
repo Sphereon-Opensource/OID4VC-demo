@@ -150,6 +150,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "dbc2023",
       "steps": [
         {
           "id": "startPage",
