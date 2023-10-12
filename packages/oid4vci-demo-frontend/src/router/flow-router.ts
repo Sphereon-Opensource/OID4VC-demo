@@ -42,7 +42,7 @@ export function useFlowRouter<T extends PageConfig>() {
     const pageLocation = useLocation()
     const routes = getEcosystemRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
-    const [currentRoute] = useMemo<VCIConfigRoute>(() => getCurrentRoute(routes, currentRouteId), [currentRouteId])
+    const currentRoute = useMemo<VCIConfigRoute>(() => getCurrentRoute(routes, currentRouteId), [currentRouteId])
     const stepsById = useMemo<StepsByIdType>(() => buildStepsByIdMap(currentRoute), [currentRouteId])
     const stepState = useMemo<StepState>(() => initStepState(), [pageLocation.pathname])
 

@@ -146,7 +146,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   private pollAuthStatus = async (
     authRequestURIResponse: GenerateAuthRequestURIResponse
   ) => {
-    this.authStatusHandle = setInterval(async () => {
+    this.authStatusHandle = setInterval(async (args) => {
       agent.siopClientGetAuthStatus({
         correlationId: authRequestURIResponse.correlationId,
         definitionId: authRequestURIResponse.definitionId
