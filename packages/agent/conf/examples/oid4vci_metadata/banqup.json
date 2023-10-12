@@ -1,0 +1,131 @@
+{
+  "correlationId": "https://banqup.demo.sphereon.com/agent",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://banqup.demo.sphereon.com/agent",
+    "credential_endpoint": "https://banqup.demo.sphereon.com/agent/credentials",
+    "display": [
+      {
+        "name": "Banqup",
+        "description": "Banqup Issuer"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Account Credential",
+            "description": "Account Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Account Credential",
+            "description": "Account Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Account Credential",
+            "description": "Account Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "emailAddress"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "First name"
+              },
+              {
+                "name": "First name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Last name"
+              },
+              {
+                "name": "Last Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "emailAddress": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email address"
+              },
+              {
+                "name": "Email address",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email adres",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "banqup-account",
+        "types": [
+          "VerifiableCredential",
+          "Account"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      }
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/banqup",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "Account"
+          ],
+          "template_path": "Account.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
+  }
+}
