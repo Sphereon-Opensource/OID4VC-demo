@@ -18,9 +18,7 @@
       "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "banqup/logo.svg",
-        "width": 230,
-        "height": 350
+        "src": "banqup/logo.svg"
       },
       "mobile": {
         "logo": {
@@ -32,60 +30,6 @@
         "backgroundColor": "#EFFFF5"
       }
     },
-    "downloadSphereonWallet": {
-      "leftPane": {
-        "backgroundColor": "#0E0B31",
-        "width": "40%",
-        "logo": {
-          "src": "banqup/logo.svg",
-          "width": 230,
-          "height": 350
-        },
-        "mobile": {
-          "logo": {
-            "src": "banqup/logo.svg",
-            "alt": "banqup",
-            "width": 65,
-            "height": 65
-          },
-          "backgroundColor": "#EFFFF5"
-        }
-      },
-      "rightPane": {
-        "image": "banqup/flyng-iphone.svg",
-        "width": "100%",
-        "sphereonWalletQRCode": {
-          "enableQR": true,
-          "style": {
-          },
-          "button": {
-            "style": {
-              "width": 250
-            }
-          },
-          "downloadUrl": "https://qrco.de/be5xfh"
-        },
-        "enablePrimaryButton": true,
-        "primaryButtonResourceId": "label_continue"
-      }
-    },
-    "issueSuccess": {
-      "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
-      "backgroundColor": "#01224B",
-      "logo": {
-        "src": "bank/guest_credential.svg",
-        "width": 262,
-        "height": 249
-      },
-      "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 43,
-          "height": 41
-        }
-      }
-    },
     "infoRequest": {
       "leftPaneWidth": "40%",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
@@ -94,9 +38,7 @@
       "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "banqup/logo.svg",
-        "width": 230,
-        "height": 350
+        "src": "banqup/logo.svg"
       },
       "mobile": {
         "logo": {
@@ -112,7 +54,7 @@
           {
             "id": "ssi_information_request_page_form_first_name",
             "key": "firstName",
-            "label": "ssi_information_request_page_form_first_name_label",
+            "label": "ssi_information_request_page_form_first_name_title",
             "type": "text",
             "required": true
           }
@@ -121,7 +63,7 @@
           {
             "id": "ssi_information_request_page_form_first_name",
             "key": "lastName",
-            "label": "ssi_information_request_page_form_last_name_label",
+            "label": "ssi_information_request_page_form_last_name_title",
             "type": "text",
             "required": true
           }
@@ -130,7 +72,7 @@
           {
             "id": "ssi_information_request_page_form_email",
             "key": "email",
-            "label": "ssi_information_request_page_form_email_label",
+            "label": "ssi_information_request_page_form_email_title",
             "type": "text",
             "required": true,
             "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
@@ -140,14 +82,14 @@
           {
             "id": "ssi_information_request_page_form_bsn_number",
             "key": "bsnNumber",
-            "label": "ssi_information_request_page_form_bsn_number_label",
+            "label": "ssi_information_request_page_form_bsn_number_title",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_terms_and_conditions_label",
+            "id": "termsAndConditions",
             "key": "termsAndConditions",
             "label": "ssi_information_request_page_form_terms_and_conditions_label",
             "labelUrl": {
@@ -167,9 +109,7 @@
       "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "banqup/logo.svg",
-        "width": 230,
-        "height": 350
+        "src": "banqup/logo.svg"
       },
       "mobile": {
         "logo": {

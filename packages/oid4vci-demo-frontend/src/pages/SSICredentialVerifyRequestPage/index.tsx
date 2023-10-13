@@ -29,6 +29,13 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
         await flowRouter.nextStep(state)
     }
 
+  function determineWidth() {
+    if(config.leftPaneWidth && config.leftPaneWidth.includes('%')) {
+      return '100%'
+    }
+    return isTabletOrMobile ? '100%' : '40%'
+  }
+
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
@@ -53,7 +60,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
             </NonMobile>
             <div style={{
                 display: 'flex',
-                width: `${isTabletOrMobile ? '100%' : '40%'}`,
+                width: determineWidth(),
                 height: '100%',
                 flexDirection: 'column',
                 alignItems: 'center',
