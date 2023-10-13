@@ -11,6 +11,8 @@ import {
 } from "./ecosystem-config"
 import {useMemo} from "react"
 import getOrCreateAgent, {VCIAgentType} from "../agent"
+import {extractFirstSubdomain} from "../utils/generic"
+
 
 export type Ecosystem = {
     getComponentConfig: (component: string) => ComponentConfig
@@ -29,7 +31,8 @@ export function useEcosystem(): Ecosystem {
     function determineEcosystemId(): string {
         const searchParams = new URLSearchParams(window.location.search)
         const ecosystemIdQueryParam = searchParams.has('ecosystemId') ? searchParams.get('ecosystemId') : undefined
-        return ecosystemIdQueryParam ?? process.env.REACT_APP_DEFAULT_ECOSYSTEM ?? 'sphereon'
+        const subDomainEcosystemId = process.env.REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN === 'true' ? extractFirstSubdomain(window.location.href) : undefined
+        return ecosystemIdQueryParam ?? subDomainEcosystemId ?? process.env.REACT_APP_DEFAULT_ECOSYSTEM ?? 'sphereon'
     }
 
     function getRootConfig(): VCIConfig {
