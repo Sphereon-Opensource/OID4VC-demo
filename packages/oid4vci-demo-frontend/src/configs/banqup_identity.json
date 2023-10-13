@@ -147,8 +147,7 @@
         {
           "id": "issueRequest",
           "operation": "navigate",
-          "path": "/credentials/issue/request",
-          "nextId": "issueSuccess"
+          "path": "/credentials/issue/request"
         }
       ]
     }
