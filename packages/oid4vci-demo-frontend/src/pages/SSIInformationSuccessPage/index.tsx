@@ -111,7 +111,7 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
         return (<NonMobile>
                     <div id={"photo"} style={{
                         display: 'flex',
-                        width: '60%',
+                        width: config.leftPaneWidth ?? '60%',
                         height: '100%',
                         flexDirection: 'column',
                         alignItems: 'center',

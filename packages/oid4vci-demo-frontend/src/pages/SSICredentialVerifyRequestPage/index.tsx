@@ -37,7 +37,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: '60%',
+                    width: config.leftPaneWidth ?? '60%',
                     height: '100%',
                     flexDirection: 'column',
                     ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),

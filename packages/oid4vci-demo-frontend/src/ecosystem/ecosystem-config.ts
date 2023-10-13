@@ -19,6 +19,7 @@ export interface PageConfig {
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft?: string
     photoRight: string
     backgroundColor?: string
@@ -34,6 +35,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft: string
     photoRight: string
     rightPaneButtonStepId?: string
@@ -51,6 +53,7 @@ export interface SSICredentialsLandingPageConfig extends PageConfig {
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft?: string
     photoLeftManual?: string
     leftTextHideManual?: boolean
@@ -65,6 +68,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoManual?: string
     photoWallet?: string
     textLeft?: string
@@ -82,11 +86,14 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
 }
 
 export interface SSIInformationRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photo?: string
     photoManual?: string
     text_top_of_image?: string
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
+    primaryButtonResourceId?: string
+    primaryButtonManualResourceId?: string
     form?: DataFormRow[]
     mobile?: {
         logo?: ImageProperties
@@ -127,6 +134,7 @@ export interface SSIDownloadPageConfig extends PageConfig {
         }
     }
     leftPane: {
+        width?: string
         leftPhone: {
             logo: ImageProperties
             image: ImageProperties
@@ -135,6 +143,36 @@ export interface SSIDownloadPageConfig extends PageConfig {
             logo: ImageProperties
             image: ImageProperties
         }
+    }
+}
+
+export interface SphereonWalletPageConfig extends PageConfig {
+    leftPane: {
+        image?: string
+        backgroundColor?: string
+        width?: string
+        logo?: ImageProperties,
+        mobile?: {
+            logo?: ImageProperties
+            backgroundColor?: string
+            image?: string
+        },
+    }
+    rightPane: {
+        image: string
+        width?: string
+        backgroundColor?: string
+        sphereonWalletQRCode: {
+            style: CSSProperties,
+            image: ImageProperties & { style: CSSProperties }
+            button: IProps & { style: CSSProperties }
+            downloadUrl: string
+        }
+        enablePrimaryButton? : boolean
+        primaryButtonResourceId? : string
+        primaryButtonStepId? : string
+        paragraphResourceId? : string
+        qrTextResourceId? : string
     }
 }
 

@@ -133,8 +133,8 @@
     },
     "issueRequest": {
       "title": "coc_qrcode_right_pane_top_title",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#005371",
       "logo": {
         "src": "coc/logo.svg",
@@ -243,6 +243,11 @@
       "id": "default",
       "vpDefinitionId": "knb-kvk",
       "steps": [
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        },
         {
           "id": "verifyRequest",
           "operation": "navigate",
