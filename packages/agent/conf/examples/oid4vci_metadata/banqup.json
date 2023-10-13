@@ -1,0 +1,162 @@
+{
+  "correlationId": "http://192.168.178.52:5000",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "http://192.168.178.52:5000",
+    "credential_endpoint": "http://192.168.178.52:5000/credentials",
+    "display": [
+      {
+        "name": "Banqp",
+        "description": "Banqup Issuer"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Banqup credential",
+            "description": "Banqup credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
+              "alt_text": "Babylon bank logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
+              "alt_text": "Waves in shades of blue"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Bank account credential",
+            "description": "Bank account credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
+              "alt_text": "Babylon bank logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
+              "alt_text": "Waves in shades of blue"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Bankrekeninggegevens",
+            "description": "Bankrekeninggegevens",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
+              "alt_text": "Babylon bank logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
+              "alt_text": "Waves in shades of blue"
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "email"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "FirstName"
+              },
+              {
+                "name": "FirstName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "LastName"
+              },
+              {
+                "name": "LastName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "email": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email"
+              },
+              {
+                "name": "Email",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "bsnNumber": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "BSNNumber"
+              },
+              {
+                "name": "BSNNumber",
+                "locale": "en-US"
+              },
+              {
+                "name": "BSNNummer",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "banqup",
+        "types": [
+          "VerifiableCredential",
+          "BankAccount"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      }
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/banqup",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "BankAccount"
+          ],
+          "template_path": "BankAccount.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
+  }
+}
