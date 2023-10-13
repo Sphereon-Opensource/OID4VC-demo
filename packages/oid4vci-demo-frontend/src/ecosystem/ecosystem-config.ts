@@ -168,11 +168,11 @@ export interface SphereonWalletPageConfig extends PageConfig {
             button: IProps & { style: CSSProperties }
             downloadUrl: string
         }
-        enablePrimaryButton? : boolean
-        primaryButtonResourceId? : string
-        primaryButtonStepId? : string
-        paragraphResourceId? : string
-        qrTextResourceId? : string
+        enablePrimaryButton?: boolean
+        primaryButtonResourceId?: string
+        primaryButtonStepId?: string
+        paragraphResourceId?: string
+        qrTextResourceId?: string
     }
 }
 
@@ -320,12 +320,18 @@ export function getEcosystemRootConfig(ecosystemId: string): VCIConfig {
     return require(`../configs/${ecosystemId}.json`)
 }
 
-export function getEcosystemRoutes(config: VCIConfig): VCIConfigRoute[] {
-    if (!config.routes) {
+export function assertRoutes(routes: VCIConfigRoute[]) : VCIConfigRoute[] {
+    if (!routes) {
         throw new Error('The routes element is missing in the ecosystem json')
     }
-    if (config.routes.length === 0) {
+    if (routes.length === 0) {
         throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
     }
+    return routes
+}
+
+export function getEcosystemRoutes(ecosystemId: string): VCIConfigRoute[] {
+    const config = getEcosystemRootConfig(ecosystemId)
+    assertRoutes(config.routes)
     return config.routes
 }

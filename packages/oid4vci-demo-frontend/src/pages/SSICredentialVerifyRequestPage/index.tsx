@@ -11,7 +11,6 @@ import {Mobile, MobileOS, NonMobile} from "../../index"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {SSICredentialVerifyRequestPageConfig} from "../../ecosystem/ecosystem-config"
-import {useLocation} from "react-router-dom"
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const ecosystem = useEcosystem()
@@ -37,7 +36,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: config.leftPaneWidth ?? '60%',
+                    width: pageConfig.leftPaneWidth ?? '60%',
                     height: '100%',
                     flexDirection: 'column',
                     ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),

@@ -1,4 +1,5 @@
 import {
+    assertRoutes,
     ComponentConfig,
     EcosystemGeneralConfig,
     getEcosystemRootConfig,
@@ -15,10 +16,10 @@ import {extractFirstSubdomain} from "../utils/generic"
 
 
 export type Ecosystem = {
-    getComponentConfig: (component: string) => ComponentConfig
+    getComponentConfig: <T extends ComponentConfig>(component: string) => T
     hasPageConfig: (stepId: string) => boolean
     getRoutes: () => VCIConfigRoute[]
-    getPageConfig: (stepId: string) => PageConfig
+    getPageConfig: <T extends PageConfig>(stepId: string) => T
     getRootConfig: () => VCIConfig
     getGeneralConfig: () => EcosystemGeneralConfig
     getAgent(): VCIAgentType
@@ -43,9 +44,9 @@ export function useEcosystem(): Ecosystem {
         return config.general
     }
 
-    function getComponentConfig(component: string): ComponentConfig {
+    function getComponentConfig<T extends ComponentConfig>(component: string): T {
         if (component in config.components) {
-            return config.components[component as keyof VCIConfigComponents]
+            return config.components[component as keyof VCIConfigComponents] as T
         }
         throw new Error(`config for ${component} doesn't exist in ecosystem ${currentEcosystemId}`)
     }
@@ -54,15 +55,15 @@ export function useEcosystem(): Ecosystem {
         return stepId in config.pages
     }
 
-    function getPageConfig(stepId: string): PageConfig {
+    function getPageConfig<T extends PageConfig>(stepId: string): T {
         if (stepId in config.pages) {
-            return config.pages[stepId as keyof VCIConfigPages]
+            return config.pages[stepId as keyof VCIConfigPages] as T
         }
         throw new Error(`Page config for step ${stepId} doesn't exist`)
     }
 
     function getRoutes(): VCIConfigRoute[] {
-        return getEcosystemRoutes(config)
+        return assertRoutes(config.routes)
     }
 
     function getAgent(): VCIAgentType {

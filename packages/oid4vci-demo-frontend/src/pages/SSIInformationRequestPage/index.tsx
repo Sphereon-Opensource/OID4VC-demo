@@ -196,7 +196,7 @@ const SSIInformationRequestPage: React.FC = () => {
     }, []);
 
     function determineWidth() {
-        if(config.leftPaneWidth && config.leftPaneWidth.includes('%')) {
+        if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
         return isTabletOrMobile ? '50%' : '40%'
@@ -207,7 +207,7 @@ const SSIInformationRequestPage: React.FC = () => {
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
-                    width: config.leftPaneWidth ?? '60%',
+                    width: pageConfig.leftPaneWidth ?? '60%',
                     height: isTabletOrMobile ? '100%': '100vh',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -411,8 +411,8 @@ const SSIInformationRequestPage: React.FC = () => {
                     <div>
                         <SSIPrimaryButton
                             caption={isManualIdentification
-                                ? t(config.primaryButtonManualResourceId ?? 'label_share')
-                                : t(config.primaryButtonResourceId ?? 'label_continue')}
+                                ? t(pageConfig.primaryButtonManualResourceId ?? 'label_share')
+                                : t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, pageConfig.form)}
                             onClick={async () => await flowRouter.nextStep({payload, isManualIdentification})}

@@ -103,7 +103,7 @@ const SSIInformationSuccessPage: React.FC = () => {
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
-    const config = flowRouter.getPageConfig()
+    const pageConfig = flowRouter.getPageConfig()
     const location = useLocation();
     const state = location.state;
     const {t} = useTranslation()
@@ -111,20 +111,20 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
         return (<NonMobile>
                     <div id={"photo"} style={{
                         display: 'flex',
-                        width: config.leftPaneWidth ?? '60%',
+                        width: pageConfig.leftPaneWidth ?? '60%',
                         height: '100%',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        ...((config.photoLeft || config.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${config.photoLeftManual}` : `${config.photoLeft}`}) 0% 0% / cover`}),
-                        ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
-                        ...(config.logo && { justifyContent: 'center' })
+                        ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),
+                        ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                        ...(pageConfig.logo && { justifyContent: 'center' })
                     }}>
-                        { config.logo &&
+                        { pageConfig.logo &&
                             <img
-                                src={config.logo.src}
-                                alt={config.logo.alt}
-                                width={config.logo.width}
-                                height={config.logo.height}
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
                             />
                         }
                     </div>
