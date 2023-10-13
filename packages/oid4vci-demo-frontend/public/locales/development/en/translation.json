@@ -22,8 +22,6 @@
   "download_app_right_pane_sphereon_qrcode_text": "Sphereon Wallet",
   "download_app_right_pane_title": "Compliant SSI Wallets",
   "sphereon_wallet_right_pane_title": "Download the Wallet",
-  "sphereon_wallet_right_pane_paragraph": "",
-  "sphereon_wallet_right_pane_sphereon_qrcode_text": "",
   "sphereon_wallet_right_pane_sphereon_qrcode_button_caption": "Download Sphereon Wallet",
   "onboarding_left_card_button_caption": "Manually",
   "onboarding_left_card_paragraph": "When you opt to manually enter your data,\nplease fill in your first- and lastname, along\nwith your email address to get the\n{{credentialName}} credential(s)",
