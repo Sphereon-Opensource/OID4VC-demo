@@ -19,7 +19,7 @@ interface IProps {
 
 const SSICardView: React.FC<IProps> = (props: IProps) => {
     const ecosystem = useEcosystem()
-    const config = ecosystem.getComponentConfig('SSICardView') as SSICardViewConfig;
+    const config = ecosystem.getComponentConfig<SSICardViewConfig>('SSICardView')
     const mainContainerStyle = config.styles.mainContainer
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {

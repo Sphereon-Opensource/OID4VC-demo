@@ -27,7 +27,7 @@ const SSISelectCredentialPage: React.FC = () => {
     const [isManualIdentification] = useState<boolean>(false)
     const flowRouter = useFlowRouter<SSISelectCredentialPageConfig>()
     const pageConfig: SSISelectCredentialPageConfig = flowRouter.getPageConfig()
-    const generalConfig: EcosystemGeneralConfig = useEcosystem().getGeneralConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 

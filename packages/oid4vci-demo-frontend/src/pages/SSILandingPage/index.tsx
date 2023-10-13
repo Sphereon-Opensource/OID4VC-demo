@@ -13,7 +13,7 @@ const SSILandingPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSILandingPageConfig>()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const pageConfig = flowRouter.getPageConfig()
-    const generalConfig: EcosystemGeneralConfig = useEcosystem().getGeneralConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const mainContainerStyle = pageConfig.styles!.mainContainer
     const leftCardViewConfig = pageConfig.styles!.leftCardView
     const rightCardViewConfig = pageConfig.styles!.rightCardView

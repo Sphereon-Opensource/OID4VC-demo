@@ -14,7 +14,7 @@ export interface IProps {
 
 const SSISecondaryButton: React.FC<IProps> = (props: IProps) => {
     const ecosystem = useEcosystem()
-    const config = ecosystem.getComponentConfig<SSISecondaryButtonConfig>('SSISecondaryButton');
+    const config = ecosystem.getComponentConfig<SSISecondaryButtonConfig>('SSISecondaryButton')
     const mainContainerStyle = config.styles.mainContainer;
     const { caption, disabled = false, onClick, style} = props
     const color = props.color ?? '#FBFBFB'

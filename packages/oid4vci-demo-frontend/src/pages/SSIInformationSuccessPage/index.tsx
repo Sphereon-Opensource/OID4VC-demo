@@ -24,7 +24,7 @@ const SSIInformationSuccessPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state;
     const pageConfig= flowRouter.getPageConfig()
-    const generalConfig: EcosystemGeneralConfig = useEcosystem().getGeneralConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
 
     return (

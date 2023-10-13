@@ -12,7 +12,7 @@ import {useEcosystem} from "../../ecosystem/ecosystem"
 const SSIDownloadPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIDownloadPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
-    const generalConfig: EcosystemGeneralConfig = useEcosystem().getGeneralConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
 
