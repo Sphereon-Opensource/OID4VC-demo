@@ -1,12 +1,12 @@
 {
-  "correlationId": "http://192.168.178.52:5000",
+  "correlationId": "https://banqup.demo.sphereon.com/agent",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://192.168.178.52:5000",
-    "credential_endpoint": "http://192.168.178.52:5000/credentials",
+    "credential_issuer": "https://banqup.demo.sphereon.com/agent",
+    "credential_endpoint": "https://banqup.demo.sphereon.com/agent/credentials",
     "display": [
       {
-        "name": "Banqp",
+        "name": "Banqup",
         "description": "Banqup Issuer"
       }
     ],
@@ -14,64 +14,46 @@
       {
         "display": [
           {
-            "name": "Banqup credential",
-            "description": "Banqup credential",
-            "background_color": "rgba(0, 0, 0, 0.2)",
-            "text_color": "#FBFBFB",
+            "name": "Verified Account Credential",
+            "background_color": "#322577",
             "logo": {
-              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
-              "alt_text": "Babylon bank logo"
-            },
-            "background_image": {
-              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
-              "alt_text": "Waves in shades of blue"
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
             }
           },
           {
             "locale": "en-US",
-            "name": "Bank account credential",
-            "description": "Bank account credential",
-            "background_color": "rgba(0, 0, 0, 0.2)",
-            "text_color": "#FBFBFB",
+            "name": "Verified Account Credential",
+            "background_color": "#322577",
             "logo": {
-              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
-              "alt_text": "Babylon bank logo"
-            },
-            "background_image": {
-              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
-              "alt_text": "Waves in shades of blue"
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
             }
           },
           {
             "locale": "nl-NL",
-            "name": "Bankrekeninggegevens",
-            "description": "Bankrekeninggegevens",
-            "background_color": "rgba(0, 0, 0, 0.2)",
-            "text_color": "#FBFBFB",
+            "name": "Geverifieerd Account Credential",
+            "background_color": "#322577",
             "logo": {
-              "url": "https://i.ibb.co/8mNMPjN/Babylon-bank-logo.png",
-              "alt_text": "Babylon bank logo"
-            },
-            "background_image": {
-              "url": "https://i.ibb.co/gypDBQv/Babylon-bank-bg.png",
-              "alt_text": "Waves in shades of blue"
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
             }
           }
         ],
         "order": [
           "firstName",
           "lastName",
-          "email"
+          "emailAddress"
         ],
         "credentialSubject": {
           "firstName": {
             "value_type": "string",
             "display": [
               {
-                "name": "FirstName"
+                "name": "First name"
               },
               {
-                "name": "FirstName",
+                "name": "First name",
                 "locale": "en-US"
               },
               {
@@ -84,10 +66,10 @@
             "value_type": "string",
             "display": [
               {
-                "name": "LastName"
+                "name": "Last name"
               },
               {
-                "name": "LastName",
+                "name": "Last Name",
                 "locale": "en-US"
               },
               {
@@ -96,34 +78,119 @@
               }
             ]
           },
-          "email": {
+          "emailAddress": {
             "value_type": "string",
             "display": [
               {
-                "name": "Email"
+                "name": "Email address"
               },
               {
-                "name": "Email",
+                "name": "Email address",
                 "locale": "en-US"
               },
               {
-                "name": "Email",
+                "name": "Email adres",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "banqup-account",
+        "types": [
+          "VerifiableCredential",
+          "Account"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Verified Account Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Verified Account Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Geverifieerd Account Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "emailAddress",
+          "bsnNumber"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "First name"
+              },
+              {
+                "name": "First name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
                 "locale": "nl-NL"
               }
             ]
           },
-          "bsnNumber": {
+          "lastName": {
             "value_type": "string",
             "display": [
               {
-                "name": "BSNNumber"
+                "name": "Last name"
               },
               {
-                "name": "BSNNumber",
+                "name": "Last Name",
                 "locale": "en-US"
               },
               {
-                "name": "BSNNummer",
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "emailAddress": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email address"
+              },
+              {
+                "name": "Email address",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email adres",
                 "locale": "nl-NL"
               }
             ]
@@ -132,7 +199,7 @@
         "id": "banqup",
         "types": [
           "VerifiableCredential",
-          "BankAccount"
+          "Account"
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
@@ -151,9 +218,9 @@
       "template_mappings": [
         {
           "credential_types": [
-            "BankAccount"
+            "Account"
           ],
-          "template_path": "BankAccount.hbs",
+          "template_path": "Account.hbs",
           "format": "jwt_vc_json"
         }
       ]
