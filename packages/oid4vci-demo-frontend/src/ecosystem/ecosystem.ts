@@ -23,11 +23,11 @@ export type Ecosystem = {
 };
 
 export function useEcosystem(): Ecosystem {
-    const currentEcosystemId = determineEcosystemId(window.location.pathname, window.location.search)
+    const currentEcosystemId = determineEcosystemId()
     const config = useMemo<VCIConfig>(() => getEcosystemRootConfig(currentEcosystemId), [currentEcosystemId])
 
-    function determineEcosystemId(locationPath: string, queryParams: string): string {
-        const searchParams = new URLSearchParams(queryParams)
+    function determineEcosystemId(): string {
+        const searchParams = new URLSearchParams(window.location.search)
         const ecosystemIdQueryParam = searchParams.has('ecosystemId') ? searchParams.get('ecosystemId') : undefined
         return ecosystemIdQueryParam ?? process.env.REACT_APP_DEFAULT_ECOSYSTEM ?? 'sphereon'
     }
