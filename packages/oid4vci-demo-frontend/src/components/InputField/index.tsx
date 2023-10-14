@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, HTMLInputTypeAttribute, ReactElement, useState} from 'react';
+import React, {ChangeEvent, FC, HTMLInputTypeAttribute, ReactElement, useState, FocusEvent} from 'react';
 import style from './index.module.css';
 import {FormFieldValue} from '../../types';
 
@@ -35,9 +35,7 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
         }
     }
 
-    // FIXME fix the type complaining about FocusEvent<HTMLInputElement, Element>
-    // @ts-ignore
-    const onBlur = async (event: FocusEvent<HTMLInputElement, Element>): Promise<void> => {
+    const onBlur = async (event: FocusEvent<HTMLInputElement>): Promise<void> => {
         const value: string | boolean = type === 'checkbox' ? event.target.checked : event.target.value
         if (customValidation) {
             setIsValid(customValidation.test(value.toString()))
