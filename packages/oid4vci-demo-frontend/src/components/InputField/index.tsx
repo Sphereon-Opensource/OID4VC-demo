@@ -36,8 +36,8 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
     }
 
     const onBlur = async (event: FocusEvent<HTMLInputElement>): Promise<void> => {
-        const value: string | boolean = type === 'checkbox' ? event.target.checked : event.target.value
         if (customValidation) {
+            const value: string | boolean = type === 'checkbox' ? event.target.checked : event.target.value
             setIsValid(customValidation.test(value.toString()))
         }
     }
