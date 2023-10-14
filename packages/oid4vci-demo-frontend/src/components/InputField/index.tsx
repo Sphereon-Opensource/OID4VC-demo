@@ -50,15 +50,15 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
         }
         <input
             type={type}
-            style={{...(!isValid && {borderColor: 'red'})}}
-            value={!isCheckBox ? (value as string | number | ReadonlyArray<string> | undefined) : undefined}
-            checked={isCheckBox ? (value as boolean) : undefined}
+            style={{ ...(!isValid && { borderColor: 'red' }) }}
             placeholder={placeholder}
             readOnly={readonly}
-            className={`${readonly ? '' : style.enabled}`}
-            defaultValue={!isCheckBox ? (defaultValue as string | number | ReadonlyArray<string> | undefined) : undefined}
             onChange={onChangeValue}
             onBlur={onBlur}
+            {...(!readonly && { className: style.enabled })}
+            {...(!isCheckBox && { defaultValue: defaultValue as string | number | ReadonlyArray<string> | undefined })}
+            {...(!isCheckBox && { value: value as string | number | ReadonlyArray<string> | undefined})}
+            {...(isCheckBox && { checked: value as boolean})}
         />
     </div>
 }
