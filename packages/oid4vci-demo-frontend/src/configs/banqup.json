@@ -114,7 +114,12 @@
             "label": "ssi_information_request_page_form_terms_and_conditions_label",
             "labelUrl": "https://google.com",
             "type": "checkbox",
-            "required": true
+            "required": true,
+            "style": {
+              "checkboxBorderColor": "#202776",
+              "checkboxLabelColor": "#424242",
+              "checkboxSelectedColor": "#202776"
+            }
           }
         ]
       ]

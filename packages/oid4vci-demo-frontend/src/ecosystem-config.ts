@@ -166,6 +166,11 @@ export interface DataFormElement {
     labelUrl?: string
     readonly?: boolean
     customValidation?: string
+    style?: {
+        checkboxBorderColor?: string
+        checkboxLabelColor?: string
+        checkboxSelectedColor?: string
+    }
 }
 
 export interface SSIDownloadPageConfig extends PageConfig {
