@@ -61,7 +61,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     borderColor={field.style?.checkboxBorderColor}
                     selectedColor={field.style?.checkboxSelectedColor}
                     // @ts-ignore // FIXME __html complaining
-                    label={field.labelUrl ? <div dangerouslySetInnerHTML={{ __html: t(field.label, { url: field.labelUrl })}}></div> : field.label}
+                    label={field.labelUrl ? <div dangerouslySetInnerHTML={{ __html: t(field.label, { url: field.labelUrl })}}/> : field.label}
                     disabled={field.readonly}
                     labelColor={field.style?.checkboxLabelColor}
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
