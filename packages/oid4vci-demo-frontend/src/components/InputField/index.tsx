@@ -2,6 +2,8 @@ import React, {ChangeEvent, FC, HTMLInputTypeAttribute, ReactElement, useState, 
 import style from './index.module.css';
 import {FormFieldValue} from '../../types';
 
+type InputValue = string | number | ReadonlyArray<string> | undefined
+
 type Props = {
     type: HTMLInputTypeAttribute;
     label?: string
@@ -56,8 +58,8 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
             onChange={onChangeValue}
             onBlur={onBlur}
             {...(!readonly && { className: style.enabled })}
-            {...(!isCheckBox && { defaultValue: defaultValue as string | number | ReadonlyArray<string> | undefined })}
-            {...(!isCheckBox && { value: value as string | number | ReadonlyArray<string> | undefined})}
+            {...(!isCheckBox && { defaultValue: defaultValue as InputValue })}
+            {...(!isCheckBox && { value: value as InputValue})}
             {...(isCheckBox && { checked: value as boolean})}
         />
     </div>
