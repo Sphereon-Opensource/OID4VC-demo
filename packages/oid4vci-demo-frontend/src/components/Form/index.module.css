@@ -7,7 +7,7 @@
     gap: 23px;
 }
 
-.formContentContainer {
+.formRowContainer {
     display: flex;
     flex-direction: row;
     gap: 12px;
