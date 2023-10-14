@@ -58,12 +58,12 @@ const Form: FC<Props> = (props: Props): ReactElement => {
         switch (field.type) {
             case 'checkbox':
                 return <SSICheckbox
-                    borderColor={field.style?.checkboxBorderColor}
-                    selectedColor={field.style?.checkboxSelectedColor}
+                    borderColor={field.display?.checkboxBorderColor}
+                    selectedColor={field.display?.checkboxSelectedColor}
                     // @ts-ignore // FIXME __html complaining
                     label={field.labelUrl ? <div dangerouslySetInnerHTML={{ __html: t(field.label, { url: field.labelUrl })}}/> : field.label}
                     disabled={field.readonly}
-                    labelColor={field.style?.checkboxLabelColor}
+                    labelColor={field.display?.checkboxLabelColor}
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
             case 'text':

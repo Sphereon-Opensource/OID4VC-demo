@@ -115,7 +115,7 @@
             "labelUrl": "https://google.com",
             "type": "checkbox",
             "required": true,
-            "style": {
+            "display": {
               "checkboxBorderColor": "#202776",
               "checkboxLabelColor": "#424242",
               "checkboxSelectedColor": "#202776"

@@ -166,7 +166,7 @@ export interface DataFormElement {
     labelUrl?: string
     readonly?: boolean
     customValidation?: string
-    style?: {
+    display?: {
         checkboxBorderColor?: string
         checkboxLabelColor?: string
         checkboxSelectedColor?: string
