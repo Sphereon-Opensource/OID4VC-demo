@@ -60,18 +60,8 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                 return <SSICheckbox
                     borderColor={'#202776'}
                     selectedColor={'#202776'}
-                    label={field.labelUrl ?
-                        <div style={{display: 'flex', flexDirection: 'row', gap: 4}}>
-                            {field.label &&
-                                <div className={"poppins-normal-16"}>{t(field.label)}</div>
-                            }
-                            {field.labelUrl.text &&
-                                <div className={"poppins-normal-16"}
-                                     style={{color: '#4E51A7', textDecoration: 'underline'}}
-                                     onClick={() => window.open('https://www.google.com', '_blank')}>{t(field.labelUrl.text)}</div>
-                            }
-                        </div> : field.label ? t(field.label) : undefined
-                    }
+                    // @ts-ignore // FIXME
+                    label={field.labelUrl ? <div dangerouslySetInnerHTML={{ __html: t(field.label, { url: field.labelUrl })}}></div> : field.label}
                     disabled={field.readonly}
                     labelColor={'#424242'}
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}

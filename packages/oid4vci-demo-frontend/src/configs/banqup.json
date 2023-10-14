@@ -112,10 +112,7 @@
             "id": "termsAndConditions",
             "key": "termsAndConditions",
             "label": "ssi_information_request_page_form_terms_and_conditions_label",
-            "labelUrl": {
-              "text": "ssi_information_request_page_form_terms_and_conditions_url_text",
-              "url": "https://google.com"
-            },
+            "labelUrl": "https://google.com",
             "type": "checkbox",
             "required": true
           }

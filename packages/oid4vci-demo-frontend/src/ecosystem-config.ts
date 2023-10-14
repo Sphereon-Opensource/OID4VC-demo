@@ -163,15 +163,9 @@ export interface DataFormElement {
     required?: boolean
     defaultValue?: string
     label?: string
-    // FIXME can be placed better but for now this was the easiest. when there is a url for the label (and this is only possible for a checkbox) we use an element for the label to be displayed
-    labelUrl?: LabelUrl
+    labelUrl?: string
     readonly?: boolean
     customValidation?: string
-}
-
-export type LabelUrl = {
-    text: string
-    url: string
 }
 
 export interface SSIDownloadPageConfig extends PageConfig {
