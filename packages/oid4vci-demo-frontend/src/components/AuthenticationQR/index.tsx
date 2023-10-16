@@ -36,6 +36,8 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
 
 
   componentDidMount() {
+    const {ecosystem, vpDefinitionId} = this.props
+
     this.qrExpirationMs =
       parseInt(process.env.REACT_APP_SSI_QR_CODE_EXPIRES_AFTER_SEC ?? '300') *
       1000
@@ -49,20 +51,21 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       )
     }
     this._isMounted = true
-    if (!this.props.ecosystem) {
+    if (!ecosystem) {
       throw new Error('Prop ecosystem is required')
     }
-    if (!this.props.vpDefinitionId) {
+    if (!vpDefinitionId) {
       throw new Error('Prop vpDefinitionId is required')
     }
   }
 
   private generateNewQRCode() {
-      this.props.ecosystem.getAgent()
-      .siopClientCreateAuthRequest({definitionId: this.props.vpDefinitionId})
+    const {ecosystem, vpDefinitionId, setQrCodeData} = this.props
+      ecosystem.getAgent()
+      .siopClientCreateAuthRequest({definitionId: vpDefinitionId})
       .then((authRequestURIResponse) => {
-        this.props.setQrCodeData(authRequestURIResponse.authRequestURI)
-        this.props.ecosystem.getAgent()
+        setQrCodeData(authRequestURIResponse.authRequestURI)
+        ecosystem.getAgent()
           .qrURIElement(this.createQRCodeElement(authRequestURIResponse))
           .then((qrCode) => {
             this.registerState(authRequestURIResponse, qrCode)
@@ -149,14 +152,15 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   private pollAuthStatus = async (
     authRequestURIResponse: GenerateAuthRequestURIResponse
   ) => {
+    const {ecosystem, onSignInComplete} = this.props
     this.authStatusHandle = setInterval(async (args) => {
-      this.props.ecosystem.getAgent().siopClientGetAuthStatus({
+      ecosystem.getAgent().siopClientGetAuthStatus({
         correlationId: authRequestURIResponse.correlationId,
         definitionId: authRequestURIResponse.definitionId
       }).then((response: AuthStatusResponse) => {
         if (response.status === AuthorizationResponseStateStatus.VERIFIED) {
           clearInterval(this.authStatusHandle)
-          this.props.onSignInComplete(response.payload!)
+          onSignInComplete(response.payload!)
         }
       }).catch((error: Error) => {
         clearInterval(this.authStatusHandle)
