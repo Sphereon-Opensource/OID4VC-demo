@@ -155,7 +155,6 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
           clearInterval(this.authStatusHandle)
           this.props.onSignInComplete(response.payload!)
         }
-        return Promise.resolve()
       }).catch((error: Error) => {
         clearInterval(this.authStatusHandle)
         console.log(`ERROR: ${error.message}`)
