@@ -194,6 +194,22 @@
                 "locale": "nl-NL"
               }
             ]
+          },
+          "bsnNumber": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "BSN number"
+              },
+              {
+                "name": "BSN number",
+                "locale": "en-US"
+              },
+              {
+                "name": "BSN nummer",
+                "locale": "nl-NL"
+              }
+            ]
           }
         },
         "id": "banqup",
