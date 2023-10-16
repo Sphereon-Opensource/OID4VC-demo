@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 327px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 23px;
+}
+
+.formRowContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}

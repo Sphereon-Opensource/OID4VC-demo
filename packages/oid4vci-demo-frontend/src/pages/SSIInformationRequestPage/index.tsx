@@ -1,5 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
-import inputStyle from './SSIInformationRequestPage.module.css'
+import React, {useCallback, useEffect, useState} from 'react'
 import {useTranslation} from "react-i18next"
 import {
     AdditionalClaims,
@@ -9,7 +8,6 @@ import {
     W3CVerifiableCredential,
     W3CVerifiablePresentation
 } from "@sphereon/ssi-types"
-
 import '../../css/typography.css'
 import {
     DataFormElement,
@@ -23,11 +21,9 @@ import {Buffer} from 'buffer'
 import {useMediaQuery} from "react-responsive"
 import {NonMobile} from "../../index"
 import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils"
-import {generateRandomIBAN} from "../../utils/iban"
+import Form from "../../components/Form";
+import { FormData } from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
-
-type Payload = Record<string, string>
-type DefaultValueType = string | number | ReadonlyArray<string> | undefined
 
 type State = {
     data?: any
@@ -37,41 +33,25 @@ type State = {
 function getInitialState(form: DataFormRow[] | undefined) {
   if (!form) {
     return {
-      Voornaam: '',
-      Achternaam: '',
+      firstName: '',
+      lastName: '',
       emailAddress: ''
     }
   }
   return transformFormConfigToEmptyObject(form)
 }
 
-function isPayloadValid(payload: Payload, form?: DataFormRow[]) {
+function isPayloadValid(payload: FormData, form?: DataFormRow[]) {
   let requiredFields =  Object.keys(payload) // FIXME this should be configurable
   if (form) {
     requiredFields = extractRequiredKeys(form)
   }
   for (let field of requiredFields) {
-    if (!payload[field] || payload[field].toString().trim() === '') {
+    if (!payload[field] || payload[field]!.toString().trim() === '') {
       return false;
     }
   }
   return true;
-}
-
-function evalDefaultValue(field: DataFormElement, payload: Payload): DefaultValueType {
-    const payloadValue = payload[field.key]
-    if (payloadValue) {
-        return payloadValue
-    }
-
-    let defaultValue: DefaultValueType = field.defaultValue ?? ''
-    if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
-        defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
-    } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
-        defaultValue = generateRandomIBAN()
-    }
-    payload[field.key] = `${defaultValue}`
-    return defaultValue
 }
 
 const SSIInformationRequestPage: React.FC = () => {
@@ -80,22 +60,14 @@ const SSIInformationRequestPage: React.FC = () => {
     const location = useLocation();
     const state: State | undefined = location.state;
     const {t} = useTranslation()
-    const [payload, setPayload] = useState<Payload>(getInitialState(config.form))
+    const [payload, setPayload] = useState<FormData>(getInitialState(config.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const [isInvalidEmail, setIsInvalidEmail] = useState(false)
-    const EMAIL_ADDRESS_VALIDATION_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
     // Manually is only when all of them need to be filled by the user
     // None of them means that our wallet is used
     // Only Email is microsoft entra
     // TODO WAL-546
     const [isManualIdentification, setManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === ''))
-    //const [isManualIdentification, setManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === '') || !payload.emailAddress || payload.emailAddress === '')
-
-    const onEmailValidation = () => {
-        if (payload.emailAddress && payload.emailAddress?.length !== 0) {
-            setIsInvalidEmail(!EMAIL_ADDRESS_VALIDATION_REGEX.test(payload.emailAddress!))
-        }
-    }
 
     const processVPToken = useCallback(async () => {
         async function asyncFlatMap<T, O>(arr: T[], asyncFn: (t: T) => Promise<O[]>): Promise<O[]> {
@@ -117,15 +89,15 @@ const SSIInformationRequestPage: React.FC = () => {
         const decodeBase64 = async (jwt: string, kid?: string): Promise<any> => {
             return JSON.parse(Buffer.from(jwt.split('.')[1], 'base64').toString())
         }
-        const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims, form?: DataFormRow[]): Payload => {
+        const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims, form?: DataFormRow[]): FormData => {
             if (!form) {
-                if (!cs.Voornaam && !cs.Achternaam && !cs.emailAddress) {
+                if (!cs.firstName && !cs.lastName && !cs.emailAddress) {
                     return {} as Record<string, string>;
                 }
 
                 return {
-                    Voornaam: cs.Voornaam,
-                    Achternaam: cs.Achternaam,
+                    firstName: cs.firstName,
+                    lastName: cs.lastName,
                     emailAddress: cs.emailAddress
                 } as Record<string, string>;
             }
@@ -139,7 +111,7 @@ const SSIInformationRequestPage: React.FC = () => {
             return payload;
         }
 
-        const handleCredential = async (vc: W3CVerifiableCredential): Promise<Payload[]> => {
+        const handleCredential = async (vc: W3CVerifiableCredential): Promise<FormData[]> => {
             let verifiableCredential: IVerifiableCredential
             if (typeof vc === 'string') {
                 verifiableCredential = (await decodeBase64(vc)).vc as IVerifiableCredential
@@ -155,7 +127,7 @@ const SSIInformationRequestPage: React.FC = () => {
             return [handleCredentialSubject(verifiableCredential.credentialSubject, config.form)]
         }
 
-        const handleVP = async (vp: W3CVerifiablePresentation): Promise<Payload[]> => {
+        const handleVP = async (vp: W3CVerifiablePresentation): Promise<FormData[]> => {
             let verifiablePresentation: IVerifiablePresentation
             if (typeof vp === 'string') {
                 verifiablePresentation = (await decodeBase64(vp)).vp as IVerifiablePresentation
@@ -171,7 +143,7 @@ const SSIInformationRequestPage: React.FC = () => {
             return handleCredential(verifiablePresentation.verifiableCredential)
         }
 
-        const handleVPToken = async (vpToken?: W3CVerifiablePresentation | W3CVerifiablePresentation[]): Promise<Payload[]> => {
+        const handleVPToken = async (vpToken?: W3CVerifiablePresentation | W3CVerifiablePresentation[]): Promise<FormData[]> => {
             if (!vpToken) {
                 return []
             }
@@ -180,7 +152,6 @@ const SSIInformationRequestPage: React.FC = () => {
             }
             return await handleVP(vpToken)
         }
-
 
         const payload = await handleVPToken(state?.data?.vp_token)
         if (payload.length) {
@@ -197,7 +168,11 @@ const SSIInformationRequestPage: React.FC = () => {
         }
     }, []);
 
-    function determineWidth() {
+    const onFormValueChange = async (formData: FormData): Promise<void> => {
+        setPayload(formData)
+    }
+
+	function determineWidth() {
         if(config.leftPaneWidth && config.leftPaneWidth.includes('%')) {
             return '100%'
         }
@@ -235,7 +210,6 @@ const SSIInformationRequestPage: React.FC = () => {
                     }
                 </div>
             </NonMobile>
-
             <div style={{
                 display: 'flex',
                 flexGrow: 1,
@@ -281,135 +255,10 @@ const SSIInformationRequestPage: React.FC = () => {
                         </text>
                     </div>
                     <div/>
-                  {config.form && (
-                      <div
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            textAlign: 'left',
-                            width: '327px',
-                            paddingTop: '48px',
-                            paddingBottom: '48px',
-                            gap: 23,
-                          }}
-                      >
-                        {config.form.map((row) => {
-                          const fieldWidth = 100 / row.length;
-                          return (
-                              <div
-                                  style={{
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    gap: 12,
-                                  }}
-                              >
-                                {row.map((field) => {
-                                    const defaultFieldValue = evalDefaultValue(field, payload)
-                                    const fieldReadOnly = defaultFieldValue !== undefined && !!state?.data?.vp_token
-                                    return (
-                                        <div
-                                            key={field.id}
-                                            style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                gap: 6,
-                                                width: `${fieldWidth}%`
-                                            }}
-                                        >
-                                            <label className="poppins-normal-10" htmlFor={field.id}>
-                                                {t(field.title)}
-                                            </label>
-                                            <input
-                                                id={field.id}
-                                                type={field.type === 'date' ? 'date' : field.type || 'text'}
-                                                style={{width: '100%'}}
-                                                readOnly={fieldReadOnly}
-                                                className={`${fieldReadOnly ? '' : inputStyle.enabled}`}
-                                                defaultValue={defaultFieldValue}
-                                                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                                                    setPayload((prevPayload) => ({
-                                                        ...prevPayload,
-                                                        [field.key]: event.target.value,
-                                                    }))
-                                                }
-                                            />
-                                        </div>
-                                    )
-                                })}
-                              </div>
-                          );
-                        })}
-                      </div>
-                  )}
-
-                  {!config.form && <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    textAlign: 'left',
-                    width: '327px',
-                    height: isManualIdentification ? '40%' : '186px',
-                    gap: 23
-                  }}>
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 6
-                    }}>
-                      <label className='poppins-normal-10' htmlFor="Voornaam">First name</label>
-                      <input
-                          id="Voornaam"
-                          type="text"
-                          placeholder='First name'
-                          readOnly={!!payload.Voornaam && !!state?.data?.vp_token}
-                          className={`${(!!payload.Voornaam && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                          defaultValue={payload.Voornaam}
-                          onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
-                            ...payload,
-                            Voornaam: event.target.value
-                          })}
-                      />
-                    </div>
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 6
-                    }}>
-                      <label className='poppins-normal-10' htmlFor="Achternaam">Last name</label>
-                      <input
-                          id="Achternaam"
-                          type="text"
-                          placeholder='Last name'
-                          readOnly={!!payload?.Achternaam && !!state?.data?.vp_token}
-                          className={`${(!!payload.Achternaam && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                          defaultValue={payload.Achternaam}
-                          onChange={(event: ChangeEvent<HTMLInputElement>) => setPayload({
-                            ...payload,
-                            Achternaam: event.target.value
-                          })}
-                      />
-                    </div>
-                    <div style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 6
-                    }}>
-                      <label className='poppins-normal-10' htmlFor="email">Email address</label>
-                      <input
-                          style={{...(isInvalidEmail && {borderColor: 'red'})}}
-                          id="email"
-                          type="email"
-                          placeholder='Email address'
-                          readOnly={!!payload?.emailAddress && !!state?.data?.vp_token}
-                          className={`${(!!payload.emailAddress && !!state?.data?.vp_token) ? '' : inputStyle.enabled}`}
-                          defaultValue={payload.emailAddress}
-                          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                            setIsInvalidEmail(false)
-                            setPayload({...payload, emailAddress: event.target.value})
-                          }}
-                          onBlur={onEmailValidation}
-                      />
-                    </div>
-                  </div>}
+                    <Form
+                        form={config.form.map((row: DataFormRow) => row.map((field: DataFormElement) => ({ ...field, readonly: field.defaultValue !== undefined && !!state?.data?.vp_token, defaultValue: payload[field.id] as string })))}
+                        onChange={onFormValueChange}
+                    />
                     <div>
                         <SSIPrimaryButton
                             caption={isManualIdentification

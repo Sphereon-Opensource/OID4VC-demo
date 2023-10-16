@@ -81,29 +81,45 @@
       "form": [
         [
           {
-            "id": "ssi_information_request_page_form_first_name",
+            "id": "firstName",
             "key": "firstName",
-            "title": "ssi_information_request_page_form_first_name_title",
-            "type": "string",
+            "label": "ssi_information_request_page_form_name_title",
+            "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_first_name",
+            "id": "lastName",
             "key": "lastName",
-            "title": "ssi_information_request_page_form_last_name_title",
-            "type": "string",
+            "label": "ssi_information_request_page_form_last_name_title",
+            "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_email",
-            "key": "email",
-            "title": "ssi_information_request_page_form_email_title",
-            "type": "string",
-            "required": true
+            "id": "emailAddress",
+            "key": "emailAddress",
+            "label": "ssi_information_request_page_form_email_title",
+            "type": "text",
+            "required": true,
+            "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        ],
+        [
+          {
+            "id": "termsAndConditions",
+            "key": "termsAndConditions",
+            "label": "ssi_information_request_page_form_terms_and_conditions_label",
+            "labelUrl": "https://google.com",
+            "type": "checkbox",
+            "required": true,
+            "display": {
+              "checkboxBorderColor": "#202776",
+              "checkboxLabelColor": "#424242",
+              "checkboxSelectedColor": "#202776"
+            }
           }
         ]
       ]
