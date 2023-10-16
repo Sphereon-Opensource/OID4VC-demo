@@ -2,8 +2,8 @@
   "general": {
     "credentialName": "FMA Guest",
     "issueCredentialType": "fmdm2023",
-    "agentVpBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
-    "agentVciBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
     "verifierUrl": "https://marketplace.future-mobility-alliance.org",
     "verifierUrlCaption": "FMDM marketplace",
     "downloadUrl": "https://ssi.future-mobility-alliance.org/demo/issuer/#/download"

@@ -2,8 +2,8 @@
   "general": {
     "credentialName": "Triall Guest",
     "issueCredentialType": "triall2023",
-    "agentVpBaseUrl": "https://ssi.triall.io/demo/issuer",
-    "agentVciBaseUrl": "https://ssi.triall.io/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
     "verifierUrl": "https://cix.triall.io",
     "verifierUrlCaption": "Clinical Insights Exchange",
     "downloadUrl": "https://ssi.triall.io/demo/issuer/#/download"

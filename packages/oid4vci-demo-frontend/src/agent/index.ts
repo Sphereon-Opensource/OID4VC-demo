@@ -15,20 +15,21 @@ import {getCurrentEcosystemGeneralConfig} from "../ecosystem-config"
 
 const generalConfig = getCurrentEcosystemGeneralConfig()
 
-const authentication = {
+const buildAuthentication = {
   enabled: generalConfig.authenticationEnabled === true || generalConfig.authenticationStaticToken !== undefined,
   staticBearerToken: generalConfig.authenticationStaticToken ?? ''
 }
+
 const agent = createAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient & IOID4VCIRestClient>({
   plugins: [
     new QrCodeProvider(),
     new SIOPv2OID4VPRPRestClient({
-      baseUrl: generalConfig.agentVpBaseUrl ?? 'https://ssi.sphereon.com/agent',
-      authentication: authentication
-    }),
-    new OID4VCIRestClient({
-      baseUrl: generalConfig.agentVciBaseUrl ?? 'https://ssi.sphereon.com/issuer',
-      authentication: authentication
+                baseUrl: generalConfig.oid4vpAgentBaseUrl ?? 'https://ssi.sphereon.com/agent',
+                authentication: buildAuthentication(generalConfig)
+            }),
+            new OID4VCIRestClient({
+                baseUrl: generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer',
+                authentication: buildAuthentication(generalConfig)
     }),
   ]
 })
