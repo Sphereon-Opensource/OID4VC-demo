@@ -514,6 +514,9 @@ importers:
       '@types/underscore.string':
         specifier: ^0.0.38
         version: 0.0.38
+      process:
+        specifier: ^0.11.10
+        version: 0.11.10
       typescript:
         specifier: 4.9.5
         version: 4.9.5

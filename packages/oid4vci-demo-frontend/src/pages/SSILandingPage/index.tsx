@@ -1,12 +1,12 @@
 import React from 'react'
 import {NavigateOptions} from 'react-router-dom'
-import SSICardView from '../../components/SSICardView'
 import {ButtonType} from '../../types'
 import {useTranslation} from 'react-i18next'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {SSILandingPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem"
+import SSICardView from "../../components/SSICardView"
 
 const SSILandingPage: React.FC = () => {
     const {t} = useTranslation()

@@ -13,7 +13,7 @@ import {Pagination} from 'swiper'
 import {useFlowRouter} from "../../router/flow-router"
 import {SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem"
-import SSICardView from "../../components/SSICardView"
+import {SSICredentialCardView} from "@sphereon/ui-components.ssi-react"
 
 const short = require('short-uuid');
 
