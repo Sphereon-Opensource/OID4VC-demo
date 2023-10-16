@@ -33,7 +33,7 @@ const SSISelectCredentialPage: React.FC = () => {
 
     useEffect((): void => {
 
-        MetadataClient.retrieveAllMetadata(generalConfig.agentVciBaseUrl ?? 'https://ssi.sphereon.com/issuer')
+        MetadataClient.retrieveAllMetadata(generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer')
             .then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
 

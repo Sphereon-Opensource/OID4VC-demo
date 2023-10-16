@@ -28,11 +28,11 @@ const getOrCreateAgent = (ecoSystemId: string, generalConfig: EcosystemGeneralCo
         plugins: [
             new QrCodeProvider(),
             new SIOPv2OID4VPRPRestClient({
-                baseUrl: generalConfig.agentVpBaseUrl ?? 'https://ssi.sphereon.com/agent',
+                baseUrl: generalConfig.oid4vpAgentBaseUrl ?? 'https://ssi.sphereon.com/agent',
                 authentication: buildAuthentication(generalConfig)
             }),
             new OID4VCIRestClient({
-                baseUrl: generalConfig.agentVciBaseUrl ?? 'https://ssi.sphereon.com/issuer',
+                baseUrl: generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer',
                 authentication: buildAuthentication(generalConfig)
             }),
         ]
