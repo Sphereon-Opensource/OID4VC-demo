@@ -153,7 +153,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       this.props.ecosystem.getAgent().siopClientGetAuthStatus({
         correlationId: authRequestURIResponse.correlationId,
         definitionId: authRequestURIResponse.definitionId
-      }).then((response: AuthStatusResponse): Promise<void> => {
+      }).then((response: AuthStatusResponse) => {
         if (response.status === AuthorizationResponseStateStatus.VERIFIED) {
           clearInterval(this.authStatusHandle)
           this.props.onSignInComplete(response.payload!)

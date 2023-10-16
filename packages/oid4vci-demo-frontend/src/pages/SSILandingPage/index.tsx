@@ -5,7 +5,7 @@ import {ButtonType} from '../../types'
 import {useTranslation} from 'react-i18next'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
-import {EcosystemGeneralConfig, SSILandingPageConfig} from "../../ecosystem/ecosystem-config"
+import {SSILandingPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 
 const SSILandingPage: React.FC = () => {

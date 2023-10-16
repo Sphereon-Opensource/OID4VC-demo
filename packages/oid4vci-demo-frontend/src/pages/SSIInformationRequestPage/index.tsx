@@ -9,20 +9,15 @@ import {
     W3CVerifiablePresentation
 } from "@sphereon/ssi-types"
 import '../../css/typography.css'
-import {
-    DataFormElement,
-    DataFormRow,
-    getCurrentEcosystemGeneralConfig,
-    SSIInformationRequestPageConfig
-} from "../../ecosystem-config"
+import {DataFormElement, DataFormRow, SSIInformationRequestPageConfig} from "../../ecosystem/ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useLocation} from "react-router-dom"
 import {Buffer} from 'buffer'
 import {useMediaQuery} from "react-responsive"
 import {NonMobile} from "../../index"
 import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils"
-import Form from "../../components/Form";
-import { FormData } from "../../types"
+import Form from "../../components/Form"
+import {FormData} from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 
@@ -59,10 +54,12 @@ const SSIInformationRequestPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig();
     const location = useLocation();
+    const credentialName = useEcosystem().getGeneralConfig().credentialName
     const state: State | undefined = location.state;
     const {t} = useTranslation()
-    const [payload, setPayload] = useState<FormData>(getInitialState(config.form))
+    const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+
 
     // Manually is only when all of them need to be filled by the user
     // None of them means that our wallet is used
@@ -257,7 +254,7 @@ const SSIInformationRequestPage: React.FC = () => {
                     </div>
                     <div/>
                     <Form
-                        form={config.form.map((row: DataFormRow) => row.map((field: DataFormElement) => ({ ...field, readonly: field.defaultValue !== undefined && !!state?.data?.vp_token, defaultValue: payload[field.id] as string })))}
+                        form={pageConfig.form.map((row: DataFormRow) => row.map((field: DataFormElement) => ({ ...field, readonly: field.defaultValue !== undefined && !!state?.data?.vp_token, defaultValue: payload[field.id] as string })))}
                         onChange={onFormValueChange}
                     />
                     <div>

@@ -1,7 +1,7 @@
 import React, {FC, ReactElement, ReactNode, useState} from 'react';
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react';
 import {useTranslation} from 'react-i18next';
-import {DataFormElement, DataFormRow} from '../../ecosystem-config';
+import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config';
 import {generateRandomIBAN} from '../../utils/iban';
 import {transformFormConfigToEmptyObject} from '../../utils/ObjectUtils';
 import InputField from '../InputField';

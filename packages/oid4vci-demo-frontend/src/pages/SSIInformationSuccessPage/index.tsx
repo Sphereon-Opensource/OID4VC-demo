@@ -8,7 +8,7 @@ import SSIPrimaryButton from '../../components/SSIPrimaryButton'
 import {NonMobile} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
-import {EcosystemGeneralConfig, SSIInformationSharedSuccessPageConfig} from "../../ecosystem/ecosystem-config"
+import {SSIInformationSharedSuccessPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 
 type State = {

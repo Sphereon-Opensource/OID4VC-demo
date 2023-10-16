@@ -2,7 +2,6 @@ import React, {ReactElement, useEffect, useState} from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import './index.module.css'
-import {SSICredentialCardView} from '@sphereon/ui-components.ssi-react'
 import {MetadataClient} from '@sphereon/oid4vci-client'
 import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadataResult} from '@sphereon/oid4vci-common'
 import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store'
@@ -12,8 +11,9 @@ import {useMediaQuery} from "react-responsive"
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {Pagination} from 'swiper'
 import {useFlowRouter} from "../../router/flow-router"
-import {EcosystemGeneralConfig, SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
+import {SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem"
+import SSICardView from "../../components/SSICardView"
 
 const short = require('short-uuid');
 
