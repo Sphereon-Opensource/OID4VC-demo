@@ -215,7 +215,7 @@
         "id": "banqup",
         "types": [
           "VerifiableCredential",
-          "Account"
+          "VerifiedID"
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
@@ -237,6 +237,13 @@
             "Account"
           ],
           "template_path": "Account.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "VerifiedID"
+          ],
+          "template_path": "Identity.hbs",
           "format": "jwt_vc_json"
         }
       ]
