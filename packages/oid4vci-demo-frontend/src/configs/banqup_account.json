@@ -83,7 +83,7 @@
           {
             "id": "ssi_information_request_page_form_first_name",
             "key": "firstName",
-            "label": "ssi_information_request_page_form_first_name_title",
+            "label": "ssi_information_request_page_form_name_title",
             "type": "text",
             "required": true
           }
@@ -100,7 +100,7 @@
         [
           {
             "id": "ssi_information_request_page_form_email",
-            "key": "email",
+            "key": "emailAddress",
             "label": "ssi_information_request_page_form_email_title",
             "type": "text",
             "required": true,
@@ -112,12 +112,14 @@
             "id": "termsAndConditions",
             "key": "termsAndConditions",
             "label": "ssi_information_request_page_form_terms_and_conditions_label",
-            "labelUrl": {
-              "text": "ssi_information_request_page_form_terms_and_conditions_url_text",
-              "url": "https://google.com"
-            },
+            "labelUrl": "https://google.com",
             "type": "checkbox",
-            "required": true
+            "required": true,
+            "display": {
+              "checkboxBorderColor": "#202776",
+              "checkboxLabelColor": "#424242",
+              "checkboxSelectedColor": "#202776"
+            }
           }
         ]
       ]
