@@ -15,8 +15,8 @@ const agentByEcosystemId: AgentMap = {}
 
 
 const buildAuthentication = (generalConfig: EcosystemGeneralConfig): Siopv2RestClientAuthenticationOpts => ({
-    enabled: generalConfig.authenticationEnabled === true || generalConfig.authenticationStaticToken !== undefined,
-    staticBearerToken: generalConfig.authenticationStaticToken ?? ''
+    enabled: !!generalConfig.authenticationEnabled || generalConfig.authenticationStaticToken !== undefined,
+    ...(generalConfig.authenticationStaticToken && { staticBearerToken: generalConfig.authenticationStaticToken })
 })
 
 const getOrCreateAgent = (ecoSystemId: string, generalConfig: EcosystemGeneralConfig): VCIAgentType => {
