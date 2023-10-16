@@ -11,24 +11,25 @@ import {
   IOID4VCIRestClient,
   OID4VCIRestClient
 } from '@sphereon/ssi-sdk.oid4vci-issuer-rest-client'
+import {getCurrentEcosystemGeneralConfig} from "../ecosystem-config"
+
+const generalConfig = getCurrentEcosystemGeneralConfig()
+
+const authentication = {
+  enabled: !!generalConfig.authenticationEnabled || !!generalConfig.authenticationStaticToken,
+  ...(generalConfig.authenticationStaticToken && { staticBearerToken: generalConfig.authenticationStaticToken })
+}
 
 const agent = createAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient & IOID4VCIRestClient>({
   plugins: [
     new QrCodeProvider(),
     new SIOPv2OID4VPRPRestClient({
-      baseUrl: process.env.REACT_APP_OID4VP_AGENT_BASE_URL ?? 'https://ssi.sphereon.com/agent',
-      definitionId: process.env.REACT_APP_OID4VP_PRESENTATION_DEF_ID ?? 'sphereonWalletIdentity',
-      authentication: {
-        enabled: process.env.REACT_APP_AUTHENTICATION_ENABLED === "true" || process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN !== undefined,
-        staticBearerToken: process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN
-      }
+      baseUrl: generalConfig.oid4vpAgentBaseUrl ?? 'https://ssi.sphereon.com/agent',
+      authentication: authentication
     }),
     new OID4VCIRestClient({
-      baseUrl: process.env.REACT_APP_OID4VCI_AGENT_BASE_URL ?? 'https://ssi.sphereon.com/issuer',
-      authentication: {
-        enabled: process.env.REACT_APP_AUTHENTICATION_ENABLED === "true" || process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN !== undefined,
-        staticBearerToken: process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN
-      }
+      baseUrl: generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer',
+      authentication: authentication
     }),
   ]
 })

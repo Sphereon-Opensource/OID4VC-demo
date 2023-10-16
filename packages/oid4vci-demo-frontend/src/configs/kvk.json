@@ -2,7 +2,8 @@
   "general": {
     "credentialName": "KvK Inschrijving",
     "issueCredentialType": "KvkInschrijving",
-    "baseUrl": "https://kvk.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "https://kvk.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://kvk.demo.sphereon.com/agent",
     "verifierUrl": "https://kvk.demo.sphereon.com/verifier",
     "verifierUrlCaption": "KvK Inschrijving",
     "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
@@ -240,6 +241,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "knb-kvk",
       "steps": [
         {
           "id": "download",

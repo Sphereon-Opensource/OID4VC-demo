@@ -121,7 +121,7 @@ const SSIDownloadPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={t('download_app_right_pane_button_caption')}
                             style={{width: '327px'}}
-                            onClick={async () => window.location.href = generalConfig.baseUrl ?? 'https://sphereon.com'}
+                            onClick={async () => window.location.href = generalConfig.downloadUrl ?? 'https://sphereon.com'}
                         />
                     </div>
                 </div>
