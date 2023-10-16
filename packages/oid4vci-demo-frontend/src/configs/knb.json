@@ -2,8 +2,6 @@
   "general": {
     "credentialName": "Sphereon Guest",
     "issueCredentialType": "GuestCredential",
-    "agentVpBaseUrl": "https://knb.demo.sphereon.com/agent",
-    "agentVciBaseUrl": "https://knb.demo.sphereon.com/agent",
     "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
     "verifierUrlCaption": "Sphereon demo",
     "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
