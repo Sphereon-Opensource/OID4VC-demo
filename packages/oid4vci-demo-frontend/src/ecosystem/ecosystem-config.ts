@@ -1,5 +1,5 @@
 import {ImageProperties} from "../types"
-import {CSSProperties} from "react"
+import {CSSProperties, HTMLInputTypeAttribute} from "react"
 import {IProps} from "../components/SSISecondaryButton"
 
 
@@ -94,7 +94,7 @@ export interface SSIInformationRequestPageConfig extends PageConfig {
     sharing_data_right_pane_paragraph?: string
     primaryButtonResourceId?: string
     primaryButtonManualResourceId?: string
-    form?: DataFormRow[]
+    form: DataFormRow[]
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string,
@@ -108,15 +108,21 @@ export interface SSIInformationRequestPageConfig extends PageConfig {
 export type DataFormRow = DataFormElement[];
 
 export interface DataFormElement {
-    id: string;
-    title: string;
-    key: string;
-    type: DataFormInputType;
-    required: boolean;
+    id: string
+    key: string
+    type: HTMLInputTypeAttribute
+    required?: boolean
     defaultValue?: string
+    label?: string
+    labelUrl?: string
+    readonly?: boolean
+    customValidation?: string
+    display?: {
+        checkboxBorderColor?: string
+        checkboxLabelColor?: string
+        checkboxSelectedColor?: string
+    }
 }
-
-type DataFormInputType = 'string' | 'date';
 
 export interface SSIDownloadPageConfig extends PageConfig {
     rightPane: {

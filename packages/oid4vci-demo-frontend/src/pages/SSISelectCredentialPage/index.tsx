@@ -2,7 +2,7 @@ import React, {ReactElement, useEffect, useState} from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import './index.module.css'
-import {SSICardView} from '@sphereon/ui-components.ssi-react'
+import {SSICredentialCardView} from '@sphereon/ui-components.ssi-react'
 import {MetadataClient} from '@sphereon/oid4vci-client'
 import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadataResult} from '@sphereon/oid4vci-common'
 import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store'
@@ -74,7 +74,7 @@ const SSISelectCredentialPage: React.FC = () => {
                             style={{cursor: 'pointer', width: '325px'}}
                             onClick={() => onSelectCredential(key)}
                         >
-                            <SSICardView
+                            <SSICredentialCardView
                                 header={{
                                     credentialTitle: value[0].alias,
                                     credentialSubtitle: value[0].description,

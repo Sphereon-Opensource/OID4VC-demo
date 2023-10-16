@@ -1,5 +1,5 @@
 import React from 'react'
-import {SSIMiniCardView} from '@sphereon/ui-components.ssi-react'
+import {SSICredentialMiniCardView} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {Mobile, NonMobile} from "../../index"
 import {useMediaQuery} from "react-responsive"
@@ -97,7 +97,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                                     alignContent: 'space-between',
                                     cursor: 'pointer'
                                 }}>
-                                    <SSIMiniCardView
+                                    <SSICredentialMiniCardView
                                         backgroundImage={{uri: value.backgroundImage}}
                                         logo={{
                                             uri: value.logo?.src,
@@ -124,7 +124,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                                     justifyContent: 'center',
                                     cursor: 'pointer'
                                 }}>
-                                    <SSIMiniCardView
+                                    <SSICredentialMiniCardView
                                         style={{width: 140, height: 90}}
                                         backgroundImage={{
                                             uri: value.backgroundImage
