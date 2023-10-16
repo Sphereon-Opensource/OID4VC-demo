@@ -3,7 +3,6 @@ import {
     ComponentConfig,
     EcosystemGeneralConfig,
     getEcosystemRootConfig,
-    getEcosystemRoutes,
     PageConfig,
     VCIConfig,
     VCIConfigComponents,

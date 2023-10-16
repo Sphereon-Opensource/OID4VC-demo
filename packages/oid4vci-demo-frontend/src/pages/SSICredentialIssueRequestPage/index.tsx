@@ -24,7 +24,6 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const generalConfig = ecosystem.getGeneralConfig()
-    const buttonConfig = ecosystem.getComponentConfig<SSISecondaryButtonConfig>('SSISecondaryButton')
     const isNarrowScreen = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state;
     const [qrCode, setQrCode] = useState<ReactElement>();

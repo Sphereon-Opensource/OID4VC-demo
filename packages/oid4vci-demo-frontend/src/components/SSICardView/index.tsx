@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
-import {ButtonType, IButton, ImageProperties} from '../../types';
-import SSIPrimaryButton from '../SSIPrimaryButton';
-import SSISecondaryButton from '../SSISecondaryButton';
-import {NonMobile} from "../../index";
-import {useMediaQuery} from "react-responsive";
+import React from 'react'
+import {ButtonType, IButton, ImageProperties} from '../../types'
+import SSIPrimaryButton from '../SSIPrimaryButton'
+import SSISecondaryButton from '../SSISecondaryButton'
+import {NonMobile} from "../../index"
+import {useMediaQuery} from "react-responsive"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {SSICardViewConfig} from "../../ecosystem/ecosystem-config"
 
