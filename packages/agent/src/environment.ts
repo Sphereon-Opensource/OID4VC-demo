@@ -7,7 +7,7 @@ import {
     IIssuerOptsImportArgs,
     IMetadataImportArgs
 } from "@sphereon/ssi-sdk.oid4vci-issuer-store";
-import * as process from "process"
+
 
 await dotenvConfig()
 

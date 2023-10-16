@@ -7,7 +7,6 @@ import {
     AuthStatusResponse,
     GenerateAuthRequestURIResponse
 } from "@sphereon/ssi-sdk.siopv2-oid4vp-common"
-import * as process from "process"
 
 export type AuthenticationQRProps = {
     onAuthRequestRetrieved: () => void

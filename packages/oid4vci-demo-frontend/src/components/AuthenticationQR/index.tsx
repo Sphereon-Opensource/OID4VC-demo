@@ -6,7 +6,6 @@ import {CreateElementArgs, QRType, URIData, ValueResult} from '@sphereon/ssi-sdk
 import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
 import {NonMobileOS} from "../../index"
-import * as process from "process"
 import {Ecosystem} from "../../ecosystem/ecosystem"
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
