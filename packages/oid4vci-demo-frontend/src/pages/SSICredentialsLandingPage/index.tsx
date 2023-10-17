@@ -22,7 +22,6 @@ const SSICredentialsLandingPage: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'space-around',
             alignContent: 'center',
-
             flex: 1,
             height: '100vh',
         }}>
@@ -41,8 +40,8 @@ const SSICredentialsLandingPage: React.FC = () => {
                         <img
                             src={pageConfig.logo.src}
                             alt={pageConfig.logo.alt}
-                            width={300}
-                            height={56}
+                            width={pageConfig.logo.width}
+                            height={pageConfig.logo.height}
                         />
                     }
                 </div>
@@ -99,6 +98,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                                 }}>
                                     <SSICredentialMiniCardView
                                         backgroundImage={{uri: value.backgroundImage}}
+                                        backgroundColor={value.backgroundColor}
                                         logo={{
                                             uri: value.logo?.src,
                                             ...((value.logo?.height && value.logo?.width) && {
@@ -106,13 +106,13 @@ const SSICredentialsLandingPage: React.FC = () => {
                                                     height: value.logo?.height,
                                                     width: value.logo?.width,
                                                 }
-                                            })
-
+                                            }),
+                                            // maxWidth: 45
                                         }}
                                     />
                                     <div style={{width: 200, paddingLeft: '5px'}}>
-                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span><br/>
-                                        <span style={{fontSize: '10px'}}>{value.description}</span>
+                                        <span style={{fontSize: '10px'}}>{value.description}</span><br/>
+                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span>
                                     </div>
                                 </div>
                             </Mobile>
@@ -126,6 +126,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                                 }}>
                                     <SSICredentialMiniCardView
                                         style={{width: 140, height: 90}}
+                                        backgroundColor={value.backgroundColor}
                                         backgroundImage={{
                                             uri: value.backgroundImage
                                         }}
@@ -136,17 +137,18 @@ const SSICredentialsLandingPage: React.FC = () => {
                                                     height: value.logo?.height,
                                                     width: value.logo?.width,
                                                 }
-                                            })
-
+                                            }),
+                                            // maxWidth: 110
                                         }}
                                     />
                                     <div style={{width: '450px', textAlign: 'left', paddingLeft: '3%'}}>
+                                        <span style={{fontSize: '18px', color: '#303030',}}>{value.description}</span><br/>
                                         <span style={{
                                             fontSize: '30px',
                                             fontWeight: '500',
                                             color: '#303030'
-                                        }}>{value.name}</span><br/>
-                                        <span style={{fontSize: '18px', color: '#303030',}}>{value.description}</span>
+                                        }}>{value.name}</span>
+
                                     </div>
                                 </div>
                             </NonMobile>
