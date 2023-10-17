@@ -65,7 +65,7 @@ import {
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
-import * as process from "process"
+
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)

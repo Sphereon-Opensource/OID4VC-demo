@@ -4,13 +4,12 @@ import style from '../../components/Text/Text.module.css'
 import {Trans, useTranslation} from "react-i18next"
 import {useLocation} from 'react-router-dom'
 import SSIPrimaryButton from '../../components/SSIPrimaryButton'
-import {
-    EcosystemGeneralConfig,
-    getCurrentEcosystemGeneralConfig, SSIInformationSharedSuccessPageConfig
-} from "../../ecosystem-config"
+
 import {NonMobile} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
+import {SSIInformationSharedSuccessPageConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
 
 type State = {
     Voornaam: string
@@ -23,11 +22,9 @@ const SSIInformationSuccessPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
     const location = useLocation();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-
     const state: State | undefined = location.state;
-
-    const config= flowRouter.getPageConfig()
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
+    const pageConfig= flowRouter.getPageConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
 
     return (
@@ -40,7 +37,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                             flex: 1,
                             display: 'flex',
                             flexDirection: 'column',
-                            background: `url(${config.photoLeft})`,
+                            background: `url(${pageConfig.photoLeft})`,
                             backgroundSize: 'cover',
                         }}
                     >
@@ -78,7 +75,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 textAlign: 'center'
                             }}
                             title={t('sharing_data_success_right_pane_title', {Voornaam: state?.Voornaam}).split('\n')}
-                            lines={t(`${config.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
+                            lines={t(`${pageConfig.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
                         />
                     </Trans>
                     <div style={{
@@ -86,7 +83,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                         height: '397px',
                         flexGrow: 1
                     }}>
-                        <img src={config.photoRight} alt="success"/>
+                        <img src={pageConfig.photoRight} alt="success"/>
                     </div>
                     <div style={{
                         width: '100%',
@@ -106,7 +103,7 @@ const SSIInformationSuccessPage: React.FC = () => {
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
-    const config = flowRouter.getPageConfig()
+    const pageConfig = flowRouter.getPageConfig()
     const location = useLocation();
     const state = location.state;
     const {t} = useTranslation()
@@ -114,20 +111,20 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
         return (<NonMobile>
                     <div id={"photo"} style={{
                         display: 'flex',
-                        width: config.leftPaneWidth ?? '60%',
+                        width: pageConfig.leftPaneWidth ?? '60%',
                         height: '100%',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        ...((config.photoLeft || config.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${config.photoLeftManual}` : `${config.photoLeft}`}) 0% 0% / cover`}),
-                        ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
-                        ...(config.logo && { justifyContent: 'center' })
+                        ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),
+                        ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                        ...(pageConfig.logo && { justifyContent: 'center' })
                     }}>
-                        { config.logo &&
+                        { pageConfig.logo &&
                             <img
-                                src={config.logo.src}
-                                alt={config.logo.alt}
-                                width={config.logo.width}
-                                height={config.logo.height}
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
                             />
                         }
                     </div>

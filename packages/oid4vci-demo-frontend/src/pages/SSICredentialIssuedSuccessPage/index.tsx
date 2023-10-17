@@ -2,15 +2,17 @@ import React from "react"
 import {Text} from "../../components/Text"
 import {useTranslation} from "react-i18next"
 import SSIPrimaryButton from '../../components/SSIPrimaryButton'
-import {getCurrentEcosystemGeneralConfig, SSICredentialIssuedSuccessPageConfig} from "../../ecosystem-config"
 import {NonMobile} from "../../index"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {EcosystemGeneralConfig, SSICredentialIssuedSuccessPageConfig} from "../../ecosystem/ecosystem-config"
 
 const SSICredentialIssuedSuccessPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSICredentialIssuedSuccessPageConfig>()
-    const config = flowRouter.getPageConfig()
-    const generalConfig = getCurrentEcosystemGeneralConfig()
+    const pageConfig = flowRouter.getPageConfig()
+    const ecosystem = useEcosystem()
+    const generalConfig: EcosystemGeneralConfig = ecosystem.getGeneralConfig();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
 
@@ -19,9 +21,9 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: config.leftPaneWidth ?? '60%',
+                    width: pageConfig.leftPaneWidth ?? '60%',
                     height: '100%',
-                    background: `url(${config.photoLeft})`,
+                    background: `url(${pageConfig.photoLeft})`,
                     backgroundSize: 'cover',
                     flexDirection: 'column'
                 }}>
@@ -57,14 +59,14 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                         height: '397px',
                         flexGrow: 1
                     }}>
-                        <img src={config.photoRight} alt="success"/>
+                        <img src={pageConfig.photoRight} alt="success"/>
                     </div>
                     <div style={{display: 'flex',flexDirection: 'row'}}>
                         <SSIPrimaryButton
                             caption={t('credentials_success_right_pane_button_caption', {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
                             // style={{width: '250px'}}
                             onClick={async () => {
-                                config.rightPaneButtonStepId && await flowRouter.goToStep(config.rightPaneButtonStepId)
+                                pageConfig.rightPaneButtonStepId && await flowRouter.goToStep(pageConfig.rightPaneButtonStepId)
                             }}
                         />
                     </div>
