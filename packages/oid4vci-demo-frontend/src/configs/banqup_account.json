@@ -1,10 +1,10 @@
 {
   "general": {
-    "credentialName": "Bank account credential",
-    "issueCredentialType": "BankAccount",
+    "credentialName": "Account credential",
+    "issueCredentialType": "Account",
     "baseUrl": "http://192.168.2.90:5000/bank",
     "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Bank credential",
+    "verifierUrlCaption": "Account credential",
     "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
@@ -83,14 +83,14 @@
           {
             "id": "ssi_information_request_page_form_first_name",
             "key": "firstName",
-            "label": "ssi_information_request_page_form_name_label",
+            "label": "ssi_information_request_page_form_first_name_label",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_first_name",
+            "id": "ssi_information_request_page_form_last_name",
             "key": "lastName",
             "label": "ssi_information_request_page_form_last_name_label",
             "type": "text",

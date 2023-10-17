@@ -114,7 +114,7 @@
       {
         "display": [
           {
-            "name": "Verified Account Credential",
+            "name": "Verified Identity Credential",
             "background_color": "#322577",
             "logo": {
               "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
@@ -123,7 +123,7 @@
           },
           {
             "locale": "en-US",
-            "name": "Verified Account Credential",
+            "name": "Verified Identity Credential",
             "background_color": "#322577",
             "logo": {
               "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
@@ -132,7 +132,7 @@
           },
           {
             "locale": "nl-NL",
-            "name": "Geverifieerd Account Credential",
+            "name": "Geverifieerd Identity Credential",
             "background_color": "#322577",
             "logo": {
               "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
