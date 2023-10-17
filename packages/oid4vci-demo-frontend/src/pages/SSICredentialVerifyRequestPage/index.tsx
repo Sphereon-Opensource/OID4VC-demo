@@ -32,7 +32,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     }
 
   function determineWidth() {
-    if(config.leftPaneWidth && config.leftPaneWidth.includes('%')) {
+    if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
       return '100%'
     }
     return isTabletOrMobile ? '100%' : '40%'
