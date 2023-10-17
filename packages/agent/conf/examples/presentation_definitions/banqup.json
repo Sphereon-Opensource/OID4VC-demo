@@ -3,22 +3,22 @@
   "purpose": "We hebben informatie nodig van u",
   "input_descriptors": [
     {
-      "id": "bbbbbbb-0234-4f35-9d21-251668a60950",
-      "name": "Verificatie notaris",
-      "purpose": "We hebben informatie verstrekt door uw notaris nodig",
+      "id": "628123ed-a16d-4716-aaee-67734360777e",
+      "name": "Bankrekening",
+      "purpose": "We hebben het bankrekening credential van u nodig",
       "schema": [
         {
-          "uri": "NotaryCompanyVerification"
+          "uri": "Account"
         }
       ]
     },
     {
-      "id": "aaaaaaaa-0234-4f35-9d21-251668a60950",
-      "name": "KvK inschrijving",
-      "purpose": "We hebben uw KvK inschrijving nodig",
+      "id": "86431fd3-e091-455e-8eab-06940c5b0d38",
+      "name": "Identiteit",
+      "purpose": "We hebben een ID credential van u nodig",
       "schema": [
         {
-          "uri": "KvkInschrijving"
+          "uri": "Identity"
         }
       ]
     }
