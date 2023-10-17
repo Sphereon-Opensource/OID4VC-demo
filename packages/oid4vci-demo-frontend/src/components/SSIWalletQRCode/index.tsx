@@ -1,6 +1,6 @@
-import SSISecondaryButton, {IProps} from "../SSISecondaryButton";
-import React, {CSSProperties} from "react";
-import {ImageProperties} from "../../types";
+import SSISecondaryButton, {IProps} from "../SSISecondaryButton"
+import React, {CSSProperties} from "react"
+import {ImageProperties} from "../../types"
 
 export interface SSIWalletQRCodeProps {
   className?: string

@@ -1,6 +1,6 @@
-import React, {ChangeEvent, FC, HTMLInputTypeAttribute, ReactElement, useState, FocusEvent} from 'react';
-import style from './index.module.css';
-import {FormFieldValue} from '../../types';
+import React, {ChangeEvent, FC, FocusEvent, HTMLInputTypeAttribute, ReactElement, useState} from 'react'
+import style from './index.module.css'
+import {FormFieldValue} from '../../types'
 
 type InputValue = string | number | ReadonlyArray<string> | undefined
 

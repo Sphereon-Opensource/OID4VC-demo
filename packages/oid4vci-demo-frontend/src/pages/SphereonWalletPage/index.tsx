@@ -5,9 +5,8 @@ import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useMediaQuery} from "react-responsive"
 import {NonMobile} from "../../index"
 import SSIWalletQRCode from "../../components/SSIWalletQRCode"
-import {ImageProperties} from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
-import {SphereonWalletPageConfig} from "../../ecosystem-config"
+import {SphereonWalletPageConfig} from "../../ecosystem/ecosystem-config"
 
 
 const SphereonWalletPage: React.FC = () => {

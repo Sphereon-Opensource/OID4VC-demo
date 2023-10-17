@@ -2,7 +2,8 @@
   "general": {
     "credentialName": "Conference Attendee",
     "issueCredentialType": "dbc2023",
-    "baseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
     "verifierUrlCaption": "Energy SHR website",
     "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
@@ -152,6 +153,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "energySHR2023",
       "steps": [
         {
           "id": "startPage",

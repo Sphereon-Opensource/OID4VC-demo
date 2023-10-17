@@ -1,70 +1,21 @@
-import {ImageProperties} from "./types"
+import {ImageProperties} from "../types"
 import {CSSProperties, HTMLInputTypeAttribute} from "react"
-import {IProps} from "./components/SSISecondaryButton"
+import {IProps} from "../components/SSISecondaryButton"
 
-interface VCIConfig {
+
+export interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
     routes: VCIConfigRoute[]
     components: VCIConfigComponents
 }
 
-export function getCurrentEcosystemConfig(): VCIConfig {
-    const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon'
-    return require(`./configs/${ecosystem}.json`)
-}
-
-export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    return config.general
-}
-
-export function getCurrentEcosystemComponentConfig(component: string, config?: VCIConfig): ComponentConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    if (component in config.components) {
-        return config.components[component as keyof VCIConfigComponents]
-    }
-    throw new Error(`config for ${component} doesn't exist`)
-}
-
-export function hasCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): boolean {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    return stepId in config.pages;
-}
-
-export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    if (stepId in config.pages) {
-        return config.pages[stepId as keyof VCIConfigPages]
-    }
-    throw new Error(`Page config for step ${stepId} doesn't exist`)
-}
-
-export function getEcosystemRoutes(config?: VCIConfig): VCIConfigRoute[] {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    if (!config.routes) {
-        throw new Error('The routes element is missing in the ecosystem json')
-    }
-    if (config.routes.length === 0) {
-        throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
-    }
-    return config.routes
-}
 
 export interface ComponentConfig {
 }
 
 export interface PageConfig {
+    vpDefinitionId?: string
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
@@ -73,8 +24,8 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
-    enableRightPaneButton? : boolean
-    rightPaneButtonStepId? : string
+    enableRightPaneButton?: boolean
+    rightPaneButtonStepId?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
@@ -87,7 +38,7 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     leftPaneWidth?: string
     photoLeft: string
     photoRight: string
-    rightPaneButtonStepId? : string
+    rightPaneButtonStepId?: string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
@@ -110,7 +61,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
     photoRight: string
     textRight?: string
     mobile?: {
-      logo: ImageProperties
+        logo: ImageProperties
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -145,8 +96,8 @@ export interface SSIInformationRequestPageConfig extends PageConfig {
     primaryButtonManualResourceId?: string
     form: DataFormRow[]
     mobile?: {
-      logo?: ImageProperties
-      backgroundColor?: string,
+        logo?: ImageProperties
+        backgroundColor?: string,
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -223,11 +174,11 @@ export interface SphereonWalletPageConfig extends PageConfig {
             button: IProps & { style: CSSProperties }
             downloadUrl: string
         }
-        enablePrimaryButton? : boolean
-        primaryButtonResourceId? : string
-        primaryButtonStepId? : string
-        paragraphResourceId? : string
-        qrTextResourceId? : string
+        enablePrimaryButton?: boolean
+        primaryButtonResourceId?: string
+        primaryButtonStepId?: string
+        paragraphResourceId?: string
+        qrTextResourceId?: string
     }
 }
 
@@ -305,7 +256,10 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
 }
 
 export interface EcosystemGeneralConfig {
-    baseUrl?: string
+    oid4vpAgentBaseUrl?: string
+    oid4vciAgentBaseUrl?: string
+    authenticationEnabled?: boolean
+    authenticationStaticToken?: string
     verifierUrl?: string
     backCaption?: string
     verifierUrlCaption?: string
@@ -332,6 +286,7 @@ export interface VCIConfigPages {
 
 export interface VCIConfigRoute {
     id?: string
+    vpDefinitionId?: string
     steps: VCIConfigRouteStep[]
 }
 
@@ -367,3 +322,22 @@ export interface VCIConfigComponents {
     Text: SSITextConfig
 }
 
+export function getEcosystemRootConfig(ecosystemId: string): VCIConfig {
+    return require(`../configs/${ecosystemId}.json`)
+}
+
+export function assertRoutes(routes: VCIConfigRoute[]) : VCIConfigRoute[] {
+    if (!routes) {
+        throw new Error('The routes element is missing in the ecosystem json')
+    }
+    if (routes.length === 0) {
+        throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
+    }
+    return routes
+}
+
+export function getEcosystemRoutes(ecosystemId: string): VCIConfigRoute[] {
+    const config = getEcosystemRootConfig(ecosystemId)
+    assertRoutes(config.routes)
+    return config.routes
+}

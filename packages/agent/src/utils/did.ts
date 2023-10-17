@@ -24,6 +24,7 @@ import {
 } from "@sphereon/ssi-sdk-ext.key-utils";
 
 
+
 export function createDidResolver() {
     return new Resolver({
         ...getUniResolver('ethr', {

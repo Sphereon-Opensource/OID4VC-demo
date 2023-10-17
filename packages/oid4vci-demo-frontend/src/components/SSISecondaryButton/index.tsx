@@ -1,9 +1,7 @@
-import React from 'react';
-import {
-    getCurrentEcosystemComponentConfig,
-    SSIPrimaryButtonConfig,
-    SSISecondaryButtonConfig
-} from "../../ecosystem-config"
+import React from 'react'
+
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSISecondaryButtonConfig} from "../../ecosystem/ecosystem-config"
 
 export interface IProps {
     style?: React.CSSProperties,
@@ -15,7 +13,8 @@ export interface IProps {
 }
 
 const SSISecondaryButton: React.FC<IProps> = (props: IProps) => {
-    const config = getCurrentEcosystemComponentConfig('SSISecondaryButton') as SSISecondaryButtonConfig;
+    const ecosystem = useEcosystem()
+    const config = ecosystem.getComponentConfig<SSISecondaryButtonConfig>('SSISecondaryButton')
     const mainContainerStyle = config.styles.mainContainer;
     const { caption, disabled = false, onClick, style} = props
     const color = props.color ?? '#FBFBFB'

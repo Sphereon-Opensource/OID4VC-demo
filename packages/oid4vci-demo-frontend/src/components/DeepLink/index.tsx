@@ -1,7 +1,7 @@
-import React from "react";
-import style from "./DeepLink.module.css";
-import SSIPrimaryButton from "../SSIPrimaryButton";
-import {t} from "i18next";
+import React from "react"
+import style from "./DeepLink.module.css"
+import SSIPrimaryButton from "../SSIPrimaryButton"
+import {t} from "i18next"
 
 export interface DeepLinkProps {
   link: string
