@@ -106,8 +106,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                                                     height: value.logo?.height,
                                                     width: value.logo?.width,
                                                 }
-                                            }),
-                                            // maxWidth: 45
+                                            })
                                         }}
                                     />
                                     <div style={{width: 200, paddingLeft: '5px'}}>
@@ -137,8 +136,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                                                     height: value.logo?.height,
                                                     width: value.logo?.width,
                                                 }
-                                            }),
-                                            // maxWidth: 110
+                                            })
                                         }}
                                     />
                                     <div style={{width: '450px', textAlign: 'left', paddingLeft: '3%'}}>
@@ -148,7 +146,6 @@ const SSICredentialsLandingPage: React.FC = () => {
                                             fontWeight: '500',
                                             color: '#303030'
                                         }}>{value.name}</span>
-
                                     </div>
                                 </div>
                             </NonMobile>
