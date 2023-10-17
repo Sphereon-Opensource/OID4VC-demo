@@ -4,6 +4,7 @@ import {ISIOPv2OID4VPRPRestClient, SIOPv2OID4VPRPRestClient} from "@sphereon/ssi
 
 
 
+
 const agent = createAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient>({
     plugins: [
         new QrCodeProvider(),

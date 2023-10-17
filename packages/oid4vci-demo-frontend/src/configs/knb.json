@@ -2,7 +2,6 @@
   "general": {
     "credentialName": "Sphereon Guest",
     "issueCredentialType": "GuestCredential",
-    "baseUrl": "https://ssi.sphereon.com/demo/issuer",
     "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
     "verifierUrlCaption": "Sphereon demo",
     "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"

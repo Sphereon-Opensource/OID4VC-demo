@@ -1,4 +1,4 @@
-import {DataFormRow} from "../ecosystem-config";
+import {DataFormRow} from "../ecosystem/ecosystem-config"
 
 export const extractKeys = (data: DataFormRow[]): string[] => {
    return data.flatMap(item => item.map(field => field.key));

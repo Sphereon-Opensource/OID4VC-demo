@@ -3,7 +3,7 @@ import { DataStoreContactEntities, DataStoreMigrations } from '@sphereon/ssi-sdk
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
 import { KeyValueStoreEntity, kvStoreMigrations } from '@sphereon/ssi-sdk.kv-store-temp'
 import {DB_SQLITE_FILE} from "../environment";
-import * as process from "process"
+
 
 
 

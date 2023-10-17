@@ -9,21 +9,17 @@ import {
     W3CVerifiablePresentation
 } from "@sphereon/ssi-types"
 import '../../css/typography.css'
-import {
-    DataFormElement,
-    DataFormRow,
-    getCurrentEcosystemGeneralConfig,
-    SSIInformationRequestPageConfig
-} from "../../ecosystem-config"
+import {DataFormElement, DataFormRow, SSIInformationRequestPageConfig} from "../../ecosystem/ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useLocation} from "react-router-dom"
 import {Buffer} from 'buffer'
 import {useMediaQuery} from "react-responsive"
 import {NonMobile} from "../../index"
 import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils"
-import Form from "../../components/Form";
-import { FormData } from "../../types"
+import Form from "../../components/Form"
+import {FormData} from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
+import {useEcosystem} from "../../ecosystem/ecosystem"
 
 type State = {
     data?: any
@@ -56,12 +52,14 @@ function isPayloadValid(payload: FormData, form?: DataFormRow[]) {
 
 const SSIInformationRequestPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationRequestPageConfig>()
-    const config = flowRouter.getPageConfig();
+    const pageConfig = flowRouter.getPageConfig();
     const location = useLocation();
+    const credentialName = useEcosystem().getGeneralConfig().credentialName
     const state: State | undefined = location.state;
     const {t} = useTranslation()
-    const [payload, setPayload] = useState<FormData>(getInitialState(config.form))
+    const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig.form))
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+
 
     // Manually is only when all of them need to be filled by the user
     // None of them means that our wallet is used
@@ -122,9 +120,9 @@ const SSIInformationRequestPage: React.FC = () => {
                 return []
             }
             if (Array.isArray(verifiableCredential.credentialSubject)) {
-              return (verifiableCredential.credentialSubject as (ICredentialSubject & AdditionalClaims)[]).map(cs => handleCredentialSubject(cs, config.form));
+              return (verifiableCredential.credentialSubject as (ICredentialSubject & AdditionalClaims)[]).map(cs => handleCredentialSubject(cs, pageConfig.form));
             }
-            return [handleCredentialSubject(verifiableCredential.credentialSubject, config.form)]
+            return [handleCredentialSubject(verifiableCredential.credentialSubject, pageConfig.form)]
         }
 
         const handleVP = async (vp: W3CVerifiablePresentation): Promise<FormData[]> => {
@@ -173,39 +171,39 @@ const SSIInformationRequestPage: React.FC = () => {
     }
 
 	function determineWidth() {
-        if(config.leftPaneWidth && config.leftPaneWidth.includes('%')) {
+        if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
         return isTabletOrMobile ? '50%' : '40%'
     }
 
     return (
-        <div style={{display: 'flex',  height: "100vh", width: '100vw',  ...(isTabletOrMobile && { overflowX: "hidden", ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) })}}>
+        <div style={{display: 'flex',  height: "100vh", width: '100vw',  ...(isTabletOrMobile && { overflowX: "hidden", ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) })}}>
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
-                    width: config.leftPaneWidth ?? '60%',
+                    width: pageConfig.leftPaneWidth ?? '60%',
                     height: isTabletOrMobile ? '100%': '100vh',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    ...((config.photo || config.photoManual) && { background: `url(${isManualIdentification? `${config.photoManual}` : `${config.photo}`}) 0% 0% / cover`}),
-                    ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
-                    ...(config.logo && { justifyContent: 'center' })
+                    ...((pageConfig.photo || pageConfig.photoManual) && { background: `url(${isManualIdentification? `${pageConfig.photoManual}` : `${pageConfig.photo}`}) 0% 0% / cover`}),
+                    ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                    ...(pageConfig.logo && { justifyContent: 'center' })
                 }}>
-                    { config.logo &&
+                    { pageConfig.logo &&
                         <img
-                            src={config.logo.src}
-                            alt={config.logo.alt}
-                            width={config.logo.width}
-                            height={config.logo.height}
+                            src={pageConfig.logo.src}
+                            alt={pageConfig.logo.alt}
+                            width={pageConfig.logo.width}
+                            height={pageConfig.logo.height}
                         />
                     }
-                    { (config.text_top_of_image && !isManualIdentification) &&
+                    { (pageConfig.text_top_of_image && !isManualIdentification) &&
                          <text
                              className={"poppins-medium-36"}
                              style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
                          >
-                             {t(`${config.text_top_of_image}`)}
+                             {t(`${pageConfig.text_top_of_image}`)}
                          </text>
                     }
                 </div>
@@ -216,15 +214,15 @@ const SSIInformationRequestPage: React.FC = () => {
                 width: determineWidth(),
                 alignItems: 'center',
                 flexDirection: 'column',
-                ...(isTabletOrMobile && { gap: 24, ...(config.mobile?.backgroundColor && { backgroundColor: config.mobile.backgroundColor }) }),
+                ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
                 ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
-                {(isTabletOrMobile && config.mobile?.logo) &&
+                {(isTabletOrMobile && pageConfig.mobile?.logo) &&
                     <img
-                        src={config.mobile.logo.src}
-                        alt={config.mobile.logo.alt}
-                        width={config.mobile.logo?.width ?? 150}
-                        height={config.mobile.logo?.height ?? 150}
+                        src={pageConfig.mobile.logo.src}
+                        alt={pageConfig.mobile.logo.alt}
+                        width={pageConfig.mobile.logo?.width ?? 150}
+                        height={pageConfig.mobile.logo?.height ?? 150}
                     />
                 }
                 <div style={{
@@ -245,27 +243,27 @@ const SSIInformationRequestPage: React.FC = () => {
                             className={"inter-normal-24"}
                             style={{marginBottom: 12}}
                         >
-                            {t(config.sharing_data_right_pane_title)}
+                            {t(pageConfig.sharing_data_right_pane_title)}
                         </text>
                         <text
                             className={"poppins-normal-14"}
                             style={{maxWidth: 313, textAlign: 'center'}}
                         >
-                            {t(config.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName: getCurrentEcosystemGeneralConfig().credentialName})}
+                            {t(pageConfig.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName})}
                         </text>
                     </div>
                     <div/>
                     <Form
-                        form={config.form.map((row: DataFormRow) => row.map((field: DataFormElement) => ({ ...field, readonly: field.defaultValue !== undefined && !!state?.data?.vp_token, defaultValue: payload[field.id] as string })))}
+                        form={pageConfig.form.map((row: DataFormRow) => row.map((field: DataFormElement) => ({ ...field, readonly: field.defaultValue !== undefined && !!state?.data?.vp_token, defaultValue: payload[field.id] as string })))}
                         onChange={onFormValueChange}
                     />
                     <div>
                         <SSIPrimaryButton
                             caption={isManualIdentification
-                                ? t(config.primaryButtonManualResourceId ?? 'label_share')
-                                : t(config.primaryButtonResourceId ?? 'label_continue')}
+                                ? t(pageConfig.primaryButtonManualResourceId ?? 'label_share')
+                                : t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
                             style={{width: 327}}
-                            disabled={!isPayloadValid(payload, config.form)}
+                            disabled={!isPayloadValid(payload, pageConfig.form)}
                             onClick={async () => await flowRouter.nextStep({payload, isManualIdentification})}
                         />
                     </div>
