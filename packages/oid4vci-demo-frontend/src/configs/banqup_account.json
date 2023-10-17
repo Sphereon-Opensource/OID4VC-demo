@@ -3,6 +3,8 @@
     "credentialName": "Account credential",
     "issueCredentialType": "Account",
     "baseUrl": "http://192.168.2.90:5000/bank",
+    "oid4vpAgentBaseUrl": "http://192.168.1.200:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.1.200:5000",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Account credential",
     "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
@@ -81,27 +83,27 @@
       "form": [
         [
           {
-            "id": "ssi_information_request_page_form_first_name",
+            "id": "firstName",
             "key": "firstName",
-            "label": "ssi_information_request_page_form_first_name_label",
+            "label": "ssi_information_request_page_form_name_title",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_last_name",
+            "id": "lastName",
             "key": "lastName",
-            "label": "ssi_information_request_page_form_last_name_label",
+            "label": "ssi_information_request_page_form_last_name_title",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_email",
+            "id": "emailAddress",
             "key": "emailAddress",
-            "label": "ssi_information_request_page_form_email_label",
+            "label": "ssi_information_request_page_form_email_title",
             "type": "text",
             "required": true,
             "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
@@ -146,6 +148,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "banqup-account",
       "steps": [
         {
           "id": "downloadSphereonWallet",

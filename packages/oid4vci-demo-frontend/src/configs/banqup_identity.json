@@ -2,7 +2,8 @@
   "general": {
     "credentialName": "Identity credential",
     "issueCredentialType": "VerifiedID",
-    "baseUrl": "http://192.168.2.90:5000",
+    "oid4vpAgentBaseUrl": "http://192.168.1.200:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.1.200:5000",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Identity credential",
     "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
@@ -126,6 +127,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "banqup",
       "steps": [
         {
           "id": "verifyRequest",
