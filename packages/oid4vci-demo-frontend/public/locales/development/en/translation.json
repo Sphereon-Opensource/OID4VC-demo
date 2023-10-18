@@ -34,7 +34,7 @@
   "qrcode_right_pane_top_paragraph": "A hassle-free way to share your personal\ninformation using your digital wallet.",
   "qrcode_right_pane_top_title": "Use your Digital Identity",
   "sharing_data_right_pane_paragraph": "Almost there!\n Please fill out any missing data.\r\nTo claim your {{credentialName}}\ncredential(s). The content will not be stored! It is used to personalize the credentials",
-  "sharing_data_fill_out_right_pane_paragraph": "To get started, please provide us with your personal details",
+  "sharing_data_fill_out_right_pane_paragraph": "To get started, please provide us with your details",
   "sharing_data_right_pane_title": "Provide your data",
   "manual_fill_data_right_pane_title": "Personal details",
   "action_open_wallet_caption": "Open in wallet",

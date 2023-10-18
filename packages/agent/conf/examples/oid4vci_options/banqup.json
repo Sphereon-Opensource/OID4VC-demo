@@ -1,6 +1,6 @@
 {
   "definitionId": "banqup",
-  "correlationId": "http://192.168.2.90:5000",
+  "correlationId": "https://identity.banqup.demo.sphereon.com/agent",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"
