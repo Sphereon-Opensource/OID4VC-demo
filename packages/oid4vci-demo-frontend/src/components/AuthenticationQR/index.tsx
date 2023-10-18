@@ -13,6 +13,8 @@ const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 export type AuthenticationQRProps = {
   vpDefinitionId: string
   ecosystem: Ecosystem
+  width?: number
+  fgColor?: string
   onAuthRequestRetrieved: () => void
   onSignInComplete: (payload: AuthorizationResponsePayload) => void
   setQrCodeData: (text: string) => void
@@ -88,9 +90,9 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       },
       renderingProps: {
         bgColor: 'white',
-        fgColor: '#000000',
+        fgColor: this.props.fgColor ?? '#000000',
         level: 'L',
-        size: 300,
+        size:  this.props.width ?? 300,
         title: 'Sign in'
       }
     }
