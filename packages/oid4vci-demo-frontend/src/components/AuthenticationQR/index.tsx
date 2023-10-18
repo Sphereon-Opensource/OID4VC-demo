@@ -7,6 +7,7 @@ import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
 import {NonMobileOS} from "../../index"
 import {Ecosystem} from "../../ecosystem/ecosystem"
+import {APP_SSI_QR_CODE_EXPIRES_AFTER_SEC} from "../../environment"
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
@@ -37,9 +38,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   componentDidMount() {
     const {ecosystem, vpDefinitionId} = this.props
 
-    this.qrExpirationMs =
-      parseInt(process.env.REACT_APP_SSI_QR_CODE_EXPIRES_AFTER_SEC ?? '300') *
-      1000
+    this.qrExpirationMs = APP_SSI_QR_CODE_EXPIRES_AFTER_SEC * 1000
     // actually since the QR points to a JWT it has its own expiration value as well.
 
     if (!this.state.qrCode) {

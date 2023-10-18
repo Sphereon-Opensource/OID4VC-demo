@@ -102,12 +102,14 @@ const SSIInformationSuccessPage: React.FC = () => {
 }
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
+    const ecosystem = useEcosystem()
+    const generalConfig = ecosystem.getGeneralConfig()
     const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const location = useLocation();
     const state = location.state;
     const {t} = useTranslation()
-    if (process.env.REACT_APP_ENVIRONMENT !== 'sphereon') {
+    if (ecosystem.getEcosystemId() !== 'sphereon') {
         return (<NonMobile>
                     <div id={"photo"} style={{
                         display: 'flex',

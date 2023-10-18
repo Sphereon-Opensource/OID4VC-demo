@@ -7,6 +7,7 @@ import {
     Siopv2RestClientAuthenticationOpts
 } from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client/src/types/ISIOPv2OID4VPRPRestClient"
 import {EcosystemGeneralConfig} from "../ecosystem/ecosystem-config"
+import {DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL, DEV_OVERRIDE_OID4VP_AGENT_BASE_URL} from "../environment"
 
 export type VCIAgentType = TAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient & IOID4VCIRestClient>
 type AgentMap = { [key: string]: VCIAgentType };
@@ -28,13 +29,13 @@ const getOrCreateAgent = (ecoSystemId: string, generalConfig: EcosystemGeneralCo
         plugins: [
             new QrCodeProvider(),
             new SIOPv2OID4VPRPRestClient({
-                baseUrl: process.env.REACT_APP_DEV_OVERRIDE_OID4VP_AGENT_BASE_URL
+                baseUrl: DEV_OVERRIDE_OID4VP_AGENT_BASE_URL
                     ?? generalConfig.oid4vpAgentBaseUrl
                     ?? 'https://ssi.sphereon.com/agent',
                 authentication: buildAuthentication(generalConfig)
             }),
             new OID4VCIRestClient({
-                baseUrl: process.env.REACT_APP_DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL
+                baseUrl: DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL
                     ?? generalConfig.oid4vciAgentBaseUrl
                     ?? 'https://ssi.sphereon.com/issuer',
                 authentication: buildAuthentication(generalConfig)

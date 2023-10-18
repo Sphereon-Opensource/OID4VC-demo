@@ -11,7 +11,12 @@ import {
 } from "./ecosystem-config"
 import {useMemo} from "react"
 import getOrCreateAgent, {VCIAgentType} from "../agent"
-import {extractFirstSubdomain} from "../utils/generic"
+import {extractSubdomains} from "../utils/generic"
+import {
+    DEFAULT_ECOSYSTEM,
+    DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN,
+    DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN_PARTS
+} from "../environment"
 
 
 export type Ecosystem = {
@@ -22,6 +27,7 @@ export type Ecosystem = {
     getRootConfig: () => VCIConfig
     getGeneralConfig: () => EcosystemGeneralConfig
     getAgent(): VCIAgentType
+    getEcosystemId (): string
 };
 
 export function useEcosystem(): Ecosystem {
@@ -31,8 +37,10 @@ export function useEcosystem(): Ecosystem {
     function determineEcosystemId(): string {
         const searchParams = new URLSearchParams(window.location.search)
         const ecosystemIdQueryParam = searchParams.has('ecosystemId') ? searchParams.get('ecosystemId') : undefined
-        const subDomainEcosystemId = process.env.REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN === 'true' ? extractFirstSubdomain(window.location.href) : undefined
-        return ecosystemIdQueryParam ?? subDomainEcosystemId ?? process.env.REACT_APP_DEFAULT_ECOSYSTEM ?? 'sphereon'
+        const subDomainEcosystemId = DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN
+            ? extractSubdomains(window.location.href, DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN_PARTS)
+            : undefined
+        return ecosystemIdQueryParam ?? subDomainEcosystemId ?? DEFAULT_ECOSYSTEM ?? 'sphereon'
     }
 
     function getRootConfig(): VCIConfig {
@@ -69,6 +77,10 @@ export function useEcosystem(): Ecosystem {
         return getOrCreateAgent(currentEcosystemId, getGeneralConfig())
     }
 
+    function getEcosystemId() : string {
+        return currentEcosystemId
+    }
+
     return {
         getGeneralConfig,
         getComponentConfig,
@@ -76,6 +88,7 @@ export function useEcosystem(): Ecosystem {
         hasPageConfig,
         getPageConfig,
         getRoutes,
-        getAgent
+        getAgent,
+        getEcosystemId
     }
 }
