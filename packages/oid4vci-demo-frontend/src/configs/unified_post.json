@@ -1,0 +1,72 @@
+{
+  "pages": {
+    "landingPage": {
+      "logo": {
+        "src": "banqup/logo.svg",
+        "alt": "banqup logo"
+      },
+      "mobile": {
+        "logo": {
+          "src": "banqup/logo_horizontal.svg",
+          "alt": "banqup logo",
+          "width": 183,
+          "height": 45
+        }
+      },
+      "backgroundColor": "#0E0B31",
+      "pageTitle": "ssi_credentials_landing_page_title",
+      "text": "ssi_credentials_landing_page_text",
+      "credentials": [
+        {
+          "name": "Verified account",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "step 1",
+          "backgroundColor": "#322577",
+          "logo": {
+            "src": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+            "alt_text": "Banqup logo",
+            "width": 459,
+            "height": 122
+          }
+        },
+        {
+          "name": "Verified identity",
+          "route": "https://identity.banqup.demo.sphereon.com",
+          "backgroundColor": "#322577",
+          "description": "step 2",
+          "logo": {
+            "src": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+            "alt_text": "Banqup logo",
+            "width": 459,
+            "height": 122
+          }
+        },
+        {
+          "name": "Verified legal entity",
+          "route": "https://legal-entity.banqup.demo.sphereon.com",
+          "description": "step 3",
+          "backgroundColor": "#322577",
+          "logo": {
+            "src": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+            "alt_text": "Banqup logo",
+            "width": 459,
+            "height": 122
+          }
+        }
+      ]
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landing",
+          "isDefaultRoute": true
+        }
+      ]
+    }
+  ]
+}
