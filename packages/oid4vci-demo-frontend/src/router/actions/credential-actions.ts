@@ -21,8 +21,8 @@ type CredentialOfferState = {
     isManualIdentification: Boolean,
     credentialType?: string
 }
-export const createCredentialOffer = async (state: CredentialOfferState, ecosystem: Ecosystem): Promise<QRState> => {
-    const generalConfig = ecosystem.getGeneralConfig()
+export const createCredentialOffer = async (actionParams: Record<string, any>, state: CredentialOfferState, ecosystem: Ecosystem): Promise<QRState> => {
+    const generalConfig = ecosystem.getGeneralConfig() // TODO delete me after all configs use actionParams.issueCredentialType
     const shortUuid = short.generate()
     const uriData: IOID4VCIClientCreateOfferUriResponse = await ecosystem.getAgent().oid4vciClientCreateOfferUri({
         grants: {
@@ -34,7 +34,7 @@ export const createCredentialOffer = async (state: CredentialOfferState, ecosyst
         credentialDataSupplierInput: {
             ...state.payload
         },
-        credentials: [state.credentialType ?? generalConfig.issueCredentialType],
+        credentials: [state.credentialType ?? ("issueCredentialType" in actionParams ? actionParams.issueCredentialType : generalConfig.issueCredentialType)],
     })
 
     return {

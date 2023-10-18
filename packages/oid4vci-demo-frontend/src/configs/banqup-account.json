@@ -1,7 +1,6 @@
 {
   "general": {
     "credentialName": "Account credential",
-    "issueCredentialType": "Account",
     "oid4vpAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
     "oid4vciAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
@@ -166,6 +165,9 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "Account"
+          },
           "nextId": "issueRequest"
         },
         {
