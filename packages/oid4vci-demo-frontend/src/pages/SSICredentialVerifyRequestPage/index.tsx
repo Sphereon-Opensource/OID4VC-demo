@@ -128,9 +128,9 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     <div style={{marginTop: "20"}}>
                     <Mobile><Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                   lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}/></Mobile>
-                    <NonMobile><Text style={{flexGrow: 1, color: pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor ?? '#FBFBFB' }}
+                    <NonMobile><Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}` }}
                                      className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className} poppins-semi-bold-16`}
-                                     title={['Sign in']}
+                                     title={t('credential_verify_request_right_pane_bottom_title').split('\n')}
                                      lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/></NonMobile>
                     {pageConfig.enableRightPaneButton && (
                         <div style={{display: 'flex', justifyContent: 'center'}}>

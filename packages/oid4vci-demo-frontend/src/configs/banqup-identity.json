@@ -61,11 +61,11 @@
           "topTitle": {
             "style": {
               "display": "none"
-            },
+            }
+          },
           "bottomText": {
             "fontColor": "#424242",
             "className": "removeMarginTop"
-          }
           },
           "width": 200,
           "marginTop": "0",

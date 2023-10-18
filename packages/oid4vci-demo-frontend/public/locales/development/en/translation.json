@@ -11,6 +11,7 @@
   "credential_verify_request_right_pane_top_title": "Provide details",
   "credential_verify_request_right_pane_top_paragraph": "In order to issue a credential we need to get\nsome information from your wallet.",
   "button_open_from_wallet": "Open wallet",
+  "credential_verify_request_right_pane_bottom_title": "Sign In",
   "credential_verify_request_right_pane_bottom_paragraph": "By scanning this QR code with your Banqup app",
   "credential_verify_request_right_pane_bottom_paragraph_mobile": "Please click the button to open a wallet\nGo back to this screen afterwards to continue.",
   "credential_verify_request_right_pane_button_caption": "To manual entry",
