@@ -2,8 +2,8 @@
   "general": {
     "credentialName": "Account credential",
     "issueCredentialType": "Account",
-    "oid4vpAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
-    "oid4vciAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "https://banqup.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://banqup.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Account credential",
     "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",

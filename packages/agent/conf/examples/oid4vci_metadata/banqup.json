@@ -227,6 +227,123 @@
           "ES256K",
           "EdDSA"
         ]
+      },
+      {
+        "display": [
+          {
+            "name": "Verified Legal Entity Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Verified Legal Entity Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Geverifieerd Juridische Entiteit Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          }
+        ],
+        "order": [
+          "companyName",
+          "companyEmailAddress",
+          "taxRegistrationNumber",
+          "vatNumber"
+        ],
+        "credentialSubject": {
+          "companyName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Company name"
+              },
+              {
+                "name": "Company name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Bedrijfsnaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "companyEmailAddress": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Company email address"
+              },
+              {
+                "name": "Company email address",
+                "locale": "en-US"
+              },
+              {
+                "name": "bedrijf email adres",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "taxRegistrationNumber": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "TRN"
+              },
+              {
+                "name": "TRN",
+                "locale": "en-US"
+              },
+              {
+                "name": "RSIN",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "vatNumber": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "VAT number"
+              },
+              {
+                "name": "VAT number",
+                "locale": "en-US"
+              },
+              {
+                "name": "BTW identificatienummer",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "banqup-legal-entity",
+        "types": [
+          "VerifiableCredential",
+          "LegalEntity"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
       }
     ],
     "credential_supplier_config": {
@@ -244,6 +361,13 @@
             "VerifiedID"
           ],
           "template_path": "Identity.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "LegalEntity"
+          ],
+          "template_path": "LegalEntity.hbs",
           "format": "jwt_vc_json"
         }
       ]
