@@ -1,62 +1,33 @@
 {
   "general": {
-    "credentialName": "Bank account credential",
-    "issueCredentialType": "BankAccount",
-    "baseUrl": "http://192.168.2.90:5000/bank",
+    "credentialName": "Identity credential",
+    "oid4vpAgentBaseUrl": "https://identity.banqup.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://identity.banqup.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Bank credential",
+    "verifierUrlCaption": "Identity credential",
     "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
-    "downloadSphereonWallet": {
-      "leftPane": {
-        "backgroundColor": "#0E0B31",
-        "width": "40%",
-        "logo": {
-          "src": "banqup/logo.svg"
-        },
-        "mobile": {
-          "logo": {
-            "src": "banqup/logo.svg",
-            "alt": "banqup",
-            "width": 65,
-            "height": 65
-          },
-          "backgroundColor": "#EFFFF5"
-        }
-      },
-      "rightPane": {
-        "image": "banqup/flyng-iphone.svg",
-        "width": "100%",
-        "sphereonWalletQRCode": {
-          "enableQR": true,
-          "style": {
-          },
-          "button": {
-            "style": {
-              "width": 250
-            }
-          },
-          "downloadUrl": "https://qrco.de/be5xfh"
-        },
-        "enablePrimaryButton": true,
-        "primaryButtonResourceId": "label_continue"
-      }
-    },
-    "issueSuccess": {
-      "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
-      "backgroundColor": "#01224B",
+    "verifyRequest": {
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "bank/guest_credential.svg"
+        "src": "banqup/logo.svg"
       },
       "mobile": {
         "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 43,
-          "height": 41
-        }
+          "src": "banqup/logo.svg",
+          "alt": "banqup",
+          "width": 65,
+          "height": 65
+        },
+        "backgroundColor": "#EFFFF5"
       }
     },
     "infoRequest": {
@@ -81,30 +52,39 @@
       "form": [
         [
           {
-            "id": "firstName",
+            "id": "ssi_information_request_page_form_first_name",
             "key": "firstName",
-            "label": "ssi_information_request_page_form_name_title",
+            "label": "ssi_information_request_page_form_first_name_label",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "lastName",
+            "id": "ssi_information_request_page_form_last_name",
             "key": "lastName",
-            "label": "ssi_information_request_page_form_last_name_title",
+            "label": "ssi_information_request_page_form_last_name_label",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "emailAddress",
+            "id": "ssi_information_request_page_form_email",
             "key": "emailAddress",
-            "label": "ssi_information_request_page_form_email_title",
+            "label": "ssi_information_request_page_form_email_label",
             "type": "text",
             "required": true,
             "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        ],
+        [
+          {
+            "id": "ssi_information_request_page_form_bsn_number",
+            "key": "bsnNumber",
+            "label": "ssi_information_request_page_form_bsn_number_label",
+            "type": "text",
+            "required": true
           }
         ],
         [
@@ -146,11 +126,12 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "banqup",
       "steps": [
         {
-          "id": "downloadSphereonWallet",
+          "id": "verifyRequest",
           "operation": "navigate",
-          "path": "/download/sphereon-wallet",
+          "path": "/credentials/verify/request",
           "nextId": "infoRequest",
           "isDefaultRoute": true
         },
@@ -164,18 +145,15 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "VerifiedID"
+          },
           "nextId": "issueRequest"
         },
         {
           "id": "issueRequest",
           "operation": "navigate",
-          "path": "/credentials/issue/request",
-          "nextId": "issueSuccess"
-        },
-        {
-          "id": "issueSuccess",
-          "operation": "navigate",
-          "path": "https://knb.demo.sphereon.com"
+          "path": "/credentials/issue/request"
         }
       ]
     }
