@@ -1,0 +1,26 @@
+{
+  "id": "banqup",
+  "purpose": "We hebben informatie nodig van u",
+  "input_descriptors": [
+    {
+      "id": "628123ed-a16d-4716-aaee-67734360777e",
+      "name": "Bankrekening",
+      "purpose": "We hebben het bankrekening credential van u nodig",
+      "schema": [
+        {
+          "uri": "Account"
+        }
+      ]
+    },
+    {
+      "id": "86431fd3-e091-455e-8eab-06940c5b0d38",
+      "name": "Identiteit",
+      "purpose": "We hebben een ID credential van u nodig",
+      "schema": [
+        {
+          "uri": "Identity"
+        }
+      ]
+    }
+  ]
+}
