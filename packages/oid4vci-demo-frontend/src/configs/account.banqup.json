@@ -146,7 +146,6 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "banqup",
       "steps": [
         {
           "id": "downloadSphereonWallet",
