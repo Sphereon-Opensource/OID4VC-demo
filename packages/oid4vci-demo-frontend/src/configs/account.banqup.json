@@ -5,8 +5,7 @@
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Account credential",
-    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
-    "redirectUrl": "https://banqup.demo.sphereon.com"
+    "downloadUrl": "https://agent.demo.sphereon.com/#/download"
   },
   "pages": {
     "downloadSphereonWallet": {
