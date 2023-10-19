@@ -1,12 +1,12 @@
 {
   "general": {
     "credentialName": "Account credential",
-    "oid4vpAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
-    "oid4vciAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Account credential",
-    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
-    "redirectUrl": "https://knb.demo.sphereon.com"
+    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
+    "redirectUrl": "https://banqup.demo.sphereon.com"
   },
   "pages": {
     "downloadSphereonWallet": {
