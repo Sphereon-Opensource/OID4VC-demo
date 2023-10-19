@@ -1,12 +1,10 @@
 {
   "general": {
     "credentialName": "Account credential",
+    "issueCredentialType": "Account",
     "oid4vpAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
     "oid4vciAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
-    "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Account credential",
-    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
-    "redirectUrl": "https://knb.demo.sphereon.com"
+    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download"
   },
   "pages": {
     "downloadSphereonWallet": {
@@ -146,7 +144,6 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "banqup-account",
       "steps": [
         {
           "id": "downloadSphereonWallet",
@@ -179,7 +176,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://knb.demo.sphereon.com"
+          "path": "https://banqup.demo.sphereon.com"
         }
       ]
     }
