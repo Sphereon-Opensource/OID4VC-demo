@@ -1,5 +1,5 @@
 {
-  "definitionId": "banqup",
+  "definitionId": "banqup-identity",
   "rpOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

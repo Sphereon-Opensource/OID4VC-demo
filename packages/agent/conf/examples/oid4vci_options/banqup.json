@@ -1,5 +1,5 @@
 {
-  "definitionId": "banqup",
+  "definitionId": "banqup-identity",
   "correlationId": "https://agent.banqup.demo.sphereon.com",
   "issuerOpts": {
     "didOpts": {
