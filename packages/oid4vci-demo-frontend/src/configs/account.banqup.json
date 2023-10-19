@@ -178,7 +178,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://knb.demo.sphereon.com"
+          "path": "https://banqup.demo.sphereon.com/"
         }
       ]
     }

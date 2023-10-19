@@ -154,7 +154,13 @@
           "id": "issueRequest",
           "operation": "navigate",
           "path": "/credentials/issue/request"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://banqup.demo.sphereon.com/"
         }
+
       ]
     }
   ],
