@@ -18,7 +18,7 @@
       "purpose": "We hebben een ID credential van u nodig",
       "schema": [
         {
-          "uri": "Identity"
+          "uri": "VerifiedID"
         }
       ]
     }
