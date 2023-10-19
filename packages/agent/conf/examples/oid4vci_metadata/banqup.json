@@ -212,7 +212,7 @@
             ]
           }
         },
-        "id": "banqup",
+        "id": "banqup-identity",
         "types": [
           "VerifiableCredential",
           "VerifiedID"
