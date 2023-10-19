@@ -368,6 +368,7 @@ export interface VCINavigationStep extends VCIConfigRouteStep {
 
 export interface VCIExecuteStep extends VCIConfigRouteStep {
     action: VCIAction
+    actionParams: Record<string, any>
 }
 
 export interface VCIConfigComponents {

@@ -124,7 +124,7 @@ export function useFlowRouter<T extends PageConfig>() {
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
-                    outState = await createCredentialOffer(inState, ecosystem)
+                    outState = await createCredentialOffer(executeStep.actionParams, inState, ecosystem)
                     break
             }
             stepState.currentStep = executeStep

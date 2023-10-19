@@ -162,6 +162,9 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "Account"
+          },
           "nextId": "issueRequest"
         },
         {
