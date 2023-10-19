@@ -48,8 +48,10 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
           style?: CSSProperties
         },
         bottomText?: {
-          fontColor?: string,
+          fontColor?: string
           className?: string
+          credential_verify_request_right_pane_bottom_title?: string
+          credential_verify_request_right_pane_bottom_paragraph?: string
         }
         pane?: {
           height?: string
