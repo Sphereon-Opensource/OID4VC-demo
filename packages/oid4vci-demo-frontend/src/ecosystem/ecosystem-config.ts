@@ -2,14 +2,12 @@ import {ImageProperties} from "../types"
 import {CSSProperties, HTMLInputTypeAttribute} from "react"
 import {IProps} from "../components/SSISecondaryButton"
 
-
 export interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
     routes: VCIConfigRoute[]
     components: VCIConfigComponents
 }
-
 
 export interface ComponentConfig {
 }
@@ -74,6 +72,20 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
       height?: string
       logo?: ImageProperties
     }
+}
+
+export interface SSILoadingPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    sharing_data_right_pane_title: string
+    sharing_data_right_pane_paragraph: string
+    rightPaneButtonStepId?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
@@ -308,7 +320,6 @@ export interface EcosystemGeneralConfig {
     downloadUrl?: string
     credentialName: string
     issueCredentialType: string
-
 }
 
 export interface SSITextConfig extends ComponentConfig {
@@ -324,6 +335,7 @@ export interface VCIConfigPages {
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
+    SSILoadingPage: SSILoadingPageConfig
 }
 
 export interface VCIConfigRoute {

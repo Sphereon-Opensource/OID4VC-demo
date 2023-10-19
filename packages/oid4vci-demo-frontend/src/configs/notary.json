@@ -161,7 +161,7 @@
           {
             "id": "ssi_information_request_page_form_company_name",
             "key": "Bedrijfsnaam",
-            "title": "ssi_information_request_page_form_company_name_title",
+            "title": "ssi_information_request_page_form_company_name_label",
             "type": "string",
             "required": true
           }
@@ -170,7 +170,7 @@
           {
             "id": "ssi_information_request_page_form_company_location",
             "key": "Bedrijfslocatie",
-            "title": "ssi_information_request_page_form_company_location_title",
+            "title": "ssi_information_request_page_form_company_location_label",
             "type": "string",
             "required": true
           }
@@ -179,14 +179,14 @@
           {
             "id": "ssi_information_request_page_first_name_director",
             "key": "Voornaam",
-            "title": "ssi_information_request_page_form_first_name_director_title",
+            "title": "ssi_information_request_page_form_first_name_director_label",
             "type": "string",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name_director",
             "key": "Achternaam",
-            "title": "ssi_information_request_page_form_last_name_director_title",
+            "title": "ssi_information_request_page_form_last_name_director_label",
             "type": "string",
             "required": true
           }
@@ -195,7 +195,7 @@
           {
             "id": "ssi_information_request_page_form_place_of_birth",
             "key": "Geboorteplaats",
-            "title": "ssi_information_request_page_form_place_of_birth_title",
+            "title": "ssi_information_request_page_form_place_of_birth_label",
             "type": "string",
             "required": true
           }
@@ -204,7 +204,7 @@
           {
             "id": "ssi_information_request_page_form_date_of_birth",
             "key": "Geboortedatum",
-            "title": "ssi_information_request_page_form_date_of_birth_title",
+            "title": "ssi_information_request_page_form_date_of_birth_label",
             "type": "date",
             "required": true
           }
