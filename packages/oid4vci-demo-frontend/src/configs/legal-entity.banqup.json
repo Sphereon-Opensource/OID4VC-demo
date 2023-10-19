@@ -1,7 +1,6 @@
 {
   "general": {
     "credentialName": "Legal entity credential",
-    "issueCredentialType": "LegalEntity",
     "oid4vpAgentBaseUrl": "https://banqup.demo.sphereon.com/agent",
     "oid4vciAgentBaseUrl": "https://banqup.demo.sphereon.com/agent"
   },
@@ -143,6 +142,9 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "LegalEntity"
+          },
           "nextId": "issueRequest"
         },
         {
