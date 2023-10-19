@@ -1,12 +1,9 @@
 {
   "general": {
-    "credentialName": "Identity credential",
-    "issueCredentialType": "VerifiedID",
+    "credentialName": "Legal entity credential",
+    "issueCredentialType": "LegalEntity",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
-    "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
-    "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Identity credential"
+    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com"
   },
   "pages": {
     "verifyRequest": {
@@ -98,8 +95,8 @@
     },
     "infoRequest": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title_banqup",
-      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "sharing_data_right_pane_title": "manual_fill_data_company_right_pane_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_company_fill_out_right_pane_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
@@ -118,27 +115,18 @@
       "form": [
         [
           {
-            "id": "ssi_information_request_page_form_first_name",
-            "key": "firstName",
-            "label": "ssi_information_request_page_form_first_name_label",
+            "id": "companyName",
+            "key": "companyName",
+            "label": "ssi_information_request_page_form_company_name_label",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "ssi_information_request_page_form_last_name",
-            "key": "lastName",
-            "label": "ssi_information_request_page_form_last_name_label",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "ssi_information_request_page_form_email",
-            "key": "emailAddress",
-            "label": "ssi_information_request_page_form_email_label",
+            "id": "companyEmailAddress",
+            "key": "companyEmailAddress",
+            "label": "ssi_information_request_page_form_company_email_address_label",
             "type": "text",
             "required": true,
             "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
@@ -146,29 +134,32 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_form_bsn_number",
-            "key": "bsnNumber",
-            "label": "ssi_information_request_page_form_bsn_number_label",
+            "id": "taxRegistrationNumber",
+            "key": "taxRegistrationNumber",
+            "label": "ssi_information_request_page_form_tax_registration_number_label",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "termsAndConditions",
-            "key": "termsAndConditions",
-            "label": "ssi_information_request_page_form_terms_and_conditions_label",
-            "labelUrl": "https://google.com",
-            "type": "checkbox",
-            "required": true,
-            "display": {
-              "checkboxBorderColor": "#202776",
-              "checkboxLabelColor": "#424242",
-              "checkboxSelectedColor": "#202776"
-            }
+            "id": "vatNumber",
+            "key": "vatNumber",
+            "label": "ssi_information_request_page_form_vat_number_label",
+            "type": "text",
+            "required": true
           }
         ]
       ]
+    },
+    "loading": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "loading_verify_company_information_caption",
+      "sharing_data_right_pane_paragraph": "loading_verify_company_information_description",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
     },
     "issueRequest": {
       "leftPaneWidth": "40%",
@@ -192,7 +183,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "banqup-identity",
+      "vpDefinitionId": "banqup-legal-entity",
       "steps": [
         {
           "id": "verifyRequest",
@@ -205,6 +196,13 @@
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/request",
+          "nextId": "loading",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "loading",
+          "operation": "navigate",
+          "path": "/loading",
           "nextId": "credentialOffer"
         },
         {
@@ -228,15 +226,6 @@
     }
   ],
   "components": {
-    "DeepLink": {},
-    "SSICardView": {
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#326D85",
-          "textColor": "#FBFBFB"
-        }
-      }
-    },
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
@@ -250,7 +239,6 @@
           "backgroundColor": "#353438"
         }
       }
-    },
-    "Text": {}
+    }
   }
 }
