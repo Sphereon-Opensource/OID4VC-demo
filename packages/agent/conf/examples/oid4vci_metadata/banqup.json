@@ -110,6 +110,123 @@
           "ES256K",
           "EdDSA"
         ]
+      },
+      {
+        "display": [
+          {
+            "name": "Verified Identity Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Verified Identity Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Geverifieerd Identity Credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/4P0C0rL/banqup-logo-white.png",
+              "alt_text": "Banqup logo"
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "emailAddress",
+          "bsnNumber"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "First name"
+              },
+              {
+                "name": "First name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Last name"
+              },
+              {
+                "name": "Last Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "emailAddress": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email address"
+              },
+              {
+                "name": "Email address",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email adres",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "bsnNumber": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "BSN number"
+              },
+              {
+                "name": "BSN number",
+                "locale": "en-US"
+              },
+              {
+                "name": "BSN nummer",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "banqup-identity",
+        "types": [
+          "VerifiableCredential",
+          "VerifiedID"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
       }
     ],
     "credential_supplier_config": {
@@ -120,6 +237,13 @@
             "Account"
           ],
           "template_path": "Account.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "VerifiedID"
+          ],
+          "template_path": "Identity.hbs",
           "format": "jwt_vc_json"
         }
       ]

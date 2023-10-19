@@ -1,12 +1,10 @@
 {
   "general": {
-    "credentialName": "Bank account credential",
-    "issueCredentialType": "BankAccount",
-    "baseUrl": "http://192.168.2.90:5000/bank",
-    "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Bank credential",
-    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
-    "redirectUrl": "https://knb.demo.sphereon.com"
+    "credentialName": "Account credential",
+    "issueCredentialType": "Account",
+    "oid4vpAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://account.banqup.demo.sphereon.com/agent",
+    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download"
   },
   "pages": {
     "downloadSphereonWallet": {
@@ -83,7 +81,7 @@
           {
             "id": "firstName",
             "key": "firstName",
-            "label": "ssi_information_request_page_form_name_title",
+            "label": "ssi_information_request_page_form_first_name_label",
             "type": "text",
             "required": true
           }
@@ -92,7 +90,7 @@
           {
             "id": "lastName",
             "key": "lastName",
-            "label": "ssi_information_request_page_form_last_name_title",
+            "label": "ssi_information_request_page_form_last_name_label",
             "type": "text",
             "required": true
           }
@@ -101,7 +99,7 @@
           {
             "id": "emailAddress",
             "key": "emailAddress",
-            "label": "ssi_information_request_page_form_email_title",
+            "label": "ssi_information_request_page_form_email_label",
             "type": "text",
             "required": true,
             "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
@@ -175,7 +173,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://knb.demo.sphereon.com"
+          "path": "https://banqup.demo.sphereon.com"
         }
       ]
     }
