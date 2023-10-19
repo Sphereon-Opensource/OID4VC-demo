@@ -3,8 +3,6 @@
     "credentialName": "Account credential",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
-    "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Account credential",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download"
   },
   "pages": {
@@ -177,7 +175,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://banqup.demo.sphereon.com/"
+          "path": "https://banqup.demo.sphereon.com"
         }
       ]
     }
