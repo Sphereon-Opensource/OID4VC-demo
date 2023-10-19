@@ -224,7 +224,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://banqup.demo.sphereon.com"
+          "path": "https://identity.banqup.demo.sphereon.com"
         }
       ]
     }
