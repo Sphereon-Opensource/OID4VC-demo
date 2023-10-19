@@ -12,8 +12,6 @@
     "verifyRequest": {
       "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
-      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
@@ -28,6 +26,72 @@
           "height": 65
         },
         "backgroundColor": "#EFFFF5"
+      },
+      "rightPaneGrid": {
+        "style": {
+          "width": "100%",
+          "gridTemplateColumns": "repeat(9, 1fr)",
+          "gridTemplateRows": "repeat(7, minmax(1fr, auto))"
+        }
+      },
+      "rightPaneLeftPane": {
+        "grid": {
+          "gridColumn": "2/8",
+          "gridRow": "6",
+          "height": "30%"
+        },
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242",
+            "gridRow": "5",
+            "gridColumn": "3/8",
+            "display": "block"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "style": {
+              "display": "none"
+            }
+          },
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      },
+      "mostRightPanel": {
+        "grid": {
+          "gridColumn": "7/8",
+          "gridRow": "6"
+        },
+        "separator": {
+          "logo": {
+            "src": "banqup/separator.svg",
+            "alt": "banqup",
+            "height": "356px",
+            "width": "13px"
+          }
+        },
+        "width": "24%",
+        "height": "100%",
+        "logo": {
+          "src": "banqup/right_panel_image.svg",
+          "width": "193px",
+          "height": "150px",
+          "alt": "download app"
+        }
       }
     },
     "infoRequest": {

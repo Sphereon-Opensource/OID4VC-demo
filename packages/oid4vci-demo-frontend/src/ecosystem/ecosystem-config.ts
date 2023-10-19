@@ -32,6 +32,48 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
         backgroundColor?: string
         image?: string
     },
+    rightPaneGrid?: {
+      style?: CSSProperties,
+    },
+    rightPaneLeftPane?: {
+      grid?: {
+        gridColumn?: string
+        gridRow?: string
+        height?: string
+      }
+      welcomeLabel?: {
+        style?: CSSProperties
+        className?: string
+      }
+      qrCode?: {
+        topTitle?: {
+          style?: CSSProperties
+        },
+        bottomText?: {
+          fontColor?: string,
+          className?: string
+        }
+        pane?: {
+          height?: string
+        }
+        width?: number
+        marginTop?: string,
+        marginBottom?: string
+      },
+      width?: string
+    }
+    mostRightPanel?: {
+      grid?: {
+        gridColumn?: string
+        gridRow?: string
+      }
+      separator?: {
+        logo?: ImageProperties
+      },
+      width?: string
+      height?: string
+      logo?: ImageProperties
+    }
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
