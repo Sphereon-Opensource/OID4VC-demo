@@ -218,7 +218,8 @@
         {
           "id": "issueRequest",
           "operation": "navigate",
-          "path": "/credentials/issue/request"
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
         },
         {
           "id": "issueSuccess",
