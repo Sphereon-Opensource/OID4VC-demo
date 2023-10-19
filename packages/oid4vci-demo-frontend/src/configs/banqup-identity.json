@@ -2,12 +2,12 @@
   "general": {
     "credentialName": "Identity credential",
     "issueCredentialType": "VerifiedID",
-    "oid4vpAgentBaseUrl": "https://identity.banqup.demo.sphereon.com/agent",
-    "oid4vciAgentBaseUrl": "https://identity.banqup.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
+    "redirectUrl": "https://banqup.demo.sphereon.com",
     "verifierUrl": "https://sphereon.com",
-    "verifierUrlCaption": "Identity credential",
-    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
-    "redirectUrl": "https://knb.demo.sphereon.com"
+    "verifierUrlCaption": "Identity credential"
   },
   "pages": {
     "verifyRequest": {
@@ -65,7 +65,9 @@
           },
           "bottomText": {
             "fontColor": "#424242",
-            "className": "removeMarginTop"
+            "className": "removeMarginTop",
+            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_banqup",
+            "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph_banqup"
           },
           "width": 200,
           "marginTop": "0",
@@ -97,7 +99,7 @@
     },
     "infoRequest": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title_banqup",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
@@ -191,7 +193,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "banqup",
+      "vpDefinitionId": "banqup-identity",
       "steps": [
         {
           "id": "verifyRequest",
@@ -215,7 +217,13 @@
         {
           "id": "issueRequest",
           "operation": "navigate",
-          "path": "/credentials/issue/request"
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://banqup.demo.sphereon.com"
         }
       ]
     }
