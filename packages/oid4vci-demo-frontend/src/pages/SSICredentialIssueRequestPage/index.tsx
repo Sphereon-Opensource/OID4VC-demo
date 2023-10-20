@@ -178,7 +178,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378}}
                                 className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                                lines={pageConfig.bottomParagraph ? t(pageConfig.bottomParagraph).split('\n') : []}
+                                lines={pageConfig.bottomParagraph ? t(pageConfig.bottomParagraph).split('\n') : []} // FIXME DPP-84
                             />
                         </NonMobile>
                         <Mobile>
