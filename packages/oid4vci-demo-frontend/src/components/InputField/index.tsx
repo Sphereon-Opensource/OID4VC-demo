@@ -28,7 +28,7 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
     const [isValid, setIsValid] = useState<boolean>(true)
     const isCheckBox = type === 'checkbox'
 
-    useEffect(() => {
+    useEffect(() => { // It can be that the form is rendered without payload data the first time
         setValue(defaultValue);
     }, [defaultValue]);
 
