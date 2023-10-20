@@ -156,6 +156,8 @@ const SSIInformationRequestPage: React.FC = () => {
     useEffect(() => {
         if (state?.data?.vp_token) {
             processVPToken().catch(console.log)
+        } else {
+            setInitComplete(true)
         }
     }, []);
 
