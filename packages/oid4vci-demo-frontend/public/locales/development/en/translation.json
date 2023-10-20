@@ -32,6 +32,7 @@
   "onboarding_right_card_paragraph": "Choose to share your data via your wallet.\nIt's a quick method to provide the\r\ninformation to get the\r\n\r\n{{credentialName}} credential(s)",
   "onboarding_right_card_title": "Use your Wallet",
   "qrcode_right_pane_bottom_paragraph": "Simply scan the QR code using\nyour wallet's QR scanner.",
+  "mobile_right_pane_bottom_paragraph": "Open your wallet app by clicking the 'Open in wallet' button.",
   "qrcode_right_pane_top_paragraph": "A hassle-free way to share your personal\ninformation using your digital wallet.",
   "qrcode_right_pane_top_title": "Use your Digital Identity",
   "sharing_data_right_pane_paragraph": "Almost there!\n Please fill out any missing data.\r\nTo claim your {{credentialName}}\ncredential(s). The content will not be stored! It is used to personalize the credentials",

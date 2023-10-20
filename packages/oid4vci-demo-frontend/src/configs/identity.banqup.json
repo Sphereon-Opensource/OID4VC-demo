@@ -179,6 +179,7 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
+        "bottomParagraph": "mobile_right_pane_bottom_paragraph",
         "logo": {
           "src": "banqup/logo.svg",
           "alt": "banqup",

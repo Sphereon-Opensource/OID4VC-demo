@@ -31,6 +31,7 @@
   "onboarding_right_card_paragraph": "Kies ervoor om uw gegevens via uw wallet te delen.\nHet is een snelle methode om de\r\ninformatie te verstrekken voor de\r\n\r\n{{credentialName}} credential",
   "onboarding_right_card_title": "Gebruik uw Wallet",
   "qrcode_right_pane_bottom_paragraph": "Scan eenvoudig de QR-code met\nde QR-scanner van uw wallet.",
+  "mobile_right_pane_bottom_paragraph": "Open uw wallet app door op de 'Open in wallet' knop te klikken.",
   "qrcode_right_pane_top_paragraph": "Een moeiteloze manier om uw persoonlijke\ninformatie te delen met behulp van uw digitale wallet.",
   "qrcode_right_pane_top_title": "Gebruik uw Digitale Identiteit",
   "sharing_data_manually_right_pane_button_caption": "Delen",
