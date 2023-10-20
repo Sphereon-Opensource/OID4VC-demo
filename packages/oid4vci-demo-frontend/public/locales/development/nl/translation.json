@@ -80,5 +80,7 @@
   "paragraph_add_credential": "Laten we de credential aan uw wallet toevoegen.",
   "paragraph_scan_this_qr": "Scan deze QR-code met de QR-scanner van uw wallet. Als u al op uw telefoon bent, open dan uw wallet door op de knop 'Openen in wallet' te klikken.",
   "loading_verify_company_information_caption": "Verifying the company information",
-  "loading_verify_company_information_description": "Please wait, you will automatically go to the next step."
+  "loading_verify_company_information_description": "Please wait, you will automatically go to the next step.",
+  "loading_verify_identity_information_caption": "Verifying your identity.",
+  "loading_verify_identity_information_description": "Please wait, you will automatically go to the next step."
 }
