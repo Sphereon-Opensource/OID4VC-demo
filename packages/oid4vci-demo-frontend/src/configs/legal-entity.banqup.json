@@ -123,6 +123,24 @@
         ],
         [
           {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_contact_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_contact_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
             "id": "companyEmailAddress",
             "key": "companyEmailAddress",
             "label": "ssi_information_request_page_form_company_email_address_label",
@@ -136,15 +154,6 @@
             "id": "taxRegistrationNumber",
             "key": "taxRegistrationNumber",
             "label": "ssi_information_request_page_form_tax_registration_number_label",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "vatNumber",
-            "key": "vatNumber",
-            "label": "ssi_information_request_page_form_vat_number_label",
             "type": "text",
             "required": true
           }
