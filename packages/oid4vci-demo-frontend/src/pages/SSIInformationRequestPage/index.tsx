@@ -254,7 +254,7 @@ const SSIInformationRequestPage: React.FC = () => {
                                 row.map((field: DataFormElement) => {
                                     return ({
                                         ...field,
-                                        readonly: field.defaultValue !== undefined && !!state?.data?.vp_token,
+                                        readonly: (!!field.defaultValue || !!payload[field.id]) && !!state?.data?.vp_token,
                                         defaultValue: payload[field.id] as string
                                     })
                                 }))}
