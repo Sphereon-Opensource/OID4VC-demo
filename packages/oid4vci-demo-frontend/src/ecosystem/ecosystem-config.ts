@@ -125,13 +125,13 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
 
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
-    photoManual?: string
     photoWallet?: string
     textLeft?: string
     backgroundColor?: string
     logo?: ImageProperties
     title?: string
     topParagraph?: string
+    bottomParagraphText?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
@@ -144,12 +144,10 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
 export interface SSIInformationRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photo?: string
-    photoManual?: string
     text_top_of_image?: string
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
     primaryButtonResourceId?: string
-    primaryButtonManualResourceId?: string
     form: DataFormRow[]
     mobile?: {
         logo?: ImageProperties

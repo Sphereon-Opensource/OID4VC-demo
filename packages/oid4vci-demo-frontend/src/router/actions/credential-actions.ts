@@ -18,7 +18,6 @@ type QRState = Record<string, any>
 
 type CredentialOfferState = {
     payload: Payload,
-    isManualIdentification: Boolean,
     credentialType?: string
 }
 export const createCredentialOffer = async (actionParams: Record<string, any>, state: CredentialOfferState, ecosystem: Ecosystem): Promise<QRState> => {
@@ -40,6 +39,5 @@ export const createCredentialOffer = async (actionParams: Record<string, any>, s
     return {
         uri: uriData.uri,
         preAuthCode: shortUuid,
-        isManualIdentification: state.isManualIdentification,
     } as QRState
 }

@@ -174,7 +174,7 @@
       "leftPaneWidth": "40%",
       "title": "title_secure_your_personal_credential",
       "topParagraph": "paragraph_add_credential",
-      "bottomParagraph": "paragraph_scan_this_qr",
+      "bottomParagraph": "qrcode_right_pane_bottom_paragraph",
       "backgroundColor": "#0E0B31",
       "logo": {
         "src": "banqup/logo.svg"
