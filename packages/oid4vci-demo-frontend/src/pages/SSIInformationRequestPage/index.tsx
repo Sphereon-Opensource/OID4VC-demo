@@ -57,6 +57,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const state: State | undefined = location.state;
     const {t} = useTranslation()
     const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig.form))
+    const [initComplete, setInitComplete] = useState<boolean>(false)
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const processVPToken = useCallback(async () => {
@@ -149,6 +150,7 @@ const SSIInformationRequestPage: React.FC = () => {
             const authPayload = payload.filter(p => Object.keys(p).length === max)[0]
             setPayload(authPayload)
         }
+        setInitComplete(true)
     }, [state?.data?.vp_token])
 
     useEffect(() => {
@@ -244,10 +246,19 @@ const SSIInformationRequestPage: React.FC = () => {
                         </text>
                     </div>
                     <div/>
-                    <Form
-                        form={pageConfig.form.map((row: DataFormRow) => row.map((field: DataFormElement) => ({ ...field, readonly: field.defaultValue !== undefined && !!state?.data?.vp_token, defaultValue: payload[field.id] as string })))}
-                        onChange={onFormValueChange}
-                    />
+                    {initComplete && ( // We should not render the form until handleVPToken's result came back
+                        <Form
+                            form={pageConfig.form.map((row: DataFormRow) =>
+                                row.map((field: DataFormElement) => {
+                                    return ({
+                                        ...field,
+                                        readonly: field.defaultValue !== undefined && !!state?.data?.vp_token,
+                                        defaultValue: payload[field.id] as string
+                                    })
+                                }))}
+                            onChange={onFormValueChange}
+                        />
+                    )}
                     <div>
                         <SSIPrimaryButton
                             caption={t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
