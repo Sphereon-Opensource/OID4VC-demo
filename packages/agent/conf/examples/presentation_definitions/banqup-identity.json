@@ -1,24 +1,14 @@
 {
   "id": "banqup-identity",
-  "purpose": "We hebben informatie nodig van u",
+  "purpose": "We need to confirm your bank account",
   "input_descriptors": [
     {
-      "id": "628123ed-a16d-4716-aaee-67734360777e",
-      "name": "Bankrekening",
-      "purpose": "We hebben het bankrekening credential van u nodig",
+      "id": "d618cebc-5a26-4bb9-a46e-172bfa25f070",
+      "name": "Account",
+      "purpose": "We need a verified Banq account credential",
       "schema": [
         {
           "uri": "Account"
-        }
-      ]
-    },
-    {
-      "id": "86431fd3-e091-455e-8eab-06940c5b0d38",
-      "name": "Identiteit",
-      "purpose": "We hebben een ID credential van u nodig",
-      "schema": [
-        {
-          "uri": "Identity"
         }
       ]
     }

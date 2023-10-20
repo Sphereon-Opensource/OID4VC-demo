@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://banqup.demo.sphereon.com/agent",
+  "correlationId": "https://agent.banqup.demo.sphereon.com",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://banqup.demo.sphereon.com/agent",
-    "credential_endpoint": "https://banqup.demo.sphereon.com/agent/credentials",
+    "credential_issuer": "https://agent.banqup.demo.sphereon.com",
+    "credential_endpoint": "https://agent.banqup.demo.sphereon.com/credentials",
     "display": [
       {
         "name": "Banqup",
