@@ -117,7 +117,7 @@
       "form": [
         [
           {
-            "id": "ssi_information_request_page_form_first_name",
+            "id": "firstName",
             "key": "firstName",
             "label": "ssi_information_request_page_form_first_name_label",
             "type": "text",
@@ -126,7 +126,7 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_form_last_name",
+            "id": "lastName",
             "key": "lastName",
             "label": "ssi_information_request_page_form_last_name_label",
             "type": "text",
@@ -135,7 +135,7 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_form_email",
+            "id": "emailAddress",
             "key": "emailAddress",
             "label": "ssi_information_request_page_form_email_label",
             "type": "text",
@@ -145,7 +145,7 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_form_bsn_number",
+            "id": "bsnNumber",
             "key": "bsnNumber",
             "label": "ssi_information_request_page_form_bsn_number_label",
             "type": "text",
@@ -183,12 +183,13 @@
       "leftPaneWidth": "40%",
       "title": "title_secure_your_personal_credential",
       "topParagraph": "paragraph_add_credential",
-      "bottomParagraph": "paragraph_scan_this_qr",
+      "bottomParagraph": "qrcode_right_pane_bottom_paragraph",
       "backgroundColor": "#0E0B31",
       "logo": {
         "src": "banqup/logo.svg"
       },
       "mobile": {
+        "bottomParagraph": "mobile_right_pane_bottom_paragraph",
         "logo": {
           "src": "banqup/logo.svg",
           "alt": "banqup",

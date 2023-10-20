@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, FocusEvent, HTMLInputTypeAttribute, ReactElement, useState} from 'react'
+import React, {ChangeEvent, FC, FocusEvent, HTMLInputTypeAttribute, ReactElement, useEffect, useState} from 'react'
 import style from './index.module.css'
 import {FormFieldValue} from '../../types'
 
@@ -27,6 +27,10 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
     const [value, setValue] = useState<FormFieldValue>(defaultValue)
     const [isValid, setIsValid] = useState<boolean>(true)
     const isCheckBox = type === 'checkbox'
+
+    useEffect(() => { // It can be that the form is rendered without payload data the first time
+        setValue(defaultValue);
+    }, [defaultValue]);
 
     const onChangeValue = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
         const value: string | boolean = isCheckBox ? event.target.checked : event.target.value

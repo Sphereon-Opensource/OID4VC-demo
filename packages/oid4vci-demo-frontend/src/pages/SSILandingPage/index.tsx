@@ -26,12 +26,11 @@ const SSILandingPage: React.FC = () => {
     }
 
     const onManualIdentificationClick = async (): Promise<void> => {
-        const params = {isManualIdentification: true}
-        await flowRouter.goToStep('infoRequest', params as NavigateOptions)  // TODO create config prop for stepId
+        await flowRouter.goToStep('infoRequest')
     }
 
     const onWalletIdentificationClick = async (): Promise<void> => {
-        await flowRouter.goToStep('verifyRequest') // TODO create config prop for stepId
+        await flowRouter.goToStep('verifyRequest')
     }
 
     return (

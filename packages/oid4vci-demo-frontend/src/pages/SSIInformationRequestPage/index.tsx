@@ -23,7 +23,6 @@ import {useEcosystem} from "../../ecosystem/ecosystem"
 
 type State = {
     data?: any
-    isManualIdentification?: boolean
 }
 
 function getInitialState(form: DataFormRow[] | undefined) {
@@ -58,14 +57,8 @@ const SSIInformationRequestPage: React.FC = () => {
     const state: State | undefined = location.state;
     const {t} = useTranslation()
     const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig.form))
+    const [initComplete, setInitComplete] = useState<boolean>(false)
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-
-
-    // Manually is only when all of them need to be filled by the user
-    // None of them means that our wallet is used
-    // Only Email is microsoft entra
-    // TODO WAL-546
-    const [isManualIdentification, setManualIdentification] = useState<boolean>((!payload.Voornaam || payload.Voornaam === '') || (!payload.Achternaam || payload.Achternaam === ''))
 
     const processVPToken = useCallback(async () => {
         async function asyncFlatMap<T, O>(arr: T[], asyncFn: (t: T) => Promise<O[]>): Promise<O[]> {
@@ -156,8 +149,8 @@ const SSIInformationRequestPage: React.FC = () => {
             const max = Math.max(...payload.map(p => Object.keys(p).length))
             const authPayload = payload.filter(p => Object.keys(p).length === max)[0]
             setPayload(authPayload)
-            setManualIdentification((!authPayload.Voornaam || authPayload.Voornaam === '') || (!authPayload.Achternaam || authPayload.Achternaam === '')) // FIXME
         }
+        setInitComplete(true)
     }, [state?.data?.vp_token])
 
     useEffect(() => {
@@ -186,7 +179,7 @@ const SSIInformationRequestPage: React.FC = () => {
                     height: isTabletOrMobile ? '100%': '100vh',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    ...((pageConfig.photo || pageConfig.photoManual) && { background: `url(${isManualIdentification? `${pageConfig.photoManual}` : `${pageConfig.photo}`}) 0% 0% / cover`}),
+                    ...((pageConfig.photo) && { background: `url(${pageConfig.photo}) 0% 0% / cover`}),
                     ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
                     ...(pageConfig.logo && { justifyContent: 'center' })
                 }}>
@@ -198,7 +191,7 @@ const SSIInformationRequestPage: React.FC = () => {
                             height={pageConfig.logo.height}
                         />
                     }
-                    { (pageConfig.text_top_of_image && !isManualIdentification) &&
+                    { pageConfig.text_top_of_image &&
                          <text
                              className={"poppins-medium-36"}
                              style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
@@ -253,18 +246,25 @@ const SSIInformationRequestPage: React.FC = () => {
                         </text>
                     </div>
                     <div/>
-                    <Form
-                        form={pageConfig.form.map((row: DataFormRow) => row.map((field: DataFormElement) => ({ ...field, readonly: field.defaultValue !== undefined && !!state?.data?.vp_token, defaultValue: payload[field.id] as string })))}
-                        onChange={onFormValueChange}
-                    />
+                    {initComplete && ( // We should not render the form until handleVPToken's result came back
+                        <Form
+                            form={pageConfig.form.map((row: DataFormRow) =>
+                                row.map((field: DataFormElement) => {
+                                    return ({
+                                        ...field,
+                                        readonly: field.defaultValue !== undefined && !!state?.data?.vp_token,
+                                        defaultValue: payload[field.id] as string
+                                    })
+                                }))}
+                            onChange={onFormValueChange}
+                        />
+                    )}
                     <div>
                         <SSIPrimaryButton
-                            caption={isManualIdentification
-                                ? t(pageConfig.primaryButtonManualResourceId ?? 'label_share')
-                                : t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
+                            caption={t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
                             style={{width: 327}}
                             disabled={!isPayloadValid(payload, pageConfig.form)}
-                            onClick={async () => await flowRouter.nextStep({payload, isManualIdentification})}
+                            onClick={async () => await flowRouter.nextStep({payload})}
                         />
                     </div>
                 </div>
