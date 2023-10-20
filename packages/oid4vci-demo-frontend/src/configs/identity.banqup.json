@@ -169,6 +169,15 @@
         ]
       ]
     },
+    "loading": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "loading_verify_identity_information_caption",
+      "sharing_data_right_pane_paragraph": "loading_verify_identity_information_description",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    },
     "issueRequest": {
       "leftPaneWidth": "40%",
       "title": "title_secure_your_personal_credential",
@@ -204,6 +213,12 @@
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/request",
+          "nextId": "loading"
+        },
+        {
+          "id": "loading",
+          "operation": "navigate",
+          "path": "/loading",
           "nextId": "credentialOffer"
         },
         {
