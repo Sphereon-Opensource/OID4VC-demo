@@ -6,7 +6,7 @@ import {useLocation} from 'react-router-dom'
 import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator'
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
 import DeepLink from "../../components/DeepLink"
-import {Mobile, NonMobile} from '../..'
+import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
@@ -174,20 +174,20 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         </Mobile>
                     </div>
                     <div style={{marginTop: "20px"}}>
-                        <NonMobile>
+                        <NonMobileOS>
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378}}
                                 className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                 lines={pageConfig.bottomParagraph ? t(pageConfig.bottomParagraph).split('\n') : []} // FIXME DPP-84
                             />
-                        </NonMobile>
-                        <Mobile>
+                        </NonMobileOS>
+                        <MobileOS>
                             <Text
                                 style={{flexGrow: 1, marginLeft: 24, marginRight: 24}}
                                 className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                 lines={t(pageConfig.mobile?.bottomParagraph ? pageConfig.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                             />
-                        </Mobile>
+                        </MobileOS>
                     </div>
                 </div>
             </div>
