@@ -131,7 +131,6 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     logo?: ImageProperties
     title?: string
     topParagraph?: string
-    bottomParagraphText?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
