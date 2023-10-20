@@ -57,6 +57,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const state: State | undefined = location.state;
     const {t} = useTranslation()
     const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig.form))
+    const [readonlyPayload, setReadonlyPayload] = useState<FormData>(getInitialState(pageConfig.form))
     const [initComplete, setInitComplete] = useState<boolean>(false)
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
@@ -148,6 +149,7 @@ const SSIInformationRequestPage: React.FC = () => {
         if (payload.length) {
             const max = Math.max(...payload.map(p => Object.keys(p).length))
             const authPayload = payload.filter(p => Object.keys(p).length === max)[0]
+            setReadonlyPayload(authPayload)
             setPayload(authPayload)
         }
         setInitComplete(true)
@@ -254,7 +256,7 @@ const SSIInformationRequestPage: React.FC = () => {
                                 row.map((field: DataFormElement) => {
                                     return ({
                                         ...field,
-                                        readonly: (field.readonly || (!!state?.data?.vp_token && !!payload[field.id])),
+                                        readonly: (field.readonly || (!!state?.data?.vp_token && !!readonlyPayload[field.id])),
                                         defaultValue: payload[field.id] as string ?? field.defaultValue
                                     })
                                 }))}
