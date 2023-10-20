@@ -17,10 +17,10 @@ const SSILoadingPage: React.FC = (): ReactElement => {
     const {payload, isManualIdentification} = location.state
 
     useEffect((): void => {
-        // Simulating a verifying process here that navigates to the next step after 10 seconds
+        // Simulating a verifying process here that navigates to the next step after 5 seconds
         setTimeout(async (): Promise<void> => {
             await flowRouter.nextStep({payload, isManualIdentification})
-        }, 10000)
+        }, 5000)
     }, []);
 
     return <div style={{display: 'flex',  height: "100vh", width: '100vw',  ...(isTabletOrMobile && { overflowX: "hidden", ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) })}}>
