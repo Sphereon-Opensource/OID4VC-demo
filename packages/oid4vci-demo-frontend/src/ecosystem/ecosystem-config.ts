@@ -83,6 +83,7 @@ export interface SSILoadingPageConfig extends PageConfig {
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph: string
     rightPaneButtonStepId?: string
+    spinnerColor?: string
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string

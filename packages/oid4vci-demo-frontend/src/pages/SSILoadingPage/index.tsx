@@ -1,12 +1,12 @@
-import React, {ReactElement, useEffect, useState} from 'react';
+import React, {ReactElement, useEffect} from 'react';
 import {useMediaQuery} from 'react-responsive';
 import {useTranslation} from 'react-i18next';
 import {useFlowRouter} from '../../router/flow-router';
 import {SSILoadingPageConfig} from '../../ecosystem/ecosystem-config';
 import {NonMobile} from '../../index';
 import style from './index.module.css'
-import {FormData} from "../../types";
 import {useLocation} from "react-router-dom";
+import {Oval} from 'react-loader-spinner'
 
 const SSILoadingPage: React.FC = (): ReactElement => {
     const {t} = useTranslation()
@@ -51,10 +51,24 @@ const SSILoadingPage: React.FC = (): ReactElement => {
             ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
             ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' })
         }}>
-            {/*TODO implement the spinner here*/}
-            <div className={style.captionContainer}>
-                <div className={style.caption}>{t(pageConfig.sharing_data_right_pane_title)}</div>
-                <div className={style.description}>{t(pageConfig.sharing_data_right_pane_paragraph)}</div>
+            <div className={style.contentContainer}>
+                {/*TODO replace with the spinner component from VDX-258*/}
+                <Oval
+                    height={160}
+                    width={160}
+                    color={pageConfig.spinnerColor}
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel='oval-loading'
+                    secondaryColor={pageConfig.spinnerColor}
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                />
+                <div className={style.captionContainer}>
+                    <div className={style.caption}>{t(pageConfig.sharing_data_right_pane_title)}</div>
+                    <div className={style.description}>{t(pageConfig.sharing_data_right_pane_paragraph)}</div>
+                </div>
             </div>
         </div>
     </div>
