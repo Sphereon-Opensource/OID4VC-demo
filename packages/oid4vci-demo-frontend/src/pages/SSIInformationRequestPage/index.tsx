@@ -11,7 +11,7 @@ import Form from "../../components/Form"
 import {FormData} from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
-import {CredentialData, useCredentialsReader} from "../../utils/credentials-helper"
+import {CredentialsData, useCredentialsReader} from "../../utils/credentials-helper"
 
 type State = {
     data?: any
@@ -48,7 +48,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const credentialName = useEcosystem().getGeneralConfig().credentialName
     const state: State | undefined = location.state
     const credentialsReader = useCredentialsReader()
-    const [credentialsData, setCredentialsData] = useState<CredentialData | undefined>()
+    const [credentialsData, setCredentialsData] = useState<CredentialsData | undefined>()
     const {t} = useTranslation()
     const [formData, setFormData] = useState<FormData>(getInitialState(pageConfig.form))
     const [initComplete, setInitComplete] = useState<boolean>(false)
@@ -56,7 +56,7 @@ const SSIInformationRequestPage: React.FC = () => {
 
 
     useEffect(() => {
-        credentialsReader.credentialDataFromVpToken(state?.data?.vp_token).then((credentialData?: CredentialData) => {
+        credentialsReader.credentialDataFromVpToken(state?.data?.vp_token).then((credentialData?: CredentialsData) => {
             setCredentialsData(credentialData)
             setInitComplete(true)
         })

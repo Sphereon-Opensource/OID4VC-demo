@@ -8,8 +8,8 @@ import {
 } from "@sphereon/ssi-types"
 import {Buffer} from "buffer"
 
-export type CredentialData = Readonly<Record<string, CredentialValue>>;
-export type CredentialValue = Readonly<string | number | ReadonlyArray<string> | boolean | undefined>;
+export type CredentialsData = Readonly<Record<string, CredentialsValue>>;
+export type CredentialsValue = Readonly<string | number | ReadonlyArray<string> | boolean | undefined>;
 
 export function useCredentialsReader() {
     
@@ -17,7 +17,7 @@ export function useCredentialsReader() {
         return JSON.parse(Buffer.from(jwt.split('.')[1], 'base64').toString())
     }
 
-    async function credentialDataFromVpToken(vp_token: W3CVerifiablePresentation | W3CVerifiablePresentation[]): Promise<CredentialData | undefined> {
+    async function credentialDataFromVpToken(vp_token: W3CVerifiablePresentation | W3CVerifiablePresentation[]): Promise<CredentialsData | undefined> {
         const credentialData = await handleVPToken(vp_token)
         if (credentialData.length) {
             const max = Math.max(...credentialData.map(p => Object.keys(p).length))
@@ -26,7 +26,7 @@ export function useCredentialsReader() {
         return undefined
     }
 
-    const handleVPToken = async (vpToken?: W3CVerifiablePresentation | W3CVerifiablePresentation[]): Promise<CredentialData[]> => {
+    const handleVPToken = async (vpToken?: W3CVerifiablePresentation | W3CVerifiablePresentation[]): Promise<CredentialsData[]> => {
         if (!vpToken) {
             return []
         }
@@ -36,7 +36,7 @@ export function useCredentialsReader() {
         return await handleVP(vpToken)
     }
 
-    const handleVP = async (vp: W3CVerifiablePresentation): Promise<CredentialData[]> => {
+    const handleVP = async (vp: W3CVerifiablePresentation): Promise<CredentialsData[]> => {
         let verifiablePresentation: IVerifiablePresentation
         if (typeof vp === 'string') {
             verifiablePresentation = (await decodeBase64(vp)).vp as IVerifiablePresentation
@@ -52,7 +52,7 @@ export function useCredentialsReader() {
         return handleCredential(verifiablePresentation.verifiableCredential)
     }
 
-    const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims): CredentialData => {
+    const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims): CredentialsData => {
         const keyValuePairs = Object.entries(cs).flatMap(([key, value]) => {
             if (value && typeof value === 'object' && !Array.isArray(value) && !(value instanceof Function)) {
                 return Object.entries(value).map(([nestedKey, nestedValue]) => [`${key}.${nestedKey}`, nestedValue])
@@ -60,10 +60,10 @@ export function useCredentialsReader() {
                 return [[key, value]]
             }
         })
-        return Object.fromEntries(keyValuePairs) as CredentialData
+        return Object.fromEntries(keyValuePairs) as CredentialsData
     }
 
-    const handleCredential = async (vc: W3CVerifiableCredential): Promise<CredentialData[]> => {
+    const handleCredential = async (vc: W3CVerifiableCredential): Promise<CredentialsData[]> => {
         let verifiableCredential: IVerifiableCredential
         if (typeof vc === 'string') {
             verifiableCredential = (await decodeBase64(vc)).vc as IVerifiableCredential

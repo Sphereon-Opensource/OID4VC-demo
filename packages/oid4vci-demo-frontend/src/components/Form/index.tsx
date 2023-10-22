@@ -7,11 +7,11 @@ import {transformFormConfigToEmptyObject} from '../../utils/ObjectUtils'
 import InputField from '../InputField'
 import {FormData, FormFieldValue} from '../../types'
 import style from './index.module.css'
-import {CredentialData} from "../../utils/credentials-helper"
+import {CredentialsData} from "../../utils/credentials-helper"
 
 type Props = {
     form: DataFormRow[]
-    credentialsData: CredentialData | undefined
+    credentialsData: CredentialsData | undefined
     onChange?: (formData: FormData) => Promise<void>
 }
 
@@ -26,7 +26,7 @@ function getInitialState(form: DataFormRow[] | undefined): FormData {
     return transformFormConfigToEmptyObject(form)
 }
 
-const evaluateDefaultValue = (field: DataFormElement, formData: FormData, credentialsData: CredentialData | undefined): FormFieldValue => {
+const evaluateDefaultValue = (field: DataFormElement, formData: FormData, credentialsData: CredentialsData | undefined): FormFieldValue => {
     const fieldValue = formData[field.key]
     if (fieldValue) {
         return fieldValue
