@@ -59,6 +59,7 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
             style={{ ...(!isValid && { borderColor: 'red' }) }}
             placeholder={placeholder}
             readOnly={readonly}
+            tabIndex={readonly ? -1 : undefined}
             onChange={onChangeValue}
             onBlur={onBlur}
             {...(!readonly && { className: style.enabled })}

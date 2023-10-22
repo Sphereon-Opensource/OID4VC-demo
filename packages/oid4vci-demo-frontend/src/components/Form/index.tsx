@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, ReactNode, useState} from 'react'
+import React, {FC, ReactElement, ReactNode, useRef, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
@@ -7,9 +7,11 @@ import {transformFormConfigToEmptyObject} from '../../utils/ObjectUtils'
 import InputField from '../InputField'
 import {FormData, FormFieldValue} from '../../types'
 import style from './index.module.css'
+import {CredentialData} from "../../utils/credentials-helper"
 
 type Props = {
     form: DataFormRow[]
+    credentialsData: CredentialData | undefined
     onChange?: (formData: FormData) => Promise<void>
 }
 
@@ -24,26 +26,27 @@ function getInitialState(form: DataFormRow[] | undefined): FormData {
     return transformFormConfigToEmptyObject(form)
 }
 
-const evaluateDefaultValue = (field: DataFormElement, payload: FormData): FormFieldValue => {
-    const payloadValue = payload[field.key]
-    if (payloadValue) {
-        return payloadValue
+const evaluateDefaultValue = (field: DataFormElement, formData: FormData, credentialsData: CredentialData | undefined): FormFieldValue => {
+    const fieldValue = formData[field.key]
+    if (fieldValue) {
+        return fieldValue
     }
 
-    let defaultValue: FormFieldValue = field.defaultValue ?? ''
+    let defaultValue: FormFieldValue = credentialsData?.[field.id] ?? field.defaultValue ?? ''
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = generateRandomIBAN()
     }
-    payload[field.key] = `${defaultValue}`
+    formData[field.key] = `${defaultValue}`
     return defaultValue
 }
 
 const Form: FC<Props> = (props: Props): ReactElement => {
-    const {form, onChange} = props
+    const {form, credentialsData, onChange} = props
     const {t} = useTranslation()
     const [formData, setFormData] = useState<FormData>(getInitialState(form))
+    const firstNonReadonlyInputRef = useRef(null);
 
     const onChangeValue = async (value: FormFieldValue, key: string): Promise<void> => {
         const data = {...formData, [key]: value}
@@ -54,7 +57,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getFieldElementFrom = (field: DataFormElement): ReactElement => {
-        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formData)
+        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formData, credentialsData)
         switch (field.type) {
             case 'checkbox':
                 return <SSICheckbox
@@ -62,7 +65,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     selectedColor={field.display?.checkboxSelectedColor}
                     // @ts-ignore // FIXME __html complaining
                     label={field.labelUrl ? <div dangerouslySetInnerHTML={{ __html: t(field.label, { url: field.labelUrl })}}/> : field.label}
-                    disabled={field.readonly}
+                    disabled={field.readonly || credentialsData?.[field.id] !== undefined }
                     labelColor={field.display?.checkboxLabelColor}
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
@@ -71,7 +74,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                 return <InputField
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
-                    readonly={field.readonly}
+                    readonly={field.readonly || credentialsData?.[field.id] !== undefined}
                     defaultValue={defaultValue}
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
@@ -83,7 +86,9 @@ const Form: FC<Props> = (props: Props): ReactElement => {
 
     const getRowElementFrom = (row: DataFormRow): ReactElement => {
         return <div className={style.formRowContainer}>
-            {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field))}
+            {row.map((field: DataFormElement): ReactNode => {
+                return getFieldElementFrom(field)
+            })}
         </div>
     }
 
