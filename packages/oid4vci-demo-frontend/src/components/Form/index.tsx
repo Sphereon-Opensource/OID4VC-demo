@@ -86,9 +86,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
 
     const getRowElementFrom = (row: DataFormRow): ReactElement => {
         return <div className={style.formRowContainer}>
-            {row.map((field: DataFormElement): ReactNode => {
-                return getFieldElementFrom(field)
-            })}
+            {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field))}
         </div>
     }
 
