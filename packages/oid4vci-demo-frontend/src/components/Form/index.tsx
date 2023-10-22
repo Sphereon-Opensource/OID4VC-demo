@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, ReactNode, useRef, useState} from 'react'
+import React, {FC, ReactElement, ReactNode, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
@@ -46,7 +46,6 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     const {form, credentialsData, onChange} = props
     const {t} = useTranslation()
     const [formData, setFormData] = useState<FormData>(getInitialState(form))
-    const firstNonReadonlyInputRef = useRef(null);
 
     const onChangeValue = async (value: FormFieldValue, key: string): Promise<void> => {
         const data = {...formData, [key]: value}
