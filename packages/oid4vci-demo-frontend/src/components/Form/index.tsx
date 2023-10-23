@@ -25,7 +25,7 @@ function getInitialState(form: DataFormRow[] | undefined): FormOutputData {
     return transformFormConfigToEmptyObject(form)
 }
 
-const evaluateDefaultValue = (field: DataFormElement, formData: FormOutputData, formInitData: ImmutableRecord | undefined): FormFieldValue => {
+const evaluateDefaultValue = (field: DataFormElement, formInitData: ImmutableRecord | undefined, formData: FormOutputData): FormFieldValue => {
     const fieldValue = formData[field.key]
     if (fieldValue) {
         return fieldValue
@@ -55,7 +55,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getFieldElementFrom = (field: DataFormElement): ReactElement => {
-        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formData, formInitData)
+        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formInitData, formData)
         switch (field.type) {
             case 'checkbox':
                 return <SSICheckbox
