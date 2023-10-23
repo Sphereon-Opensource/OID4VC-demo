@@ -162,7 +162,7 @@ const SSIInformationRequestPage: React.FC = () => {
                     <div/>
                     {initComplete && ( // We should not render the form until handleVPToken's result came back
                         <Form
-                            form={pageConfig.form}
+                            formConfig={pageConfig.form}
                             formInitData={credentialsData}
                             onChange={onFormValueChange}
                         />

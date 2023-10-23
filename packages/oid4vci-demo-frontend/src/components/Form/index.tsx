@@ -9,7 +9,7 @@ import {FormOutputData, FormFieldValue, ImmutableRecord} from '../../types'
 import style from './index.module.css'
 
 type Props = {
-    form: DataFormRow[]
+    formConfig: DataFormRow[]
     formInitData?: ImmutableRecord
     onChange?: (formData: FormOutputData) => Promise<void>
 }
@@ -42,9 +42,9 @@ const evaluateDefaultValue = (field: DataFormElement, formData: FormOutputData, 
 }
 
 const Form: FC<Props> = (props: Props): ReactElement => {
-    const {form, formInitData, onChange} = props
+    const {formConfig, formInitData, onChange} = props
     const {t} = useTranslation()
-    const [formData, setFormData] = useState<FormOutputData>(getInitialState(form))
+    const [formData, setFormData] = useState<FormOutputData>(getInitialState(formConfig))
 
     const onChangeValue = async (value: FormFieldValue, key: string): Promise<void> => {
         const data = {...formData, [key]: value}
@@ -89,7 +89,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getFormFrom = (): Array<ReactElement> => {
-        return form.map((row: DataFormRow) => getRowElementFrom(row))
+        return formConfig.map((row: DataFormRow) => getRowElementFrom(row))
     }
 
     return <div className={style.container}>
