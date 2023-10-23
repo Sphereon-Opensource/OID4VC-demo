@@ -25,13 +25,13 @@ function getInitialState(form: DataFormRow[] | undefined): FormOutputData {
     return transformFormConfigToEmptyObject(form)
 }
 
-const evaluateDefaultValue = (field: DataFormElement, formData: FormOutputData, credentialsData: ImmutableRecord | undefined): FormFieldValue => {
+const evaluateDefaultValue = (field: DataFormElement, formData: FormOutputData, formInitData: ImmutableRecord | undefined): FormFieldValue => {
     const fieldValue = formData[field.key]
     if (fieldValue) {
         return fieldValue
     }
 
-    let defaultValue: FormFieldValue = credentialsData?.[field.id] ?? field.defaultValue ?? ''
+    let defaultValue: FormFieldValue = formInitData?.[field.id] ?? field.defaultValue ?? ''
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
