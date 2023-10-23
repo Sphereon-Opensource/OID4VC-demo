@@ -66,8 +66,8 @@ const SSIInformationRequestPage: React.FC = () => {
         setFormData(formData)
     }
 
-    function determineWidth() {
-        if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
+	function determineWidth() {
+        if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
         return isTabletOrMobile ? '50%' : '40%'
