@@ -8,10 +8,11 @@ import {useMediaQuery} from "react-responsive"
 import {NonMobile} from "../../index"
 import {extractRequiredKeys, transformFormConfigToEmptyObject} from "../../utils/ObjectUtils"
 import Form from "../../components/Form"
-import {FormData} from "../../types"
+import {FormOutputData, ImmutableRecord} from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
-import {CredentialsData, useCredentialsReader} from "../../utils/credentials-helper"
+import {useCredentialsReader} from "../../utils/credentials-helper"
+
 
 type State = {
     data?: any
@@ -28,7 +29,7 @@ function getInitialState(form: DataFormRow[] | undefined) {
     return transformFormConfigToEmptyObject(form)
 }
 
-function isFormDataValid(formData: FormData, form?: DataFormRow[]) {
+function isFormDataValid(formData: FormOutputData, form?: DataFormRow[]) {
     let requiredFields = Object.keys(formData)
     if (form) {
         requiredFields = extractRequiredKeys(form)
@@ -48,21 +49,21 @@ const SSIInformationRequestPage: React.FC = () => {
     const credentialName = useEcosystem().getGeneralConfig().credentialName
     const state: State | undefined = location.state
     const credentialsReader = useCredentialsReader()
-    const [credentialsData, setCredentialsData] = useState<CredentialsData | undefined>()
+    const [credentialsData, setCredentialsData] = useState<ImmutableRecord | undefined>()
     const {t} = useTranslation()
-    const [formData, setFormData] = useState<FormData>(getInitialState(pageConfig.form))
+    const [formData, setFormData] = useState<FormOutputData>(getInitialState(pageConfig.form))
     const [initComplete, setInitComplete] = useState<boolean>(false)
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
 
     useEffect(() => {
-        credentialsReader.credentialDataFromVpToken(state?.data?.vp_token).then((credentialData?: CredentialsData) => {
+        credentialsReader.credentialDataFromVpToken(state?.data?.vp_token).then((credentialData?: ImmutableRecord) => {
             setCredentialsData(credentialData)
             setInitComplete(true)
         })
     }, [])
 
-    const onFormValueChange = async (formData: FormData): Promise<void> => {
+    const onFormValueChange = async (formData: FormOutputData): Promise<void> => {
         setFormData(formData)
     }
 
@@ -162,7 +163,7 @@ const SSIInformationRequestPage: React.FC = () => {
                     {initComplete && ( // We should not render the form until handleVPToken's result came back
                         <Form
                             form={pageConfig.form}
-                            credentialsData={credentialsData}
+                            formInitData={credentialsData}
                             onChange={onFormValueChange}
                         />
                     )}
