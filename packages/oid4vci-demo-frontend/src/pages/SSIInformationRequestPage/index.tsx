@@ -58,6 +58,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const {t} = useTranslation()
     const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig.form))
     const [initComplete, setInitComplete] = useState<boolean>(false)
+    const [vpTokenValues, setVpTokenValues] = useState<string[]>([]);
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     const processVPToken = useCallback(async () => {
@@ -85,7 +86,7 @@ const SSIInformationRequestPage: React.FC = () => {
                 if (!cs.firstName && !cs.lastName && !cs.emailAddress) {
                     return {} as Record<string, string>;
                 }
-
+                setVpTokenValues(prevVpTokenValues => [...prevVpTokenValues, 'firstName', 'lastName', 'emailAddress']);
                 return {
                     firstName: cs.firstName,
                     lastName: cs.lastName,
@@ -95,8 +96,8 @@ const SSIInformationRequestPage: React.FC = () => {
             const payload = transformFormConfigToEmptyObject(form);
             for (const payloadKey in payload) {
                 if (payloadKey in cs) {
-                    // TODO: since this code is based on the manual flow, we have to revisit it for the wallet flow
                     payload[payloadKey] = cs[payloadKey];
+                    setVpTokenValues(prevVpTokenValues => [...prevVpTokenValues, payloadKey]);
                 }
             }
             return payload;
@@ -254,7 +255,7 @@ const SSIInformationRequestPage: React.FC = () => {
                                 row.map((field: DataFormElement) => {
                                     return ({
                                         ...field,
-                                        readonly: (field.readonly || (!!state?.data?.vp_token && !!payload[field.id])),
+                                        readonly: field.readonly || vpTokenValues.includes(field.id),
                                         defaultValue: payload[field.id] as string ?? field.defaultValue
                                     })
                                 }))}
