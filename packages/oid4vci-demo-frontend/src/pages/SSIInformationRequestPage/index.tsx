@@ -77,7 +77,13 @@ const SSIInformationRequestPage: React.FC = () => {
         <div style={{
             display: 'flex',
             height: "100vh",
-            width: '100vw', ...(isTabletOrMobile && {overflowX: "hidden", ...(pageConfig.mobile?.backgroundColor && {backgroundColor: pageConfig.mobile.backgroundColor})})
+            width: '100vw',
+            ...(isTabletOrMobile && {
+                overflowX: "hidden",
+                ...(pageConfig.mobile?.backgroundColor && {
+                    backgroundColor: pageConfig.mobile.backgroundColor
+                })
+            })
         }}>
             <NonMobile>
                 <div id={"photo"} style={{
@@ -98,13 +104,13 @@ const SSIInformationRequestPage: React.FC = () => {
                             height={pageConfig.logo.height}
                         />
                     }
-                    {pageConfig.text_top_of_image &&
-                        <text
-                            className={"poppins-medium-36"}
-                            style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
-                        >
-                            {t(`${pageConfig.text_top_of_image}`)}
-                        </text>
+                    { pageConfig.text_top_of_image &&
+                         <text
+                             className={"poppins-medium-36"}
+                             style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
+                         >
+                             {t(`${pageConfig.text_top_of_image}`)}
+                         </text>
                     }
                 </div>
             </NonMobile>
@@ -114,8 +120,8 @@ const SSIInformationRequestPage: React.FC = () => {
                 width: determineWidth(),
                 alignItems: 'center',
                 flexDirection: 'column',
-                ...(isTabletOrMobile && {gap: 24, ...(pageConfig.mobile?.backgroundColor && {backgroundColor: pageConfig.mobile.backgroundColor})}),
-                ...(!isTabletOrMobile && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
+                ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
+                ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
                 {(isTabletOrMobile && pageConfig.mobile?.logo) &&
                     <img
