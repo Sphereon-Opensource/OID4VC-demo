@@ -1,19 +1,11 @@
 {
-  "general": {
-    "credentialName": "Sphereon Guest",
-    "issueCredentialType": "GuestCredential",
-    "baseUrl": "https://ssi.sphereon.com/demo/issuer",
-    "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
-    "verifierUrlCaption": "Sphereon demo",
-    "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
-  },
   "pages": {
     "landingPage": {
       "logo": {
         "src": "wallets/sphereon_logo.svg",
         "alt": "sphereon.com",
-        "width": 171,
-        "height": 36
+        "width": 300,
+        "height": 56
       },
       "mobile": {
         "logo": {
@@ -71,41 +63,12 @@
       "id": "default",
       "steps": [
         {
-          "id": "start",
+          "id": "landingPage",
           "operation": "navigate",
           "path": "/landing",
           "isDefaultRoute": true
         }
       ]
     }
-  ],
-  "components": {
-    "DeepLink": {},
-    "SSICardView": {
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#FBFBFB",
-          "textColor": "#FBFBFB"
-        },
-        "secondaryButton": {
-          "backgroundColor": "#062058"
-        }
-      }
-    },
-    "SSIPrimaryButton": {
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "linear-gradient(91deg, #7276F7 0.39%, #7C40E8 100%)"
-        }
-      }
-    },
-    "SSISecondaryButton": {
-      "styles": {
-        "mainContainer": {
-          "color": "#062058"
-        }
-      }
-    },
-    "Text": {}
-  }
+  ]
 }

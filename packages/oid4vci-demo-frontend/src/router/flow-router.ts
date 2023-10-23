@@ -1,7 +1,5 @@
 import {useLocation, useNavigate} from "react-router-dom"
 import {
-    getCurrentEcosystemPageConfig,
-    getEcosystemRoutes, hasCurrentEcosystemPageConfig,
     PageConfig,
     VCIAction,
     VCIConfigRoute,
@@ -9,9 +7,10 @@ import {
     VCIExecuteStep,
     VCINavigationStep,
     VCIOperation
-} from "../ecosystem-config"
+} from "../ecosystem/ecosystem-config"
 import {useMemo, useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
+import {useEcosystem} from "../ecosystem/ecosystem"
 
 
 type StepsByIdType = { [key: string]: VCIConfigRouteStep };
@@ -22,14 +21,11 @@ interface StepState {
 }
 
 export function useFlowAppRouter() {
-    const routes = getEcosystemRoutes()
+    const ecosystem = useEcosystem()
+    const routes = ecosystem.getRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
-    const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
+    const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(getCurrentRoute(routes, currentRouteId)))
 
-
-    function getRouteId(): string {
-        return currentRouteId
-    }
 
     function getDefaultLocation(state?: any): string {
         return defaultLocation(stepsById)
@@ -44,14 +40,12 @@ export function useFlowAppRouter() {
 export function useFlowRouter<T extends PageConfig>() {
     const navigate = useNavigate()
     const pageLocation = useLocation()
-    const routes = getEcosystemRoutes()
+    const ecosystem = useEcosystem()
+    const routes = ecosystem.getRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
-    const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(routes, getRouteId()))
+    const currentRoute = useMemo<VCIConfigRoute>(() => getCurrentRoute(routes, currentRouteId), [currentRouteId])
+    const stepsById = useMemo<StepsByIdType>(() => buildStepsByIdMap(currentRoute), [currentRouteId])
     const stepState = useMemo<StepState>(() => initStepState(), [pageLocation.pathname])
-
-    function getRouteId(): string {
-        return currentRouteId
-    }
 
     function initStepState(): StepState {
         const stepState = {} as StepState
@@ -72,8 +66,8 @@ export function useFlowRouter<T extends PageConfig>() {
         if (!currentStep) {
             throw new Error(`can't determine current step for location path ${currentLocation}`)
         }
-        if(hasCurrentEcosystemPageConfig(currentStep.id)) {
-            stepState.pageConfig = getCurrentEcosystemPageConfig(currentStep.id)
+        if(ecosystem.hasPageConfig(currentStep.id)) {
+            stepState.pageConfig = ecosystem.getPageConfig(currentStep.id)
         }
         return stepState
     }
@@ -130,7 +124,7 @@ export function useFlowRouter<T extends PageConfig>() {
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
-                    outState = await createCredentialOffer(inState)
+                    outState = await createCredentialOffer(executeStep.actionParams, inState, ecosystem)
                     break
             }
             stepState.currentStep = executeStep
@@ -147,15 +141,24 @@ export function useFlowRouter<T extends PageConfig>() {
         return stepState.pageConfig as T
     }
 
+    function getVpDefinitionId(): string {
+        const vpDefinitionId = getPageConfig().vpDefinitionId ?? currentRoute.vpDefinitionId
+        if(!vpDefinitionId) {
+            throw new Error('vpDefinitionId is neither defined in the page configuration nor in the route.')
+        }
+        return vpDefinitionId
+    }
+
     return {
         getPageConfig,
+        getVpDefinitionId,
         goToStep,
         nextStep,
         setCurrentRouteId
     }
 }
 
-function buildStepsByIdMap(routes: VCIConfigRoute[], routeId?: string): StepsByIdType {
+function getCurrentRoute(routes: VCIConfigRoute[], routeId?: string): VCIConfigRoute {
     const inputRouteId = routeId || 'default'
     const matchingRoute = routes.find((route) => {
         return route.id === inputRouteId
@@ -164,8 +167,11 @@ function buildStepsByIdMap(routes: VCIConfigRoute[], routeId?: string): StepsByI
     if (!matchingRoute) {
         throw new Error(`Route ${inputRouteId} could not be matched with the routes/route elements in your ecosystem json`)
     }
+    return matchingRoute
+}
 
-    return matchingRoute.steps.reduce((map, step) => {
+function buildStepsByIdMap(currentRoute: VCIConfigRoute): StepsByIdType {
+    return currentRoute.steps.reduce((map, step) => {
         map[step.id] = step
         return map
     }, {} as StepsByIdType)

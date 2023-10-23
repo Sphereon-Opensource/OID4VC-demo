@@ -1,21 +1,29 @@
 import short from "short-uuid"
-import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
-import agent from "../../agent"
-import {getCurrentEcosystemGeneralConfig} from "../../ecosystem-config"
+import {IOID4VCIClientCreateOfferUriResponse, IOID4VCIRestClient} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
+import {Ecosystem, useEcosystem} from "../../ecosystem/ecosystem"
+import {
+    ComponentConfig,
+    EcosystemGeneralConfig,
+    PageConfig,
+    VCIConfig,
+    VCIConfigRoute
+} from "../../ecosystem/ecosystem-config"
+import {IAgent, RemoveContext} from "@veramo/core"
+import {IQRCodeGenerator} from "@sphereon/ssi-sdk.qr-code-generator"
+import {ISIOPv2OID4VPRPRestClient} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client"
 
-const generalConfig = getCurrentEcosystemGeneralConfig()
 
 type Payload = Record<string, string>
 type QRState = Record<string, any>
 
 type CredentialOfferState = {
     payload: Payload,
-    isManualIdentification: Boolean,
     credentialType?: string
 }
-export const createCredentialOffer = async (state: CredentialOfferState): Promise<QRState> => {
+export const createCredentialOffer = async (actionParams: Record<string, any>, state: CredentialOfferState, ecosystem: Ecosystem): Promise<QRState> => {
+    const generalConfig = ecosystem.getGeneralConfig() // TODO delete me after all configs use actionParams.issueCredentialType
     const shortUuid = short.generate()
-    const uriData: IOID4VCIClientCreateOfferUriResponse = await agent.oid4vciClientCreateOfferUri({
+    const uriData: IOID4VCIClientCreateOfferUriResponse = await ecosystem.getAgent().oid4vciClientCreateOfferUri({
         grants: {
             'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
                 'pre-authorized_code': shortUuid,
@@ -25,12 +33,11 @@ export const createCredentialOffer = async (state: CredentialOfferState): Promis
         credentialDataSupplierInput: {
             ...state.payload
         },
-        credentials: [state.credentialType ?? generalConfig.issueCredentialType],
+        credentials: [state.credentialType ?? ("issueCredentialType" in actionParams ? actionParams.issueCredentialType : generalConfig.issueCredentialType)],
     })
 
     return {
         uri: uriData.uri,
         preAuthCode: shortUuid,
-        isManualIdentification: state.isManualIdentification,
     } as QRState
 }

@@ -1,9 +1,6 @@
-import React from 'react';
-import {
-    getCurrentEcosystemComponentConfig,
-    
-    SSIPrimaryButtonConfig
-} from "../../ecosystem-config"
+import React from 'react'
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSIPrimaryButtonConfig} from "../../ecosystem/ecosystem-config"
 
 export interface IButtonProps {
     style?: React.CSSProperties,
@@ -14,8 +11,9 @@ export interface IButtonProps {
 }
 
 const SSIPrimaryButton: React.FC<IButtonProps> = (props: IButtonProps) => {
-const config = getCurrentEcosystemComponentConfig('SSIPrimaryButton') as SSIPrimaryButtonConfig;
-const mainContainerStyle = config.styles.mainContainer;
+    const ecosystem = useEcosystem()
+    const config = ecosystem.getComponentConfig<SSIPrimaryButtonConfig>('SSIPrimaryButton')
+    const mainContainerStyle = config.styles.mainContainer;
     const {caption, disabled = false, onClick, style} = props
     // TODO text
     return (

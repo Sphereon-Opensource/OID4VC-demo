@@ -1,10 +1,10 @@
 import React from 'react'
-import {SSIMiniCardView} from '@sphereon/ui-components.ssi-react'
+import {SSICredentialMiniCardView} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
-import {SSICredentialCardConfig, SSICredentialsLandingPageConfig} from "../../ecosystem-config"
 import {Mobile, NonMobile} from "../../index"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
+import {SSICredentialCardConfig, SSICredentialsLandingPageConfig} from "../../ecosystem/ecosystem-config"
 
 function handleCredentialClick(value: SSICredentialCardConfig) {
     window.location.href = value.route
@@ -14,7 +14,7 @@ const SSICredentialsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
-    const config= flowRouter.getPageConfig()
+    const pageConfig= flowRouter.getPageConfig()
 
     return (
         <div style={{
@@ -22,7 +22,6 @@ const SSICredentialsLandingPage: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'space-around',
             alignContent: 'center',
-
             flex: 1,
             height: '100vh',
         }}>
@@ -34,15 +33,15 @@ const SSICredentialsLandingPage: React.FC = () => {
                     height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    ...(config.backgroundColor && {backgroundColor: config.backgroundColor}),
-                    ...(config.logo && {justifyContent: 'center'})
+                    ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
+                    ...(pageConfig.logo && {justifyContent: 'center'})
                 }}>
-                    {config.logo &&
+                    {pageConfig.logo &&
                         <img
-                            src={config.logo.src}
-                            alt={config.logo.alt}
-                            width={300}
-                            height={56}
+                            src={pageConfig.logo.src}
+                            alt={pageConfig.logo.alt}
+                            width={pageConfig.logo.width}
+                            height={pageConfig.logo.height}
                         />
                     }
                 </div>
@@ -63,10 +62,10 @@ const SSICredentialsLandingPage: React.FC = () => {
                     <Mobile>
                         <img
                             style={{marginBottom: 30}}
-                            src={config.mobile?.logo?.src ?? 'wallets/sphereon_logo.png'}
-                            alt={config.mobile?.logo?.alt ?? 'logo'}
-                            width={config.mobile?.logo?.width ?? 100}
-                            height={config.mobile?.logo?.height ?? 100}
+                            src={pageConfig.mobile?.logo?.src ?? 'wallets/sphereon_logo.png'}
+                            alt={pageConfig.mobile?.logo?.alt ?? 'logo'}
+                            width={pageConfig.mobile?.logo?.width ?? 100}
+                            height={pageConfig.mobile?.logo?.height ?? 100}
                         />
                     </Mobile>
                     <div style={{
@@ -80,15 +79,15 @@ const SSICredentialsLandingPage: React.FC = () => {
                         margin: 'auto'
                     }}>
                         <Mobile>
-                            <span style={{fontWeight: '600', fontSize: '24px', width: '100%'}}>{t(config.pageTitle)}</span><br/>
-                            <span style={{fontSize: '11px'}}>{t(config.text)}</span>
+                            <span style={{fontWeight: '600', fontSize: '24px', width: '100%'}}>{t(pageConfig.pageTitle)}</span><br/>
+                            <span style={{fontSize: '11px'}}>{t(pageConfig.text)}</span>
                         </Mobile>
                         <NonMobile>
-                            <span style={{fontWeight: '600', fontSize: '32px'}}>{t(config.pageTitle)}</span><br/>
-                            <span style={{fontSize: '20px'}}>{t(config.text)}</span>
+                            <span style={{fontWeight: '600', fontSize: '32px'}}>{t(pageConfig.pageTitle)}</span><br/>
+                            <span style={{fontSize: '20px'}}>{t(pageConfig.text)}</span>
                         </NonMobile>
                     </div>
-                    {config.credentials.map(value => (
+                    {pageConfig.credentials.map(value => (
                         <div onClick={() => handleCredentialClick(value)}>
                             <Mobile>
                                 <div style={{
@@ -97,8 +96,9 @@ const SSICredentialsLandingPage: React.FC = () => {
                                     alignContent: 'space-between',
                                     cursor: 'pointer'
                                 }}>
-                                    <SSIMiniCardView
+                                    <SSICredentialMiniCardView
                                         backgroundImage={{uri: value.backgroundImage}}
+                                        backgroundColor={value.backgroundColor}
                                         logo={{
                                             uri: value.logo?.src,
                                             ...((value.logo?.height && value.logo?.width) && {
@@ -107,12 +107,11 @@ const SSICredentialsLandingPage: React.FC = () => {
                                                     width: value.logo?.width,
                                                 }
                                             })
-
                                         }}
                                     />
                                     <div style={{width: 200, paddingLeft: '5px'}}>
-                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span><br/>
-                                        <span style={{fontSize: '10px'}}>{value.description}</span>
+                                        <span style={{fontSize: '10px'}}>{value.description}</span><br/>
+                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span>
                                     </div>
                                 </div>
                             </Mobile>
@@ -124,8 +123,9 @@ const SSICredentialsLandingPage: React.FC = () => {
                                     justifyContent: 'center',
                                     cursor: 'pointer'
                                 }}>
-                                    <SSIMiniCardView
+                                    <SSICredentialMiniCardView
                                         style={{width: 140, height: 90}}
+                                        backgroundColor={value.backgroundColor}
                                         backgroundImage={{
                                             uri: value.backgroundImage
                                         }}
@@ -137,16 +137,15 @@ const SSICredentialsLandingPage: React.FC = () => {
                                                     width: value.logo?.width,
                                                 }
                                             })
-
                                         }}
                                     />
                                     <div style={{width: '450px', textAlign: 'left', paddingLeft: '3%'}}>
+                                        <span style={{fontSize: '18px', color: '#303030',}}>{value.description}</span><br/>
                                         <span style={{
                                             fontSize: '30px',
                                             fontWeight: '500',
                                             color: '#303030'
-                                        }}>{value.name}</span><br/>
-                                        <span style={{fontSize: '18px', color: '#303030',}}>{value.description}</span>
+                                        }}>{value.name}</span>
                                     </div>
                                 </div>
                             </NonMobile>

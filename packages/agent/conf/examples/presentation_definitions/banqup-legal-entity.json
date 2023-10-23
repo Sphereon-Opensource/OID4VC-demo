@@ -1,0 +1,16 @@
+{
+  "id": "banqup-legal-entity",
+  "purpose": "We need to confirm your identity",
+  "input_descriptors": [
+    {
+      "id": "d618cebc-5a26-4bb9-a46e-172bfa25f070",
+      "name": "VerifiedIdentity",
+      "purpose": "We need a verified identity credential",
+      "schema": [
+        {
+          "uri": "Identity"
+        }
+      ]
+    }
+  ]
+}

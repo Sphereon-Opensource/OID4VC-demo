@@ -2,7 +2,8 @@
   "general": {
     "credentialName": "Sphereon Guest",
     "issueCredentialType": "GuestCredential",
-    "baseUrl": "https://ssi.sphereon.com/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.sphereon.com/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.sphereon.com/demo/issuer",
     "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
     "verifierUrlCaption": "Sphereon demo",
     "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
@@ -163,6 +164,7 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "sphereonGuest",
       "steps": [
         {
           "id": "startPage",

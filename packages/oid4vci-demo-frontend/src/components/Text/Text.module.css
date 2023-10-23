@@ -15,3 +15,11 @@ div.text > p {
     flex-grow: 1;
     margin: 0
 }
+
+.removeMarginTop > h2 {
+    margin-top: 0;
+}
+
+.removeMarginBottom > h2 {
+    margin-bottom: 0;
+}

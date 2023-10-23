@@ -2,8 +2,6 @@ import React, {ReactElement, useEffect, useState} from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import './index.module.css'
-import {SSICardView} from '@sphereon/ui-components.ssi-react'
-import {SSISelectCredentialPageConfig} from '../../ecosystem-config'
 import {MetadataClient} from '@sphereon/oid4vci-client'
 import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadataResult} from '@sphereon/oid4vci-common'
 import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store'
@@ -13,6 +11,9 @@ import {useMediaQuery} from "react-responsive"
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {Pagination} from 'swiper'
 import {useFlowRouter} from "../../router/flow-router"
+import {SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSICredentialCardView} from "@sphereon/ui-components.ssi-react"
 
 const short = require('short-uuid');
 
@@ -25,13 +26,15 @@ const SSISelectCredentialPage: React.FC = () => {
     const [payload] = useState<Payload>({})
     const [isManualIdentification] = useState<boolean>(false)
     const flowRouter = useFlowRouter<SSISelectCredentialPageConfig>()
-    const config: SSISelectCredentialPageConfig = flowRouter.getPageConfig()
+    const pageConfig: SSISelectCredentialPageConfig = flowRouter.getPageConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     useEffect((): void => {
 
-        MetadataClient.retrieveAllMetadata(process.env.REACT_APP_OID4VCI_AGENT_BASE_URL!).then(async (metadata: EndpointMetadataResult): Promise<void> => {
+        MetadataClient.retrieveAllMetadata(generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer')
+            .then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
 
             if (!metadata.credentialIssuerMetadata) {
@@ -71,7 +74,7 @@ const SSISelectCredentialPage: React.FC = () => {
                             style={{cursor: 'pointer', width: '325px'}}
                             onClick={() => onSelectCredential(key)}
                         >
-                            <SSICardView
+                            <SSICredentialCardView
                                 header={{
                                     credentialTitle: value[0].alias,
                                     credentialSubtitle: value[0].description,
@@ -133,13 +136,13 @@ const SSISelectCredentialPage: React.FC = () => {
     // @ts-ignore
     return (
         <div
-            style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: config.styles.mainContainer.backgroundColor, alignItems: 'center', justifyContent: 'center'}}>
+            style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: pageConfig.styles.mainContainer.backgroundColor, alignItems: 'center', justifyContent: 'center'}}>
             <div style={{display: 'flex', flexDirection: 'row', maxWidth: isTabletOrMobile ? 327 : 1075, gap: 13, marginTop: isTabletOrMobile ? 25: 244, justifyContent: 'center'}}>
                 <p className={'inter-normal-48'} style={{color: '#FBFBFB', alignContent: 'center', textAlign: 'center'}}>{t('select_credential_title1') + ' '}
                 <span className={`inter-normal-48`}
 
                    style={{
-                       background: config.styles.mainContainer.textGradient,
+                       background: pageConfig.styles.mainContainer.textGradient,
                        backgroundClip: 'text',
                        WebkitBackgroundClip: 'text',
                        WebkitTextFillColor: 'transparent',
@@ -149,7 +152,7 @@ const SSISelectCredentialPage: React.FC = () => {
                 <span className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title3') + ' '}</span>
                 <span className={`inter-normal-48`}
                    style={{
-                       background: config.styles.mainContainer.textGradient,
+                       background: pageConfig.styles.mainContainer.textGradient,
                        backgroundClip: 'text',
                        WebkitBackgroundClip: 'text',
                        WebkitTextFillColor: 'transparent',
@@ -191,10 +194,10 @@ const SSISelectCredentialPage: React.FC = () => {
 
             <img
                 style={{marginTop: isTabletOrMobile ? 'initial': 'auto', marginBottom: isTabletOrMobile ? 15: 85}}
-                src={config.logo.src}
-                alt={config.logo.alt}
-                width={config.logo.width}
-                height={config.logo.height}
+                src={pageConfig.logo.src}
+                alt={pageConfig.logo.alt}
+                width={pageConfig.logo.width}
+                height={pageConfig.logo.height}
             />
         </div>
     );

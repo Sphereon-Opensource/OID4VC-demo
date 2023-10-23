@@ -1,80 +1,89 @@
-import {ImageProperties} from "./types"
-import {CSSProperties} from "react"
-import {IProps} from "./components/SSISecondaryButton"
+import {ImageProperties} from "../types"
+import {CSSProperties, HTMLInputTypeAttribute} from "react"
+import {IProps} from "../components/SSISecondaryButton"
 
-interface VCIConfig {
+export interface VCIConfig {
     general: EcosystemGeneralConfig
     pages: VCIConfigPages
     routes: VCIConfigRoute[]
     components: VCIConfigComponents
 }
 
-export function getCurrentEcosystemConfig(): VCIConfig {
-    const ecosystem = process.env.REACT_APP_ENVIRONMENT ?? 'sphereon'
-    return require(`./configs/${ecosystem}.json`)
-}
-
-export function getCurrentEcosystemGeneralConfig(config?: VCIConfig): EcosystemGeneralConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    return config.general
-}
-
-export function getCurrentEcosystemComponentConfig(component: string, config?: VCIConfig): ComponentConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    if (component in config.components) {
-        return config.components[component as keyof VCIConfigComponents]
-    }
-    throw new Error(`config for ${component} doesn't exist`)
-}
-
-export function hasCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): boolean {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    return stepId in config.pages;
-}
-
-export function getCurrentEcosystemPageConfig(stepId: string, config?: VCIConfig): PageConfig {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    if (stepId in config.pages) {
-        return config.pages[stepId as keyof VCIConfigPages]
-    }
-    throw new Error(`Page config for step ${stepId} doesn't exist`)
-}
-
-export function getEcosystemRoutes(config?: VCIConfig): VCIConfigRoute[] {
-    if (!config) {
-        config = getCurrentEcosystemConfig()
-    }
-    if (!config.routes) {
-        throw new Error('The routes element is missing in the ecosystem json')
-    }
-    if (config.routes.length === 0) {
-        throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
-    }
-    return config.routes
-}
-
 export interface ComponentConfig {
 }
 
 export interface PageConfig {
+    vpDefinitionId?: string
 }
 
 export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft?: string
     photoRight: string
     backgroundColor?: string
     logo?: ImageProperties
-    enableRightPaneButton? : boolean
-    rightPaneButtonStepId? : string
+    enableRightPaneButton?: boolean
+    rightPaneButtonStepId?: string
     bottomParagraph?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+    rightPaneGrid?: {
+      style?: CSSProperties,
+    },
+    rightPaneLeftPane?: {
+      grid?: {
+        gridColumn?: string
+        gridRow?: string
+        height?: string
+      }
+      welcomeLabel?: {
+        style?: CSSProperties
+        className?: string
+      }
+      qrCode?: {
+        topTitle?: {
+          style?: CSSProperties
+        },
+        bottomText?: {
+          fontColor?: string
+          className?: string
+          credential_verify_request_right_pane_bottom_title?: string
+          credential_verify_request_right_pane_bottom_paragraph?: string
+        }
+        pane?: {
+          height?: string
+        }
+        width?: number
+        marginTop?: string,
+        marginBottom?: string
+      },
+      width?: string
+    }
+    mostRightPanel?: {
+      grid?: {
+        gridColumn?: string
+        gridRow?: string
+      }
+      separator?: {
+        logo?: ImageProperties
+      },
+      width?: string
+      height?: string
+      logo?: ImageProperties
+    }
+}
+
+export interface SSILoadingPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    sharing_data_right_pane_title: string
+    sharing_data_right_pane_paragraph: string
+    rightPaneButtonStepId?: string
+    spinnerColor?: string
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
@@ -83,9 +92,10 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
 }
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft: string
     photoRight: string
-    rightPaneButtonStepId? : string
+    rightPaneButtonStepId?: string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
@@ -100,6 +110,7 @@ export interface SSICredentialsLandingPageConfig extends PageConfig {
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photoLeft?: string
     photoLeftManual?: string
     leftTextHideManual?: boolean
@@ -107,14 +118,14 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
     photoRight: string
     textRight?: string
     mobile?: {
-      logo: ImageProperties
+        logo: ImageProperties
     },
     backgroundColor?: string
     logo?: ImageProperties
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {
-    photoManual?: string
+    leftPaneWidth?: string
     photoWallet?: string
     textLeft?: string
     backgroundColor?: string
@@ -131,15 +142,16 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
 }
 
 export interface SSIInformationRequestPageConfig extends PageConfig {
+    leftPaneWidth?: string
     photo?: string
-    photoManual?: string
     text_top_of_image?: string
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
-    form?: DataFormRow[]
+    primaryButtonResourceId?: string
+    form: DataFormRow[]
     mobile?: {
-      logo?: ImageProperties
-      backgroundColor?: string,
+        logo?: ImageProperties
+        backgroundColor?: string,
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -150,15 +162,21 @@ export interface SSIInformationRequestPageConfig extends PageConfig {
 export type DataFormRow = DataFormElement[];
 
 export interface DataFormElement {
-    id: string;
-    title: string;
-    key: string;
-    type: DataFormInputType;
-    required: boolean;
+    id: string
+    key: string
+    type: HTMLInputTypeAttribute
+    required?: boolean
     defaultValue?: string
+    label?: string
+    labelUrl?: string
+    readonly?: boolean
+    customValidation?: string
+    display?: {
+        checkboxBorderColor?: string
+        checkboxLabelColor?: string
+        checkboxSelectedColor?: string
+    }
 }
-
-type DataFormInputType = 'string' | 'date';
 
 export interface SSIDownloadPageConfig extends PageConfig {
     rightPane: {
@@ -176,6 +194,7 @@ export interface SSIDownloadPageConfig extends PageConfig {
         }
     }
     leftPane: {
+        width?: string
         leftPhone: {
             logo: ImageProperties
             image: ImageProperties
@@ -184,6 +203,36 @@ export interface SSIDownloadPageConfig extends PageConfig {
             logo: ImageProperties
             image: ImageProperties
         }
+    }
+}
+
+export interface SphereonWalletPageConfig extends PageConfig {
+    leftPane: {
+        image?: string
+        backgroundColor?: string
+        width?: string
+        logo?: ImageProperties,
+        mobile?: {
+            logo?: ImageProperties
+            backgroundColor?: string
+            image?: string
+        },
+    }
+    rightPane: {
+        image: string
+        width?: string
+        backgroundColor?: string
+        sphereonWalletQRCode: {
+            style: CSSProperties,
+            image: ImageProperties & { style: CSSProperties }
+            button: IProps & { style: CSSProperties }
+            downloadUrl: string
+        }
+        enablePrimaryButton?: boolean
+        primaryButtonResourceId?: string
+        primaryButtonStepId?: string
+        paragraphResourceId?: string
+        qrTextResourceId?: string
     }
 }
 
@@ -261,14 +310,16 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
 }
 
 export interface EcosystemGeneralConfig {
-    baseUrl?: string
+    oid4vpAgentBaseUrl?: string
+    oid4vciAgentBaseUrl?: string
+    authenticationEnabled?: boolean
+    authenticationStaticToken?: string
     verifierUrl?: string
     backCaption?: string
     verifierUrlCaption?: string
     downloadUrl?: string
     credentialName: string
     issueCredentialType: string
-
 }
 
 export interface SSITextConfig extends ComponentConfig {
@@ -284,10 +335,12 @@ export interface VCIConfigPages {
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
+    SSILoadingPage: SSILoadingPageConfig
 }
 
 export interface VCIConfigRoute {
     id?: string
+    vpDefinitionId?: string
     steps: VCIConfigRouteStep[]
 }
 
@@ -313,6 +366,7 @@ export interface VCINavigationStep extends VCIConfigRouteStep {
 
 export interface VCIExecuteStep extends VCIConfigRouteStep {
     action: VCIAction
+    actionParams: Record<string, any>
 }
 
 export interface VCIConfigComponents {
@@ -323,3 +377,22 @@ export interface VCIConfigComponents {
     Text: SSITextConfig
 }
 
+export function getEcosystemRootConfig(ecosystemId: string): VCIConfig {
+    return require(`../configs/${ecosystemId}.json`)
+}
+
+export function assertRoutes(routes: VCIConfigRoute[]) : VCIConfigRoute[] {
+    if (!routes) {
+        throw new Error('The routes element is missing in the ecosystem json')
+    }
+    if (routes.length === 0) {
+        throw new Error('The routes element in the ecosystem json is missing "route" child-elements')
+    }
+    return routes
+}
+
+export function getEcosystemRoutes(ecosystemId: string): VCIConfigRoute[] {
+    const config = getEcosystemRootConfig(ecosystemId)
+    assertRoutes(config.routes)
+    return config.routes
+}

@@ -8,6 +8,7 @@ import {
     IMetadataImportArgs
 } from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 
+
 await dotenvConfig()
 
 export const DB_CONNECTION_NAME = process.env.DB_CONNECTION_NAME ?? 'default'

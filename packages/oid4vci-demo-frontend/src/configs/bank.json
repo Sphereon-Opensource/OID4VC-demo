@@ -2,7 +2,8 @@
   "general": {
     "credentialName": "Bank account credential",
     "issueCredentialType": "BankAccount",
-    "baseUrl": "http://192.168.2.90:5000/bank",
+    "oid4vpAgentBaseUrl": "https://bank.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://bank.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Bank credential",
     "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
@@ -141,9 +142,9 @@
       }
     },
     "issueRequest": {
-      "title": "coc_qrcode_right_pane_top_title",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "title": "title_secure_your_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#01224B",
       "logo": {
         "src": "bank/guest_credential.svg",
@@ -192,9 +193,9 @@
         ],
         [
           {
-            "id": "ssi_information_request_page_form_kvknummer",
+            "id": "ssi_information_request_page_form_coc_number_label",
             "key": "KvkNummer",
-            "title": "ssi_information_request_page_form_kvknummer_title",
+            "title": "ssi_information_request_page_form_coc_number_label",
             "type": "string",
             "required": true
           }
@@ -203,7 +204,7 @@
           {
             "id": "ssi_information_request_page_form_company_location",
             "key": "Bedrijfslocatie",
-            "title": "ssi_information_request_page_form_company_location_title",
+            "title": "ssi_information_request_page_form_company_location_label",
             "type": "string",
             "required": true
           }
@@ -212,7 +213,7 @@
           {
             "id": "ssi_information_request_page_form_first_name_director",
             "key": "Voornaam",
-            "title": "ssi_information_request_page_form_first_name_director_title",
+            "title": "ssi_information_request_page_form_first_name_director_label",
             "type": "string",
             "required": true
           }
@@ -221,7 +222,7 @@
           {
             "id": "ssi_information_request_page_form_last_name_director",
             "key": "Achternaam",
-            "title": "ssi_information_request_page_form_last_name_director_title",
+            "title": "ssi_information_request_page_form_last_name_director_label",
             "type": "string",
             "required": true
           }
@@ -230,7 +231,7 @@
           {
             "id": "ssi_information_request_page_form_place_of_birth",
             "key": "Geboorteplaats",
-            "title": "ssi_information_request_page_form_place_of_birth_title",
+            "title": "ssi_information_request_page_form_place_of_birth_label",
             "type": "string",
             "required": true
           }
@@ -239,7 +240,7 @@
           {
             "id": "ssi_information_request_page_form_date_of_birth",
             "key": "Geboortedatum",
-            "title": "ssi_information_request_page_form_date_of_birth_title",
+            "title": "ssi_information_request_page_form_date_of_birth_label",
             "type": "date",
             "required": true
           }
@@ -250,9 +251,10 @@
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "knb-babylon",
       "steps": [
         {
-          "id": "verifyCredential",
+          "id": "verifyRequest",
           "operation": "navigate",
           "path": "/credentials/verify/request",
           "nextId": "infoRequest",
