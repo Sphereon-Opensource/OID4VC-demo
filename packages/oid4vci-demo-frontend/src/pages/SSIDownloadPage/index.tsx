@@ -1,37 +1,27 @@
-import React, {useEffect, useState} from "react"
-import {Text} from "../../components/Text";
-import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {
-    getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSIDownloadPageConfig
-} from "../../ecosystem-config";
-import {useTranslation} from "react-i18next";
-import SSIWalletQRCode from "../../components/SSIWalletQRCode";
-import {NonMobile} from "../../index";
-import {useMediaQuery} from "react-responsive";
-import {Sequencer} from "../../router/sequencer"
-import {useLocation, useNavigate} from "react-router-dom"
+import React from "react"
+import {Text} from "../../components/Text"
+import SSIPrimaryButton from "../../components/SSIPrimaryButton"
+import {useTranslation} from "react-i18next"
+import {SSIDownloadPageConfig} from "../../ecosystem/ecosystem-config"
+import SSIWalletQRCode from "../../components/SSIWalletQRCode"
+import {NonMobile} from "../../index"
+import {useMediaQuery} from "react-responsive"
+import {useFlowRouter} from "../../router/flow-router"
+import {useEcosystem} from "../../ecosystem/ecosystem"
 
 const SSIDownloadPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const location = useLocation()
-    const navigate = useNavigate()
-    const config = getCurrentEcosystemPageOrComponentConfig('SSIDownloadPage') as SSIDownloadPageConfig
-    const generalConfig = getCurrentEcosystemGeneralConfig()
+    const flowRouter = useFlowRouter<SSIDownloadPageConfig>()
+    const pageConfig = flowRouter.getPageConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
-
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-    }, [])
 
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: '60%',
+                    width: pageConfig.leftPane.width ?? '60%',
                     height: '100%',
                     background: 'linear-gradient(315deg, #FFF 0%, #E6E6E6 100%)',
                     backgroundSize: 'cover',
@@ -47,9 +37,9 @@ const SSIDownloadPage: React.FC = () => {
                         paddingLeft: '10%'
                     }}>
                         {/* eslint-disable-next-line jsx-a11y/alt-text*/}
-                        <img {...config.leftPane.leftPhone.logo} />
+                        <img {...pageConfig.leftPane.leftPhone.logo} />
                         {/* eslint-disable-next-line jsx-a11y/alt-text*/}
-                        <img {...config.leftPane.leftPhone.image} />
+                        <img {...pageConfig.leftPane.leftPhone.image} />
                     </div>
                     <div style={{
                         display: "flex",
@@ -61,9 +51,9 @@ const SSIDownloadPage: React.FC = () => {
                         paddingRight: '10%'
                     }}>
                         {/* eslint-disable-next-line jsx-a11y/alt-text*/}
-                        <img {...config.leftPane.rightPhone.logo}/>
+                        <img {...pageConfig.leftPane.rightPhone.logo}/>
                         {/* eslint-disable-next-line jsx-a11y/alt-text*/}
-                        <img {...config.leftPane.rightPhone.image}/>
+                        <img {...pageConfig.leftPane.rightPhone.image}/>
                     </div>
                 </div>
             </NonMobile>
@@ -103,27 +93,27 @@ const SSIDownloadPage: React.FC = () => {
                             justifyContent: "space-around"
                         }}>
                             <SSIWalletQRCode
-                                image={config.rightPane.paradymWalletQRCode.image}
+                                image={pageConfig.rightPane.paradymWalletQRCode.image}
                                 className='poppins-semi-bold-14'
                                 text={t('download_app_right_pane_paradym_qrcode_text') as string}
-                                style={config.rightPane.paradymWalletQRCode.style}
+                                style={pageConfig.rightPane.paradymWalletQRCode.style}
                                 button={{
-                                    style: config.rightPane.paradymWalletQRCode.button.style,
+                                    style: pageConfig.rightPane.paradymWalletQRCode.button.style,
                                     caption: t('download_app_right_pane_paradym_qrcode_button_caption'),
-                                    color: config.rightPane.paradymWalletQRCode.button.color,
-                                    onClick: () => window.location.href = config.rightPane.paradymWalletQRCode.downloadUrl
+                                    color: pageConfig.rightPane.paradymWalletQRCode.button.color,
+                                    onClick: () => window.location.href = pageConfig.rightPane.paradymWalletQRCode.downloadUrl
                                 }}
                             />
                             <SSIWalletQRCode
-                                image={config.rightPane.sphereonWalletQRCode.image}
+                                image={pageConfig.rightPane.sphereonWalletQRCode.image}
                                 className='poppins-semi-bold-14'
                                 text={t('download_app_right_pane_sphereon_qrcode_text') as string}
-                                style={config.rightPane.sphereonWalletQRCode.style}
+                                style={pageConfig.rightPane.sphereonWalletQRCode.style}
                                 button={{
-                                    style: config.rightPane.sphereonWalletQRCode.button.style,
+                                    style: pageConfig.rightPane.sphereonWalletQRCode.button.style,
                                     caption: t('download_app_right_pane_sphereon_qrcode_button_caption'),
-                                    color: config.rightPane.sphereonWalletQRCode.button.color,
-                                    onClick: () => window.location.href = config.rightPane.sphereonWalletQRCode.downloadUrl
+                                    color: pageConfig.rightPane.sphereonWalletQRCode.button.color,
+                                    onClick: () => window.location.href = pageConfig.rightPane.sphereonWalletQRCode.downloadUrl
                                 }}
                             />
                         </div>
@@ -132,7 +122,7 @@ const SSIDownloadPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={t('download_app_right_pane_button_caption')}
                             style={{width: '327px'}}
-                            onClick={async () => window.location.href = generalConfig.baseUrl ?? 'https://sphereon.com'}
+                            onClick={async () => window.location.href = generalConfig.downloadUrl ?? 'https://sphereon.com'}
                         />
                     </div>
                 </div>

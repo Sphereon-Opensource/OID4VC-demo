@@ -2,14 +2,15 @@
   "general": {
     "credentialName": "Notaris Credential",
     "issueCredentialType": "NotaryCompanyVerification",
-    "baseUrl": "https://notary.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "https://notary.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://notary.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Notaris credential",
     "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
-    "SSIDownloadPage": {
+    "download": {
       "rightPane": {
         "paradymWalletQRCode": {
           "style": {
@@ -129,9 +130,9 @@
       "backgroundColor": "#BEBEBE"
     },
     "SSICredentialIssueRequestPage": {
-      "title": "coc_qrcode_right_pane_top_title",
-      "topParagraph": "coc_qrcode_right_pane_top_paragraph",
-      "bottomParagraph": "coc_qrcode_right_pane_bottom_paragraph",
+      "title": "title_secure_your_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
       "logo": {
         "src": "notary/guest_credential.svg",
         "alt": "Van Auckland Notary",
@@ -160,7 +161,7 @@
           {
             "id": "ssi_information_request_page_form_company_name",
             "key": "Bedrijfsnaam",
-            "title": "ssi_information_request_page_form_company_name_title",
+            "title": "ssi_information_request_page_form_company_name_label",
             "type": "string",
             "required": true
           }
@@ -169,7 +170,7 @@
           {
             "id": "ssi_information_request_page_form_company_location",
             "key": "Bedrijfslocatie",
-            "title": "ssi_information_request_page_form_company_location_title",
+            "title": "ssi_information_request_page_form_company_location_label",
             "type": "string",
             "required": true
           }
@@ -178,14 +179,14 @@
           {
             "id": "ssi_information_request_page_first_name_director",
             "key": "Voornaam",
-            "title": "ssi_information_request_page_form_first_name_director_title",
+            "title": "ssi_information_request_page_form_first_name_director_label",
             "type": "string",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name_director",
             "key": "Achternaam",
-            "title": "ssi_information_request_page_form_last_name_director_title",
+            "title": "ssi_information_request_page_form_last_name_director_label",
             "type": "string",
             "required": true
           }
@@ -194,7 +195,7 @@
           {
             "id": "ssi_information_request_page_form_place_of_birth",
             "key": "Geboorteplaats",
-            "title": "ssi_information_request_page_form_place_of_birth_title",
+            "title": "ssi_information_request_page_form_place_of_birth_label",
             "type": "string",
             "required": true
           }
@@ -203,7 +204,7 @@
           {
             "id": "ssi_information_request_page_form_date_of_birth",
             "key": "Geboortedatum",
-            "title": "ssi_information_request_page_form_date_of_birth_title",
+            "title": "ssi_information_request_page_form_date_of_birth_label",
             "type": "date",
             "required": true
           }
@@ -250,34 +251,42 @@
       }
     }
   },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credentialOffer",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      },
-      {
-        "id": "issueSuccess",
-        "operation": "navigate",
-        "path": "https://knb.demo.sphereon.com"
-      }
-    ]
-  },
+  "routes": [
+    {
+      "vpDefinitionId": "knb-auckland",
+      "steps": [
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://knb.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

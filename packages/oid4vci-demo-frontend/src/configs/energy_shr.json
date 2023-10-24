@@ -2,13 +2,14 @@
   "general": {
     "credentialName": "Conference Attendee",
     "issueCredentialType": "dbc2023",
-    "baseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
     "verifierUrlCaption": "Energy SHR website",
     "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
   },
   "pages": {
-    "SSIDownloadPage": {
+    "download": {
       "rightPane": {
         "paradymWalletQRCode": {
           "style": {
@@ -86,15 +87,15 @@
         }
       }
     },
-    "SSICredentialVerifyRequestPage": {
+    "verifyRequest": {
       "photoLeft": "energyshr/ImageEnergySHR.svg",
       "photoRight": "energyshr/undraw_messenger_re_8bky_grey.svg"
     },
-    "SSICredentialIssuedSuccessPage": {
+    "issueSuccess": {
       "photoLeft": "energyshr/ImageEnergySHR.svg",
       "photoRight": "energyshr/undraw_messenger_re_8bky_grey.svg"
     },
-    "SSIInformationSharedSuccessPage": {
+    "infoSharedSuccess": {
       "photoLeft": "image_2.svg",
       "photoLeftManual": "energyshr/wallet.svg",
       "leftTextHideManual": true,
@@ -102,17 +103,17 @@
       "photoRight": "energyshr/undraw_certification_re_ifll_grey.svg",
       "textRight": "sharing_data_success_right_pane_paragraph_short"
     },
-    "SSICredentialIssueRequestPage": {
+    "issueRequest": {
       "photoManual": "energyshr/ImageEnergySHR.svg",
       "photoWallet": "energyshr/ImageEnergySHR.svg"
     },
-    "SSIInformationRequestPage": {
+    "infoRequest": {
       "photo": "image_4.svg",
       "photoManual": "energyshr/ImageEnergySHR.svg",
       "text_top_of_image": "common_left_pane_title",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
     },
-    "SSILandingPage": {
+    "startPage": {
       "photoLeft": "energyshr/landing_manual_grey.svg",
       "photoRight": "energyshr/landing_wallet_grey.svg",
       "logo": {
@@ -134,7 +135,7 @@
         }
       }
     },
-    "SSISelectCredentialPage": {
+    "credSelect": {
       "logo": {
         "src": "energyshr/energyshr_logo.svg",
         "alt": "energyshr",
@@ -148,52 +149,62 @@
         }
       }
     }
-  },  "sequencer": {
-  "steps": [
+  },
+  "routes": [
     {
-      "id": "start",
-      "operation": "navigate",
-      "path": "/start",
-      "isDefaultRoute": true
-    },
-    {
-      "id": "infoRequest",
-      "operation": "navigate",
-      "path": "/information/request",
-      "nextId": "credSelect"
-    },
-    {
-      "id": "credSelect",
-      "operation": "navigate",
-      "path": "/credentials/select",
-      "nextId": "verifyRequest"
-    },
-    {
-      "id": "verifyRequest",
-      "operation": "navigate",
-      "path": "/credentials/verify/request",
-      "nextId": "credentialOffer",
-      "isDefaultRoute": true
-    },
-    {
-      "id": "credentialOffer",
-      "operation": "execute",
-      "action": "create-credential-offer",
-      "nextId": "issueRequest"
-    },
-    {
-      "id": "issueRequest",
-      "operation": "navigate",
-      "path": "/credentials/issue/request",
-      "nextId": "issueSuccess"
-    },
-    {
-      "id": "issueSuccess",
-      "operation": "navigate",
-      "path": "/credentials/issue/success"
+      "id": "default",
+      "vpDefinitionId": "energySHR2023",
+      "steps": [
+        {
+          "id": "startPage",
+          "operation": "navigate",
+          "path": "/start",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/request",
+          "nextId": "credSelect"
+        },
+        {
+          "id": "credSelect",
+          "operation": "navigate",
+          "path": "/credentials/select",
+          "nextId": "verifyRequest"
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
     }
-  ]
-},
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

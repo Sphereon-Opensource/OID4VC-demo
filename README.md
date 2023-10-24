@@ -122,9 +122,6 @@ CONF_PATH="./my-config-path" #Allows you to set a custom configuration path
 **oid4vci-demo-frontend .env.local**
 
 ```dotenv
-REACT_APP_OID4VP_AGENT_BASE_URL=http://192.168.2.90:5000 # The ip/hostname and port where the frontend will contact the agent
-REACT_APP_OID4VP_PRESENTATION_DEF_ID=sphereonWalletIdentity # The presentation definition ID as recognized by the SSI-SDK agent verifier
-REACT_APP_OID4VCI_AGENT_BASE_URL='http://192.168.2.90:5000/sphereonGuest' # The base url of the SSI-SDK agent. The agent can support multiple VCI issuers at the same time depending on their config
 REACT_APP_ENVIRONMENT=sphereon # The branding and built in credential defnitions and metadata to use. Supported values: sphereon, dbc, triall, fmdm, energyshr
 PORT=5001 # The port to use when running pnpm run start:dev. Please note that you can also build the project, and host it on a regular webserver.
 ```

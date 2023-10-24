@@ -1,7 +1,7 @@
-import React from "react";
-import style from './Card.module.css';
-import {Text, TextProperties} from "../Text";
-import SSIPrimaryButton, {IButtonProps} from "../SSIPrimaryButton";
+import React from "react"
+import style from './Card.module.css'
+import {Text, TextProperties} from "../Text"
+import SSIPrimaryButton, {IButtonProps} from "../SSIPrimaryButton"
 
 export interface ImageProperties {
   src: string
