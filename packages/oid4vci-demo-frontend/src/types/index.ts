@@ -17,5 +17,7 @@ export interface ImageProperties {
   height?: number
 }
 
-export type FormData = Record<string, FormFieldValue>
+export type FormOutputData = Record<string, FormFieldValue>
 export type FormFieldValue = string | number | ReadonlyArray<string> | boolean | undefined
+export type ImmutableRecord = Readonly<Record<string, ImmutableValue>>;
+export type ImmutableValue = Readonly<string | number | ReadonlyArray<string> | boolean | undefined>;

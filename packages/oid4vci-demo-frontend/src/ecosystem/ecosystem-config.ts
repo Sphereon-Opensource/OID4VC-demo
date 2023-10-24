@@ -1,4 +1,4 @@
-import {ImageProperties} from "../types"
+import {FormFieldValue, ImageProperties} from "../types"
 import {CSSProperties, HTMLInputTypeAttribute} from "react"
 import {IProps} from "../components/SSISecondaryButton"
 
@@ -166,7 +166,7 @@ export interface DataFormElement {
     key: string
     type: HTMLInputTypeAttribute
     required?: boolean
-    defaultValue?: string
+    defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
     readonly?: boolean
