@@ -122,7 +122,36 @@
       "photo": "image_4.svg",
       "photoManual": "image_4.svg",
       "text_top_of_image": "common_left_pane_title",
-      "sharing_data_right_pane_title": "sharing_data_right_pane_title"
+      "sharing_data_right_pane_title": "sharing_data_right_pane_title",
+      "form": [
+        [
+          {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "email",
+            "key": "email",
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
     },
     "startPage": {
       "photoLeft": "landing_manual.svg",
@@ -143,20 +172,6 @@
         "rightCardView": {
           "textColor": "#303030",
           "buttonType": "primary"
-        }
-      }
-    },
-    "SSISelectCredentialPage": {
-      "logo": {
-        "src": "wallets/sphereon_logo.svg",
-        "alt": "sphereon.com",
-        "width": 167,
-        "height": 70
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#202537",
-          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
         }
       }
     }
