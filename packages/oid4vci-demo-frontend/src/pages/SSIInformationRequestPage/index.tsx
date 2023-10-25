@@ -20,20 +20,23 @@ import Form from "../../components/Form"
 import {FormData} from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
+import {DEFAULT_FORM} from "../../types/default-form"
 
 type State = {
     data?: any
 }
 
-function getInitialState(form: DataFormRow[] | undefined) {
-  if (!form) {
-    return {
-      firstName: '',
-      lastName: '',
-      emailAddress: ''
-    }
+function getInitialState(formConfig: SSIInformationRequestPageConfig) {
+  if (!formConfig.form) {
+
+      formConfig.form = DEFAULT_FORM
+      return {
+          firstName: '',
+          lastName: '',
+          emailAddress: ''
+      }
   }
-  return transformFormConfigToEmptyObject(form)
+  return transformFormConfigToEmptyObject(formConfig.form)
 }
 
 function isPayloadValid(payload: FormData, form?: DataFormRow[]) {
@@ -56,7 +59,7 @@ const SSIInformationRequestPage: React.FC = () => {
     const credentialName = useEcosystem().getGeneralConfig().credentialName
     const state: State | undefined = location.state;
     const {t} = useTranslation()
-    const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig.form))
+    const [payload, setPayload] = useState<FormData>(getInitialState(pageConfig))
     const [initComplete, setInitComplete] = useState<boolean>(false)
     const [vpTokenValues, setVpTokenValues] = useState<string[]>([]);
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
