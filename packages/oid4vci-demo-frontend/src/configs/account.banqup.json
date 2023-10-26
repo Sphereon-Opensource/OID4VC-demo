@@ -26,17 +26,29 @@
       "rightPane": {
         "image": "banqup/flyng-iphone.svg",
         "width": "100%",
-        "sphereonWalletQRCode": {
-          "enableQR": true,
-          "style": {
+        "sphereonWalletQRCodes": [
+          {
+            "buttonCaptionResourceId": "label_download_ios",
+            "style": {},
+            "button": {
+              "style": {
+                "width": 250
+              }
+            },
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
           },
-          "button": {
-            "style": {
-              "width": 250
-            }
-          },
-          "downloadUrl": "https://qrco.de/be5xfh"
-        },
+          {
+            "buttonCaptionResourceId": "label_download_android",
+            "enableQR": false,
+            "style": {},
+            "button": {
+              "style": {
+                "width": 250
+              }
+            },
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
+          }
+        ],
         "enablePrimaryButton": true,
         "primaryButtonResourceId": "label_continue"
       }
@@ -269,7 +281,8 @@
         {
           "id": "downloadSphereonWallet",
           "operation": "navigate",
-          "path": "/download/sphereon-wallet"
+          "path": "/download/sphereon-wallet",
+          "nextId": "verifyRequest"
         }
       ]
     }

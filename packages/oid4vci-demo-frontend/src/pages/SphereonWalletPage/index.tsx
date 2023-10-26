@@ -14,7 +14,7 @@ const SphereonWalletPage: React.FC = () => {
     const config = flowRouter.getPageConfig()
     const {t} = useTranslation()
     const isNarrowScreen = useMediaQuery({query: '(max-width: 767px)'})
-    const sphereonWalletQRCode = config.rightPane.sphereonWalletQRCode
+    const sphereonWalletQRCodes = config.rightPane.sphereonWalletQRCodes
 
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
@@ -82,18 +82,23 @@ const SphereonWalletPage: React.FC = () => {
                         marginTop: 8,
                         alignItems: 'center'
                     }}>
-                        <SSIWalletQRCode
-                            image={sphereonWalletQRCode.image}
-                            className="poppins-semi-bold-14"
-                            text={config.rightPane.qrTextResourceId ? t(config.rightPane.qrTextResourceId) as string : ''}
-                            style={sphereonWalletQRCode.style}
-                            button={{
-                                style: sphereonWalletQRCode.button.style,
-                                caption: t('sphereon_wallet_right_pane_sphereon_qrcode_button_caption'),
-                                color: sphereonWalletQRCode.button.color,
-                                onClick: () => window.location.href = sphereonWalletQRCode.downloadUrl
-                            }}
-                        />
+                        {
+                            sphereonWalletQRCodes.map((sphereonWalletQRCode, index) => (
+                                <SSIWalletQRCode
+                                    key={index}
+                                    image={sphereonWalletQRCode.image}
+                                    className="poppins-semi-bold-14"
+                                    text={config.rightPane.qrTextResourceId ? t(config.rightPane.qrTextResourceId) as string : ''}
+                                    style={sphereonWalletQRCode.style}
+                                    button={{
+                                        style: sphereonWalletQRCode.button.style,
+                                        caption: t(sphereonWalletQRCode.buttonCaptionResourceId),
+                                        color: sphereonWalletQRCode.button.color,
+                                        onClick: () => window.location.href = sphereonWalletQRCode.downloadUrl
+                                    }}
+                                />
+                            ))
+                        }
                     </div>
                     <div style={{
                         marginTop: "8px",
@@ -103,7 +108,6 @@ const SphereonWalletPage: React.FC = () => {
                             <div style={{display: 'flex', justifyContent: 'center'}}>
                                 <SSIPrimaryButton
                                     caption={t(config.rightPane.primaryButtonResourceId ?? 'label_continue')}
-                                    style={sphereonWalletQRCode.button.style}
                                     onClick={async () => {
                                         if (config.rightPane.primaryButtonStepId) {
                                             await flowRouter.goToStep(config.rightPane.primaryButtonStepId)
