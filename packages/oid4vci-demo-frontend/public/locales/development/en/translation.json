@@ -83,5 +83,8 @@
   "loading_verify_company_information_caption": "Verifying the company information",
   "loading_verify_company_information_description": "Please wait, you will automatically go to the next step.",
   "loading_verify_identity_information_caption": "Verifying your identity.",
-  "loading_verify_identity_information_description": "Please wait, you will automatically go to the next step."
+  "loading_verify_identity_information_description": "Please wait, you will automatically go to the next step.",
+  "welcome_title": "Welcome!",
+  "welcome_page_confirm_account_subtitle": "We’ll first need to confirm your account",
+  "welcome_page_confirm_account_description": "Confirm your account by providing some information and by replying to the verification e-mail we’ll sent."
 }
