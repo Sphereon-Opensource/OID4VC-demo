@@ -83,7 +83,9 @@
   "paragraph_add_credential": "Let's add the credential to your wallet",
   "paragraph_scan_this_qr": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
   "loading_verify_company_information_caption": "Verifying the company information",
-  "loading_verify_company_information_description": "Please wait, you will automatically go to the next step.",
   "loading_verify_identity_information_caption": "Verifying your identity.",
-  "loading_verify_identity_information_description": "Please wait, you will automatically go to the next step."
+  "loading_verify_information_description": "Please wait, you will automatically go to the next step.",
+  "welcome_title": "Welcome!",
+  "welcome_page_confirm_account_subtitle": "We’ll first need to confirm your account",
+  "welcome_page_confirm_account_description": "Confirm your account by providing some information and by replying to the verification e-mail we’ll sent."
 }

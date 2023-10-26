@@ -12,6 +12,7 @@ import SSICredentialsLandingPage from "../pages/SSICredentialsLandingPage"
 import SphereonWalletPage from "../pages/SphereonWalletPage"
 import SSILoadingPage from '../pages/SSILoadingPage';
 import {useFlowAppRouter} from "./flow-router"
+import SSIWelcomePage from '../pages/SSIWelcomeScreen'
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -24,7 +25,8 @@ export const routes: Record<string, any> = {
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
     '/download/sphereon-wallet': <SphereonWalletPage/>,
     '/download': <SSIDownloadPage/>,
-    '/loading': <SSILoadingPage/>
+    '/loading': <SSILoadingPage/>,
+    '/welcome': <SSIWelcomePage/>
 }
 
 const AppRouter: React.FC = () => {
