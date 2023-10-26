@@ -96,6 +96,16 @@
         }
       }
     },
+    "welcome": {
+      "leftPaneWidth": "40%",
+      "right_pane_subtitle": "welcome_page_confirm_identity_subtitle",
+      "right_pane_paragraph": "welcome_page_confirm_identity_description",
+      "right_pane_paragraph_text_align": "left",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    },
     "infoRequest": {
       "leftPaneWidth": "40%",
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title_banqup",
@@ -209,8 +219,14 @@
           "id": "verifyRequest",
           "operation": "navigate",
           "path": "/credentials/verify/request",
-          "nextId": "infoRequest",
+          "nextId": "welcome",
           "isDefaultRoute": true
+        },
+        {
+          "id": "welcome",
+          "operation": "navigate",
+          "path": "/welcome",
+          "nextId": "infoRequest"
         },
         {
           "id": "infoRequest",

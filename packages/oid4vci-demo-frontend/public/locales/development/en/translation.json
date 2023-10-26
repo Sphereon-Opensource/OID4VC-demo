@@ -87,5 +87,7 @@
   "loading_verify_information_description": "Please wait, you will automatically go to the next step.",
   "welcome_title": "Welcome!",
   "welcome_page_confirm_account_subtitle": "We’ll first need to confirm your account",
-  "welcome_page_confirm_account_description": "Confirm your account by providing some information and by replying to the verification e-mail we’ll sent."
+  "welcome_page_confirm_identity_subtitle": "We would like to know a bit more about you",
+  "welcome_page_confirm_account_description": "Confirm your account by providing some information and by replying to the verification e-mail we’ll sent.",
+  "welcome_page_confirm_identity_description": "<strong>Next steps:</strong><br>1. Provide some personal information<br>2. Upload a valid ID<br>3. Perform a liveliness check<br>4. Wait for confirmation"
 }
