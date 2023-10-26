@@ -142,6 +142,16 @@
         }
       }
     },
+    "welcome": {
+      "leftPaneWidth": "40%",
+      "right_pane_title": "welcome_title",
+      "right_pane_subtitle": "welcome_page_confirm_account_subtitle",
+      "right_pane_paragraph": "welcome_page_confirm_account_description",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    },
     "issueSuccess": {
       "leftPaneWidth": "40%",
       "backgroundColor": "#0E0B31",
@@ -259,8 +269,14 @@
           "id": "verifyRequest",
           "operation": "navigate",
           "path": "/credentials/verify/request",
-          "nextId": "infoRequest",
+          "nextId": "welcome",
           "isDefaultRoute": true
+        },
+        {
+          "id": "welcome",
+          "operation": "navigate",
+          "path": "/welcome",
+          "nextId": "infoRequest"
         },
         {
           "id": "infoRequest",

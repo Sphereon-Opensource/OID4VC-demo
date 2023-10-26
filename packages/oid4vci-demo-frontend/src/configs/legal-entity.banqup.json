@@ -164,7 +164,7 @@
     "loading": {
       "leftPaneWidth": "40%",
       "sharing_data_right_pane_title": "loading_verify_company_information_caption",
-      "sharing_data_right_pane_paragraph": "loading_verify_company_information_description",
+      "sharing_data_right_pane_paragraph": "loading_verify_information_description",
       "backgroundColor": "#0E0B31",
       "spinnerColor": "#0E0B31",
       "logo": {
