@@ -212,6 +212,7 @@
       "rightPaneTextMarginBottom": "10%",
       "rightPaneButtonWidth": "135px",
       "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "credentialIssuerDemo",
       "mobile": {
         "logo": {
           "src": "bank/logo.svg",
@@ -264,7 +265,13 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "/credentials/issue/success"
+          "path": "/credentials/issue/success",
+          "nextId": "credentialIssuerDemo"
+        },
+        {
+          "id": "credentialIssuerDemo",
+          "operation": "navigate",
+          "path": "https://legal-entity.banqup.demo.sphereon.com"
         }
       ]
     }
