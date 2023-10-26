@@ -1,7 +1,7 @@
 import React, {useState, ChangeEvent, useEffect, useRef} from 'react'
 import style from '../VerificationCodeField/index.module.css'
 
-interface NumericInputProps {
+interface Props {
     length: number
     onComplete: (value: string) => void
 }
@@ -10,7 +10,7 @@ enum Key {
     BACKSPACE = 'Backspace',
 }
 
-const VerificationCodeField: React.FC<NumericInputProps> = ({length, onComplete}) => {
+const VerificationCodeField: React.FC<Props> = ({length, onComplete}) => {
     const [values, setValues] = useState<string[]>(Array(length).fill(''))
     const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
