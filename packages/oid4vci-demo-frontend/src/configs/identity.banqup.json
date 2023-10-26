@@ -64,7 +64,7 @@
           "bottomText": {
             "fontColor": "#424242",
             "className": "removeMarginTop",
-            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_banqup",
+            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_signin",
             "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph_banqup"
           },
           "width": 200,
