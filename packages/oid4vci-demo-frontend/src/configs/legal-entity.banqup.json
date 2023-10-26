@@ -200,13 +200,14 @@
         "src": "banqup/logo.svg"
       },
       "rightPaneTitle": "credentials_success_right_pane_valid_id_title",
-      "rightPaneParagraph": "credentials_success_right_pane_valid_id_paragraph",
-      "rightPaneButtonCaption": "credentials_success_right_pane_valid_id_button_caption",
+      "rightPaneParagraph": "credentials_success_right_pane_registered_company_paragraph",
+      "rightPaneButtonCaption": "label_finish",
       "rightPaneTextHeight": "40%",
       "rightPaneTextMarginTop": "0",
       "rightPaneTextMarginBottom": "10%",
       "rightPaneButtonWidth": "135px",
       "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
         "logo": {
           "src": "bank/logo.svg",
@@ -260,7 +261,12 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://banqup.demo.sphereon.com"
+          "path": "/credentials/issue/success"
+        },
+        {
+          "id": "toCompanyFlow",
+          "operation": "navigate",
+          "path": "https://legal-entity.banqup.demo.sphereon.com"
         },
         {
           "id": "downloadSphereonWallet",
