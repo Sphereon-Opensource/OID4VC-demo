@@ -24,6 +24,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     logo?: ImageProperties
     enableRightPaneButton?: boolean
     rightPaneButtonStepId?: string
+    downloadAppStepId?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
