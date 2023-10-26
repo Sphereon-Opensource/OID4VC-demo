@@ -2,27 +2,20 @@ import React, {ReactElement, useEffect} from 'react';
 import {useMediaQuery} from 'react-responsive';
 import {useTranslation} from 'react-i18next';
 import {useFlowRouter} from '../../router/flow-router';
-import {SSILoadingPageConfig} from '../../ecosystem/ecosystem-config';
+import {SSILoadingPageConfig, SSIVerifyEmailPageConfig} from '../../ecosystem/ecosystem-config'
 import {NonMobile} from '../../index';
 import style from './index.module.css'
 import {useLocation} from "react-router-dom";
 import {Oval} from 'react-loader-spinner'
 
-const SSILoadingPage: React.FC = (): ReactElement => {
+const SSIEmailVerificationPage: React.FC = (): ReactElement => {
     const {t} = useTranslation()
-    const flowRouter = useFlowRouter<SSILoadingPageConfig>()
+    const flowRouter = useFlowRouter<SSIVerifyEmailPageConfig>()
     const pageConfig = flowRouter.getPageConfig();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const location = useLocation();
     const payload = location.state?.payload ?? {}
     const isManualIdentification = location.state?.isManualIdentification ?? false
-
-    useEffect((): void => {
-        // Simulating a verifying process here that navigates to the next step after 5 seconds
-        setTimeout(async (): Promise<void> => {
-            await flowRouter.nextStep({payload, isManualIdentification})
-        }, 5000)
-    }, []);
 
     return <div style={{display: 'flex',  height: "100vh", width: '100vw',  ...(isTabletOrMobile && { overflowX: "hidden", ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) })}}>
         <NonMobile>
@@ -53,19 +46,6 @@ const SSILoadingPage: React.FC = (): ReactElement => {
             ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' })
         }}>
             <div className={style.contentContainer}>
-                {/*TODO replace with the spinner component from VDX-258*/}
-                <Oval
-                    height={160}
-                    width={160}
-                    color={pageConfig.spinnerColor}
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                    visible={true}
-                    ariaLabel='oval-loading'
-                    secondaryColor={pageConfig.spinnerColor}
-                    strokeWidth={2}
-                    strokeWidthSecondary={2}
-                />
                 <div className={style.captionContainer}>
                     <div className={style.caption}>{t(pageConfig.sharing_data_right_pane_title)}</div>
                     <div className={style.description}>{t(pageConfig.sharing_data_right_pane_paragraph)}</div>
@@ -75,4 +55,4 @@ const SSILoadingPage: React.FC = (): ReactElement => {
     </div>
 }
 
-export default SSILoadingPage;
+export default SSIEmailVerificationPage;
