@@ -251,9 +251,11 @@
     },
     "verifyEmail": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "loading_verify_identity_information_caption",
-      "sharing_data_right_pane_paragraph": "loading_verify_information_description",
       "backgroundColor": "#0E0B31",
+      "rightPaneTitle": "title_please_check_your_email",
+      "rightPaneParagraph": "paragraph_confirm_email",
+      "verifyDigitsTitle": "title_fill_5_digits",
+      "primaryButtonResourceId": "label_continue",
       "logo": {
         "src": "banqup/logo.svg"
       }

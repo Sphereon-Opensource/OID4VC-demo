@@ -1,15 +1,65 @@
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 80%;
+    position: relative;
+    min-height: 600px;  /* This can be adjusted based on your content */
+}
+
 .captionContainer {
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 8px;
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    min-height: 150px;  /* This can be adjusted */
 }
 
-.caption {
+.bottomWrapper {
+    margin-top: auto;
+    margin-bottom: calc(160px - 4vh);  /* Adjusts margin based on viewport height */
+}
+
+.verificationContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 60px;
+}
+
+/* For smaller screens */
+@media (max-height: 800px) {
+    .bottomWrapper {
+        margin-bottom: calc(100px - 2vh);
+    }
+    .captionContainer {
+        top: 15%;  /* Bring it a bit higher */
+    }
+}
+
+
+.mainTitle {
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: 32px;
+}
+
+.subTitle {
+    color: #424242;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.spacer {
+    height: 10px;
 }
 
 .description {
@@ -24,12 +74,5 @@
     flex-grow: 1;
     align-items: center;
     flex-direction: column;
-}
-
-.contentContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
 }
 

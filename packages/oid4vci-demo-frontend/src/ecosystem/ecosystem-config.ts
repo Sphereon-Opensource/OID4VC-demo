@@ -109,9 +109,11 @@ export interface SSIVerifyEmailPageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
     logo?: ImageProperties
-    sharing_data_right_pane_title: string
-    sharing_data_right_pane_paragraph: string
-    rightPaneButtonStepId?: string
+    rightPaneTitle: string
+    rightPaneParagraph: string
+    verifyDigitsTitle: string
+    primaryButtonResourceId?: string
+    primaryButtonStepId?: string
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
