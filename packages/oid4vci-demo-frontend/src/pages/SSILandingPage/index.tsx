@@ -1,5 +1,4 @@
 import React from 'react'
-import {NavigateOptions} from 'react-router-dom'
 import {ButtonType} from '../../types'
 import {useTranslation} from 'react-i18next'
 import {useMediaQuery} from "react-responsive"

@@ -9,6 +9,7 @@
   },
   "pages": {
     "verifyRequest": {
+      "downloadAppStepId": "downloadSphereonWallet",
       "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "leftPaneWidth": "40%",
       "primaryButtonResourceId": "label_continue",
@@ -64,7 +65,7 @@
           "bottomText": {
             "fontColor": "#424242",
             "className": "removeMarginTop",
-            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_banqup",
+            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_signin",
             "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph_banqup"
           },
           "width": 200,
@@ -172,7 +173,7 @@
     "loading": {
       "leftPaneWidth": "40%",
       "sharing_data_right_pane_title": "loading_verify_identity_information_caption",
-      "sharing_data_right_pane_paragraph": "loading_verify_identity_information_description",
+      "sharing_data_right_pane_paragraph": "loading_verify_information_description",
       "backgroundColor": "#0E0B31",
       "spinnerColor": "#0E0B31",
       "logo": {
@@ -206,12 +207,13 @@
       },
       "rightPaneTitle": "credentials_success_right_pane_valid_id_title",
       "rightPaneParagraph": "credentials_success_right_pane_valid_id_paragraph",
-      "rightPaneButtonCaption": "credentials_success_right_pane_valid_id_button_caption",
+      "rightPaneButtonCaption": "label_continue",
       "rightPaneTextHeight": "40%",
       "rightPaneTextMarginTop": "0",
       "rightPaneTextMarginBottom": "10%",
       "rightPaneButtonWidth": "135px",
       "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
         "logo": {
           "src": "bank/logo.svg",
@@ -265,6 +267,16 @@
           "id": "issueSuccess",
           "operation": "navigate",
           "path": "/credentials/issue/success"
+        },
+        {
+          "id": "toCompanyFlow",
+          "operation": "navigate",
+          "path": "https://legal-entity.banqup.demo.sphereon.com"
+        },
+        {
+          "id": "downloadSphereonWallet",
+          "operation": "navigate",
+          "path": "/download/sphereon-wallet"
         }
       ]
     }

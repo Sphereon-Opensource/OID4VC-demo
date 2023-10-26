@@ -9,6 +9,7 @@
   },
   "pages": {
     "verifyRequest": {
+      "downloadAppStepId": "downloadSphereonWallet",
       "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "leftPaneWidth": "40%",
       "primaryButtonResourceId": "label_continue",
@@ -64,7 +65,7 @@
           "bottomText": {
             "fontColor": "#424242",
             "className": "removeMarginTop",
-            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_banqup",
+            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_signin",
             "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph_banqup"
           },
           "width": 200,
@@ -166,7 +167,7 @@
     "loading": {
       "leftPaneWidth": "40%",
       "sharing_data_right_pane_title": "loading_verify_company_information_caption",
-      "sharing_data_right_pane_paragraph": "loading_verify_company_information_description",
+      "sharing_data_right_pane_paragraph": "loading_verify_information_description",
       "backgroundColor": "#0E0B31",
       "spinnerColor": "#0E0B31",
       "logo": {
@@ -260,6 +261,11 @@
           "id": "issueSuccess",
           "operation": "navigate",
           "path": "https://banqup.demo.sphereon.com"
+        },
+        {
+          "id": "downloadSphereonWallet",
+          "operation": "navigate",
+          "path": "/download/sphereon-wallet"
         }
       ]
     }

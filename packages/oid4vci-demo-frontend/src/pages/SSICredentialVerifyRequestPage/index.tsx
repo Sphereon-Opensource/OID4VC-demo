@@ -182,13 +182,21 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     width={`${pageConfig.mostRightPanel?.logo?.width}`}
                     height={`${pageConfig.mostRightPanel?.logo?.height}`}
                 />
-                  <SSIPrimaryButton caption={t('ssi_download_app_button')} style={{
-                    backgroundColor: '#312B78',
-                    color: '#FFFFFF',
-                    width: '170px',
-                    height: '32px',
-                    margin: "15% auto 0 auto"
-                  }} />
+                  <SSIPrimaryButton
+                      caption={t('ssi_download_app_button')}
+                      style={{
+                          backgroundColor: '#312B78',
+                          color: '#FFFFFF',
+                          width: '170px',
+                          height: '32px',
+                          margin: "15% auto 0 auto"
+                      }}
+                      onClick={async (): Promise<void> => {
+                          if (pageConfig.downloadAppStepId) {
+                              await flowRouter.goToStep(pageConfig.downloadAppStepId)
+                          }
+                      }}
+                  />
                 </div>
               </div>
               </div>
