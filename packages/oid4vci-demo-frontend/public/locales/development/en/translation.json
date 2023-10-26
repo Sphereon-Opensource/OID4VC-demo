@@ -75,6 +75,8 @@
   "label_share": "Share",
   "label_next": "Next",
   "label_continue": "Continue",
+  "label_download_ios": "Download iOS",
+  "label_download_android": "Download Android",
   "title_personal_details": "Personal Details",
   "title_secure_your_credential": "Secure your {{credentialName}} credential",
   "title_secure_your_personal_credential": "Secure your personal credential",
