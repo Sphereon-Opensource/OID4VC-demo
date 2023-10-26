@@ -20,8 +20,12 @@
 }
 
 .bottomWrapper {
+    justify-content: center;
     margin-top: auto;
     margin-bottom: calc(160px - 4vh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .verificationContainer {
