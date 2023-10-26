@@ -7,7 +7,7 @@ export const extractKeys = (data: DataFormRow[]): string[] => {
 
 export const extractRequiredKeys = (data: DataFormRow[]): string[] => {
   return data.flatMap(item =>
-      item.filter(field => field.required)
+      item.filter(field => field.required && !Boolean(field.leaveEmptyInCaseOfEmptyValue))
       .map(field => field.key)
   );
 };

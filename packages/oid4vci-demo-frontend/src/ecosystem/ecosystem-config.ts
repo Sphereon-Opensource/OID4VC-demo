@@ -182,6 +182,7 @@ export interface DataFormElement {
     key: string
     type: HTMLInputTypeAttribute
     required?: boolean
+    leaveEmptyInCaseOfEmptyValue?: boolean
     defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string

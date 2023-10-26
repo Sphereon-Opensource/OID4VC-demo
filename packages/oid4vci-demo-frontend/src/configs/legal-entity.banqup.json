@@ -95,7 +95,7 @@
     },
     "infoRequest": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "manual_fill_data_company_right_pane_title",
+      "sharing_data_right_pane_title": "manual_fill_data_company_right_pane_title_tell_us_more_company",
       "sharing_data_right_pane_paragraph": "sharing_data_company_fill_out_right_pane_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
@@ -142,6 +142,16 @@
         ],
         [
           {
+            "id": "bsn",
+            "key": "bsn",
+            "label": "ssi_information_request_page_form_contact_bsn_label",
+            "type": "text",
+            "required": true,
+            "leaveEmptyInCaseOfEmptyValue": true
+          }
+        ],
+        [
+          {
             "id": "companyEmailAddress",
             "key": "companyEmailAddress",
             "label": "ssi_information_request_page_form_company_email_address_label",
@@ -154,7 +164,7 @@
           {
             "id": "taxRegistrationNumber",
             "key": "taxRegistrationNumber",
-            "label": "ssi_information_request_page_form_tax_registration_number_label",
+            "label": "ssi_information_request_page_form_tax_registration_code_label",
             "type": "text",
             "required": true
           }
