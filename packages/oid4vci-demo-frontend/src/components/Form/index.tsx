@@ -5,15 +5,16 @@ import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
 import {generateRandomIBAN} from '../../utils/iban'
 import {transformFormConfigToEmptyObject} from '../../utils/ObjectUtils'
 import InputField from '../InputField'
-import {FormData, FormFieldValue} from '../../types'
+import {FormOutputData, FormFieldValue, ImmutableRecord} from '../../types'
 import style from './index.module.css'
 
 type Props = {
-    form: DataFormRow[]
-    onChange?: (formData: FormData) => Promise<void>
+    formConfig: DataFormRow[]
+    formInitData?: ImmutableRecord
+    onChange?: (formData: FormOutputData) => Promise<void>
 }
 
-function getInitialState(form: DataFormRow[] | undefined): FormData {
+function getInitialState(form: DataFormRow[] | undefined): FormOutputData {
     if (!form) {
         return {
             firstName: '',
@@ -24,26 +25,26 @@ function getInitialState(form: DataFormRow[] | undefined): FormData {
     return transformFormConfigToEmptyObject(form)
 }
 
-const evaluateDefaultValue = (field: DataFormElement, payload: FormData): FormFieldValue => {
-    const payloadValue = payload[field.key]
-    if (payloadValue) {
-        return payloadValue
+const evaluateDefaultValue = (field: DataFormElement, formInitData: ImmutableRecord | undefined, formData: FormOutputData): FormFieldValue => {
+    const fieldValue = formData[field.key]
+    if (fieldValue) {
+        return fieldValue
     }
 
-    let defaultValue: FormFieldValue = field.defaultValue ?? ''
+    let defaultValue: FormFieldValue = formInitData?.[field.id] ?? field.defaultValue ?? ''
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = generateRandomIBAN()
     }
-    payload[field.key] = `${defaultValue}`
+    formData[field.key] = `${defaultValue}`
     return defaultValue
 }
 
 const Form: FC<Props> = (props: Props): ReactElement => {
-    const {form, onChange} = props
+    const {formConfig, formInitData, onChange} = props
     const {t} = useTranslation()
-    const [formData, setFormData] = useState<FormData>(getInitialState(form))
+    const [formData, setFormData] = useState<FormOutputData>(getInitialState(formConfig))
 
     const onChangeValue = async (value: FormFieldValue, key: string): Promise<void> => {
         const data = {...formData, [key]: value}
@@ -54,7 +55,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getFieldElementFrom = (field: DataFormElement): ReactElement => {
-        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formData)
+        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formInitData, formData)
         switch (field.type) {
             case 'checkbox':
                 return <SSICheckbox
@@ -62,7 +63,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     selectedColor={field.display?.checkboxSelectedColor}
                     // @ts-ignore // FIXME __html complaining
                     label={field.labelUrl ? <div dangerouslySetInnerHTML={{ __html: t(field.label, { url: field.labelUrl })}}/> : field.label}
-                    disabled={field.readonly}
+                    disabled={field.readonly || formInitData?.[field.id] !== undefined }
                     labelColor={field.display?.checkboxLabelColor}
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
@@ -71,7 +72,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                 return <InputField
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
-                    readonly={field.readonly}
+                    readonly={field.readonly || formInitData?.[field.id] !== undefined}
                     defaultValue={defaultValue}
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
@@ -88,7 +89,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getFormFrom = (): Array<ReactElement> => {
-        return form.map((row: DataFormRow) => getRowElementFrom(row))
+        return formConfig.map((row: DataFormRow) => getRowElementFrom(row))
     }
 
     return <div className={style.container}>

@@ -1,4 +1,4 @@
-import {ImageProperties} from "../types"
+import {FormFieldValue, ImageProperties} from "../types"
 import {CSSProperties, HTMLInputTypeAttribute} from "react"
 import {IProps} from "../components/SSISecondaryButton"
 
@@ -24,6 +24,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     logo?: ImageProperties
     enableRightPaneButton?: boolean
     rightPaneButtonStepId?: string
+    downloadAppStepId?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
@@ -84,6 +85,21 @@ export interface SSILoadingPageConfig extends PageConfig {
     sharing_data_right_pane_paragraph: string
     rightPaneButtonStepId?: string
     spinnerColor?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+
+export interface SSIWelcomePageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    right_pane_title: string
+    right_pane_subtitle: string
+    right_pane_paragraph: string
+    rightPaneButtonStepId?: string
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
@@ -166,7 +182,7 @@ export interface DataFormElement {
     key: string
     type: HTMLInputTypeAttribute
     required?: boolean
-    defaultValue?: string
+    defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
     readonly?: boolean
@@ -206,6 +222,14 @@ export interface SSIDownloadPageConfig extends PageConfig {
     }
 }
 
+export interface SphereonWalletQRCode {
+    buttonCaptionResourceId: string
+    style: CSSProperties,
+    image: ImageProperties & { style: CSSProperties },
+    button: IProps & { style: CSSProperties },
+    downloadUrl: string
+}
+
 export interface SphereonWalletPageConfig extends PageConfig {
     leftPane: {
         image?: string
@@ -222,12 +246,7 @@ export interface SphereonWalletPageConfig extends PageConfig {
         image: string
         width?: string
         backgroundColor?: string
-        sphereonWalletQRCode: {
-            style: CSSProperties,
-            image: ImageProperties & { style: CSSProperties }
-            button: IProps & { style: CSSProperties }
-            downloadUrl: string
-        }
+        sphereonWalletQRCodes: SphereonWalletQRCode[]
         enablePrimaryButton?: boolean
         primaryButtonResourceId?: string
         primaryButtonStepId?: string
@@ -336,6 +355,7 @@ export interface VCIConfigPages {
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
     SSILoadingPage: SSILoadingPageConfig
+    SSIWelcomePage: SSIWelcomePageConfig
 }
 
 export interface VCIConfigRoute {
