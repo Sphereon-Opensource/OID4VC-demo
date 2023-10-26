@@ -5,7 +5,7 @@
     height: 100%;
     width: 80%;
     position: relative;
-    min-height: 600px;  /* This can be adjusted based on your content */
+    min-height: 600px;
 }
 
 .captionContainer {
@@ -16,12 +16,12 @@
     position: absolute;
     top: 25%;
     width: 100%;
-    min-height: 150px;  /* This can be adjusted */
+    min-height: 150px;
 }
 
 .bottomWrapper {
     margin-top: auto;
-    margin-bottom: calc(160px - 4vh);  /* Adjusts margin based on viewport height */
+    margin-bottom: calc(160px - 4vh);
 }
 
 .verificationContainer {
