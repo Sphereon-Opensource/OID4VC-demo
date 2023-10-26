@@ -5,7 +5,6 @@
   "credentials_right_pane_top_paragraph": "Laten we een {{credentialName}} Referentie\ntoevoegen aan uw wallet.",
   "credentials_right_pane_top_title": "Beveilig uw {{credentialName}} Referentie",
   "credentials_success_right_pane_button_caption": "Ga naar {{verifierUrlCaption}}",
-  "credentials_success_right_pane_verified_account_button_caption": "Continue",
   "credentials_success_right_pane_paragraph": "Uw {{credentialName}} credential is met succes aan u uitgereikt.\n\nU kunt het gebruiken om uw identiteit te verifiëren wanneer u interactie heeft met andere partijen.",
   "credentials_success_right_pane_title": "Gefeliciteerd!",
   "credentials_success_right_pane_verified_account_paragraph": "\r\n\n\nThe Verified {{credentialName}} credential proofs that UnifiedPost\nhas been able to verify that you have access to the  e-mail address you provided.\r\n\nYou can use this credential to Login to your UnifiedPost account.",
@@ -91,7 +90,6 @@
   "loading_verify_company_information_caption": "Controleren van de bedrijfsinformatie",
   "loading_verify_information_description": "Even geduld, u wordt automatisch naar de volgende stap geleid.",
   "loading_verify_identity_information_caption": "Controleren van uw identiteitsinformatie",
-  "loading_verify_information_description": "Even geduld, u wordt automatisch naar de volgende stap geleid.",
   "welcome_title": "Welkom!",
   "welcome_page_confirm_account_subtitle": "We moeten eerst uw account bevestigen",
   "welcome_page_confirm_account_description": "Bevestig uw account door wat informatie te verstrekken en door de verificatie-e-mail te beantwoorden die we hebben verzonden."

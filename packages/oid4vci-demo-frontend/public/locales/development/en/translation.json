@@ -6,7 +6,6 @@
   "credentials_right_pane_top_title": "Secure your {{credentialName}} Credential",
   "credentials_success_right_pane_back_button_caption": "Back to credentials",
   "credentials_success_right_pane_button_caption": "Go to {{verifierUrlCaption}}",
-  "credentials_success_right_pane_verified_account_button_caption": "Continue",
   "credentials_success_right_pane_paragraph": "Your {{credentialName}} credential has been\r\nsuccessfully issued to you.\r\n\nYou can use it to verify your identity whenever you\r\ninteract with other parties.",
   "credentials_success_right_pane_title": "Congratulations!",
   "credentials_success_right_pane_verified_account_paragraph": "\r\n\n\nThe Verified {{credentialName}} credential proofs that UnifiedPost\nhas been able to verify that you have access to the  e-mail address you provided.\r\n\nYou can use this credential to Login to your UnifiedPost account.",
