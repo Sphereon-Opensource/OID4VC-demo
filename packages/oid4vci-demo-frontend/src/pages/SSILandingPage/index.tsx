@@ -36,19 +36,19 @@ const SSILandingPage: React.FC = () => {
         <div style={{
             display: 'flex',
             alignItems: 'center',
-            flexDirection: 'column',
             justifyContent: 'center',
+            flex: 1,
             height: '100vh',
             backgroundColor: mainContainerStyle.backgroundColor,
+            flexDirection: 'column'
         }}>
             <div style={{
-                maxWidth: isTabletOrMobile ? 380 : 810,
+                maxWidth: isTabletOrMobile ? 405 : 810,
                 justifyContent: 'space-between',
-                alignItems: 'center',
-                flexDirection: isTabletOrMobile ? 'column' : 'row',
+                alignContent: 'center',
+                flexDirection: `${isTabletOrMobile ? 'column' : 'row'}`,
                 display: 'flex',
-                width: '100%',
-                marginBottom: isTabletOrMobile ? 20 : 40
+                width: '100%'
             }}>
                 <SSICardView
                     title={t('onboarding_left_card_title')}
