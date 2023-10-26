@@ -94,9 +94,19 @@ export interface SSILoadingPageConfig extends PageConfig {
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     leftPaneWidth?: string
-    photoLeft: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    photoLeft?: string
     photoRight: string
     rightPaneButtonStepId?: string
+    rightPaneTitle: string
+    rightPaneParagraph: string
+    rightPaneButtonCaption: string
+    rightPaneTextHeight: string
+    rightPaneTextMarginTop: string
+    rightPaneTextMarginBottom: string
+    rightPaneButtonWidth?: string
+    rightPaneButtonHeight?: string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
