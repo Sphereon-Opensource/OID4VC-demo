@@ -24,6 +24,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     logo?: ImageProperties
     enableRightPaneButton?: boolean
     rightPaneButtonStepId?: string
+    downloadAppStepId?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
@@ -216,6 +217,14 @@ export interface SSIDownloadPageConfig extends PageConfig {
     }
 }
 
+export interface SphereonWalletQRCode {
+    buttonCaptionResourceId: string
+    style: CSSProperties,
+    image: ImageProperties & { style: CSSProperties },
+    button: IProps & { style: CSSProperties },
+    downloadUrl: string
+}
+
 export interface SphereonWalletPageConfig extends PageConfig {
     leftPane: {
         image?: string
@@ -232,12 +241,7 @@ export interface SphereonWalletPageConfig extends PageConfig {
         image: string
         width?: string
         backgroundColor?: string
-        sphereonWalletQRCode: {
-            style: CSSProperties,
-            image: ImageProperties & { style: CSSProperties }
-            button: IProps & { style: CSSProperties }
-            downloadUrl: string
-        }
+        sphereonWalletQRCodes: SphereonWalletQRCode[]
         enablePrimaryButton?: boolean
         primaryButtonResourceId?: string
         primaryButtonStepId?: string
