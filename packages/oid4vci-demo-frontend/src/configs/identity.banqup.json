@@ -207,13 +207,13 @@
       },
       "rightPaneTitle": "credentials_success_right_pane_valid_id_title",
       "rightPaneParagraph": "credentials_success_right_pane_valid_id_paragraph",
-      "rightPaneButtonCaption": "credentials_success_right_pane_valid_id_button_caption",
+      "rightPaneButtonCaption": "label_continue",
       "rightPaneTextHeight": "40%",
       "rightPaneTextMarginTop": "0",
       "rightPaneTextMarginBottom": "10%",
       "rightPaneButtonWidth": "135px",
       "rightPaneButtonHeight": "48px",
-      "rightPaneButtonStepId": "credentialIssuerDemo",
+      "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
         "logo": {
           "src": "bank/logo.svg",
@@ -269,7 +269,7 @@
           "path": "/credentials/issue/success"
         },
         {
-          "id": "credentialIssuerDemo",
+          "id": "toCompanyFlow",
           "operation": "navigate",
           "path": "https://legal-entity.banqup.demo.sphereon.com"
         },
