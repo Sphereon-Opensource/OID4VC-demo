@@ -255,6 +255,7 @@
       "rightPaneTitle": "title_please_check_your_email",
       "rightPaneParagraph": "paragraph_confirm_email",
       "verifyDigitsTitle": "title_fill_5_digits",
+      "numberOfDigits": 5,
       "primaryButtonResourceId": "label_continue",
       "logo": {
         "src": "banqup/logo.svg"

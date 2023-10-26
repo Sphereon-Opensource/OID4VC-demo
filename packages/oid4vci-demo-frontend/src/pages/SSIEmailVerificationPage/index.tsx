@@ -56,7 +56,7 @@ const SSIEmailVerificationPage: React.FC = (): ReactElement => {
                     <div className={style.verificationContainer}>
                         <div className={style.subTitle}>{t(pageConfig.verifyDigitsTitle)}</div>
                         <div className={style.spacer}></div>
-                        <VerificationCodeField length={5}
+                        <VerificationCodeField length={pageConfig.numberOfDigits ?? 5}
                                                onComplete={async () => pageConfig.primaryButtonStepId
                                                    ? await flowRouter.goToStep(pageConfig.primaryButtonStepId)
                                                    : await flowRouter.nextStep()

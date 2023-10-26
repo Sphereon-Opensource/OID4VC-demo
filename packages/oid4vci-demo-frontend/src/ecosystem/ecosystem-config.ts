@@ -112,6 +112,7 @@ export interface SSIVerifyEmailPageConfig extends PageConfig {
     rightPaneTitle: string
     rightPaneParagraph: string
     verifyDigitsTitle: string
+    numberOfDigits? : number
     primaryButtonResourceId?: string
     primaryButtonStepId?: string
     mobile?: {
