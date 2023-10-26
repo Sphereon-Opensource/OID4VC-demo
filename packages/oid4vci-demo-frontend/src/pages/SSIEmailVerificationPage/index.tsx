@@ -5,18 +5,15 @@ import {useFlowRouter} from '../../router/flow-router'
 import {SSIVerifyEmailPageConfig} from '../../ecosystem/ecosystem-config'
 import {NonMobile} from '../../index'
 import style from './index.module.css'
-import {useLocation} from "react-router-dom"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
-import NumericInput from "../../components/NumericInput"
+import VerificationCodeField from "../../components/VerificationCodeField"
+
 
 const SSIEmailVerificationPage: React.FC = (): ReactElement => {
     const {t} = useTranslation()
     const flowRouter = useFlowRouter<SSIVerifyEmailPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const location = useLocation()
-    const payload = location.state?.payload ?? {}
-    const isManualIdentification = location.state?.isManualIdentification ?? false
 
     return <div style={{
         display: 'flex',
@@ -59,9 +56,11 @@ const SSIEmailVerificationPage: React.FC = (): ReactElement => {
                     <div className={style.verificationContainer}>
                         <div className={style.subTitle}>{t(pageConfig.verifyDigitsTitle)}</div>
                         <div className={style.spacer}></div>
-                        <NumericInput length={5} onComplete={value => {
-                            console.log(value)
-                        }}/>
+                        <VerificationCodeField length={5}
+                                               onComplete={async () => pageConfig.primaryButtonStepId
+                                                   ? await flowRouter.goToStep(pageConfig.primaryButtonStepId)
+                                                   : await flowRouter.nextStep()
+                                               }/>
                     </div>
                     <SSIPrimaryButton
                         caption={t(pageConfig.primaryButtonResourceId ?? 'label_continue')}

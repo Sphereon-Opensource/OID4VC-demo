@@ -1,5 +1,5 @@
 import React, {useState, ChangeEvent, useEffect, useRef} from 'react'
-import style from '../NumericInput/index.module.css'
+import style from '../VerificationCodeField/index.module.css'
 
 interface NumericInputProps {
     length: number
@@ -10,13 +10,15 @@ enum Key {
     BACKSPACE = 'Backspace',
 }
 
-const NumericInput: React.FC<NumericInputProps> = ({length, onComplete}) => {
+const VerificationCodeField: React.FC<NumericInputProps> = ({length, onComplete}) => {
     const [values, setValues] = useState<string[]>(Array(length).fill(''))
     const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
     useEffect(() => {
         if (inputRefs.current[0]) {
-            inputRefs.current[0].focus()
+            setTimeout(() => { // Without delay focus will not work
+                inputRefs.current[0]?.focus();
+            }, 100);
         }
     }, [])
 
@@ -65,7 +67,7 @@ const NumericInput: React.FC<NumericInputProps> = ({length, onComplete}) => {
             {values.map((value, index) => (
                 <input
                     ref={(el) => (inputRefs.current[index] = el)}
-                    className={style.enabled}
+                    className={style.digitField}
                     key={index}
                     type="text"
                     value={value}
@@ -79,4 +81,4 @@ const NumericInput: React.FC<NumericInputProps> = ({length, onComplete}) => {
     )
 }
 
-export default NumericInput
+export default VerificationCodeField

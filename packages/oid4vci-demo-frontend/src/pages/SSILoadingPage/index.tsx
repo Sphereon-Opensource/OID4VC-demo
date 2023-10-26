@@ -5,7 +5,6 @@ import {useFlowRouter} from '../../router/flow-router';
 import {SSILoadingPageConfig} from '../../ecosystem/ecosystem-config';
 import {NonMobile} from '../../index';
 import style from './index.module.css'
-import {useLocation} from "react-router-dom";
 import {Oval} from 'react-loader-spinner'
 
 const SSILoadingPage: React.FC = (): ReactElement => {
@@ -13,14 +12,11 @@ const SSILoadingPage: React.FC = (): ReactElement => {
     const flowRouter = useFlowRouter<SSILoadingPageConfig>()
     const pageConfig = flowRouter.getPageConfig();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const location = useLocation();
-    const payload = location.state?.payload ?? {}
-    const isManualIdentification = location.state?.isManualIdentification ?? false
 
     useEffect((): void => {
         // Simulating a verifying process here that navigates to the next step after 5 seconds
         setTimeout(async (): Promise<void> => {
-            await flowRouter.nextStep({payload, isManualIdentification})
+            await flowRouter.nextStep()
         }, 5000)
     }, []);
 

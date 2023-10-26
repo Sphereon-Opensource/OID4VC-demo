@@ -81,7 +81,7 @@
   "title_secure_your_credential": "Secure your {{credentialName}} credential",
   "title_secure_your_personal_credential": "Secure your personal credential",
   "title_please_check_your_email": "Please check your e-mail",
-  "title_fill_5_digits": "Fill in the 5-digit code from the app.",
+  "title_fill_5_digits": "Fill in the 5-digit code from the confirmation e-mail.",
   "paragraph_add_credential": "Let's add the credential to your wallet",
   "paragraph_scan_this_qr": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
   "paragraph_confirm_email": "Confirm your Account by entering the 5 digit confirmation code from the email.",
