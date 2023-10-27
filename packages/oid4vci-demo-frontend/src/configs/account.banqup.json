@@ -144,7 +144,7 @@
       "rightPaneTextMarginBottom": "10%",
       "rightPaneButtonWidth": "135px",
       "rightPaneButtonHeight": "48px",
-      "rightPaneButtonStepId": "toCompanyFlow",
+      "rightPaneButtonStepId": "toIdentityFlow",
       "mobile": {
       }
     },
