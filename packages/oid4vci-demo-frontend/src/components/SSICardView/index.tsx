@@ -61,7 +61,7 @@ const SSICardView: React.FC<IProps> = (props: IProps) => {
                 >
                     {title}
                 </p>
-                <text
+                <p
                     className={"poppins-normal-14"}
                     style={{
                         maxWidth: 313,
@@ -71,7 +71,7 @@ const SSICardView: React.FC<IProps> = (props: IProps) => {
                     }}
                 >
                     {message.split('\r\n')}
-                </text>
+                </p>
                 {button.type === ButtonType.PRIMARY
                     ? <SSIPrimaryButton
                         caption={button.caption}

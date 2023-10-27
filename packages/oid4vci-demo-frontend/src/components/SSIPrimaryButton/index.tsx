@@ -48,19 +48,16 @@ const SSIPrimaryButton: React.FC<IButtonProps> = (props: IButtonProps) => {
         return mergedStyle
     }
 
-
-    // TODO text
     return (
         <button style={buildStyle()}
                 onClick={onClick}
                 disabled={disabled}
         >
-            <text
-                className={"poppins-normal-16"}
-                style={{color: '#FBFBFB'}}
+            <p className={"poppins-normal-16"}
+               style={{color: '#FBFBFB'}}
             >
                 {caption}
-            </text>
+            </p>
         </button>
     )
 }
