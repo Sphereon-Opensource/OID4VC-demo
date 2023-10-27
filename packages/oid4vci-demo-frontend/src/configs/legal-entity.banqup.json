@@ -266,7 +266,7 @@
         {
           "id": "toCompanyFlow",
           "operation": "navigate",
-          "path": "https://legal-entity.banqup.demo.sphereon.com"
+          "path": "https://account.banqup.demo.sphereon.com"
         },
         {
           "id": "downloadSphereonWallet",
