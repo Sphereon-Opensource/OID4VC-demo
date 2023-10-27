@@ -5,7 +5,7 @@
     {
       "id": "d618cebc-5a26-4bb9-a46e-172bfa25f070",
       "name": "VerifiedID or Account",
-      "purpose": "We need a verified identity credential or an account credential",
+      "purpose": "We need a verified identity credential or an verified account credential",
       "schema": [
         {
           "uri": "VerifiedID"
