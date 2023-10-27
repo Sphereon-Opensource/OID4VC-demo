@@ -7,15 +7,18 @@ import {NonMobile} from '../../index';
 import style from './index.module.css'
 import InputField from "../../components/InputField";
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
+import {useLocation} from "react-router-dom";
 
 const SSIIdentityVerificationPage: React.FC = (): ReactElement => {
     const {t} = useTranslation()
     const flowRouter = useFlowRouter<SSIIdentityVerificationPageConfig>()
     const pageConfig = flowRouter.getPageConfig();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+    const location = useLocation();
+    const state = location.state
 
     const onContinue = async (): Promise<void> => {
-        await flowRouter.nextStep()
+        await flowRouter.nextStep(state)
     }
 
     return <div style={{display: 'flex',  height: "100vh", width: '100vw',  ...(isTabletOrMobile && { overflowX: "hidden", ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) })}}>
