@@ -1,8 +1,11 @@
 {
   "general": {
-    "credentialName": "Legal entity credential",
+    "credentialName": "Legal Entity",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com"
+    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
+    "verifierUrl": "https://legal-entity.banqup.demo.sphereon.com",
+    "verifierUrlCaption": "Legal Entity credential"
   },
   "pages": {
     "verifyRequest": {
