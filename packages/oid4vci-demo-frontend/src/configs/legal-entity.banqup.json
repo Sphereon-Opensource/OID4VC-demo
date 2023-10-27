@@ -203,7 +203,7 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "bottomParagraph": "mobile_right_pane_bottom_paragraph",
+        "bottomParagraph": "mobile_right_pane_bottom_paragraph"
       }
     },
     "issueSuccess": {
