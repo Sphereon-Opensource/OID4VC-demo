@@ -7,7 +7,6 @@ import {NonMobile} from '../../index';
 import style from './index.module.css'
 import InputField from "../../components/InputField";
 import SSIPrimaryButton from "../../components/SSIPrimaryButton";
-import {useLocation} from "react-router-dom";
 
 const SSIIdentityVerificationPage: React.FC = (): ReactElement => {
     const {t} = useTranslation()
