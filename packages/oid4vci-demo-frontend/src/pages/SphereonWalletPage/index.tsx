@@ -76,7 +76,7 @@ const SphereonWalletPage: React.FC = () => {
                     }}>
                         <div style={{
                             display: 'flex',
-                            flexDirection: 'row',
+                            flexDirection: 'column',
                             marginTop: 8,
                             marginBottom: 16,
                             alignItems: 'center'

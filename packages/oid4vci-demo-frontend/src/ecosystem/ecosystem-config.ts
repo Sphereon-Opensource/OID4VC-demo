@@ -235,11 +235,11 @@ export interface SSIDownloadPageConfig extends PageConfig {
 
 export interface SphereonWalletQRCode {
     buttonCaptionResourceId: string
-    qrTextResourceId?: string
     style: CSSProperties,
     image: ImageProperties & { style: CSSProperties },
     button: IProps & { style: CSSProperties },
-    downloadUrl: string
+    downloadUrl: string,
+    qrTextResourceId?: string
 }
 
 export interface SphereonWalletPageConfig extends PageConfig {
