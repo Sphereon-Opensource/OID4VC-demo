@@ -11,7 +11,7 @@
   "credentials_success_right_pane_valid_id_paragraph": "\r\n\n\nDe geverifieerde {{credentialName}} credential bewijst dat\nUnifiedPost heeft kunnen verifiëren dat je een geldig identiteitsbewijs hebt\nn dat je aan dit geldige identiteitsbewijs bent gekoppeld.",
   "credential_verify_request_right_pane_top_title": "Gegevens verstrekken",
   "credential_verify_request_right_pane_top_paragraph": "Om een credential uit te geven hebben we wat informatie nodig uit je wallet.",
-  "button_open_from_wallet": "Open wallet",
+  "button_open_from_wallet": "Openen in wallet",
   "credential_verify_request_right_pane_bottom_title_signin": "Inloggen",
   "credential_verify_request_right_pane_bottom_title_signup": "Registreren",
   "credential_verify_request_right_pane_bottom_paragraph_banqup": "Start door deze QR-code te scannen met je Banqup app",
