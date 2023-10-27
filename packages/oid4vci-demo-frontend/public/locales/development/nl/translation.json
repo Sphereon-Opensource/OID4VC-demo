@@ -7,6 +7,8 @@
   "credentials_success_right_pane_button_caption": "Ga naar {{verifierUrlCaption}}",
   "credentials_success_right_pane_paragraph": "Je {{credentialName}} credential is met succes aan je uitgereikt.\n\nU kunt het gebruiken om je identiteit te verifiëren wanneer je interactie heeft met andere partijen.",
   "credentials_success_right_pane_title": "Gefeliciteerd!",
+  "credentials_success_right_pane_verified_account_paragraph": "\r\n\n\nThe Verified {{credentialName}} credential proofs that UnifiedPost\nhas been able to verify that you have access to the  e-mail address you provided.\r\n\nYou can use this credential to login to your UnifiedPost account.",
+  "credentials_success_right_pane_verified_account_title": "You have received your Verified {{name}} credential",
   "credentials_success_right_pane_valid_id_title": "U heeft je geverifieerde {{name}} credential ontvangen",
   "credentials_success_right_pane_valid_id_paragraph": "\r\n\n\nDe geverifieerde {{credentialName}} credential bewijst dat\nUnifiedPost heeft kunnen verifiëren dat je een geldig identiteitsbewijs hebt\nn dat je aan dit geldige identiteitsbewijs bent gekoppeld.",
   "credentials_success_right_pane_registered_company_paragraph": "\n\n\nDe geverifieerde {{credentialName}} credential bewijst dat\nUnifiedPost heeft kunnen verifiëren dat je bedrijf een geregistreerd bedrijf is.\r\n\nU kunt deze credential gebruiken om je UnifiedPost-account af te handelen.",

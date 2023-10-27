@@ -69,8 +69,8 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                             flexGrow: 1,
                             textAlign: 'center'
                         }}
-                        title={t(pageConfig.rightPaneTitle, {name: generalConfig.credentialName}).split('\n')}
-                        lines={t(pageConfig.rightPaneParagraph, {credentialName: generalConfig.credentialName}).split('\r\n')}/>
+                        title={t(pageConfig.rightPaneTitle ?? 'credentials_success_right_pane_title', {name: generalConfig.credentialName}).split('\n')}
+                        lines={t(pageConfig.rightPaneParagraph ?? 'credentials_success_right_pane_paragraph', {credentialName: generalConfig.credentialName}).split('\r\n')}/>
                     <div style={{
                         width: '342px',
                         height: '397px',
@@ -80,7 +80,7 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                     </div>
                     <div style={{display: 'flex',flexDirection: 'row'}}>
                         <SSIPrimaryButton
-                            caption={t(pageConfig.rightPaneButtonCaption, {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
+                            caption={t(pageConfig.rightPaneButtonCaption ?? 'credentials_success_right_pane_button_caption', {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
                             style={{
                                width: pageConfig.rightPaneButtonWidth ?? '300px',
                                height: pageConfig.rightPaneButtonHeight ?? '42px'

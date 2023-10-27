@@ -130,12 +130,12 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     photoLeft?: string
     photoRight: string
     rightPaneButtonStepId?: string
-    rightPaneTitle: string
-    rightPaneParagraph: string
-    rightPaneButtonCaption: string
-    rightPaneTextHeight: string
-    rightPaneTextMarginTop: string
-    rightPaneTextMarginBottom: string
+    rightPaneTitle?: string
+    rightPaneParagraph?: string
+    rightPaneButtonCaption?: string
+    rightPaneTextHeight?: string
+    rightPaneTextMarginTop?: string
+    rightPaneTextMarginBottom?: string
     rightPaneButtonWidth?: string
     rightPaneButtonHeight?: string
 }
