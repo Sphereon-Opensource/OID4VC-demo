@@ -212,7 +212,8 @@ export interface SphereonWalletQRCode {
     style: CSSProperties,
     image: ImageProperties & { style: CSSProperties },
     button: IProps & { style: CSSProperties },
-    downloadUrl: string
+    downloadUrl: string,
+    qrTextResourceId?: string
 }
 
 export interface SphereonWalletPageConfig extends PageConfig {
@@ -236,7 +237,6 @@ export interface SphereonWalletPageConfig extends PageConfig {
         primaryButtonResourceId?: string
         primaryButtonStepId?: string
         paragraphResourceId?: string
-        qrTextResourceId?: string
     }
 }
 
