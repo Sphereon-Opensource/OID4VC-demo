@@ -76,7 +76,7 @@ const SSIIdentityVerificationPage: React.FC = (): ReactElement => {
                                readonly
                            />
                            <InputField
-                               label={'Issuing country'}
+                               label={'ID number'}
                                type={'text'}
                                defaultValue={'SPECI2021'}
                                readonly
