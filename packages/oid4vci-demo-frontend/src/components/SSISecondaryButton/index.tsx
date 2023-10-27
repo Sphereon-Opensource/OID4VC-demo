@@ -17,8 +17,13 @@ const SSISecondaryButton: React.FC<IProps> = (props: IProps) => {
     const config = ecosystem.getComponentConfig<SSISecondaryButtonConfig>('SSISecondaryButton')
     const mainContainerStyle = config.styles.mainContainer
     const buttonStyle = config.styles.button
-    const {caption, disabled = false, onClick, style} = props
-    const color = props.color ?? '#FBFBFB'
+    const {
+        caption,
+        disabled = false,
+        onClick,
+        style,
+        color = '#FBFBFB'
+    } = props
 
     const buildStyle = (): React.CSSProperties => {
         const mergedStyle: React.CSSProperties = {

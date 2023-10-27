@@ -16,8 +16,13 @@ const SSIPrimaryButton: React.FC<IButtonProps> = (props: IButtonProps) => {
     const config = ecosystem.getComponentConfig<SSIPrimaryButtonConfig>('SSIPrimaryButton')
     const mainContainerStyle = config.styles.mainContainer;
     const buttonStyle = config.styles.button
-    const {caption, disabled = false, onClick, style} = props
-    const color = props.color ?? '#FBFBFB'
+    const {
+        caption,
+        disabled = false,
+        onClick,
+        style,
+        color = '#FBFBFB'
+    } = props
 
     const buildStyle = (): React.CSSProperties => {
         const mergedStyle: React.CSSProperties = {
