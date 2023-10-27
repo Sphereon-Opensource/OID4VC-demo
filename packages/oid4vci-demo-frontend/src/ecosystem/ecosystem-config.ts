@@ -83,7 +83,6 @@ export interface SSILoadingPageConfig extends PageConfig {
     logo?: ImageProperties
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph: string
-    rightPaneButtonStepId?: string
     spinnerColor?: string
     mobile?: {
         logo?: ImageProperties
@@ -101,6 +100,22 @@ export interface SSIWelcomePageConfig extends PageConfig {
     right_pane_paragraph?: string
     right_pane_paragraph_text_align?: string
     rightPaneButtonStepId?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+export interface SSIVerifyEmailPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    rightPaneTitle: string
+    rightPaneParagraph: string
+    verifyDigitsTitle: string
+    numberOfDigits? : number
+    primaryButtonResourceId?: string
+    primaryButtonStepId?: string
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
