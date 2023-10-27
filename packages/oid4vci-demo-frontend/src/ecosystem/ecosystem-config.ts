@@ -91,6 +91,18 @@ export interface SSILoadingPageConfig extends PageConfig {
     },
 }
 
+export interface SSIIdentityVerificationPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    sharing_data_right_pane_title: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+
 export interface SSIWelcomePageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
@@ -391,6 +403,7 @@ export interface VCIConfigPages {
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
     SSILoadingPage: SSILoadingPageConfig
     SSIWelcomePage: SSIWelcomePageConfig
+    SSIIdentityVerificationPage: SSIIdentityVerificationPageConfig
 }
 
 export interface VCIConfigRoute {
