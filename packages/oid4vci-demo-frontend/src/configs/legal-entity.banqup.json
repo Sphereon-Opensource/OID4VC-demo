@@ -207,7 +207,7 @@
       "rightPaneTextMarginBottom": "10%",
       "rightPaneButtonWidth": "135px",
       "rightPaneButtonHeight": "48px",
-      "rightPaneButtonStepId": "toCompanyFlow",
+      "rightPaneButtonStepId": "toAccountFlow",
       "mobile": {
         "logo": {
           "src": "bank/logo.svg",
@@ -264,7 +264,7 @@
           "path": "/credentials/issue/success"
         },
         {
-          "id": "toCompanyFlow",
+          "id": "toAccountFlow",
           "operation": "navigate",
           "path": "https://account.banqup.demo.sphereon.com"
         },
