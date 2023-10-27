@@ -1,10 +1,10 @@
 {
   "general": {
-    "credentialName": "Identity credential",
+    "credentialName": "Identity",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
-    "verifierUrl": "https://sphereon.com",
+    "verifierUrl": "https://legal-entity.banqup.demo.sphereon.com",
     "verifierUrlCaption": "Identity credential"
   },
   "pages": {
@@ -94,6 +94,53 @@
           "height": "150px",
           "alt": "download app"
         }
+      }
+    },
+    "welcome": {
+      "leftPaneWidth": "40%",
+      "right_pane_subtitle": "welcome_page_confirm_identity_subtitle",
+      "right_pane_paragraph": "welcome_page_confirm_identity_description",
+      "right_pane_paragraph_text_align": "left",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    },
+    "downloadSphereonWallet": {
+      "leftPane": {
+        "backgroundColor": "#0E0B31",
+        "width": "40%",
+        "logo": {
+          "src": "banqup/logo.svg"
+        },
+        "mobile": {
+          "logo": {
+            "src": "banqup/logo.svg",
+            "alt": "banqup",
+            "width": 65,
+            "height": 65
+          },
+          "backgroundColor": "#EFFFF5"
+        }
+      },
+      "rightPane": {
+        "image": "banqup/flyng-iphone.svg",
+        "width": "100%",
+        "sphereonWalletQRCodes": [
+          {
+            "buttonCaptionResourceId": "label_download_ios",
+            "style": {},
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
+          },
+          {
+            "buttonCaptionResourceId": "label_download_android",
+            "enableQR": false,
+            "style": {},
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
+          }
+        ],
+        "enablePrimaryButton": true,
+        "primaryButtonResourceId": "label_continue"
       }
     },
     "infoRequest": {
@@ -198,6 +245,38 @@
           "height": 65
         }
       }
+    },
+    "issueSuccess": {
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "rightPaneTitle": "credentials_success_right_pane_valid_id_title",
+      "rightPaneParagraph": "credentials_success_right_pane_valid_id_paragraph",
+      "rightPaneButtonCaption": "label_continue",
+      "rightPaneTextHeight": "40%",
+      "rightPaneTextMarginTop": "0",
+      "rightPaneTextMarginBottom": "10%",
+      "rightPaneButtonWidth": "135px",
+      "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toCompanyFlow",
+      "mobile": {
+        "logo": {
+          "src": "bank/logo.svg",
+          "alt": "bank",
+          "width": 65,
+          "height": 65
+        }
+      }
+    },
+    "verifyIdentity": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "loading_verify_identity_information_caption",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
     }
   },
   "routes": [
@@ -209,8 +288,20 @@
           "id": "verifyRequest",
           "operation": "navigate",
           "path": "/credentials/verify/request",
-          "nextId": "infoRequest",
+          "nextId": "welcome",
           "isDefaultRoute": true
+        },
+        {
+          "id": "welcome",
+          "operation": "navigate",
+          "path": "/welcome",
+          "nextId": "verifyIdentity"
+        },
+        {
+          "id": "verifyIdentity",
+          "operation": "navigate",
+          "path": "/verify/identity",
+          "nextId": "infoRequest"
         },
         {
           "id": "infoRequest",
@@ -242,12 +333,18 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://banqup.demo.sphereon.com"
+          "path": "/credentials/issue/success"
+        },
+        {
+          "id": "toCompanyFlow",
+          "operation": "navigate",
+          "path": "https://legal-entity.banqup.demo.sphereon.com"
         },
         {
           "id": "downloadSphereonWallet",
           "operation": "navigate",
-          "path": "/download/sphereon-wallet"
+          "path": "/download/sphereon-wallet",
+          "nextId": "verifyRequest"
         }
       ]
     }
@@ -266,6 +363,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },
@@ -273,6 +373,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#353438"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },

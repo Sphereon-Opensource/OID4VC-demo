@@ -109,12 +109,12 @@ const SSIInformationRequestPage: React.FC = () => {
                         />
                     }
                     { pageConfig.text_top_of_image &&
-                         <text
+                         <p
                              className={"poppins-medium-36"}
                              style={{maxWidth: 735, color: '#FBFBFB', marginTop: "auto", marginBottom: 120}}
                          >
                              {t(`${pageConfig.text_top_of_image}`)}
-                         </text>
+                         </p>
                     }
                 </div>
             </NonMobile>
@@ -149,18 +149,18 @@ const SSIInformationRequestPage: React.FC = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <text
+                        <p
                             className={"inter-normal-24"}
                             style={{marginBottom: 12}}
                         >
                             {t(pageConfig.sharing_data_right_pane_title)}
-                        </text>
-                        <text
+                        </p>
+                        <p
                             className={"poppins-normal-14"}
                             style={{maxWidth: 313, textAlign: 'center'}}
                         >
                             {t(pageConfig.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName})}
-                        </text>
+                        </p>
                     </div>
                     <div/>
                     {initComplete && ( // We should not render the form until handleVPToken's result came back
@@ -173,7 +173,6 @@ const SSIInformationRequestPage: React.FC = () => {
                     <div>
                         <SSIPrimaryButton
                             caption={t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
-                            style={{width: 327}}
                             disabled={!isFormDataValid(formData, pageConfig.form)}
                             onClick={async () => await flowRouter.nextStep({payload: formData})}
                         />

@@ -99,7 +99,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         />
                     }
                     {(pageConfig.textLeft) && (
-                        <text
+                        <p
                             className={"poppins-medium-36"}
                             style={{
                                 maxWidth: 735,
@@ -109,7 +109,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             }} // TODO add this to all except knb_kvk
                         >
                             {t('common_left_pane_title')}
-                        </text>
+                        </p>
                     )}
                 </div>
             </NonMobile>
