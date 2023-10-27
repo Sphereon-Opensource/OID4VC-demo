@@ -1,10 +1,10 @@
 {
   "general": {
-    "credentialName": "Account credential",
-    "oid4vpAgentBaseUrl": "http://192.168.178.52:5000",
-    "oid4vciAgentBaseUrl": "http://192.168.178.52:5000",
-    "downloadUrl": "http://192.168.178.52:5000/#/download",
-    "verifierUrl": "https://legal-entity.banqup.demo.sphereon.com"
+    "credentialName": "Account",
+    "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
+    "verifierUrl": "https://identity.banqup.demo.sphereon.com"
   },
   "pages": {
     "downloadSphereonWallet": {
@@ -307,7 +307,7 @@
         {
           "id": "toCompanyFlow",
           "operation": "navigate",
-          "path": "https://legal-entity.banqup.demo.sphereon.com"
+          "path": "https://identity.banqup.demo.sphereon.com"
         },
         {
           "id": "downloadSphereonWallet",
