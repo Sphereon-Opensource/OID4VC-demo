@@ -4,7 +4,7 @@
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download",
-    "verifierUrl": "https://identity.banqup.demo.sphereon.com"
+    "verifierUrl": "https:/account.banqup.demo.sphereon.com"
   },
   "pages": {
     "downloadSphereonWallet": {
@@ -310,7 +310,8 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "/credentials/issue/success"
+          "path": "/credentials/issue/success",
+          "nextId": "toCompanyFlow"
         },
         {
           "id": "toCompanyFlow",
