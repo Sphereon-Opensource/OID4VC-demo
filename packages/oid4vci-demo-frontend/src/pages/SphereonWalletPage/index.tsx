@@ -74,31 +74,32 @@ const SphereonWalletPage: React.FC = () => {
                         display: 'contents',
                         alignItems: 'center'
                     }}>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            marginTop: 8,
+                            marginBottom: 16,
+                            alignItems: 'center'
+                        }}>
+                            {
+                                sphereonWalletQRCodes.map((sphereonWalletQRCode, index) => (
+                                    <SSIWalletQRCode
+                                        key={index}
+                                        image={sphereonWalletQRCode.image}
+                                        className="poppins-semi-bold-14"
+                                        text={sphereonWalletQRCode.qrTextResourceId ? t(sphereonWalletQRCode.qrTextResourceId) as string : ''}
+                                        style={sphereonWalletQRCode.style}
+                                        button={{
+                                            style: sphereonWalletQRCode.button?.style,
+                                            caption: t(sphereonWalletQRCode.buttonCaptionResourceId),
+                                            color: sphereonWalletQRCode.button?.color,
+                                            onClick: () => window.location.href = sphereonWalletQRCode.downloadUrl
+                                        }}
+                                    />
+                                ))
+                            }
+                        </div>
                         <img src={config.rightPane.image} alt="phone"/>
-                    </div>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        marginTop: 8,
-                        alignItems: 'center'
-                    }}>
-                        {
-                            sphereonWalletQRCodes.map((sphereonWalletQRCode, index) => (
-                                <SSIWalletQRCode
-                                    key={index}
-                                    image={sphereonWalletQRCode.image}
-                                    className="poppins-semi-bold-14"
-                                    text={config.rightPane.qrTextResourceId ? t(config.rightPane.qrTextResourceId) as string : ''}
-                                    style={sphereonWalletQRCode.style}
-                                    button={{
-                                        style: sphereonWalletQRCode.button.style,
-                                        caption: t(sphereonWalletQRCode.buttonCaptionResourceId),
-                                        color: sphereonWalletQRCode.button.color,
-                                        onClick: () => window.location.href = sphereonWalletQRCode.downloadUrl
-                                    }}
-                                />
-                            ))
-                        }
                     </div>
                     <div style={{
                         marginTop: "8px",

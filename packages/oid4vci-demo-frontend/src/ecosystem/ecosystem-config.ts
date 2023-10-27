@@ -235,6 +235,7 @@ export interface SSIDownloadPageConfig extends PageConfig {
 
 export interface SphereonWalletQRCode {
     buttonCaptionResourceId: string
+    qrTextResourceId?: string
     style: CSSProperties,
     image: ImageProperties & { style: CSSProperties },
     button: IProps & { style: CSSProperties },
@@ -262,7 +263,6 @@ export interface SphereonWalletPageConfig extends PageConfig {
         primaryButtonResourceId?: string
         primaryButtonStepId?: string
         paragraphResourceId?: string
-        qrTextResourceId?: string
     }
 }
 
@@ -327,6 +327,10 @@ export interface SSIPrimaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor: string
         }
+        button: {
+            width?: string | number
+            height?: string | number
+        }
     }
 }
 
@@ -335,6 +339,10 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor?: string
             color: string
+        }
+        button: {
+            width?: string | number
+            height?: string | number
         }
     }
 }
