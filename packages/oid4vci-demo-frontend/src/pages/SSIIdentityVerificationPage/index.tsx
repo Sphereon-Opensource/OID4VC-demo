@@ -14,11 +14,9 @@ const SSIIdentityVerificationPage: React.FC = (): ReactElement => {
     const flowRouter = useFlowRouter<SSIIdentityVerificationPageConfig>()
     const pageConfig = flowRouter.getPageConfig();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const location = useLocation();
-    const state = location.state
 
     const onContinue = async (): Promise<void> => {
-        await flowRouter.nextStep({payload: state})
+        await flowRouter.nextStep()
     }
 
     return <div style={{display: 'flex',  height: "100vh", width: '100vw',  ...(isTabletOrMobile && { overflowX: "hidden", ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) })}}>
