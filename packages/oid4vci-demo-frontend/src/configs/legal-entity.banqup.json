@@ -261,7 +261,8 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "/credentials/issue/success"
+          "path": "/credentials/issue/success",
+          "nextId": "toAccountFlow"
         },
         {
           "id": "toAccountFlow",
