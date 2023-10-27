@@ -91,6 +91,18 @@ export interface SSILoadingPageConfig extends PageConfig {
     },
 }
 
+export interface SSIIdentityVerificationPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    sharing_data_right_pane_title: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+
 export interface SSIWelcomePageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
@@ -130,12 +142,12 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     photoLeft?: string
     photoRight: string
     rightPaneButtonStepId?: string
-    rightPaneTitle: string
-    rightPaneParagraph: string
-    rightPaneButtonCaption: string
-    rightPaneTextHeight: string
-    rightPaneTextMarginTop: string
-    rightPaneTextMarginBottom: string
+    rightPaneTitle?: string
+    rightPaneParagraph?: string
+    rightPaneButtonCaption?: string
+    rightPaneTextHeight?: string
+    rightPaneTextMarginTop?: string
+    rightPaneTextMarginBottom?: string
     rightPaneButtonWidth?: string
     rightPaneButtonHeight?: string
 }
@@ -208,6 +220,7 @@ export interface DataFormElement {
     key: string
     type: HTMLInputTypeAttribute
     required?: boolean
+    readonlyWhenAbsentInPayload?: boolean
     defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
@@ -390,6 +403,7 @@ export interface VCIConfigPages {
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
     SSILoadingPage: SSILoadingPageConfig
     SSIWelcomePage: SSIWelcomePageConfig
+    SSIIdentityVerificationPage: SSIIdentityVerificationPageConfig
 }
 
 export interface VCIConfigRoute {

@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "Identity credential",
+    "credentialName": "Identity",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
@@ -239,6 +239,14 @@
       "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
       }
+    },
+    "verifyIdentity": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "loading_verify_identity_information_caption",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
     }
   },
   "routes": [
@@ -257,6 +265,12 @@
           "id": "welcome",
           "operation": "navigate",
           "path": "/welcome",
+          "nextId": "verifyIdentity"
+        },
+        {
+          "id": "verifyIdentity",
+          "operation": "navigate",
+          "path": "/verify/identity",
           "nextId": "infoRequest"
         },
         {

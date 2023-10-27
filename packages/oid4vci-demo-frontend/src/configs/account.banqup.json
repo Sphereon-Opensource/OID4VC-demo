@@ -1,9 +1,10 @@
 {
   "general": {
-    "credentialName": "Account credential",
+    "credentialName": "Account",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
-    "downloadUrl": "https://agent.demo.sphereon.com/#/download"
+    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
+    "verifierUrl": "https:/account.banqup.demo.sphereon.com"
   },
   "pages": {
     "downloadSphereonWallet": {
@@ -130,11 +131,20 @@
       }
     },
     "issueSuccess": {
-      "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
-      "backgroundColor": "#01224B",
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "bank/guest_credential.svg"
+        "src": "banqup/logo.svg"
       },
+      "rightPaneTitle": "credentials_success_right_pane_verified_account_title",
+      "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph",
+      "rightPaneButtonCaption": "label_continue",
+      "rightPaneTextHeight": "40%",
+      "rightPaneTextMarginTop": "0",
+      "rightPaneTextMarginBottom": "10%",
+      "rightPaneButtonWidth": "135px",
+      "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
       }
     },
@@ -270,7 +280,13 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://banqup.demo.sphereon.com"
+          "path": "/credentials/issue/success",
+          "nextId": "toIdentityFlow"
+        },
+        {
+          "id": "toIdentityFlow",
+          "operation": "navigate",
+          "path": "https://identity.banqup.demo.sphereon.com"
         },
         {
           "id": "downloadSphereonWallet",
