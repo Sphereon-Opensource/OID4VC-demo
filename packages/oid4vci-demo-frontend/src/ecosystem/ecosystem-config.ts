@@ -92,11 +92,37 @@ export interface SSILoadingPageConfig extends PageConfig {
     },
 }
 
+export interface SSIWelcomePageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    right_pane_title?: string
+    right_pane_subtitle?: string
+    right_pane_paragraph?: string
+    right_pane_paragraph_text_align?: string
+    rightPaneButtonStepId?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     leftPaneWidth?: string
-    photoLeft: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    photoLeft?: string
     photoRight: string
     rightPaneButtonStepId?: string
+    rightPaneTitle: string
+    rightPaneParagraph: string
+    rightPaneButtonCaption: string
+    rightPaneTextHeight: string
+    rightPaneTextMarginTop: string
+    rightPaneTextMarginBottom: string
+    rightPaneButtonWidth?: string
+    rightPaneButtonHeight?: string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
@@ -209,6 +235,7 @@ export interface SSIDownloadPageConfig extends PageConfig {
 
 export interface SphereonWalletQRCode {
     buttonCaptionResourceId: string
+    qrTextResourceId?: string
     style: CSSProperties,
     image: ImageProperties & { style: CSSProperties },
     button: IProps & { style: CSSProperties },
@@ -301,6 +328,10 @@ export interface SSIPrimaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor: string
         }
+        button: {
+            width?: string | number
+            height?: string | number
+        }
     }
 }
 
@@ -309,6 +340,10 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor?: string
             color: string
+        }
+        button: {
+            width?: string | number
+            height?: string | number
         }
     }
 }
@@ -340,6 +375,7 @@ export interface VCIConfigPages {
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
     SSILoadingPage: SSILoadingPageConfig
+    SSIWelcomePage: SSIWelcomePageConfig
 }
 
 export interface VCIConfigRoute {

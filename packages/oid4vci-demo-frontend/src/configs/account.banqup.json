@@ -30,22 +30,12 @@
           {
             "buttonCaptionResourceId": "label_download_ios",
             "style": {},
-            "button": {
-              "style": {
-                "width": 250
-              }
-            },
             "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
           },
           {
             "buttonCaptionResourceId": "label_download_android",
             "enableQR": false,
             "style": {},
-            "button": {
-              "style": {
-                "width": 250
-              }
-            },
             "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
           }
         ],
@@ -139,6 +129,16 @@
           "height": "150px",
           "alt": "download app"
         }
+      }
+    },
+    "welcome": {
+      "leftPaneWidth": "40%",
+      "right_pane_title": "welcome_title",
+      "right_pane_subtitle": "welcome_page_confirm_account_subtitle",
+      "right_pane_paragraph": "welcome_page_confirm_account_description",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
       }
     },
     "issueSuccess": {
@@ -249,8 +249,14 @@
           "id": "verifyRequest",
           "operation": "navigate",
           "path": "/credentials/verify/request",
-          "nextId": "infoRequest",
+          "nextId": "welcome",
           "isDefaultRoute": true
+        },
+        {
+          "id": "welcome",
+          "operation": "navigate",
+          "path": "/welcome",
+          "nextId": "infoRequest"
         },
         {
           "id": "infoRequest",
@@ -301,6 +307,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },
@@ -308,6 +317,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#353438"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },

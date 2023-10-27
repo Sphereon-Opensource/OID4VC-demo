@@ -90,9 +90,9 @@ const SphereonWalletPage: React.FC = () => {
                                         text={sphereonWalletQRCode.qrTextResourceId ? t(sphereonWalletQRCode.qrTextResourceId) as string : ''}
                                         style={sphereonWalletQRCode.style}
                                         button={{
-                                            style: sphereonWalletQRCode.button.style,
+                                            style: sphereonWalletQRCode.button?.style,
                                             caption: t(sphereonWalletQRCode.buttonCaptionResourceId),
-                                            color: sphereonWalletQRCode.button.color,
+                                            color: sphereonWalletQRCode.button?.color,
                                             onClick: () => window.location.href = sphereonWalletQRCode.downloadUrl
                                         }}
                                     />
