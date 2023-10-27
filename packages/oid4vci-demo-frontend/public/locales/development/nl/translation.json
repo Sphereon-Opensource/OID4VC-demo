@@ -91,8 +91,9 @@
   "paragraph_scan_this_qr": "Scan deze QR-code met de QR-scanner van uw wallet. Als u al op uw telefoon bent, open dan uw wallet door op de knop 'Openen in wallet' te klikken.",
   "loading_verify_company_information_caption": "Controleren van de bedrijfsinformatie",
   "loading_verify_identity_information_caption": "Controleren van uw identiteitsinformatie",
-  "loading_verify_information_description": "Even geduld, u wordt automatisch naar de volgende stap geleid.",
   "welcome_title": "Welkom!",
   "welcome_page_confirm_account_subtitle": "We moeten eerst uw account bevestigen",
-  "welcome_page_confirm_account_description": "Bevestig uw account door wat informatie te verstrekken en door de verificatie-e-mail te beantwoorden die we hebben verzonden."
+  "welcome_page_confirm_identity_subtitle": "Wij willen graag wat meer over u weten",
+  "welcome_page_confirm_account_description": "Bevestig uw account door wat informatie te verstrekken en door de verificatie-e-mail te beantwoorden die we hebben verzonden.",
+  "welcome_page_confirm_identity_description": "<strong>Volgende stappen:</strong><br>1. Verstrek enkele persoonlijke gegevens<br>2. Upload een geldig identiteitsbewijs<br>3. Voer een levensvatbaarheidscontrole uit<br>4. Wacht op bevestiging"
 }

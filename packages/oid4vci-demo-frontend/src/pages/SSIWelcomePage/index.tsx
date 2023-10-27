@@ -55,11 +55,12 @@ const SSIWelcomePage: React.FC = (): ReactElement => {
                         }
                     </div>
                     { pageConfig.right_pane_paragraph &&
-                        <div className={style.description}>{t(pageConfig.right_pane_paragraph)}</div>
+                        // @ts-ignore
+                        <div className={style.description} style={{...(pageConfig.right_pane_paragraph_text_align && { textAlign: pageConfig.right_pane_paragraph_text_align})}}dangerouslySetInnerHTML={{ __html: t(pageConfig.right_pane_paragraph)}}/>
                     }
                 </div>
                 <SSIPrimaryButton
-                    caption={'Continue'}
+                    caption={t('label_continue')}
                     style={{width: 200, ...style}}
                     onClick={async (): Promise<void> => {
                         await flowRouter.nextStep(state)
