@@ -162,7 +162,7 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <text
+            <p
                 className={"inter-normal-24 normal-400"}
                 style={{
                     color: '#FBFBFB',
@@ -171,7 +171,7 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
                 }}
             >
                 {t('sharing_data_success_get_mobile_app_message')}
-            </text>
+            </p>
             <div style={{display: 'flex', flexDirection: 'row', margin: 'auto'}}>
                 <a href="https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet"
                    target="_blank"

@@ -54,12 +54,11 @@ const SSISecondaryButton: React.FC<IProps> = (props: IProps) => {
             onClick={onClick}
             disabled={disabled}
         >
-            <span
-                className={"poppins-normal-16"}
-                style={{color: color}}
+            <p className={"poppins-normal-16"}
+               style={{color: color}}
             >
                 {caption}
-            </span>
+            </p>
         </button>
     )
 }
