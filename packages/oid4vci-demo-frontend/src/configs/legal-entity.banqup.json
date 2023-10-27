@@ -187,7 +187,7 @@
             "label": "ssi_information_request_page_form_contact_bsn_label",
             "type": "text",
             "required": true,
-            "leaveEmptyInCaseOfEmptyValue": true
+            "readonlyWhenAbsentInPayload": true
           }
         ],
         [
@@ -204,7 +204,7 @@
           {
             "id": "taxRegistrationNumber",
             "key": "taxRegistrationNumber",
-            "label": "ssi_information_request_page_form_tax_registration_code_label",
+            "label": "ssi_information_request_page_form_tax_registration_number_label",
             "type": "text",
             "required": true
           }
