@@ -153,12 +153,12 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         marginTop: isNarrowScreen ? 20 : '15%',
                         alignItems: 'center'
                     }}>
-                        <NonMobile>
+                        <NonMobileOS>
                             <div style={{flexGrow: 1, marginBottom: 34}}>
                                 {qrCode}
                             </div>
-                        </NonMobile>
-                        <Mobile>
+                        </NonMobileOS>
+                        <MobileOS>
                             <div style={{
                                 gap: 24,
                                 display: 'flex',
@@ -171,7 +171,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                                 }
                                 <DeepLink style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
                             </div>
-                        </Mobile>
+                        </MobileOS>
                     </div>
                     <div style={{marginTop: "20px"}}>
                         <NonMobileOS>

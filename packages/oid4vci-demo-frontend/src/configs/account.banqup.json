@@ -15,12 +15,6 @@
           "src": "banqup/logo.svg"
         },
         "mobile": {
-          "logo": {
-            "src": "banqup/logo.svg",
-            "alt": "banqup",
-            "width": 65,
-            "height": 65
-          },
           "backgroundColor": "#EFFFF5"
         }
       },
@@ -55,12 +49,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
         "backgroundColor": "#EFFFF5"
       },
       "rightPaneGrid": {
@@ -158,12 +146,6 @@
       "rightPaneButtonHeight": "48px",
       "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 65,
-          "height": 65
-        }
       }
     },
     "infoRequest": {
@@ -177,12 +159,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
         "backgroundColor": "#EFFFF5"
       },
       "form": [
@@ -241,12 +217,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        }
       }
     },
     "verifyEmail": {
