@@ -96,9 +96,10 @@ export interface SSIWelcomePageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
     logo?: ImageProperties
-    right_pane_title: string
-    right_pane_subtitle: string
-    right_pane_paragraph: string
+    right_pane_title?: string
+    right_pane_subtitle?: string
+    right_pane_paragraph?: string
+    right_pane_paragraph_text_align?: string
     rightPaneButtonStepId?: string
     mobile?: {
         logo?: ImageProperties
