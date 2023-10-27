@@ -208,6 +208,7 @@ export interface DataFormElement {
     key: string
     type: HTMLInputTypeAttribute
     required?: boolean
+    readonlyWhenAbsentInPayload?: boolean
     defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string

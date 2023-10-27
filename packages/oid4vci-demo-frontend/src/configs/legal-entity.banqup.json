@@ -135,8 +135,8 @@
     },
     "infoRequest": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title_banqup",
-      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "sharing_data_right_pane_title": "manual_fill_data_company_right_pane_title_tell_us_more_company",
+      "sharing_data_right_pane_paragraph": "sharing_data_company_fill_out_right_pane_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
@@ -178,6 +178,16 @@
             "label": "ssi_information_request_page_form_contact_last_name_label",
             "type": "text",
             "required": true
+          }
+        ],
+        [
+          {
+            "id": "bsnNumber",
+            "key": "bsn",
+            "label": "ssi_information_request_page_form_contact_bsn_label",
+            "type": "text",
+            "required": true,
+            "readonlyWhenAbsentInPayload": true
           }
         ],
         [

@@ -72,7 +72,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                 return <InputField
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
-                    readonly={field.readonly || formInitData?.[field.id] !== undefined}
+                    readonly={field.readonly || formInitData?.[field.id] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)}
                     defaultValue={defaultValue}
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
