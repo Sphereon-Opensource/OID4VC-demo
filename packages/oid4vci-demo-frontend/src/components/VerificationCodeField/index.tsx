@@ -1,4 +1,4 @@
-import React, {useState, ChangeEvent, useEffect, useRef} from 'react'
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
 import style from '../VerificationCodeField/index.module.css'
 
 interface Props {
@@ -17,8 +17,8 @@ const VerificationCodeField: React.FC<Props> = ({length, onComplete}) => {
     useEffect(() => {
         if (inputRefs.current[0]) {
             setTimeout(() => { // Without delay focus will not work
-                inputRefs.current[0]?.focus();
-            }, 100);
+                inputRefs.current[0]?.focus()
+            }, 100)
         }
     }, [])
 
@@ -74,6 +74,9 @@ const VerificationCodeField: React.FC<Props> = ({length, onComplete}) => {
                     onChange={(e: ChangeEvent<HTMLInputElement>) => handleUpdate(index, e.target.value)}
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(e, index)}
                     onPaste={(e) => handlePaste(e, index)}
+                    onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '')
+                    }}
                     maxLength={1}
                 />
             ))}
