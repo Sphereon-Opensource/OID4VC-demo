@@ -142,7 +142,7 @@
         ],
         [
           {
-            "id": "bsn",
+            "id": "bsnNumber",
             "key": "bsn",
             "label": "ssi_information_request_page_form_contact_bsn_label",
             "type": "text",
