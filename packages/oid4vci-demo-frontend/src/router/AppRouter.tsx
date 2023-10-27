@@ -13,7 +13,7 @@ import SphereonWalletPage from "../pages/SphereonWalletPage"
 import SSILoadingPage from '../pages/SSILoadingPage';
 import {useFlowAppRouter} from "./flow-router"
 import SSIEmailVerificationPage from "../pages/SSIEmailVerificationPage"
-import SSIWelcomePage from '../pages/SSIWelcomeScreen'
+import SSIWelcomePage from '../pages/SSIWelcomePage'
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,

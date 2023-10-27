@@ -95,9 +95,10 @@ export interface SSIWelcomePageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
     logo?: ImageProperties
-    right_pane_title: string
-    right_pane_subtitle: string
-    right_pane_paragraph: string
+    right_pane_title?: string
+    right_pane_subtitle?: string
+    right_pane_paragraph?: string
+    right_pane_paragraph_text_align?: string
     rightPaneButtonStepId?: string
     mobile?: {
         logo?: ImageProperties
@@ -124,9 +125,19 @@ export interface SSIVerifyEmailPageConfig extends PageConfig {
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     leftPaneWidth?: string
-    photoLeft: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    photoLeft?: string
     photoRight: string
     rightPaneButtonStepId?: string
+    rightPaneTitle: string
+    rightPaneParagraph: string
+    rightPaneButtonCaption: string
+    rightPaneTextHeight: string
+    rightPaneTextMarginTop: string
+    rightPaneTextMarginBottom: string
+    rightPaneButtonWidth?: string
+    rightPaneButtonHeight?: string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
@@ -242,7 +253,8 @@ export interface SphereonWalletQRCode {
     style: CSSProperties,
     image: ImageProperties & { style: CSSProperties },
     button: IProps & { style: CSSProperties },
-    downloadUrl: string
+    downloadUrl: string,
+    qrTextResourceId?: string
 }
 
 export interface SphereonWalletPageConfig extends PageConfig {
@@ -266,7 +278,6 @@ export interface SphereonWalletPageConfig extends PageConfig {
         primaryButtonResourceId?: string
         primaryButtonStepId?: string
         paragraphResourceId?: string
-        qrTextResourceId?: string
     }
 }
 
@@ -331,6 +342,10 @@ export interface SSIPrimaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor: string
         }
+        button: {
+            width?: string | number
+            height?: string | number
+        }
     }
 }
 
@@ -339,6 +354,10 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor?: string
             color: string
+        }
+        button: {
+            width?: string | number
+            height?: string | number
         }
     }
 }
