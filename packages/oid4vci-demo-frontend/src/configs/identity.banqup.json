@@ -19,12 +19,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
         "backgroundColor": "#EFFFF5"
       },
       "rightPaneGrid": {
@@ -114,12 +108,6 @@
           "src": "banqup/logo.svg"
         },
         "mobile": {
-          "logo": {
-            "src": "banqup/logo.svg",
-            "alt": "banqup",
-            "width": 65,
-            "height": 65
-          },
           "backgroundColor": "#EFFFF5"
         }
       },
@@ -154,12 +142,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
         "backgroundColor": "#EFFFF5"
       },
       "form": [
@@ -238,12 +220,6 @@
       },
       "mobile": {
         "bottomParagraph": "mobile_right_pane_bottom_paragraph",
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        }
       }
     },
     "issueSuccess": {
@@ -262,12 +238,6 @@
       "rightPaneButtonHeight": "48px",
       "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 65,
-          "height": 65
-        }
       }
     }
   },
