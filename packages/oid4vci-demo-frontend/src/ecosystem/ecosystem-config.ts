@@ -83,7 +83,6 @@ export interface SSILoadingPageConfig extends PageConfig {
     logo?: ImageProperties
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph: string
-    rightPaneButtonStepId?: string
     spinnerColor?: string
     mobile?: {
         logo?: ImageProperties
@@ -101,6 +100,22 @@ export interface SSIWelcomePageConfig extends PageConfig {
     right_pane_paragraph?: string
     right_pane_paragraph_text_align?: string
     rightPaneButtonStepId?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+export interface SSIVerifyEmailPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    rightPaneTitle: string
+    rightPaneParagraph: string
+    verifyDigitsTitle: string
+    numberOfDigits? : number
+    primaryButtonResourceId?: string
+    primaryButtonStepId?: string
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
@@ -239,7 +254,8 @@ export interface SphereonWalletQRCode {
     style: CSSProperties,
     image: ImageProperties & { style: CSSProperties },
     button: IProps & { style: CSSProperties },
-    downloadUrl: string
+    downloadUrl: string,
+    qrTextResourceId?: string
 }
 
 export interface SphereonWalletPageConfig extends PageConfig {
@@ -263,7 +279,6 @@ export interface SphereonWalletPageConfig extends PageConfig {
         primaryButtonResourceId?: string
         primaryButtonStepId?: string
         paragraphResourceId?: string
-        qrTextResourceId?: string
     }
 }
 
@@ -328,6 +343,10 @@ export interface SSIPrimaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor: string
         }
+        button: {
+            width?: string | number
+            height?: string | number
+        }
     }
 }
 
@@ -336,6 +355,10 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor?: string
             color: string
+        }
+        button: {
+            width?: string | number
+            height?: string | number
         }
     }
 }

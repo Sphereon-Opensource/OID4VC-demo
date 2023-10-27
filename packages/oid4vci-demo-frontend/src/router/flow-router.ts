@@ -26,7 +26,6 @@ export function useFlowAppRouter() {
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
     const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(getCurrentRoute(routes, currentRouteId)))
 
-
     function getDefaultLocation(state?: any): string {
         return defaultLocation(stepsById)
     }
@@ -66,29 +65,29 @@ export function useFlowRouter<T extends PageConfig>() {
         if (!currentStep) {
             throw new Error(`can't determine current step for location path ${currentLocation}`)
         }
-        if(ecosystem.hasPageConfig(currentStep.id)) {
+        if (ecosystem.hasPageConfig(currentStep.id)) {
             stepState.pageConfig = ecosystem.getPageConfig(currentStep.id)
         }
         return stepState
     }
 
-    function getDefaultLocation(state?: any): string {
+    function getDefaultLocation(): string {
         return defaultLocation(stepsById)
     }
 
-    async function nextStep(state ?: any) {
+    async function nextStep(updatedState ?: any) {
         const currentStep = stepState.currentStep
         if (!currentStep) {
             throw new Error('current route/step is unknown')
         }
         if (currentStep.nextId) {
-            await goToStep(currentStep.nextId, state)
+            await goToStep(currentStep.nextId, updatedState)
         } else {
             throw new Error(`There is no next step defined in step ${currentStep.id} in the sequence element of the ecosystem json`)
         }
     }
 
-    async function goToStep(stepId: string, state?: any) {
+    async function goToStep(stepId: string, updatedState?: any) {
         const nextStep = stepsById[stepId]
         if (!nextStep) {
             throw new Error(`Could not find a step id ${stepId} which was defined as nextId of step ${stepState.currentStep?.id}`)
@@ -109,22 +108,22 @@ export function useFlowRouter<T extends PageConfig>() {
                     if (navigate === undefined) {
                         throw new Error(`Can't navigate from this page because we could not get the navigation hook.`)
                     }
-                    navigate(navStep.path, {state})
+                    navigate(navStep.path, {state: updatedState})
                 }
                 break
             case VCIOperation.EXECUTE:
-                await execute(nextStep as VCIExecuteStep, state)
+                await execute(nextStep as VCIExecuteStep, updatedState)
                 break
         }
     }
 
-    async function execute(executeStep: VCIExecuteStep, inState: any) {
+    async function execute(executeStep: VCIExecuteStep, updatedState: any) {
         try {
             console.debug('executing step', executeStep.id)
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
-                    outState = await createCredentialOffer(executeStep.actionParams, inState, ecosystem)
+                    outState = await createCredentialOffer(executeStep.actionParams, {...updatedState, ...pageLocation.state}, ecosystem)
                     break
             }
             stepState.currentStep = executeStep
@@ -143,7 +142,7 @@ export function useFlowRouter<T extends PageConfig>() {
 
     function getVpDefinitionId(): string {
         const vpDefinitionId = getPageConfig().vpDefinitionId ?? currentRoute.vpDefinitionId
-        if(!vpDefinitionId) {
+        if (!vpDefinitionId) {
             throw new Error('vpDefinitionId is neither defined in the page configuration nor in the route.')
         }
         return vpDefinitionId

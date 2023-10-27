@@ -170,7 +170,6 @@ const SSIInformationRequestPage: React.FC = () => {
                     <div>
                         <SSIPrimaryButton
                             caption={t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
-                            style={{width: 327}}
                             disabled={!isFormDataValid(formData, pageConfig.form)}
                             onClick={async () => await flowRouter.nextStep({payload: formData})}
                         />
