@@ -311,10 +311,10 @@
           "id": "issueSuccess",
           "operation": "navigate",
           "path": "/credentials/issue/success",
-          "nextId": "toCompanyFlow"
+          "nextId": "toIdentityFlow"
         },
         {
-          "id": "toCompanyFlow",
+          "id": "toIdentityFlow",
           "operation": "navigate",
           "path": "https://identity.banqup.demo.sphereon.com"
         },
