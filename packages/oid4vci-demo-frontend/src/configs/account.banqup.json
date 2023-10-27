@@ -31,22 +31,12 @@
           {
             "buttonCaptionResourceId": "label_download_ios",
             "style": {},
-            "button": {
-              "style": {
-                "width": 250
-              }
-            },
             "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
           },
           {
             "buttonCaptionResourceId": "label_download_android",
             "enableQR": false,
             "style": {},
-            "button": {
-              "style": {
-                "width": 250
-              }
-            },
             "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
           }
         ],
@@ -258,6 +248,18 @@
           "height": 65
         }
       }
+    },
+    "verifyEmail": {
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
+      "rightPaneTitle": "title_please_check_your_email",
+      "rightPaneParagraph": "paragraph_confirm_email",
+      "verifyDigitsTitle": "title_fill_5_digits",
+      "numberOfDigits": 5,
+      "primaryButtonResourceId": "label_continue",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
     }
   },
   "routes": [
@@ -282,6 +284,12 @@
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/request",
+          "nextId": "verifyEmail"
+        },
+        {
+          "id": "verifyEmail",
+          "operation": "navigate",
+          "path": "/verify/email",
           "nextId": "credentialOffer"
         },
         {
@@ -332,6 +340,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },
@@ -339,6 +350,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#353438"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },
