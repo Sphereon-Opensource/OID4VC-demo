@@ -187,7 +187,6 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                       style={{
                           backgroundColor: '#312B78',
                           color: '#FFFFFF',
-                          width: '170px',
                           height: '32px',
                           margin: "15% auto 0 auto"
                       }}

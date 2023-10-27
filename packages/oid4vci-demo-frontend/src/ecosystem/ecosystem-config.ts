@@ -316,10 +316,10 @@ export interface SSIPrimaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor: string
         }
-    }
-    button: {
-        width?: string | number
-        height?: string | number
+        button: {
+            width?: string | number
+            height?: string | number
+        }
     }
 }
 

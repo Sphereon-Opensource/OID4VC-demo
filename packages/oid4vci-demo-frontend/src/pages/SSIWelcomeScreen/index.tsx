@@ -59,8 +59,8 @@ const SSIWelcomePage: React.FC = (): ReactElement => {
                     }
                 </div>
                 <SSIPrimaryButton
-                    caption={'Continue'}
-                    style={{width: 200, ...style}}
+                    caption={t("label_continue")}
+                    style={style}
                     onClick={async (): Promise<void> => {
                         await flowRouter.nextStep(state)
                     }}
