@@ -108,13 +108,15 @@
           {
             "buttonCaptionResourceId": "label_download_ios",
             "style": {},
-            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796",
+            "target": "_blank"
           },
           {
             "buttonCaptionResourceId": "label_download_android",
             "enableQR": false,
             "style": {},
-            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US",
+            "target": "_blank"
           }
         ],
         "enablePrimaryButton": true,
