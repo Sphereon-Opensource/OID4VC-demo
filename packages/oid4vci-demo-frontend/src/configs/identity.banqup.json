@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "Identity",
+    "credentialName": "Verified Identity",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
@@ -65,28 +65,6 @@
           "width": 200,
           "marginTop": "0",
           "marginBottom": "10%"
-        }
-      },
-      "mostRightPanel": {
-        "grid": {
-          "gridColumn": "7/8",
-          "gridRow": "6"
-        },
-        "separator": {
-          "logo": {
-            "src": "banqup/separator.svg",
-            "alt": "banqup",
-            "height": "356px",
-            "width": "13px"
-          }
-        },
-        "width": "24%",
-        "height": "100%",
-        "logo": {
-          "src": "banqup/right_panel_image.svg",
-          "width": "193px",
-          "height": "150px",
-          "alt": "download app"
         }
       }
     },
@@ -203,7 +181,7 @@
     },
     "issueRequest": {
       "leftPaneWidth": "40%",
-      "title": "title_secure_your_personal_credential",
+      "title": "title_secure_your_credential",
       "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "qrcode_right_pane_bottom_paragraph",
       "backgroundColor": "#0E0B31",
@@ -220,7 +198,7 @@
       "logo": {
         "src": "banqup/logo.svg"
       },
-      "rightPaneTitle": "credentials_success_right_pane_valid_id_title",
+      "rightPaneTitle": "credentials_success_right_pane_banqup_title",
       "rightPaneParagraph": "credentials_success_right_pane_valid_id_paragraph",
       "rightPaneButtonCaption": "label_continue",
       "rightPaneTextHeight": "40%",

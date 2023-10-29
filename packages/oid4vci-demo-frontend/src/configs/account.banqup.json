@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "Account",
+    "credentialName": "Verified Account",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download",
@@ -138,7 +138,7 @@
       "logo": {
         "src": "banqup/logo.svg"
       },
-      "rightPaneTitle": "credentials_success_right_pane_verified_account_title",
+      "rightPaneTitle": "credentials_success_right_pane_banqup_title",
       "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph",
       "rightPaneButtonCaption": "label_continue",
       "rightPaneTextHeight": "40%",
@@ -152,8 +152,8 @@
     },
     "infoRequest": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
-      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "sharing_data_right_pane_title": "ssi_information_request_page_form_account_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_banqup_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
       "backgroundColor": "#0E0B31",
@@ -211,7 +211,7 @@
     },
     "issueRequest": {
       "leftPaneWidth": "40%",
-      "title": "title_secure_your_personal_credential",
+      "title": "title_secure_your_credential",
       "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#0E0B31",
