@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "Legal Entity",
+    "credentialName": "Verified Legal Entity",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
@@ -66,28 +66,6 @@
           "marginTop": "0",
           "marginBottom": "10%"
         }
-      },
-      "mostRightPanel": {
-        "grid": {
-          "gridColumn": "7/8",
-          "gridRow": "6"
-        },
-        "separator": {
-          "logo": {
-            "src": "banqup/separator.svg",
-            "alt": "banqup",
-            "height": "356px",
-            "width": "13px"
-          }
-        },
-        "width": "24%",
-        "height": "100%",
-        "logo": {
-          "src": "banqup/right_panel_image.svg",
-          "width": "193px",
-          "height": "150px",
-          "alt": "download app"
-        }
       }
     },
     "downloadSphereonWallet": {
@@ -108,13 +86,15 @@
           {
             "buttonCaptionResourceId": "label_download_ios",
             "style": {},
-            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796",
+            "target": "_blank"
           },
           {
             "buttonCaptionResourceId": "label_download_android",
             "enableQR": false,
             "style": {},
-            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US",
+            "target": "_blank"
           }
         ],
         "enablePrimaryButton": true,
@@ -205,7 +185,7 @@
     },
     "issueRequest": {
       "leftPaneWidth": "40%",
-      "title": "title_secure_your_personal_credential",
+      "title": "title_secure_your_credential",
       "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "qrcode_right_pane_bottom_paragraph",
       "backgroundColor": "#0E0B31",
@@ -222,7 +202,7 @@
       "logo": {
         "src": "banqup/logo.svg"
       },
-      "rightPaneTitle": "credentials_success_right_pane_valid_id_title",
+      "rightPaneTitle": "credentials_success_right_pane_banqup_title",
       "rightPaneParagraph": "credentials_success_right_pane_registered_company_paragraph",
       "rightPaneButtonCaption": "label_finish",
       "rightPaneTextHeight": "40%",

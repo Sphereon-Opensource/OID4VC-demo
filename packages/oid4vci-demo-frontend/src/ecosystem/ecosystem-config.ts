@@ -1,5 +1,5 @@
 import {FormFieldValue, ImageProperties} from "../types"
-import {CSSProperties, HTMLInputTypeAttribute} from "react"
+import {CSSProperties, HTMLAttributeAnchorTarget, HTMLInputTypeAttribute} from "react"
 import {IProps} from "../components/SSISecondaryButton"
 
 export interface VCIConfig {
@@ -263,10 +263,11 @@ export interface SSIDownloadPageConfig extends PageConfig {
 
 export interface SphereonWalletQRCode {
     buttonCaptionResourceId: string
-    style: CSSProperties,
-    image: ImageProperties & { style: CSSProperties },
-    button: IProps & { style: CSSProperties },
-    downloadUrl: string,
+    style: CSSProperties
+    image: ImageProperties & { style: CSSProperties }
+    button: IProps & { style: CSSProperties }
+    downloadUrl: string
+    target?: HTMLAttributeAnchorTarget
     qrTextResourceId?: string
 }
 
