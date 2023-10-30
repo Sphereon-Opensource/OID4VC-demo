@@ -1,9 +1,10 @@
 {
   "general": {
-    "credentialName": "Account credential",
+    "credentialName": "Account",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
-    "downloadUrl": "https://agent.demo.sphereon.com/#/download"
+    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
+    "verifierUrl": "https:/account.banqup.demo.sphereon.com"
   },
   "pages": {
     "downloadSphereonWallet": {
@@ -14,46 +15,137 @@
           "src": "banqup/logo.svg"
         },
         "mobile": {
-          "logo": {
-            "src": "banqup/logo.svg",
-            "alt": "banqup",
-            "width": 65,
-            "height": 65
-          },
           "backgroundColor": "#EFFFF5"
         }
       },
       "rightPane": {
         "image": "banqup/flyng-iphone.svg",
         "width": "100%",
-        "sphereonWalletQRCode": {
-          "enableQR": true,
-          "style": {
+        "sphereonWalletQRCodes": [
+          {
+            "buttonCaptionResourceId": "label_download_ios",
+            "style": {},
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
           },
-          "button": {
-            "style": {
-              "width": 250
-            }
-          },
-          "downloadUrl": "https://qrco.de/be5xfh"
-        },
+          {
+            "buttonCaptionResourceId": "label_download_android",
+            "enableQR": false,
+            "style": {},
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
+          }
+        ],
         "enablePrimaryButton": true,
         "primaryButtonResourceId": "label_continue"
       }
     },
-    "issueSuccess": {
-      "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
-      "backgroundColor": "#01224B",
+    "verifyRequest": {
+      "downloadAppStepId": "downloadSphereonWallet",
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
+      "leftPaneWidth": "40%",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
       "logo": {
-        "src": "bank/guest_credential.svg"
+        "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 43,
-          "height": 41
+        "backgroundColor": "#EFFFF5"
+      },
+      "rightPaneGrid": {
+        "style": {
+          "width": "100%",
+          "gridTemplateColumns": "repeat(9, 1fr)",
+          "gridTemplateRows": "repeat(7, minmax(1fr, auto))"
         }
+      },
+      "rightPaneLeftPane": {
+        "grid": {
+          "gridColumn": "2/8",
+          "gridRow": "6",
+          "height": "30%"
+        },
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242",
+            "gridRow": "5",
+            "gridColumn": "3/8",
+            "display": "block"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "style": {
+              "display": "none"
+            }
+          },
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_signup",
+            "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph_banqup"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      },
+      "mostRightPanel": {
+        "grid": {
+          "gridColumn": "7/8",
+          "gridRow": "6"
+        },
+        "separator": {
+          "logo": {
+            "src": "banqup/separator.svg",
+            "alt": "banqup",
+            "height": "356px",
+            "width": "13px"
+          }
+        },
+        "width": "24%",
+        "height": "100%",
+        "logo": {
+          "src": "banqup/right_panel_image.svg",
+          "width": "193px",
+          "height": "150px",
+          "alt": "download app"
+        }
+      }
+    },
+    "welcome": {
+      "leftPaneWidth": "40%",
+      "right_pane_title": "welcome_title",
+      "right_pane_subtitle": "welcome_page_confirm_account_subtitle",
+      "right_pane_paragraph": "welcome_page_confirm_account_description",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    },
+    "issueSuccess": {
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "rightPaneTitle": "credentials_success_right_pane_verified_account_title",
+      "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph",
+      "rightPaneButtonCaption": "label_continue",
+      "rightPaneTextHeight": "40%",
+      "rightPaneTextMarginTop": "0",
+      "rightPaneTextMarginBottom": "10%",
+      "rightPaneButtonWidth": "135px",
+      "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toCompanyFlow",
+      "mobile": {
       }
     },
     "infoRequest": {
@@ -67,12 +159,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
         "backgroundColor": "#EFFFF5"
       },
       "form": [
@@ -131,30 +217,49 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        }
+      }
+    },
+    "verifyEmail": {
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
+      "rightPaneTitle": "title_please_check_your_email",
+      "rightPaneParagraph": "paragraph_confirm_email",
+      "verifyDigitsTitle": "title_fill_5_digits",
+      "numberOfDigits": 5,
+      "primaryButtonResourceId": "label_continue",
+      "logo": {
+        "src": "banqup/logo.svg"
       }
     }
   },
   "routes": [
     {
       "id": "default",
+      "vpDefinitionId": "sphereonWalletIdentity",
       "steps": [
         {
-          "id": "downloadSphereonWallet",
+          "id": "verifyRequest",
           "operation": "navigate",
-          "path": "/download/sphereon-wallet",
-          "nextId": "infoRequest",
+          "path": "/credentials/verify/request",
+          "nextId": "welcome",
           "isDefaultRoute": true
+        },
+        {
+          "id": "welcome",
+          "operation": "navigate",
+          "path": "/welcome",
+          "nextId": "infoRequest"
         },
         {
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/request",
+          "nextId": "verifyEmail"
+        },
+        {
+          "id": "verifyEmail",
+          "operation": "navigate",
+          "path": "/verify/email",
           "nextId": "credentialOffer"
         },
         {
@@ -175,7 +280,19 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://banqup.demo.sphereon.com"
+          "path": "/credentials/issue/success",
+          "nextId": "toIdentityFlow"
+        },
+        {
+          "id": "toIdentityFlow",
+          "operation": "navigate",
+          "path": "https://identity.banqup.demo.sphereon.com"
+        },
+        {
+          "id": "downloadSphereonWallet",
+          "operation": "navigate",
+          "path": "/download/sphereon-wallet",
+          "nextId": "verifyRequest"
         }
       ]
     }
@@ -194,6 +311,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },
@@ -201,6 +321,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#353438"
+        },
+        "button": {
+          "width" : "220px"
         }
       }
     },

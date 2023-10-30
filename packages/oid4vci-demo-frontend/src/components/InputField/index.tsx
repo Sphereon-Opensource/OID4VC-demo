@@ -50,7 +50,7 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
 
     return <div className={style.container}>
         { label &&
-            <label className="poppins-normal-10">
+            <label className="poppins-normal-10 inputFieldLabel">
                 {label}
             </label>
         }
@@ -59,9 +59,10 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
             style={{ ...(!isValid && { borderColor: 'red' }) }}
             placeholder={placeholder}
             readOnly={readonly}
+            tabIndex={readonly ? -1 : undefined} // Do not tab-stop in read-only fields
             onChange={onChangeValue}
             onBlur={onBlur}
-            {...(!readonly && { className: style.enabled })}
+            className={`${style.inputField}${!readonly ? ` ${style.enabled}` : ''}`}
             {...(!isCheckBox && { defaultValue: defaultValue as InputValue })}
             {...(!isCheckBox && { value: value as InputValue})}
             {...(isCheckBox && { checked: value as boolean})}

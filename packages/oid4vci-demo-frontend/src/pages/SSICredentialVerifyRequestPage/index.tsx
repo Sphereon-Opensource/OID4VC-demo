@@ -7,7 +7,7 @@ import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop"
 import MemoizedAuthenticationQR from '../../components/AuthenticationQR'
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useMediaQuery} from "react-responsive"
-import {Mobile, MobileOS, NonMobile} from "../../index"
+import {Mobile, MobileOS, NonMobile, NonMobileOS} from "../../index"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {SSICredentialVerifyRequestPageConfig} from "../../ecosystem/ecosystem-config"
@@ -80,7 +80,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                 ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
                 ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
-                {(isTabletOrMobile && pageConfig?.logo) &&
+                {(isTabletOrMobile && pageConfig?.mobile?.logo) &&
                     <img
                         src={`${pageConfig.mobile?.logo?.src}`}
                         alt={`${pageConfig.mobile?.logo?.alt}`}
@@ -106,16 +106,18 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         marginTop: `${isTabletOrMobile ? 20 : pageConfig.rightPaneLeftPane?.qrCode?.marginTop ?? '25%'}`,
                         alignItems: 'center'
                     }}>
-                        <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
-                            {/*Whether the QR code is shown (mobile) is handled in the component itself */}
-                            {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                       fgColor={'rgba(50, 57, 72, 1)'}
-                                                       width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                       vpDefinitionId={flowRouter.getVpDefinitionId()}
-                                                       onAuthRequestRetrieved={console.log}
-                                                       onSignInComplete={onSignInComplete}
-                                                       setQrCodeData={setDeepLink}/>}
-                        </div>
+                        <NonMobileOS>
+                            <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
+                                {/*Whether the QR code is shown (mobile) is handled in the component itself */}
+                                {<MemoizedAuthenticationQR ecosystem={ecosystem}
+                                                           fgColor={'rgba(50, 57, 72, 1)'}
+                                                           width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
+                                                           vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                           onAuthRequestRetrieved={console.log}
+                                                           onSignInComplete={onSignInComplete}
+                                                           setQrCodeData={setDeepLink}/>}
+                            </div>
+                        </NonMobileOS>
                         <MobileOS>
                             <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
                                 { pageConfig.mobile?.image &&
@@ -182,13 +184,20 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                     width={`${pageConfig.mostRightPanel?.logo?.width}`}
                     height={`${pageConfig.mostRightPanel?.logo?.height}`}
                 />
-                  <SSIPrimaryButton caption={t('ssi_download_app_button')} style={{
-                    backgroundColor: '#312B78',
-                    color: '#FFFFFF',
-                    width: '170px',
-                    height: '32px',
-                    margin: "15% auto 0 auto"
-                  }} />
+                  <SSIPrimaryButton
+                      caption={t('ssi_download_app_button')}
+                      style={{
+                          backgroundColor: '#312B78',
+                          color: '#FFFFFF',
+                          height: '32px',
+                          margin: "15% auto 0 auto"
+                      }}
+                      onClick={async (): Promise<void> => {
+                          if (pageConfig.downloadAppStepId) {
+                              await flowRouter.goToStep(pageConfig.downloadAppStepId)
+                          }
+                      }}
+                  />
                 </div>
               </div>
               </div>

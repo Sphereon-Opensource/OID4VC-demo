@@ -1,4 +1,4 @@
-import {ImageProperties} from "../types"
+import {FormFieldValue, ImageProperties} from "../types"
 import {CSSProperties, HTMLInputTypeAttribute} from "react"
 import {IProps} from "../components/SSISecondaryButton"
 
@@ -24,6 +24,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     logo?: ImageProperties
     enableRightPaneButton?: boolean
     rightPaneButtonStepId?: string
+    downloadAppStepId?: string
     bottomParagraph?: string
     mobile?: {
         logo?: ImageProperties
@@ -82,8 +83,51 @@ export interface SSILoadingPageConfig extends PageConfig {
     logo?: ImageProperties
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph: string
-    rightPaneButtonStepId?: string
     spinnerColor?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+
+export interface SSIIdentityVerificationPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    sharing_data_right_pane_title: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+
+export interface SSIWelcomePageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    right_pane_title?: string
+    right_pane_subtitle?: string
+    right_pane_paragraph?: string
+    right_pane_paragraph_text_align?: string
+    rightPaneButtonStepId?: string
+    mobile?: {
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: string
+    },
+}
+export interface SSIVerifyEmailPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    rightPaneTitle: string
+    rightPaneParagraph: string
+    verifyDigitsTitle: string
+    numberOfDigits? : number
+    primaryButtonResourceId?: string
+    primaryButtonStepId?: string
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
@@ -93,9 +137,19 @@ export interface SSILoadingPageConfig extends PageConfig {
 
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     leftPaneWidth?: string
-    photoLeft: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    photoLeft?: string
     photoRight: string
     rightPaneButtonStepId?: string
+    rightPaneTitle?: string
+    rightPaneParagraph?: string
+    rightPaneButtonCaption?: string
+    rightPaneTextHeight?: string
+    rightPaneTextMarginTop?: string
+    rightPaneTextMarginBottom?: string
+    rightPaneButtonWidth?: string
+    rightPaneButtonHeight?: string
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
@@ -166,7 +220,8 @@ export interface DataFormElement {
     key: string
     type: HTMLInputTypeAttribute
     required?: boolean
-    defaultValue?: string
+    readonlyWhenAbsentInPayload?: boolean
+    defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
     readonly?: boolean
@@ -206,6 +261,15 @@ export interface SSIDownloadPageConfig extends PageConfig {
     }
 }
 
+export interface SphereonWalletQRCode {
+    buttonCaptionResourceId: string
+    style: CSSProperties,
+    image: ImageProperties & { style: CSSProperties },
+    button: IProps & { style: CSSProperties },
+    downloadUrl: string,
+    qrTextResourceId?: string
+}
+
 export interface SphereonWalletPageConfig extends PageConfig {
     leftPane: {
         image?: string
@@ -222,17 +286,11 @@ export interface SphereonWalletPageConfig extends PageConfig {
         image: string
         width?: string
         backgroundColor?: string
-        sphereonWalletQRCode: {
-            style: CSSProperties,
-            image: ImageProperties & { style: CSSProperties }
-            button: IProps & { style: CSSProperties }
-            downloadUrl: string
-        }
+        sphereonWalletQRCodes: SphereonWalletQRCode[]
         enablePrimaryButton?: boolean
         primaryButtonResourceId?: string
         primaryButtonStepId?: string
         paragraphResourceId?: string
-        qrTextResourceId?: string
     }
 }
 
@@ -297,6 +355,10 @@ export interface SSIPrimaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor: string
         }
+        button: {
+            width?: string | number
+            height?: string | number
+        }
     }
 }
 
@@ -305,6 +367,10 @@ export interface SSISecondaryButtonConfig extends ComponentConfig {
         mainContainer: {
             backgroundColor?: string
             color: string
+        }
+        button: {
+            width?: string | number
+            height?: string | number
         }
     }
 }
@@ -336,6 +402,8 @@ export interface VCIConfigPages {
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
     SSILoadingPage: SSILoadingPageConfig
+    SSIWelcomePage: SSIWelcomePageConfig
+    SSIIdentityVerificationPage: SSIIdentityVerificationPageConfig
 }
 
 export interface VCIConfigRoute {
