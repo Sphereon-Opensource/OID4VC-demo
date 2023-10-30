@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "Identity",
+    "credentialName": "Verified Identity",
     "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
     "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
@@ -19,12 +19,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
         "backgroundColor": "#EFFFF5"
       },
       "rightPaneGrid": {
@@ -72,28 +66,6 @@
           "marginTop": "0",
           "marginBottom": "10%"
         }
-      },
-      "mostRightPanel": {
-        "grid": {
-          "gridColumn": "7/8",
-          "gridRow": "6"
-        },
-        "separator": {
-          "logo": {
-            "src": "banqup/separator.svg",
-            "alt": "banqup",
-            "height": "356px",
-            "width": "13px"
-          }
-        },
-        "width": "24%",
-        "height": "100%",
-        "logo": {
-          "src": "banqup/right_panel_image.svg",
-          "width": "193px",
-          "height": "150px",
-          "alt": "download app"
-        }
       }
     },
     "welcome": {
@@ -114,12 +86,6 @@
           "src": "banqup/logo.svg"
         },
         "mobile": {
-          "logo": {
-            "src": "banqup/logo.svg",
-            "alt": "banqup",
-            "width": 65,
-            "height": 65
-          },
           "backgroundColor": "#EFFFF5"
         }
       },
@@ -130,13 +96,15 @@
           {
             "buttonCaptionResourceId": "label_download_ios",
             "style": {},
-            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796"
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796",
+            "target": "_blank"
           },
           {
             "buttonCaptionResourceId": "label_download_android",
             "enableQR": false,
             "style": {},
-            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US"
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US",
+            "target": "_blank"
           }
         ],
         "enablePrimaryButton": true,
@@ -154,12 +122,6 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        },
         "backgroundColor": "#EFFFF5"
       },
       "form": [
@@ -217,19 +179,9 @@
         ]
       ]
     },
-    "loading": {
-      "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "loading_verify_identity_information_caption",
-      "sharing_data_right_pane_paragraph": "loading_verify_information_description",
-      "backgroundColor": "#0E0B31",
-      "spinnerColor": "#0E0B31",
-      "logo": {
-        "src": "banqup/logo.svg"
-      }
-    },
     "issueRequest": {
       "leftPaneWidth": "40%",
-      "title": "title_secure_your_personal_credential",
+      "title": "title_secure_your_credential",
       "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "qrcode_right_pane_bottom_paragraph",
       "backgroundColor": "#0E0B31",
@@ -237,13 +189,7 @@
         "src": "banqup/logo.svg"
       },
       "mobile": {
-        "bottomParagraph": "mobile_right_pane_bottom_paragraph",
-        "logo": {
-          "src": "banqup/logo.svg",
-          "alt": "banqup",
-          "width": 65,
-          "height": 65
-        }
+        "bottomParagraph": "mobile_right_pane_bottom_paragraph"
       }
     },
     "issueSuccess": {
@@ -252,7 +198,7 @@
       "logo": {
         "src": "banqup/logo.svg"
       },
-      "rightPaneTitle": "credentials_success_right_pane_valid_id_title",
+      "rightPaneTitle": "credentials_success_right_pane_banqup_title",
       "rightPaneParagraph": "credentials_success_right_pane_valid_id_paragraph",
       "rightPaneButtonCaption": "label_continue",
       "rightPaneTextHeight": "40%",
@@ -262,12 +208,6 @@
       "rightPaneButtonHeight": "48px",
       "rightPaneButtonStepId": "toCompanyFlow",
       "mobile": {
-        "logo": {
-          "src": "bank/logo.svg",
-          "alt": "bank",
-          "width": 65,
-          "height": 65
-        }
       }
     },
     "verifyIdentity": {
@@ -307,12 +247,6 @@
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/request",
-          "nextId": "loading"
-        },
-        {
-          "id": "loading",
-          "operation": "navigate",
-          "path": "/loading",
           "nextId": "credentialOffer"
         },
         {

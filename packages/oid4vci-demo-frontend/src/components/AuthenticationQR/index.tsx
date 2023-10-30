@@ -111,7 +111,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   render() {
     // Show the loader until we have details on which parameters to load into the QR code
     return this.state.qrCode ? (
-      <NonMobileOS><div>{this.state.qrCode}</div></NonMobileOS>
+      <div>{this.state.qrCode}</div>
     ) : (
       <BallTriangle color="#352575" height="100" width="100" />
     )
