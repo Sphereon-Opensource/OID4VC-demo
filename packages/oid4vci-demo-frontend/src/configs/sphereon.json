@@ -101,13 +101,17 @@
         }
       }
     },
-    "verifyRequest": {
+    "infoFromVPRequest": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
       "photoRight": "undraw_messenger_re_8bky_1.svg"
     },
     "issueSuccess": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
-      "photoRight": "undraw_messenger_re_8bky_1.svg"
+      "photoRight": "undraw_messenger_re_8bky_1.svg",
+      "rightPaneTitle": "credentials_success_right_pane_title",
+      "rightPaneParagraph": "credentials_success_right_pane_paragraph",
+      "rightPaneButtonCaption": "credentials_success_right_pane_button_caption",
+      "rightPaneButtonStepId": "toSphereonDemo"
     },
     "infoSharedSuccess": {
       "photoLeft": "image_4.svg",
@@ -185,6 +189,7 @@
           "id": "startPage",
           "operation": "navigate",
           "path": "/start",
+          "nextId": "infoFromVPRequest",
           "isDefaultRoute": true
         },
         {
@@ -197,13 +202,13 @@
           "id": "credSelect",
           "operation": "navigate",
           "path": "/credentials/select",
-          "nextId": "verifyRequest"
+          "nextId": "credentialOffer"
         },
         {
-          "id": "verifyRequest",
+          "id": "infoFromVPRequest",
           "operation": "navigate",
-          "path": "/credentials/verify/request",
-          "nextId": "credentialOffer",
+          "path": "/credentials/info/vp/request",
+          "nextId": "infoRequest",
           "isDefaultRoute": true
         },
         {
@@ -221,7 +226,13 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "/credentials/issue/success"
+          "path": "/credentials/issue/success",
+          "nextId": "toSphereonDemo"
+        },
+        {
+          "id": "toSphereonDemo",
+          "operation": "navigate",
+          "path": "https://ssi.sphereon.com"
         },
         {
           "id": "download",
