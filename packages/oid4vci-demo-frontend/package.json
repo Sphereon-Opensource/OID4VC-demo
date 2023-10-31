@@ -47,6 +47,7 @@
     "build": "react-scripts build",
     "build:clean": "react-scripts build",
     "test": "react-scripts test",
+    "findTranslationDifferences": "node src/translationDiffrences.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
