@@ -259,9 +259,10 @@
         ],
         "order": [
           "companyName",
+          "contactFirstName",
+          "contactLastName",
           "companyEmailAddress",
-          "taxRegistrationNumber",
-          "vatNumber"
+          "taxRegistrationNumber"
         ],
         "credentialSubject": {
           "companyName": {
@@ -276,6 +277,38 @@
               },
               {
                 "name": "Bedrijfsnaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "contactFirstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Contact first name"
+              },
+              {
+                "name": "Contact first name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Contact voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "contactLastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Contact last name"
+              },
+              {
+                "name": "Contact last name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Contact achternaam",
                 "locale": "nl-NL"
               }
             ]
@@ -308,22 +341,6 @@
               },
               {
                 "name": "RSIN",
-                "locale": "nl-NL"
-              }
-            ]
-          },
-          "vatNumber": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "VAT number"
-              },
-              {
-                "name": "VAT number",
-                "locale": "en-US"
-              },
-              {
-                "name": "BTW identificatienummer",
                 "locale": "nl-NL"
               }
             ]

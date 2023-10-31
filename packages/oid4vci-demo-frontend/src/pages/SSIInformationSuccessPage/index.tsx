@@ -94,7 +94,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                         alignSelf: 'flex-end',
                     }}>
                         <SSIPrimaryButton
-                            caption={t('sharing_data_success_right_pane_button_caption')}
+                            caption={t('label_next')}
                             style={{width: '100%'}}
                             onClick={async () => await onIssueCredential()}
                         />

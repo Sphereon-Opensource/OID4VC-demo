@@ -93,7 +93,7 @@ const SphereonWalletPage: React.FC = () => {
                                             style: sphereonWalletQRCode.button?.style,
                                             caption: t(sphereonWalletQRCode.buttonCaptionResourceId),
                                             color: sphereonWalletQRCode.button?.color,
-                                            onClick: () => window.location.href = sphereonWalletQRCode.downloadUrl
+                                            onClick: () => window.open(sphereonWalletQRCode.downloadUrl, sphereonWalletQRCode.target ?? '_self')
                                         }}
                                     />
                                 ))
