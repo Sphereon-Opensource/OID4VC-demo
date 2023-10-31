@@ -102,7 +102,7 @@ export default function SSIInformationFromVPRequestPage(): React.ReactElement | 
                 alignItems: 'center',
                 gap: '1rem'
               }}>
-                <DeepLink link={deepLink} style={{width: 300}}/>
+                <DeepLink link={deepLink} buttonType={"secondary"} textColor={pageConfig.textColor} style={{width: 300}}/>
                 <SSIPrimaryButton
                     caption={t('credential_verify_request_right_pane_button_caption')}
                     onClick={async () => {

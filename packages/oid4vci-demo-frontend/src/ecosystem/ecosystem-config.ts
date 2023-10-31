@@ -20,6 +20,7 @@ export interface SSIInformationFromVPRequestPageConfig extends PageConfig {
   photoLeft?: string
   backgroundColor?: string
   logo?: ImageProperties
+  textColor?: string
   rightPaneLeftPane?: {
     grid?: {
       gridColumn?: string
