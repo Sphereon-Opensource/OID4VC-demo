@@ -167,20 +167,6 @@
       "photoLeft": "image_2.svg",
       "photoLeftManual": "triall/wallet.svg",
       "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
-    },
-    "credSelect": {
-      "logo": {
-        "src": "triall/logo.svg",
-        "alt": "triall",
-        "width": 260,
-        "height": 55
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#347189",
-          "textGradient": "linear-gradient(169deg, #E84461 0%, #D30D30 100%)"
-        }
-      }
     }
   },
   "routes": [
