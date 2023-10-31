@@ -35,11 +35,6 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
       style?: CSSProperties,
     },
     rightPaneLeftPane?: {
-      grid?: {
-        gridColumn?: string
-        gridRow?: string
-        height?: string
-      }
       welcomeLabel?: {
         style?: CSSProperties
         className?: string
@@ -64,10 +59,6 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
       width?: string
     }
     mostRightPanel?: {
-      grid?: {
-        gridColumn?: string
-        gridRow?: string
-      }
       separator?: {
         logo?: ImageProperties
       },
