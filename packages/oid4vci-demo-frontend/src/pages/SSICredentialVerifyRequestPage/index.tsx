@@ -78,7 +78,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                   <div
                       style={{
                           marginTop: 'auto',
-                          fontSize: 72,//48
+                          fontSize: 72,// FIXME design says 48, but 48 is way to small for some reason so upping the size here
                           fontWeight: 600,
                           color: "#424242",
                       }}
