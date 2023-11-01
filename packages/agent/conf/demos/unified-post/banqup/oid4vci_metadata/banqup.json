@@ -57,7 +57,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "Voornaam",
+                "name": "firstName",
                 "locale": "nl-NL"
               }
             ]
@@ -73,7 +73,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "Achternaam",
+                "name": "lastName",
                 "locale": "nl-NL"
               }
             ]
@@ -158,7 +158,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "Voornaam",
+                "name": "firstName",
                 "locale": "nl-NL"
               }
             ]
@@ -174,7 +174,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "Achternaam",
+                "name": "lastName",
                 "locale": "nl-NL"
               }
             ]
@@ -259,8 +259,8 @@
         ],
         "order": [
           "companyName",
-          "contactFirstName",
-          "contactLastName",
+          "contactFirst Name",
+          "contactLast Name",
           "companyEmailAddress",
           "taxRegistrationNumber"
         ],
@@ -281,7 +281,7 @@
               }
             ]
           },
-          "contactFirstName": {
+          "contactFirst Name": {
             "value_type": "string",
             "display": [
               {
@@ -297,7 +297,7 @@
               }
             ]
           },
-          "contactLastName": {
+          "contactLast Name": {
             "value_type": "string",
             "display": [
               {

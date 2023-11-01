@@ -204,14 +204,14 @@
         [
           {
             "id": "ssi_information_request_page_first_name_director",
-            "key": "Voornaam",
+            "key": "firstName",
             "title": "ssi_information_request_page_form_first_name_director_label",
             "type": "string",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name_director",
-            "key": "Achternaam",
+            "key": "lastName",
             "title": "ssi_information_request_page_form_last_name_director_label",
             "type": "string",
             "required": true

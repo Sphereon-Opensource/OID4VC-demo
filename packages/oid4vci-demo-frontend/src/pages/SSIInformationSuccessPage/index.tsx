@@ -12,8 +12,8 @@ import {SSIInformationSharedSuccessPageConfig} from "../../ecosystem/ecosystem-c
 import {useEcosystem} from "../../ecosystem/ecosystem"
 
 type State = {
-    Voornaam: string
-    Achternaam: string
+    firstName: string
+    lastName: string
     emailAddress: string
     isManualIdentification: boolean
 }
@@ -74,7 +74,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 flexGrow: 1,
                                 textAlign: 'center'
                             }}
-                            title={t('sharing_data_success_right_pane_title', {Voornaam: state?.Voornaam}).split('\n')}
+                            title={t('sharing_data_success_right_pane_title', {Voornaam: state?.firstName}).split('\n')}
                             lines={t(`${pageConfig.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
                         />
                     </Trans>

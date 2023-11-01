@@ -66,14 +66,14 @@
             "value_type": "string",
             "display": [
               {
-                "name": "FirstName"
+                "name": "First Name"
               },
               {
                 "name": "First Name",
                 "locale": "en-US"
               },
               {
-                "name": "Voornaam",
+                "name": "firstName",
                 "locale": "nl-NL"
               }
             ]
@@ -89,7 +89,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "Achternaam",
+                "name": "lastName",
                 "locale": "nl-NL"
               }
             ]

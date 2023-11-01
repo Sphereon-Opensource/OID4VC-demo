@@ -140,8 +140,8 @@
           }
         ],
         "order": [
-          "Voornaam",
-          "Achternaam",
+          "firstName",
+          "lastName",
           "email",
           "type"
         ],
@@ -150,14 +150,14 @@
             "value_type": "string",
             "display": [
               {
-                "name": "FirstName"
+                "name": "First Name"
               },
               {
-                "name": "FirstName",
+                "name": "First Name",
                 "locale": "en-US"
               },
               {
-                "name": "Voornaam",
+                "name": "firstName",
                 "locale": "nl-NL"
               }
             ]
@@ -166,14 +166,14 @@
             "value_type": "string",
             "display": [
               {
-                "name": "LastName"
+                "name": "Last Name"
               },
               {
-                "name": "LastName",
+                "name": "Last Name",
                 "locale": "en-US"
               },
               {
-                "name": "Achternaam",
+                "name": "lastName",
                 "locale": "nl-NL"
               }
             ]
@@ -277,8 +277,8 @@
           }
         ],
         "order": [
-          "Voornaam",
-          "Achternaam",
+          "firstName",
+          "lastName",
           "email"
         ],
         "credentialSubject": {
@@ -293,7 +293,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "Voornaam",
+                "name": "firstName",
                 "locale": "nl-NL"
               }
             ]
@@ -302,14 +302,14 @@
             "value_type": "string",
             "display": [
               {
-                "name": "LastName"
+                "name": "Last Name"
               },
               {
-                "name": "LastName",
+                "name": "Last Name",
                 "locale": "en-US"
               },
               {
-                "name": "Achternaam",
+                "name": "lastName",
                 "locale": "nl-NL"
               }
             ]
