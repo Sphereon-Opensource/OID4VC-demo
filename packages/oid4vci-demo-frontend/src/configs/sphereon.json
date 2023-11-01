@@ -183,7 +183,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonGuest",
+      "vpDefinitionId": "sphereonWalletIdentity",
       "steps": [
         {
           "id": "startPage",
