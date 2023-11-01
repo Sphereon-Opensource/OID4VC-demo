@@ -65,7 +65,7 @@
           "type"
         ],
         "credentialSubject": {
-          "Voornaam": {
+          "firstName": {
             "value_type": "string",
             "display": [
               {
@@ -81,7 +81,7 @@
               }
             ]
           },
-          "Achternaam": {
+          "lastName": {
             "value_type": "string",
             "display": [
               {

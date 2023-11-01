@@ -146,7 +146,7 @@
           "type"
         ],
         "credentialSubject": {
-          "Voornaam": {
+          "firstName": {
             "value_type": "string",
             "display": [
               {
@@ -162,7 +162,7 @@
               }
             ]
           },
-          "Achternaam": {
+          "lastName": {
             "value_type": "string",
             "display": [
               {
@@ -282,14 +282,14 @@
           "email"
         ],
         "credentialSubject": {
-          "Voornaam": {
+          "firstName": {
             "value_type": "string",
             "display": [
               {
-                "name": "FirstName"
+                "name": "First Name"
               },
               {
-                "name": "FirstName",
+                "name": "First Name",
                 "locale": "en-US"
               },
               {
@@ -298,7 +298,7 @@
               }
             ]
           },
-          "Achternaam": {
+          "lastName": {
             "value_type": "string",
             "display": [
               {
