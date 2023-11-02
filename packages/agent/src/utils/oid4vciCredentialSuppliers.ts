@@ -238,6 +238,8 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
         } as unknown as CredentialDataSupplierResult
     } */
     return Promise.resolve({} as unknown as CredentialDataSupplierResult) // return empty result so the code will start looking for templates
+    // TODO ^^^ we can't return undefined here because CredentialDataSupplier is defined in project OID4VC as Promise<CredentialDataSupplierResult> and not Promise<CredentialDataSupplierResult | undefined>. But we are going to remove hardcoded templates anyway
+
 }
 
 const supplierByType = async (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {

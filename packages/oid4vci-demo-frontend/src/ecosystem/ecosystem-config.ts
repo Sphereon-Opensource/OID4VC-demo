@@ -15,6 +15,42 @@ export interface ComponentConfig {
 export interface PageConfig {
     vpDefinitionId?: string
 }
+export interface SSIInformationFromVPRequestPageConfig extends PageConfig {
+  photoRight: string
+  photoLeft?: string
+  backgroundColor?: string
+  logo?: ImageProperties
+  textColor?: string
+  rightPaneLeftPane?: {
+    grid?: {
+      gridColumn?: string
+      gridRow?: string
+      height?: string
+    }
+    welcomeLabel?: {
+      style?: CSSProperties
+      className?: string
+    }
+    qrCode?: {
+      topTitle?: {
+        style?: CSSProperties
+      },
+      bottomText?: {
+        fontColor?: string
+        className?: string
+        credential_verify_request_right_pane_bottom_title?: string
+        credential_verify_request_right_pane_bottom_paragraph?: string
+      }
+      pane?: {
+        height?: string
+      }
+      width?: number
+      marginTop?: string,
+      marginBottom?: string
+    },
+    width?: string
+  }
+}
 
 export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
@@ -394,7 +430,8 @@ export interface SSITextConfig extends ComponentConfig {
 
 export interface VCIConfigPages {
     SSICredentialIssuedSuccessPage: SSICredentialIssuedSuccessPageConfig
-    SSICredentialVerifyRequestPage: SSICredentialVerifyRequestPageConfig
+    SSIInformationFromVPRequestPage?: SSIInformationFromVPRequestPageConfig
+    SSICredentialVerifyRequestPage?: SSICredentialVerifyRequestPageConfig
     SSIInformationSharedSuccessPage: SSIInformationSharedSuccessPageConfig
     SSILandingPage: SSILandingPageConfig
     SSICredentialIssueRequestPage: SSICredentialIssueRequestPageConfig

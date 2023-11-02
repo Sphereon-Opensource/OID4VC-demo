@@ -2,14 +2,14 @@ import React, {ReactElement, useEffect, useState} from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import './index.module.css'
-import {MetadataClient} from '@sphereon/oid4vci-client'
-import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadataResult} from '@sphereon/oid4vci-common'
-import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store'
-import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper'
-import {useTranslation} from "react-i18next"
-import {useMediaQuery} from "react-responsive"
-import {Swiper, SwiperSlide} from 'swiper/react'
-import {Pagination} from 'swiper'
+import { MetadataClient } from '@sphereon/oid4vci-client'
+import { EndpointMetadataResult } from '@sphereon/oid4vci-common'
+import { IBasicCredentialLocaleBranding, IBasicImageDimensions } from '@sphereon/ssi-sdk.data-store'
+import { getCredentialBrandings } from '../../utils/mapper/branding/OIDC4VCIBrandingMapper'
+import { useTranslation } from "react-i18next"
+import { useMediaQuery } from "react-responsive"
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination } from 'swiper'
 import {useFlowRouter} from "../../router/flow-router"
 import {SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem"
@@ -33,36 +33,16 @@ const SSISelectCredentialPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     useEffect((): void => {
-
         MetadataClient.retrieveAllMetadata(DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL
             ?? generalConfig.oid4vciAgentBaseUrl
             ?? 'https://ssi.sphereon.com/issuer')
-            .then(async (metadata: EndpointMetadataResult): Promise<void> => {
+        .then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
-
             if (!metadata.credentialIssuerMetadata) {
                 return
             }
-
-            const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>()
-            Promise.all(
-                (metadata.credentialIssuerMetadata.credentials_supported as CredentialSupported[]).map(async (metadata: CredentialSupported): Promise<void> => {
-                    const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
-                        (metadata.display ?? []).map(
-                            async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
-                                await credentialLocaleBrandingFrom(display)
-                        ),
-                    );
-
-                    const credentialTypes: Array<string> =
-                        metadata.types.length > 1
-                            ? metadata.types.filter((type: string) => type !== 'VerifiableCredential')
-                            : metadata.types.length === 0
-                                ? ['VerifiableCredential']
-                                : metadata.types;
-
-                    credentialBranding.set(credentialTypes[0], localeBranding); // TODO for now taking the first type
-                })).then(() => setSupportedCredentials(credentialBranding))
+            getCredentialBrandings(metadata)
+            .then((credentialBranding) => setSupportedCredentials(credentialBranding))
         })
     }, []);
 

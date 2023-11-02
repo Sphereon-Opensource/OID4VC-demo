@@ -15,6 +15,7 @@ import {useFlowAppRouter} from "./flow-router"
 import SSIEmailVerificationPage from "../pages/SSIEmailVerificationPage"
 import SSIWelcomePage from '../pages/SSIWelcomePage'
 import SSIIdentityVerificationPage from '../pages/SSIIdentityVerificationPage'
+import SSIInformationFromVPRequestPage from "../pages/SSIInformationFromVPRequest";
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -23,6 +24,7 @@ export const routes: Record<string, any> = {
     '/information/success': <SSIInformationSuccessPage/>,
     '/credentials/select': <SSISelectCredentialPage/>,
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
+    '/credentials/info/vp/request': <SSIInformationFromVPRequestPage/>,
     '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
     '/verify/email': <SSIEmailVerificationPage/>,

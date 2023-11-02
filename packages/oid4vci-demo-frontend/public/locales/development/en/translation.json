@@ -55,7 +55,7 @@
   "select_credential_title4": "collect",
   "sharing_data_success_right_pane_paragraph": "for providing the information. We are now ready\r\nto issue a new credential to you.\r\n\nIf you don't have a wallet yet, please download\r\none of the compliant wallets on the left.",
   "sharing_data_success_right_pane_paragraph_short": "for providing the information. We're done now\nto issue you a new credential.",
-  "sharing_data_success_right_pane_title": "Thanks {{Voornaam}}!",
+  "sharing_data_success_right_pane_title": "Thanks {{firstName}}!",
   "sharing_data_success_get_mobile_app_message": "Get the Sphereon Wallet",
   "ssi_information_request_page_form_account_title": "Account Information",
   "ssi_information_request_page_form_bsn_number_label": "BSN Number",

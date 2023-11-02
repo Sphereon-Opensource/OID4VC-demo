@@ -32,11 +32,8 @@ function getInitialState(formConfig: SSIInformationRequestPageConfig) {
   return transformFormConfigToEmptyObject(formConfig.form)
 }
 
-function isFormDataValid(formData: FormOutputData, form?: DataFormRow[]) {
-    let requiredFields = Object.keys(formData)
-    if (form) {
-        requiredFields = extractRequiredKeys(form)
-    }
+function isFormDataValid(formData: FormOutputData, form: DataFormRow[]) {
+    const requiredFields = extractRequiredKeys(form)
     for (let field of requiredFields) {
         if (!formData[field] || formData[field]!.toString().trim() === '') {
             return false
