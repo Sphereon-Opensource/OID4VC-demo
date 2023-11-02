@@ -10,45 +10,62 @@
 
 **Warning: This project still is in very early development. Breaking changes without notice will happen at this point!**
 
-## Agent Configuration Guide
+<h2 id="toc">Table of contents</h2>
+1. [Agent Configuration Guide](#agent_config_guide)
+    1. [Configuration Directory Structure](#configuration_dir_structure)
+        1. [dids](#config_dids)
+        2. [oid4vci_metadata](#oid4vci_metadata)
+        3. [oid4vci_options](#oid4vci_options)
+        4. [oid4vp_options](#oid4vp_options)
+        5. [presentation_definitions](#presentation_definitions)
+        6. [templates](#templates)
+    2. [.env variables](#env_variables)
+2. [Starting the agent](#starting_agent)
+
+
+<h2 id="agent_config_guide">Agent Configuration Guide</h2>
 
 Welcome to the agent setup guide. This document will walk you through configuring your agent module by leveraging the settings defined in your `.env` file. Specifically, the `CONF_PATH` property in your `.env` file dictates where the agent retrieves its configuration from.
 
-### Configuration Directory Structure
+<h3 id="configuration_dir_structure">Configuration Directory Structure</h3>
 
 Within your `packages/agent/conf` directory, navigate to the `examples` subfolder. Here, you will find six key directories, each integral to the agent's configuration:
 
-1. **dids**: This directory is designated for storing Decentralized Identifiers (DIDs) documents. These did documents will be used throughout or oid4vci and oid4vp/siop process.
+<h4 id="config_dids">1. dids</h4>
+This directory is designated for storing Decentralized Identifiers (DIDs) documents. These did documents will be used throughout or oid4vci and oid4vp/siop process.
 
-2. **oid4vci_metadata**: In this folder, you'll find JSON files that detail the metadata required by the [VCI specification](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) and some values that are essential for configuring this agent. Following is a table of values that should be set for a json file inside `oid4vci_metadata`:
+<h4 id="oid4vci_metadata">2. oid4vci_metadata</h4>
+In this folder, you'll find JSON files that detail the metadata required by the [VCI specification](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) and some values that are essential for configuring this agent. Following is a table of values that should be set for a json file inside `oid4vci_metadata`:
 
-| Variable              | Sub-Variable                 | Description                                                                                                                                                                                                     |
-|-----------------------|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `correlationId`       |                              | A unique identifier used to track the transaction within the system.                                                                                                                                            |
-| `overwriteExisting`   |                              | Determines whether to replace existing data with new data.                                                                                                                                                      |
-| `metadata`            |                              | Contains configuration details and specifications for credential issuance.                                                                                                                                      |
-|                       | `credential_issuer`          | The entity that issues and signs the credential.                                                                                                                                                                |
-|                       | `credential_endpoint`        | The URL where the credential can be accessed.                                                                                                                                                                   |
-|                       | `display`                    | Name and description of the entity who is issuing the credential.                                                                                                                                               |
-|                       | `credentials_supported`      | A list of the types of credentials that are supported. Each entity can include branding information of the credential, plus details about the fields existing in each credential and locale information for it. |
-|                       | `credential_supplier_config` | Configuration settings for the provider of the credentials.                                                                                                                                                     | 
+| Variable              | Sub-Variable                 | Description                                                                                                                                                                                                                                                                                                                                        |
+|-----------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `correlationId`       |                              | This value maps different configuration files onto the same internal issuer or verifier. So a correlationId between an options file and for instance a metadata file end up in the same issuer/verifier instance and DB.                                                                                                                           |
+| `overwriteExisting`   |                              | Determines whether to replace existing OID4VCI metadata stored in the database with new values coming from the metadata configuration file.                                                                                                                                                                                                        |
+| `metadata`            |                              | Contains configuration details and specifications for credential issuance.                                                                                                                                                                                                                                                                         |
+|                       | `credential_issuer`          | The Credential Issuer's identifier.                                                                                                                                                                                                                                                                                                                |
+|                       | `credential_endpoint`        | URL of the Credential Issuer's Credential Endpoint. This URL MUST use the https scheme and MAY contain port, path and query parameter components.                                                                                                                                                                                                  |
+|                       | `display`                    | (optional) An array of objects, where each object contains display properties of a Credential Issuer for a certain language. Below is a non-exhaustive list of valid parameters that MAY be included: name (optional) string and locale (optional) string                                                                                          |
+|                       | `credentials_supported`      | A JSON array containing a list of JSON objects, each of them representing metadata about a separate credential type that the Credential Issuer can issue. The JSON objects in the array MUST conform to the structure of the [OID4VCI spec](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#credential-metadata-object). |
+|                       | `credential_supplier_config` | Configuration settings for the provider of the credentials.                                                                                                                                                                                                                                                                                        | 
 
-3. **oid4vci_options**: This is the directory where custom OID4VCI configuration files are maintained.
+<h4 id="oid4vci_options">3. oid4vci_options</h4>
+This is the directory where custom OID4VCI configuration files are maintained.
 
-| Variable              | Sub-Variable        | Description                                                                                                  |
-|-----------------------|---------------------|--------------------------------------------------------------------------------------------------------------|
-| `definitionId`        |                     | Unique identifier for the credential definition.                                                             |
-| `correlationId`       |                     | A unique identifier used to track the transaction within the system.                                         |
-| `overwriteExisting`   |                     | (optional) Boolean flag indicating whether existing storage should be overwritten. Defaults to `true`        |
-| `ttl`                 |                     | (optional) A number how long to store the value in milliseconds. If not provided will be stored indefinitely |
-| `storeId`             |                     | (optional) String specifying the store identifier for using different storage solutions side by side.        |
-| `namespace`           |                     | (optional) Namespace for the current instance.                                                               |
-| `issuerOpts`          |                     | Object containing configuration details and options for credential issuance.                                 |
-|                       | `didOpts`           | Options related to the Decentralized Identifier (DID) of the issuer.                                         |
-|                       | `userPinRequired`   | (optional) Boolean indicating if a user PIN is required for operations.                                      |
-|                       | `cNonceExpiresIn`   | (optional) Number specifying the expiration time for the client nonce in the issuance process.               |
+| Variable              | Sub-Variable        | Description                                                                                                                                                                                                               |
+|-----------------------|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `definitionId`        |                     | Unique identifier for the credential definition.                                                                                                                                                                          |
+| `correlationId`       |                     | This value maps different configuration files onto the same internal issuer or verifier. So a correlationId between an options file and for instance a metadata file end up in the same issuer/verifier instance and DB.  |
+| `overwriteExisting`   |                     | (optional) Boolean flag indicating whether existing storage should be overwritten. Defaults to `true`                                                                                                                     |
+| `ttl`                 |                     | (optional) A number how long to store the value in milliseconds. If not provided will be stored indefinitely                                                                                                              |
+| `storeId`             |                     | (optional) String specifying the store identifier for using different storage solutions side by side.                                                                                                                     |
+| `namespace`           |                     | (optional) Namespace for the current instance.                                                                                                                                                                            |
+| `issuerOpts`          |                     | Object containing configuration details and options for credential issuance.                                                                                                                                              |
+|                       | `didOpts`           | Options related to the Decentralized Identifier (DID) of the issuer.                                                                                                                                                      |
+|                       | `userPinRequired`   | (optional) Boolean indicating if a user PIN is required for operations.                                                                                                                                                   |
+|                       | `cNonceExpiresIn`   | (optional) Number specifying the expiration time for the client nonce in the issuance process.                                                                                                                            |
 
-4. **oid4vp_options**: Here, you will store configuration files related to OpenID for Verifiable Presentations (OID4VP).
+<h4 id="oid4vp_options">4. oid4vp_options</h4>
+Here, you will store configuration files related to OpenID for Verifiable Presentations (OID4VP).
 
 | Variable           | Sub-Variable          | Description                                                                                             |
 |--------------------|-----------------------|---------------------------------------------------------------------------------------------------------|
@@ -61,9 +78,11 @@ Within your `packages/agent/conf` directory, navigate to the `examples` subfolde
 |                    | `eventEmitter`        | (optional) An object used to handle events, enabling asynchronous event-driven programming.             |
 |                    | `didOpts`             | Options related to the Decentralized Identifier (DID) of the verifier.                                  |
 
-5. **presentation_definitions**: The content of this directory is essential for defining how the agent understands and processes presentation requests.
+<h4 id="presentation_definitions">5. presentation_definitions</h4>
+The content of this directory is essential for defining how the agent understands and processes presentation requests. For a more thorough description of presentation_definition in [presentation exchange documentation](https://identity.foundation/presentation-exchange/#presentation-definition), and how it's being used in [OID4VP](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) spec.
 
-6. **templates**: This directory includes templates for the dynamic generation of content, We're populating the credential using [handlebars](https://handlebarsjs.com/). You can find examples of this usage in this directory. Here is an example of such usage:
+<h4 id="templates">6. templates</h4>
+This directory includes templates for the dynamic generation of Verifiable Credentials, We're populating the credential using [handlebars](https://handlebarsjs.com/). You can find examples of this usage in this directory. Here is an example of such usage:
 ```handlebars
    {
        "@context": ["https://www.w3.org/2018/credentials/v1"],
@@ -80,9 +99,9 @@ Within your `packages/agent/conf` directory, navigate to the `examples` subfolde
 
 Each directory plays a critical role in the configuration of the agent and the successful deployment of the verifiable credential issuance ecosystem within your application. It is essential to carefully craft the contents of these directories in alignment with your specific use cases and the standards of the decentralized identity space.
 
-### .env variables
+<h3 id="env_variables">.env variables</h3>
 
-Your `.env` file should contain the following variables with values tailored to your setup:
+Your `.env.local` file should contain the following variables with values tailored to your setup:
 
 | Variable                         | Description                                                                                                              |
 |----------------------------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -103,7 +122,7 @@ Your `.env` file should contain the following variables with values tailored to 
 
 **Note**: If you intend to access the agent through a mobile device, ensure that you do not use `localhost` or `127.0.0.1`. Instead, use a local IP address that is reachable from your mobile device within the same network.
 
-### Starting the agent
+<h2 id="starting_agent">Starting the agent</h2>
 
 To start your agent:
 

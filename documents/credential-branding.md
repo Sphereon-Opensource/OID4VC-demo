@@ -1,12 +1,29 @@
+<!--suppress HtmlDeprecatedAttribute -->
+<h1 align="center">
+  <br>
+  <a href="https://www.sphereon.com"><img src="https://sphereon.com/content/themes/sphereon/assets/img/logo.svg" alt="Sphereon" width="400"></a>
+  <br>OID4VC demo's credential branding 
+  <br>
+</h1>
 
-## Credential Branding in Verifiable Credentials
+---
+
+**Warning: This project still is in very early development. Breaking changes without notice will happen at this point!**
+
+<h2 id="toc">Table of contents</h2>
+1. [Credential Branding in Verifiable Credentials](#branding_in_vcs)
+2. [Definition and Purpose](#definition)
+3. [Metadata Parameters](#metadata)
+4. [Branding in real-world](#branding_real)
+
+<h2 id="branding_in_vcs">Credential Branding in Verifiable Credentials</h2>
 Credential branding is an essential aspect of Verifiable Credentials (VCs) that helps define how a credential is displayed and identified to end-users. It plays a crucial role in creating a user-friendly and consistent experience for individuals who interact with verifiable credentials. In this explanation, we give you a detailed account of the concept of credential branding as defined in the [Verifiable Credentials Issuance (VCI) spec](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) specification.
 
-## Definition and Purpose
+<h2 id="definition">Definition and Purpose</h2>
 
 In the context of VCs, "Credential Branding" refers to the visual and descriptive attributes associated with a credential, including its name, logo, background color, and more. These attributes are defined in the metadata of the credential issuer and are used to present the credential in a consistent and nice way to the credential holder or verifier.
 
-## Metadata Parameters
+<h2 id="metadata">Metadata Parameters</h2>
 
 Credential branding is specified using various parameters in the metadata of a credential issuer. Here are some metadata parameters related to credential branding:
 
@@ -26,8 +43,9 @@ Credential branding is specified using various parameters in the metadata of a c
 
     - **Text Color (OPTIONAL):** A string value representing the text color of the credential, specified using numerical color values defined in CSS Color Module Level 3.
 
-## Branding in real-world
-We're using branding in this project. So in order to get familiar with it, you can visit one of our config json files in `packages/agent/conf/examples/oid4vci_metadata`. You can find the branding related information (as the spec suggests in `credentials_supported` field of the metadata)
+<h2 id="branding_real">Branding in real-world</h2>
+
+We're using branding in this project. So in order to get familiar with it, you can visit one of our config json files in [packages/agent/conf/examples/oid4vci_metadata](./agent-setup.md#oid4vci_metadata). You can find the branding related information (as the spec suggests in `credentials_supported` field of the metadata)
 Here is a real world example of a credential branding:
 ```json
 {
@@ -56,32 +74,8 @@ Here is a real world example of a credential branding:
   ...
 }
 ```
-## Implementation
 
-Credential branding is typically specified by credential issuers in their metadata. They define how each credential they issue should be presented, including its name, logo, and visual style. Credential holders and verifiers use this branding information to ensure a consistent and recognizable display of the credential.
-
-In code, credential branding can be accessed and displayed using appropriate methods. For example, following code (in our oid4vci-demo-frontend) shows how to read and display credential branding. The `credentialBranding` object is populated with information extracted from the `credentials_supported` metadata parameter, which includes display properties and other branding-related details.
-
-```typescript
-const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>()
-
-Promise.all(
-    (metadata.credentialIssuerMetadata.credentials_supported as CredentialSupported[]).map(async (metadata: CredentialSupported): Promise<void> => {
-      const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
-          (metadata.display ?? []).map(
-              async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
-                  await credentialLocaleBrandingFrom(display)
-          ),
-      );
-
-      const credentialTypes: Array<string> =
-          metadata.types.length > 1
-              ? metadata.types.filter((type: string) => type !== 'VerifiableCredential')
-              : metadata.types.length === 0
-                  ? ['VerifiableCredential']
-                  : metadata.types;
-
-      credentialBranding.set(credentialTypes[0], localeBranding);
-    })
-).then(() => setSupportedCredentials(credentialBranding))
-```
+When providing image for branding, be sure that:
+1. The image (both `background_image.url` and `logo.url`) are available to every party interacting with the demo.
+2. Providing a rectangular image without rounded corners, the library will take care of that.
+3. You can have locale-specific branding for your credentials. For this to happen you can add a locale to your display array, with a `locale` key representing your desired locale. Read more in [OID4VCI](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-10.2.3.1-2.5.1)
