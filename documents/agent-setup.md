@@ -18,7 +18,7 @@ Welcome to the agent setup guide. This document will walk you through configurin
 
 Within your `packages/agent/conf` directory, navigate to the `examples` subfolder. Here, you will find six key directories, each integral to the agent's configuration:
 
-1. **dids**: This directory is designated for storing Decentralized Identifiers (DIDs) documents.
+1. **dids**: This directory is designated for storing Decentralized Identifiers (DIDs) documents. These did documents will be used throughout or oid4vci and oid4vp/siop process.
 
 2. **oid4vci_metadata**: In this folder, you'll find JSON files that detail the metadata required by the [VCI specification](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) and some values that are essential for configuring this agent. Following is a table of values that should be set for a json file inside `oid4vci_metadata`:
 
