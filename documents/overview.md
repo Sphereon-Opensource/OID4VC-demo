@@ -1,3 +1,15 @@
+<!--suppress HtmlDeprecatedAttribute -->
+<h1 align="center">
+  <br>
+  <a href="https://www.sphereon.com"><img src="https://sphereon.com/content/themes/sphereon/assets/img/logo.svg" alt="Sphereon" width="400"></a>
+  <br>OID4VC demo overview 
+  <br>
+</h1>
+
+---
+
+**Warning: This project still is in very early development. Breaking changes without notice will happen at this point!**
+
 ## Overview
 This multimodule project, consists of three parts. At the core of this project sits the "agent" module. This module coordinates all the backend functionalities of two other react projects. The agent can achieve this by taking advantage of our other ssi related technologies. Here are a brief list of other useful resources:
 - [SSI-SDK](https://github.com/Sphereon-Opensource/SSI-SDK)
@@ -12,11 +24,11 @@ This multimodule project, consists of three parts. At the core of this project s
 And many more open-source libraries.
 You can use this demo for showcasing VCI abilities as well as SIOP-OID4VP abilities.
 
-In this document we're going to show you step by step what you have to do to setup your own VCI demo.
-Note that in order for you to setup a VCI demo and actually receive a credential, you need to have an SSI compatible wallet. Here is a list of wallet's with such capabilities:
+In this document we're going to show you step by step what you have to do to set your own VCI demo up.
+Note that in order for you to set a VCI demo up and actually receive a credential, you need to have an SSI compatible wallet. Here is a list of wallet's with such capabilities:
+//TODO: complete this list
 - Sphereon
 
-//TODO: complete this list
 
 A scenario for fetching a credential. Note that since the process is dynamic, your setup might be a little different, but the main parts will stay the same.
 
