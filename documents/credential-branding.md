@@ -79,7 +79,7 @@ Here is a real world example of a credential branding:
 
 When providing image for branding, be sure that:
 1. The image (both `background_image.url` and `logo.url`) are available to every party interacting with the demo.
-2. Providing a rectangular image for background image, without rounded corners, the library will take care of that.
+2. Providing a rectangular image for background image of credential cards, without rounded corners, the library will take care of that.
 3. Locale-Specific Branding: To cope with different languages and regional preferences, our system allows for locale-specific customization of credentials. You can define these customizations within the `display` array by including a `locale` key to specify the language (following BCP47 [RFC5646](https://datatracker.ietf.org/doc/html/rfc5646) standards). This flexibility means that not only can the display name of the credential (`display.name`) be localized, but any claim within the credential can also have a locale-specific display name (`claims.display.name`). This enables the presentation of credentials in the user's preferred language.
 For instance, if your credential includes a "firstName" this can be displayed in English, Spanish, French, or any other supported language based on the locale you specify. Each locale can have its distinct display properties, ensuring that users see the credential information in their own language. The array can include multiple objects for different locales, with the condition that each language identifier must be unique within the array.
 Beyond names and claim labels, other optional branding elements can be locale-adapted too, such as:
