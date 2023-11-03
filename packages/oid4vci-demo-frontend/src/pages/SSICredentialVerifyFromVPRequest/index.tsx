@@ -34,7 +34,7 @@ export default function SSICredentialVerifyFromVPRequestPage(): React.ReactEleme
       }
     };
 
-    navigate('/information/request', {state});
+    navigate('/information/manual/request', {state});
   }
 
   return (
@@ -106,7 +106,7 @@ export default function SSICredentialVerifyFromVPRequestPage(): React.ReactEleme
                 <SSIPrimaryButton
                     caption={t('credential_verify_request_right_pane_button_caption')}
                     onClick={async () => {
-                      navigate('/information/request');
+                      navigate('/information/manual/request');
                     }}
                 />
               </div>

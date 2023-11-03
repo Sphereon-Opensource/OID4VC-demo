@@ -4,7 +4,7 @@ import SSICredentialIssueRequestPage from '../pages/SSICredentialIssueRequestPag
 import SSICredentialVerifyRequestPage from '../pages/SSICredentialVerifyRequestPage'
 import SSICredentialIssuedSuccessPage from '../pages/SSICredentialIssuedSuccessPage'
 import SSILandingPage from '../pages/SSILandingPage'
-import SSIInformationRequestPage from '../pages/SSIInformationRequestPage'
+import SSIInformationManualRequestPage from '../pages/SSIInformationManualRequestPage'
 import SSIDownloadPage from "../pages/SSIDownloadPage"
 import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
@@ -20,7 +20,7 @@ import SSICredentialVerifyFromVPRequestPage from '../pages/SSICredentialVerifyFr
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
     '/landing': <SSICredentialsLandingPage/>,
-    '/information/request': <SSIInformationRequestPage/>,
+    '/information/manual/request': <SSIInformationManualRequestPage/>,
     '/information/success': <SSIInformationSuccessPage/>,
     '/credentials/select': <SSISelectCredentialPage/>,
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,

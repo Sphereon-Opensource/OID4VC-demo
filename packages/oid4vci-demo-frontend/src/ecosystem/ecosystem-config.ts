@@ -222,7 +222,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     },
 }
 
-export interface SSIInformationRequestPageConfig extends PageConfig {
+export interface SSIInformationManualRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photo?: string
     text_top_of_image?: string
@@ -426,7 +426,7 @@ export interface VCIConfigPages {
     SSIInformationSharedSuccessPage: SSIInformationSharedSuccessPageConfig
     SSILandingPage: SSILandingPageConfig
     SSICredentialIssueRequestPage: SSICredentialIssueRequestPageConfig
-    SSIInformationRequestPage: SSIInformationRequestPageConfig
+    SSIInformationManualRequestPage: SSIInformationManualRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
