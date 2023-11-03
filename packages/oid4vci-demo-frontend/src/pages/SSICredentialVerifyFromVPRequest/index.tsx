@@ -11,15 +11,15 @@ import { useMediaQuery } from 'react-responsive'
 import { NonMobile } from '../../index'
 import { useFlowRouter } from '../../router/flow-router'
 import { useEcosystem } from '../../ecosystem/ecosystem'
-import { SSIInformationFromVPRequestPageConfig } from '../../ecosystem/ecosystem-config'
+import { SSICredentialVerifyFromVPRequestPageConfig } from '../../ecosystem/ecosystem-config'
 
 export interface QRCodePageProperties {
   setData: React.Dispatch<React.SetStateAction<AuthorizationResponsePayload | undefined>>
 }
 
-export default function SSIInformationFromVPRequestPage(): React.ReactElement | null {
+export default function SSICredentialVerifyFromVPRequestPage(): React.ReactElement | null {
   const ecosystem = useEcosystem()
-  const flowRouter = useFlowRouter<SSIInformationFromVPRequestPageConfig>()
+  const flowRouter = useFlowRouter<SSICredentialVerifyFromVPRequestPageConfig>()
   const pageConfig = flowRouter.getPageConfig()
   const {t} = useTranslation()
   const credentialName = useEcosystem().getGeneralConfig().credentialName

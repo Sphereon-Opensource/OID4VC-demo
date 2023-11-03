@@ -15,7 +15,7 @@ export interface ComponentConfig {
 export interface PageConfig {
     vpDefinitionId?: string
 }
-export interface SSIInformationFromVPRequestPageConfig extends PageConfig {
+export interface SSICredentialVerifyFromVPRequestPageConfig extends PageConfig {
   photoRight: string
   photoLeft?: string
   backgroundColor?: string
@@ -421,7 +421,7 @@ export interface SSITextConfig extends ComponentConfig {
 
 export interface VCIConfigPages {
     SSICredentialIssuedSuccessPage: SSICredentialIssuedSuccessPageConfig
-    SSIInformationFromVPRequestPage?: SSIInformationFromVPRequestPageConfig
+    SSICredentialVerifyFromVPRequestPage?: SSICredentialVerifyFromVPRequestPageConfig
     SSICredentialVerifyRequestPage?: SSICredentialVerifyRequestPageConfig
     SSIInformationSharedSuccessPage: SSIInformationSharedSuccessPageConfig
     SSILandingPage: SSILandingPageConfig
