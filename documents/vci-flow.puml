@@ -13,7 +13,7 @@ participant "Wallet" as wallet order 1 #RED
 participant "Demo app" as demo order 2 #BLUE
 participant "Agent" as agent order 3 #GREEN
 
-user -> demo: from the list, selects a credential that she wants to receive
+user -> demo: from the list, selects a credential type that she wants to receive
 demo -> demo: generates a form with the form data in ecosystem config file
 demo -> user: shows user the form to user.
 user -> demo: user fills in the information and clicks on send
