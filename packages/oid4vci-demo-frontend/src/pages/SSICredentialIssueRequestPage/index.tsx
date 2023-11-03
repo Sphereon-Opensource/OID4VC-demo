@@ -5,7 +5,7 @@ import {useTranslation} from "react-i18next"
 import {useLocation} from 'react-router-dom'
 import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator'
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
-import DeepLinkButton from "../../components/DeepLinkButton"
+import DeepLink from "../../components/DeepLink"
 import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
@@ -169,7 +169,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                                 {pageConfig.mobile?.image &&
                                     <img src={pageConfig.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
                                 }
-                                <DeepLinkButton style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
+                                <DeepLink style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
                             </div>
                         </MobileOS>
                     </div>

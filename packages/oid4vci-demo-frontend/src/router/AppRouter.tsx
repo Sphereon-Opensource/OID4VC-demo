@@ -4,7 +4,7 @@ import SSICredentialIssueRequestPage from '../pages/SSICredentialIssueRequestPag
 import SSICredentialVerifyRequestPage from '../pages/SSICredentialVerifyRequestPage'
 import SSICredentialIssuedSuccessPage from '../pages/SSICredentialIssuedSuccessPage'
 import SSILandingPage from '../pages/SSILandingPage'
-import SSIInformationManualRequestPage from '../pages/SSIInformationManualRequestPage'
+import SSIInformationRequestPage from '../pages/SSIInformationRequestPage'
 import SSIDownloadPage from "../pages/SSIDownloadPage"
 import SSIInformationSuccessPage from "../pages/SSIInformationSuccessPage"
 import SSISelectCredentialPage from "../pages/SSISelectCredentialPage"
@@ -15,16 +15,14 @@ import {useFlowAppRouter} from "./flow-router"
 import SSIEmailVerificationPage from "../pages/SSIEmailVerificationPage"
 import SSIWelcomePage from '../pages/SSIWelcomePage'
 import SSIIdentityVerificationPage from '../pages/SSIIdentityVerificationPage'
-import SSICredentialVerifyFromVPRequestPage from '../pages/SSICredentialVerifyFromVPRequest'
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
     '/landing': <SSICredentialsLandingPage/>,
-    '/information/manual/request': <SSIInformationManualRequestPage/>,
+    '/information/request': <SSIInformationRequestPage/>,
     '/information/success': <SSIInformationSuccessPage/>,
     '/credentials/select': <SSISelectCredentialPage/>,
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
-    '/credentials/verify/vp/request': <SSICredentialVerifyFromVPRequestPage/>,
     '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
     '/verify/email': <SSIEmailVerificationPage/>,

@@ -1,20 +1,20 @@
 import React from 'react'
-import { Text } from '../../components/Text'
+import {Text} from '../../components/Text'
 import style from '../../components/Text/Text.module.css'
-import { Trans, useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
+import {Trans, useTranslation} from "react-i18next"
+import {useLocation} from 'react-router-dom'
 import SSIPrimaryButton from '../../components/SSIPrimaryButton'
 
-import { NonMobile } from '../..'
-import { useMediaQuery } from 'react-responsive'
-import { useFlowRouter } from '../../router/flow-router'
-import { SSIInformationSharedSuccessPageConfig } from '../../ecosystem/ecosystem-config'
-import { useEcosystem } from '../../ecosystem/ecosystem'
+import {NonMobile} from '../..'
+import {useMediaQuery} from "react-responsive"
+import {useFlowRouter} from "../../router/flow-router"
+import {SSIInformationSharedSuccessPageConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
 
 type State = {
-    payload: {
-        [x: string]: string
-    }
+    Voornaam: string
+    Achternaam: string
+    emailAddress: string
     isManualIdentification: boolean
 }
 
@@ -23,14 +23,10 @@ const SSIInformationSuccessPage: React.FC = () => {
     const location = useLocation();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state;
-    const pageConfig = flowRouter.getPageConfig()
+    const pageConfig= flowRouter.getPageConfig()
     const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
-    const firstName = state!.payload?.['firstName'] ?? ''
-    const onIssueCredential = async (): Promise<void> => await flowRouter.nextStep({
-        payload: state!.payload,
-        credentialType: generalConfig.issueCredentialType
-  })
+
     return (
         <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none'}}>
             <NonMobile>
@@ -78,7 +74,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 flexGrow: 1,
                                 textAlign: 'center'
                             }}
-                            title={t('sharing_data_success_right_pane_title', {firstName}).split('\n')}
+                            title={t('sharing_data_success_right_pane_title', {Voornaam: state?.Voornaam}).split('\n')}
                             lines={t(`${pageConfig.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
                         />
                     </Trans>
@@ -96,7 +92,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={t('label_next')}
                             style={{width: '100%'}}
-                            onClick={async () => await onIssueCredential()}
+                            onClick={async () => await flowRouter.nextStep()}
                         />
                     </div>
                 </div>
@@ -107,6 +103,7 @@ const SSIInformationSuccessPage: React.FC = () => {
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
     const ecosystem = useEcosystem()
+    const generalConfig = ecosystem.getGeneralConfig()
     const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const location = useLocation();

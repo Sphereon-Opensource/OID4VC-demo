@@ -258,7 +258,7 @@
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/manual/request",
+          "path": "/information/request",
           "nextId": "credentialOffer"
         },
         {

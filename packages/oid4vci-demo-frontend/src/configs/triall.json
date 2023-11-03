@@ -87,10 +87,9 @@
         }
       }
     },
-    "infoFromVPRequest": {
+    "verifyRequest": {
       "photoLeft": "triall/guest_credential.svg",
-      "photoRight": "undraw_messenger_re_8bky_1.svg",
-      "textColor": "#E84461"
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
     },
     "issueSuccess": {
       "photoLeft": "triall/guest_credential.svg",
@@ -106,39 +105,10 @@
       "photoWallet": "triall/guest_credential.svg"
     },
     "infoRequest": {
-      "photo": "image_4.svg",
-      "photoManual": "image_4.svg",
+      "photo": "triall/guest_credential.svg",
+      "photoManual": "triall/guest_credential.svg",
       "text_top_of_image": "common_left_pane_title",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
-      "form": [
-        [
-          {
-            "id": "firstName",
-            "key": "firstName",
-            "label": "ssi_information_request_page_form_first_name_label",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "lastName",
-            "key": "lastName",
-            "label": "ssi_information_request_page_form_last_name_label",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "email",
-            "key": "email",
-            "label": "ssi_information_request_page_form_email_label",
-            "type": "text",
-            "required": true
-          }
-        ]
-      ]
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
     },
     "startPage": {
       "photoLeft": "triall/landing_manual_grey.svg",
@@ -163,41 +133,49 @@
         }
       }
     },
-    "shareSuccess": {
-      "photoLeft": "image_2.svg",
-      "photoLeftManual": "triall/wallet.svg",
-      "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
+    "credSelect": {
+      "logo": {
+        "src": "triall/logo.svg",
+        "alt": "triall",
+        "width": 260,
+        "height": 55
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#347189",
+          "textGradient": "linear-gradient(169deg, #E84461 0%, #D30D30 100%)"
+        }
+      }
     }
   },
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonGuest",
+      "vpDefinitionId": "triall2023",
       "steps": [
         {
           "id": "startPage",
           "operation": "navigate",
           "path": "/start",
-          "nextId": "infoFromVPRequest",
           "isDefaultRoute": true
         },
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/manual/request",
-          "nextId": "shareSuccess"
+          "path": "/information/request",
+          "nextId": "credSelect"
         },
         {
-          "id": "shareSuccess",
+          "id": "credSelect",
           "operation": "navigate",
-          "path": "/information/success",
-          "nextId": "credentialOffer"
+          "path": "/credentials/select",
+          "nextId": "verifyRequest"
         },
         {
-          "id": "infoFromVPRequest",
+          "id": "verifyRequest",
           "operation": "navigate",
-          "path": "/credentials/verify/vp/request",
-          "nextId": "infoRequest",
+          "path": "/credentials/verify/request",
+          "nextId": "credentialOffer",
           "isDefaultRoute": true
         },
         {
@@ -215,13 +193,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "/credentials/issue/success",
-          "nextId": "toTriallDemo"
-        },
-        {
-          "id": "toTriallDemo",
-          "operation": "navigate",
-          "path": "https://cix.triall.io"
+          "path": "/credentials/issue/success"
         },
         {
           "id": "download",

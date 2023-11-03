@@ -75,10 +75,6 @@ export function useFlowRouter<T extends PageConfig>() {
         return defaultLocation(stepsById)
     }
 
-    function getNextId(): string | undefined {
-      return stepState.currentStep?.nextId
-    }
-
     async function nextStep(updatedState ?: any) {
         const currentStep = stepState.currentStep
         if (!currentStep) {
@@ -155,7 +151,6 @@ export function useFlowRouter<T extends PageConfig>() {
     return {
         getPageConfig,
         getVpDefinitionId,
-        getNextId,
         goToStep,
         nextStep,
         setCurrentRouteId
