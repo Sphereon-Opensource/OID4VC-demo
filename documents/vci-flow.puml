@@ -3,32 +3,23 @@
 header VCI flow
 title
 VCI flow
-A scenario for getting a credential in your SSI wallet
+A scenario for receiving a credential in your SSI wallet
 end title
 
 autonumber
 
 participant "User" as user order 0 #ORANGE
 participant "Wallet" as wallet order 1 #RED
-participant "VCI front end" as vci order 2 #BLUE
+participant "Demo app" as demo order 2 #BLUE
 participant "Agent" as agent order 3 #GREEN
 
-user -> vci: from the list, select a credential that you want to receive
-vci -> agent: fetch credential metadata/requested presentation definition\nand generate a qr code
-vci -> user: show the qr code
-user -> wallet: scan the qr code
-wallet -> wallet: search the credentials inside the wallet\nfor matching with the presentation definition
-wallet -> user: shows user a list of credentials from which the user can select
-user -> wallet: user selects requested credentials
-wallet -> agent: wallet sends credentials to the agent
-agent -> agent: agent checks the received credentials\nagainst the presentation definition
-agent -> vci: sends the credential
-vci -> vci: receives the credential and based on the\nform data of the vci, generates a form with\nexisting data from user's credential and new\ninformation requested in the form
-vci -> user: VCI shows user the input form data.\nthis form will consist of information\nfrom user's credential and empty fields\nthat are empty in the new credential
-user -> vci: user fills in the information and clicks on send
-vci -> agent: agent receives the information from vci and\nwith the credential template, creates a credential offer
-agent -> vci: agent sends the credential offer to vci
-vci -> user: vci shows the credential offer uri in a qr code
+user -> demo: from the list, selects a credential that she wants to receive
+demo -> demo: generates a form with the form data in ecosystem config file
+demo -> user: shows user the form to user.
+user -> demo: user fills in the information and clicks on send
+demo -> agent: agent receives the information from demo app and\nwith the credential template, creates a credential offer
+agent -> demo: agent sends the credential offer to the demo app
+demo -> user: demo app shows the credential offer uri in a qr code
 user -> wallet: user scans the qr code with the wallet
 wallet -> user: wallet shows user the credential the she is about to accept
 user -> wallet: user accepts the new credential

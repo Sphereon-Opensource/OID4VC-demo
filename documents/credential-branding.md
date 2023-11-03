@@ -10,20 +10,22 @@
 
 **Warning: This project still is in very early development. Breaking changes without notice will happen at this point!**
 
-<h2 id="toc">Table of contents</h2>
+## Table of contents <a name="toc"></a>
+
 1. [Credential Branding in Verifiable Credentials](#branding_in_vcs)
 2. [Definition and Purpose](#definition)
 3. [Metadata Parameters](#metadata)
 4. [Branding in real-world](#branding_real)
 
-<h2 id="branding_in_vcs">Credential Branding in Verifiable Credentials</h2>
+## Credential Branding in Verifiable Credentials <a name="branding_in_vcs"></a>
+
 Credential branding is an essential aspect of Verifiable Credentials (VCs) that helps define how a credential is displayed and identified to end-users. It plays a crucial role in creating a user-friendly and consistent experience for individuals who interact with verifiable credentials. In this explanation, we give you a detailed account of the concept of credential branding as defined in the [Verifiable Credentials Issuance (VCI) spec](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) specification.
 
-<h2 id="definition">Definition and Purpose</h2>
+## Definition and Purpose <a name="definition"></a>
 
 In the context of VCs, "Credential Branding" refers to the visual and descriptive attributes associated with a credential, including its name, logo, background color, and more. These attributes are defined in the metadata of the credential issuer and are used to present the credential in a consistent and nice way to the credential holder or verifier.
 
-<h2 id="metadata">Metadata Parameters</h2>
+## Metadata Parameters <a name="metadata"></a>
 
 Credential branding is specified using various parameters in the metadata of a credential issuer. Here are some metadata parameters related to credential branding:
 
@@ -43,7 +45,7 @@ Credential branding is specified using various parameters in the metadata of a c
 
     - **Text Color (OPTIONAL):** A string value representing the text color of the credential, specified using numerical color values defined in CSS Color Module Level 3.
 
-<h2 id="branding_real">Branding in real-world</h2>
+## Branding in real-world <a name="branding_real"></a>
 
 We're using branding in this project. So in order to get familiar with it, you can visit one of our config json files in [packages/agent/conf/examples/oid4vci_metadata](./agent-setup.md#oid4vci_metadata). You can find the branding related information (as the spec suggests in `credentials_supported` field of the metadata)
 Here is a real world example of a credential branding:
@@ -77,5 +79,13 @@ Here is a real world example of a credential branding:
 
 When providing image for branding, be sure that:
 1. The image (both `background_image.url` and `logo.url`) are available to every party interacting with the demo.
-2. Providing a rectangular image without rounded corners, the library will take care of that.
-3. You can have locale-specific branding for your credentials. For this to happen you can add a locale to your display array, with a `locale` key representing your desired locale. Read more in [OID4VCI](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-10.2.3.1-2.5.1)
+2. Providing a rectangular image for background image, without rounded corners, the library will take care of that.
+3. Locale-Specific Branding: To cope with different languages and regional preferences, our system allows for locale-specific customization of credentials. You can define these customizations within the `display` array by including a `locale` key to specify the language (following BCP47 [RFC5646](https://datatracker.ietf.org/doc/html/rfc5646) standards). This flexibility means that not only can the display name of the credential (`display.name`) be localized, but any claim within the credential can also have a locale-specific display name (`claims.display.name`). This enables the presentation of credentials in the user's preferred language.
+For instance, if your credential includes a "firstName" this can be displayed in English, Spanish, French, or any other supported language based on the locale you specify. Each locale can have its distinct display properties, ensuring that users see the credential information in their own language. The array can include multiple objects for different locales, with the condition that each language identifier must be unique within the array.
+Beyond names and claim labels, other optional branding elements can be locale-adapted too, such as:
+  - `logo`: Provide a URL for the wallet to fetch a locale-specific logo, along with alternative text and a description.
+  - `background_image`: Provide a URL for the wallet to fetch a locale-specific background image, along with alternative text and a description.
+  - `description`: Offer a localized description of the credential.
+  - `background_color` and `text_color`: Set locale-specific colors for the credential's background and text, ensuring that the visual presentation aligns with the language and regional norms.
+
+By utilizing these customizable display options, you can enhance the user experience with a display that is both visually and linguistically tailored to requirements of your user. Read more details in the [OID4VCI specification](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-10.2.3.1-2.5.1).

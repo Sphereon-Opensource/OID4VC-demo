@@ -10,7 +10,8 @@
 
 **Warning: This project still is in very early development. Breaking changes without notice will happen at this point!**
 
-<h2 id="toc">Table of contents</h2>
+## Table of contents <a name="toc"></a>
+
 1. [Overview](#overview)
 2. [Config](#config)
     1. [.env configuration](#env_config)
@@ -18,12 +19,12 @@
        1. [Form configuration](#form_config)
 3. [Starting the VCI frontend](#starting)
 
-<h2 id="overview">Overview</h2>
+## Overview <a name="overview"></a>
 
 This module creates a UI using react. To create a custom UI, you should add your own configuration to `packages/oid4vci-demo-frontend/src/configs` folder. You can take a look at our other existing configurations before doing so, or if you want a more in-depth understanding about all the values inside these config files, you might want to take a look at the interfaces behind this [configuration](packages/oid4vci-demo-frontend/src/ecosystem/ecosystem-config.ts). In this document we're going to examine each configuration file and show you how to setup your own demo.
 
-<h2 id="config">Config</h2>
-<h3 id="env_config">.env configuration</h2>
+## Config <a name="config"></a>
+### .env configuration <a name="env_config"></a>
 
 In this module we're using a few configuration from .env which are listed below:
 - `PORT`: The port number that you want this frontend to be accessed from.
@@ -43,7 +44,7 @@ In this module we're using a few configuration from .env which are listed below:
     3. value received from `REACT_APP_DEFAULT_ECOSYSTEM`
     4. if all the above failed, defaults to `sphereon` config. 
 
-<h3 id="config_files">Config files</h2>
+### Config files <a name="config_files"></a>
 
 For configuring your VCI front end you have to create your own file in `packages/oid4vci-demo-frontend/src/configs`. Each of these config files that you're creating should follow a certain structure.
 
@@ -69,7 +70,7 @@ here are a few important note on these configurations:
 - You can modify your flow to choose what suits your purpose. this can be achieved with modifying the `routes` property in your config json.
 - If your config contains new images, be sure to copy them in the public folder of this module
 
-<h3 id="form_config">Form configuration</h2>
+### Form configuration <a name="form_config"></a>
 
 Here is a more in-depth look at the form configuration. A form is a list of lists. This is done to enable you to have multiple entries in a line.
 Each input entry can be defined with the following interface:
@@ -127,5 +128,6 @@ Here is an example of a `credentialSubject` that can be used for populating this
 }
 ```
 
-<h3 id="starting">Starting the VCI frontend</h2>
+### Starting the VCI frontend <a name="starting"></a>
+
 Once you've managed to create your own configuration file, you can start you have to alter the value of `REACT_APP_DEFAULT_ECOSYSTEM` in your `.env` file. After this, you can start this module using `start:prod` or `start:dev` scripts.

@@ -10,7 +10,7 @@
 
 **Warning: This project still is in very early development. Breaking changes without notice will happen at this point!**
 
-<h2 id="toc">Table of contents</h2>
+## Table of contents <a name="toc"></a>
 1. [Agent Configuration Guide](#agent_config_guide)
     1. [Configuration Directory Structure](#configuration_dir_structure)
         1. [dids](#config_dids)
@@ -23,18 +23,20 @@
 2. [Starting the agent](#starting_agent)
 
 
-<h2 id="agent_config_guide">Agent Configuration Guide</h2>
+## Agent Configuration Guide <a name="agent_config_guide"></a>
 
 Welcome to the agent setup guide. This document will walk you through configuring your agent module by leveraging the settings defined in your `.env` file. Specifically, the `CONF_PATH` property in your `.env` file dictates where the agent retrieves its configuration from.
 
-<h3 id="configuration_dir_structure">Configuration Directory Structure</h3>
+### Configuration Directory Structure <a name="configuration_dir_structure"></a>
 
 Within your `packages/agent/conf` directory, navigate to the `examples` subfolder. Here, you will find six key directories, each integral to the agent's configuration:
 
-<h4 id="config_dids">1. dids</h4>
+#### 1. dids <a name="config_dids"></a>
+
 This directory is designated for storing Decentralized Identifiers (DIDs) documents. These did documents will be used throughout or oid4vci and oid4vp/siop process.
 
-<h4 id="oid4vci_metadata">2. oid4vci_metadata</h4>
+#### 2. oid4vci_metadata <a name="oid4vci_metadata"></a>
+
 In this folder, you'll find JSON files that detail the metadata required by the [VCI specification](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) and some values that are essential for configuring this agent. Following is a table of values that should be set for a json file inside `oid4vci_metadata`:
 
 | Variable              | Sub-Variable                 | Description                                                                                                                                                                                                                                                                                                                                        |
@@ -48,7 +50,8 @@ In this folder, you'll find JSON files that detail the metadata required by the 
 |                       | `credentials_supported`      | A JSON array containing a list of JSON objects, each of them representing metadata about a separate credential type that the Credential Issuer can issue. The JSON objects in the array MUST conform to the structure of the [OID4VCI spec](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#credential-metadata-object). |
 |                       | `credential_supplier_config` | Configuration settings for the provider of the credentials.                                                                                                                                                                                                                                                                                        | 
 
-<h4 id="oid4vci_options">3. oid4vci_options</h4>
+#### 3. oid4vci_options <a name="oid4vci_options"></a>
+
 This is the directory where custom OID4VCI configuration files are maintained.
 
 | Variable              | Sub-Variable        | Description                                                                                                                                                                                                               |
@@ -64,7 +67,8 @@ This is the directory where custom OID4VCI configuration files are maintained.
 |                       | `userPinRequired`   | (optional) Boolean indicating if a user PIN is required for operations.                                                                                                                                                   |
 |                       | `cNonceExpiresIn`   | (optional) Number specifying the expiration time for the client nonce in the issuance process.                                                                                                                            |
 
-<h4 id="oid4vp_options">4. oid4vp_options</h4>
+#### 4. oid4vp_options <a name="oid4vp_options"></a>
+
 Here, you will store configuration files related to OpenID for Verifiable Presentations (OID4VP).
 
 | Variable           | Sub-Variable          | Description                                                                                             |
@@ -78,10 +82,12 @@ Here, you will store configuration files related to OpenID for Verifiable Presen
 |                    | `eventEmitter`        | (optional) An object used to handle events, enabling asynchronous event-driven programming.             |
 |                    | `didOpts`             | Options related to the Decentralized Identifier (DID) of the verifier.                                  |
 
-<h4 id="presentation_definitions">5. presentation_definitions</h4>
+#### 5. presentation_definitions <a name="presentation_definitions"></a>
+
 The content of this directory is essential for defining how the agent understands and processes presentation requests. For a more thorough description of presentation_definition in [presentation exchange documentation](https://identity.foundation/presentation-exchange/#presentation-definition), and how it's being used in [OID4VP](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) spec.
 
-<h4 id="templates">6. templates</h4>
+#### 6. templates <a name="templates"></a>
+
 This directory includes templates for the dynamic generation of Verifiable Credentials, We're populating the credential using [handlebars](https://handlebarsjs.com/). You can find examples of this usage in this directory. Here is an example of such usage:
 ```handlebars
    {
@@ -99,7 +105,7 @@ This directory includes templates for the dynamic generation of Verifiable Crede
 
 Each directory plays a critical role in the configuration of the agent and the successful deployment of the verifiable credential issuance ecosystem within your application. It is essential to carefully craft the contents of these directories in alignment with your specific use cases and the standards of the decentralized identity space.
 
-<h3 id="env_variables">.env variables</h3>
+### .env variables <a name="env_variables"></a>
 
 Your `.env.local` file should contain the following variables with values tailored to your setup:
 
@@ -122,7 +128,7 @@ Your `.env.local` file should contain the following variables with values tailor
 
 **Note**: If you intend to access the agent through a mobile device, ensure that you do not use `localhost` or `127.0.0.1`. Instead, use a local IP address that is reachable from your mobile device within the same network.
 
-<h2 id="starting_agent">Starting the agent</h2>
+## Starting the agent <a name="starting_agent"></a>
 
 To start your agent:
 
