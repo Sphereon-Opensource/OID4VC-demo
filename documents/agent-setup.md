@@ -82,11 +82,11 @@ Here, you will store configuration files related to OpenID for Verifiable Presen
 
 #### 5. presentation_definitions
 
-The content of this directory is essential for defining how the agent understands and processes presentation requests. For an in-depth explanation of presentation_definition, refer to the [Presentation Exchange Documentation](https://identity.foundation/presentation-exchange/). To understand its role in the context of the [OID4VP specification](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html), please consult the provided link.
+The content of this directory is essential for defining how the agent understands and processes presentation requests. This is only applied if your demo application is asking the user for their VerifiableCredential(s) from the wallet. For an in-depth explanation of presentation_definition, refer to the [Presentation Exchange Documentation](https://identity.foundation/presentation-exchange/). To understand its role in the context of the [OID4VP specification](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html), please consult the provided link.
 
 #### 6. templates
 
-This directory includes templates for the dynamic generation of Verifiable Credentials, We're populating the credential using [handlebars](https://handlebarsjs.com/). You can find examples of this usage in this directory. Here is an example of such usage:
+This directory features templates designed to dynamically create Verifiable Credentials. We use [Handlebars](https://handlebarsjs.com/) to fill the templates with data received from the demo application. Ensure that your [form configuration](./vci-front-end.md#form-configuration)/ requested VerifiableCredential (in above section) provides the necessary data for this process. Examples within this directory illustrate how to implement this approach. Below is one such example:
 ```handlebars
    {
        "@context": ["https://www.w3.org/2018/credentials/v1"],
