@@ -1,5 +1,5 @@
 import React from "react"
-import styles from "./DeepLink.module.css"
+import styles from "./DeepLinkButton.module.css"
 import SSIPrimaryButton from "../SSIPrimaryButton"
 import {t} from "i18next"
 import SSISecondaryButton from "../SSISecondaryButton"

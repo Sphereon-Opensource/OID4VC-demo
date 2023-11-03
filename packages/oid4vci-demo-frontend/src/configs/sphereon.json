@@ -87,7 +87,7 @@
         }
       }
     },
-    "credSelect": {
+    "multiCredentialIssuer": {
       "logo": {
         "src": "wallets/sphereon_logo.png",
         "alt": "sphereon",
@@ -196,10 +196,10 @@
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/request",
-          "nextId": "credSelect"
+          "nextId": "multiCredentialIssuer"
         },
         {
-          "id": "credSelect",
+          "id": "multiCredentialIssuer",
           "operation": "navigate",
           "path": "/credentials/select",
           "nextId": "credentialOffer"
