@@ -39,7 +39,10 @@ export class TemplateVCGenerator {
             return format(new Date(), this.timeFormatPattern)
         })
         this.handlebars.registerHelper('dateTimeAfterDays', (days: number) => {
-            return format(add(new Date(), {days: days}), this.timeFormatPattern)
+            return format(add(new Date(), {days}), this.timeFormatPattern)
+        })
+        this.handlebars.registerHelper('dateTimeAfterMonths', (months: number) => {
+            return format(add(new Date(), {months}), this.timeFormatPattern)
         })
         this.handlebars.registerHelper('dateTimeAfterMonths', (months: number) => {
             return format(add(new Date(), {months}), this.timeFormatPattern)

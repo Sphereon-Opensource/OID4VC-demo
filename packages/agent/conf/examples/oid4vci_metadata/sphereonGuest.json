@@ -14,8 +14,85 @@
       {
         "display": [
           {
+            "name": "Example University Degree",
+            "description": "JFF Plugfest 3 OpenBadge (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#1763c1",
+            "logo": {
+              "url": "https://w3c-ccg.github.io/vc-ed/plugfest-1-2022/images/JFF_LogoLockup.png",
+              "alt_text": "Red, magenta and yellow vertical lines with 3 black dots and the text JFF, depicting the Jobs For the Future logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Example University Degree",
+            "description": "JFF Plugfest 3 OpenBadge (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#1763c1",
+            "logo": {
+              "url": "https://w3c-ccg.github.io/vc-ed/plugfest-1-2022/images/JFF_LogoLockup.png",
+              "alt_text": "Red, magenta and yellow vertical lines with 3 black dots and the text JFF, depicting the Jobs For the Future logo."
+            }
+          }
+        ],
+        "id": "OpenBadgeCredentialJwt",
+        "types": [
+          "VerifiableCredential",
+          "OpenBadgeCredential"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:key"
+        ],
+        "cryptographic_suites_supported": [
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Permanent Resident Card",
+            "description": "Government of Kakapo (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#3a2d2d",
+            "logo": {
+              "url": "https://i.ibb.co/kJm9Mpx/Screenshot-2023-08-18-000155.png",
+              "alt_text": "White shield with text Government of Kakapo and subtitle Ministry of Foreign Affairs."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Permanent Resident Card",
+            "description": "Government of Kakapo (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#3a2d2d",
+            "logo": {
+              "url": "https://i.ibb.co/kJm9Mpx/Screenshot-2023-08-18-000155.png",
+              "alt_text": "White shield with text Government of Kakapo and subtitle Ministry of Foreign Affairs."
+            }
+          }
+        ],
+        "id": "PermantResidentCardJwt",
+        "types": [
+          "VerifiableCredential",
+          "PermanentResidentCard"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
             "name": "Sphereon guest",
-            "description": "Sphereon guest credential for demo purposes.",
+            "description": "Demo credential",
             "text_color": "#FFFFFF",
             "background_image": {
               "url": "https://i.ibb.co/kmfrH4F/tulips.png",
@@ -28,7 +105,7 @@
           },
           {
             "locale": "en-US",
-            "name": "Sphereon guest",
+            "name": "Demo credential",
             "description": "Sphereon guest credential for demo purposes.",
             "text_color": "#FFFFFF",
             "background_image": {
@@ -56,13 +133,13 @@
           }
         ],
         "order": [
-          "Voornaam",
-          "Achternaam",
+          "firstName",
+          "lastName",
           "email",
           "type"
         ],
         "credentialSubject": {
-          "Voornaam": {
+          "firstName": {
             "value_type": "string",
             "display": [
               {
@@ -78,7 +155,7 @@
               }
             ]
           },
-          "Achternaam": {
+          "lastName": {
             "value_type": "string",
             "display": [
               {
@@ -141,20 +218,138 @@
           "ES256",
           "ES256K",
           "EdDSA"
-        ],
-        "credential_supplier_config": {
-          "templates_base_dir": "templates/sphereonGuest",
-          "template_mappings": [
-            {
-              "credential_types": [
-                "GuestCredential"
-              ],
-              "template_path": "GuestCredential.hbs",
-              "format": "jwt_vc_json"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Conference Attendee",
+            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "background_color": "#3B6F6D",
+            "text_color": "#FFFFFF",
+            "logo": {
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+              "alt_text": "An orange block shape, with the text Dutch Blockchain Coalition next to it, portraying the logo of the Dutch Blockchain Coalition."
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
+              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
             }
-          ]
-        }
+          },
+          {
+            "locale": "en-US",
+            "name": "Conference Attendee",
+            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
+            "background_color": "#3B6F6D",
+            "text_color": "#FFFFFF",
+            "logo": {
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+              "alt_text": "An orange block shape, with the text Dutch Blockchain Coalition next to it, portraying the logo of the Dutch Blockchain Coalition."
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
+              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Conferentie Deelnemer",
+            "description": "De DBC Conferentie Deelnemer credential wordt uitgegeven aan alle bezoekers van de DBC conferentie.",
+            "background_color": "#3B6F6D",
+            "text_color": "#FFFFFF",
+            "logo": {
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+              "alt_text": "Aaneengesloten open blokken in de kleur blauw, met een blok in de kleur oranje, die tesamen de achtergrond van de kaart vormen."
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
+              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "email"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "FirstName"
+              },
+              {
+                "name": "FirstName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "LastName"
+              },
+              {
+                "name": "LastName",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "email": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email"
+              },
+              {
+                "name": "Email",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "dbc2023",
+        "types": [
+          "VerifiableCredential",
+          "DBCConferenceAttendee"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
       }
-    ]
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/sphereonGuest",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "GuestCredential"
+          ],
+          "template_path": "GuestCredential.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
   }
 }

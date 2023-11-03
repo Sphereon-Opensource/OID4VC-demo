@@ -29,7 +29,8 @@ const SSILandingPage: React.FC = () => {
     }
 
     const onWalletIdentificationClick = async (): Promise<void> => {
-        await flowRouter.goToStep('verifyRequest')
+      const nextId = flowRouter.getNextId();
+      await flowRouter.goToStep(nextId || 'verifyRequest');
     }
 
     return (

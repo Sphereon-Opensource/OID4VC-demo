@@ -87,13 +87,31 @@
         }
       }
     },
-    "verifyRequest": {
+    "multiCredentialIssuer": {
+      "logo": {
+        "src": "wallets/sphereon_logo.png",
+        "alt": "sphereon",
+        "width": 204,
+        "height": 43
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#202537",
+          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
+        }
+      }
+    },
+    "infoFromVPRequest": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
       "photoRight": "undraw_messenger_re_8bky_1.svg"
     },
     "issueSuccess": {
       "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
-      "photoRight": "undraw_messenger_re_8bky_1.svg"
+      "photoRight": "undraw_messenger_re_8bky_1.svg",
+      "rightPaneTitle": "credentials_success_right_pane_title",
+      "rightPaneParagraph": "credentials_success_right_pane_paragraph",
+      "rightPaneButtonCaption": "credentials_success_right_pane_button_caption",
+      "rightPaneButtonStepId": "toSphereonDemo"
     },
     "infoSharedSuccess": {
       "photoLeft": "image_4.svg",
@@ -108,7 +126,36 @@
       "photo": "image_4.svg",
       "photoManual": "image_4.svg",
       "text_top_of_image": "common_left_pane_title",
-      "sharing_data_right_pane_title": "sharing_data_right_pane_title"
+      "sharing_data_right_pane_title": "sharing_data_right_pane_title",
+      "form": [
+        [
+          {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "email",
+            "key": "email",
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
     },
     "startPage": {
       "photoLeft": "landing_manual.svg",
@@ -131,50 +178,37 @@
           "buttonType": "primary"
         }
       }
-    },
-    "SSISelectCredentialPage": {
-      "logo": {
-        "src": "wallets/sphereon_logo.svg",
-        "alt": "sphereon.com",
-        "width": 167,
-        "height": 70
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#202537",
-          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
-        }
-      }
     }
   },
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonGuest",
+      "vpDefinitionId": "sphereonWalletIdentity",
       "steps": [
         {
           "id": "startPage",
           "operation": "navigate",
           "path": "/start",
+          "nextId": "infoFromVPRequest",
           "isDefaultRoute": true
         },
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/request",
-          "nextId": "credSelect"
+          "path": "/information/manual/request",
+          "nextId": "multiCredentialIssuer"
         },
         {
-          "id": "credSelect",
+          "id": "multiCredentialIssuer",
           "operation": "navigate",
           "path": "/credentials/select",
-          "nextId": "verifyRequest"
+          "nextId": "credentialOffer"
         },
         {
-          "id": "verifyRequest",
+          "id": "infoFromVPRequest",
           "operation": "navigate",
-          "path": "/credentials/verify/request",
-          "nextId": "credentialOffer",
+          "path": "/credentials/verify/vp/request",
+          "nextId": "infoRequest",
           "isDefaultRoute": true
         },
         {
@@ -192,7 +226,13 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "/credentials/issue/success"
+          "path": "/credentials/issue/success",
+          "nextId": "toSphereonDemo"
+        },
+        {
+          "id": "toSphereonDemo",
+          "operation": "navigate",
+          "path": "https://ssi.sphereon.com"
         },
         {
           "id": "download",

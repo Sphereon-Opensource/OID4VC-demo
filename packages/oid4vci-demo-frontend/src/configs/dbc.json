@@ -132,7 +132,7 @@
         }
       }
     },
-    "credSelect": {
+    "multiCredentialIssuer": {
       "logo": {
         "src": "dbc/dbc_logo.png",
         "alt": "dbc",
@@ -161,11 +161,11 @@
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/request",
-          "nextId": "credSelect"
+          "path": "/information/manual/request",
+          "nextId": "multiCredentialIssuer"
         },
         {
-          "id": "credSelect",
+          "id": "multiCredentialIssuer",
           "operation": "navigate",
           "path": "/credentials/select",
           "nextId": "verifyRequest"

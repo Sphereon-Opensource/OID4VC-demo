@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Text} from "../../components/Text"
 import style from '../../components/Text/Text.module.css'
-import DeepLink from "../../components/DeepLink"
+import DeepLinkButton from "../../components/DeepLinkButton"
 import {useTranslation} from "react-i18next"
 import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop"
 import MemoizedAuthenticationQR from '../../components/AuthenticationQR'
@@ -106,7 +106,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                   { pageConfig.mobile?.image &&
                                       <img src={`${pageConfig.mobile?.image}`} alt="success" style={{overflow: 'hidden'}}/>
                                   }
-                                  <DeepLink style={{flexGrow: 1}} link={deepLink}/>
+                                  <DeepLinkButton style={{flexGrow: 1}} link={deepLink}/>
                               </div>
                           </MobileOS>
                           <Mobile>

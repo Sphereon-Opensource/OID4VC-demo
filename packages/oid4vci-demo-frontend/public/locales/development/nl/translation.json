@@ -54,7 +54,7 @@
   "manual_fill_data_company_right_pane_title": "Bedrijf details",
   "sharing_data_success_right_pane_paragraph": "voor het verstrekken van de informatie. We zijn nu klaar\r\nom een nieuwe credential aan je uit te geven.\r\n\nAls je nog geen wallet heeft, download dan alstublieft\r\neen van de conforme wallets aan de linkerkant.",
   "sharing_data_success_right_pane_paragraph_short": "voor het verstrekken van de informatie. We zijn nu klaar\r\nom een nieuwe credential aan je uit te geven.",
-  "sharing_data_success_right_pane_title": "Bedankt {{Voornaam}}!",
+  "sharing_data_success_right_pane_title": "Bedankt {{firstName}}!",
   "sharing_data_success_get_mobile_app_message": "Haal de Sphereon Wallet",
   "action_open_wallet_caption": "Openen in wallet",
   "ssi_information_request_page_form_account_title": "Account Informatie",

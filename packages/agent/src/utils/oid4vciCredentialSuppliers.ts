@@ -11,8 +11,8 @@ import {CONF_PATH, CredentialSupplierConfigWithTemplateSupport, normalizeFilePat
 const templateVCGenerator = new TemplateVCGenerator()
 
 const credentialDataSupplierPermantResidentCard: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Jane'
-    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'Doe'
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Jane'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'Doe'
 
     return Promise.resolve({
         format: args.credentialRequest.format,
@@ -29,8 +29,8 @@ const credentialDataSupplierPermantResidentCard: CredentialDataSupplier = (args:
             "expirationDate": "2029-12-03T12:19:52Z",
             "credentialSubject": {
                 "type": ["PermanentResident", "Person"],
-                "givenName": Voornaam,
-                "familyName": Achternaam,
+                "givenName": firstName,
+                "familyName": lastName,
                 "gender": "Male",
                 "residentSince": "2015-01-01",
                 "lprCategory": "C09",
@@ -86,8 +86,8 @@ const credentialDataSupplierOpenBadgeJwtJson: CredentialDataSupplier = (args: Cr
 }
 
 const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
-    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'DBC'
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'DBC'
     const email = args.credentialDataSupplierInput?.email ?? 'dbc@example.com'
 
     return Promise.resolve({
@@ -97,8 +97,8 @@ const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: C
             type: ['VerifiableCredential', 'DBCConferenceAttendee'],
             expirationDate: '2023-07-26T00:00:00Z',
             credentialSubject: {
-                Voornaam,
-                Achternaam,
+                firstName,
+                lastName,
                 email,
                 event: {
                     name: 'DBC Conference 2023',
@@ -110,8 +110,8 @@ const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: C
 }
 
 const credentialDataSupplierFMAGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
-    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'FMA'
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'FMA'
     const email = args.credentialDataSupplierInput?.email ?? 'fma@example.com'
 
     return Promise.resolve({
@@ -121,8 +121,8 @@ const credentialDataSupplierFMAGuest2023: CredentialDataSupplier = (args: Creden
             type: ['VerifiableCredential', 'GuestCredential'],
             expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
             credentialSubject: {
-                Voornaam,
-                Achternaam,
+                firstName,
+                lastName,
                 email,
                 type: 'Future Mobility Alliance Guest',
             },
@@ -131,8 +131,8 @@ const credentialDataSupplierFMAGuest2023: CredentialDataSupplier = (args: Creden
 }
 
 const credentialDataSupplierTriallGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
-    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'Triall'
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'Triall'
     const email = args.credentialDataSupplierInput?.email ?? 'triall@example.com'
 
     return Promise.resolve({
@@ -142,8 +142,8 @@ const credentialDataSupplierTriallGuest2023: CredentialDataSupplier = (args: Cre
             type: ['VerifiableCredential', 'GuestCredential'],
             expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
             credentialSubject: {
-                Voornaam,
-                Achternaam,
+                firstName,
+                lastName,
                 email,
                 type: 'Triall Guest',
             },
@@ -152,8 +152,8 @@ const credentialDataSupplierTriallGuest2023: CredentialDataSupplier = (args: Cre
 }
 
 const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
-    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'EnergySHR'
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'EnergySHR'
     const email = args.credentialDataSupplierInput?.email ?? 'energyshr@example.com'
 
     return Promise.resolve({
@@ -163,8 +163,8 @@ const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: 
             type: ['VerifiableCredential', 'GuestCredential'],
             expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
             credentialSubject: {
-                Voornaam,
-                Achternaam,
+                firstName,
+                lastName,
                 email,
                 type: 'EnergySHR Guest',
             },
@@ -173,8 +173,8 @@ const credentialDataSupplierEnergySHRGuest2023: CredentialDataSupplier = (args: 
 }
 
 const credentialDataSupplierSphereon: CredentialDataSupplier = (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {
-    const Voornaam = args.credentialDataSupplierInput?.Voornaam ?? 'Hello'
-    const Achternaam = args.credentialDataSupplierInput?.Achternaam ?? 'Sphereon'
+    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
+    const lastName = args.credentialDataSupplierInput?.lastName ?? 'Sphereon'
     const email = args.credentialDataSupplierInput?.email ?? 'sphereon@example.com'
 
     const types = getTypesFromRequest(args.credentialRequest)
@@ -189,10 +189,10 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 type: ['VerifiableCredential', 'VerifiedEmployee'],
                 expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
                 credentialSubject: {
-                    givenName: Voornaam,
-                    surname: Achternaam,
+                    givenName: firstName,
+                    surname: lastName,
                     mail: email,
-                    displayName: `${Voornaam} ${Achternaam}`,
+                    displayName: `${firstName} ${lastName}`,
                     jobTitle: 'Chief Credential Issuer',
                     preferredLanguage: 'en_US',
                 },
@@ -209,8 +209,8 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 type: ['VerifiableCredential', 'MembershipExample'],
                 expirationDate: new Date(+new Date() + 48 * 60 * 60 * 3600).toISOString(),
                 credentialSubject: {
-                    Voornaam,
-                    Achternaam,
+                    firstName,
+                    lastName,
                     email,
                     type: 'Membership Example',
                 },
@@ -229,8 +229,8 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
                 type: ['VerifiableCredential', 'GuestCredential'],
                 expirationDate: new Date(+new Date() + 24 * 60 * 60 * 3600).toISOString(),
                 credentialSubject: {
-                    Voornaam,
-                    Achternaam,
+                    firstName,
+                    lastName,
                     email,
                     type: 'Sphereon Guest',
                 },
@@ -238,6 +238,8 @@ const credentialDataSupplierSphereon: CredentialDataSupplier = (args: Credential
         } as unknown as CredentialDataSupplierResult
     } */
     return Promise.resolve({} as unknown as CredentialDataSupplierResult) // return empty result so the code will start looking for templates
+    // TODO ^^^ we can't return undefined here because CredentialDataSupplier is defined in project OID4VC as Promise<CredentialDataSupplierResult> and not Promise<CredentialDataSupplierResult | undefined>. But we are going to remove hardcoded templates anyway
+
 }
 
 const supplierByType = async (args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> => {
