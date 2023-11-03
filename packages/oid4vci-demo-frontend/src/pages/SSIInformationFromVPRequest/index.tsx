@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Text } from '../../components/Text'
 import style from '../../components/Text/Text.module.css'
-import DeepLink from '../../components/DeepLink'
+import DeepLinkButton from '../../components/DeepLinkButton'
 import { useTranslation } from 'react-i18next'
 import { AuthorizationResponsePayload } from '@sphereon/did-auth-siop'
 import { useNavigate } from 'react-router-dom'
@@ -102,7 +102,7 @@ export default function SSIInformationFromVPRequestPage(): React.ReactElement | 
                 alignItems: 'center',
                 gap: '1rem'
               }}>
-                <DeepLink link={deepLink} buttonType={"secondary"} textColor={pageConfig.textColor} style={{width: 300}}/>
+                <DeepLinkButton link={deepLink} buttonType={"secondary"} textColor={pageConfig.textColor} style={{width: 300}}/>
                 <SSIPrimaryButton
                     caption={t('credential_verify_request_right_pane_button_caption')}
                     onClick={async () => {

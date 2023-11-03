@@ -11,7 +11,7 @@ export interface DeepLinkProps {
   style?: React.CSSProperties
 }
 
-function generateSecondary(props: DeepLinkProps): React.ReactElement {
+function generateSecondaryButton(props: DeepLinkProps): React.ReactElement {
   return (
       <SSISecondaryButton
           caption={t('button_open_from_wallet')}
@@ -25,9 +25,9 @@ function generateSecondary(props: DeepLinkProps): React.ReactElement {
   );
 }
 
-export default function DeepLink(props: DeepLinkProps): React.ReactElement {
+export default function DeepLinkButton(props: DeepLinkProps): React.ReactElement {
   if (props.buttonType === 'secondary') {
-    return generateSecondary(props)
+    return generateSecondaryButton(props)
   }
 
   return (
