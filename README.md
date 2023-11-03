@@ -1,7 +1,7 @@
 <h2 style="text-align: center; vertical-align: middle">
     <center><a href="https://www.sphereon.com"><img src="https://sphereon.com/content/themes/sphereon/assets/img/logo.svg" alt="Sphereon" width="320" style="vertical-align: middle" ></a></center>
 
-<br>OID4VC Issuer
+<br>OID4VC Issuer and Verifier Demo      
 <br>
 <br>
 </h2>
@@ -9,12 +9,14 @@
 #### This is a demo to showcase our OpenID for Verifiable Credentials libraries and components.
 
 **Please note that this is not intended as production code. It is a relative simple implementation to show how the
+OID4VC technologies, SIOPv2 (peer to peer authentication), OID4VP (Verification), OID4VCI (Issuance) end Presentation
+Exchange (requirements by verifiers) work.**
 
 ## Overview
 
 In this document we're going to show you step by step what you have to do to set your own VCI demo up.
 
-The demo consists of 2 components, which can be found in the packages folder.
+The demo consists of 3 components, which can be found in the packages folder.
 
 - The agent using our [SSI-SDK](https://github.com/Sphereon-OpenSource/SSI-SDK), responsible for key-management, DIDs,
   Presentation Exchange storage, Issuer Metadata Storage, as well as
@@ -23,7 +25,9 @@ The demo consists of 2 components, which can be found in the packages folder.
 - A Demo Issuer frontend, allowing you to fill out a simple form, or using a wallet, to supply some information, which
   then will be used to issue a credential containing that information. This code can be exported and run on a regular
   webserver if you want. It is a frontend communicating with the agent, using some of our OID4VC SSI-SDK plugins.
-
+- A Demo Verifier frontend, allowing you to verify the Credential issued by the agent (the demo issuer, also contains
+  similar functionality if you would follow the wallet flow btw). Be aware that we will replace this demo frontend with
+  something a bit more appealing soon.
 
 The Demo is using code from our [SSI-SDK](https://github.com/Sphereon-OpenSource/SSI-SDK), providing 11 modules for
 OID4VC, QR code generation, as well as Issuance branding. Integrating these technologies with a Key Management System,
@@ -50,6 +54,9 @@ A scenario for fetching a credential. Note that since the process is dynamic, yo
 
 //TODO: when merged, change the address
 ![To fetch a credential](./documents/vci-flow.puml)
+
+And a scenario for using Verifiable Credential(s) For OID4VP flow:
+![OID4VP flow](./documents/oid4vp-flow.puml)
 
 In the next chapters we're going to show you how to setup the `agent` module, oid4vci-demo-front-end and a brief introduction on how credential branding actually works.
 

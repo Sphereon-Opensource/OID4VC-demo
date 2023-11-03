@@ -8,24 +8,22 @@
 
 ---
 
-**Warning: This project still is in very early development. Breaking changes without notice will happen at this point!**
+## Table of contents
 
-## Table of contents <a name="toc"></a>
+1. [Credential Branding in Verifiable Credentials](#credential-branding-in-verifiable-credentials)
+2. [Definition and Purpose](#definition-and-purpose)
+3. [Metadata Parameters](#metadata-parameters)
+4. [Branding in real-world](#branding-in-real-world)
 
-1. [Credential Branding in Verifiable Credentials](#branding_in_vcs)
-2. [Definition and Purpose](#definition)
-3. [Metadata Parameters](#metadata)
-4. [Branding in real-world](#branding_real)
-
-## Credential Branding in Verifiable Credentials <a name="branding_in_vcs"></a>
+## Credential Branding in Verifiable Credentials
 
 Credential branding is an essential aspect of Verifiable Credentials (VCs) that helps define how a credential is displayed and identified to end-users. It plays a crucial role in creating a user-friendly and consistent experience for individuals who interact with verifiable credentials. In this explanation, we give you a detailed account of the concept of credential branding as defined in the [Verifiable Credentials Issuance (VCI) spec](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) specification.
 
-## Definition and Purpose <a name="definition"></a>
+## Definition and Purpose
 
 In the context of VCs, "Credential Branding" refers to the visual and descriptive attributes associated with a credential, including its name, logo, background color, and more. These attributes are defined in the metadata of the credential issuer and are used to present the credential in a consistent and nice way to the credential holder or verifier.
 
-## Metadata Parameters <a name="metadata"></a>
+## Metadata Parameters
 
 Credential branding is specified using various parameters in the metadata of a credential issuer. Here are some metadata parameters related to credential branding:
 
@@ -45,9 +43,9 @@ Credential branding is specified using various parameters in the metadata of a c
 
     - **Text Color (OPTIONAL):** A string value representing the text color of the credential, specified using numerical color values defined in CSS Color Module Level 3.
 
-## Branding in real-world <a name="branding_real"></a>
+## Branding in real-world
 
-We're using branding in this project. So in order to get familiar with it, you can visit one of our config json files in [packages/agent/conf/examples/oid4vci_metadata](./agent-setup.md#oid4vci_metadata). You can find the branding related information (as the spec suggests in `credentials_supported` field of the metadata)
+We're using branding in this project. So in order to get familiar with it, you can visit one of our config json files in [packages/agent/conf/examples/oid4vci_metadata](./agent-setup.md#2-oid4vci_metadata). You can find the branding related information (as the spec suggests in `credentials_supported` field of the metadata)
 Here is a real world example of a credential branding:
 ```json
 {
