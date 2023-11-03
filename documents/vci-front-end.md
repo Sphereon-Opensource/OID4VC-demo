@@ -128,4 +128,4 @@ Here is an example of a `credentialSubject` that can be used for populating this
 
 ### Starting the VCI frontend
 
-Once you've managed to create your own configuration file, you can start you have to alter the value of `REACT_APP_DEFAULT_ECOSYSTEM` in your `.env` file. After this, you can start this module using `start:prod` or `start:dev` scripts.
+Once you've managed to create your own configuration file, you can start you have to alter the value of `REACT_APP_DEFAULT_ECOSYSTEM` in your `.env.local` file. After this, you can start this module using `start:prod` or `start:dev` scripts.
