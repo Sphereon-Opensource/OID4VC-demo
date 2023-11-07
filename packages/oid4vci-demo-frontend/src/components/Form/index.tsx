@@ -14,14 +14,7 @@ type Props = {
     onChange?: (formData: FormOutputData) => Promise<void>
 }
 
-function getInitialState(form: DataFormRow[] | undefined): FormOutputData {
-    if (!form) {
-        return {
-            firstName: '',
-            lastName: '',
-            emailAddress: ''
-        }
-    }
+function getInitialState(form: DataFormRow[]): FormOutputData {
     return transformFormConfigToEmptyObject(form)
 }
 

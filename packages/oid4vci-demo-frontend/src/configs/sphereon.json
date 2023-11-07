@@ -87,7 +87,7 @@
         }
       }
     },
-    "credSelect": {
+    "multiCredentialIssuer": {
       "logo": {
         "src": "wallets/sphereon_logo.png",
         "alt": "sphereon",
@@ -195,11 +195,11 @@
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/request",
-          "nextId": "credSelect"
+          "path": "/information/manual/request",
+          "nextId": "multiCredentialIssuer"
         },
         {
-          "id": "credSelect",
+          "id": "multiCredentialIssuer",
           "operation": "navigate",
           "path": "/credentials/select",
           "nextId": "credentialOffer"
@@ -207,7 +207,7 @@
         {
           "id": "infoFromVPRequest",
           "operation": "navigate",
-          "path": "/credentials/info/vp/request",
+          "path": "/credentials/verify/vp/request",
           "nextId": "infoRequest",
           "isDefaultRoute": true
         },

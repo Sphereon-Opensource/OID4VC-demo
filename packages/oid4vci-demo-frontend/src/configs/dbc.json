@@ -3,7 +3,7 @@
     "credentialName": "Conference Attendee",
     "issueCredentialType": "dbc2023",
     "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
-    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
     "verifierUrlCaption": "DBC website",
     "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
@@ -91,10 +91,6 @@
       "photoLeft": "dbc/DBC.png",
       "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
     },
-    "infoSuccess": {
-      "photoLeft": "dbc/DBC.png",
-      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
-    },
     "issueSuccess": {
       "photoLeft": "dbc/DBC.png",
       "photoRight": "fmdm/undraw_messenger_re_8bky_grey.svg.svg"
@@ -136,7 +132,7 @@
         }
       }
     },
-    "credSelect": {
+    "multiCredentialIssuer": {
       "logo": {
         "src": "dbc/dbc_logo.png",
         "alt": "dbc",
@@ -165,22 +161,26 @@
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/request",
-          "nextId": "credentialOffer"
+          "path": "/information/manual/request",
+          "nextId": "multiCredentialIssuer"
+        },
+        {
+          "id": "multiCredentialIssuer",
+          "operation": "navigate",
+          "path": "/credentials/select",
+          "nextId": "verifyRequest"
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
         },
         {
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
-          "actionParams": {
-            "issueCredentialType": "dbc2023"
-          },
-          "nextId": "infoSuccess"
-        },
-        {
-          "id": "infoSuccess",
-          "operation": "navigate",
-          "path": "/information/success",
           "nextId": "issueRequest"
         },
         {
@@ -192,21 +192,12 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "/credentials/issue/success",
-          "nextId": "verifyRequest"
+          "path": "/credentials/issue/success"
         },
         {
-          "id": "verifyRequest",
+          "id": "download",
           "operation": "navigate",
-          "path": "/credentials/verify/request",
-          "nextId": "verifySuccess",
-          "isDefaultRoute": true
-        },
-        {
-          "id": "verifySuccess",
-          "operation": "navigate",
-          "path": "/credentials/verify/success",
-          "isDefaultRoute": true
+          "path": "/download"
         }
       ]
     }

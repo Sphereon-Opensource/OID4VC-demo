@@ -1,0 +1,26 @@
+@startuml
+
+header OID4VP flow
+title
+OID4VP flow
+A scenario for testing OID4VP flow using an SSI wallet
+end title
+
+autonumber
+
+participant "Wallet" as wallet order 0 #RED
+participant "User" as user order 1 #ORANGE
+participant "Demo app" as demo order 2 #BLUE
+participant "Agent" as agent order 3 #GREEN
+
+demo -> agent: The demo application retrieves the\npresentation_definition url from the agent.
+demo -> user: The demo application displays a QR code\nthat encodes the URI of the\npresentation_definition to the user.
+user -> wallet: The user scans this QR code with their\ndigital wallet application.
+wallet -> wallet: The wallet application acquires the\npresentation_definition and compiles a list of\nVerifiable Credentials that match the criteria.
+wallet -> user: The wallet application presents this\nlist of suitable credentials to the user\nfor review.
+user -> wallet: The user selects the appropriate\nVerifiableCredential(s) from the list.
+wallet -> wallet: The wallet application encapsulates the\nselected Verifiable Credential(s) into a\npresentation package and signs it with the\nuser's decentralized identifier (DID), thereby\ncreating a Verifiable Presentation.
+wallet -> agent: The wallet application transmits\nthe Verifiable Presentation to the agent.
+agent -> agent: The agent assesses the Verifiable Presentation\nto ensure it aligns with the PresentationDefinition criteria.
+agent -> demo: After verifying the VerifiablePresentation\nagainst the PresentationDefinition, the agent\nsends the access token to the demo app,\nwhich uses it to continue the user's session\nthat began with the QR code scan.
+@enduml

@@ -23,27 +23,17 @@
       },
       "rightPaneGrid": {
         "style": {
-          "width": "100%",
-          "gridTemplateColumns": "repeat(9, 1fr)",
-          "gridTemplateRows": "repeat(7, minmax(1fr, auto))"
+          "width": "100%"
         }
       },
       "rightPaneLeftPane": {
-        "grid": {
-          "gridColumn": "2/8",
-          "gridRow": "6",
-          "height": "30%"
-        },
         "width": "50%",
         "welcomeLabel": {
           "style": {
             "fontSize": "48px",
             "fontWeight": 600,
             "textAlign": "center",
-            "color": "#424242",
-            "gridRow": "5",
-            "gridColumn": "3/8",
-            "display": "block"
+            "color": "#424242"
           },
           "className": "removeMarginBottom"
         },
@@ -230,7 +220,7 @@
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/request",
+          "path": "/information/manual/request",
           "nextId": "loading",
           "isDefaultRoute": true
         },

@@ -1,0 +1,26 @@
+@startuml
+
+header VCI flow
+title
+VCI flow
+A scenario for receiving a credential in your SSI wallet
+end title
+
+autonumber
+
+participant "User" as user order 0 #ORANGE
+participant "Wallet" as wallet order 1 #RED
+participant "Demo app" as demo order 2 #BLUE
+participant "Agent" as agent order 3 #GREEN
+
+user -> demo: The user selects a type of credential they wish to receive from the provided list.
+demo -> demo: The demo application generates a form using the data specified in the ecosystem configuration file.
+demo -> user: The demo application displays this form to the user.
+user -> demo: The user completes the form with their details and submits it by clicking the "send" button.
+demo -> agent: The agent, upon receiving the user's information from the demon application, uses a credential template to create a credential offer.
+agent -> demo: The agent then sends this credential offer back to the demo application.
+demo -> user: The demo application presents the credential offer to the user in the form of a QR code.
+user -> wallet: The user scans the QR code using their digital wallet application.
+wallet -> user: The wallet application reveals to the user the details of the credential they are about to accept.
+user -> wallet: The user confirms acceptance of the credential within their wallet application.
+@enduml

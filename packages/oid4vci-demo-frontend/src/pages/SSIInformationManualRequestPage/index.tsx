@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useTranslation} from "react-i18next"
 import '../../css/typography.css'
-import {DataFormRow, SSIInformationRequestPageConfig} from "../../ecosystem/ecosystem-config"
+import {DataFormRow, SSIInformationManualRequestPageConfig} from "../../ecosystem/ecosystem-config"
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useLocation} from "react-router-dom"
 import {useMediaQuery} from "react-responsive"
@@ -42,8 +42,8 @@ function isFormDataValid(formData: FormOutputData, form: DataFormRow[]) {
     return true
 }
 
-const SSIInformationRequestPage: React.FC = () => {
-    const flowRouter = useFlowRouter<SSIInformationRequestPageConfig>()
+const SSIInformationManualRequestPage: React.FC = () => {
+    const flowRouter = useFlowRouter<SSIInformationManualRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const location = useLocation()
     const credentialName = useEcosystem().getGeneralConfig().credentialName
@@ -180,4 +180,4 @@ const SSIInformationRequestPage: React.FC = () => {
     )
 }
 
-export default SSIInformationRequestPage
+export default SSIInformationManualRequestPage

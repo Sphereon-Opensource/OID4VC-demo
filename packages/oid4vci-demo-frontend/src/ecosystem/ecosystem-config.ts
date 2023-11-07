@@ -15,7 +15,7 @@ export interface ComponentConfig {
 export interface PageConfig {
     vpDefinitionId?: string
 }
-export interface SSIInformationFromVPRequestPageConfig extends PageConfig {
+export interface SSICredentialVerifyFromVPRequestPageConfig extends PageConfig {
   photoRight: string
   photoLeft?: string
   backgroundColor?: string
@@ -71,11 +71,6 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
       style?: CSSProperties,
     },
     rightPaneLeftPane?: {
-      grid?: {
-        gridColumn?: string
-        gridRow?: string
-        height?: string
-      }
       welcomeLabel?: {
         style?: CSSProperties
         className?: string
@@ -100,10 +95,6 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
       width?: string
     }
     mostRightPanel?: {
-      grid?: {
-        gridColumn?: string
-        gridRow?: string
-      }
       separator?: {
         logo?: ImageProperties
       },
@@ -231,7 +222,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     },
 }
 
-export interface SSIInformationRequestPageConfig extends PageConfig {
+export interface SSIInformationManualRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photo?: string
     text_top_of_image?: string
@@ -430,12 +421,12 @@ export interface SSITextConfig extends ComponentConfig {
 
 export interface VCIConfigPages {
     SSICredentialIssuedSuccessPage: SSICredentialIssuedSuccessPageConfig
-    SSIInformationFromVPRequestPage?: SSIInformationFromVPRequestPageConfig
+    SSICredentialVerifyFromVPRequestPage?: SSICredentialVerifyFromVPRequestPageConfig
     SSICredentialVerifyRequestPage?: SSICredentialVerifyRequestPageConfig
     SSIInformationSharedSuccessPage: SSIInformationSharedSuccessPageConfig
     SSILandingPage: SSILandingPageConfig
     SSICredentialIssueRequestPage: SSICredentialIssueRequestPageConfig
-    SSIInformationRequestPage: SSIInformationRequestPageConfig
+    SSIInformationManualRequestPage: SSIInformationManualRequestPageConfig
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig

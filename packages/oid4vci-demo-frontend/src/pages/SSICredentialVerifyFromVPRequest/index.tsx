@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Text } from '../../components/Text'
 import style from '../../components/Text/Text.module.css'
-import DeepLink from '../../components/DeepLink'
+import DeepLinkButton from '../../components/DeepLinkButton'
 import { useTranslation } from 'react-i18next'
 import { AuthorizationResponsePayload } from '@sphereon/did-auth-siop'
 import { useNavigate } from 'react-router-dom'
@@ -11,15 +11,15 @@ import { useMediaQuery } from 'react-responsive'
 import { NonMobile } from '../../index'
 import { useFlowRouter } from '../../router/flow-router'
 import { useEcosystem } from '../../ecosystem/ecosystem'
-import { SSIInformationFromVPRequestPageConfig } from '../../ecosystem/ecosystem-config'
+import { SSICredentialVerifyFromVPRequestPageConfig } from '../../ecosystem/ecosystem-config'
 
 export interface QRCodePageProperties {
   setData: React.Dispatch<React.SetStateAction<AuthorizationResponsePayload | undefined>>
 }
 
-export default function SSIInformationFromVPRequestPage(): React.ReactElement | null {
+export default function SSICredentialVerifyFromVPRequestPage(): React.ReactElement | null {
   const ecosystem = useEcosystem()
-  const flowRouter = useFlowRouter<SSIInformationFromVPRequestPageConfig>()
+  const flowRouter = useFlowRouter<SSICredentialVerifyFromVPRequestPageConfig>()
   const pageConfig = flowRouter.getPageConfig()
   const {t} = useTranslation()
   const credentialName = useEcosystem().getGeneralConfig().credentialName
@@ -34,7 +34,7 @@ export default function SSIInformationFromVPRequestPage(): React.ReactElement | 
       }
     };
 
-    navigate('/information/request', {state});
+    navigate('/information/manual/request', {state});
   }
 
   return (
@@ -102,11 +102,11 @@ export default function SSIInformationFromVPRequestPage(): React.ReactElement | 
                 alignItems: 'center',
                 gap: '1rem'
               }}>
-                <DeepLink link={deepLink} buttonType={"secondary"} textColor={pageConfig.textColor} style={{width: 300}}/>
+                <DeepLinkButton link={deepLink} buttonType={"secondary"} textColor={pageConfig.textColor} style={{width: 300}}/>
                 <SSIPrimaryButton
                     caption={t('credential_verify_request_right_pane_button_caption')}
                     onClick={async () => {
-                      navigate('/information/request');
+                      navigate('/information/manual/request');
                     }}
                 />
               </div>

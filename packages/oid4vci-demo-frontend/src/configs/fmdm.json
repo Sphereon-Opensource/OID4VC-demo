@@ -184,7 +184,7 @@
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/request",
+          "path": "/information/manual/request",
           "nextId": "shareSuccess"
         },
         {
@@ -196,7 +196,7 @@
         {
           "id": "infoFromVPRequest",
           "operation": "navigate",
-          "path": "/credentials/info/vp/request",
+          "path": "/credentials/verify/vp/request",
           "nextId": "infoRequest",
           "isDefaultRoute": true
         },

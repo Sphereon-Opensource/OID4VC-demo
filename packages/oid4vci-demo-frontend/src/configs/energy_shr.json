@@ -135,7 +135,7 @@
         }
       }
     },
-    "credSelect": {
+    "multiCredentialIssuer": {
       "logo": {
         "src": "energyshr/energyshr_logo.svg",
         "alt": "energyshr",
@@ -164,11 +164,11 @@
         {
           "id": "infoRequest",
           "operation": "navigate",
-          "path": "/information/request",
-          "nextId": "credSelect"
+          "path": "/information/manual/request",
+          "nextId": "multiCredentialIssuer"
         },
         {
-          "id": "credSelect",
+          "id": "multiCredentialIssuer",
           "operation": "navigate",
           "path": "/credentials/select",
           "nextId": "verifyRequest"
