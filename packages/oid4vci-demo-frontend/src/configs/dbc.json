@@ -165,9 +165,9 @@
       }
     },
     "shareSuccess": {
-      "photoLeft": "dbc/wallet.svg",
-      "photoLeftManual": "dbc/wallet.svg",
-      "photoRight": "fmdm/undraw_certification_re_ifll_grey.svg"
+      "photoLeft": "dbc/DBC.png",
+      "photoLeftManual": "dbc/DBC.png",
+      "photoRight": "undraw_messenger_re_8bky_grey.svg"
     }
   },
   "routes": [
