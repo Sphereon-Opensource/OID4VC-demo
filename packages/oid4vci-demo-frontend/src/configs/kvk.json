@@ -90,6 +90,15 @@
     "verifyRequest": {
       "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "backgroundColor": "#005371",
+      "showQRCodeTopTitle": true,
+      "rightPaneLeftPane": {
+        "qrCode": {
+          "bottomText": {
+            "credential_verify_request_right_pane_bottom_title": "",
+            "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph"
+          }
+        }
+      },
       "logo": {
         "src": "coc/logo.svg",
         "alt": "chamber of commerce logo",

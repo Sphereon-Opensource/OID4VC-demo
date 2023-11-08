@@ -62,6 +62,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     rightPaneButtonStepId?: string
     downloadAppStepId?: string
     bottomParagraph?: string
+    showQRCodeTopTitle?: boolean
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string

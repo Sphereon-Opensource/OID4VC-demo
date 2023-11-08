@@ -17,6 +17,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const flowRouter = useFlowRouter<SSICredentialVerifyRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const {t} = useTranslation()
+    const credentialName = useEcosystem().getGeneralConfig().credentialName
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const onSignInComplete = async (data: AuthorizationResponsePayload): Promise<void> => {
@@ -67,7 +68,18 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                       height={pageConfig.mobile?.logo?.height ?? 150}
                   />
               }
-              <div style={{
+            {pageConfig.showQRCodeTopTitle && (<div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                marginTop: 'auto',
+                maxHeight: '300px'
+              }}>
+                <Text style={{ textAlign: 'center'}}
+                      className={style.pReduceLineSpace}
+                      title={t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
+                      lines={t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
+              </div>)}
+            {!pageConfig.showQRCodeTopTitle && <div style={{
                     display: 'flex',
                     flexGrow: 1,
                     flexDirection: 'column',
@@ -85,8 +97,8 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                   >
                       {t('ssi_welcome_label')}
                   </div>
-              </div>
-              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1}}>
+              </div>}
+              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(pageConfig.showQRCodeTopTitle && { marginBottom: 'auto'})}}>
                   <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24 })}}>
                       <div>
                           <NonMobileOS>
