@@ -129,6 +129,18 @@
           "EdDSA"
         ]
       }
-    ]
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/dbc",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "DBCConferenceAttendee"
+          ],
+          "template_path": "DBCConferenceAttendee.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
   }
 }
