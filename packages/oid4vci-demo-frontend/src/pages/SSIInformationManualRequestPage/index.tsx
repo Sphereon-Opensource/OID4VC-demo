@@ -19,7 +19,7 @@ type State = {
     data?: any
 }
 
-function getInitialState(formConfig: SSIInformationRequestPageConfig) {
+function getInitialState(formConfig: SSIInformationManualRequestPageConfig) {
   if (!formConfig.form) {
 
       formConfig.form = DEFAULT_FORM

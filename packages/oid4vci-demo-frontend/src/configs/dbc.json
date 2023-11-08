@@ -91,6 +91,10 @@
       "photoLeft": "dbc/DBC.png",
       "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
     },
+    "infoSuccess": {
+      "photoLeft": "dbc/DBC.png",
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+    },
     "issueSuccess": {
       "photoLeft": "dbc/DBC.png",
       "photoRight": "fmdm/undraw_messenger_re_8bky_grey.svg.svg"
@@ -162,6 +166,12 @@
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/manual/request",
+          "nextId": "infoSuccess"
+        },
+        {
+          "id": "infoSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
           "nextId": "multiCredentialIssuer"
         },
         {
