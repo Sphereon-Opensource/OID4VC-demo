@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, ReactNode, useState} from 'react'
+import React, {CSSProperties, FC, ReactElement, ReactNode, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
@@ -47,7 +47,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
         }
     }
 
-    const getFieldElementFrom = (field: DataFormElement): ReactElement => {
+    const getFieldElementFrom = (field: DataFormElement, style?: CSSProperties): ReactElement => {
         const defaultValue: FormFieldValue = evaluateDefaultValue(field, formInitData, formData)
         switch (field.type) {
             case 'checkbox':
@@ -61,8 +61,10 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
             case 'text':
-            case 'date':
+          case 'date':
                 return <InputField
+                    labelStyle={field.labelStyle}
+                    inlineStyle={style}
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
                     readonly={field.readonly || formInitData?.[field.id] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)}
@@ -76,8 +78,9 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getRowElementFrom = (row: DataFormRow): ReactElement => {
+        const elementWidth = row.length > 1 ? { width: `${100 / row.length}%`} : undefined
         return <div className={style.formRowContainer}>
-            {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field))}
+            {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field, elementWidth))}
         </div>
     }
 

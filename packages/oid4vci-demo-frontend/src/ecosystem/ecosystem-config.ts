@@ -251,6 +251,7 @@ export interface DataFormElement {
     defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
+    labelStyle?: CSSProperties
     readonly?: boolean
     customValidation?: string
     display?: {
