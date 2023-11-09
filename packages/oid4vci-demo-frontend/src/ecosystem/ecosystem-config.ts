@@ -216,6 +216,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     title?: string
     topParagraph?: string
     bottomParagraph?: string
+    rightPaneHeight?: string | number
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string

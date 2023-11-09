@@ -142,10 +142,11 @@
       "backgroundColor": "#005371"
     },
     "issueRequest": {
-      "title": "coc_qrcode_right_pane_top_title",
+      "title": "title_secure_your_credential",
       "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "paragraph_scan_this_qr",
       "backgroundColor": "#005371",
+      "rightPaneHeight": "70%",
       "logo": {
         "src": "coc/logo.svg",
         "alt": "chamber of commerce logo",
@@ -167,6 +168,7 @@
       "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "coc_sharing_data_right_pane_top_paragraph",
       "backgroundColor": "#005371",
+      "primaryButtonResourceId": "Share",
       "logo": {
         "src": "coc/logo.svg",
         "alt": "chamber of commerce logo",
@@ -187,8 +189,9 @@
           {
             "id": "ssi_information_request_page_form_company_name",
             "key": "Bedrijfsnaam",
-            "title": "ssi_information_request_page_form_company_name_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_company_name_label",
+            "labelStyle": { "color": "#424242" },
+            "type": "text",
             "required": true
           }
         ],
@@ -196,8 +199,9 @@
           {
             "id": "ssi_information_request_page_form_coc_number",
             "key": "KvkNummer",
-            "title": "ssi_information_request_page_form_coc_number_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_coc_number_label",
+            "labelStyle": { "color": "#424242" },
+            "type": "text",
             "required": true,
             "defaultValue": "*RANDOM8"
           }
@@ -206,8 +210,9 @@
           {
             "id": "ssi_information_request_page_form_company_location",
             "key": "Bedrijfslocatie",
-            "title": "ssi_information_request_page_form_company_location_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_company_location_label",
+            "labelStyle": { "color": "#424242" },
+            "type": "text",
             "required": true
           }
         ],
@@ -215,15 +220,17 @@
           {
             "id": "ssi_information_request_page_first_name_director",
             "key": "Voornaam",
-            "title": "ssi_information_request_page_form_first_name_director_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_first_name_director_label",
+            "labelStyle": { "color": "#424242" },
+            "type": "text",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name_director",
             "key": "Achternaam",
-            "title": "ssi_information_request_page_form_last_name_director_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_last_name_director_label",
+            "labelStyle": { "color": "#424242" },
+            "type": "text",
             "required": true
           }
         ],
@@ -231,8 +238,9 @@
           {
             "id": "ssi_information_request_page_form_place_of_birth",
             "key": "Geboorteplaats",
-            "title": "ssi_information_request_page_form_place_of_birth_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_place_of_birth_label",
+            "labelStyle": { "color": "#424242" },
+            "type": "text",
             "required": true
           }
         ],
@@ -240,7 +248,8 @@
           {
             "id": "ssi_information_request_page_form_date_of_birth",
             "key": "Geboortedatum",
-            "title": "ssi_information_request_page_form_date_of_birth_label",
+            "label": "ssi_information_request_page_form_date_of_birth_label",
+            "labelStyle": { "color": "#424242" },
             "type": "date",
             "required": true
           }
@@ -275,6 +284,9 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "KvkInschrijving"
+          },
           "nextId": "issueRequest"
         },
         {
@@ -313,6 +325,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#005371"
+        },
+        "button": {
+          "width": "327px"
         }
       }
     },

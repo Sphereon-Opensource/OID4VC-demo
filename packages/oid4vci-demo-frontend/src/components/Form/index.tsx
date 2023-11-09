@@ -24,7 +24,7 @@ const evaluateDefaultValue = (field: DataFormElement, formInitData: ImmutableRec
         return fieldValue
     }
 
-    let defaultValue: FormFieldValue = formInitData?.[field.id] ?? field.defaultValue ?? ''
+    let defaultValue: FormFieldValue = formInitData?.[field.key] ?? field.defaultValue ?? ''
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
@@ -67,7 +67,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     inlineStyle={style}
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
-                    readonly={field.readonly || formInitData?.[field.id] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)}
+                    readonly={field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)}
                     defaultValue={defaultValue}
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
