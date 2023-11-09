@@ -1,10 +1,7 @@
-(async () => {
-    const environment = await import('./environment');
-    await environment.loadEnvironmentVariables();
+import { loadEnvironmentVariables } from './environment'
+loadEnvironmentVariables();
 
-    await import('./database');
-    await import('./agent');
-})().catch((error) => {
-    console.error('Failed to initialize the agent:', error);
-});
-
+export * from './types'
+export * from './utils'
+export * from './database'
+export * from './agent'

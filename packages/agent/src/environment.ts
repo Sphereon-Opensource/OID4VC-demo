@@ -9,8 +9,8 @@ import {
 } from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 
 
-export async function loadEnvironmentVariables() {
-    await dotenvConfig();
+export function loadEnvironmentVariables() {
+    dotenvConfig();
 }
 
 export const DB_CONNECTION_NAME = process.env.DB_CONNECTION_NAME ?? 'default'
