@@ -93,6 +93,7 @@
       "showQRCodeTopTitle": true,
       "rightPaneLeftPane": {
         "qrCode": {
+          "fgColor": "#000000",
           "bottomText": {
             "credential_verify_request_right_pane_bottom_title": "",
             "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph"

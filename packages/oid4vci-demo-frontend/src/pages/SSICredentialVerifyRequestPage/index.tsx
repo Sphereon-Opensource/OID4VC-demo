@@ -98,14 +98,14 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                       {t('ssi_welcome_label')}
                   </div>
               </div>}
-              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(pageConfig.showQRCodeTopTitle && { marginBottom: 'auto'})}}>
+              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(pageConfig.showQRCodeTopTitle && { marginBottom: '31%'})}}>
                   <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24 })}}>
                       <div>
                           <NonMobileOS>
-                              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(pageConfig.showQRCodeTopTitle && { height: '100%', marginTop: '4%'})}}>
                                   {/*Whether the QR code is shown (mobile) is handled in the component itself */}
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                             fgColor={'rgba(50, 57, 72, 1)'}
+                                                             fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
                                                              vpDefinitionId={flowRouter.getVpDefinitionId()}
                                                              onAuthRequestRetrieved={console.log}
@@ -127,7 +127,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               />
                           </Mobile>
                           <NonMobile>
-                              <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}` }}
+                              <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(pageConfig.showQRCodeTopTitle && { marginTop: '12%' })}}
                                     className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className} poppins-semi-bold-16`}
                                     title={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n')}
                                     lines={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_paragraph}`).split('\n')}

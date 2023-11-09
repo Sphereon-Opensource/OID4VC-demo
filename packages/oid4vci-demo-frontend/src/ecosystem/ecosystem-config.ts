@@ -77,6 +77,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
         className?: string
       }
       qrCode?: {
+        fgColor?: string
         topTitle?: {
           style?: CSSProperties
         },
