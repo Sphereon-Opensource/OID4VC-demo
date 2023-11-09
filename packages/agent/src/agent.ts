@@ -1,3 +1,4 @@
+
 import {
   createAgent,
   IAgentContext,
@@ -42,16 +43,16 @@ import {
   getOrCreateDIDs,
 } from "./utils";
 import {
-  DB_CONNECTION_NAME,
-  DB_ENCRYPTION_KEY,
-  DID_PREFIX,
-  DIDMethods,
-  INTERNAL_HOSTNAME_OR_IP,
-  INTERNAL_PORT,
-  IS_OID4VCI_ENABLED,
-  IS_OID4VP_ENABLED,
-  oid4vciInstanceOpts
-} from "./environment";
+    DB_CONNECTION_NAME,
+    DB_ENCRYPTION_KEY,
+    DID_PREFIX,
+    DIDMethods,
+    INTERNAL_HOSTNAME_OR_IP,
+    INTERNAL_PORT,
+    IS_OID4VCI_ENABLED,
+    IS_OID4VP_ENABLED,
+    oid4vciInstanceOpts
+} from "./environment"
 import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
 import {
@@ -65,6 +66,7 @@ import {
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
+
 
 
 const resolver = createDidResolver()
