@@ -130,7 +130,7 @@
             ]
           }
         },
-        "id": "BabylonBank",
+        "id": "knb-bank",
         "types": [
           "VerifiableCredential",
           "BankAccount"
