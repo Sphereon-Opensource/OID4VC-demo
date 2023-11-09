@@ -148,7 +148,7 @@
       }
     ],
     "credential_supplier_config": {
-      "templates_base_dir": "templates/kvk",
+      "templates_base_dir": "templates/knb_kvk",
       "template_mappings": [
         {
           "credential_types": [
