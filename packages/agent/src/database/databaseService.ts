@@ -1,7 +1,7 @@
 import Debug from 'debug'
 import { DataSource } from 'typeorm'
-import {getSqliteConfig} from "./config"
 
+import { sqliteConfig } from './config'
 
 const debug = Debug(`sphereon:demo:db`)
 
@@ -11,7 +11,6 @@ const debug = Debug(`sphereon:demo:db`)
 const dataSources = new Map()
 
 export const getDbConnection = async (dbName: string): Promise<DataSource> => {
-  const sqliteConfig = getSqliteConfig()
   if (sqliteConfig.synchronize) {
     return Promise.reject(
       `WARNING: Migrations need to be enabled in this app! Adjust the database configuration and set migrationsRun and synchronize to false`
