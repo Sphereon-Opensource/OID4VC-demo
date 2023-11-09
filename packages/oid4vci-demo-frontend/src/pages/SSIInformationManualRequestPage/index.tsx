@@ -13,7 +13,6 @@ import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {useCredentialsReader} from "../../utils/credentials-helper"
 
-import {DEFAULT_FORM} from "../../types/default-form"
 
 type State = {
     data?: any
@@ -21,13 +20,7 @@ type State = {
 
 function getInitialState(formConfig: SSIInformationManualRequestPageConfig) {
   if (!formConfig.form) {
-
-      formConfig.form = DEFAULT_FORM
-      return {
-          firstName: '',
-          lastName: '',
-          emailAddress: ''
-      }
+      return {}
   }
   return transformFormConfigToEmptyObject(formConfig.form)
 }

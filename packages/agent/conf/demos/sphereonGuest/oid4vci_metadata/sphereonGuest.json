@@ -277,10 +277,10 @@
             "value_type": "string",
             "display": [
               {
-                "name": "FirstName"
+                "name": "First Name"
               },
               {
-                "name": "FirstName",
+                "name": "First Name",
                 "locale": "en-US"
               },
               {
@@ -296,7 +296,7 @@
                 "name": "LastName"
               },
               {
-                "name": "LastName",
+                "name": "Last name",
                 "locale": "en-US"
               },
               {

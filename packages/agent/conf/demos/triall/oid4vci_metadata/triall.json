@@ -73,7 +73,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "firstName",
+                "name": "Voornaam",
                 "locale": "nl-NL"
               }
             ]
@@ -89,7 +89,7 @@
                 "locale": "en-US"
               },
               {
-                "name": "lastName",
+                "name": "Achternaam",
                 "locale": "nl-NL"
               }
             ]
