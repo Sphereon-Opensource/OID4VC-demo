@@ -1,6 +1,11 @@
 {
     "@context": [
-        "https://www.w3.org/2018/credentials/v1"
+        "https://www.w3.org/2018/credentials/v1", {
+            "description": {
+                "@id": "http://schema.org/description",
+                "@container": "@language"
+            },
+        }
     ],
     "type": [
         "VerifiableCredential",
@@ -8,7 +13,10 @@
     ],
     "expirationDate": "{{{ dateTimeAfterMonths 12 }}}",
     "credentialSubject": {
-        "description": "Company has been verified by the notary",
+        "description": {
+          "en": "Company has been verified by the notary",
+          "nl": "Bedrijf is geverifieerd door de notaris"
+         }
         {{{mergeJSON @root}}}
     }
 }

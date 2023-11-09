@@ -130,7 +130,7 @@
             ]
           }
         },
-        "id": "energySHR2023",
+        "id": "energySHR",
         "types": [
           "VerifiableCredential",
           "GuestCredential"

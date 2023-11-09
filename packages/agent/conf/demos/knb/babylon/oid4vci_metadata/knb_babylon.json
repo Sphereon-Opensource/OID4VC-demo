@@ -1,9 +1,9 @@
 {
-  "correlationId": "http://192.168.1.200:5000",
+  "correlationId": "https://bank.demo.sphereon.com/agent",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://192.168.1.200:5000",
-    "credential_endpoint": "http://192.168.1.200:5000/credentials",
+    "credential_issuer": "https://bank.demo.sphereon.com/agent",
+    "credential_endpoint": "https://bank.demo.sphereon.com/agent/credentials",
     "display": [
       {
         "name": "Babylon Bank",
@@ -130,7 +130,7 @@
             ]
           }
         },
-        "id": "BabylonBank2023",
+        "id": "BabylonBank",
         "types": [
           "VerifiableCredential",
           "BankAccount"

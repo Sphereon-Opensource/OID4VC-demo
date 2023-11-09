@@ -1,6 +1,6 @@
 {
   "definitionId": "knb-babylon",
-  "correlationId": "http://192.168.1.200:5000",
+  "correlationId": "https://bank.demo.sphereon.com/agent",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

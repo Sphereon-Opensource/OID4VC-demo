@@ -259,8 +259,8 @@
         ],
         "order": [
           "companyName",
-          "contactFirst Name",
-          "contactLast Name",
+          "contactFirstName",
+          "contactLastName",
           "companyEmailAddress",
           "taxRegistrationNumber"
         ],
@@ -281,7 +281,7 @@
               }
             ]
           },
-          "contactFirst Name": {
+          "contactFirstName": {
             "value_type": "string",
             "display": [
               {
@@ -297,7 +297,7 @@
               }
             ]
           },
-          "contactLast Name": {
+          "contactLastName": {
             "value_type": "string",
             "display": [
               {

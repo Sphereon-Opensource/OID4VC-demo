@@ -153,7 +153,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "energySHR2023",
+      "vpDefinitionId": "energySHR",
       "steps": [
         {
           "id": "startPage",
