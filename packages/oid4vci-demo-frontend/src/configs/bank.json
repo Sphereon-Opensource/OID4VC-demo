@@ -251,7 +251,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "knb-babylon",
+      "vpDefinitionId": "knb-bank",
       "steps": [
         {
           "id": "verifyRequest",
