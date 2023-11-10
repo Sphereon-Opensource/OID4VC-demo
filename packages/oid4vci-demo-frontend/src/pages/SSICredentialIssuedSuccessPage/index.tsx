@@ -12,37 +12,37 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSICredentialIssuedSuccessPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const ecosystem = useEcosystem()
-    const generalConfig: EcosystemGeneralConfig = ecosystem.getGeneralConfig();
+    const generalConfig: EcosystemGeneralConfig = ecosystem.getGeneralConfig()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const {t} = useTranslation()
 
-  function determineWidth() {
-    if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
-      return '100%'
+    function determineWidth() {
+        if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
+            return '100%'
+        }
+        return isTabletOrMobile ? '100%' : '40%'
     }
-    return isTabletOrMobile ? '100%' : '40%'
-  }
 
     return (
-        <div style={{display: 'flex', height: '100vh', width: '100%'}}>
+        <div style={ {display: 'flex', height: isTabletOrMobile ? '100%' : '100vh', width: '100%'} }>
             <NonMobile>
                 <div style={{
                     display: 'flex',
                     width: pageConfig.leftPaneWidth ?? '60%',
                     height: '100%',
                     flexDirection: 'column',
-                    ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
-                    ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
-                    ...(pageConfig.logo && { justifyContent: 'center', alignItems: 'center' })
+                    ...(pageConfig.photoLeft && {background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+                    ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
+                    ...(pageConfig.logo && {justifyContent: 'center', alignItems: 'center'})
                 }}>
-                  { pageConfig.logo &&
-                      <img
-                          src={pageConfig.logo.src}
-                          alt={pageConfig.logo.alt}
-                          width={`${pageConfig.logo.width}`}
-                          height={`${pageConfig.logo.height}`}
-                      />
-                  }
+                    {pageConfig.logo &&
+                        <img
+                            src={pageConfig.logo.src}
+                            alt={pageConfig.logo.alt}
+                            width={`${pageConfig.logo.width}`}
+                            height={`${pageConfig.logo.height}`}
+                        />
+                    }
                 </div>
             </NonMobile>
             <div style={{
@@ -73,17 +73,17 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
                         lines={t(pageConfig.rightPaneParagraph ?? 'credentials_success_right_pane_paragraph', {credentialName: generalConfig.credentialName}).split('\r\n')}/>
                     <div style={{
                         width: '342px',
-                        height: '397px',
+                        height: isTabletOrMobile ? '257px' : '397px',
                         flexGrow: 1
                     }}>
-                        <img src={pageConfig.photoRight} alt={pageConfig.photoRight ? "success" : ""}/>
+                        <img src={pageConfig.photoRight} alt={pageConfig.photoRight ? "success" : ""} height="100%"/>
                     </div>
-                    <div style={{display: 'flex',flexDirection: 'row'}}>
+                    <div style={{display: 'flex', flexDirection: 'row'}}>
                         <SSIPrimaryButton
                             caption={t(pageConfig.rightPaneButtonCaption ?? 'credentials_success_right_pane_button_caption', {verifierUrlCaption: generalConfig.verifierUrlCaption ?? 'start'})}
                             style={{
-                               width: pageConfig.rightPaneButtonWidth ?? '300px',
-                               height: pageConfig.rightPaneButtonHeight ?? '42px'
+                                width: pageConfig.rightPaneButtonWidth ?? '300px',
+                                height: pageConfig.rightPaneButtonHeight ?? '42px'
                             }}
                             onClick={async () => {
                                 pageConfig.rightPaneButtonStepId && await flowRouter.goToStep(pageConfig.rightPaneButtonStepId)
@@ -96,4 +96,4 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
     )
 }
 
-export default SSICredentialIssuedSuccessPage;
+export default SSICredentialIssuedSuccessPage
