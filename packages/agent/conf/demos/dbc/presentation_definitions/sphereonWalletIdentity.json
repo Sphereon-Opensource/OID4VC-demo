@@ -1,6 +1,6 @@
 {
   "id": "sphereonWalletIdentity",
-  "purpose": "We want to know your name and e-mail address (will not be stored)",
+  "purpose": "To onboard you we need your firstname, lastname and e-mail",
   "input_descriptors": [
     {
       "id": "ace7aff1-0234-4f35-9d21-251668a60950",
