@@ -62,6 +62,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     rightPaneButtonStepId?: string
     downloadAppStepId?: string
     bottomParagraph?: string
+    showQRCodeTopTitle?: boolean
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
@@ -76,6 +77,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
         className?: string
       }
       qrCode?: {
+        fgColor?: string
         topTitle?: {
           style?: CSSProperties
         },
@@ -214,6 +216,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     title?: string
     topParagraph?: string
     bottomParagraph?: string
+    rightPaneHeight?: string | number
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
@@ -251,6 +254,7 @@ export interface DataFormElement {
     defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
+    labelStyle?: CSSProperties
     readonly?: boolean
     customValidation?: string
     display?: {
