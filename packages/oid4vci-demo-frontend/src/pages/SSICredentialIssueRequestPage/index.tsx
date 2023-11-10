@@ -71,7 +71,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
-        return isNarrowScreen ? '50%' : '40%'
+        return isNarrowScreen ? '100%' : '40%'
     }
 
     const {t} = useTranslation()
