@@ -102,6 +102,11 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               </div>
                           </NonMobileOS>
                           <MobileOS>
+                              {<MemoizedAuthenticationQR ecosystem={ecosystem}
+                                                         vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                         onAuthRequestRetrieved={console.log}
+                                                         onSignInComplete={onSignInComplete}
+                                                         setQrCodeData={setDeepLink}/>}
                               <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
                                   { pageConfig.mobile?.image &&
                                       <img src={`${pageConfig.mobile?.image}`} alt="success" style={{overflow: 'hidden'}}/>
