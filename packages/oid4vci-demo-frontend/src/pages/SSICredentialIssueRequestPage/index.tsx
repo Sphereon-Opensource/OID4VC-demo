@@ -134,7 +134,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    ...(isNarrowScreen && {height: '100%'}),
+                    ...(isNarrowScreen && {height: '80%'}),
                     alignItems: 'center'
                 }}>
                     <Text
