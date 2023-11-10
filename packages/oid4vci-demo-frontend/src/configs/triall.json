@@ -94,7 +94,8 @@
     },
     "issueSuccess": {
       "photoLeft": "triall/guest_credential.svg",
-      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg",
+      "rightPaneButtonStepId": "toTriallDemo"
     },
     "infoSharedSuccess": {
       "photoLeft": "triall/guest_credential.svg",
