@@ -86,7 +86,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     useEffect((): void => {
-        if (onChange && formInitData) {
+        if (onChange && formInitData) { // Update host form to update enable nxt button
             onChange(formData)
         }
     })
