@@ -76,11 +76,16 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
         className?: string
       }
       qrCode?: {
+        fgColor?: string
         topTitle?: {
           style?: CSSProperties
+          h2Style?: CSSProperties
+          pStyle?: CSSProperties
         },
         bottomText?: {
           fontColor?: string
+          pStyle?: CSSProperties
+          h2Style?: CSSProperties
           className?: string
           credential_verify_request_right_pane_bottom_title?: string
           credential_verify_request_right_pane_bottom_paragraph?: string
@@ -214,12 +219,17 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     title?: string
     topParagraph?: string
     bottomParagraph?: string
+    rightPaneHeight?: string | number
     mobile?: {
         logo?: ImageProperties
         backgroundColor?: string
         image?: string
         bottomParagraph?: string
+        rightPaneWidth?: string | number
     },
+  qrCodeContainer?: {
+      height: string
+  }
 }
 
 export interface SSIInformationManualRequestPageConfig extends PageConfig {
@@ -251,6 +261,7 @@ export interface DataFormElement {
     defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
+    labelStyle?: CSSProperties
     readonly?: boolean
     customValidation?: string
     display?: {

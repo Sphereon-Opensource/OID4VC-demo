@@ -17,6 +17,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const flowRouter = useFlowRouter<SSICredentialVerifyRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const {t} = useTranslation()
+    const credentialName = useEcosystem().getGeneralConfig().credentialName
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const onSignInComplete = async (data: AuthorizationResponsePayload): Promise<void> => {
@@ -67,7 +68,20 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                       height={pageConfig.mobile?.logo?.height ?? 150}
                   />
               }
-              <div style={{
+            {!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && (<div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                marginTop: 'auto',
+                maxHeight: '300px'
+              }}>
+                <Text style={{ textAlign: 'center' }}
+                      className={style.pReduceLineSpace}
+                      h2Style={pageConfig.rightPaneLeftPane.qrCode.topTitle.h2Style}
+                      pStyle={pageConfig.rightPaneLeftPane.qrCode.topTitle.pStyle}
+                      title={t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
+                      lines={t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
+              </div>)}
+            {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
                     display: 'flex',
                     flexGrow: 1,
                     flexDirection: 'column',
@@ -85,15 +99,15 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                   >
                       {t('ssi_welcome_label')}
                   </div>
-              </div>
-              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1}}>
+              </div>}
+              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginBottom: '31%'})}}>
                   <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24 })}}>
                       <div>
                           <NonMobileOS>
-                              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { height: '100%', marginTop: '4%'})}}>
                                   {/*Whether the QR code is shown (mobile) is handled in the component itself */}
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                             fgColor={'rgba(50, 57, 72, 1)'}
+                                                             fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
                                                              vpDefinitionId={flowRouter.getVpDefinitionId()}
                                                              onAuthRequestRetrieved={console.log}
@@ -115,7 +129,8 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               />
                           </Mobile>
                           <NonMobile>
-                              <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}` }}
+                              <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginTop: '12%' })}}
+                                    pStyle={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.pStyle}
                                     className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className} poppins-semi-bold-16`}
                                     title={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n')}
                                     lines={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_paragraph}`).split('\n')}

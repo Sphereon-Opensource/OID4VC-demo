@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "Notaris Credential",
+    "credentialName": "Notaris",
     "issueCredentialType": "NotaryCompanyVerification",
     "oid4vpAgentBaseUrl": "https://notary.demo.sphereon.com/agent",
     "oid4vciAgentBaseUrl": "https://notary.demo.sphereon.com/agent",
@@ -88,51 +88,16 @@
         }
       }
     },
-    "SSICredentialVerifyRequestPage": {
+    "issueSuccess": {
       "photoLeft": "notary/guest_credential.svg",
-      "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
+      "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg",
+      "rightPaneTitle": "title_secure_your_credential",
+      "rightPaneParagraph": "credentials_right_pane_top_paragraph"
     },
-    "SSISelectCredentialPage": {
-      "logo": {
-        "src": "notary/logo.svg",
-        "alt": "notary.demo.sphereon.com",
-        "width": 167,
-        "height": 70
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#202537",
-          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
-        }
-      }
-    },
-    "SSICredentialIssuedSuccessPage": {
-      "photoLeft": "notary/guest_credential.svg",
-      "photoRight": "notary/undraw_messenger_re_8bky_grey.svg.svg"
-    },
-    "SSIInformationSharedSuccessPage": {
-      "photoLeft": "notary/guest_credential.svg",
-      "photoRight": "notary/undraw_certification_re_ifll_grey.svg",
-      "logo": {
-        "src": "notary/guest_credential.svg",
-        "alt": "Van Auckland Notary",
-        "width": 700,
-        "height": 700
-      },
-      "mobile": {
-        "logo": {
-          "src": "notary/logo.svg",
-          "alt": "notary",
-          "width": 200,
-          "height": 200
-        }
-      },
-      "backgroundColor": "#BEBEBE"
-    },
-    "SSICredentialIssueRequestPage": {
+    "issueRequest": {
       "title": "title_secure_your_credential",
-      "topParagraph": "paragraph_add_credential",
-      "bottomParagraph": "paragraph_scan_this_qr",
+      "topParagraph": "paragraph_add_credential_notaris",
+      "bottomParagraph": "paragraph_scan_this_qr_notaris",
       "logo": {
         "src": "notary/guest_credential.svg",
         "alt": "Van Auckland Notary",
@@ -147,13 +112,16 @@
           "width": 120,
           "height": 120
         },
+        "qrCodeContainer": {
+          "height": "inherit"
+        },
+        "rightPaneWidth": "100%",
         "backgroundColor": "#E8EAED",
-        "image": "undraw_certification_re_ifll_1.svg"
+        "image": "undraw_certification_re_ifll_1.svg",
+        "bottomParagraph": "credentials_right_pane_bottom_paragraph_mobile_notaris"
       }
     },
-    "SSIInformationRequestPage": {
-      "photo": "notary/guest_credential.svg",
-      "text_top_of_image": "common_left_pane_title",
+    "infoRequest": {
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
       "form": [
@@ -161,8 +129,11 @@
           {
             "id": "ssi_information_request_page_form_company_name",
             "key": "Bedrijfsnaam",
-            "title": "ssi_information_request_page_form_company_name_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_company_name_label",
+            "labelStyle": {
+              "color": "rgba(48, 48, 48, 0.8)"
+            },
+            "type": "text",
             "required": true
           }
         ],
@@ -170,8 +141,11 @@
           {
             "id": "ssi_information_request_page_form_company_location",
             "key": "Bedrijfslocatie",
-            "title": "ssi_information_request_page_form_company_location_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_company_location_label",
+            "labelStyle": {
+              "color": "rgba(48, 48, 48, 0.8)"
+            },
+            "type": "text",
             "required": true
           }
         ],
@@ -179,15 +153,21 @@
           {
             "id": "ssi_information_request_page_first_name_director",
             "key": "Voornaam",
-            "title": "ssi_information_request_page_form_first_name_director_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_first_name_director_label",
+            "labelStyle": {
+              "color": "rgba(48, 48, 48, 0.8)"
+            },
+            "type": "text",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name_director",
             "key": "Achternaam",
-            "title": "ssi_information_request_page_form_last_name_director_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_last_name_director_label",
+            "labelStyle": {
+              "color": "rgba(48, 48, 48, 0.8)"
+            },
+            "type": "text",
             "required": true
           }
         ],
@@ -195,8 +175,11 @@
           {
             "id": "ssi_information_request_page_form_place_of_birth",
             "key": "Geboorteplaats",
-            "title": "ssi_information_request_page_form_place_of_birth_label",
-            "type": "string",
+            "label": "ssi_information_request_page_form_place_of_birth_label",
+            "labelStyle": {
+              "color": "rgba(48, 48, 48, 0.8)"
+            },
+            "type": "text",
             "required": true
           }
         ],
@@ -204,7 +187,10 @@
           {
             "id": "ssi_information_request_page_form_date_of_birth",
             "key": "Geboortedatum",
-            "title": "ssi_information_request_page_form_date_of_birth_label",
+            "label": "ssi_information_request_page_form_date_of_birth_label",
+            "labelStyle": {
+              "color": "rgba(48, 48, 48, 0.8)"
+            },
             "type": "date",
             "required": true
           }
@@ -225,35 +211,13 @@
         "width": 700,
         "height": 700
       },
-      "backgroundColor": "#BEBEBE"
-    },
-    "SSILandingPage": {
-      "photoLeft": "notary/landing_manual_grey.svg",
-      "photoRight": "notary/landing_wallet_grey.svg",
-      "logo": {
-        "src": "notary/logo.svg",
-        "alt": "notary",
-        "width": 125,
-        "height": 125
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "white"
-        },
-        "leftCardView": {
-          "textColor": "#FBFBFB",
-          "backgroundColor": "#326D85"
-        },
-        "rightCardView": {
-          "textColor": "#FBFBFB",
-          "buttonType": "primary"
-        }
-      }
+      "backgroundColor": "#BEBEBE",
+      "primaryButtonResourceId": "Share"
     }
   },
   "routes": [
     {
-      "vpDefinitionId": "knb-auckland",
+      "id": "default",
       "steps": [
         {
           "id": "infoRequest",
@@ -266,6 +230,9 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "NotaryCompanyVerification"
+          },
           "nextId": "issueRequest"
         },
         {
@@ -301,6 +268,9 @@
       "styles": {
         "mainContainer": {
           "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width": "327px"
         }
       }
     },

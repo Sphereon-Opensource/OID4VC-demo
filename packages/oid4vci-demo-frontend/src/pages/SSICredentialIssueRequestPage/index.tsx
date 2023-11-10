@@ -71,6 +71,9 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
+        if (isNarrowScreen && pageConfig.mobile?.rightPaneWidth) {
+          return pageConfig.mobile?.rightPaneWidth
+        }
         return isNarrowScreen ? '50%' : '40%'
     }
 
@@ -134,8 +137,9 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
+                    ...(!!pageConfig.rightPaneHeight && { height: pageConfig.rightPaneHeight }),
                     ...(isNarrowScreen && {height: '100%'}),
-                    alignItems: 'center'
+                    alignItems: 'center',
                 }}>
                     <Text
                         style={{textAlign: 'center', ...(isNarrowScreen && {marginRight: 24, marginLeft: 24})}}
@@ -148,7 +152,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '50vh',
+                        height: `${pageConfig?.qrCodeContainer?.height}` ?? '50vh',
                         marginBottom: isNarrowScreen ? 40 : '15%',
                         marginTop: isNarrowScreen ? 20 : '15%',
                         alignItems: 'center'

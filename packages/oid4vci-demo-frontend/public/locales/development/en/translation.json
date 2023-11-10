@@ -1,6 +1,7 @@
 {
   "common_left_pane_title": "\"Digital identity is the passport to the\nvirtual world, where convenience and\nconnectivity effortlessly intertwine.\"",
   "credentials_right_pane_bottom_paragraph_mobile": "Please click the button to store your credential.\nGo back to this screen afterwards to continue",
+  "credentials_right_pane_bottom_paragraph_mobile_notaris": "Click on the button\nto receive your credential",
   "credentials_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR\nscanner to accept and store your credential.",
   "credentials_right_pane_top_paragraph": "Let's add a {{credentialName}} Credential\nto your wallet.",
   "credentials_right_pane_top_title": "Secure your {{credentialName}} Credential",
@@ -94,7 +95,9 @@
   "title_please_check_your_email": "Please check your e-mail",
   "title_fill_5_digits": "Fill in the 5-digit code from the confirmation e-mail.",
   "paragraph_add_credential": "Let's add the credential to your wallet",
+  "paragraph_add_credential_notaris": "Let's add the {{credentialName}} credential to your wallet.",
   "paragraph_scan_this_qr": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
+  "paragraph_scan_this_qr_notaris": "Scan this QR code using your wallet's QR\n scanner to accept and store your credential.",
   "paragraph_confirm_email": "Confirm your account by entering the 5 digit confirmation code from the email.",
   "loading_verify_company_information_caption": "Verifying the company information",
   "loading_verify_identity_information_caption": "Verifying your identity",
