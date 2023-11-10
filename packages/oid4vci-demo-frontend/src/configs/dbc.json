@@ -134,8 +134,8 @@
         ],
         [
           {
-            "id": "email",
-            "key": "email",
+            "id": "emailAddress",
+            "key": "emailAddress",
             "label": "ssi_information_request_page_form_email_label",
             "type": "text",
             "required": true
