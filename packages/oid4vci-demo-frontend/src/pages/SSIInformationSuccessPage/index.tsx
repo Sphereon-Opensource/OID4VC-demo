@@ -32,7 +32,7 @@ const SSIInformationSuccessPage: React.FC = () => {
         credentialType: generalConfig.issueCredentialType
   })
     return (
-        <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none'}}>
+        <div style={{display: 'flex', flexDirection: 'row', height: isTabletOrMobile ? '100%' : '100vh', userSelect: 'none'}}>
             <NonMobile>
                 {state?.isManualIdentification
                     ? <SSIInformationSharedSuccessPageLeftPanel/>
@@ -86,10 +86,10 @@ const SSIInformationSuccessPage: React.FC = () => {
                     </Trans>
                     <div style={{
                         width: '342px',
-                        height: '397px',
+                        height: isTabletOrMobile ? '257px' : '397px',
                         flexGrow: 1
                     }}>
-                        <img src={pageConfig.photoRight} alt="success"/>
+                        <img src={pageConfig.photoRight} alt="success" height="100%"/>
                     </div>
                     <div style={{
                         width: '100%',
