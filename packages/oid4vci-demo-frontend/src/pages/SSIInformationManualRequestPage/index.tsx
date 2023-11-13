@@ -67,7 +67,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
     return (
         <div style={{
             display: 'flex',
-            height: "100vh",
+            height: (isTabletOrMobile ? '100%' : '100vh'),
             width: '100vw',
             ...(isTabletOrMobile && {
                 overflowX: "hidden",

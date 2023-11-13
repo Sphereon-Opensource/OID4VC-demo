@@ -30,7 +30,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     }
 
     return (
-        <div style={{display: 'flex', height: '100vh', width: '100%'}}>
+        <div style={{display: 'flex', height: (isTabletOrMobile ? '100%' : '100vh'), width: '100%'}}>
             <NonMobile>
                 <div style={{
                     display: 'flex',

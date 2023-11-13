@@ -23,7 +23,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const generalConfig = ecosystem.getGeneralConfig()
-    const isNarrowScreen = useMediaQuery({query: '(max-width: 767px)'})
+    const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state
     const [qrCode, setQrCode] = useState<ReactElement>()
 
@@ -71,17 +71,17 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
-        if (isNarrowScreen && pageConfig.mobile?.rightPaneWidth) {
+        if (isTabletOrMobile && pageConfig.mobile?.rightPaneWidth) {
           return pageConfig.mobile?.rightPaneWidth
         }
-        return isNarrowScreen ? '50%' : '40%'
+        return isTabletOrMobile ? '50%' : '40%'
     }
 
     const {t} = useTranslation()
 
 
     return (
-        <div style={{display: 'flex', height: '100vh', width: '100%'}}>
+        <div style={{display: 'flex', height: (isTabletOrMobile ? '100%' : '100vh'), width: '100%'}}>
             <NonMobile>
                 <div style={{
                     display: 'flex',
@@ -122,10 +122,10 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 height: '100%',
                 alignItems: 'center',
                 flexDirection: 'column',
-                ...(isNarrowScreen && {gap: 24, ...(pageConfig.mobile?.backgroundColor && {backgroundColor: pageConfig.mobile.backgroundColor})}),
-                ...(!isNarrowScreen && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
+                ...(isTabletOrMobile && {gap: 24, ...(pageConfig.mobile?.backgroundColor && {backgroundColor: pageConfig.mobile.backgroundColor})}),
+                ...(!isTabletOrMobile && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
             }}>
-                {(isNarrowScreen && pageConfig.mobile?.logo) &&
+                {(isTabletOrMobile && pageConfig.mobile?.logo) &&
                     <img
                         src={pageConfig.mobile.logo.src}
                         alt={pageConfig.mobile.logo.alt}
@@ -138,11 +138,11 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     ...(!!pageConfig.rightPaneHeight && { height: pageConfig.rightPaneHeight }),
-                    ...(isNarrowScreen && {height: '100%'}),
+                    ...(isTabletOrMobile && {height: '100%'}),
                     alignItems: 'center',
                 }}>
                     <Text
-                        style={{textAlign: 'center', ...(isNarrowScreen && {marginRight: 24, marginLeft: 24})}}
+                        style={{textAlign: 'center', ...(isTabletOrMobile && {marginRight: 24, marginLeft: 24})}}
                         className={style.pReduceLineSpace}
                         title={t(pageConfig.title ? pageConfig.title : 'qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
                         }
@@ -153,8 +153,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         height: `${pageConfig?.qrCodeContainer?.height}` ?? '50vh',
-                        marginBottom: isNarrowScreen ? 40 : '15%',
-                        marginTop: isNarrowScreen ? 20 : '15%',
+                        marginBottom: isTabletOrMobile ? 40 : '15%',
+                        marginTop: isTabletOrMobile ? 20 : '15%',
                         alignItems: 'center'
                     }}>
                         <NonMobileOS>
