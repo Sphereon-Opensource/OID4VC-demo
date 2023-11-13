@@ -2,11 +2,11 @@
   "general": {
     "credentialName": "EnergySHR Guest",
     "issueCredentialType": "energySHR",
-    "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
-    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.energyshr.nl/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.energyshr.nl/demo/issuer",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
     "verifierUrlCaption": "Energy SHR website",
-    "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
+    "downloadUrl": "https://ssi.energyshr.nl/demo/issuer/#/download"
   },
   "pages": {
     "download": {
@@ -223,7 +223,7 @@
         {
           "id": "toEnergySHRDemo",
           "operation": "navigate",
-          "path": "https://www.dutchblockchaincoalition.org/userlogin"
+          "path": "https://www.energyshr.nl"
         },
         {
           "id": "download",
