@@ -67,7 +67,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
     return (
         <div style={{
             display: 'flex',
-            height: (isTabletOrMobile ? '100%' : '100vh'),
+            height: isTabletOrMobile ? "100vh" : "100vh",
             width: '100vw',
             ...(isTabletOrMobile && {
                 overflowX: "hidden",
@@ -80,7 +80,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                 <div id={"photo"} style={{
                     display: 'flex',
                     width: pageConfig.leftPaneWidth ?? '60%',
-                    height: isTabletOrMobile ? '100%' : '100vh',
+                    height: '100vh',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / cover`}),
@@ -111,6 +111,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                 width: determineWidth(),
                 alignItems: 'center',
                 flexDirection: 'column',
+                ...(isTabletOrMobile && { height: '100vh' }),
                 ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
                 ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>

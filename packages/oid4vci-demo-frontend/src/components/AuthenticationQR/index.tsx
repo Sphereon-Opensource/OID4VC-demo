@@ -108,14 +108,18 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
     this._isMounted = false
   }
 
-  render() {
-    // Show the loader until we have details on which parameters to load into the QR code
-    return this.state.qrCode ? (
-      <div>{this.state.qrCode}</div>
-    ) : (
-      <BallTriangle color="#352575" height="100" width="100" />
-    )
-  }
+    render() {
+        // Show the loader until we have details on which parameters to load into the QR code
+        return this.state.qrCode ? (
+            <NonMobileOS>
+                <div>{this.state.qrCode}</div>
+            </NonMobileOS>
+        ) : (
+            <NonMobileOS>
+                <BallTriangle color="#352575" height="100" width="100"/>
+            </NonMobileOS>
+        )
+    }
 
   /* We don't want to keep used and unused states indefinitely, so expire the QR code after a configured timeout  */
   private refreshQRCode = () => {

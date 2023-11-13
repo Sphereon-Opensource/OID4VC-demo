@@ -74,7 +74,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (isTabletOrMobile && pageConfig.mobile?.rightPaneWidth) {
           return pageConfig.mobile?.rightPaneWidth
         }
-        return isTabletOrMobile ? '50%' : '40%'
+        return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '40%'
     }
 
     const {t} = useTranslation()

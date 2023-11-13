@@ -233,6 +233,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     bottomParagraph?: string
     rightPaneHeight?: string | number
     mobile?: {
+        width?: string | number
         logo?: ImageProperties
         backgroundColor?: string
         image?: string
@@ -254,7 +255,7 @@ export interface SSIInformationManualRequestPageConfig extends PageConfig {
     form: DataFormRow[]
     mobile?: {
         logo?: ImageProperties
-        backgroundColor?: string,
+        backgroundColor?: string
     },
     backgroundColor?: string
     logo?: ImageProperties

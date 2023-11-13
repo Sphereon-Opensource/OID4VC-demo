@@ -125,8 +125,8 @@
             "style": {
               "justifyContent": "end",
               "gap": "40px",
-              "align-items": "normal",
-              "flex-grow": 1,
+              "alignItems": "normal",
+              "flexGrow": 1,
               "marginTop": "50%"
             }
           },
@@ -184,6 +184,7 @@
         "height": 383
       },
       "mobile": {
+        "width": "inherit",
         "logo": {
           "src": "coc/logo.svg",
           "alt": "chamber of commerce logo",
