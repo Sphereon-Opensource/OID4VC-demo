@@ -1,0 +1,27 @@
+{
+"@context": [
+"https://www.w3.org/2018/credentials/v1",
+"https://w3id.org/citizenship/v1",
+"https://w3c-ccg.github.io/ldp-bbs2020/context/v1"
+],
+"type": [
+"VerifiableCredential",
+"PermanentResidentCard"
+],
+"identifier": "83627465",
+"name": "Permanent Resident Card",
+"description": "Government of Example Permanent Resident Card.",
+"expirationDate": "{{{ dateTimeAfterYears 6 }}}",
+"credentialSubject": {
+"type": ["PermanentResident", "Person"],
+"firstName": "{{firstName}}",
+"lastName": "{{lastName}}",
+"gender": "Male",
+"residentSince": "2015-01-01",
+"lprCategory": "C09",
+"lprNumber": "999-999-999",
+"commuterClassification": "C1",
+"birthCountry": "Bahamas",
+"birthDate": "1958-07-17"
+}
+}
