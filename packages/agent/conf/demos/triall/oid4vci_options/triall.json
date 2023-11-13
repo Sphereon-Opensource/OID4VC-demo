@@ -1,6 +1,6 @@
 {
   "definitionId": "triall2023",
-  "correlationId": "https://ssi.triall.io/issuer",
+  "correlationId": "https://ssi.triall.io/agent",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://ssi.triall.io/issuer",
+  "correlationId": "https://ssi.triall.io/agent",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.triall.io/issuer",
-    "credential_endpoint": "https://ssi.triall.io/issuer/credentials",
+    "credential_issuer": "https://ssi.triall.io/agent",
+    "credential_endpoint": "https://ssi.triall.io/agent/credentials",
     "display": [
       {
         "name": "Triall",

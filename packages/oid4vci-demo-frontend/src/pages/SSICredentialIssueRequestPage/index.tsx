@@ -6,7 +6,7 @@ import {useLocation} from 'react-router-dom'
 import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator'
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
 import DeepLinkButton from "../../components/DeepLinkButton"
-import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
+import {MobileOS, NonMobile, NonMobileOS} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
