@@ -148,10 +148,10 @@
             "value_type": "string",
             "display": [
               {
-                "name": "FirstName"
+                "name": "First Name"
               },
               {
-                "name": "FirstName",
+                "name": "First Name",
                 "locale": "en-US"
               },
               {
@@ -164,10 +164,10 @@
             "value_type": "string",
             "display": [
               {
-                "name": "LastName"
+                "name": "Last Name"
               },
               {
-                "name": "LastName",
+                "name": "Last Name",
                 "locale": "en-US"
               },
               {
@@ -282,10 +282,10 @@
             "value_type": "string",
             "display": [
               {
-                "name": "FirstName"
+                "name": "First Name"
               },
               {
-                "name": "FirstName",
+                "name": "First Name",
                 "locale": "en-US"
               },
               {
@@ -298,10 +298,10 @@
             "value_type": "string",
             "display": [
               {
-                "name": "LastName"
+                "name": "Last Name"
               },
               {
-                "name": "LastName",
+                "name": "Last Name",
                 "locale": "en-US"
               },
               {

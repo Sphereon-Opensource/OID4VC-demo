@@ -10,10 +10,11 @@ import { useTranslation } from "react-i18next"
 import { useMediaQuery } from "react-responsive"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper'
-import { useFlowRouter } from '../../router/flow-router'
-import { SSISelectCredentialPageConfig } from '../../ecosystem/ecosystem-config'
-import { useEcosystem } from '../../ecosystem/ecosystem'
-import { SSICredentialCardView } from '@sphereon/ui-components.ssi-react'
+import {useFlowRouter} from "../../router/flow-router"
+import {SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSICredentialCardView} from "@sphereon/ui-components.ssi-react"
+import {DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL} from "../../environment"
 
 const short = require('short-uuid');
 
@@ -32,7 +33,9 @@ const SSISelectCredentialPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
     useEffect((): void => {
-        MetadataClient.retrieveAllMetadata(generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer')
+        MetadataClient.retrieveAllMetadata(DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL
+            ?? generalConfig.oid4vciAgentBaseUrl
+            ?? 'https://ssi.sphereon.com/issuer')
         .then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
             if (!metadata.credentialIssuerMetadata) {

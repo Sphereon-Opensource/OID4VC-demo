@@ -18,8 +18,11 @@ type State = {
     data?: any
 }
 
-function getInitialState(form: DataFormRow[]) {
-    return transformFormConfigToEmptyObject(form)
+function getInitialState(formConfig: SSIInformationManualRequestPageConfig) {
+  if (!formConfig.form) {
+      return {}
+  }
+  return transformFormConfigToEmptyObject(formConfig.form)
 }
 
 function isFormDataValid(formData: FormOutputData, form: DataFormRow[]) {
@@ -41,7 +44,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
     const credentialsReader = useCredentialsReader()
     const [credentialsData, setCredentialsData] = useState<ImmutableRecord | undefined>()
     const {t} = useTranslation()
-    const [formData, setFormData] = useState<FormOutputData>(getInitialState(pageConfig.form))
+    const [formData, setFormData] = useState<FormOutputData>(getInitialState(pageConfig))
     const [initComplete, setInitComplete] = useState<boolean>(false)
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 

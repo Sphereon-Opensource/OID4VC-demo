@@ -85,30 +85,6 @@ const credentialDataSupplierOpenBadgeJwtJson: CredentialDataSupplier = (args: Cr
     } as unknown as CredentialDataSupplierResult)
 }
 
-const credentialDataSupplierDBCConference2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
-    const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
-    const lastName = args.credentialDataSupplierInput?.lastName ?? 'DBC'
-    const email = args.credentialDataSupplierInput?.email ?? 'dbc@example.com'
-
-    return Promise.resolve({
-        format: args.credentialRequest.format,
-        credential: {
-            '@context': ['https://www.w3.org/2018/credentials/v1'],
-            type: ['VerifiableCredential', 'DBCConferenceAttendee'],
-            expirationDate: '2023-07-26T00:00:00Z',
-            credentialSubject: {
-                firstName,
-                lastName,
-                email,
-                event: {
-                    name: 'DBC Conference 2023',
-                    date: '2023-06-26',
-                },
-            },
-        },
-    } as unknown as CredentialDataSupplierResult)
-}
-
 const credentialDataSupplierFMAGuest2023: CredentialDataSupplier = (args: CredentialDataSupplierArgs) => {
     const firstName = args.credentialDataSupplierInput?.firstName ?? 'Hello'
     const lastName = args.credentialDataSupplierInput?.lastName ?? 'FMA'
@@ -299,9 +275,6 @@ class TemplateCredentialDataSupplier {
         switch (true) {
             case /(future)|(fma2023)|(fmdm2023)/.test(issuerCorrelationId):
                 supplier = credentialDataSupplierFMAGuest2023
-                break
-            case /(dbc)|(blockchain)/.test(issuerCorrelationId):
-                supplier = credentialDataSupplierDBCConference2023
                 break
             case /(triall)|(cix)/.test(issuerCorrelationId):
                 supplier = credentialDataSupplierTriallGuest2023

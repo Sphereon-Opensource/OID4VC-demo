@@ -71,7 +71,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
-        return isNarrowScreen ? '50%' : '40%'
+        return isNarrowScreen ? '100%' : '40%'
     }
 
     const {t} = useTranslation()
@@ -134,8 +134,9 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    ...(isNarrowScreen && {height: '100%'}),
-                    alignItems: 'center'
+                    ...(pageConfig.rightPaneHeight && { height: pageConfig.rightPaneHeight }),
+                    ...(isNarrowScreen && {height: '80%'}),
+                    alignItems: 'center',
                 }}>
                     <Text
                         style={{textAlign: 'center', ...(isNarrowScreen && {marginRight: 24, marginLeft: 24})}}

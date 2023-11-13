@@ -152,13 +152,18 @@ export function useFlowRouter<T extends PageConfig>() {
         return vpDefinitionId
     }
 
+    function getCurrentStepId(): string | undefined {
+        return stepState.currentStep?.id
+    }
+
     return {
         getPageConfig,
         getVpDefinitionId,
         getNextId,
         goToStep,
         nextStep,
-        setCurrentRouteId
+        setCurrentRouteId,
+        getCurrentStepId
     }
 }
 
