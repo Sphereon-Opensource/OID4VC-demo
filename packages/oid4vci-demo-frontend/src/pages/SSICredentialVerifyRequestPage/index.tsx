@@ -99,10 +99,11 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                   >
                       {t('ssi_welcome_label')}
                   </div>
-              </div>}
-              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginBottom: '31%'})}}>
-                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24 })}}>
-                      <div>
+              </div>
+              }
+              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginBottom: '31%'}), ...(isTabletOrMobile && pageConfig.mobile?.qrCode?.rootContainer?.style)}}>
+                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.qrCode?.container?.style) })}}>
+                    <div>
                           <NonMobileOS>
                               <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { height: '100%', marginTop: '4%'})}}>
                                   {/*Whether the QR code is shown (mobile) is handled in the component itself */}
@@ -124,6 +125,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               </div>
                           </MobileOS>
                           <Mobile>
+                              <div style={{ display: 'none', ...(pageConfig.mobile?.qrCode?.bottomParagraph?.style) }}></div>
                               <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
                                     lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}
                               />

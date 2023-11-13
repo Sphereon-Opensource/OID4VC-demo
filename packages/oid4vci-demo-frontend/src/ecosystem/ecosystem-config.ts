@@ -63,6 +63,17 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     downloadAppStepId?: string
     bottomParagraph?: string
     mobile?: {
+        qrCode?: {
+          rootContainer?: {
+            style?: CSSProperties
+          },
+          container?: {
+            style?: CSSProperties
+          }
+          bottomParagraph?: {
+            style?: CSSProperties
+          }
+        }
         logo?: ImageProperties
         backgroundColor?: string
         image?: string

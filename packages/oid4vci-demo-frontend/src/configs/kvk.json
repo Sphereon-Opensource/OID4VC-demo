@@ -97,6 +97,14 @@
           "bottomText": {
             "credential_verify_request_right_pane_bottom_title": "",
             "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph"
+          },
+          "topTitle": {
+            "h2Style": {
+              "color": "#424242"
+            },
+            "pStyle": {
+              "color": "#303030"
+            }
           }
         }
       },
@@ -107,6 +115,28 @@
         "height": 383
       },
       "mobile": {
+        "qrCode": {
+          "rootContainer": {
+            "style": {
+              "maxHeight": "inherit"
+            }
+          },
+          "container": {
+            "style": {
+              "justifyContent": "end",
+              "gap": "40px",
+              "align-items": "normal",
+              "flex-grow": 1,
+              "marginTop": "50%"
+            }
+          },
+          "bottomParagraph": {
+            "style": {
+              "display": "block",
+              "height": "10%"
+            }
+          }
+        },
         "logo": {
           "src": "coc/logo.svg",
           "alt": "chamber of commerce logo",
