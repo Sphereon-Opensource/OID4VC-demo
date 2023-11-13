@@ -2,8 +2,8 @@
   "general": {
     "credentialName": "Conference Attendee",
     "issueCredentialType": "dbc2023",
-    "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org",
-    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org",
+    "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/agent",
+    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/agent",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
     "verifierUrlCaption": "DBC website",
     "downloadUrl": "https://ssi.dutchblockchaincoalition.org/#/download"
