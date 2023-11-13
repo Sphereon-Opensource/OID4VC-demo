@@ -295,7 +295,10 @@
     "SSISecondaryButton": {
       "styles": {
         "mainContainer": {
-          "color": "#E84461"
+          "backgroundColor": "#353438"
+        },
+        "button": {
+          "width": "220px"
         }
       }
     },
