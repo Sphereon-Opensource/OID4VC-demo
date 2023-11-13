@@ -89,6 +89,7 @@
       }
     },
     "verifyRequest": {
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
       "photoRight": "bank/undraw_messenger_re_8bky_grey.svg",
       "backgroundColor": "#01224B",
       "rightPaneLeftPane": {
@@ -117,6 +118,28 @@
         "height": 249
       },
       "mobile": {
+        "qrCode": {
+          "rootContainer": {
+            "style": {
+              "maxHeight": "inherit"
+            }
+          },
+          "container": {
+            "style": {
+              "justifyContent": "end",
+              "gap": "40px",
+              "alignItems": "normal",
+              "flexGrow": 1,
+              "marginTop": "50%"
+            }
+          },
+          "bottomParagraph": {
+            "style": {
+              "display": "block",
+              "height": "10%"
+            }
+          }
+        },
         "logo": {
           "src": "bank/logo.svg",
           "alt": "bank",
@@ -172,6 +195,7 @@
         "height": 249
       },
       "mobile": {
+        "width": "inherit",
         "logo": {
           "src": "bank/logo.svg",
           "alt": "bank",
@@ -192,6 +216,7 @@
         "height": 249
       },
       "mobile": {
+        "width": "inherit",
         "logo": {
           "src": "bank/logo.svg",
           "alt": "bank",

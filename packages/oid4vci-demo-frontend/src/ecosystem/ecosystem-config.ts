@@ -254,6 +254,7 @@ export interface SSIInformationManualRequestPageConfig extends PageConfig {
     primaryButtonResourceId?: string
     form: DataFormRow[]
     mobile?: {
+        width?: string | number
         logo?: ImageProperties
         backgroundColor?: string
     },

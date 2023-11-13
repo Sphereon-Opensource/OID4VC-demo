@@ -61,7 +61,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
         if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
-        return isTabletOrMobile ? '50%' : '40%'
+        return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '40%'
     }
 
     return (
