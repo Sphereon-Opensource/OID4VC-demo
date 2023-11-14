@@ -3,41 +3,32 @@ version: '3.8'
 services:
   ssi-agent:
     container_name: ssi-agent
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    env_file:
-      - ./docker/.env.ssi-agent
-    tty: true
     build:
-      context: ./
+      context: .
       dockerfile: ./docker/Dockerfile.ssi-agent
+    volumes:
+      - "$PWD/agent-env/.env.local:/opt/ssi-agent/packages/agent/.env.local:ro"
+    environment:
+      - PORT=5000
+      - CONF_PATH=/opt/ssi-agent/packages/agent/conf/demos/sphereonGuest
     ports:
       - "5000:5000"
+    restart: unless-stopped
+
   oid4vci-demo-frontend:
     container_name: oid4vci-demo-frontend
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     env_file:
       - ./docker/.env.oid4vci-demo-frontend
     depends_on:
       - ssi-agent
     tty: true
     build:
-      context: ./
+      context: .
       dockerfile: ./docker/Dockerfile.oid4vci-demo-frontend
+    environment:
+      - PORT=5001
+      - REACT_APP_DEFAULT_ECOSYSTEM=sphereon
+      - REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN=false
     ports:
       - "5001:5001"
-  oid4vp-demo-frontend:
-    container_name: oid4vp-demo-frontend
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    env_file:
-      - ./docker/.env.oid4vp-demo-frontend
-    depends_on:
-      - ssi-agent
-    tty: true
-    build:
-      context: ./
-      dockerfile: ./docker/Dockerfile.oid4vp-demo-frontend
-    ports:
-      - "5002:5002"
+    restart: unless-stopped
