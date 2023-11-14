@@ -64,7 +64,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
           case 'date':
                 return <InputField
                     labelStyle={field.labelStyle}
-                    inlineStyle={style}
+                    inlineStyle={{ ...style, ...field.inputStyle}}
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
                     readonly={field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)}

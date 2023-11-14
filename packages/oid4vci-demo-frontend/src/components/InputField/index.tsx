@@ -60,7 +60,7 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
         }
         <input
             type={type}
-            style={{...(inlineStyle && { width: '100%' }), ...(!isValid && { borderColor: 'red' })}}
+            style={{...(inlineStyle && { width: '100%', ...(inlineStyle) }), ...(!isValid && { borderColor: 'red' })}}
             placeholder={placeholder}
             readOnly={readonly}
             tabIndex={readonly ? -1 : undefined} // Do not tab-stop in read-only fields

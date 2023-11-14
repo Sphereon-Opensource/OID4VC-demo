@@ -20,6 +20,7 @@
   "credential_verify_request_right_pane_bottom_paragraph_banqup": "By scanning this QR code with your Banqup app",
   "credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR\nscanner to provide information.",
   "credential_verify_request_right_pane_bottom_paragraph_mobile": "Please click the button to open a wallet\nGo back to this screen afterwards to continue.",
+  "credential_verify_request_right_pane_bottom_paragraph_mobile_bank": "Click on the button \nto start sharing your information with us.",
   "credential_verify_request_right_pane_button_caption": "To manual entry",
   "download_app_right_pane_button_caption": "Get your credential",
   "download_app_right_pane_paragraph": "Please download one of the below DDIP\ncompliant SSI Wallets if you haven't yet",

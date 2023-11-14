@@ -139,13 +139,13 @@ const SSIInformationManualRequestPage: React.FC = () => {
                     >
                         <p
                             className={"inter-normal-24"}
-                            style={{marginBottom: 12}}
+                            style={{marginBottom: 12, ...(pageConfig?.sharing_data_right_pane_title_style)}}
                         >
                             {t(pageConfig.sharing_data_right_pane_title)}
                         </p>
                         <p
                             className={"poppins-normal-14"}
-                            style={{maxWidth: 313, textAlign: 'center'}}
+                            style={{maxWidth: 313, textAlign: 'center', ...(pageConfig?.sharing_data_right_pane_paragraph_style)}}
                         >
                             {t(pageConfig.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName})}
                         </p>

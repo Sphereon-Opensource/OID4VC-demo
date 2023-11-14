@@ -130,15 +130,16 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               </div>
                           </MobileOS>
                           <Mobile>
-                              <div style={{ display: 'none', ...(pageConfig.mobile?.qrCode?.bottomParagraph?.style) }}></div>
-                              <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                                    lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}
+                              <div style={{ display: 'none', ...(pageConfig.mobile?.qrCode?.bottomText?.style) }}></div>
+                              <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} ${ pageConfig.mobile?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16' }`}
+                                    pStyle={pageConfig.mobile?.qrCode?.bottomText?.pStyle}
+                                    lines={t(pageConfig.mobile?.qrCode?.bottomText?.paragraph ?? 'credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}
                               />
                           </Mobile>
                           <NonMobile>
                               <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginTop: '12%' })}}
                                     pStyle={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.pStyle}
-                                    className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className} poppins-semi-bold-16`}
+                                    className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
                                     title={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n')}
                                     lines={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_paragraph}`).split('\n')}
                               />
