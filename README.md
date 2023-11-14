@@ -72,29 +72,30 @@ introduction on how credential branding actually works.
 - [Credential Branding](./documents/credential-branding.md)
 
 ### Docker
+We maintain two distinct Docker setups for development and production environments. Navigate to either `docker/compose/dev` for development or `docker/compose/prod` for production to find their respective `docker-compose.yml` files.
 
-From the root folder run:
+To build and run the Docker containers, execute the following commands from within the respective directory:
 
 ```bash
-docker-compose build
-docker-compose up
+
+docker compose build # This builds the Docker images
+docker compose up    # This starts the Docker containers
 ```
 
-The build phase might take a few minutes. If you run the docker-compose up command 3 services will be running. The
-ssi-agent, oid4vci-demo-frontend and oid4vp-frontend.
+Please note that Docker will configure your images using the settings specified in the `build` directory:
+```
+.env.oid4vci-demo-frontend
+.env.oid4vp-demo-frontend
+.env.ssi-agent
+```
+Ensure that you have correctly set up your environment variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
+The  current example chooses the folder `packages/agent/conf/demos/sphereonGuest` as your base configuration folder.
+The building process may take a few minutes. Once you execute the docker compose up command, three services will start: ssi-agent, oid4vci-demo-frontend, and oid4vp-frontend.
 
 You should now be able to go to http://host.docker.internal:5001 and http://host.docker.internal:5002 respectively to
 test the issuer and verifier demo's.
 
 Please note that you might have to configure your docker environment to expose the host.docker.internal like the image
-below. If you cannot make that work you could adjust the config/docker and docker/*.env files to suit your needs
+below. If you cannot make that work you could adjust the config/docker and docker/compose/{dev/prod}/build/.env* files to suit your needs.
 
 <img src="resources/docker_settings.png" width="500" />
-
-#### Environment variables and configuration for docker.
-
-Please note that the environment variables for the 3 images come from the ./docker folder. You will have to copy the 3
-example files and remove the .example suffix.
-
-The configuration files are copied over to the agent image. So the above explained configuration options also apply when
-running in docker.

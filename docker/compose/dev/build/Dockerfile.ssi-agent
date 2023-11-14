@@ -4,7 +4,7 @@ RUN npm -g install pnpm && SHELL=bash pnpm setup && source /root/.bashrc && pnpm
 RUN pnpm add typescript tslib
 WORKDIR /opt/ssi-agent
 
-COPY ./ .
+COPY ../../../../. .
 RUN pnpm install -r
 RUN pnpm build
 
