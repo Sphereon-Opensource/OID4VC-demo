@@ -210,6 +210,9 @@
           }
         },
         "bottomText": {
+          "pStyle": {
+            "color": "#303030"
+          },
           "className": "poppins-normal-16"
         }
       },

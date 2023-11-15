@@ -181,7 +181,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             </div>
                         </MobileOS>
                     </div>
-                    <div style={{marginTop: "20px", ...(isTabletOrMobile && { textAlign: 'center', marginTop: 'inherit' })}}>
+                    <div style={{marginTop: "20px", textAlign: 'center', ...(isTabletOrMobile && { marginTop: 'inherit' })}}>
                         <NonMobileOS>
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378}}
