@@ -2,10 +2,11 @@
 
 docker_compose_file="../docker-compose.yml"
 
-# Extract DEMO_HOST_ADDRESS and otherwise default to localhost
+# Extract DEMO_HOST_ADDRESS and otherwise exits.
 demo_host_address=$(awk '/ssi-agent:/{flag=1; next} /environment:/{flag=2; next} flag==2 && /DEMO_HOST_ADDRESS/{split($2,a,"="); print a[2]; flag=0}' "$docker_compose_file" | tr -d '"' | tr -d ' ')
 if [ -z "$demo_host_address" ]; then
-    demo_host_address="localhost"
+    echo "Error: DEMO_HOST_ADDRESS not found in docker-compose.yml."
+    exit 1
 fi
 
 # Check if demo_host_address contains 'http://' or 'https://' if not, prepend it
@@ -15,7 +16,7 @@ if [[ ! $demo_host_address =~ ^http ]]; then
 fi
 
 # Extract ENVIRONMENT name and default to sphereon if not found
-environment_name=$(grep "^REACT_APP_DEFAULT_ECOSYSTEM=" ./.env.oid4vci-demo-frontend | cut -d '=' -f2)
+environment_name=$(grep "^[[:space:]]*REACT_APP_DEFAULT_ECOSYSTEM[[:space:]]*=" ./.env.oid4vci-demo-frontend | cut -d '=' -f2 | xargs)
 
 if [ -z "$environment_name" ]; then
     environment_name="sphereon"
