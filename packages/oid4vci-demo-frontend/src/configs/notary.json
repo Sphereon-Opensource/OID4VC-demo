@@ -114,6 +114,9 @@
           }
         },
         "bottomText": {
+          "pStyle": {
+            "color": "#303030"
+          },
           "className": "poppins-normal-16"
         }
       },
@@ -138,8 +141,7 @@
           "src": "undraw_certification_re_ifll_1.svg",
           "width": 300,
           "height": 300
-        },
-        "bottomParagraph": "credentials_right_pane_bottom_paragraph_notaris"
+        }
       }
     },
     "infoRequest": {
