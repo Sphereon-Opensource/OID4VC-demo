@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://ssi.future-mobility-alliance.org/issuer",
+  "correlationId": "${AGENT_ENDPOINT_FMDM | AGENT_ENDPOINT | 'http://localhost:5000'}/issuer",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.future-mobility-alliance.org/issuer",
-    "credential_endpoint": "https://ssi.future-mobility-alliance.org/issuer/credentials",
+    "credential_issuer": "${AGENT_ENDPOINT_FMDM | AGENT_ENDPOINT | 'http://localhost:5000'}/issuer",
+    "credential_endpoint": "${AGENT_ENDPOINT_FMDM | AGENT_ENDPOINT | 'http://localhost:5000'}/issuer/credentials",
     "display": [
       {
         "name": "Future Mobility Alliance",

@@ -1,6 +1,6 @@
 {
   "definitionId": "knb-kvk",
-  "correlationId": "https://kvk.demo.sphereon.com/agent",
+  "correlationId": "${AGENT_ENDPOINT_KVK | AGENT_ENDPOINT | 'http://localhost:5000'}/agent",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

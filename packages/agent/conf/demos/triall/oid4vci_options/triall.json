@@ -1,6 +1,6 @@
 {
   "definitionId": "triall2023",
-  "correlationId": "https://ssi.triall.io/issuer",
+  "correlationId": "${AGENT_ENDPOINT_TRIALL | AGENT_ENDPOINT | 'http://localhost:5000'}",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

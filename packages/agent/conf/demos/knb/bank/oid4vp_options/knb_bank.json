@@ -1,6 +1,6 @@
 {
   "definitionId": "knb-bank",
-  "correlationId": "https://bank.demo.sphereon.com/agent",
+  "correlationId": "${AGENT_ENDPOINT_BANK | AGENT_ENDPOINT | 'http://localhost:5000'}/agent",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

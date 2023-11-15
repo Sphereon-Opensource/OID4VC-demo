@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://ssi.sphereon.com/pf3",
+  "correlationId": "${AGENT_ENDPOINT_PF3 | AGENT_ENDPOINT | 'http://localhost:5000'}",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.sphereon.com/pf3",
-    "credential_endpoint": "https://ssi.sphereon.com/pf3/credentials",
+    "credential_issuer": "${AGENT_ENDPOINT_PF3 | AGENT_ENDPOINT | 'http://localhost:5000'}",
+    "credential_endpoint": "${AGENT_ENDPOINT_PF3 | AGENT_ENDPOINT | 'http://localhost:5000'}/credentials",
     "display": [
       {
         "name": "Sphereon",

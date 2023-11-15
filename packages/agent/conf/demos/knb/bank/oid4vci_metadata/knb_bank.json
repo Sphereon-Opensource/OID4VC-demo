@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://bank.demo.sphereon.com/agent",
+  "correlationId": "${AGENT_ENDPOINT_BANK | AGENT_ENDPOINT | 'http://localhost:5000'}/agent",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://bank.demo.sphereon.com/agent",
-    "credential_endpoint": "https://bank.demo.sphereon.com/agent/credentials",
+    "credential_issuer": "${AGENT_ENDPOINT_BANK | AGENT_ENDPOINT | 'http://localhost:5000'}/agent",
+    "credential_endpoint": "${AGENT_ENDPOINT_BANK | AGENT_ENDPOINT | 'http://localhost:5000'}/agent/credentials",
     "display": [
       {
         "name": "Babylon Bank",

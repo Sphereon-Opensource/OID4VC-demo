@@ -1,6 +1,6 @@
 {
   "definitionId": "knb-auckland",
-  "correlationId": "https://notary.demo.sphereon.com/agent",
+  "correlationId": "${AGENT_ENDPOINT_NOTARY | AGENT_ENDPOINT | 'http://localhost:5000'}/agent",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"
