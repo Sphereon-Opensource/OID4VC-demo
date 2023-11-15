@@ -209,6 +209,9 @@
           "pStyle": {
             "color": "#303030"
           }
+        },
+        "bottomText": {
+          "className": "poppins-normal-16"
         }
       },
       "mobile": {

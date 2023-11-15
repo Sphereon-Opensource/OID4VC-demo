@@ -183,16 +183,16 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         <NonMobileOS>
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378}}
-                                pStyle={pageConfig.mobile.qrCode.bottomText.pStyle}
-                                className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                                pStyle={pageConfig.mobile?.qrCode?.bottomText?.pStyle}
+                                className={`${style.pReduceLineSpace} ${pageConfig.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
                                 lines={pageConfig.bottomParagraph ? t(pageConfig.bottomParagraph).split('\n') : []} // FIXME DPP-84
                             />
                         </NonMobileOS>
                         <MobileOS>
                             <Text
                                 style={{flexGrow: 1, marginLeft: 24, marginRight: 24}}
-                                pStyle={pageConfig.qrCode.bottomText.pStyle}
-                                className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                                pStyle={pageConfig.qrCode?.bottomText?.pStyle}
+                                className={`${style.pReduceLineSpace} ${pageConfig.mobile?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
                                 lines={t(pageConfig.mobile?.bottomParagraph ? pageConfig.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                             />
                         </MobileOS>

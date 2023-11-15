@@ -245,6 +245,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
         qrCode?: {
           bottomText?: {
             pStyle?: CSSProperties
+            className?: string
           }
         }
     },
@@ -258,6 +259,7 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
       },
     bottomText?: {
         pStyle?: CSSProperties
+        className?: string
     }
   }
 }
