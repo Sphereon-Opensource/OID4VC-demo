@@ -15,7 +15,7 @@ if [[ ! $demo_host_address =~ ^http ]]; then
 fi
 
 # Extract ENVIRONMENT name and default to sphereon if not found
-environment_name=$(grep "REACT_APP_DEFAULT_ECOSYSTEM" ./.env.oid4vci-demo-frontend | cut -d '=' -f2)
+environment_name=$(grep "^REACT_APP_DEFAULT_ECOSYSTEM=" ./.env.oid4vci-demo-frontend | cut -d '=' -f2)
 
 if [ -z "$environment_name" ]; then
     environment_name="sphereon"
