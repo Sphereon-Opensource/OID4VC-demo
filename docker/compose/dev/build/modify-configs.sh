@@ -74,4 +74,10 @@ fi
 # change the value of CONF_PATH to our newly created directory
 sed -i "s|^CONF_PATH=.*|CONF_PATH=\"/opt/ssi-agent/packages/agent/conf/${current_folder}\"|" ./.env.ssi-agent
 
-echo "Configuration modification complete for environment: ${environment_name}"
+simplified_dest_dir=$dest_dir
+
+# Loop to remove each occurrence of '../' from the beginning of simplified_dest_dir
+while [[ $simplified_dest_dir == ../* ]]; do
+    simplified_dest_dir=${simplified_dest_dir#../}
+done
+echo "Configuration modification complete for environment: ${environment_name}. and saved to ${simplified_dest_dir}"
