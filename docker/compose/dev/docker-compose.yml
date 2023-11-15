@@ -3,6 +3,10 @@ version: '3.8'
 services:
   ssi-agent:
     container_name: ssi-agent
+    entrypoint: /bin/sh
+    command: -c "while true; do sleep 30; done"
+    environment:
+      - DEMO_HOST_ADDRESS="https://ssi.sphereon.com/demo"
     build:
       context: ../../..
       dockerfile: ./docker/Dockerfile.ssi-agent
@@ -12,7 +16,6 @@ services:
       - "./agent-env/.env.local:/opt/ssi-agent/packages/agent/.env.local:ro"
     ports:
       - "5000:5000"
-    restart: unless-stopped
 
   oid4vci-demo-frontend:
     container_name: oid4vci-demo-frontend
