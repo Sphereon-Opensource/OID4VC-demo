@@ -1,6 +1,6 @@
 {
   "definitionId": "knb-kvk",
-  "correlationId": "${AGENT_ENDPOINT_KVK | AGENT_ENDPOINT | 'http://localhost:5000'}/agent",
+  "correlationId": "${AGENT_ENDPOINT_KVK | AGENT_ENDPOINT | http://localhost:5000'}",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"
