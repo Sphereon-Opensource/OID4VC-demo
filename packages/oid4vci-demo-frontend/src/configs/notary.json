@@ -223,8 +223,8 @@
         "logo": {
           "src": "notary/logo.svg",
           "alt": "notary",
-          "width": 200,
-          "height": 200
+          "width": 120,
+          "height": 120
         },
         "backgroundColor": "#E8EAED"
       },
