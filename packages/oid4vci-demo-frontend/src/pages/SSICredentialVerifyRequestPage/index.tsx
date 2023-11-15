@@ -30,7 +30,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     }
 
     return (
-        <div style={{display: 'flex', height: (isTabletOrMobile ? '100%' : '100vh'), width: '100%'}}>
+        <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
                 <div style={{
                     display: 'flex',
@@ -103,7 +103,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
               }
               <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginBottom: '31%'}), ...(isTabletOrMobile && pageConfig.mobile?.qrCode?.rootContainer?.style)}}>
                   <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.qrCode?.container?.style) })}}>
-                    <div>
+                    <div style={{...(isTabletOrMobile && { textAlign: 'center' })}}>
                           <NonMobileOS>
                               <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { height: '100%', marginTop: '4%'})}}>
                                   {/*Whether the QR code is shown (mobile) is handled in the component itself */}

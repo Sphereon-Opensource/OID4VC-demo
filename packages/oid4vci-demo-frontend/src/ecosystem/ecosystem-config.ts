@@ -239,14 +239,13 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
         width?: string | number
         logo?: ImageProperties
         backgroundColor?: string
-        image?: string
+        image?: ImageProperties
         bottomParagraph?: string
         rightPaneWidth?: string | number
-        qrCode?: {
-          bottomText?: {
-            pStyle?: CSSProperties
-            className?: string
-          }
+        bottomText?: {
+          paragraph?: string
+          pStyle?: CSSProperties
+          className?: string
         }
     },
   qrCodeContainer?: {

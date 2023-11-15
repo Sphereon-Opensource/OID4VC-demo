@@ -2,11 +2,11 @@
   "general": {
     "credentialName": "Bank account credential",
     "issueCredentialType": "BankAccount",
-    "oid4vpAgentBaseUrl": "https://bank.demo.sphereon.com/agent",
-    "oid4vciAgentBaseUrl": "https://bank.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "http://192.168.178.52:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.178.52:5000",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Bank credential",
-    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
+    "downloadUrl": "http://192.168.178.52:5000/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
@@ -131,8 +131,7 @@
               "justifyContent": "end",
               "gap": "40px",
               "alignItems": "normal",
-              "flexGrow": 1,
-              "marginTop": "50%"
+              "flexGrow": 1
             }
           },
           "bottomText": {
@@ -222,8 +221,19 @@
           "width": 65,
           "height": 65
         },
+        "bottomText": {
+          "pStyle": {
+            "color": "#303030"
+          },
+          "className": "poppins-normal-16",
+          "paragraph": "credentials_right_pane_bottom_paragraph_mobile_bank"
+        },
         "backgroundColor": "#EFFFF5",
-        "image": "undraw_profile_details_re_ch9r 1.svg"
+        "image": {
+          "src": "undraw_certification_re_ifll_1.svg",
+          "width": 300,
+          "height": 300
+        }
       }
     },
     "infoRequest": {

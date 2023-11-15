@@ -2,11 +2,11 @@
   "general": {
     "credentialName": "Notaris",
     "issueCredentialType": "NotaryCompanyVerification",
-    "oid4vpAgentBaseUrl": "https://notary.demo.sphereon.com/agent",
-    "oid4vciAgentBaseUrl": "https://notary.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "http://192.168.178.52:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.178.52:5000",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Notaris credential",
-    "downloadUrl": "https://notary.demo.sphereon.com/agent/#/download",
+    "downloadUrl": "http://192.168.178.52:5000/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {

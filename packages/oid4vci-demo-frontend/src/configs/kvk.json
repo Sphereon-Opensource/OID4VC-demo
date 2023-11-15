@@ -2,11 +2,11 @@
   "general": {
     "credentialName": "KvK Inschrijving",
     "issueCredentialType": "KvkInschrijving",
-    "oid4vpAgentBaseUrl": "https://kvk.demo.sphereon.com/agent",
-    "oid4vciAgentBaseUrl": "https://kvk.demo.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "http://192.168.178.52:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.178.52:5000",
     "verifierUrl": "https://kvk.demo.sphereon.com/verifier",
     "verifierUrlCaption": "KvK Inschrijving",
-    "downloadUrl": "https://kvk.demo.sphereon.com/agent/#/download"
+    "downloadUrl": "http://192.168.178.52:5000/#/download"
   },
   "pages": {
     "download": {

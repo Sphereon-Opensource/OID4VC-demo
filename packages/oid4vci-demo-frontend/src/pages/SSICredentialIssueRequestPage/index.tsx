@@ -81,7 +81,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
 
 
     return (
-        <div style={{display: 'flex', height: (isTabletOrMobile ? '100%' : '100vh'), width: '100%'}}>
+        <div style={{display: 'flex', height: (isTabletOrMobile ? '100vh' : '100vh'), width: '100%'}}>
             <NonMobile>
                 <div style={{
                     display: 'flex',
@@ -173,27 +173,29 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                                 overflow: 'hidden'
                             }}>
                                 {pageConfig.mobile?.image &&
-                                    <img src={pageConfig.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
+                                    <img src={pageConfig.mobile?.image?.src}
+                                         width={pageConfig.mobile?.image?.width}
+                                         height={pageConfig.mobile?.image?.height} alt="success" style={{overflow: 'hidden'}}/>
                                 }
                                 <DeepLinkButton style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
                             </div>
                         </MobileOS>
                     </div>
-                    <div style={{marginTop: "20px"}}>
+                    <div style={{marginTop: "20px", ...(isTabletOrMobile && { textAlign: 'center', marginTop: 'inherit' })}}>
                         <NonMobileOS>
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378}}
-                                pStyle={pageConfig.mobile?.qrCode?.bottomText?.pStyle}
+                                pStyle={pageConfig.qrCode?.bottomText?.pStyle}
                                 className={`${style.pReduceLineSpace} ${pageConfig.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
                                 lines={pageConfig.bottomParagraph ? t(pageConfig.bottomParagraph).split('\n') : []} // FIXME DPP-84
                             />
                         </NonMobileOS>
                         <MobileOS>
                             <Text
-                                style={{flexGrow: 1, marginLeft: 24, marginRight: 24}}
-                                pStyle={pageConfig.qrCode?.bottomText?.pStyle}
-                                className={`${style.pReduceLineSpace} ${pageConfig.mobile?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
-                                lines={t(pageConfig.mobile?.bottomParagraph ? pageConfig.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                                style={{flexGrow: 1, marginLeft: 24, marginRight: 24, marginBottom: '10%'}}
+                                pStyle={pageConfig.mobile?.bottomText?.pStyle}
+                                className={`${style.pReduceLineSpace} ${pageConfig.mobile?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
+                                lines={t(pageConfig.mobile?.bottomText?.paragraph ? pageConfig.mobile?.bottomText?.paragraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                             />
                         </MobileOS>
                     </div>
