@@ -156,6 +156,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                     <div/>
                     {initComplete && ( // We should not render the form until handleVPToken's result came back
                         <Form
+                            inputBackgroundColor={(isTabletOrMobile ? pageConfig.mobile?.backgroundColor : undefined) }
                             formConfig={pageConfig.form}
                             formInitData={credentialsData}
                             onChange={onFormValueChange}

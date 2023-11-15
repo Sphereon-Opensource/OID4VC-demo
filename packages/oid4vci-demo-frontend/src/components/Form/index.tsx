@@ -9,6 +9,7 @@ import {FormOutputData, FormFieldValue, ImmutableRecord} from '../../types'
 import style from './index.module.css'
 
 type Props = {
+    inputBackgroundColor?: string
     formConfig: DataFormRow[]
     formInitData?: ImmutableRecord
     onChange?: (formData: FormOutputData) => Promise<void>
@@ -47,7 +48,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
         }
     }
 
-    const getFieldElementFrom = (field: DataFormElement, style?: CSSProperties): ReactElement => {
+    const getFieldElementFrom = (field: DataFormElement): ReactElement => {
         const defaultValue: FormFieldValue = evaluateDefaultValue(field, formInitData, formData)
         switch (field.type) {
             case 'checkbox':
@@ -62,12 +63,14 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                 />
             case 'text':
           case 'date':
+                const isReadonly = field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)
+
                 return <InputField
                     labelStyle={field.labelStyle}
-                    inlineStyle={{ ...style, ...field.inputStyle}}
+                    inlineStyle={{ width: '100%', ...(isReadonly && !!props.inputBackgroundColor && { backgroundColor: props.inputBackgroundColor }), ...field.inputStyle }}
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
-                    readonly={field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)}
+                    readonly={isReadonly}
                     defaultValue={defaultValue}
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
@@ -78,9 +81,9 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getRowElementFrom = (row: DataFormRow): ReactElement => {
-        const elementWidth = { width: '100%' }
+
         return <div className={style.formRowContainer}>
-            {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field, elementWidth))}
+            {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field))}
         </div>
     }
 
