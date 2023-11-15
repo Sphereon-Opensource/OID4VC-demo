@@ -5,8 +5,6 @@ services:
     container_name: ssi-agent
     entrypoint: /bin/sh
     command: -c "while true; do sleep 30; done"
-    environment:
-      - DEMO_HOST_ADDRESS="https://ssi.sphereon.com/demo"
     build:
       context: ../../..
       dockerfile: ./docker/Dockerfile.ssi-agent

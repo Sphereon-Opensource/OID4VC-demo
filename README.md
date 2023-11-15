@@ -76,7 +76,15 @@ We maintain two distinct Docker setups for development and production environmen
 
 To build and run the Docker containers, execute the following commands from within the respective directory:
 
-We also have created a script to modify the configurations for you. You can find it in `docker/compose/dev/modify-configs.sh`. This script will look at your `.env.oid4vci-demo-frontend` to select an ecosystem (defaults to `sphereon`) and then looks at your docker-compose file for `DEMO_HOST_ADDRESS` (defaults to `localhost`) if not found. After that, it will copy the desired ecosystem agent's config files to a folder called `docker+epoch_date` like: `docker-1700059590` uses that as the configuration for the demo.
+We also have created a script to modify the configurations for you. You can find it in `docker/compose/dev/modify-configs.sh`. This script will look at your `.env.oid4vci-demo-frontend` to select an ecosystem (defaults to `sphereon`) and then looks at your docker-compose file for `DEMO_HOST_ADDRESS`. **Note that you can't continue unless you provide this value**:
+```yaml
+services:
+  ssi-agent:
+    ...
+    environment:
+      - DEMO_HOST_ADDRESS="https://my-ssi-demo.com"
+```
+After that, it will copy the desired ecosystem agent's config files to a folder called `docker+epoch_date` like: `docker-1700059590` uses that as the configuration for the demo.
 
 ```bash
 
