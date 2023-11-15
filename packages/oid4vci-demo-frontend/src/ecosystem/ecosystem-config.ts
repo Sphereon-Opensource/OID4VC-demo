@@ -71,8 +71,11 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
           container?: {
             style?: CSSProperties
           }
-          bottomParagraph?: {
+          bottomText?: {
+            paragraph?: string
             style?: CSSProperties
+            className?: string
+            pStyle?: CSSProperties
           }
         }
         logo?: ImageProperties
@@ -239,9 +242,23 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
         image?: string
         bottomParagraph?: string
         rightPaneWidth?: string | number
+        qrCode?: {
+          bottomText?: {
+            pStyle?: CSSProperties
+          }
+        }
     },
   qrCodeContainer?: {
       height: string
+  }
+  qrCode?: {
+      topTitle?: {
+        h2Style?: CSSProperties
+        pStyle?: CSSProperties
+      },
+    bottomText?: {
+        pStyle?: CSSProperties
+    }
   }
 }
 
@@ -249,6 +266,8 @@ export interface SSIInformationManualRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photo?: string
     text_top_of_image?: string
+    sharing_data_right_pane_title_style?: CSSProperties
+    sharing_data_right_pane_paragraph_style?: CSSProperties
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
     primaryButtonResourceId?: string
@@ -276,6 +295,7 @@ export interface DataFormElement {
     label?: string
     labelUrl?: string
     labelStyle?: CSSProperties
+    inputStyle?: CSSProperties
     readonly?: boolean
     customValidation?: string
     display?: {
@@ -442,6 +462,7 @@ export interface EcosystemGeneralConfig {
 }
 
 export interface SSITextConfig extends ComponentConfig {
+  // For future reference: For some reason the CSS style reaches the component, but it's not picked up
 }
 
 export interface VCIConfigPages {
