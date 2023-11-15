@@ -1,0 +1,563 @@
+{
+  "correlationId": "http://internet.or.LAN.host:5000/sphereonGuest",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "http://internet.or.LAN.host:5000/sphereonGuest",
+    "credential_endpoint": "http://internet.or.LAN.host:5000/sphereonGuest/credentials",
+    "display": [
+      {
+        "name": "Sphereon International",
+        "description": "Sphereon International"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Example University Degree",
+            "description": "JFF Plugfest 3 OpenBadge (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#1763c1",
+            "logo": {
+              "url": "https://w3c-ccg.github.io/vc-ed/plugfest-1-2022/images/JFF_LogoLockup.png",
+              "alt_text": "Red, magenta and yellow vertical lines with 3 black dots and the text JFF, depicting the Jobs For the Future logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Example University Degree",
+            "description": "JFF Plugfest 3 OpenBadge (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#1763c1",
+            "logo": {
+              "url": "https://w3c-ccg.github.io/vc-ed/plugfest-1-2022/images/JFF_LogoLockup.png",
+              "alt_text": "Red, magenta and yellow vertical lines with 3 black dots and the text JFF, depicting the Jobs For the Future logo."
+            }
+          }
+        ],
+        "id": "OpenBadgeCredentialJwt",
+        "types": [
+          "VerifiableCredential",
+          "OpenBadgeCredential"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:key"
+        ],
+        "cryptographic_suites_supported": [
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Permanent Resident Card",
+            "description": "Government of Kakapo (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#3a2d2d",
+            "logo": {
+              "url": "https://i.ibb.co/kJm9Mpx/Screenshot-2023-08-18-000155.png",
+              "alt_text": "White shield with text Government of Kakapo and subtitle Ministry of Foreign Affairs."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Permanent Resident Card",
+            "description": "Government of Kakapo (JWT)",
+            "text_color": "#FFFFFF",
+            "background_color": "#3a2d2d",
+            "logo": {
+              "url": "https://i.ibb.co/kJm9Mpx/Screenshot-2023-08-18-000155.png",
+              "alt_text": "White shield with text Government of Kakapo and subtitle Ministry of Foreign Affairs."
+            }
+          }
+        ],
+        "id": "PermantResidentCardJwt",
+        "types": [
+          "VerifiableCredential",
+          "PermanentResidentCard"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Sphereon guest",
+            "description": "Demo credential",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Demo credential",
+            "description": "Sphereon guest credential for demo purposes.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Sphereon gast",
+            "description": "Sphereon gast credential wordt uitgegeven voor demo doeleinden.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "email",
+          "type"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "First Name"
+              },
+              {
+                "name": "First Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Last Name"
+              },
+              {
+                "name": "Last Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "email": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email"
+              },
+              {
+                "name": "Email",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "type": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Type"
+              },
+              {
+                "name": "Type",
+                "locale": "en-US"
+              },
+              {
+                "name": "Type",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "sphereon2023",
+        "types": [
+          "VerifiableCredential",
+          "GuestCredential"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Membership Example",
+            "description": "Membership Example credential",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Membership Example",
+            "description": "Sphereon Membership Example credential for demo purposes.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Voorbeeld lidmaatschap",
+            "description": "Sphereon voorbeeld lidmaatschap credential wordt uitgegeven voor demo doeleinden.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "email",
+          "type"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "First Name"
+              },
+              {
+                "name": "First Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Last Name"
+              },
+              {
+                "name": "Last Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "email": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email"
+              },
+              {
+                "name": "Email",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "type": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Type"
+              },
+              {
+                "name": "Type",
+                "locale": "en-US"
+              },
+              {
+                "name": "Type",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "MembershipExample",
+        "types": [
+          "VerifiableCredential",
+          "MembershipExample"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Verified Employee",
+            "description": "Verified employee credential",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Verified Employee",
+            "description": "Verified Employee credential for demo purposes.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Geverifieerde medewerker",
+            "description": "Geverifieerde medewerker credential wordt uitgegeven voor demo doeleinden.",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          }
+        ],
+        "order": [
+          "givenName",
+          "surname",
+          "mail",
+          "displayName",
+          "jobTitle",
+          "preferredLanguage"
+        ],
+        "credentialSubject": {
+          "givenName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Given Name"
+              },
+              {
+                "name": "Given Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "surname": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Surname"
+              },
+              {
+                "name": "Surname",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "mail": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email"
+              },
+              {
+                "name": "Email",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "displayName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Display Name"
+              },
+              {
+                "name": "Display Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Weergavenaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "jobTitle": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Job Title"
+              },
+              {
+                "name": "Job Title",
+                "locale": "en-US"
+              },
+              {
+                "name": "Functietitel",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "preferredLanguage": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Preferred Language"
+              },
+              {
+                "name": "Preferred Language",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voorkeurstaal",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "VerifiedEmployee",
+        "types": [
+          "VerifiableCredential",
+          "VerifiedEmployee"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256",
+          "ES256K",
+          "EdDSA"
+        ]
+      }
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/sphereonGuest",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "GuestCredential"
+          ],
+          "template_path": "GuestCredential.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "MembershipExample"
+          ],
+          "template_path": "MembershipExample.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "OpenBadgeCredential"
+          ],
+          "template_path": "OpenBadgeCredential.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "PermanentResidentCard"
+          ],
+          "template_path": "PermanentResidentCard.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "VerifiedEmployee"
+          ],
+          "template_path": "VerifiedEmployee.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
+  }
+}

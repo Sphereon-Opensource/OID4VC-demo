@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC, ReactElement, ReactNode, useState} from 'react'
+import React, {CSSProperties, FC, ReactElement, ReactNode, useEffect, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
@@ -87,6 +87,12 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     const getFormFrom = (): Array<ReactElement> => {
         return formConfig.map((row: DataFormRow) => getRowElementFrom(row))
     }
+
+    useEffect((): void => {
+        if (onChange && formInitData) { // Update host form to update enable nxt button
+            onChange(formData)
+        }
+    })
 
     return <div className={style.container}>
         {getFormFrom()}

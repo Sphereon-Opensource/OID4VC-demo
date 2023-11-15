@@ -462,7 +462,6 @@ export interface EcosystemGeneralConfig {
 }
 
 export interface SSITextConfig extends ComponentConfig {
-  // For future reference: For some reason the CSS style reaches the component, but it's not picked up
 }
 
 export interface VCIConfigPages {

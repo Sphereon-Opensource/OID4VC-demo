@@ -45,12 +45,14 @@ const SSIInformationSuccessPage: React.FC = () => {
                             backgroundSize: 'cover',
                         }}
                     >
-                        <div style={{marginTop: 'auto', marginBottom: 153}}>
-                            <Text
-                                className={`${style.text} poppins-medium-36`}
-                                lines={t('common_left_pane_title').split('\n')}
-                            />
-                        </div>
+                        {(pageConfig.textLeft) && (
+                            <div style={{marginTop: 'auto', marginBottom: 153}}>
+                                <Text
+                                    className={`${style.text} poppins-medium-36`}
+                                    lines={t(pageConfig.textLeft).split('\n')}
+                                />
+                            </div>
+                        )}
                     </div>
                 }
             </NonMobile>
