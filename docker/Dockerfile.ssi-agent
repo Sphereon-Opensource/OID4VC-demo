@@ -1,10 +1,11 @@
-FROM node:lts-bullseye
+FROM node:lts-bookworm
 SHELL ["/bin/bash", "-c"]
 RUN npm -g install pnpm && SHELL=bash pnpm setup && source /root/.bashrc && pnpm add -g pnpm
 RUN pnpm add typescript tslib
 WORKDIR /opt/ssi-agent
 
-COPY ./packages/agent .
+COPY /. .
+RUN rm -rf /root/.local/share/pnpm/store
 RUN pnpm install -r
 RUN pnpm build
 
