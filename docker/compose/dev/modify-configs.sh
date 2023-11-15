@@ -16,14 +16,14 @@ if [[ ! $demo_host_address =~ ^http ]]; then
 fi
 
 # Extract ENVIRONMENT name and default to sphereon if not found
-environment_name=$(grep "^[[:space:]]*REACT_APP_DEFAULT_ECOSYSTEM[[:space:]]*=" ./.env.oid4vci-demo-frontend | cut -d '=' -f2 | xargs)
+environment_name=$(grep "^[[:space:]]*REACT_APP_DEFAULT_ECOSYSTEM[[:space:]]*=" ../../.env.oid4vci-demo-frontend | cut -d '=' -f2 | xargs)
 
 if [ -z "$environment_name" ]; then
     environment_name="sphereon"
 fi
 
 # change the urls in vci frontend configs
-config_file="../../../../packages/oid4vci-demo-frontend/src/configs/${environment_name}.json"
+config_file="../../../packages/oid4vci-demo-frontend/src/configs/${environment_name}.json"
 if [ -f "$config_file" ]; then
     new_oid4vp_agent_base_url="${demo_host_address}:5000"
     new_oid4vci_agent_base_url="${demo_host_address}:5000"
@@ -35,9 +35,10 @@ else
     echo "Config file not found: ${config_file}"
 fi
 
-src_dir="../../../../packages/agent/conf/demos/${environment_name}"
-current_folder="docker-$(date +%s)"
-dest_dir="../../../../packages/agent/conf/dev/${current_folder}" # Using epoch time for uniqueness
+src_dir="../../../packages/agent/conf/demos/${environment_name}"
+current_folder="${environment_name}"
+dest_dir="./agent-env/conf" # Using epoch time for uniqueness
+mkdir -p $dest_dir/${current_folder}
 
 # Check if the source directory exists (because we might have different names for our config here)
 if [ ! -d "$src_dir" ]; then
@@ -72,7 +73,7 @@ if [ -d "$oid4vci_metadata_folder" ]; then
 fi
 
 # change the value of CONF_PATH to our newly created directory
-sed -i "s|^CONF_PATH=.*|CONF_PATH=\"/opt/ssi-agent/packages/agent/conf/${current_folder}\"|" ./.env.ssi-agent
+sed -i "s|^CONF_PATH=.*|CONF_PATH=\"/opt/ssi-agent/packages/agent/conf/${current_folder}\"|" ../../.env.ssi-agent
 
 simplified_dest_dir=$dest_dir
 

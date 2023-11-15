@@ -1,46 +1,59 @@
 version: '3.8'
 
 services:
-  ssi-agent:
-    container_name: ssi-agent
-    entrypoint: /bin/sh
-    command: -c "while true; do sleep 30; done"
+  oid4vc-demo-ssi-agent:
+    container_name: oid4vc-demo-ssi-agent
+    image: oid4vc-demo-ssi-agent:latest
     build:
       context: ../../..
-      dockerfile: ./docker/Dockerfile.ssi-agent
+      dockerfile: ./docker/Dockerfile
+      args:
+        PACKAGE_PATH: packages/agent
+        NODE_SCRIPT: "start:dev"
     env_file:
       - ../../.env.ssi-agent
+    environment:
+      - DEMO_HOST_ADDRESS="http://192.168.1.200:500"
     volumes:
-      - "./agent-env/.env.local:/opt/ssi-agent/packages/agent/.env.local:ro"
+#      - "./agent-env/.env.local:/opt/oid4vc-demo/packages/agent/.env.local:ro"
+      - "./agent-env/conf:/opt/oid4vc-demo/packages/agent/conf:ro"
     ports:
       - "5000:5000"
 
   oid4vci-demo-frontend:
     container_name: oid4vci-demo-frontend
+    image: oid4vci-demo-frontend:latest
     env_file:
       - ../../.env.oid4vci-demo-frontend
     depends_on:
-      - ssi-agent
+      - oid4vc-demo-ssi-agent
     tty: true
     build:
       context: ../../..
-      dockerfile: ./docker/Dockerfile.oid4vci-demo-frontend
+      dockerfile: ./docker/Dockerfile
+      args:
+        PACKAGE_PATH: packages/oid4vci-demo-frontend
+        NODE_SCRIPT: "start:prod"
     ports:
       - "5001:5001"
     restart: unless-stopped
 
   oid4vp-demo-frontend:
     container_name: oid4vp-demo-frontend
+    image: oid4vp-demo-frontend:latest
     extra_hosts:
       - "host.docker.internal:host-gateway"
     env_file:
       - ../../.env.oid4vp-demo-frontend
     depends_on:
-      - ssi-agent
+      - oid4vc-demo-ssi-agent
     tty: true
     build:
       context: ../../..
-      dockerfile: ./docker/Dockerfile.oid4vp-demo-frontend
+      dockerfile: ./docker/Dockerfile
+      args:
+        PACKAGE_PATH: packages/oid4vp-demo-frontend
+        NODE_SCRIPT: "start:prod"
     ports:
       - "5002:5002"
     restart: unless-stopped
