@@ -70,7 +70,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
     return (
         <div style={{
             display: 'flex',
-            height: isTabletOrMobile ? "100vh" : "100vh",
+            height: "100vh",
             width: '100vw',
             ...(isTabletOrMobile && {
                 overflowX: "hidden",
@@ -83,7 +83,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                 <div id={"photo"} style={{
                     display: 'flex',
                     width: pageConfig.leftPaneWidth ?? '60%',
-                    height: '100vh',
+                    height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / cover`}),

@@ -78,7 +78,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getRowElementFrom = (row: DataFormRow): ReactElement => {
-        const elementWidth = row.length > 1 ? { width: `${100 / row.length}%`} : undefined
+        const elementWidth = { width: '100%' }
         return <div className={style.formRowContainer}>
             {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field, elementWidth))}
         </div>
