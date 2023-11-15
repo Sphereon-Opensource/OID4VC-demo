@@ -1,6 +1,6 @@
 {
   "definitionId": "sphereonGuest",
-  "correlationId": "${AGENT_ENDPOINT_SPHEREONGUEST | AGENT_ENDPOINT | 'http://localhost:5000' }",
+  "correlationId": "${AGENT_ENDPOINT_SPHEREONGUEST ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

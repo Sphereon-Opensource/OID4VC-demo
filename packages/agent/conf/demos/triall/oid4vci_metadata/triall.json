@@ -1,9 +1,9 @@
 {
-  "correlationId": "${AGENT_ENDPOINT_TRIALL | AGENT_ENDPOINT | 'http://localhost:5000'}",
+  "correlationId": "${AGENT_ENDPOINT_TRIALL ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "${AGENT_ENDPOINT_TRIALL | AGENT_ENDPOINT | 'http://localhost:5000'}",
-    "credential_endpoint": "${AGENT_ENDPOINT_TRIALL | AGENT_ENDPOINT | 'http://localhost:5000'}/credentials",
+    "credential_issuer": "${AGENT_ENDPOINT_TRIALL ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}",
+    "credential_endpoint": "${AGENT_ENDPOINT_TRIALL ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}/credentials",
     "display": [
       {
         "name": "Triall",

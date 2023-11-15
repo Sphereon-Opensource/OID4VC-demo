@@ -40,22 +40,21 @@ export function loadJsonFiles<T>({path}: { path: string }): {
 }
 
 function substituteEnvVars(content: string): string {
-    const envVarRegex = /\$\{([^}]+)}/g
+    const envVarRegex = /\$\{([^}]+)}/g;
     return content.replace(envVarRegex, (_, vars) => {
-        const options = vars.split('|').map((opt: string) => opt.trim())
+        const options = vars.split(/(?:\|\|)|(?:\?\?)/).map((opt: string) => opt.trim()).filter(Boolean);
         for (const option of options) {
             if (option.startsWith("'") && option.endsWith("'")) {
-                return option.slice(1, -1)
+                return option.slice(1, -1);
             }
-            const envValue = process.env[option]
+            const envValue = process.env[option];
             if (envValue !== undefined && envValue !== null && envValue.trim() !== '') {
-                return envValue
+                return envValue;
             }
         }
-        return ''
-    })
+        return '';
+    });
 }
-
 
 /**
  * The function builds a file path without missing or excess slashes
