@@ -91,7 +91,7 @@ Please note that Docker will configure your images using the settings specified 
 .env.ssi-agent
 ```
 Ensure that you have correctly set up your environment variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
-The  current example chooses the folder `packages/agent/conf/demos/sphereonGuest` as your base configuration folder.
+The  current example chooses the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
 The building process may take a few minutes. Once you execute the docker compose up command, three services will start: ssi-agent, oid4vci-demo-frontend, and oid4vp-frontend.
 
 You should now be able to go to http://host.docker.internal:5001 and http://host.docker.internal:5002 respectively to

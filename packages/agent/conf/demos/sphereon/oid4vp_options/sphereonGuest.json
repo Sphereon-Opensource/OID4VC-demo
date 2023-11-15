@@ -1,5 +1,5 @@
 {
-  "definitionId": "sphereonGuest",
+  "definitionId": "sphereon",
   "rpOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"
