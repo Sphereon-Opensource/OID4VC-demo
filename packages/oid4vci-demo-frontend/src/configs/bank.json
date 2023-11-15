@@ -1,12 +1,12 @@
 {
   "general": {
-    "credentialName": "Bank account credential",
+    "credentialName": "Bank account",
     "issueCredentialType": "BankAccount",
-    "oid4vpAgentBaseUrl": "http://192.168.178.52:5000",
-    "oid4vciAgentBaseUrl": "http://192.168.178.52:5000",
+    "oid4vpAgentBaseUrl": "https://bank.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://bank.demo.sphereon.com/agent",
     "verifierUrl": "https://sphereon.com",
     "verifierUrlCaption": "Bank credential",
-    "downloadUrl": "http://192.168.178.52:5000/#/download",
+    "downloadUrl": "https://bank.demo.sphereon.com/agent/#/download",
     "redirectUrl": "https://knb.demo.sphereon.com"
   },
   "pages": {
