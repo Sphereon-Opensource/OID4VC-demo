@@ -95,6 +95,10 @@
         "qrCode": {
           "fgColor": "#000000",
           "bottomText": {
+            "className": "poppins-normal-16",
+            "pStyle": {
+              "color": "#303030"
+            },
             "credential_verify_request_right_pane_bottom_title": "",
             "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph"
           },
@@ -126,15 +130,19 @@
               "justifyContent": "end",
               "gap": "40px",
               "alignItems": "normal",
-              "flexGrow": 1,
-              "marginTop": "50%"
+              "flexGrow": 1
             }
           },
-          "bottomParagraph": {
+          "bottomText": {
+            "paragraph": "credential_verify_request_right_pane_bottom_paragraph_mobile_bank",
+            "pStyle": {
+              "color": "#303030"
+            },
             "style": {
               "display": "block",
               "height": "10%"
-            }
+            },
+            "className": "poppins-normal-16"
           }
         },
         "logo": {
@@ -183,6 +191,19 @@
         "width": 383,
         "height": 383
       },
+      "qrCode": {
+        "topTitle": {
+          "h2Style": {
+            "color": "#424242"
+          },
+          "pStyle": {
+            "color": "#303030"
+          }
+        },
+        "bottomText": {
+          "className": "poppins-normal-16"
+        }
+      },
       "mobile": {
         "width": "inherit",
         "logo": {
@@ -191,13 +212,30 @@
           "width": 65,
           "height": 65
         },
+        "bottomText": {
+          "pStyle": {
+            "color": "#303030"
+          },
+          "className": "poppins-normal-16",
+          "paragraph": "credentials_right_pane_bottom_paragraph_mobile_bank"
+        },
         "backgroundColor": "#EDEFFF",
-        "image": "undraw_certification_re_ifll_1.svg"
+        "image": {
+          "src": "undraw_certification_re_ifll_1.svg",
+          "width": 300,
+          "height": 300
+        }
       }
     },
     "infoRequest": {
       "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "coc_sharing_data_right_pane_top_paragraph",
+      "sharing_data_right_pane_title_style": {
+        "color": "#303030"
+      },
+      "sharing_data_right_pane_paragraph_style": {
+        "color": "#303030"
+      },
       "backgroundColor": "#005371",
       "primaryButtonResourceId": "Share",
       "logo": {
@@ -222,6 +260,7 @@
             "key": "Bedrijfsnaam",
             "label": "ssi_information_request_page_form_company_name_label",
             "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -232,6 +271,7 @@
             "key": "KvkNummer",
             "label": "ssi_information_request_page_form_coc_number_label",
             "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true,
             "defaultValue": "*RANDOM8"
@@ -243,6 +283,7 @@
             "key": "Bedrijfslocatie",
             "label": "ssi_information_request_page_form_company_location_label",
             "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -253,6 +294,7 @@
             "key": "Voornaam",
             "label": "ssi_information_request_page_form_first_name_director_label",
             "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           },
@@ -261,6 +303,7 @@
             "key": "Achternaam",
             "label": "ssi_information_request_page_form_last_name_director_label",
             "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -271,6 +314,7 @@
             "key": "Geboorteplaats",
             "label": "ssi_information_request_page_form_place_of_birth_label",
             "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -281,6 +325,7 @@
             "key": "Geboortedatum",
             "label": "ssi_information_request_page_form_date_of_birth_label",
             "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "date",
             "required": true
           }
