@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker_compose_file="../docker-compose.yml"
+docker_compose_file="./docker-compose.yml"
 
 # Extract DEMO_HOST_ADDRESS and otherwise default to localhost
 demo_host_address=$(awk '/ssi-agent:/{flag=1; next} /environment:/{flag=2; next} flag==2 && /DEMO_HOST_ADDRESS/{split($2,a,"="); print a[2]; flag=0}' "$docker_compose_file" | tr -d '"' | tr -d ' ')

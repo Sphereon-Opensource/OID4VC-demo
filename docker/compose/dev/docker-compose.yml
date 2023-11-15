@@ -5,11 +5,11 @@ services:
     container_name: ssi-agent
     build:
       context: ../../..
-      dockerfile: ./docker/compose/dev/build/Dockerfile.ssi-agent
+      dockerfile: ./docker/Dockerfile.ssi-agent
     env_file:
-      - ./build/.env.ssi-agent
+      - ../../.env.ssi-agent
     volumes:
-      - "$PWD/agent-env/.env.local:/opt/ssi-agent/packages/agent/.env.local:ro"
+      - "./agent-env/.env.local:/opt/ssi-agent/packages/agent/.env.local:ro"
     ports:
       - "5000:5000"
     restart: unless-stopped
@@ -17,13 +17,13 @@ services:
   oid4vci-demo-frontend:
     container_name: oid4vci-demo-frontend
     env_file:
-      - ./build/.env.oid4vci-demo-frontend
+      - ../../.env.oid4vci-demo-frontend
     depends_on:
       - ssi-agent
     tty: true
     build:
       context: ../../..
-      dockerfile: ./docker/compose/dev/build/Dockerfile.oid4vci-demo-frontend
+      dockerfile: ../../build/Dockerfile.oid4vci-demo-frontend
     ports:
       - "5001:5001"
     restart: unless-stopped
@@ -33,13 +33,13 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     env_file:
-      - ./build/.env.oid4vp-demo-frontend
+      - ../../.env.oid4vp-demo-frontend
     depends_on:
       - ssi-agent
     tty: true
     build:
       context: ../../..
-      dockerfile: ./docker/compose/dev/build/Dockerfile.oid4vp-demo-frontend
+      dockerfile: ../../build/Dockerfile.oid4vp-demo-frontend
     ports:
       - "5002:5002"
     restart: unless-stopped
