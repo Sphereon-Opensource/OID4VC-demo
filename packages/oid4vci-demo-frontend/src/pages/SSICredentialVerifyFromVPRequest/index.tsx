@@ -85,35 +85,48 @@ export default function SSICredentialVerifyFromVPRequestPage(): React.ReactEleme
               marginBottom: '25%',
               marginTop: '25%'
             }}>
-              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
-                {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                           fgColor={'rgba(50, 57, 72, 1)'}
-                                           width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                           vpDefinitionId={flowRouter.getVpDefinitionId()}
-                                           onAuthRequestRetrieved={console.log}
-                                           onSignInComplete={onSignInComplete}
-                                           setQrCodeData={setDeepLink}/>}
-              </div>
-              <div style={{
-                paddingTop: 20,
-                paddingBottom: 20,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '1rem'
-              }}>
-                <DeepLinkButton link={deepLink} buttonType={"secondary"} textColor={pageConfig.textColor} style={{width: 300}}/>
-                <SSIPrimaryButton
-                    caption={t('credential_verify_request_right_pane_button_caption')}
-                    onClick={async () => {
-                      navigate('/information/manual/request');
-                    }}
-                />
-              </div>
 
-
-              <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                    lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
+                <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', marginBottom: 0}}>
+                    <NonMobileOS>
+                        <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                            {/*Whether the QR code is shown (mobile) is handled in the component itself */}
+                            {<MemoizedAuthenticationQR ecosystem={ecosystem}
+                                                       fgColor={'rgba(50, 57, 72, 1)'}
+                                                       width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
+                                                       vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                       onAuthRequestRetrieved={console.log}
+                                                       onSignInComplete={onSignInComplete}
+                                                       setQrCodeData={setDeepLink}/>}
+                        </div>
+                    </NonMobileOS>
+                    <MobileOS>
+                        {<MemoizedAuthenticationQR ecosystem={ecosystem}
+                                                   vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                   onAuthRequestRetrieved={console.log}
+                                                   onSignInComplete={onSignInComplete}
+                                                   setQrCodeData={setDeepLink}/>}
+                        <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
+                            <DeepLinkButton style={{flexGrow: 1}} link={deepLink}/>
+                        </div>
+                    </MobileOS>
+                </div>
+                <div style={{
+                    paddingTop: 40,
+                    paddingBottom: 20,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '1rem'
+                }}>
+                    <SSIPrimaryButton
+                        caption={t('credential_verify_request_right_pane_button_caption')}
+                        onClick={async () => {
+                            navigate('/information/manual/request')
+                        }}
+                    />
+                    <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                          lines={t('credential_verify_request_right_pane_bottom_paragraph').split('\n')}/>
+                </div>
             </div>
             <div style={{
               display: 'flex',
