@@ -1,7 +1,7 @@
 {
   "general": {
     "credentialName": "Triall Guest",
-    "issueCredentialType": "GuestCredential",
+    "issueCredentialType": "triall2023",
     "oid4vpAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
     "oid4vciAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
     "verifierUrl": "https://cix.triall.io",
