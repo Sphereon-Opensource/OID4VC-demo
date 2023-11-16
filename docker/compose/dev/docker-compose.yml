@@ -11,12 +11,9 @@ services:
         PACKAGE_PATH: packages/agent
         NODE_SCRIPT: "start:dev"
     env_file:
-      - ../../.env.ssi-agent
-    environment:
-      - DEMO_HOST_ADDRESS="http://192.168.1.200:500"
+      - ./agent/.env.local
     volumes:
-#      - "./agent-env/.env.local:/opt/oid4vc-demo/packages/agent/.env.local:ro"
-      - "./agent-env/conf:/opt/oid4vc-demo/packages/agent/conf:ro"
+      - "./agent/conf:/opt/oid4vc-demo/packages/agent/conf:ro"
     ports:
       - "5000:5000"
 
@@ -24,7 +21,7 @@ services:
     container_name: oid4vci-demo-frontend
     image: oid4vci-demo-frontend:latest
     env_file:
-      - ../../.env.oid4vci-demo-frontend
+      - ./oid4vci-demo-frontend/.env.local
     depends_on:
       - oid4vc-demo-ssi-agent
     tty: true
@@ -44,7 +41,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     env_file:
-      - ../../.env.oid4vp-demo-frontend
+      - ./oid4vp-demo-frontend/.env.local
     depends_on:
       - oid4vc-demo-ssi-agent
     tty: true

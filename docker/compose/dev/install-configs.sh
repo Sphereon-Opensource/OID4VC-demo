@@ -1,11 +1,10 @@
 #!/bin/bash
 
-docker_compose_file="./docker-compose.yml"
 
 # Extract DEMO_HOST_ADDRESS and otherwise exits.
-demo_host_address=$(awk '/ssi-agent:/{flag=1; next} /environment:/{flag=2; next} flag==2 && /DEMO_HOST_ADDRESS/{split($2,a,"="); print a[2]; flag=0}' "$docker_compose_file" | tr -d '"' | tr -d ' ')
+demo_host_address=$1
 if [ -z "$demo_host_address" ]; then
-    echo "Error: DEMO_HOST_ADDRESS not found in docker-compose.yml."
+    echo "Usage: ./install-configs.sh <demo host address>"
     exit 1
 fi
 
@@ -15,8 +14,17 @@ if [[ ! $demo_host_address =~ ^http ]]; then
     demo_host_address="http://${demo_host_address}"
 fi
 
+# copy .env files from templates
+mkdir -p ./agent
+cp ../../.env.ssi-agent ./agent/.env.local
+mkdir -p ./oid4vci-demo-frontend
+cp ../../.env.oid4vci-demo-frontend ./oid4vci-demo-frontend/.env.local
+mkdir -p ./oid4vp-demo-frontend
+cp ../../.env.oid4vp-demo-frontend ./oid4vp-demo-frontend/.env.local
+
+
 # Extract ENVIRONMENT name and default to sphereon if not found
-environment_name=$(grep "^[[:space:]]*REACT_APP_DEFAULT_ECOSYSTEM[[:space:]]*=" ../../.env.oid4vci-demo-frontend | cut -d '=' -f2 | xargs)
+environment_name=$(grep "^[[:space:]]*REACT_APP_DEFAULT_ECOSYSTEM[[:space:]]*=" ./oid4vci-demo-frontend/.env.local | cut -d '=' -f2 | xargs)
 
 if [ -z "$environment_name" ]; then
     environment_name="sphereon"
@@ -25,8 +33,8 @@ fi
 # change the urls in vci frontend configs
 config_file="../../../packages/oid4vci-demo-frontend/src/configs/${environment_name}.json"
 if [ -f "$config_file" ]; then
-    new_oid4vp_agent_base_url="${demo_host_address}:5000"
-    new_oid4vci_agent_base_url="${demo_host_address}:5000"
+    new_oid4vp_agent_base_url="${demo_host_address}"
+    new_oid4vci_agent_base_url="${demo_host_address}"
 
     jq --arg oid4vp "$new_oid4vp_agent_base_url" --arg oid4vci "$new_oid4vci_agent_base_url" \
        '.general.oid4vpAgentBaseUrl = $oid4vp | .general.oid4vciAgentBaseUrl = $oid4vci' \
@@ -37,7 +45,7 @@ fi
 
 src_dir="../../../packages/agent/conf/demos/${environment_name}"
 current_folder="${environment_name}"
-dest_dir="./agent-env/conf" # Using epoch time for uniqueness
+dest_dir="./agent/conf" # Using epoch time for uniqueness
 mkdir -p $dest_dir/${current_folder}
 
 # Check if the source directory exists (because we might have different names for our config here)
@@ -73,7 +81,7 @@ if [ -d "$oid4vci_metadata_folder" ]; then
 fi
 
 # change the value of CONF_PATH to our newly created directory
-sed -i "s|^CONF_PATH=.*|CONF_PATH=\"/opt/ssi-agent/packages/agent/conf/${current_folder}\"|" ../../.env.ssi-agent
+sed -i "s|^CONF_PATH=.*|CONF_PATH=\"/opt/oid4vc-demo/packages/agent/conf/${current_folder}\"|" ./agent/.env.local
 
 simplified_dest_dir=$dest_dir
 

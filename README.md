@@ -75,28 +75,23 @@ introduction on how credential branding actually works.
 We maintain two distinct Docker setups for development and production environments. Navigate to either `docker/compose/dev` for development or `docker/compose/prod` for production to find their respective `docker-compose.yml` files.
 
 To build and run the Docker containers, execute the following commands from within the respective directory:
-
-We also have created a script to modify the configurations for you. You can find it in `docker/compose/dev/modify-configs.sh`. This script will look at your `.env.oid4vci-demo-frontend` to select an ecosystem (defaults to `sphereon`) and then looks at your docker-compose file for `DEMO_HOST_ADDRESS`. **Note that you can't continue unless you provide this value**:
-```yaml
-services:
-  ssi-agent:
-    ...
-    environment:
-      - DEMO_HOST_ADDRESS="https://my-ssi-demo.com"
-```
-After that, it will copy the desired ecosystem agent's config files to a folder called `docker+epoch_date` like: `docker-1700059590` uses that as the configuration for the demo.
-
 ```bash
-
 docker compose build # This builds the Docker images
-docker compose up    # This starts the Docker containers
+docker compose up -d # This starts the Docker containers
 ```
 
-Please note that Docker will configure your images using the settings specified in the `build` directory:
+We also have created a script to modify and install the agent configurations for you. It's located here: `docker/compose/dev/install-configs.sh <demo host address>`.
+This should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet software. For example:
+```bash
+install-configs.sh http://192.168.1.100:5000
 ```
-.env.oid4vci-demo-frontend
-.env.oid4vp-demo-frontend
-.env.ssi-agent
+The script will look at your `oid4vci-demo-frontend/.env.local` to select an ecosystem (defaults to `sphereon`).
+
+Please note that Docker Compose will set up the environment for your containers using the env files contained in the directories under `docker/compose/dev`:
+```
+oid4vci-demo-frontend/.env.local
+oid4vp-demo-frontend/.env.local
+agent/.env.local
 ```
 Ensure that you have correctly set up your environment variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
 The  current example chooses the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
