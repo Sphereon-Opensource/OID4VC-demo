@@ -72,9 +72,8 @@ introduction on how credential branding actually works.
 - [Credential Branding](./documents/credential-branding.md)
 
 ### Docker
-We maintain two distinct Docker setups for development and production environments. Navigate to either `docker/compose/build` for development or `docker/compose/prod` for production to find their respective `docker-compose.yml` files.
-
-We have created a script to modify and install the agent configurations for you required to build and run the Docker containers.
+We maintain Docker a setup for building and testing in directory `docker/compose/build`.
+We have created a script to install and patch the agent configurations for you required to build and run the Docker containers.
 It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent host address>`.
 The host address should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet software. For example:
 ```bash
@@ -89,7 +88,8 @@ agent/.env.local
 ```
 (The .env.local files are copied and patched from the packages/**/src/.env.example files)
 
-Ensure that you have correctly set up your environment variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
+Ensure that you execute the script and docker compose commands with ./docker/compose/build as working directory and have correctly set up your environment
+variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
 The current example for ecosystem "sphereon" loads the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
 All ecosystems present in packages/agent/conf/demos can be installed using the install-configs.sh script.  
 
