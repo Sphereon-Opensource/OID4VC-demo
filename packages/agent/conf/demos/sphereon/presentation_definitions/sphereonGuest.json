@@ -1,5 +1,5 @@
 {
-  "id": "sphereon",
+  "id": "sphereonGuest",
   "purpose": "For this portal we need your e-mail address and name from a Sphereon guest credential",
   "input_descriptors": [
     {
