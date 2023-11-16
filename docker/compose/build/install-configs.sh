@@ -87,4 +87,4 @@ simplified_dest_dir=$dest_dir
 while [[ $simplified_dest_dir == ../* ]]; do
     simplified_dest_dir=${simplified_dest_dir#../}
 done
-echo "Configuration modification complete for environment: ${ecosystem_name}. and saved to ${simplified_dest_dir}"
+echo "Configuration installation complete for environment: ${ecosystem_name}."
