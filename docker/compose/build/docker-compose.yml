@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  oid4vc-demo-ssi-agent:
+    container_name: oid4vc-demo-ssi-agent
+    image: oid4vc-demo-ssi-agent:latest
+    build:
+      context: ../../..
+      dockerfile: ./docker/Dockerfile
+      args:
+        PACKAGE_PATH: packages/agent
+        NODE_SCRIPT: "start:dev"
+    volumes:
+      - "./agent/conf:/opt/oid4vc-demo/packages/agent/conf:ro"
+      - "./agent/.env.local:/opt/oid4vc-demo/packages/agent/.env.local:ro"
+    ports:
+      - "5000:5000"
+
+  oid4vci-demo-frontend:
+    container_name: oid4vci-demo-frontend
+    image: oid4vci-demo-frontend:latest
+    depends_on:
+      - oid4vc-demo-ssi-agent
+    tty: true
+    build:
+      context: ../../..
+      dockerfile: ./docker/Dockerfile
+      args:
+        PACKAGE_PATH: packages/oid4vci-demo-frontend
+        NODE_SCRIPT: "start:prod"
+    volumes:
+      - "./oid4vci-demo-frontend/conf:/opt/oid4vc-demo/packages/oid4vci-demo-frontend/src/configs:ro"
+      - "./oid4vci-demo-frontend/.env.local:/opt/oid4vc-demo/packages/oid4vci-demo-frontend/.env.local:ro"
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+
+  oid4vp-demo-frontend:
+    container_name: oid4vp-demo-frontend
+    image: oid4vp-demo-frontend:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - oid4vc-demo-ssi-agent
+    tty: true
+    build:
+      context: ../../..
+      dockerfile: ./docker/Dockerfile
+      args:
+        PACKAGE_PATH: packages/oid4vp-demo-frontend
+        NODE_SCRIPT: "start:prod"
+    volumes:
+      - "./oid4vp-demo-frontend/.env.local:/opt/oid4vc-demo/packages/oid4vp-demo-frontend/.env.local:ro"
+    ports:
+      - "5002:5002"
+    restart: unless-stopped
