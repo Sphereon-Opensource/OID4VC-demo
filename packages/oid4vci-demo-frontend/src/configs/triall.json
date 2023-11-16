@@ -173,7 +173,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "triall2023",
+      "vpDefinitionId": "sphereonWalletIdentity",
       "steps": [
         {
           "id": "startPage",

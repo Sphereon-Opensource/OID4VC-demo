@@ -172,7 +172,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "fma",
+      "vpDefinitionId": "sphereonWalletIdentity",
       "steps": [
         {
           "id": "startPage",
