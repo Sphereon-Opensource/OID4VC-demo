@@ -31,6 +31,8 @@ services:
       args:
         PACKAGE_PATH: packages/oid4vci-demo-frontend
         NODE_SCRIPT: "start:prod"
+    volumes:
+      - "./oid4vci-demo-frontend/conf:/opt/oid4vc-demo/packages/oid4vci-demo-frontend/src/configs:ro"
     ports:
       - "5001:5001"
     restart: unless-stopped

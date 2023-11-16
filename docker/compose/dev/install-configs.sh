@@ -17,7 +17,7 @@ fi
 # copy .env files from templates
 mkdir -p ./agent
 cp ../../.env.ssi-agent ./agent/.env.local
-mkdir -p ./oid4vci-demo-frontend
+mkdir -p ./oid4vci-demo-frontend/conf
 cp ../../.env.oid4vci-demo-frontend ./oid4vci-demo-frontend/.env.local
 mkdir -p ./oid4vp-demo-frontend
 cp ../../.env.oid4vp-demo-frontend ./oid4vp-demo-frontend/.env.local
@@ -31,7 +31,8 @@ if [ -z "$environment_name" ]; then
 fi
 
 # change the urls in vci frontend configs
-config_file="../../../packages/oid4vci-demo-frontend/src/configs/${environment_name}.json"
+cp -r "../../../packages/oid4vci-demo-frontend/src/configs/${environment_name}.json" ./oid4vci-demo-frontend/conf
+config_file="./oid4vci-demo-frontend/conf/${environment_name}.json"
 if [ -f "$config_file" ]; then
     new_oid4vp_agent_base_url="${demo_host_address}"
     new_oid4vci_agent_base_url="${demo_host_address}"

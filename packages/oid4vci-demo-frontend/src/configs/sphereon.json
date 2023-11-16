@@ -2,8 +2,8 @@
   "general": {
     "credentialName": "Sphereon Guest",
     "issueCredentialType": "GuestCredential",
-    "oid4vpAgentBaseUrl": "http://192.168.1.200:5000",
-    "oid4vciAgentBaseUrl": "http://192.168.1.200:5000",
+    "oid4vpAgentBaseUrl": "https://ssi.sphereon.com/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.sphereon.com/demo/issuer",
     "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
     "verifierUrlCaption": "Sphereon demo",
     "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
