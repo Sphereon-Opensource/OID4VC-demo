@@ -18,6 +18,11 @@ if [ ! -e "../../../packages/agent/conf/demos/${ecosystem_name}" ]; then
     exit 1
 fi
 
+if [ ! -e "../../../packages/oid4vci-demo-frontend/src/configs/${ecosystem_name}.json" ]; then
+    echo "There is no ecosystem file named ${ecosystem_name} json in packages/oid4vci-demo-frontend/src/configs"
+    exit 1
+fi
+
 
 # copy & patch .env files from templates
 mkdir -p ./agent
@@ -87,4 +92,4 @@ simplified_dest_dir=$dest_dir
 while [[ $simplified_dest_dir == ../* ]]; do
     simplified_dest_dir=${simplified_dest_dir#../}
 done
-echo "Configuration installation complete for environment: ${ecosystem_name}."
+echo "Configuration installation complete for environment ${ecosystem_name} in docker/compose/build"
