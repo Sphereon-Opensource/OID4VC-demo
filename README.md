@@ -58,7 +58,7 @@ Here is a list of wallet's with above-mentioned capabilities:
 A scenario for fetching a credential. Note that since the process is dynamic, your setup might be a little different,
 but the main parts will stay the same.
 
-![To fetch a credential](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/buildelop/documents/vci-flow.puml)
+![To fetch a credential](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/develop/documents/vci-flow.puml)
 
 And a scenario for using Verifiable Credential(s) For OID4VP flow:
 ![OID4VP flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/develop/documents/oid4vp-flow.puml)
