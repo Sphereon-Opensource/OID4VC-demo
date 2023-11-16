@@ -10,10 +10,9 @@ services:
       args:
         PACKAGE_PATH: packages/agent
         NODE_SCRIPT: "start:dev"
-    env_file:
-      - ./agent/.env.local
     volumes:
       - "./agent/conf:/opt/oid4vc-demo/packages/agent/conf:ro"
+      - "./agent/.env.local:/opt/oid4vc-demo/packages/agent/.env.local:ro"
     ports:
       - "5000:5000"
 
@@ -33,6 +32,7 @@ services:
         NODE_SCRIPT: "start:prod"
     volumes:
       - "./oid4vci-demo-frontend/conf:/opt/oid4vc-demo/packages/oid4vci-demo-frontend/src/configs:ro"
+      - "./oid4vci-demo-frontend/.env.local:/opt/oid4vc-demo/packages/oid4vci-demo-frontend/.env.local:ro"
     ports:
       - "5001:5001"
     restart: unless-stopped
@@ -53,6 +53,8 @@ services:
       args:
         PACKAGE_PATH: packages/oid4vp-demo-frontend
         NODE_SCRIPT: "start:prod"
+    volumes:
+      - "./oid4vp-demo-frontend/.env.local:/opt/oid4vc-demo/packages/oid4vp-demo-frontend/.env.local:ro"
     ports:
       - "5002:5002"
     restart: unless-stopped

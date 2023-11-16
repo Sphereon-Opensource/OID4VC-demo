@@ -1,5 +1,5 @@
 {
-  "correlationId": "http://internet.or.LAN.host:5000/sphereon",
+  "correlationId": "sphereon",
   "overwriteExisting": true,
   "metadata": {
     "credential_issuer": "http://internet.or.LAN.host:5000/sphereon",

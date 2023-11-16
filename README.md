@@ -58,10 +58,10 @@ Here is a list of wallet's with above-mentioned capabilities:
 A scenario for fetching a credential. Note that since the process is dynamic, your setup might be a little different,
 but the main parts will stay the same.
 
-![To fetch a credential](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/develop/documents/vci-flow.puml)
+![To fetch a credential](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/buildelop/documents/vci-flow.puml)
 
 And a scenario for using Verifiable Credential(s) For OID4VP flow:
-![OID4VP flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/develop/documents/oid4vp-flow.puml)
+![OID4VP flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/buildelop/documents/oid4vp-flow.puml)
 
 # Step by Step instructions
 In the next chapters we're going to show you how to setup the `agent` module, oid4vci-demo-front-end and a brief
@@ -72,35 +72,41 @@ introduction on how credential branding actually works.
 - [Credential Branding](./documents/credential-branding.md)
 
 ### Docker
-We maintain two distinct Docker setups for development and production environments. Navigate to either `docker/compose/dev` for development or `docker/compose/prod` for production to find their respective `docker-compose.yml` files.
+We maintain two distinct Docker setups for development and production environments. Navigate to either `docker/compose/build` for development or `docker/compose/prod` for production to find their respective `docker-compose.yml` files.
 
-To build and run the Docker containers, execute the following commands from within the respective directory:
+We have created a script to modify and install the agent configurations for you required to build and run the Docker containers.
+It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent host address>`.
+The host address should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet software. For example:
 ```bash
-docker compose build # This builds the Docker images
-docker compose up -d # This starts the Docker containers
+install-configs.sh sphereon http://192.168.1.100:5000
 ```
 
-We also have created a script to modify and install the agent configurations for you. It's located here: `docker/compose/dev/install-configs.sh <demo host address>`.
-This should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet software. For example:
-```bash
-install-configs.sh http://192.168.1.100:5000
-```
-The script will look at your `oid4vci-demo-frontend/.env.local` to select an ecosystem (defaults to `sphereon`).
-
-Please note that Docker Compose will set up the environment for your containers using the env files contained in the directories under `docker/compose/dev`:
+The install-configs.sh script will set up the environment for your containers using the env files contained in the directories under `docker/compose/build`:
 ```
 oid4vci-demo-frontend/.env.local
 oid4vp-demo-frontend/.env.local
 agent/.env.local
 ```
 Ensure that you have correctly set up your environment variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
-The  current example chooses the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
+The current example chooses the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
+
+To build and run the Docker containers, execute the following commands from within the respective directory:
+```bash
+docker compose build # This builds the Docker images
+docker compose up -d # This starts the Docker containers
+```
 The building process may take a few minutes. Once you execute the docker compose up command, three services will start: ssi-agent, oid4vci-demo-frontend, and oid4vp-frontend.
 
 You should now be able to go to http://host.docker.internal:5001 and http://host.docker.internal:5002 respectively to
 test the issuer and verifier demo's.
 
 Please note that you might have to configure your docker environment to expose the host.docker.internal like the image
-below. If you cannot make that work you could adjust the config/docker and docker/compose/{dev/prod}/build/.env* files to suit your needs.
+below. If you cannot make that work you could adjust the config/docker and docker/compose/build/**/.env* files to suit your needs.
 
+To build the images without docker-compose you can also just use "docker build" in the project root directory with some parameters:
+```shell
+docker build -f ./docker/Dockerfile -t oid4vc-demo-ssi-agent:latest --build-arg="PACKAGE_PATH=packages/agent" --build-arg="NODE_SCRIPT=start:dev" .
+docker build -f ./docker/Dockerfile -t oid4vci-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vci-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
+docker build -f ./docker/Dockerfile -t oid4vp-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vp-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
+```
 <img src="resources/docker_settings.png" width="500" />

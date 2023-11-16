@@ -1,41 +1,39 @@
 #!/bin/bash
 
-
-# Extract DEMO_HOST_ADDRESS and otherwise exits.
-demo_host_address=$1
-if [ -z "$demo_host_address" ]; then
-    echo "Usage: ./install-configs.sh <demo host address>"
+ecosystem_name=$1
+agent_host_address=$2
+if [ -z "$ecosystem_name" ] || [ -z "$agent_host_address" ]; then
+    echo "Usage: ./install-configs.sh <ecosystem> <agent host address>"
     exit 1
 fi
 
-# Check if demo_host_address contains 'http://' or 'https://' if not, prepend it
-if [[ ! $demo_host_address =~ ^http ]]; then
-    # If not, prepend 'http://'
-    demo_host_address="http://${demo_host_address}"
+# Check if agent_host_address contains 'http://' or 'https://'
+if [[ ! $agent_host_address =~ ^http ]]; then
+    echo "agent host address should be an http/https URL"
+    exit 1
 fi
 
-# copy .env files from templates
+# copy & patch .env files from templates
 mkdir -p ./agent
-cp ../../.env.ssi-agent ./agent/.env.local
+cp ../../../packages/agent/.env.example ./agent/.env.local
+sed -i "s|^CONF_PATH=.*|CONF_PATH=\"/opt/oid4vc-demo/packages/agent/conf/${ecosystem_name}\"|" ./agent/.env.local
+sed -i "s|^OID4VP_WEBAPP_BASE_URI=.*|OID4VP_WEBAPP_BASE_URI=${agent_host_address}|" ./agent/.env.local
+sed -i "s|^OID4VP_AGENT_BASE_URI=.*|OID4VP_AGENT_BASE_URI=${agent_host_address}|" ./agent/.env.local
+
 mkdir -p ./oid4vci-demo-frontend/conf
-cp ../../.env.oid4vci-demo-frontend ./oid4vci-demo-frontend/.env.local
+cp ../../../packages/oid4vci-demo-frontend/.env.example ./oid4vci-demo-frontend/.env.local
+sed -i "s|^REACT_APP_DEFAULT_ECOSYSTEM=.*|REACT_APP_DEFAULT_ECOSYSTEM=$ecosystem_name|" ./oid4vci-demo-frontend/.env.local
+
 mkdir -p ./oid4vp-demo-frontend
-cp ../../.env.oid4vp-demo-frontend ./oid4vp-demo-frontend/.env.local
-
-
-# Extract ENVIRONMENT name and default to sphereon if not found
-environment_name=$(grep "^[[:space:]]*REACT_APP_DEFAULT_ECOSYSTEM[[:space:]]*=" ./oid4vci-demo-frontend/.env.local | cut -d '=' -f2 | xargs)
-
-if [ -z "$environment_name" ]; then
-    environment_name="sphereon"
-fi
+cp ../../../packages/oid4vp-demo-frontend/.env.example ./oid4vp-demo-frontend/.env.local
+sed -i "s|^REACT_APP_BACKEND_BASE_URI=.*|REACT_APP_BACKEND_BASE_URI=\"http://host.docker.internal:5000\"|" ./oid4vp-demo-frontend/.env.local
 
 # change the urls in vci frontend configs
-cp -r "../../../packages/oid4vci-demo-frontend/src/configs/${environment_name}.json" ./oid4vci-demo-frontend/conf
-config_file="./oid4vci-demo-frontend/conf/${environment_name}.json"
+cp "../../../packages/oid4vci-demo-frontend/src/configs/${ecosystem_name}.json" ./oid4vci-demo-frontend/conf
+config_file="./oid4vci-demo-frontend/conf/${ecosystem_name}.json"
 if [ -f "$config_file" ]; then
-    new_oid4vp_agent_base_url="${demo_host_address}"
-    new_oid4vci_agent_base_url="${demo_host_address}"
+    new_oid4vp_agent_base_url="${agent_host_address}"
+    new_oid4vci_agent_base_url="${agent_host_address}"
 
     jq --arg oid4vp "$new_oid4vp_agent_base_url" --arg oid4vci "$new_oid4vci_agent_base_url" \
        '.general.oid4vpAgentBaseUrl = $oid4vp | .general.oid4vciAgentBaseUrl = $oid4vci' \
@@ -44,15 +42,14 @@ else
     echo "Config file not found: ${config_file}"
 fi
 
-src_dir="../../../packages/agent/conf/demos/${environment_name}"
-current_folder="${environment_name}"
+src_dir="../../../packages/agent/conf/demos/${ecosystem_name}"
 dest_dir="./agent/conf" # Using epoch time for uniqueness
-mkdir -p $dest_dir/${current_folder}
+mkdir -p $dest_dir/${ecosystem_name}
 
 # Check if the source directory exists (because we might have different names for our config here)
 if [ ! -d "$src_dir" ]; then
     # If the exact match doesn't exist, find the first directory containing the environment name
-    src_dir=$(find ../../../../packages/agent/conf/demos -type d -name "*${environment_name}*" | head -n 1)
+    src_dir=$(find ../../../../packages/agent/conf/demos -type d -name "*${ecosystem_name}*" | head -n 1)
 fi
 # Copy the found dir to destination
 cp -r "$src_dir" "$dest_dir"
@@ -61,9 +58,6 @@ cp -r "$src_dir" "$dest_dir"
 find "$dest_dir" -type f -name '*.json' | while read json_file; do
     jq --arg newUrl "$new_oid4vci_agent_base_url" \
        '(
-         if (has("correlationId") and .correlationId) then .correlationId = $newUrl else . end
-       ) |
-       (
          if .metadata then .metadata.credential_issuer = $newUrl else . end
        ) |
        (
@@ -81,13 +75,10 @@ if [ -d "$oid4vci_metadata_folder" ]; then
     done
 fi
 
-# change the value of CONF_PATH to our newly created directory
-sed -i "s|^CONF_PATH=.*|CONF_PATH=\"/opt/oid4vc-demo/packages/agent/conf/${current_folder}\"|" ./agent/.env.local
-
 simplified_dest_dir=$dest_dir
 
 # Loop to remove each occurrence of '../' from the beginning of simplified_dest_dir
 while [[ $simplified_dest_dir == ../* ]]; do
     simplified_dest_dir=${simplified_dest_dir#../}
 done
-echo "Configuration modification complete for environment: ${environment_name}. and saved to ${simplified_dest_dir}"
+echo "Configuration modification complete for environment: ${ecosystem_name}. and saved to ${simplified_dest_dir}"

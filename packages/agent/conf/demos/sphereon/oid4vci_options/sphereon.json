@@ -1,6 +1,6 @@
 {
+  "correlationId": "sphereon",
   "definitionId": "sphereonGuest",
-  "correlationId": "http://internet.or.LAN.host:5000/sphereon",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"
