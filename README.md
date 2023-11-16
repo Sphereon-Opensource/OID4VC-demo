@@ -88,8 +88,9 @@ agent/.env.local
 ```
 (The .env.local files are copied and patched from the packages/**/src/.env.example files)
 
-Ensure that you execute the script and docker compose commands with ./docker/compose/build as working directory and have correctly set up your environment
+Please ensure that you execute the script and docker compose commands with ./docker/compose/build as working directory and have correctly set up your environment
 variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
+
 The current example for ecosystem "sphereon" loads the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
 All ecosystems present in packages/agent/conf/demos can be installed using the install-configs.sh script.  
 
@@ -97,11 +98,11 @@ All ecosystems present in packages/agent/conf/demos can be installed using the i
 To build and run the Docker containers, execute the following commands from within the respective directory:
 ```bash
 docker compose build # This builds the Docker images
-docker compose up -d # This starts the Docker containers
+docker compose up -d # This starts the Docker containers, this will require the .env & config files to be installed
 ```
 The building process may take a few minutes. Once you execute the docker compose up command, three services will start: ssi-agent, oid4vci-demo-frontend, and oid4vp-frontend.
 
-You should now be able to go to http://host.docker.internal:5001 and http://host.docker.internal:5002 respectively to
+You should now be able to go to http://localhost:5001 and http://localhost:5002 respectively to
 test the issuer and verifier demo's.
 
 Please note that you might have to configure your docker environment to expose the host.docker.internal like the image

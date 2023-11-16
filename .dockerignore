@@ -1,5 +1,6 @@
 **/*.env*
 !**/.env.example
+packages/agent/conf/dev
 
 # dependencies
 **/node_modules

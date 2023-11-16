@@ -26,7 +26,7 @@ sed -i "s|^REACT_APP_DEFAULT_ECOSYSTEM=.*|REACT_APP_DEFAULT_ECOSYSTEM=$ecosystem
 
 mkdir -p ./oid4vp-demo-frontend
 cp ../../../packages/oid4vp-demo-frontend/.env.example ./oid4vp-demo-frontend/.env.local
-sed -i "s|^REACT_APP_BACKEND_BASE_URI=.*|REACT_APP_BACKEND_BASE_URI=\"http://host.docker.internal:5000\"|" ./oid4vp-demo-frontend/.env.local
+sed -i "s|^REACT_APP_BACKEND_BASE_URI=.*|REACT_APP_BACKEND_BASE_URI=${agent_host_address}|" ./oid4vp-demo-frontend/.env.local
 
 # change the urls in vci frontend configs
 cp "../../../packages/oid4vci-demo-frontend/src/configs/${ecosystem_name}.json" ./oid4vci-demo-frontend/conf

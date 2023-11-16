@@ -19,8 +19,6 @@ services:
   oid4vci-demo-frontend:
     container_name: oid4vci-demo-frontend
     image: oid4vci-demo-frontend:latest
-    env_file:
-      - ./oid4vci-demo-frontend/.env.local
     depends_on:
       - oid4vc-demo-ssi-agent
     tty: true
@@ -42,8 +40,6 @@ services:
     image: oid4vp-demo-frontend:latest
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    env_file:
-      - ./oid4vp-demo-frontend/.env.local
     depends_on:
       - oid4vc-demo-ssi-agent
     tty: true
