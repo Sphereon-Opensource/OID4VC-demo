@@ -87,8 +87,12 @@ oid4vci-demo-frontend/.env.local
 oid4vp-demo-frontend/.env.local
 agent/.env.local
 ```
+(The .env.local files are copied and patched from the packages/**/src/.env.example files)
+
 Ensure that you have correctly set up your environment variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md) and [Setting up the VCI frontend](./documents/vci-front-end.md).
-The current example chooses the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
+The current example for ecosystem "sphereon" loads the folder `packages/agent/conf/demos/sphereon` as your base configuration folder.
+All ecosystems present in packages/agent/conf/demos can be installed using the install-configs.sh script.  
+
 
 To build and run the Docker containers, execute the following commands from within the respective directory:
 ```bash
