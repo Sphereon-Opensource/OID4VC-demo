@@ -54,7 +54,7 @@ else
 fi
 
 src_dir="../../../packages/agent/conf/demos/${ecosystem_name}"
-dest_dir="./agent/conf" # Using epoch time for uniqueness
+dest_dir="./agent/conf"
 mkdir -p $dest_dir/${ecosystem_name}
 
 # Check if the source directory exists (because we might have different names for our config here)
