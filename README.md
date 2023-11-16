@@ -102,8 +102,7 @@ docker compose up -d # This starts the Docker containers, this will require the 
 ```
 The building process may take a few minutes. Once you execute the docker compose up command, three services will start: ssi-agent, oid4vci-demo-frontend, and oid4vp-frontend.
 
-You should now be able to go to http://localhost:5001 and http://localhost:5002 respectively to
-test the issuer and verifier demo's.
+You should now be able to go to http://localhost:5001 and http://localhost:5002 respectively to test the issuer and verifier demo's.
 
 Please note that you might have to configure your docker environment to expose the host.docker.internal like the image
 below. If you cannot make that work you could adjust the config/docker and docker/compose/build/**/.env* files to suit your needs.
