@@ -13,6 +13,12 @@ if [[ ! $agent_host_address =~ ^http ]]; then
     exit 1
 fi
 
+if [ ! -e "../../../packages/agent/conf/demos/${ecosystem_name}" ]; then
+    echo "There is no ecosystem named ${ecosystem_name} in /packages/agent/conf/demos"
+    exit 1
+fi
+
+
 # copy & patch .env files from templates
 mkdir -p ./agent
 cp ../../../packages/agent/.env.example ./agent/.env.local

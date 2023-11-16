@@ -61,7 +61,7 @@ but the main parts will stay the same.
 ![To fetch a credential](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/buildelop/documents/vci-flow.puml)
 
 And a scenario for using Verifiable Credential(s) For OID4VP flow:
-![OID4VP flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/buildelop/documents/oid4vp-flow.puml)
+![OID4VP flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/develop/documents/oid4vp-flow.puml)
 
 # Step by Step instructions
 In the next chapters we're going to show you how to setup the `agent` module, oid4vci-demo-front-end and a brief
