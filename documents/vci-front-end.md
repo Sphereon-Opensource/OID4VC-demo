@@ -28,11 +28,11 @@ In this module we're using a few configuration from .env which are listed below:
 - `PORT`: The port number that you want this frontend to be accessed from.
 - `REACT_APP_DEFAULT_ECOSYSTEM`: (optional) The default ecosystem name of this demo. This should be your own configuration file name. You can also switch you ecosystem in the runtime with using `ecosystemId` query param in your url. For example you can head to `http://localhost:5001/?ecosystemId=sphereon#/credentials/issue/success` to see Sphereon's configured version of SSICredentialIssuedSuccessPage page.
 - `REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN`: (optional) If set to true, the frontend will try to find ecosystem value from subdomain
-- `REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN_BEFORE`: This optional environment variable enhances the functionality of multi-tenancy or environment-specific configurations in a web application. When `REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN` is set to `true`, this variable instructs the application to dynamically extract and set the ecosystem value from a specified segment of the application's URL.
+- `REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN_SUFFIX`: This optional environment variable enhances the functionality of multi-tenancy or environment-specific configurations in a web application. When `REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN` is set to `true`, this variable instructs the application to dynamically extract and set the ecosystem value from a specified segment of the application's URL.
   The purpose of this variable is to parse the URL and use a portion of the subdomain as the ecosystem identifier, which can then be used to configure or customize the application's behavior based on that ecosystem. This is particularly useful for applications that serve multiple ecosystems or tenants from a single codebase but require tenant-specific configurations.
   Here's how it works:
     - If the application's URL is `http://simple.demo.sphereon.com/`, and
-    - The `REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN_BEFORE` is set to `demo.sphereon.com`,
+    - The `REACT_APP_DEFAULT_ECOSYSTEM_FROM_SUBDOMAIN_SUFFIX` is set to `demo.sphereon.com`,
   Then the application will extract the subdomain segment that precedes the `demo.sphereon.com` part of the URL, which in this case is `simple`. This extracted value is then designated as the ecosystem identifier.
   The ecosystem identifier (`simple` in the example) can be used to load specific configurations, assets, or even to dictate the application's behavior for that particular ecosystem. This enables a flexible and scalable approach to managing configurations in a multi-ecosystem platform.
  
