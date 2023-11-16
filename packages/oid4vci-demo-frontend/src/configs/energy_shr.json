@@ -1,7 +1,7 @@
 {
   "general": {
     "credentialName": "EnergySHR Guest",
-    "issueCredentialType": "energySHR",
+    "issueCredentialType": "GuestCredential",
     "oid4vpAgentBaseUrl": "https://ssi.energyshr.nl/demo/issuer",
     "oid4vciAgentBaseUrl": "https://ssi.energyshr.nl/demo/issuer",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
@@ -134,8 +134,8 @@
         ],
         [
           {
-            "id": "emailAddress",
-            "key": "emailAddress",
+            "id": "email",
+            "key": "email",
             "label": "ssi_information_request_page_form_email_label",
             "type": "text",
             "required": true
@@ -206,6 +206,9 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "GuestCredential"
+          },
           "nextId": "issueRequest"
         },
         {

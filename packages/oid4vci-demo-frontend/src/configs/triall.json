@@ -1,7 +1,7 @@
 {
   "general": {
     "credentialName": "Triall Guest",
-    "issueCredentialType": "triall2023",
+    "issueCredentialType": "GuestCredential",
     "oid4vpAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
     "oid4vciAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
     "verifierUrl": "https://cix.triall.io",
@@ -173,7 +173,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonGuest",
+      "vpDefinitionId": "triall2023",
       "steps": [
         {
           "id": "startPage",
@@ -205,6 +205,9 @@
           "id": "credentialOffer",
           "operation": "execute",
           "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "GuestCredential"
+          },
           "nextId": "issueRequest"
         },
         {
