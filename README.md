@@ -74,9 +74,11 @@ introduction on how credential branding actually works.
 
 ### Docker 
 
-### Windows 10 (WSL2) - Clone repository
+#### Windows 10 (WSL2) - Docker
+Make sure to have an installation of Docker Desktop with the default options (recommended WSL2)
 
-- Make sure to have an installation of Docker Desktop with the default options (recommended WSL2);
+#### Windows 10 (WSL2) - Clone repository
+
 - Clone the repository:
 ```shell
 # to not mess up the LF -> CRLF in the bash script
@@ -84,15 +86,17 @@ git config --global core.autocrlf false
 git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git 
 ```
 
-### Ubuntu 23.10 - Clone repository
+#### Ubuntu 23.10 - Docker
+Make sure to have a default Docker installation
 
-- Make sure to have a default Docker installation;
+#### Ubuntu 23.10 - Clone repository
+
 - Clone the repository:
 ```shell
 git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git 
 ```
 
-### Ubuntu 23.10 and Windows 10 (WSL2) - Install the configuration files
+#### Ubuntu 23.10 and Windows 10 (WSL2) - Install the configuration files
 
 We maintain Docker a setup for building and testing in directory `docker/compose/build`.
 We have created a script to install and patch the agent configurations for you required to build and run the Docker
@@ -102,7 +106,7 @@ It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent h
 software. For example:
 
 ```bash
-install-configs.sh sphereon http://192.168.1.100:5000
+install-configs.sh sphereon http://192.168.x.x:5000
 ```
 
 The install-configs.sh script will set up the environment for your containers using the .env.examples files from
@@ -127,14 +131,13 @@ All ecosystems present in packages/agent/conf/demos can be installed using the i
 
 To build and run the Docker containers, execute the following commands from within the respective directory:
 
-### Windows 10 - Build the image and run the container
+#### Windows 10 - Build the image and run the container
 
 - DOS shell:
 ```cmd
 cd .\OID4VC-demo\docker\compose\build
 docker compose build
-enter: (adjust path and IP)
-docker run --name ubuntu-temp --rm -v C:/Users/Sphereon/_dev/ssi/OID4VC-demo:/OID4VC-demo -w /OID4VC-demo/docker/compose/build ubuntu /bin/bash -c "apt update && apt install -y jq && ./install-configs.sh 'sphereon' 'http://192.168.1.215:5000'"
+docker run --name ubuntu-temp --rm -v C:/<path>/OID4VC-demo:/OID4VC-demo -w /OID4VC-demo/docker/compose/build ubuntu /bin/bash -c "apt update && apt install -y jq && ./install-configs.sh 'sphereon' 'http://192.168.x.x:5000'"
 docker compose up -d
 ```
 
@@ -143,7 +146,7 @@ docker compose up -d
 docker compose down
 ```
 
-### Ubuntu 23.10 - Build the image and run the container
+#### Ubuntu 23.10 - Build the image and run the container
 
 ```bash
 docker compose build # This builds the Docker images
