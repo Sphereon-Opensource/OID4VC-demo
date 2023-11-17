@@ -1,6 +1,8 @@
 {
   "common_left_pane_title": "\"Digital identity is the passport to the\nvirtual world, where convenience and\nconnectivity effortlessly intertwine.\"",
   "credentials_right_pane_bottom_paragraph_mobile": "Please click the button to store your credential.\nGo back to this screen afterwards to continue",
+  "credentials_right_pane_bottom_paragraph_mobile_notaris": "Click on the button\nto receive your credential",
+  "credentials_right_pane_bottom_paragraph_mobile_bank": "Click the button\nto receive your credential.",
   "credentials_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR\nscanner to accept and store your credential.",
   "credentials_right_pane_top_paragraph": "Let's add a {{credentialName}} Credential\nto your wallet.",
   "credentials_right_pane_top_title": "Secure your {{credentialName}} Credential",
@@ -19,6 +21,7 @@
   "credential_verify_request_right_pane_bottom_paragraph_banqup": "By scanning this QR code with your Banqup app",
   "credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR\nscanner to provide information.",
   "credential_verify_request_right_pane_bottom_paragraph_mobile": "Please click the button to open a wallet\nGo back to this screen afterwards to continue.",
+  "credential_verify_request_right_pane_bottom_paragraph_mobile_bank": "Click on the button \nto start sharing your information with us.",
   "credential_verify_request_right_pane_button_caption": "To manual entry",
   "download_app_right_pane_button_caption": "Get your credential",
   "download_app_right_pane_paragraph": "Please download one of the below DDIP\ncompliant SSI Wallets if you haven't yet",

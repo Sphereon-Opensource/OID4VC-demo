@@ -64,7 +64,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
         if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
-        return isTabletOrMobile ? '50%' : '40%'
+        return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '40%'
     }
 
     return (
@@ -83,7 +83,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                 <div id={"photo"} style={{
                     display: 'flex',
                     width: pageConfig.leftPaneWidth ?? '60%',
-                    height: isTabletOrMobile ? '100%' : '100vh',
+                    height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / cover`}),
@@ -114,6 +114,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                 width: determineWidth(),
                 alignItems: 'center',
                 flexDirection: 'column',
+                ...(isTabletOrMobile && { height: '100vh' }),
                 ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
                 ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
             }}>
@@ -141,13 +142,13 @@ const SSIInformationManualRequestPage: React.FC = () => {
                     >
                         <p
                             className={"inter-normal-24"}
-                            style={{marginBottom: 12}}
+                            style={{marginBottom: 12, ...(pageConfig?.sharing_data_right_pane_title_style)}}
                         >
                             {t(pageConfig.sharing_data_right_pane_title)}
                         </p>
                         <p
                             className={"poppins-normal-14"}
-                            style={{maxWidth: 313, textAlign: 'center'}}
+                            style={{maxWidth: 313, textAlign: 'center', ...(pageConfig?.sharing_data_right_pane_paragraph_style)}}
                         >
                             {t(pageConfig.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName})}
                         </p>
@@ -155,6 +156,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                     <div/>
                     {initComplete && ( // We should not render the form until handleVPToken's result came back
                         <Form
+                            inputBackgroundColor={(isTabletOrMobile ? pageConfig.mobile?.backgroundColor : undefined) }
                             formConfig={pageConfig.form}
                             formInitData={credentialsData}
                             onChange={onFormValueChange}

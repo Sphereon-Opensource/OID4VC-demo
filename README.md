@@ -64,6 +64,7 @@ And a scenario for using Verifiable Credential(s) For OID4VP flow:
 ![OID4VP flow](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Sphereon-Opensource/OID4VC-demo/develop/documents/oid4vp-flow.puml)
 
 # Step by Step instructions
+
 In the next chapters we're going to show you how to setup the `agent` module, oid4vci-demo-front-end and a brief
 introduction on how credential branding actually works.
 
@@ -73,28 +74,62 @@ introduction on how credential branding actually works.
 
 ### Docker
 
-From the root folder run:
+We maintain Docker a setup for building and testing in directory `docker/compose/build`.
+We have created a script to install and patch the agent configurations for you required to build and run the Docker
+containers.
+It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent host address>`.
+**IMPORTANT:** The host address should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet
+software. For example:
 
 ```bash
-docker-compose build
-docker-compose up
+install-configs.sh sphereon http://192.168.1.100:5000
 ```
 
-The build phase might take a few minutes. If you run the docker-compose up command 3 services will be running. The
-ssi-agent, oid4vci-demo-frontend and oid4vp-frontend.
+The install-configs.sh script will set up the environment for your containers using the .env.examples files from
+packages/**src/.env.example and put them in the directories under `docker/compose/build`:
 
-You should now be able to go to http://host.docker.internal:5001 and http://host.docker.internal:5002 respectively to
-test the issuer and verifier demo's.
+```
+oid4vci-demo-frontend/.env.local
+oid4vp-demo-frontend/.env.local
+agent/.env.local
+```
+
+(The .env.local files are copied and patched from the packages/**/src/.env.example files)
+
+Please ensure that you execute the script and docker compose commands with ./docker/compose/build as working directory
+and have correctly set up your environment
+variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md)
+and [Setting up the VCI frontend](./documents/vci-front-end.md).
+
+The current example for ecosystem "sphereon" loads the folder `packages/agent/conf/demos/sphereon` as your base
+configuration folder.
+All ecosystems present in packages/agent/conf/demos can be installed using the install-configs.sh script.
+
+To build and run the Docker containers, execute the following commands from within the respective directory:
+
+```bash
+docker compose build # This builds the Docker images
+docker compose up -d # This starts the Docker containers, this will require the .env & config files to be installed
+```
+
+The building process may take a few minutes. Once you execute the docker compose up command, three services will start:
+ssi-agent, oid4vci-demo-frontend, and oid4vp-frontend.
+
+You should now be able to go to http://localhost:5001 and http://localhost:5002 respectively to test the issuer and
+verifier demo's.
 
 Please note that you might have to configure your docker environment to expose the host.docker.internal like the image
-below. If you cannot make that work you could adjust the config/docker and docker/*.env files to suit your needs
-
+below. If you cannot make that work you could adjust the config/docker and docker/compose/build/**/.env* files to suit
+your needs.
 <img src="resources/docker_settings.png" width="500" />
 
-#### Environment variables and configuration for docker.
+To build the images without docker-compose you can also just use "docker build" in the project root directory with some
+parameters:
 
-Please note that the environment variables for the 3 images come from the ./docker folder. You will have to copy the 3
-example files and remove the .example suffix.
+```shell
+docker build -f ./docker/Dockerfile -t oid4vc-demo-ssi-agent:latest --build-arg="PACKAGE_PATH=packages/agent" --build-arg="NODE_SCRIPT=start:dev" .
+docker build -f ./docker/Dockerfile -t oid4vci-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vci-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
+docker build -f ./docker/Dockerfile -t oid4vp-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vp-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
+```
 
-The configuration files are copied over to the agent image. So the above explained configuration options also apply when
-running in docker.
+
