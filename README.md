@@ -72,7 +72,27 @@ introduction on how credential branding actually works.
 - [Setting up VCI frontend](./documents/vci-front-end.md)
 - [Credential Branding](./documents/credential-branding.md)
 
-### Docker
+### Docker 
+
+### Windows 10 (WSL2) - Clone repository
+
+- Make sure to have an installation of Docker Desktop with the default options (recommended WSL2);
+- Clone the repository:
+```shell
+# to not mess up the LF -> CRLF in the bash script
+git config --global core.autocrlf false
+git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git 
+```
+
+### Ubuntu 23.10 - Clone repository
+
+- Make sure to have a default Docker installation;
+- Clone the repository:
+```shell
+git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git 
+```
+
+### Ubuntu 23.10 and Windows 10 (WSL2) - Install the configuration files
 
 We maintain Docker a setup for building and testing in directory `docker/compose/build`.
 We have created a script to install and patch the agent configurations for you required to build and run the Docker
@@ -107,6 +127,24 @@ All ecosystems present in packages/agent/conf/demos can be installed using the i
 
 To build and run the Docker containers, execute the following commands from within the respective directory:
 
+### Windows 10 - Build the image and run the container
+
+- DOS shell:
+```cmd
+cd .\OID4VC-demo\docker\compose\build
+docker compose build
+enter: (adjust path and IP)
+docker run --name ubuntu-temp --rm -v C:/Users/Sphereon/_dev/ssi/OID4VC-demo:/OID4VC-demo -w /OID4VC-demo/docker/compose/build ubuntu /bin/bash -c "apt update && apt install -y jq && ./install-configs.sh 'sphereon' 'http://192.168.1.215:5000'"
+docker compose up -d
+```
+
+- make sure you do unmount the config & env files before running the install-configs.sh again
+```shell
+docker compose down
+```
+
+### Ubuntu 23.10 - Build the image and run the container
+
 ```bash
 docker compose build # This builds the Docker images
 docker compose up -d # This starts the Docker containers, this will require the .env & config files to be installed
@@ -131,5 +169,3 @@ docker build -f ./docker/Dockerfile -t oid4vc-demo-ssi-agent:latest --build-arg=
 docker build -f ./docker/Dockerfile -t oid4vci-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vci-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
 docker build -f ./docker/Dockerfile -t oid4vp-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vp-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
 ```
-
-
