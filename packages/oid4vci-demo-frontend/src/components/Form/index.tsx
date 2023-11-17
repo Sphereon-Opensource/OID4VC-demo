@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, ReactNode, useState} from 'react'
+import React, {CSSProperties, FC, ReactElement, ReactNode, useEffect, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
@@ -9,6 +9,7 @@ import {FormOutputData, FormFieldValue, ImmutableRecord} from '../../types'
 import style from './index.module.css'
 
 type Props = {
+    inputBackgroundColor?: string
     formConfig: DataFormRow[]
     formInitData?: ImmutableRecord
     onChange?: (formData: FormOutputData) => Promise<void>
@@ -24,7 +25,7 @@ const evaluateDefaultValue = (field: DataFormElement, formInitData: ImmutableRec
         return fieldValue
     }
 
-    let defaultValue: FormFieldValue = formInitData?.[field.id] ?? field.defaultValue ?? ''
+    let defaultValue: FormFieldValue = formInitData?.[field.key] ?? field.defaultValue ?? ''
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
@@ -61,11 +62,15 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
             case 'text':
-            case 'date':
+          case 'date':
+                const isReadonly = field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)
+
                 return <InputField
+                    labelStyle={field.labelStyle}
+                    inlineStyle={{ width: '100%', ...(isReadonly && !!props.inputBackgroundColor && { backgroundColor: props.inputBackgroundColor }), ...field.inputStyle }}
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
-                    readonly={field.readonly || formInitData?.[field.id] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)}
+                    readonly={isReadonly}
                     defaultValue={defaultValue}
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
@@ -76,6 +81,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     const getRowElementFrom = (row: DataFormRow): ReactElement => {
+
         return <div className={style.formRowContainer}>
             {row.map((field: DataFormElement): ReactNode => getFieldElementFrom(field))}
         </div>
@@ -84,6 +90,12 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     const getFormFrom = (): Array<ReactElement> => {
         return formConfig.map((row: DataFormRow) => getRowElementFrom(row))
     }
+
+    useEffect((): void => {
+        if (onChange && formInitData) { // Update host form to update enable nxt button
+            onChange(formData)
+        }
+    })
 
     return <div className={style.container}>
         {getFormFrom()}

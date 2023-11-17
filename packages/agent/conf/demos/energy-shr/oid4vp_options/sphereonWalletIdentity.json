@@ -1,0 +1,8 @@
+{
+  "definitionId": "sphereonWalletIdentity",
+  "rpOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}

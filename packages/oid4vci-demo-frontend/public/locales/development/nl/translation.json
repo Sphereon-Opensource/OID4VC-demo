@@ -1,6 +1,8 @@
 {
   "common_left_pane_title": "\"Digitale identiteit is het paspoort naar de\nvirtuele wereld, waar gemak en\nconnectiviteit moeiteloos samenkomen.\"",
   "credentials_right_pane_bottom_paragraph_mobile": "Klik op de knop om je credential op te slaan.\nGa daarna terug naar dit scherm om door te gaan",
+  "credentials_right_pane_bottom_paragraph_mobile_notaris": "Klik op de knop\nom je credential op te slaan.",
+  "credentials_right_pane_bottom_paragraph_mobile_bank": "Klik op de knop\nom je credential op te slaan.",
   "credentials_right_pane_bottom_paragraph": "Scan deze QR-code met de QR-scanner van je wallet\nom je credential te accepteren en op te slaan.",
   "credentials_right_pane_top_paragraph": "Laten we een {{credentialName}} credential\ntoevoegen aan je wallet.",
   "credentials_right_pane_top_title": "Beveilig je {{credentialName}} credential",
@@ -94,7 +96,9 @@
   "title_please_check_your_email": "Controleer A.U.B. je e-mail",
   "title_fill_5_digits": "Vul de 5-cijferige code in vanuit de bevestigings-e-mail.",
   "paragraph_add_credential": "Laten we de credential aan je wallet toevoegen.",
+  "paragraph_add_credential_notaris": "Let's add the {{credentialName}} credential to your wallet.",
   "paragraph_scan_this_qr": "Scan deze QR-code met de QR-scanner van je wallet. Als je al op je telefoon bent, open dan je wallet door op de knop 'Openen in wallet' te klikken.",
+  "paragraph_scan_this_qr_notaris": "Scan this QR code using your wallet's QR\n scanner to accept and store your credential.",
   "paragraph_confirm_email": "Bevestig je account door de 5-cijferige bevestigingscode uit de e-mail in te voeren.",
   "loading_verify_company_information_caption": "Controleren van de bedrijfsinformatie",
   "loading_verify_information_description": "Even geduld, je wordt automatisch naar de volgende stap geleid.",

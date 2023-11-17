@@ -1,11 +1,13 @@
-import React, {ChangeEvent, FC, FocusEvent, HTMLInputTypeAttribute, ReactElement, useEffect, useState} from 'react'
+import React, {ChangeEvent, CSSProperties, FC, FocusEvent, HTMLInputTypeAttribute, ReactElement, useEffect, useState} from 'react'
 import style from './index.module.css'
 import {FormFieldValue} from '../../types'
 
 type InputValue = string | number | ReadonlyArray<string> | undefined
 
 type Props = {
-    type: HTMLInputTypeAttribute;
+    labelStyle?: CSSProperties
+    inlineStyle?: CSSProperties
+    type: HTMLInputTypeAttribute
     label?: string
     defaultValue?: FormFieldValue
     placeholder?: string
@@ -16,6 +18,8 @@ type Props = {
 
 const InputField: FC<Props> = (props: Props): ReactElement => {
     const {
+        labelStyle,
+        inlineStyle,
         readonly = false,
         defaultValue,
         placeholder,
@@ -48,15 +52,15 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
         }
     }
 
-    return <div className={style.container}>
+    return <div style={{ ...(inlineStyle ?? {})}} className={style.container}>
         { label &&
-            <label className="poppins-normal-10 inputFieldLabel">
+            <label style={labelStyle} className="poppins-normal-10 inputFieldLabel">
                 {label}
             </label>
         }
         <input
             type={type}
-            style={{ ...(!isValid && { borderColor: 'red' }) }}
+            style={{...inlineStyle, ...(!isValid && { borderColor: 'red' })}}
             placeholder={placeholder}
             readOnly={readonly}
             tabIndex={readonly ? -1 : undefined} // Do not tab-stop in read-only fields

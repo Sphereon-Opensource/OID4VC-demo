@@ -23,7 +23,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const generalConfig = ecosystem.getGeneralConfig()
-    const isNarrowScreen = useMediaQuery({query: '(max-width: 767px)'})
+    const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state
     const [qrCode, setQrCode] = useState<ReactElement>()
 
@@ -71,14 +71,17 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
-        return isNarrowScreen ? '50%' : '40%'
+        if (isTabletOrMobile && pageConfig.mobile?.rightPaneWidth) {
+          return pageConfig.mobile?.rightPaneWidth
+        }
+        return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '40%'
     }
 
     const {t} = useTranslation()
 
 
     return (
-        <div style={{display: 'flex', height: '100vh', width: '100%'}}>
+        <div style={{display: 'flex', height: (isTabletOrMobile ? '100vh' : '100vh'), width: '100%'}}>
             <NonMobile>
                 <div style={{
                     display: 'flex',
@@ -119,10 +122,10 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 height: '100%',
                 alignItems: 'center',
                 flexDirection: 'column',
-                ...(isNarrowScreen && {gap: 24, ...(pageConfig.mobile?.backgroundColor && {backgroundColor: pageConfig.mobile.backgroundColor})}),
-                ...(!isNarrowScreen && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
+                ...(isTabletOrMobile && {gap: 24, ...(pageConfig.mobile?.backgroundColor && {backgroundColor: pageConfig.mobile.backgroundColor})}),
+                ...(!isTabletOrMobile && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
             }}>
-                {(isNarrowScreen && pageConfig.mobile?.logo) &&
+                {(isTabletOrMobile && pageConfig.mobile?.logo) &&
                     <img
                         src={pageConfig.mobile.logo.src}
                         alt={pageConfig.mobile.logo.alt}
@@ -134,12 +137,15 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    ...(isNarrowScreen && {height: '100%'}),
-                    alignItems: 'center'
+                    ...(!!pageConfig.rightPaneHeight && { height: pageConfig.rightPaneHeight }),
+                    ...(isTabletOrMobile && {height: '100%'}),
+                    alignItems: 'center',
                 }}>
                     <Text
-                        style={{textAlign: 'center', ...(isNarrowScreen && {marginRight: 24, marginLeft: 24})}}
+                        style={{textAlign: 'center', ...(isTabletOrMobile && {marginRight: 24, marginLeft: 24})}}
                         className={style.pReduceLineSpace}
+                        h2Style={pageConfig.qrCode?.topTitle?.h2Style}
+                        pStyle={pageConfig.qrCode?.topTitle?.pStyle}
                         title={t(pageConfig.title ? pageConfig.title : 'qrcode_right_pane_top_title', {credentialName: generalConfig.credentialName}).split('\n')
                         }
                         lines={t(pageConfig.topParagraph ? pageConfig.topParagraph : 'qrcode_right_pane_top_paragraph', {credentialName: generalConfig.credentialName}).split('\n')
@@ -148,9 +154,9 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        height: '50vh',
-                        marginBottom: isNarrowScreen ? 40 : '15%',
-                        marginTop: isNarrowScreen ? 20 : '15%',
+                        height: `${pageConfig?.qrCodeContainer?.height}` ?? '50vh',
+                        marginBottom: isTabletOrMobile ? 40 : '15%',
+                        marginTop: isTabletOrMobile ? 20 : '15%',
                         alignItems: 'center'
                     }}>
                         <NonMobileOS>
@@ -167,25 +173,29 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                                 overflow: 'hidden'
                             }}>
                                 {pageConfig.mobile?.image &&
-                                    <img src={pageConfig.mobile?.image} alt="success" style={{overflow: 'hidden'}}/>
+                                    <img src={pageConfig.mobile?.image?.src}
+                                         width={pageConfig.mobile?.image?.width}
+                                         height={pageConfig.mobile?.image?.height} alt="success" style={{overflow: 'hidden'}}/>
                                 }
                                 <DeepLinkButton style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
                             </div>
                         </MobileOS>
                     </div>
-                    <div style={{marginTop: "20px"}}>
+                    <div style={{marginTop: "20px", textAlign: 'center', ...(isTabletOrMobile && { marginTop: 'inherit' })}}>
                         <NonMobileOS>
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378}}
-                                className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
+                                pStyle={pageConfig.qrCode?.bottomText?.pStyle}
+                                className={`${style.pReduceLineSpace} ${pageConfig.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
                                 lines={pageConfig.bottomParagraph ? t(pageConfig.bottomParagraph).split('\n') : []} // FIXME DPP-84
                             />
                         </NonMobileOS>
                         <MobileOS>
                             <Text
-                                style={{flexGrow: 1, marginLeft: 24, marginRight: 24}}
-                                className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                                lines={t(pageConfig.mobile?.bottomParagraph ? pageConfig.mobile.bottomParagraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
+                                style={{flexGrow: 1, marginLeft: 24, marginRight: 24, marginBottom: '10%'}}
+                                pStyle={pageConfig.mobile?.bottomText?.pStyle}
+                                className={`${style.pReduceLineSpace} ${pageConfig.mobile?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
+                                lines={t(pageConfig.mobile?.bottomText?.paragraph ? pageConfig.mobile?.bottomText?.paragraph : 'credentials_right_pane_bottom_paragraph_mobile').split('\n')}
                             />
                         </MobileOS>
                     </div>

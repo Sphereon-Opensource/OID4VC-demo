@@ -63,6 +63,21 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     downloadAppStepId?: string
     bottomParagraph?: string
     mobile?: {
+        height?: string | number
+        qrCode?: {
+          rootContainer?: {
+            style?: CSSProperties
+          },
+          container?: {
+            style?: CSSProperties
+          }
+          bottomText?: {
+            paragraph?: string
+            style?: CSSProperties
+            className?: string
+            pStyle?: CSSProperties
+          }
+        }
         logo?: ImageProperties
         backgroundColor?: string
         image?: string
@@ -76,11 +91,16 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
         className?: string
       }
       qrCode?: {
+        fgColor?: string
         topTitle?: {
           style?: CSSProperties
+          h2Style?: CSSProperties
+          pStyle?: CSSProperties
         },
         bottomText?: {
           fontColor?: string
+          pStyle?: CSSProperties
+          h2Style?: CSSProperties
           className?: string
           credential_verify_request_right_pane_bottom_title?: string
           credential_verify_request_right_pane_bottom_paragraph?: string
@@ -214,25 +234,49 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     title?: string
     topParagraph?: string
     bottomParagraph?: string
+    rightPaneHeight?: string | number
     mobile?: {
+        width?: string | number
         logo?: ImageProperties
         backgroundColor?: string
-        image?: string
+        image?: ImageProperties
         bottomParagraph?: string
+        rightPaneWidth?: string | number
+        bottomText?: {
+          paragraph?: string
+          pStyle?: CSSProperties
+          className?: string
+        }
     },
+  qrCodeContainer?: {
+      height: string
+  }
+  qrCode?: {
+      topTitle?: {
+        h2Style?: CSSProperties
+        pStyle?: CSSProperties
+      },
+    bottomText?: {
+        pStyle?: CSSProperties
+        className?: string
+    }
+  }
 }
 
 export interface SSIInformationManualRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photo?: string
     text_top_of_image?: string
+    sharing_data_right_pane_title_style?: CSSProperties
+    sharing_data_right_pane_paragraph_style?: CSSProperties
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
     primaryButtonResourceId?: string
     form: DataFormRow[]
     mobile?: {
+        width?: string | number
         logo?: ImageProperties
-        backgroundColor?: string,
+        backgroundColor?: string
     },
     backgroundColor?: string
     logo?: ImageProperties
@@ -251,6 +295,8 @@ export interface DataFormElement {
     defaultValue?: FormFieldValue
     label?: string
     labelUrl?: string
+    labelStyle?: CSSProperties
+    inputStyle?: CSSProperties
     readonly?: boolean
     customValidation?: string
     display?: {
