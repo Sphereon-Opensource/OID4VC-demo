@@ -72,7 +72,20 @@ introduction on how credential branding actually works.
 - [Setting up VCI frontend](./documents/vci-front-end.md)
 - [Credential Branding](./documents/credential-branding.md)
 
-### Docker
+
+### Linux
+
+#### Docker
+Make sure to have a default Docker installation
+
+#### Clone repository
+
+- Clone the repository:
+```shell
+git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git 
+```
+
+#### Install the configuration files
 
 We maintain Docker a setup for building and testing in directory `docker/compose/build`.
 We have created a script to install and patch the agent configurations for you required to build and run the Docker
@@ -82,7 +95,7 @@ It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent h
 software. For example:
 
 ```bash
-install-configs.sh sphereon http://192.168.1.100:5000
+install-configs.sh sphereon http://192.168.x.x:5000
 ```
 
 The install-configs.sh script will set up the environment for your containers using the .env.examples files from
@@ -106,6 +119,8 @@ configuration folder.
 All ecosystems present in packages/agent/conf/demos can be installed using the install-configs.sh script.
 
 To build and run the Docker containers, execute the following commands from within the respective directory:
+
+#### Build the image and run the container
 
 ```bash
 docker compose build # This builds the Docker images
@@ -132,4 +147,66 @@ docker build -f ./docker/Dockerfile -t oid4vci-demo-frontend:latest --build-arg=
 docker build -f ./docker/Dockerfile -t oid4vp-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vp-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
 ```
 
+### Windows
 
+#### Docker Desktop (WSL2)
+Make sure to have an installation of Docker Desktop with the default options (recommended WSL2)
+
+#### Clone repository
+
+- Clone the repository:
+```shell
+# to not mess up the LF -> CRLF in the bash script
+git config --global core.autocrlf false
+git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git 
+```
+
+#### Install the configuration files
+
+We maintain Docker a setup for building and testing in directory `docker/compose/build`.
+We have created a script to install and patch the agent configurations for you required to build and run the Docker
+containers.
+It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent host address>`.
+**IMPORTANT:** The host address should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet
+software. For example:
+
+```bash
+install-configs.sh sphereon http://192.168.x.x:5000
+```
+
+The install-configs.sh script will set up the environment for your containers using the .env.examples files from
+packages/**src/.env.example and put them in the directories under `docker/compose/build`:
+
+```
+oid4vci-demo-frontend/.env.local
+oid4vp-demo-frontend/.env.local
+agent/.env.local
+```
+
+(The .env.local files are copied and patched from the packages/**/src/.env.example files)
+
+Please ensure that you execute the script and docker compose commands with ./docker/compose/build as working directory
+and have correctly set up your environment
+variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md)
+and [Setting up the VCI frontend](./documents/vci-front-end.md).
+
+The current example for ecosystem "sphereon" loads the folder `packages/agent/conf/demos/sphereon` as your base
+configuration folder.
+All ecosystems present in packages/agent/conf/demos can be installed using the install-configs.sh script.
+
+To build and run the Docker containers, execute the following commands from within the respective directory:
+
+#### Build the image and run the container
+
+- DOS shell:
+```cmd
+cd .\OID4VC-demo\docker\compose\build
+docker compose build
+docker run --name ubuntu-temp --rm -v C:/<path>/OID4VC-demo:/OID4VC-demo -w /OID4VC-demo/docker/compose/build ubuntu /bin/bash -c "apt update && apt install -y jq && ./install-configs.sh 'sphereon' 'http://192.168.x.x:5000'"
+docker compose up -d
+```
+
+- make sure you do unmount the config & env files before running the install-configs.sh again
+```shell
+docker compose down
+```
