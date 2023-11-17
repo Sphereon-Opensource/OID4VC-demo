@@ -147,7 +147,7 @@ docker build -f ./docker/Dockerfile -t oid4vci-demo-frontend:latest --build-arg=
 docker build -f ./docker/Dockerfile -t oid4vp-demo-frontend:latest --build-arg="PACKAGE_PATH=packages/oid4vp-demo-frontend" --build-arg="NODE_SCRIPT=start:prod" .
 ```
 
-### Windows 10 (WSL2)
+### Windows Docker Desktop (WSL2)
 
 #### Docker
 Make sure to have an installation of Docker Desktop with the default options (recommended WSL2)
