@@ -104,30 +104,63 @@
         "width": 700,
         "height": 700
       },
+      "qrCode": {
+        "topTitle": {
+          "h2Style": {
+            "color": "#424242"
+          },
+          "pStyle": {
+            "color": "#303030"
+          }
+        },
+        "bottomText": {
+          "pStyle": {
+            "color": "#303030"
+          },
+          "className": "poppins-normal-16"
+        }
+      },
       "backgroundColor": "#BEBEBE",
       "mobile": {
+        "width": "inherit",
         "logo": {
           "src": "notary/logo.svg",
           "alt": "notary",
           "width": 120,
           "height": 120
         },
+        "bottomText": {
+          "pStyle": {
+            "color": "#303030"
+          },
+          "className": "poppins-normal-16",
+          "paragraph": "credentials_right_pane_bottom_paragraph_mobile_notaris"
+        },
         "backgroundColor": "#E8EAED",
-        "image": "undraw_certification_re_ifll_1.svg"
+        "image": {
+          "src": "undraw_certification_re_ifll_1.svg",
+          "width": 300,
+          "height": 300
+        }
       }
     },
     "infoRequest": {
       "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_paragraph",
+      "sharing_data_right_pane_title_style": {
+        "color": "#303030"
+      },
+      "sharing_data_right_pane_paragraph_style": {
+        "color": "#303030"
+      },
       "form": [
         [
           {
             "id": "ssi_information_request_page_form_company_name",
             "key": "Bedrijfsnaam",
             "label": "ssi_information_request_page_form_company_name_label",
-            "labelStyle": {
-              "color": "rgba(48, 48, 48, 0.8)"
-            },
+            "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -137,9 +170,8 @@
             "id": "ssi_information_request_page_form_company_location",
             "key": "Bedrijfslocatie",
             "label": "ssi_information_request_page_form_company_location_label",
-            "labelStyle": {
-              "color": "rgba(48, 48, 48, 0.8)"
-            },
+            "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -147,21 +179,19 @@
         [
           {
             "id": "ssi_information_request_page_first_name_director",
-            "key": "firstName",
+            "key": "Voornaam",
             "label": "ssi_information_request_page_form_first_name_director_label",
-            "labelStyle": {
-              "color": "rgba(48, 48, 48, 0.8)"
-            },
+            "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           },
           {
             "id": "ssi_information_request_page_form_last_name_director",
-            "key": "lastName",
+            "key": "Achternaam",
             "label": "ssi_information_request_page_form_last_name_director_label",
-            "labelStyle": {
-              "color": "rgba(48, 48, 48, 0.8)"
-            },
+            "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -171,9 +201,8 @@
             "id": "ssi_information_request_page_form_place_of_birth",
             "key": "Geboorteplaats",
             "label": "ssi_information_request_page_form_place_of_birth_label",
-            "labelStyle": {
-              "color": "rgba(48, 48, 48, 0.8)"
-            },
+            "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "text",
             "required": true
           }
@@ -183,9 +212,8 @@
             "id": "ssi_information_request_page_form_date_of_birth",
             "key": "Geboortedatum",
             "label": "ssi_information_request_page_form_date_of_birth_label",
-            "labelStyle": {
-              "color": "rgba(48, 48, 48, 0.8)"
-            },
+            "labelStyle": { "color": "#424242" },
+            "inputStyle": { "color": "#424242" },
             "type": "date",
             "required": true
           }
@@ -195,8 +223,8 @@
         "logo": {
           "src": "notary/logo.svg",
           "alt": "notary",
-          "width": 200,
-          "height": 200
+          "width": 120,
+          "height": 120
         },
         "backgroundColor": "#E8EAED"
       },

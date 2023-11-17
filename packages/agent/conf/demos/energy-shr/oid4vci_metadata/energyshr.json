@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://ssi.energyshr.test.sphereon.com/issuer",
+  "correlationId": "${AGENT_ENDPOINT_ESHR ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.energyshr.test.sphereon.com/issuer",
-    "credential_endpoint": "https://ssi.energyshr.test.sphereon.com/issuer/credentials",
+    "credential_issuer": "${AGENT_ENDPOINT_ESHR ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}",
+    "credential_endpoint": "${AGENT_ENDPOINT_ESHR ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}/credentials",
     "display": [
       {
         "name": "EnergySHR",

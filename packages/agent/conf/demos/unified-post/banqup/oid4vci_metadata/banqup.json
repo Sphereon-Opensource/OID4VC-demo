@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://agent.banqup.demo.sphereon.com",
+  "correlationId": "${AGENT_ENDPOINT_BANQUP ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://agent.banqup.demo.sphereon.com",
-    "credential_endpoint": "https://agent.banqup.demo.sphereon.com/credentials",
+    "credential_issuer": "${AGENT_ENDPOINT_BANQUP ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}",
+    "credential_endpoint": "${AGENT_ENDPOINT_BANQUP ?? AGENT_ENDPOINT ?? 'http://localhost:5000'}/credentials",
     "display": [
       {
         "name": "Banqup",

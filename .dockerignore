@@ -1,8 +1,12 @@
+**/*.env*
+!**/.env.example
+packages/agent/conf/dev
+
+#docker files
+/docker
+
 # dependencies
-/node_modules
-onto-demo-client/node_modules
-siopv2-openid4vp-demo-backend/node_modules
-onto-demo-shared-types/node_modules
+**/node_modules
 /.pnp
 .pnp.js
 

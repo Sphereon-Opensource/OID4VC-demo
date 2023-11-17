@@ -1,11 +1,10 @@
-import fs from "fs";
+import fs from 'fs'
 
 export function loadJsonFiles<T>({path}: { path: string }): {
     names: string[],
     fileNames: string[],
-    asObject: Record<string, T>
+    asObject: Record<string, T>,
     asArray: T[]
-
 } {
     const fileNames = fs.readdirSync(path).filter(file => file.match(/\.json$/))
     const names: string[] = []
@@ -20,8 +19,12 @@ export function loadJsonFiles<T>({path}: { path: string }): {
             names.push(name)
             files.push(fileName)
             const jsonFilePath = `${path}/${fileName}`
+
             try {
-                const object = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8').toString()) as T
+                let content = fs.readFileSync(jsonFilePath, 'utf8').toString()
+                content = substituteEnvVars(content)
+
+                const object = JSON.parse(content) as T
                 asObject[name] = object
                 asArray.push(object)
             } catch (e) {
@@ -32,7 +35,25 @@ export function loadJsonFiles<T>({path}: { path: string }): {
             }
         }
     })
+
     return {names, fileNames: files, asObject, asArray}
+}
+
+function substituteEnvVars(content: string): string {
+    const envVarRegex = /\$\{([^}]+)}/g;
+    return content.replace(envVarRegex, (_, vars) => {
+        const options = vars.split(/(?:\|\|)|(?:\?\?)/).map((opt: string) => opt.trim()).filter(Boolean);
+        for (const option of options) {
+            if (option.startsWith("'") && option.endsWith("'")) {
+                return option.slice(1, -1);
+            }
+            const envValue = process.env[option];
+            if (envValue !== undefined && envValue !== null && envValue.trim() !== '') {
+                return envValue;
+            }
+        }
+        return '';
+    });
 }
 
 /**
@@ -40,20 +61,20 @@ export function loadJsonFiles<T>({path}: { path: string }): {
  * @param segments
  */
 export function normalizeFilePath(...segments: (string | null | undefined)[]): string {
-    let result = '';
+    let result = ''
 
     for (let i = 0; i < segments.length; i++) {
-        const segment = segments[i];
+        const segment = segments[i]
 
         if (segment !== null && segment !== undefined && segment !== '') {
             if (i === 0) {
                 // For the first non-null and non-empty segment, remove the trailing slash if it exists
-                result += segment.replace(/\/$/, '');
+                result += segment.replace(/\/$/, '')
             } else {
                 // For subsequent segments, ensure all slashes are present
-                result += `/${segment.replace(/^\//, '').replace(/\/$/, '')}`;
+                result += `/${segment.replace(/^\//, '').replace(/\/$/, '')}`
             }
         }
     }
-    return result;
+    return result
 }

@@ -1,9 +1,9 @@
 {
-  "correlationId": "http://internet.or.LAN.host:5000/sphereon",
+  "correlationId": "${AGENT_ENDPOINT_SPHEREONGUEST ?? AGENT_ENDPOINT ?? 'http://localhost:5000' }",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://internet.or.LAN.host:5000/sphereon",
-    "credential_endpoint": "http://internet.or.LAN.host:5000/sphereon/credentials",
+    "credential_issuer": "${AGENT_ENDPOINT_SPHEREONGUEST ?? AGENT_ENDPOINT ?? 'http://localhost:5000' }",
+    "credential_endpoint": "${AGENT_ENDPOINT_SPHEREONGUEST ?? AGENT_ENDPOINT ?? 'http://localhost:5000' }/credentials",
     "display": [
       {
         "name": "Sphereon International",
@@ -520,7 +520,7 @@
       }
     ],
     "credential_supplier_config": {
-      "templates_base_dir": "templates/sphereon",
+      "templates_base_dir": "templates/sphereonGuest",
       "template_mappings": [
         {
           "credential_types": [
