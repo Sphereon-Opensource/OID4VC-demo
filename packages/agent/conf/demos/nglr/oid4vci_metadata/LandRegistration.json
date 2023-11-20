@@ -2,8 +2,8 @@
   "correlationId": "nglr",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://192.168.2.90:5000",
-    "credential_endpoint": "http://192.168.2.90:5000/credentials",
+    "credential_issuer": "https://lr.demo.sphereon.com/agent",
+    "credential_endpoint": "https://lr.demo.sphereon.com/agent/credentials",
     "display": [
       {
         "name": "Land Registration",

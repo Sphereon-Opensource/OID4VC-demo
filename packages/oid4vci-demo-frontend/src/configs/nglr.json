@@ -2,8 +2,8 @@
   "general": {
     "credentialName": "Land Registration",
     "issueCredentialType": "LandRegistrationCredential",
-    "oid4vpAgentBaseUrl": "http://192.168.2.90:5000",
-    "oid4vciAgentBaseUrl": "http://192.168.2.90:5000",
+    "oid4vpAgentBaseUrl": "https://lr.demo.sphereon.com/agent",
+    "oid4vciAgentBaseUrl": "https://lr.demo.sphereon.com/agent",
     "verifierUrl": "https://example.com",
     "verifierUrlCaption": "Verify",
     "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
