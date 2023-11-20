@@ -6,7 +6,7 @@
     "credential_endpoint": "http://192.168.2.90:5000/credentials",
     "display": [
       {
-        "name": "Land Registration",
+        "name": "Lagos Land Registration",
         "description": "Land Registration Issuer"
       }
     ],
@@ -14,8 +14,8 @@
       {
         "display": [
           {
-            "name": "Land Registration",
-            "description": "Land Registration Ownership.",
+            "name": "Lagos Land Registration",
+            "description": "Land Registration - Ownership.",
             "background_color": "#3498db",
             "text_color": "#000000",
             "background_image": {
@@ -29,7 +29,7 @@
           },
           {
             "locale": "en-US",
-            "name": "Land Registration",
+            "name": "Lago Land Registration",
             "description": "Land Registration - Ownership.",
             "background_color": "#3498db",
             "text_color": "#000000",
