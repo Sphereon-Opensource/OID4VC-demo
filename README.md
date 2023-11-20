@@ -95,7 +95,7 @@ It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent h
 software. For example:
 
 ```bash
-install-configs.sh sphereon http://192.168.x.x:5000
+./install-configs.sh sphereon http://192.168.x.x:5000
 ```
 
 The install-configs.sh script will set up the environment for your containers using the .env.examples files from

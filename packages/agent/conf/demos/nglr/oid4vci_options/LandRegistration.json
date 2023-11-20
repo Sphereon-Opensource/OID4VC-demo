@@ -1,0 +1,9 @@
+{
+  "definitionId": "nglr",
+  "correlationId": "nglr",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}
