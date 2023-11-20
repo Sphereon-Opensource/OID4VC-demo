@@ -1,0 +1,12 @@
+{
+  "privateKeyHex": "f4d807fd6281df7e50378bec8262650134e233f62a2336450f74d1c95ca3799b4e9d29b6b76133baf97b989576572173a2c3c84418ad5d464208f76862d7b06c",
+  "did": "did:key:z6MkgmfvG5TCvZ9v5mA1NSRiiaud9oyKGB8VZcyUPcsaKCvu",
+  "createArgs": {
+    "provider": "did:key",
+    "options": {
+      "kid": "auth-key-ed25519",
+      "type": "Ed25519",
+      "keyType": "Ed25519"
+    }
+  }
+}
