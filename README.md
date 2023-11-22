@@ -176,42 +176,6 @@ We maintain Docker a setup for building and testing in directory `docker/compose
 We have created a script to install and patch the agent configurations for you required to build and run the Docker
 containers.
 
-To run this script, you need to have `jq` installed on your machine. To install it, you can run:
-```shell
-choco install jq
-# to ensure that you have installed jq correctly, you can run the following.
-jq -V
-```
-
-It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent host address>`.
-
-**IMPORTANT:** The host address should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet
-software. For example:
-
-```bash
-install-configs.sh sphereon http://192.168.x.x:5000
-```
-
-The install-configs.sh script will set up the environment for your containers using the .env.examples files from
-packages/**src/.env.example and put them in the directories under `docker/compose/build`:
-
-```
-oid4vci-demo-frontend/.env.local
-oid4vp-demo-frontend/.env.local
-agent/.env.local
-```
-
-(The .env.local files are copied and patched from the packages/**/src/.env.example files)
-
-Please ensure that you execute the script and docker compose commands with ./docker/compose/build as working directory
-and have correctly set up your environment
-variables as outlined in the documentation for [Setting up the agent](./documents/agent-setup.md)
-and [Setting up the VCI frontend](./documents/vci-front-end.md).
-
-The current example for ecosystem "sphereon" loads the folder `packages/agent/conf/demos/sphereon` as your base
-configuration folder.
-All ecosystems present in packages/agent/conf/demos can be installed using the install-configs.sh script.
-
 To build and run the Docker containers, execute the following commands from within the respective directory:
 
 #### Build the image and run the container
