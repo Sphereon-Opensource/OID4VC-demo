@@ -90,7 +90,16 @@ git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git
 We maintain Docker a setup for building and testing in directory `docker/compose/build`.
 We have created a script to install and patch the agent configurations for you required to build and run the Docker
 containers.
+
+To run this script, you need to have `jq` installed on your machine. To install it, you can run:
+```shell
+sudo apt install jq
+# to ensure that you have installed jq correctly, you can run the following.
+jq -V
+```
+
 It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent host address>`.
+
 **IMPORTANT:** The host address should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet
 software. For example:
 
@@ -166,7 +175,16 @@ git clone git@github.com:Sphereon-Opensource/OID4VC-demo.git
 We maintain Docker a setup for building and testing in directory `docker/compose/build`.
 We have created a script to install and patch the agent configurations for you required to build and run the Docker
 containers.
+
+To run this script, you need to have `jq` installed on your machine. To install it, you can run:
+```shell
+choco install jq
+# to ensure that you have installed jq correctly, you can run the following.
+jq -V
+```
+
 It's located here: `docker/compose/build/install-configs.sh <ecosystem> <agent host address>`.
+
 **IMPORTANT:** The host address should be either a DNS host or a LAN IP that is reachable for your mobile devices running SSI wallet
 software. For example:
 
