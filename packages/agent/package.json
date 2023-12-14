@@ -51,6 +51,7 @@
     "@veramo/data-store": "4.2.0",
     "@veramo/did-discovery": "4.2.0",
     "@veramo/did-manager": "4.2.0",
+    "@veramo/did-provider-key": "4.2.0",
     "@veramo/did-provider-ethr": "4.2.0",
     "@veramo/did-provider-ion": "4.2.0",
     "@veramo/did-resolver": "4.2.0",

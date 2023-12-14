@@ -181,6 +181,9 @@ importers:
       '@veramo/did-provider-ion':
         specifier: 4.2.0
         version: 4.2.0(@sphereon/react-native-argon2@2.0.9)(react-native@0.72.5)
+      '@veramo/did-provider-key':
+        specifier: 4.2.0
+        version: 4.2.0
       '@veramo/did-resolver':
         specifier: 4.2.0
         version: 4.2.0
@@ -5818,6 +5821,17 @@ packages:
       - web-streams-polyfill
     dev: false
 
+  /@transmute/did-key-secp256k1@0.3.0-unstable.10:
+    resolution: {integrity: sha512-C/Gyu2U3NQZ9Gxu4WVwUk8h0ERbY9Z4Kjk0P49p3IQFrWK19XmVXjA+b1RiqffhYzWJ6fH5TPYIt2LW5MRQmUA==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@transmute/did-key-common': 0.3.0-unstable.10
+      '@transmute/secp256k1-key-pair': 0.7.0-unstable.81
+    transitivePeerDependencies:
+      - encoding
+      - web-streams-polyfill
+    dev: false
+
   /@transmute/did-key-x25519@0.2.1-unstable.42:
     resolution: {integrity: sha512-pInHZaepvjmfym1fBDrdbL5isUVbYHR1nYBsH3uD9EPn7SwZfEBe0Vg9hUop81b4x/6+VVWuGm2dIhpVBxsRPQ==}
     engines: {node: '>=10'}
@@ -5830,6 +5844,17 @@ packages:
       base64url: 3.0.1
       bs58: 4.0.1
       canonicalize: 1.0.8
+    dev: false
+
+  /@transmute/did-key-x25519@0.3.0-unstable.10:
+    resolution: {integrity: sha512-Jm5UxwI9EhlfVQ9D0Clj9RlMvhOi8nqAgQG30KMzjFMVGfWqIPwQNZFvmL+XsQ7g3dfTo5iQwXBY0de/f+RoMA==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@transmute/did-key-common': 0.3.0-unstable.10
+      '@transmute/x25519-key-pair': 0.7.0-unstable.81
+    transitivePeerDependencies:
+      - encoding
+      - web-streams-polyfill
     dev: false
 
   /@transmute/ed25519-key-pair@0.6.1-unstable.37:
@@ -6869,6 +6894,23 @@ packages:
       - encoding
       - react-native
       - supports-color
+    dev: false
+
+  /@veramo/did-provider-key@4.2.0:
+    resolution: {integrity: sha512-VSNhgzU54Hu6P3kpJImzbrEdiFjpRJ+PLgPZAR+pFLPIfibvizOMY2LZjOi8tQyxbxwBUAhbrSLlTM+bauE+Ow==}
+    dependencies:
+      '@transmute/did-key-ed25519': 0.3.0-unstable.10
+      '@transmute/did-key-secp256k1': 0.3.0-unstable.10
+      '@transmute/did-key-x25519': 0.3.0-unstable.10
+      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/did-manager': 4.2.0
+      debug: 4.3.4(supports-color@5.5.0)
+      multibase: 4.0.6
+      multicodec: 3.2.1
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+      - web-streams-polyfill
     dev: false
 
   /@veramo/did-resolver@4.2.0:
@@ -15035,6 +15077,14 @@ packages:
     dependencies:
       dns-packet: 5.6.1
       thunky: 1.1.0
+    dev: false
+
+  /multicodec@3.2.1:
+    resolution: {integrity: sha512-+expTPftro8VAW8kfvcuNNNBgb9gPeNYV9dn+z1kJRWF2vih+/S79f2RVeIwmrJBUJ6NT9IUPWnZDQvegEh5pw==}
+    deprecated: This module has been superseded by the multiformats module
+    dependencies:
+      uint8arrays: 3.1.1
+      varint: 6.0.0
     dev: false
 
   /multiformats@11.0.2:
