@@ -15,6 +15,7 @@ overrides:
   '@sphereon/oid4vci-common': 0.8.2-next.4
   '@sphereon/oid4vci-issuer': 0.8.2-next.4
   '@sphereon/oid4vci-issuer-server': 0.8.2-next.4
+  '@sphereon/ssi-express-support': 0.17.6-unstable.23
   '@veramo/core': 4.2.0
   '@veramo/credential-w3c': 4.2.0
   '@veramo/data-store': 4.2.0
@@ -4474,7 +4475,7 @@ packages:
     dependencies:
       '@sphereon/oid4vci-common': 0.8.2-next.4
       '@sphereon/oid4vci-issuer': 0.8.2-next.4
-      '@sphereon/ssi-express-support': 0.17.2(passport-http-bearer@1.0.1)
+      '@sphereon/ssi-express-support': 0.17.6-unstable.23(@noble/hashes@1.3.2)(passport-http-bearer@1.0.1)
       '@sphereon/ssi-types': 0.17.6-unstable.23
       body-parser: 1.20.2
       cookie-parser: 1.4.6
@@ -4532,38 +4533,6 @@ packages:
       react-native: '>=0.67.0'
     dependencies:
       react-native: 0.72.5(@babel/core@7.23.0)(@babel/preset-env@7.22.20)(react@18.2.0)
-    dev: false
-
-  /@sphereon/ssi-express-support@0.17.2(passport-http-bearer@1.0.1):
-    resolution: {integrity: sha512-OrLC7YAelpUmCIzPRgHM97HBNFqDoSdJNNssstS6Ho0ZXswq4fsPDm+h49+//ogp1ERbuOl9Ywqhp+3DdLZCPA==}
-    peerDependencies:
-      '@noble/hashes': 1.2.0
-      passport-azure-ad: ^4.3.5
-      passport-http-bearer: ^1.0.1
-    peerDependenciesMeta:
-      '@noble/hashes':
-        optional: true
-      passport-azure-ad:
-        optional: true
-      passport-http-bearer:
-        optional: true
-    dependencies:
-      body-parser: 1.20.2
-      casbin: 5.27.1
-      cookie-session: 2.0.0
-      cors: 2.8.5
-      dotenv-flow: 3.3.0
-      express: 4.18.2
-      express-session: 1.17.3
-      http-terminator: 3.2.0
-      morgan: 1.10.0
-      openid-client: 5.5.0
-      passport: 0.6.0
-      passport-http-bearer: 1.0.1
-      qs: 6.11.2
-      uint8arrays: 3.1.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@sphereon/ssi-express-support@0.17.6-unstable.23(@noble/hashes@1.3.2)(passport-http-bearer@1.0.1):
