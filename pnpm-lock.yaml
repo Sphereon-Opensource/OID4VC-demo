@@ -76,6 +76,15 @@ importers:
       '@sphereon/did-uni-client':
         specifier: ^0.6.0
         version: 0.6.0
+      '@sphereon/oid4vci-common':
+        specifier: 0.8.2-next.4
+        version: 0.8.2-next.4
+      '@sphereon/oid4vci-issuer':
+        specifier: 0.8.2-next.4
+        version: 0.8.2-next.4
+      '@sphereon/oid4vci-issuer-server':
+        specifier: 0.8.2-next.4
+        version: 0.8.2-next.4(passport-http-bearer@1.0.1)
       '@sphereon/pex':
         specifier: 2.1.2
         version: 2.1.2
@@ -86,8 +95,8 @@ importers:
         specifier: ^2.0.9
         version: 2.0.9(react-native@0.72.5)
       '@sphereon/ssi-express-support':
-        specifier: 0.17.6-unstable.6
-        version: 0.17.6-unstable.6(passport-http-bearer@1.0.1)
+        specifier: 0.17.6-unstable.23
+        version: 0.17.6-unstable.23(@noble/hashes@1.3.2)(passport-http-bearer@1.0.1)
       '@sphereon/ssi-sdk-ext.did-provider-jwk':
         specifier: 0.15.0
         version: 0.15.0(expo-crypto@12.6.0)(expo@49.0.13)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)
@@ -116,8 +125,8 @@ importers:
         specifier: 0.17.6-unstable.23
         version: 0.17.6-unstable.23(sqlite3@5.1.6)(ts-node@10.9.1)
       '@sphereon/ssi-sdk.kv-store-temp':
-        specifier: 0.17.6-unstable.6
-        version: 0.17.6-unstable.6(sqlite3@5.1.6)(ts-node@10.9.1)
+        specifier: 0.17.6-unstable.23
+        version: 0.17.6-unstable.23(sqlite3@5.1.6)(ts-node@10.9.1)
       '@sphereon/ssi-sdk.oid4vci-issuer':
         specifier: 0.17.6-unstable.23
         version: 0.17.6-unstable.23(expo-crypto@12.6.0)(expo@49.0.13)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.72.5)(sqlite3@5.1.6)(ts-node@10.9.1)
@@ -4587,38 +4596,6 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/ssi-express-support@0.17.6-unstable.6(passport-http-bearer@1.0.1):
-    resolution: {integrity: sha512-YQpjRRhvsEgMOMmKmVznLOo0pQCc+cm6axTPObTRmQsGjodxkiDwa5Ka5+5Iz7CaUeMWDA8CYjePFYQU8mTtQQ==}
-    peerDependencies:
-      '@noble/hashes': 1.2.0
-      passport-azure-ad: ^4.3.5
-      passport-http-bearer: ^1.0.1
-    peerDependenciesMeta:
-      '@noble/hashes':
-        optional: true
-      passport-azure-ad:
-        optional: true
-      passport-http-bearer:
-        optional: true
-    dependencies:
-      body-parser: 1.20.2
-      casbin: 5.27.1
-      cookie-session: 2.0.0
-      cors: 2.8.5
-      dotenv-flow: 3.3.0
-      express: 4.18.2
-      express-session: 1.17.3
-      http-terminator: 3.2.0
-      morgan: 1.10.0
-      openid-client: 5.5.0
-      passport: 0.6.0
-      passport-http-bearer: 1.0.1
-      qs: 6.11.2
-      uint8arrays: 3.1.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
   /@sphereon/ssi-sdk-ext.did-provider-jwk@0.15.0(expo-crypto@12.6.0)(expo@49.0.13)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1):
     resolution: {integrity: sha512-ZUqtCs5xaxZcLZuuaDqSCiDSxoLJmpOpSqi117gYg3DBozS1mLUzG4BEKMrr+XjNKNu3O6t8Sezm/fjsmIwHOg==}
     dependencies:
@@ -4835,37 +4812,6 @@ packages:
 
   /@sphereon/ssi-sdk.kv-store-temp@0.17.6-unstable.23(sqlite3@5.1.6)(ts-node@10.9.1):
     resolution: {integrity: sha512-Q9ltQZp5CdFTKC9qqVPZTOhNg5a8K1tNKb3X6DMmjvF56BXo95HZYzbbJlX+5XY4afonL7gnEl3DGkp2lJUz5A==}
-    dependencies:
-      '@veramo/utils': 4.2.0
-      debug: 4.3.4(supports-color@5.5.0)
-      events: 3.3.0
-      json-buffer: 3.0.1
-      typeorm: 0.3.12(sqlite3@5.1.6)(ts-node@10.9.1)
-      uint8arrays: 3.1.1
-    transitivePeerDependencies:
-      - '@google-cloud/spanner'
-      - '@sap/hana-client'
-      - better-sqlite3
-      - encoding
-      - hdb-pool
-      - ioredis
-      - mongodb
-      - mssql
-      - mysql2
-      - oracledb
-      - pg
-      - pg-native
-      - pg-query-stream
-      - redis
-      - sql.js
-      - sqlite3
-      - supports-color
-      - ts-node
-      - typeorm-aurora-data-api-driver
-    dev: false
-
-  /@sphereon/ssi-sdk.kv-store-temp@0.17.6-unstable.6(sqlite3@5.1.6)(ts-node@10.9.1):
-    resolution: {integrity: sha512-odufUDbVEWIjbFiU8zyYao0WhS6mJFLlKDc7ge6nNUrXYOaACM9CbJrFUTGyPwNF2ZjNyqsY87W52u7dFHxNbg==}
     dependencies:
       '@veramo/utils': 4.2.0
       debug: 4.3.4(supports-color@5.5.0)
