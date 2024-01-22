@@ -263,6 +263,49 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
   }
 }
 
+export interface SSICredentialIssuerConnectPageConfig extends PageConfig {
+    issuerUrl: string
+    clientId: string
+    redirectUri: string
+    proxyTokenUrl?: string
+
+    leftPaneWidth?: string
+    photoWallet?: string
+    textLeft?: string
+    backgroundColor?: string
+    logo?: ImageProperties
+    title?: string
+    topParagraph?: string
+    bottomParagraph?: string
+    rightPaneHeight?: string | number
+    mobile?: {
+        width?: string | number
+        logo?: ImageProperties
+        backgroundColor?: string
+        image?: ImageProperties
+        bottomParagraph?: string
+        rightPaneWidth?: string | number
+        bottomText?: {
+            paragraph?: string
+            pStyle?: CSSProperties
+            className?: string
+        }
+    }
+    qrCode?: {
+        topTitle?: {
+            h2Style?: CSSProperties
+            pStyle?: CSSProperties
+        },
+        bottomText?: {
+            pStyle?: CSSProperties
+            className?: string
+        }
+    }
+    qrCodeContainer?: {
+        height: string
+    }
+}
+
 export interface SSIInformationManualRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photo?: string

@@ -16,6 +16,7 @@ import SSIEmailVerificationPage from "../pages/SSIEmailVerificationPage"
 import SSIWelcomePage from '../pages/SSIWelcomePage'
 import SSIIdentityVerificationPage from '../pages/SSIIdentityVerificationPage'
 import SSICredentialVerifyFromVPRequestPage from '../pages/SSICredentialVerifyFromVPRequest'
+import SSICredentialIssuerConnectPage from "../pages/SSICredentialIssuerConnectPage";
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -27,6 +28,7 @@ export const routes: Record<string, any> = {
     '/credentials/verify/vp/request': <SSICredentialVerifyFromVPRequestPage/>,
     '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,
+    '/credentials/issuer/connect': <SSICredentialIssuerConnectPage/>,
     '/verify/email': <SSIEmailVerificationPage/>,
     '/verify/identity': <SSIIdentityVerificationPage/>,
     '/download/sphereon-wallet': <SphereonWalletPage/>,
