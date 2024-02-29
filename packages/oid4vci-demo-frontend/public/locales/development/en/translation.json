@@ -97,7 +97,10 @@
   "title_please_check_your_email": "Please check your e-mail",
   "title_fill_5_digits": "Fill in the 5-digit code from the confirmation e-mail.",
   "title_connect_issuer": "Connect to issuer",
+  "title_connect_esignet_issuer": "Connect to eSignet issuer",
   "paragraph_add_credential": "Let's add the credential to your wallet",
+  "paragraph_add_esignet_credential": "Let's add the eSignet credential to your wallet",
+
   "paragraph_add_credential_notaris": "Let's add the {{credentialName}} credential to your wallet.",
   "paragraph_scan_this_qr": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
   "paragraph_scan_this_qr_notaris": "Scan this QR code using your wallet's QR\n scanner to accept and store your credential.",

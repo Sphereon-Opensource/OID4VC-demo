@@ -16,10 +16,10 @@
   "license": "Apache-2.0",
   "private": false,
   "dependencies": {
-    "@sphereon/did-auth-siop": "0.5.0-unstable.9",
+    "@sphereon/did-auth-siop": "0.6.0-unstable.9",
     "@sphereon/did-uni-client": "^0.6.0",
-    "@sphereon/pex": "2.2.2",
-    "@sphereon/pex-models": "^2.1.2",
+    "@sphereon/pex": "^3.2.1-unstable.7",
+    "@sphereon/pex-models": "^2.2.0",
     "@sphereon/react-native-argon2": "^2.0.9",
     "@sphereon/ssi-express-support": "0.17.6-unstable.74",
     "@sphereon/ssi-sdk-ext.did-provider-jwk": "0.15.0",

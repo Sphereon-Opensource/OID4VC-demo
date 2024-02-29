@@ -1,0 +1,16 @@
+{
+  "id": "national-eid",
+  "purpose": "Horizon African Telecom would like to receive the following information from you for verification.",
+  "input_descriptors": [
+    {
+      "id": "a7207a58-969a-4906-bbd4-b7b2804dae35",
+      "name": "National eID",
+      "purpose": "We substituted a MOSIP Identity for a National eID",
+      "schema": [
+        {
+          "uri": "MOSIPVerifiableCredential"
+        }
+      ]
+    }
+  ]
+}

@@ -36,6 +36,7 @@
       "@sphereon/oid4vci-issuer": "0.8.2-unstable.30",
       "@sphereon/oid4vci-issuer-server": "0.8.2-unstable.30",
       "@sphereon/ssi-express-support": "0.17.6-unstable.74",
+      "@sphereon/did-auth-siop": "0.6.0-unstable.9",
       "@veramo/core": "4.2.0",
       "@veramo/credential-w3c": "4.2.0",
       "@veramo/data-store": "4.2.0",
@@ -56,8 +57,8 @@
       "@veramo/remote-server": "4.2.0",
       "@veramo/selective-disclosure": "4.2.0",
       "@veramo/url-handler": "4.2.0",
-      "@sphereon/pex": "2.1.2",
-      "@sphereon/pex-models": "2.1.0",
+      "@sphereon/pex": "^3.2.1-unstable.7",
+      "@sphereon/pex-models": "2.2.0",
       "node-fetch": "2.6.12",
       "@digitalbazaar/http-client": "3.4.1"
     },

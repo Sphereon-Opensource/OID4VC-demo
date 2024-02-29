@@ -6,10 +6,10 @@
   "pages": {
     "downloadSphereonWallet": {
       "leftPane": {
-        "backgroundColor": "#0E0B31",
+        "image": "image_4.svg",
         "width": "40%",
         "logo": {
-          "src": "banqup/logo.svg"
+          "src": "hat/logo.svg"
         },
         "mobile": {
           "backgroundColor": "#EFFFF5"
@@ -42,14 +42,16 @@
       "issuerUrl": "https://esignet.collab.mosip.net",
       "clientId": "MUq1H5M4OBr9fxSC2fJrY4felRmxtDw4iRls2lBZQzI",
       "redirectUri": "com.sphereon.ssi.wallet://credentials",
-      "proxyTokenUrl": "http://192.168.1.200:3300/token",
+      "proxyTokenUrl": "http://143.178.237.153:3300/token",
       "leftPaneWidth": "40%",
-      "title": "title_connect_issuer",
-      "topParagraph": "paragraph_add_credential",
+      "title": "title_connect_esignet_issuer",
+      "topParagraph": "paragraph_add_esignet_credential",
       "bottomParagraph": "paragraph_scan_this_qr",
-      "backgroundColor": "#0E0B31",
+      "photoWallet": "hat/background.jpg",
       "logo": {
-        "src": "esignet/logo.png"
+        "src": "hat/logo.svg",
+        "width": 430,
+        "height": 63
       },
       "mobile": {
       }

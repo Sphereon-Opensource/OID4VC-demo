@@ -4,7 +4,7 @@
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
-    "@sphereon/did-auth-siop": "0.4.2",
+    "@sphereon/did-auth-siop": "0.6.0-unstable.9",
     "@sphereon/oid4vci-client": "0.8.2-unstable.30",
     "@sphereon/oid4vci-common": "0.8.2-unstable.30",
     "@sphereon/ssi-sdk.data-store": "0.17.6-unstable.74",
