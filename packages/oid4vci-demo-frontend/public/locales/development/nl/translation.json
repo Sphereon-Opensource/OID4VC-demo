@@ -57,6 +57,7 @@
   "sharing_data_success_right_pane_paragraph": "voor het verstrekken van de informatie. We zijn nu klaar\r\nom een nieuwe credential aan je uit te geven.\r\n\nAls je nog geen wallet heeft, download dan alstublieft\r\neen van de conforme wallets aan de linkerkant.",
   "sharing_data_success_right_pane_paragraph_short": "voor het verstrekken van de informatie. We zijn nu klaar\r\nom een nieuwe credential aan je uit te geven.",
   "sharing_data_success_right_pane_title": "Bedankt {{firstName}}!",
+  "sharing_data_success_right_pane_text_hat": "Your application was processed succesfully!  Next you can receive a proof of your subscription from us.",
   "sharing_data_success_get_mobile_app_message": "Haal de Sphereon Wallet",
   "action_open_wallet_caption": "Openen in wallet",
   "ssi_information_request_page_form_account_title": "Account Informatie",
@@ -70,8 +71,14 @@
   "ssi_information_request_page_form_last_name_label": "Achternaam",
   "ssi_information_request_page_form_first_name_director_label": "Voornaam directeur",
   "ssi_information_request_page_form_last_name_director_label": "Achternaam directeur",
+  "ssi_information_request_page_form_full_name_label": "Volledige naam",
   "ssi_information_request_page_form_place_of_birth_label": "Geboorteplaats",
   "ssi_information_request_page_form_date_of_birth_label": "Geboortedatum",
+  "ssi_information_request_page_form_gender_label": "Geslacht",
+  "ssi_information_request_page_form_city_label": "Plaats",
+  "ssi_information_request_page_form_account_id_label": "Account ID",
+  "ssi_information_request_page_form_phone_label": "Telefoonnummer",
+  "ssi_information_request_page_form_profile_picture_label": "Profielfoto",
   "ssi_information_request_page_form_terms_and_conditions_label": "Ik ga akkoord met de <a href=\"{{url}}\" target=\"_blank\">algemene voorwaarden</a>",
   "ssi_information_request_page_form_tax_registration_number_label": "Belastingnummer RSIN",
   "ssi_information_request_page_form_contact_first_name_label": "Contact voornaam",
@@ -109,5 +116,6 @@
   "welcome_page_confirm_account_subtitle": "We moeten eerst je account bevestigen",
   "welcome_page_confirm_identity_subtitle": "Wij willen graag wat meer over je weten",
   "welcome_page_confirm_account_description": "Bevestig je account door wat informatie te verstrekken en door de verificatie-e-mail te beantwoorden die we hebben verzonden.",
-  "welcome_page_confirm_identity_description": "<strong>Volgende stappen:</strong><br>1. Verstrek enkele persoonlijke gegevens<br>2. Upload een geldig identiteitsbewijs<br>3. Voer een authenticiteitscontrole uit<br>4. Wacht op bevestiging"
+  "welcome_page_confirm_identity_description": "<strong>Volgende stappen:</strong><br>1. Verstrek enkele persoonlijke gegevens<br>2. Upload een geldig identiteitsbewijs<br>3. Voer een authenticiteitscontrole uit<br>4. Wacht op bevestiging",
+  "welcome_hat": "Welkom bij Horizon!"
 }

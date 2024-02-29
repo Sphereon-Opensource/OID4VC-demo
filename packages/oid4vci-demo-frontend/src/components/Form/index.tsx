@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC, ReactElement, ReactNode, useEffect, useState} from 'react'
+import React, {FC, ReactElement, ReactNode, useEffect, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
@@ -7,6 +7,8 @@ import {transformFormConfigToEmptyObject} from '../../utils/ObjectUtils'
 import InputField from '../InputField'
 import {FormOutputData, FormFieldValue, ImmutableRecord} from '../../types'
 import style from './index.module.css'
+import {mapLanguageValues} from "@sphereon/ssi-types";
+
 
 type Props = {
     inputBackgroundColor?: string
@@ -26,6 +28,9 @@ const evaluateDefaultValue = (field: DataFormElement, formInitData: ImmutableRec
     }
 
     let defaultValue: FormFieldValue = formInitData?.[field.key] ?? field.defaultValue ?? ''
+    if (typeof defaultValue === 'object') {
+        defaultValue = mapLanguageValues(defaultValue)
+    }
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
@@ -62,7 +67,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
             case 'text':
-          case 'date':
+            case 'date':
                 const isReadonly = field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)
 
                 return <InputField
@@ -75,6 +80,8 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
+            case 'image':
+                return typeof defaultValue === 'string' ? <img src={defaultValue} alt="profile picture" width="70px"/> : <div/>;
             default:
                 return <div/>
         }
