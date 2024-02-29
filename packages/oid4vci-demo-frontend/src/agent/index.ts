@@ -5,7 +5,7 @@ import {IOID4VCIRestClient, OID4VCIRestClient} from '@sphereon/ssi-sdk.oid4vci-i
 import {TAgent} from "@veramo/core/src/types/IAgent"
 import {
     Siopv2RestClientAuthenticationOpts
-} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client/src/types/ISIOPv2OID4VPRPRestClient"
+} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client"
 import {EcosystemGeneralConfig} from "../ecosystem/ecosystem-config"
 import {DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL, DEV_OVERRIDE_OID4VP_AGENT_BASE_URL} from "../environment"
 
