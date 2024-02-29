@@ -217,6 +217,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
     leftTextHideManual?: boolean
     textLeft?: string
     photoRight: string
+    textRightTitle?: string
     textRight?: string
     mobile?: {
         logo: ImageProperties

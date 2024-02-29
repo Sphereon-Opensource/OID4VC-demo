@@ -42,7 +42,7 @@
       "issuerUrl": "https://esignet.collab.mosip.net",
       "clientId": "MUq1H5M4OBr9fxSC2fJrY4felRmxtDw4iRls2lBZQzI",
       "redirectUri": "com.sphereon.ssi.wallet://credentials",
-      "proxyTokenUrl": "http://143.178.237.153:3300/token",
+      "proxyTokenUrl": "https://backend.hat.demo.sphereon.com/token",
       "leftPaneWidth": "40%",
       "title": "title_connect_esignet_issuer",
       "topParagraph": "paragraph_add_esignet_credential",

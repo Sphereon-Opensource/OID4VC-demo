@@ -131,7 +131,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    height: '63%',
+                    height: '83%',
                 }}>
                     <div
                         style={{

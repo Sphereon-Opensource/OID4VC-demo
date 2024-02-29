@@ -10,7 +10,7 @@ import {Buffer} from "buffer"
 import {ImmutableRecord} from "../types"
 
 export function useCredentialsReader() {
-    
+
     const decodeBase64 = async (jwt: string, kid?: string): Promise<any> => {
         return JSON.parse(Buffer.from(jwt.split('.')[1], 'base64').toString())
     }
@@ -35,11 +35,14 @@ export function useCredentialsReader() {
     }
 
     const handleVP = async (vp: W3CVerifiablePresentation): Promise<ImmutableRecord[]> => {
-        let verifiablePresentation: IVerifiablePresentation
+        let verifiablePresentation = vp as IVerifiablePresentation
         if (typeof vp === 'string') {
-            verifiablePresentation = (await decodeBase64(vp)).vp as IVerifiablePresentation
-        } else {
-            verifiablePresentation = vp as IVerifiablePresentation
+            if (vp.startsWith('{')) {
+                const parsedVp = JSON.parse(vp);
+                verifiablePresentation = parsedVp as IVerifiablePresentation
+            } else {
+                verifiablePresentation = (await decodeBase64(vp)).vp as IVerifiablePresentation
+            }
         }
         if (!verifiablePresentation.verifiableCredential) {
             return []

@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "Verified Account",
+    "credentialName": "subscription",
     "oid4vpAgentBaseUrl": "https://agent.hat.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.hat.demo.sphereon.com",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download",
@@ -9,7 +9,7 @@
   "pages": {
     "downloadSphereonWallet": {
       "leftPane": {
-        "image": "image_4.svg",
+        "image": "hat/background.jpg",
         "width": "40%",
         "logo": {
           "src": "hat/logo-transparent.png"
@@ -46,7 +46,7 @@
       "leftPaneWidth": "40%",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
-      "photoLeft": "image_4.svg",
+      "photoLeft": "hat/background.jpg",
       "logo": {
         "src": "hat/logo.svg",
         "width": 430,
@@ -94,30 +94,30 @@
     },
     "issueSuccess": {
       "leftPaneWidth": "40%",
-      "photoLeft": "image_4.svg",
-      "photoLeftManual": "image_4.svg",
+      "photoLeft": "hat/background.jpg",
+      "photoLeftManual": "hat/background.jpg",
       "logo": {
         "src": "hat/logo-transparent.png"
       },
       "rightPaneTitle": "credentials_success_right_pane_banqup_title",
-      "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph",
-      "rightPaneButtonCaption": "label_continue",
+      "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph_hat",
+      "rightPaneButtonCaption": "label_finish",
       "rightPaneTextHeight": "40%",
       "rightPaneTextMarginTop": "0",
       "rightPaneTextMarginBottom": "10%",
       "rightPaneButtonWidth": "135px",
       "rightPaneButtonHeight": "48px",
-      "rightPaneButtonStepId": "toIdentityFlow",
+      "rightPaneButtonStepId": "toStart",
       "mobile": {
       }
     },
     "infoRequest": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "ssi_information_request_page_form_account_title",
+      "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_banqup_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
-      "photo": "image_4.svg",
+      "photo": "hat/background.jpg",
       "logo": {
         "src": "hat/logo-transparent.png"
       },
@@ -127,18 +127,55 @@
       "form": [
         [
           {
-            "id": "firstName",
-            "key": "firstName",
-            "label": "ssi_information_request_page_form_first_name_label",
+            "id": "face",
+            "key": "face",
+            "label": "ssi_information_request_page_form_profile_picture_label",
+            "type": "image",
+            "required": true,
+            "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        ],
+        [
+          {
+            "id": "fullName",
+            "key": "fullName",
+            "label": "ssi_information_request_page_form_full_name_label",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "lastName",
-            "key": "lastName",
-            "label": "ssi_information_request_page_form_last_name_label",
+            "id": "dateOfBirth",
+            "key": "dateOfBirth",
+            "label": "ssi_information_request_page_form_date_of_birth_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "gender",
+            "key": "gender",
+            "label": "ssi_information_request_page_form_gender_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "city",
+            "key": "city",
+            "label": "ssi_information_request_page_form_city_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "phone",
+            "key": "phone",
+            "label": "ssi_information_request_page_form_phone_label",
             "type": "text",
             "required": true
           }
@@ -146,7 +183,7 @@
         [
           {
             "id": "emailAddress",
-            "key": "emailAddress",
+            "key": "email",
             "label": "ssi_information_request_page_form_email_label",
             "type": "text",
             "required": true,
@@ -155,17 +192,11 @@
         ],
         [
           {
-            "id": "termsAndConditions",
-            "key": "termsAndConditions",
-            "label": "ssi_information_request_page_form_terms_and_conditions_label",
-            "labelUrl": "https://google.com",
-            "type": "checkbox",
-            "required": true,
-            "display": {
-              "checkboxBorderColor": "#202776",
-              "checkboxLabelColor": "#424242",
-              "checkboxSelectedColor": "#202776"
-            }
+            "id": "uin",
+            "key": "UIN",
+            "label": "ssi_information_request_page_form_account_id_label",
+            "type": "text",
+            "required": true
           }
         ]
       ]
@@ -175,11 +206,24 @@
       "title": "title_secure_your_credential",
       "topParagraph": "paragraph_add_credential",
       "bottomParagraph": "paragraph_scan_this_qr",
-      "photoWallet": "image_4.svg",
+      "photoWallet": "hat/background.jpg",
       "logo": {
         "src": "hat/logo-transparent.png"
       },
       "mobile": {
+      }
+    },
+    "shareSuccess": {
+      "leftPaneWidth": "40%",
+      "photoLeft": "hat/background.jpg",
+      "photoLeftManual": "hat/background.jpg",
+      "photoRight": "undraw_certification_re_ifll_2.svg",
+      "textRightTitle": "welcome_hat",
+      "textRight": "sharing_data_success_right_pane_text_hat",
+      "logo": {
+        "src": "hat/logo.svg",
+        "width": 430,
+        "height": 63
       }
     }
   },
@@ -199,6 +243,12 @@
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/manual/request",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
           "nextId": "credentialOffer"
         },
         {
@@ -220,12 +270,12 @@
           "id": "issueSuccess",
           "operation": "navigate",
           "path": "/credentials/issue/success",
-          "nextId": "toIdentityFlow"
+          "nextId": "toStart"
         },
         {
-          "id": "toIdentityFlow",
+          "id": "toStart",
           "operation": "navigate",
-          "path": "https://identity.banqup.demo.sphereon.com"
+          "path": "https://hat.demo.sphereon.com"
         },
         {
           "id": "downloadSphereonWallet",
@@ -249,10 +299,10 @@
     "SSIPrimaryButton": {
       "styles": {
         "mainContainer": {
-          "backgroundColor": "#252E7E"
+          "backgroundColor": "#1A4BA6"
         },
         "button": {
-          "width" : "220px"
+          "width": "220px"
         }
       }
     },
@@ -262,7 +312,7 @@
           "backgroundColor": "#353438"
         },
         "button": {
-          "width" : "220px"
+          "width": "220px"
         }
       }
     },

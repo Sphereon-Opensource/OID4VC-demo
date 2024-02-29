@@ -32,19 +32,30 @@ const SSIInformationSuccessPage: React.FC = () => {
         credentialType: generalConfig.issueCredentialType
   })
     return (
-        <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none'}}>
+        <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none',  width: '100vw'}}>
             <NonMobile>
                 {state?.isManualIdentification
                     ? <SSIInformationSharedSuccessPageLeftPanel/>
                     : <div
                         style={{
-                            flex: 1,
                             display: 'flex',
+                            width: pageConfig.leftPaneWidth ?? '60%',
+                            height: isTabletOrMobile ? '100%': '100vh',
                             flexDirection: 'column',
-                            background: `url(${pageConfig.photoLeft})`,
-                            backgroundSize: 'cover',
+                            alignItems: 'center',
+                            ...((pageConfig.photoLeft) && {background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+                            ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                            ...(pageConfig.logo && { justifyContent: 'center' })
                         }}
                     >
+                        {pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
+                            />
+                        }
                         {(pageConfig.textLeft) && (
                             <div style={{marginTop: 'auto', marginBottom: 153}}>
                                 <Text
@@ -58,12 +69,11 @@ const SSIInformationSuccessPage: React.FC = () => {
             </NonMobile>
             <div style={{
                 display: 'flex',
-                width: `${isTabletOrMobile ? '100%' : '40%'}`,
                 height: '100%',
-                backgroundColor: '#FFFFFF',
                 alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                marginLeft: '20%',
+                marginRight: '20%'
             }}>
                 <div style={{
                     display: 'flex',
@@ -80,8 +90,8 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 flexGrow: 1,
                                 textAlign: 'center'
                             }}
-                            title={t('sharing_data_success_right_pane_title', {firstName}).split('\n')}
-                            lines={t(`${pageConfig.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
+                            title={(pageConfig.textRightTitle ? t(pageConfig.textRightTitle) : t('sharing_data_success_right_pane_title', {firstName})).split('\n')}
+                            lines={(pageConfig.textRight ? t(pageConfig.textRight) : t(`${!state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl})).split('\r\n')}
                         />
                     </Trans>
                     <div style={{
@@ -92,12 +102,12 @@ const SSIInformationSuccessPage: React.FC = () => {
                         <img src={pageConfig.photoRight} alt="success"/>
                     </div>
                     <div style={{
+                        display: 'flex',
                         width: '100%',
-                        alignSelf: 'flex-end',
+                        justifyContent: 'center',
                     }}>
                         <SSIPrimaryButton
                             caption={t('label_next')}
-                            style={{width: '100%'}}
                             onClick={async () => await onIssueCredential()}
                         />
                     </div>

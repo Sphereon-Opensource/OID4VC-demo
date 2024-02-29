@@ -18,6 +18,6 @@ export interface ImageProperties {
 }
 
 export type FormOutputData = Record<string, FormFieldValue>
-export type FormFieldValue = string | number | ReadonlyArray<string> | boolean | undefined
+export type FormFieldValue = string | number | ReadonlyArray<string> | boolean | undefined | object
 export type ImmutableRecord = Readonly<Record<string, ImmutableValue>>;
 export type ImmutableValue = Readonly<string | number | ReadonlyArray<string> | boolean | undefined>;
