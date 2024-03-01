@@ -129,6 +129,10 @@
           "VerifiableCredential",
           "HATSubscription"
         ],
+        "type": [
+          "VerifiableCredential",
+          "HATSubscription"
+        ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
           "did:jwk"
