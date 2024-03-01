@@ -12,6 +12,7 @@ import {FormOutputData, ImmutableRecord} from "../../types"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {useCredentialsReader} from "../../utils/credentials-helper"
+import {mapLanguageValues} from "@sphereon/ssi-types";
 
 
 type State = {
@@ -51,7 +52,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
 
     useEffect(() => {
         credentialsReader.credentialDataFromVpToken(state?.data?.vp_token).then((credentialData?: ImmutableRecord) => {
-            setCredentialsData(credentialData)
+            setCredentialsData(mapLanguageValues(credentialData as object) as ImmutableRecord)
             setInitComplete(true)
         })
     }, [])

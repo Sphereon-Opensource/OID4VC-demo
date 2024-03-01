@@ -7,7 +7,6 @@ import {transformFormConfigToEmptyObject} from '../../utils/ObjectUtils'
 import InputField from '../InputField'
 import {FormOutputData, FormFieldValue, ImmutableRecord} from '../../types'
 import style from './index.module.css'
-import {mapLanguageValues} from "@sphereon/ssi-types";
 
 
 type Props = {
@@ -28,9 +27,11 @@ const evaluateDefaultValue = (field: DataFormElement, formInitData: ImmutableRec
     }
 
     let defaultValue: FormFieldValue = formInitData?.[field.key] ?? field.defaultValue ?? ''
+/*
     if (typeof defaultValue === 'object') {
         defaultValue = mapLanguageValues(defaultValue)
     }
+*/
     if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later

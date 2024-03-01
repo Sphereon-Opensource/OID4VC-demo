@@ -40,9 +40,9 @@
 
     "connectRequest": {
       "issuerUrl": "https://esignet.synergy.mosip.net",
-      "clientId": "LD9_YR-_FcGcoJpnptISyU9dpZ73DVnBNcWIpD2QQlg",
-      "clientIdSignet": "MUq1H5M4OBr9fxSC2fJrY4felRmxtDw4iRls2lBZQzI",
+      "clientId": "MUq1H5M4OBr9fxSC2fJrY4felRmxtDw4iRls2lBZQzI",
       "redirectUri": "com.sphereon.ssi.wallet://credentials",
+      "proxyTokenUrlLocal": "http://192.168.1.200:3300/token",
       "proxyTokenUrl": "https://backend.hat.demo.sphereon.com/token",
       "leftPaneWidth": "40%",
       "title": "title_connect_esignet_issuer",
