@@ -55,7 +55,7 @@ export function useCredentialsReader() {
 
     const handleCredentialSubject = (cs: ICredentialSubject & AdditionalClaims): ImmutableRecord => {
         const keyValuePairs = Object.entries(cs).flatMap(([key, value]) => {
-            if (value && typeof value === 'object' && !Array.isArray(value) && !(value instanceof Function)) {
+            if (value && typeof value === 'object' && !Array.isArray(value) && !(value instanceof Function) && !('language' in value)) {
                 return Object.entries(value).map(([nestedKey, nestedValue]) => [`${key}.${nestedKey}`, nestedValue])
             } else {
                 return [[key, value]]
