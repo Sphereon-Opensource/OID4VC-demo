@@ -113,7 +113,7 @@
     },
     "infoRequest": {
       "leftPaneWidth": "40%",
-      "sharing_data_right_pane_title": "coc_sharing_data_right_pane_title",
+      "sharing_data_right_pane_title": "ssi_information_request_page_title",
       "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_banqup_paragraph",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
