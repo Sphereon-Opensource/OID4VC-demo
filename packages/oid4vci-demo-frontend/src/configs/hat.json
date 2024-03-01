@@ -256,7 +256,7 @@
           "operation": "execute",
           "action": "create-credential-offer",
           "actionParams": {
-            "issueCredentialType": "Account"
+            "issueCredentialType": "hat-subscription"
           },
           "nextId": "issueRequest"
         },
