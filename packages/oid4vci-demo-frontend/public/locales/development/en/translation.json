@@ -86,6 +86,7 @@
   "ssi_information_request_page_form_contact_first_name_label": "Contact first name",
   "ssi_information_request_page_form_contact_last_name_label": "Contact last name",
   "ssi_information_request_page_form_contact_bsn_label": "Contact BSN",
+  "ssi_information_request_page_title": "Please verify",
   "coc_sharing_data_right_pane_title": "Share your details",
   "coc_sharing_data_right_pane_top_paragraph": "Almost there! Please provide any missing details if necessary.",
   "coc_credential_verify_request_right_pane_bottom_paragraph": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
