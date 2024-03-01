@@ -8,6 +8,11 @@
       {
         "name": "hat",
         "description": "Horizon African Telecom Issuer"
+      },
+      {
+        "name": "hat",
+        "description": "Horizon African Telecom Issuer",
+        "locale": "en"
       }
     ],
     "credentials_supported": [
