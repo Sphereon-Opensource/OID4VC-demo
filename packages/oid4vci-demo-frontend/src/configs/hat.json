@@ -1,8 +1,8 @@
 {
   "general": {
     "credentialName": "subscription",
-    "oid4vpAgentBaseUrl": "https://agent.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.demo.sphereon.com",
+    "oid4vpAgentBaseUrl": "https://agent.hat.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.hat.demo.sphereon.com",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download",
     "verifierUrl": "https:/hat.demo.sphereon.com"
   },
