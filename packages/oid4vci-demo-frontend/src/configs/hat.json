@@ -1,8 +1,8 @@
 {
   "general": {
     "credentialName": "subscription",
-    "oid4vpAgentBaseUrl": "https://agent.hat.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.hat.demo.sphereon.com",
+    "oid4vpAgentBaseUrl": "http://192.168.1.200:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.1.200:5000",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download",
     "verifierUrl": "https:/hat.demo.sphereon.com"
   },
@@ -12,7 +12,9 @@
         "image": "hat/background.jpg",
         "width": "40%",
         "logo": {
-          "src": "hat/logo-transparent.png"
+          "src": "hat/logo-transparent.png",
+          "width": 430,
+          "height": 63
         },
         "mobile": {
           "backgroundColor": "#EFFFF5"
@@ -97,7 +99,9 @@
       "photoLeft": "hat/background.jpg",
       "photoLeftManual": "hat/background.jpg",
       "logo": {
-        "src": "hat/logo-transparent.png"
+        "src": "hat/logo-transparent.png",
+        "width": 430,
+        "height": 63
       },
       "rightPaneTitle": "credentials_success_right_pane_banqup_title",
       "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph_hat",
@@ -119,7 +123,9 @@
       "primaryButtonManualResourceId": "label_continue",
       "photo": "hat/background.jpg",
       "logo": {
-        "src": "hat/logo-transparent.png"
+        "src": "hat/logo-transparent.png",
+        "width": 430,
+        "height": 63
       },
       "mobile": {
         "backgroundColor": "#EFFFF5"
@@ -208,7 +214,9 @@
       "bottomParagraph": "paragraph_scan_this_qr",
       "photoWallet": "hat/background.jpg",
       "logo": {
-        "src": "hat/logo-transparent.png"
+        "src": "hat/logo-transparent.png",
+        "width": 430,
+        "height": 63
       },
       "mobile": {
       }
