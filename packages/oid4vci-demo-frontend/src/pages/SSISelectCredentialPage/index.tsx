@@ -1,26 +1,20 @@
-import React, {ReactElement, useEffect, useState} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import React, {ReactElement, useEffect, useState} from 'react'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import './index.module.css'
-import {SSICardView} from '@sphereon/ui-components.ssi-react';
-import {getCurrentEcosystemPageOrComponentConfig, SSISelectCredentialPageConfig} from '../../ecosystem-config';
-import {MetadataClient} from '@sphereon/oid4vci-client';
-import {
-    CredentialsSupportedDisplay,
-    CredentialSupported,
-    EndpointMetadata,
-    EndpointMetadataResult
-} from '@sphereon/oid4vci-common';
-import {IBasicCredentialLocaleBranding, IBasicImageDimensions} from '@sphereon/ssi-sdk.data-store';
-import {credentialLocaleBrandingFrom} from '../../utils/mapper/branding/OIDC4VCIBrandingMapper';
-import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client";
-import agent from '../../agent';
-import {useTranslation} from "react-i18next";
-import {useMediaQuery} from "react-responsive";
-import {Swiper, SwiperSlide} from 'swiper/react';
-import {Pagination} from 'swiper';
-import {Sequencer} from "../../router/sequencer"
+import { MetadataClient } from '@sphereon/oid4vci-client'
+import { EndpointMetadataResult } from '@sphereon/oid4vci-common'
+import { IBasicCredentialLocaleBranding, IBasicImageDimensions } from '@sphereon/ssi-sdk.data-store'
+import { getCredentialBrandings } from '../../utils/mapper/branding/OIDC4VCIBrandingMapper'
+import { useTranslation } from "react-i18next"
+import { useMediaQuery } from "react-responsive"
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination } from 'swiper'
+import {useFlowRouter} from "../../router/flow-router"
+import {SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem"
+import {SSICredentialCardView} from "@sphereon/ui-components.ssi-react"
+import {DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL} from "../../environment"
 
 const short = require('short-uuid');
 
@@ -32,42 +26,22 @@ const SSISelectCredentialPage: React.FC = () => {
     const [cardElements, setCardElements] = useState<Array<ReactElement>>([])
     const [payload] = useState<Payload>({})
     const [isManualIdentification] = useState<boolean>(false)
-    const [sequencer] = useState<Sequencer>(new Sequencer())
-    const location = useLocation()
-    const navigate = useNavigate()
-    const config: SSISelectCredentialPageConfig = getCurrentEcosystemPageOrComponentConfig('SSISelectCredentialPage') as SSISelectCredentialPageConfig
+    const flowRouter = useFlowRouter<SSISelectCredentialPageConfig>()
+    const pageConfig: SSISelectCredentialPageConfig = flowRouter.getPageConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+    const issuerUrl = DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL ?? generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer'
 
     useEffect((): void => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-
-        MetadataClient.retrieveAllMetadata(process.env.REACT_APP_OID4VCI_AGENT_BASE_URL!).then(async (metadata: EndpointMetadataResult): Promise<void> => {
+        MetadataClient.retrieveAllMetadata(issuerUrl)
+        .then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
-
             if (!metadata.credentialIssuerMetadata) {
                 return
             }
-
-            const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>()
-            Promise.all(
-                (metadata.credentialIssuerMetadata.credentials_supported as CredentialSupported[]).map(async (metadata: CredentialSupported): Promise<void> => {
-                    const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
-                        (metadata.display ?? []).map(
-                            async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
-                                await credentialLocaleBrandingFrom(display)
-                        ),
-                    );
-
-                    const credentialTypes: Array<string> =
-                        metadata.types.length > 1
-                            ? metadata.types.filter((type: string) => type !== 'VerifiableCredential')
-                            : metadata.types.length === 0
-                                ? ['VerifiableCredential']
-                                : metadata.types;
-
-                    credentialBranding.set(credentialTypes[0], localeBranding); // TODO for now taking the first type
-                })).then(() => setSupportedCredentials(credentialBranding))
+            getCredentialBrandings(metadata)
+            .then((credentialBranding) => setSupportedCredentials(credentialBranding))
         })
     }, []);
 
@@ -82,7 +56,7 @@ const SSISelectCredentialPage: React.FC = () => {
                             style={{cursor: 'pointer', width: '325px'}}
                             onClick={() => onSelectCredential(key)}
                         >
-                            <SSICardView
+                            <SSICredentialCardView
                                 header={{
                                     credentialTitle: value[0].alias,
                                     credentialSubtitle: value[0].description,
@@ -116,7 +90,7 @@ const SSISelectCredentialPage: React.FC = () => {
         void setCards()
     }, [supportedCredentials]);
 
-    const onSelectCredential = async (credentialType: string): Promise<void> => await sequencer.next({
+    const onSelectCredential = async (credentialType: string): Promise<void> => await flowRouter.nextStep({
         payload,
         isManualIdentification,
         credentialType
@@ -144,13 +118,13 @@ const SSISelectCredentialPage: React.FC = () => {
     // @ts-ignore
     return (
         <div
-            style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: config.styles.mainContainer.backgroundColor, alignItems: 'center', justifyContent: 'center'}}>
+            style={{display: 'flex', flexDirection: 'column', height: '100vh', userSelect: 'none', backgroundColor: pageConfig.styles.mainContainer.backgroundColor, alignItems: 'center', justifyContent: 'center'}}>
             <div style={{display: 'flex', flexDirection: 'row', maxWidth: isTabletOrMobile ? 327 : 1075, gap: 13, marginTop: isTabletOrMobile ? 25: 244, justifyContent: 'center'}}>
                 <p className={'inter-normal-48'} style={{color: '#FBFBFB', alignContent: 'center', textAlign: 'center'}}>{t('select_credential_title1') + ' '}
                 <span className={`inter-normal-48`}
 
                    style={{
-                       background: config.styles.mainContainer.textGradient,
+                       background: pageConfig.styles.mainContainer.textGradient,
                        backgroundClip: 'text',
                        WebkitBackgroundClip: 'text',
                        WebkitTextFillColor: 'transparent',
@@ -160,7 +134,7 @@ const SSISelectCredentialPage: React.FC = () => {
                 <span className={'inter-normal-48'} style={{color: '#FBFBFB'}}>{t('select_credential_title3') + ' '}</span>
                 <span className={`inter-normal-48`}
                    style={{
-                       background: config.styles.mainContainer.textGradient,
+                       background: pageConfig.styles.mainContainer.textGradient,
                        backgroundClip: 'text',
                        WebkitBackgroundClip: 'text',
                        WebkitTextFillColor: 'transparent',
@@ -202,10 +176,10 @@ const SSISelectCredentialPage: React.FC = () => {
 
             <img
                 style={{marginTop: isTabletOrMobile ? 'initial': 'auto', marginBottom: isTabletOrMobile ? 15: 85}}
-                src={config.logo.src}
-                alt={config.logo.alt}
-                width={config.logo.width}
-                height={config.logo.height}
+                src={pageConfig.logo.src}
+                alt={pageConfig.logo.alt}
+                width={pageConfig.logo.width}
+                height={pageConfig.logo.height}
             />
         </div>
     );

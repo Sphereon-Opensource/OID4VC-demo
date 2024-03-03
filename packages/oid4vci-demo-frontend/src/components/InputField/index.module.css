@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.inputFieldLabel {
+    text-align: left;
+    color: rgba(48, 48, 48, 0.8);
+    width: 327px;
+    height: 12px;
+    margin-bottom: 6px;
+}
+
+.inputField {   /* using plain input {} will influence other components  */
+    width: 302px;
+    height: 21px;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: flex-end;
+    text-align: left !important;
+}
+
+.inputField:focus::placeholder {
+    color: transparent !important;
+}
+
+.enabled {
+    color: rgba(48, 48, 48, 0.8);
+    border: 1px solid #C4C5CA;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 10px 13px 9px 12px;
+    width: 327px;
+    height: 40px
+}

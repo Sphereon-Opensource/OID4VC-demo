@@ -37,3 +37,7 @@ yarn.lock
 
 .idea
 
+#docker
+/docker/compose/build
+!/docker/compose/build/docker-compose.yml
+!/docker/compose/build/install-configs.sh

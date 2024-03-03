@@ -1,0 +1,320 @@
+{
+  "general": {
+    "credentialName": "Verified Account",
+    "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
+    "verifierUrl": "https:/account.banqup.demo.sphereon.com"
+  },
+  "pages": {
+    "downloadSphereonWallet": {
+      "leftPane": {
+        "backgroundColor": "#0E0B31",
+        "width": "40%",
+        "logo": {
+          "src": "banqup/logo.svg"
+        },
+        "mobile": {
+          "backgroundColor": "#EFFFF5"
+        }
+      },
+      "rightPane": {
+        "image": "banqup/flyng-iphone.svg",
+        "width": "100%",
+        "sphereonWalletQRCodes": [
+          {
+            "buttonCaptionResourceId": "label_download_ios",
+            "style": {},
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796",
+            "target": "_blank"
+          },
+          {
+            "buttonCaptionResourceId": "label_download_android",
+            "enableQR": false,
+            "style": {},
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US",
+            "target": "_blank"
+          }
+        ],
+        "enablePrimaryButton": true,
+        "primaryButtonResourceId": "label_continue"
+      }
+    },
+    "verifyRequest": {
+      "downloadAppStepId": "downloadSphereonWallet",
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
+      "leftPaneWidth": "40%",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "mobile": {
+        "backgroundColor": "#EFFFF5"
+      },
+      "rightPaneGrid": {
+        "style": {
+          "width": "100%"
+        }
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "style": {
+              "display": "none"
+            }
+          },
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_signup",
+            "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph_banqup"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      },
+      "mostRightPanel": {
+        "separator": {
+          "logo": {
+            "src": "banqup/separator.svg",
+            "alt": "banqup",
+            "height": "356px",
+            "width": "13px"
+          }
+        },
+        "width": "24%",
+        "height": "100%",
+        "logo": {
+          "src": "banqup/right_panel_image.svg",
+          "width": "193px",
+          "height": "150px",
+          "alt": "download app"
+        }
+      }
+    },
+    "welcome": {
+      "leftPaneWidth": "40%",
+      "right_pane_title": "welcome_title",
+      "right_pane_subtitle": "welcome_page_confirm_account_subtitle",
+      "right_pane_paragraph": "welcome_page_confirm_account_description",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    },
+    "issueSuccess": {
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "rightPaneTitle": "credentials_success_right_pane_banqup_title",
+      "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph",
+      "rightPaneButtonCaption": "label_continue",
+      "rightPaneTextHeight": "40%",
+      "rightPaneTextMarginTop": "0",
+      "rightPaneTextMarginBottom": "10%",
+      "rightPaneButtonWidth": "135px",
+      "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toIdentityFlow",
+      "mobile": {
+      }
+    },
+    "infoRequest": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "ssi_information_request_page_form_account_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_banqup_paragraph",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "mobile": {
+        "backgroundColor": "#EFFFF5"
+      },
+      "form": [
+        [
+          {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "emailAddress",
+            "key": "emailAddress",
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true,
+            "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        ],
+        [
+          {
+            "id": "termsAndConditions",
+            "key": "termsAndConditions",
+            "label": "ssi_information_request_page_form_terms_and_conditions_label",
+            "labelUrl": "https://google.com",
+            "type": "checkbox",
+            "required": true,
+            "display": {
+              "checkboxBorderColor": "#202776",
+              "checkboxLabelColor": "#424242",
+              "checkboxSelectedColor": "#202776"
+            }
+          }
+        ]
+      ]
+    },
+    "issueRequest": {
+      "leftPaneWidth": "40%",
+      "title": "title_secure_your_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "mobile": {
+      }
+    },
+    "verifyEmail": {
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
+      "rightPaneTitle": "title_please_check_your_email",
+      "rightPaneParagraph": "paragraph_confirm_email",
+      "verifyDigitsTitle": "title_fill_5_digits",
+      "numberOfDigits": 5,
+      "primaryButtonResourceId": "label_continue",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "sphereonWalletIdentity",
+      "steps": [
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "welcome",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "welcome",
+          "operation": "navigate",
+          "path": "/welcome",
+          "nextId": "infoRequest"
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "verifyEmail"
+        },
+        {
+          "id": "verifyEmail",
+          "operation": "navigate",
+          "path": "/verify/email",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "Account"
+          },
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success",
+          "nextId": "toIdentityFlow"
+        },
+        {
+          "id": "toIdentityFlow",
+          "operation": "navigate",
+          "path": "https://identity.banqup.demo.sphereon.com"
+        },
+        {
+          "id": "downloadSphereonWallet",
+          "operation": "navigate",
+          "path": "/download/sphereon-wallet",
+          "nextId": "verifyRequest"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#326D85",
+          "textColor": "#FBFBFB"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#353438"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "definitionId": "hat",
+  "correlationId": "https://agent.hat.demo.sphereon.com",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}

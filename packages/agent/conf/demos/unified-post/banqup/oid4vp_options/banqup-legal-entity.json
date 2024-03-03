@@ -1,0 +1,8 @@
+{
+  "definitionId": "banqup-legal-entity",
+  "rpOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}

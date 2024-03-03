@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    justify-content: center;
+}
+
+
+.digitField {
+    width: 40px;
+    height: 40px;
+    outline: none;
+    display: flex;
+    align-items: flex-end;
+    text-align: left !important;
+    color: rgba(48, 48, 48, 0.8);
+    border: 1px solid #C4C5CA;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 10px 13px 9px 12px;
+}
+
+.digitField:focus::placeholder {
+    color: transparent !important;
+}

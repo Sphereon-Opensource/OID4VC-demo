@@ -1,8 +1,0 @@
-{
-  "definitionId": "fma2023",
-  "rpOpts": {
-    "didOpts": {
-      "checkLinkedDomains": "if_present"
-    }
-  }
-}

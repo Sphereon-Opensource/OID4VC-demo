@@ -1,36 +1,27 @@
 import {Resolver} from "did-resolver";
-import {getUniResolver} from "@sphereon/did-uni-client";
-import {getDidKeyResolver, KeyDIDProvider} from "@veramo/did-provider-key";
 import {getDidIonResolver, IonDIDProvider} from "@veramo/did-provider-ion";
 import {getDidJwkResolver} from "@sphereon/ssi-sdk-ext.did-resolver-jwk";
 import {getResolver as getDidWebResolver} from "web-did-resolver";
-import {EthrDIDProvider} from "@veramo/did-provider-ethr";
 import {WebDIDProvider} from "@sphereon/ssi-sdk-ext.did-provider-web";
 import {JwkDIDProvider} from "@sphereon/ssi-sdk-ext.did-provider-jwk";
 import agent, {context} from "../agent";
 import {DIDDocumentSection, IIdentifier} from "@veramo/core";
-import {
-    DID_PREFIX,
-    DIDMethods,
-    didOptConfigs,
-    IDIDResult,
-    KMS,
-    UNIVERSAL_RESOLVER_RESOLVE_URL
-} from "../environment";
+import {DID_PREFIX, DIDMethods, didOptConfigs, IDIDResult, KMS, UNIVERSAL_RESOLVER_RESOLVE_URL} from "../environment";
 import {mapIdentifierKeysToDocWithJwkSupport} from "@sphereon/ssi-sdk-ext.did-utils";
-import {
-    generatePrivateKeyHex,
-    TKeyType, toJwk
-} from "@sphereon/ssi-sdk-ext.key-utils";
+import {generatePrivateKeyHex, TKeyType, toJwk} from "@sphereon/ssi-sdk-ext.key-utils";
+import {getUniResolver} from "@sphereon/did-uni-client";
 
 
 export function createDidResolver() {
     return new Resolver({
-        ...getUniResolver('ethr', {
+        // ...getUniResolver('ethr', {
+        //     resolveUrl: UNIVERSAL_RESOLVER_RESOLVE_URL,
+        // }),
+        // ...getDidKeyResolver(),
+        ...getDidJwkResolver(),
+        ...getUniResolver('key', {
             resolveUrl: UNIVERSAL_RESOLVER_RESOLVE_URL,
         }),
-        ...getDidKeyResolver(),
-        ...getDidJwkResolver(),
         /*...getUniResolver('jwk', {
             resolveUrl: UNIVERSAL_RESOLVER_RESOLVE_URL,
         }),*/
@@ -41,13 +32,13 @@ export function createDidResolver() {
 
 export function createDidProviders() {
     return {
-        [`${DID_PREFIX}:${DIDMethods.DID_ETHR}`]: new EthrDIDProvider({
+        /*[`${DID_PREFIX}:${DIDMethods.DID_ETHR}`]: new EthrDIDProvider({
             defaultKms: KMS.LOCAL,
             network: 'goerli',
-        }),
-        [`${DID_PREFIX}:${DIDMethods.DID_KEY}`]: new KeyDIDProvider({
+        }),*/
+        /*[`${DID_PREFIX}:${DIDMethods.DID_KEY}`]: new SphereonKeyDidProvider({
             defaultKms: KMS.LOCAL,
-        }),
+        }),*/
         [`${DID_PREFIX}:${DIDMethods.DID_ION}`]: new IonDIDProvider({
             defaultKms: KMS.LOCAL,
         }),

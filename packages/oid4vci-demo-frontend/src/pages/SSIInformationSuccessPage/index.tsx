@@ -1,72 +1,79 @@
-import React, {useEffect, useState} from 'react'
-import {Text} from '../../components/Text';
-import style from '../../components/Text/Text.module.css';
-import {Trans, useTranslation} from "react-i18next";
-import {useLocation, useNavigate} from 'react-router-dom';
-import SSIPrimaryButton from '../../components/SSIPrimaryButton';
-import {
-    EcosystemGeneralConfig, getCurrentEcosystemGeneralConfig,
-    getCurrentEcosystemPageOrComponentConfig,
-    SSIInformationSharedSuccessPageConfig
-} from "../../ecosystem-config"
-import {NonMobile} from '../..';
-import {useMediaQuery} from "react-responsive";
-import {Sequencer} from "../../router/sequencer"
+import React from 'react'
+import { Text } from '../../components/Text'
+import style from '../../components/Text/Text.module.css'
+import { Trans, useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
+import SSIPrimaryButton from '../../components/SSIPrimaryButton'
+
+import { NonMobile } from '../..'
+import { useMediaQuery } from 'react-responsive'
+import { useFlowRouter } from '../../router/flow-router'
+import { SSIInformationSharedSuccessPageConfig } from '../../ecosystem/ecosystem-config'
+import { useEcosystem } from '../../ecosystem/ecosystem'
 
 type State = {
-    Voornaam: string
-    Achternaam: string
-    emailAddress: string
+    payload: {
+        [x: string]: string
+    }
     isManualIdentification: boolean
 }
 
 const SSIInformationSuccessPage: React.FC = () => {
-    const [sequencer] = useState<Sequencer>(new Sequencer())
+    const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
     const location = useLocation();
-    const navigate = useNavigate()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-
     const state: State | undefined = location.state;
-
-    const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig;
-    const generalConfig: EcosystemGeneralConfig = getCurrentEcosystemGeneralConfig()
+    const pageConfig = flowRouter.getPageConfig()
+    const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
-
-    useEffect(() => {
-        sequencer.setCurrentRoute(location.pathname, navigate)
-    }, [])
-
+    const firstName = state!.payload?.['firstName'] ?? ''
+    const onIssueCredential = async (): Promise<void> => await flowRouter.nextStep({
+        payload: state!.payload,
+        credentialType: generalConfig.issueCredentialType
+  })
     return (
-        <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none'}}>
+        <div style={{display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none',  width: '100vw'}}>
             <NonMobile>
                 {state?.isManualIdentification
                     ? <SSIInformationSharedSuccessPageLeftPanel/>
                     : <div
                         style={{
-                            flex: 1,
                             display: 'flex',
+                            width: pageConfig.leftPaneWidth ?? '60%',
+                            height: isTabletOrMobile ? '100%': '100vh',
                             flexDirection: 'column',
-                            background: `url(${config.photoLeft})`,
-                            backgroundSize: 'cover',
+                            alignItems: 'center',
+                            ...((pageConfig.photoLeft) && {background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+                            ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                            ...(pageConfig.logo && { justifyContent: 'center' })
                         }}
                     >
-                        <div style={{marginTop: 'auto', marginBottom: 153}}>
-                            <Text
-                                className={`${style.text} poppins-medium-36`}
-                                lines={t('common_left_pane_title').split('\n')}
+                        {pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
                             />
-                        </div>
+                        }
+                        {(pageConfig.textLeft) && (
+                            <div style={{marginTop: 'auto', marginBottom: 153}}>
+                                <Text
+                                    className={`${style.text} poppins-medium-36`}
+                                    lines={t(pageConfig.textLeft).split('\n')}
+                                />
+                            </div>
+                        )}
                     </div>
                 }
             </NonMobile>
             <div style={{
                 display: 'flex',
-                width: `${isTabletOrMobile ? '100%' : '40%'}`,
                 height: '100%',
-                backgroundColor: '#FFFFFF',
                 alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                marginLeft: '20%',
+                marginRight: '20%'
             }}>
                 <div style={{
                     display: 'flex',
@@ -83,8 +90,8 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 flexGrow: 1,
                                 textAlign: 'center'
                             }}
-                            title={t('sharing_data_success_right_pane_title', {Voornaam: state?.Voornaam}).split('\n')}
-                            lines={t(`${config.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
+                            title={(pageConfig.textRightTitle ? t(pageConfig.textRightTitle) : t('sharing_data_success_right_pane_title', {firstName})).split('\n')}
+                            lines={(pageConfig.textRight ? t(pageConfig.textRight) : t(`${!state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl})).split('\r\n')}
                         />
                     </Trans>
                     <div style={{
@@ -92,16 +99,16 @@ const SSIInformationSuccessPage: React.FC = () => {
                         height: '397px',
                         flexGrow: 1
                     }}>
-                        <img src={config.photoRight} alt="success"/>
+                        <img src={pageConfig.photoRight} alt="success"/>
                     </div>
                     <div style={{
+                        display: 'flex',
                         width: '100%',
-                        alignSelf: 'flex-end',
+                        justifyContent: 'center',
                     }}>
                         <SSIPrimaryButton
-                            caption={t('sharing_data_success_right_pane_button_caption')}
-                            style={{width: '100%'}}
-                            onClick={async () => await sequencer.next()}
+                            caption={t('label_next')}
+                            onClick={async () => await onIssueCredential()}
                         />
                     </div>
                 </div>
@@ -111,28 +118,30 @@ const SSIInformationSuccessPage: React.FC = () => {
 }
 
 const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
-    const config: SSIInformationSharedSuccessPageConfig = getCurrentEcosystemPageOrComponentConfig('SSIInformationSharedSuccessPage') as SSIInformationSharedSuccessPageConfig
+    const ecosystem = useEcosystem()
+    const flowRouter = useFlowRouter<SSIInformationSharedSuccessPageConfig>()
+    const pageConfig = flowRouter.getPageConfig()
     const location = useLocation();
     const state = location.state;
     const {t} = useTranslation()
-    if (process.env.REACT_APP_ENVIRONMENT !== 'sphereon') {
+    if (ecosystem.getEcosystemId() !== 'sphereon') {
         return (<NonMobile>
                     <div id={"photo"} style={{
                         display: 'flex',
-                        width: '60%',
+                        width: pageConfig.leftPaneWidth ?? '60%',
                         height: '100%',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        ...((config.photoLeft || config.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${config.photoLeftManual}` : `${config.photoLeft}`}) 0% 0% / cover`}),
-                        ...(config.backgroundColor && { backgroundColor: config.backgroundColor }),
-                        ...(config.logo && { justifyContent: 'center' })
+                        ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),
+                        ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                        ...(pageConfig.logo && { justifyContent: 'center' })
                     }}>
-                        { config.logo &&
+                        { pageConfig.logo &&
                             <img
-                                src={config.logo.src}
-                                alt={config.logo.alt}
-                                width={config.logo.width}
-                                height={config.logo.height}
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
                             />
                         }
                     </div>
@@ -168,7 +177,7 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
-            <text
+            <p
                 className={"inter-normal-24 normal-400"}
                 style={{
                     color: '#FBFBFB',
@@ -177,7 +186,7 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
                 }}
             >
                 {t('sharing_data_success_get_mobile_app_message')}
-            </text>
+            </p>
             <div style={{display: 'flex', flexDirection: 'row', margin: 'auto'}}>
                 <a href="https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet"
                    target="_blank"

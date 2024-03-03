@@ -1,0 +1,274 @@
+{
+  "general": {
+    "credentialName": "Sphereon Guest",
+    "issueCredentialType": "GuestCredential",
+    "oid4vpAgentBaseUrl": "http://192.168.2.90:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.2.90:5000/sphereon",
+    "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
+    "verifierUrlCaption": "Sphereon demo",
+    "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
+  },
+  "pages": {
+    "download": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "multiCredentialIssuer": {
+      "logo": {
+        "src": "wallets/sphereon_logo.png",
+        "alt": "sphereon",
+        "width": 204,
+        "height": 43
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#202537",
+          "textGradient": "linear-gradient(135deg, #7276F7 0%, #7C40E8 100%)"
+        }
+      }
+    },
+    "infoFromVPRequest": {
+      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
+      "photoRight": "undraw_messenger_re_8bky_1.svg"
+    },
+    "issueSuccess": {
+      "photoLeft": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
+      "photoRight": "undraw_messenger_re_8bky_1.svg",
+      "rightPaneTitle": "credentials_success_right_pane_title",
+      "rightPaneParagraph": "credentials_success_right_pane_paragraph",
+      "rightPaneButtonCaption": "credentials_success_right_pane_button_caption",
+      "rightPaneButtonStepId": "toSphereonDemo"
+    },
+    "infoSharedSuccess": {
+      "photoLeft": "image_4.svg",
+      "photoLeftManual": "image_4.svg",
+      "photoRight": "undraw_certification_re_ifll_1.svg"
+    },
+    "issueRequest": {
+      "photoManual": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
+      "photoWallet": "image_4.svg"
+    },
+    "infoRequest": {
+      "photo": "image_4.svg",
+      "photoManual": "image_4.svg",
+      "text_top_of_image": "common_left_pane_title",
+      "sharing_data_right_pane_title": "sharing_data_right_pane_title",
+      "form": [
+        [
+          {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "emailAddress",
+            "key": "emailAddress",
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
+    },
+    "startPage": {
+      "photoLeft": "landing_manual.svg",
+      "photoRight": "landing_wallet.svg",
+      "logo": {
+        "src": "wallets/sphereon_logo.svg",
+        "alt": "sphereon.com",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#202537"
+        },
+        "leftCardView": {
+          "backgroundColor": "linear-gradient(135deg, rgba(114, 118, 247, 0.5) 0%, rgba(124, 64, 232, 0.5) 100%)"
+        },
+        "rightCardView": {
+          "textColor": "#303030",
+          "buttonType": "primary"
+        }
+      }
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "sphereonGuest",
+      "steps": [
+        {
+          "id": "startPage",
+          "operation": "navigate",
+          "path": "/start",
+          "nextId": "infoFromVPRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "multiCredentialIssuer"
+        },
+        {
+          "id": "multiCredentialIssuer",
+          "operation": "navigate",
+          "path": "/credentials/select",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "infoFromVPRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/vp/request",
+          "nextId": "infoRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success",
+          "nextId": "toSphereonDemo"
+        },
+        {
+          "id": "toSphereonDemo",
+          "operation": "navigate",
+          "path": "https://ssi.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#FBFBFB",
+          "textColor": "#FBFBFB"
+        },
+        "secondaryButton": {
+          "backgroundColor": "#062058"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "linear-gradient(91deg, #7276F7 0.39%, #7C40E8 100%)"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#062058"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

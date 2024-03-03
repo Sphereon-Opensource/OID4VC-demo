@@ -1,0 +1,119 @@
+{
+  "general": {
+    "oid4vpAgentBaseUrl": "https://esignet.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://esignet.demo.sphereon.com"
+  },
+  "pages": {
+    "downloadSphereonWallet": {
+      "leftPane": {
+        "image": "image_4.svg",
+        "width": "40%",
+        "logo": {
+          "src": "hat/logo.svg"
+        },
+        "mobile": {
+          "backgroundColor": "#EFFFF5"
+        }
+      },
+      "rightPane": {
+        "image": "banqup/flyng-iphone.svg",
+        "width": "100%",
+        "sphereonWalletQRCodes": [
+          {
+            "buttonCaptionResourceId": "label_download_ios",
+            "style": {},
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796",
+            "target": "_blank"
+          },
+          {
+            "buttonCaptionResourceId": "label_download_android",
+            "enableQR": false,
+            "style": {},
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US",
+            "target": "_blank"
+          }
+        ],
+        "enablePrimaryButton": true,
+        "primaryButtonResourceId": "label_continue"
+      }
+    },
+
+    "connectRequest": {
+      "issuerUrl": "https://esignet.synergy.mosip.net",
+      "clientId": "MUq1H5M4OBr9fxSC2fJrY4felRmxtDw4iRls2lBZQzI",
+      "redirectUri": "com.sphereon.ssi.wallet://credentials",
+      "proxyTokenUrlLocal": "http://192.168.1.200:3300/token",
+      "proxyTokenUrl": "https://backend.hat.demo.sphereon.com/token",
+      "leftPaneWidth": "40%",
+      "title": "title_connect_esignet_issuer",
+      "topParagraph": "paragraph_add_esignet_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
+      "photoWallet": "hat/background.jpg",
+      "logo": {
+        "src": "hat/logo.svg",
+        "width": 430,
+        "height": 63
+      },
+      "mobile": {
+      }
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "sphereonWalletIdentity",
+      "steps": [
+        {
+          "id": "connectRequest",
+          "operation": "navigate",
+          "path": "/credentials/issuer/connect",
+          "isDefaultRoute": true,
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success"
+        },
+        {
+          "id": "downloadSphereonWallet",
+          "operation": "navigate",
+          "path": "/download/sphereon-wallet",
+          "nextId": "verifyRequest"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#326D85",
+          "textColor": "#FBFBFB"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#353438"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

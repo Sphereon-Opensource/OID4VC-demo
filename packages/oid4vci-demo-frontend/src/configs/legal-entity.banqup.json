@@ -1,0 +1,290 @@
+{
+  "general": {
+    "credentialName": "Verified Legal Entity",
+    "oid4vpAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.banqup.demo.sphereon.com",
+    "downloadUrl": "https://agent.banqup.demo.sphereon.com/#/download",
+    "verifierUrl": "https://legal-entity.banqup.demo.sphereon.com",
+    "verifierUrlCaption": "Legal Entity credential"
+  },
+  "pages": {
+    "verifyRequest": {
+      "downloadAppStepId": "downloadSphereonWallet",
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
+      "leftPaneWidth": "40%",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "mobile": {
+        "backgroundColor": "#EFFFF5"
+      },
+      "rightPaneGrid": {
+        "style": {
+          "width": "100%"
+        }
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "style": {
+              "display": "none"
+            }
+          },
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "credential_verify_request_right_pane_bottom_title": "credential_verify_request_right_pane_bottom_title_signin",
+            "credential_verify_request_right_pane_bottom_paragraph": "credential_verify_request_right_pane_bottom_paragraph_banqup"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      }
+    },
+    "downloadSphereonWallet": {
+      "leftPane": {
+        "backgroundColor": "#0E0B31",
+        "width": "40%",
+        "logo": {
+          "src": "banqup/logo.svg"
+        },
+        "mobile": {
+          "backgroundColor": "#EFFFF5"
+        }
+      },
+      "rightPane": {
+        "image": "banqup/flyng-iphone.svg",
+        "width": "100%",
+        "sphereonWalletQRCodes": [
+          {
+            "buttonCaptionResourceId": "label_download_ios",
+            "style": {},
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796",
+            "target": "_blank"
+          },
+          {
+            "buttonCaptionResourceId": "label_download_android",
+            "enableQR": false,
+            "style": {},
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US",
+            "target": "_blank"
+          }
+        ],
+        "enablePrimaryButton": true,
+        "primaryButtonResourceId": "label_continue"
+      }
+    },
+    "infoRequest": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "manual_fill_data_company_right_pane_title_tell_us_more_company",
+      "sharing_data_right_pane_paragraph": "sharing_data_company_fill_out_right_pane_paragraph",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "mobile": {
+        "backgroundColor": "#EFFFF5"
+      },
+      "form": [
+        [
+          {
+            "id": "companyName",
+            "key": "companyName",
+            "label": "ssi_information_request_page_form_company_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_contact_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_contact_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "bsnNumber",
+            "key": "bsn",
+            "label": "ssi_information_request_page_form_contact_bsn_label",
+            "type": "text",
+            "required": true,
+            "readonlyWhenAbsentInPayload": true
+          }
+        ],
+        [
+          {
+            "id": "companyEmailAddress",
+            "key": "companyEmailAddress",
+            "label": "ssi_information_request_page_form_company_email_address_label",
+            "type": "text",
+            "required": true,
+            "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        ],
+        [
+          {
+            "id": "taxRegistrationNumber",
+            "key": "taxRegistrationNumber",
+            "label": "ssi_information_request_page_form_tax_registration_number_label",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
+    },
+    "loading": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "loading_verify_company_information_caption",
+      "sharing_data_right_pane_paragraph": "loading_verify_information_description",
+      "backgroundColor": "#0E0B31",
+      "spinnerColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      }
+    },
+    "issueRequest": {
+      "leftPaneWidth": "40%",
+      "title": "title_secure_your_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "qrcode_right_pane_bottom_paragraph",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "mobile": {
+        "bottomParagraph": "mobile_right_pane_bottom_paragraph"
+      }
+    },
+    "issueSuccess": {
+      "leftPaneWidth": "40%",
+      "backgroundColor": "#0E0B31",
+      "logo": {
+        "src": "banqup/logo.svg"
+      },
+      "rightPaneTitle": "credentials_success_right_pane_banqup_title",
+      "rightPaneParagraph": "credentials_success_right_pane_registered_company_paragraph",
+      "rightPaneButtonCaption": "label_finish",
+      "rightPaneTextHeight": "40%",
+      "rightPaneTextMarginTop": "0",
+      "rightPaneTextMarginBottom": "10%",
+      "rightPaneButtonWidth": "135px",
+      "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toAccountFlow",
+      "mobile": {
+      }
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "banqup-legal-entity",
+      "steps": [
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "infoRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "loading",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "loading",
+          "operation": "navigate",
+          "path": "/loading",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "LegalEntity"
+          },
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success",
+          "nextId": "toAccountFlow"
+        },
+        {
+          "id": "toAccountFlow",
+          "operation": "navigate",
+          "path": "https://account.banqup.demo.sphereon.com"
+        },
+        {
+          "id": "downloadSphereonWallet",
+          "operation": "navigate",
+          "path": "/download/sphereon-wallet",
+          "nextId": "verifyRequest"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#252E7E"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#353438"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    }
+  }
+}

@@ -2,13 +2,14 @@
   "general": {
     "credentialName": "Triall Guest",
     "issueCredentialType": "triall2023",
-    "baseUrl": "https://ssi.triall.io/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.triall.io/demo/issuer",
     "verifierUrl": "https://cix.triall.io",
     "verifierUrlCaption": "Clinical Insights Exchange",
     "downloadUrl": "https://ssi.triall.io/demo/issuer/#/download"
   },
   "pages": {
-    "SSIDownloadPage": {
+    "download": {
       "rightPane": {
         "paradymWalletQRCode": {
           "style": {
@@ -86,30 +87,61 @@
         }
       }
     },
-    "SSICredentialVerifyRequestPage": {
+    "infoFromVPRequest": {
       "photoLeft": "triall/guest_credential.svg",
-      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+      "photoRight": "undraw_messenger_re_8bky_1.svg",
+      "textColor": "#E84461"
     },
-    "SSICredentialIssuedSuccessPage": {
+    "issueSuccess": {
       "photoLeft": "triall/guest_credential.svg",
-      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg",
+      "rightPaneButtonStepId": "toTriallDemo"
     },
-    "SSIInformationSharedSuccessPage": {
+    "infoSharedSuccess": {
       "photoLeft": "triall/guest_credential.svg",
       "photoLeftManual": "triall/guest_credential.svg",
       "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
     },
-    "SSICredentialIssueRequestPage": {
+    "issueRequest": {
       "photoManual": "triall/guest_credential.svg",
       "photoWallet": "triall/guest_credential.svg"
     },
-    "SSIInformationRequestPage": {
-      "photo": "triall/guest_credential.svg",
-      "photoManual": "triall/guest_credential.svg",
+    "infoRequest": {
+      "photo": "image_4.svg",
+      "photoManual": "image_4.svg",
       "text_top_of_image": "common_left_pane_title",
-      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title"
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "form": [
+        [
+          {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "email",
+            "key": "email",
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
     },
-    "SSILandingPage": {
+    "startPage": {
       "photoLeft": "triall/landing_manual_grey.svg",
       "photoRight": "triall/landing_wallet_grey.svg",
       "logo": {
@@ -132,108 +164,77 @@
         }
       }
     },
-    "SSISelectCredentialPage": {
-      "logo": {
-        "src": "triall/logo.svg",
-        "alt": "triall",
-        "width": 260,
-        "height": 55
-      },
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#347189",
-          "textGradient": "linear-gradient(169deg, #E84461 0%, #D30D30 100%)"
-        }
-      }
+    "shareSuccess": {
+      "photoLeft": "image_2.svg",
+      "photoLeftManual": "triall/wallet.svg",
+      "photoRight": "triall/undraw_certification_re_ifll_grey.svg"
     }
   },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "start",
-        "operation": "navigate",
-        "path": "/start",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credentialOffer",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "verifyRequest",
-        "operation": "navigate",
-        "path": "/credentials/verify/request",
-        "nextId": "credentialOffer",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      },
-      {
-        "id": "issueSuccess",
-        "operation": "navigate",
-        "path": "/credentials/issue/success"
-      }
-    ]
-  },
-  "sequencer": {
-    "steps": [
-      {
-        "id": "start",
-        "operation": "navigate",
-        "path": "/start",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "infoRequest",
-        "operation": "navigate",
-        "path": "/information/request",
-        "nextId": "credSelect"
-      },
-      {
-        "id": "credSelect",
-        "operation": "navigate",
-        "path": "/credentials/select",
-        "nextId": "verifyRequest"
-      },
-      {
-        "id": "verifyRequest",
-        "operation": "navigate",
-        "path": "/credentials/verify/request",
-        "nextId": "credentialOffer",
-        "isDefaultRoute": true
-      },
-      {
-        "id": "credentialOffer",
-        "operation": "execute",
-        "action": "create-credential-offer",
-        "nextId": "issueRequest"
-      },
-      {
-        "id": "issueRequest",
-        "operation": "navigate",
-        "path": "/credentials/issue/request",
-        "nextId": "issueSuccess"
-      },
-      {
-        "id": "issueSuccess",
-        "operation": "navigate",
-        "path": "/credentials/issue/success"
-      }
-    ]
-  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "sphereonWalletIdentity",
+      "steps": [
+        {
+          "id": "startPage",
+          "operation": "navigate",
+          "path": "/start",
+          "nextId": "infoFromVPRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "infoFromVPRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/vp/request",
+          "nextId": "infoRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "GuestCredential"
+          },
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success",
+          "nextId": "toTriallDemo"
+        },
+        {
+          "id": "toTriallDemo",
+          "operation": "navigate",
+          "path": "https://cix.triall.io"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
   "components": {
     "DeepLink": {},
     "SSICardView": {

@@ -1,24 +1,24 @@
 import {
-  createAgent,
-  IAgentContext,
-  IAgentPlugin,
-  ICredentialIssuer,
-  ICredentialVerifier,
-  IDataStore,
-  IDataStoreORM,
-  IDIDManager,
-  IKeyManager,
-  IResolver,
-  TAgent
+    createAgent,
+    IAgentContext,
+    IAgentPlugin,
+    ICredentialIssuer,
+    ICredentialVerifier,
+    IDataStore,
+    IDataStoreORM,
+    IDIDManager,
+    IKeyManager,
+    IResolver,
+    TAgent
 } from '@veramo/core'
 import {
-  CredentialHandlerLDLocal,
-  LdDefaultContexts,
-  MethodNames,
-  SphereonBbsBlsSignature2020,
-  SphereonEd25519Signature2018,
-  SphereonEd25519Signature2020,
-  SphereonJsonWebSignature2020,
+    CredentialHandlerLDLocal,
+    LdDefaultContexts,
+    MethodNames,
+    SphereonBbsBlsSignature2020,
+    SphereonEd25519Signature2018,
+    SphereonEd25519Signature2020,
+    SphereonJsonWebSignature2020,
 } from '@sphereon/ssi-sdk.vc-handler-ld-local'
 import {CredentialPlugin} from '@veramo/credential-w3c'
 import {DataStore, DataStoreORM, DIDStore, KeyStore, PrivateKeyStore} from '@veramo/data-store'
@@ -32,40 +32,40 @@ import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
 import {
-  createDidProviders,
-  createDidResolver,
-  createOID4VPRP,
-  getDefaultDID,
-  getDefaultKid,
-  getDefaultOID4VPRPOptions,
-  getIdentifier,
-  getOrCreateDIDs,
+    createDidProviders,
+    createDidResolver,
+    createOID4VPRP,
+    getDefaultDID,
+    getDefaultKid,
+    getDefaultOID4VPRPOptions,
+    getIdentifier,
+    getOrCreateDIDs,
 } from "./utils";
 import {
-  DB_CONNECTION_NAME,
-  DB_ENCRYPTION_KEY,
-  DID_PREFIX,
-  DIDMethods,
-  INTERNAL_HOSTNAME_OR_IP,
-  INTERNAL_PORT,
-  IS_OID4VCI_ENABLED,
-  IS_OID4VP_ENABLED,
-  oid4vciInstanceOpts
+    DB_CONNECTION_NAME,
+    DB_ENCRYPTION_KEY,
+    DID_PREFIX,
+    DIDMethods,
+    INTERNAL_HOSTNAME_OR_IP,
+    INTERNAL_PORT,
+    IS_OID4VCI_ENABLED,
+    IS_OID4VP_ENABLED,
+    oid4vciInstanceOpts
 } from "./environment";
 import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
 import {
-  addDefaultsToOpts,
-  createOID4VCIIssuer,
-  createOID4VCIStore,
-  getDefaultOID4VCIIssuerOptions,
-  issuerPersistToInstanceOpts,
-  toImportIssuerOptions
+    addDefaultsToOpts,
+    createOID4VCIIssuer,
+    createOID4VCIStore,
+    getDefaultOID4VCIIssuerOptions,
+    issuerPersistToInstanceOpts,
+    toImportIssuerOptions
 } from "./utils/oid4vci";
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
-import * as process from "process"
+
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -119,20 +119,17 @@ const plugins: IAgentPlugin[] = [
         keyStore: privateKeyStore,
     }),
 ]
-const oid4vpRP = await createOID4VPRP({resolver});
-if (IS_OID4VP_ENABLED) {
-    if (oid4vpRP) {
-        plugins.push(oid4vpRP)
-    }
+const oid4vpRP = IS_OID4VP_ENABLED ? await createOID4VPRP({resolver}) : undefined;
+if (oid4vpRP) {
+    plugins.push(oid4vpRP)
 }
 
-let oid4vciStore: OID4VCIStore | undefined
-if (IS_OID4VCI_ENABLED) {
-    oid4vciStore = await createOID4VCIStore();
+
+const oid4vciStore: OID4VCIStore | undefined = IS_OID4VCI_ENABLED ? await createOID4VCIStore() : undefined
+if (oid4vciStore) {
+    plugins.push(oid4vciStore)
+
     const oid4vciIssuer = await createOID4VCIIssuer({resolver});
-    if (oid4vciStore) {
-        plugins.push(oid4vciStore)
-    }
     if (oid4vciIssuer) {
         plugins.push(oid4vciIssuer)
     }
@@ -154,12 +151,11 @@ if (!defaultDID || !defaultKid || !(await getIdentifier(defaultDID))) {
     console.log('TODO create identifier and write config')
     // create Identifier
 }
-const oid4vpOpts = await getDefaultOID4VPRPOptions({did: defaultDID, resolver})
+const oid4vpOpts = IS_OID4VP_ENABLED ? await getDefaultOID4VPRPOptions({did: defaultDID, resolver}) : undefined
 if (oid4vpOpts && oid4vpRP) {
     oid4vpRP.setDefaultOpts(oid4vpOpts, context)
 
 }
-
 
 
 StaticBearerAuth.init('bearer-auth').addUser({name: 'demo', id: 'demo', token: 'demo'}).connectPassport()
@@ -195,16 +191,16 @@ if (IS_OID4VP_ENABLED) {
                 siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             },
             webappAuthStatus: {
-                webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                // webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             },
             webappDeleteAuthRequest: {
-                webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                // webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             },
             siopGetAuthRequest: {
-                siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                // siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             },
             siopVerifyAuthResponse: {
-                siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                // siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             }
         }
     }

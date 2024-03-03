@@ -1,17 +1,23 @@
 import React, {Component} from 'react'
 import {BallTriangle} from 'react-loader-spinner'
-import {AuthorizationResponseStateStatus, AuthStatusResponse, GenerateAuthRequestURIResponse} from './auth-model'
+// import {AuthorizationResponseStateStatus, GenerateAuthRequestURIResponse} from './auth-model'
 import {CreateElementArgs, QRType, URIData, ValueResult} from '@sphereon/ssi-sdk.qr-code-generator'
+import { AuthStatusResponse, GenerateAuthRequestURIResponse } from '@sphereon/ssi-sdk.siopv2-oid4vp-common'
 
-import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
+import {AuthorizationResponsePayload, AuthorizationResponseStateStatus} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
-import {DEFINITION_ID_REQUIRED_ERROR} from './constants'
-import agent from "../../agent";
 import {NonMobileOS} from "../../index"
+import {Ecosystem} from "../../ecosystem/ecosystem"
+import {APP_SSI_QR_CODE_EXPIRES_AFTER_SEC} from "../../environment"
+
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
 export type AuthenticationQRProps = {
+  vpDefinitionId: string
+  ecosystem: Ecosystem
+  width?: number
+  fgColor?: string
   onAuthRequestRetrieved: () => void
   onSignInComplete: (payload: AuthorizationResponsePayload) => void
   setQrCodeData: (text: string) => void
@@ -29,18 +35,14 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   private refreshTimerHandle?: NodeJS.Timeout
   private authStatusHandle?: number
   private qrExpirationMs = 0
-  private timedOutRequestMappings: Set<AuthenticationQRState> =
-    new Set<AuthenticationQRState>()
-
+  private timedOutRequestMappings: Set<AuthenticationQRState> = new Set<AuthenticationQRState>()
   private _isMounted = false
 
-  private readonly definitionId =
-    process.env.REACT_APP_OID4VP_PRESENTATION_DEF_ID
 
   componentDidMount() {
-    this.qrExpirationMs =
-      parseInt(process.env.REACT_APP_SSI_QR_CODE_EXPIRES_AFTER_SEC ?? '300') *
-      1000
+    const {ecosystem, vpDefinitionId} = this.props
+
+    this.qrExpirationMs = APP_SSI_QR_CODE_EXPIRES_AFTER_SEC * 1000
     // actually since the QR points to a JWT it has its own expiration value as well.
 
     if (!this.state.qrCode) {
@@ -51,17 +53,21 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       )
     }
     this._isMounted = true
-    if (!this.definitionId) {
-      throw new Error(DEFINITION_ID_REQUIRED_ERROR)
+    if (!ecosystem) {
+      throw new Error('Prop ecosystem is required')
+    }
+    if (!vpDefinitionId) {
+      throw new Error('Prop vpDefinitionId is required')
     }
   }
 
   private generateNewQRCode() {
-    agent
-      .siopClientCreateAuthRequest()
+    const {ecosystem, vpDefinitionId, setQrCodeData} = this.props
+      ecosystem.getAgent()
+      .siopClientCreateAuthRequest({definitionId: vpDefinitionId})
       .then((authRequestURIResponse) => {
-        this.props.setQrCodeData(authRequestURIResponse.authRequestURI)
-        agent
+        setQrCodeData(authRequestURIResponse.authRequestURI)
+        ecosystem.getAgent()
           .qrURIElement(this.createQRCodeElement(authRequestURIResponse))
           .then((qrCode) => {
             this.registerState(authRequestURIResponse, qrCode)
@@ -85,9 +91,9 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
       },
       renderingProps: {
         bgColor: 'white',
-        fgColor: '#000000',
+        fgColor: this.props.fgColor ?? '#000000',
         level: 'L',
-        size: 300,
+        size:  this.props.width ?? 300,
         title: 'Sign in'
       }
     }
@@ -104,14 +110,18 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
     this._isMounted = false
   }
 
-  render() {
-    // Show the loader until we have details on which parameters to load into the QR code
-    return this.state.qrCode ? (
-      <NonMobileOS><div>{this.state.qrCode}</div></NonMobileOS>
-    ) : (
-      <BallTriangle color="#352575" height="100" width="100" />
-    )
-  }
+    render() {
+        // Show the loader until we have details on which parameters to load into the QR code
+        return this.state.qrCode ? (
+            <NonMobileOS>
+                <div>{this.state.qrCode}</div>
+            </NonMobileOS>
+        ) : (
+            <NonMobileOS>
+                <BallTriangle color="#352575" height="100" width="100"/>
+            </NonMobileOS>
+        )
+    }
 
   /* We don't want to keep used and unused states indefinitely, so expire the QR code after a configured timeout  */
   private refreshQRCode = () => {
@@ -148,14 +158,15 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   private pollAuthStatus = async (
     authRequestURIResponse: GenerateAuthRequestURIResponse
   ) => {
+    const {ecosystem, onSignInComplete} = this.props
     this.authStatusHandle = setInterval(async (args) => {
-      agent.siopClientGetAuthStatus({
-        correlationId: authRequestURIResponse?.correlationId,
+      ecosystem.getAgent().siopClientGetAuthStatus({
+        correlationId: authRequestURIResponse.correlationId,
         definitionId: authRequestURIResponse.definitionId
       }).then((response: AuthStatusResponse) => {
         if (response.status === AuthorizationResponseStateStatus.VERIFIED) {
           clearInterval(this.authStatusHandle)
-          this.props.onSignInComplete(response.payload!)
+          onSignInComplete(response.payload!)
         }
       }).catch((error: Error) => {
         clearInterval(this.authStatusHandle)

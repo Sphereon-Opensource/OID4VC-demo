@@ -1,0 +1,163 @@
+{
+  "correlationId": "https://agent.hat.demo.sphereon.com",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://agent.hat.demo.sphereon.com",
+    "credential_endpoint": "https://agent.hat.demo.sphereon.com/credentials",
+    "display": [
+      {
+        "name": "hat",
+        "description": "Horizon African Telecom Issuer"
+      },
+      {
+        "name": "hat",
+        "description": "Horizon African Telecom Issuer",
+        "locale": "en"
+      }
+    ],
+    "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Telecom credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/R30YNm9/logo-small-transparent.png",
+              "alt_text": "hat logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/HXCSW3m/ff40693e64b06f38fe301fc55374fad9.jpg",
+              "alt_text": "Image telecom credential"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Telecom credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/R30YNm9/logo-small-transparent.png",
+              "alt_text": "hat logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/HXCSW3m/ff40693e64b06f38fe301fc55374fad9.jpg",
+              "alt_text": "Image telecom credential"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Telecom credential",
+            "background_color": "#322577",
+            "logo": {
+              "url": "https://i.ibb.co/R30YNm9/logo-small-transparent.png",
+              "alt_text": "hat logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/HXCSW3m/ff40693e64b06f38fe301fc55374fad9.jpg",
+              "alt_text": "Image telecom credential"
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "emailAddress",
+          "bsnNumber"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "First name"
+              },
+              {
+                "name": "First name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Last name"
+              },
+              {
+                "name": "Last Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "emailAddress": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email address"
+              },
+              {
+                "name": "Email address",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email adres",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "bsnNumber": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "BSN number"
+              },
+              {
+                "name": "BSN number",
+                "locale": "en-US"
+              },
+              {
+                "name": "BSN nummer",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "hat-subscription",
+        "types": [
+          "VerifiableCredential",
+          "HATSubscription"
+        ],
+        "type": [
+          "VerifiableCredential",
+          "HATSubscription"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256K"
+        ]
+      }
+    ],
+    "credential_supplier_config": {
+      "templates_base_dir": "templates",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "HATSubscription"
+          ],
+          "template_path": "Subscription.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
+  }
+}

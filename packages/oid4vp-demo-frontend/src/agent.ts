@@ -4,6 +4,7 @@ import {ISIOPv2OID4VPRPRestClient, SIOPv2OID4VPRPRestClient} from "@sphereon/ssi
 
 
 
+
 const agent = createAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient>({
     plugins: [
         new QrCodeProvider(),
@@ -12,7 +13,7 @@ const agent = createAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient>({
             definitionId: process.env.REACT_APP_PRESENTATION_DEF_ID ?? 'sphereonGuest',
             authentication: {
                 enabled: process.env.REACT_APP_AUTHENTICATION_ENABLED === "true" || process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN !== undefined,
-                staticBearerToken: process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN
+                bearerToken: process.env.REACT_APP_AUTHENTICATION_STATIC_TOKEN
             }
         })
     ]
