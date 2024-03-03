@@ -410,7 +410,6 @@ const SSIInformationRequestPage: React.FC = () => {
                         <SSIPrimaryButton
                             caption={isManualIdentification ? t('sharing_data_manually_right_pane_button_caption') : t('sharing_data_right_pane_button_caption')}
                             style={{width: 327}}
-                            disabled={!isPayloadValid(payload, config.form)}
                             onClick={async () => await sequencer.next({payload, isManualIdentification})}
                         />
                     </div>
