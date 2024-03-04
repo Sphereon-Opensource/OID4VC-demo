@@ -37,7 +37,7 @@
       "@sphereon/oid4vci-issuer-server": "0.8.2-next.35",
       "@sphereon/pex": "3.0.1",
       "@sphereon/pex-models": "2.1.5",
-      "@sphereon/did-auth-siop": "0.6.0-unstable.3",
+      "@sphereon/did-auth-siop": "0.6.0-unstable.10",
       "@sphereon/ssi-express-support": "0.18.2-unstable.25",
       "@veramo/core": "4.2.0",
       "@veramo/credential-w3c": "4.2.0",
