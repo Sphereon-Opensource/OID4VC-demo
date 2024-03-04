@@ -179,6 +179,7 @@ if (IS_OID4VP_ENABLED) {
     const opts: ISIOPv2RPRestAPIOpts = {
         enableFeatures: ['siop', 'rp-status'],
         endpointOpts: {
+            basePath: process.env.OID4VP_AGENT_BASE_PATH ?? '',
             globalAuth: {
                 authentication: {
                     enabled: false,
