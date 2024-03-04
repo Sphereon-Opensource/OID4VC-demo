@@ -65,6 +65,7 @@ import {
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
+import * as process from "process";
 
 
 const resolver = createDidResolver()
@@ -189,17 +190,22 @@ if (IS_OID4VP_ENABLED) {
             webappCreateAuthRequest: {
                 webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
                 siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
+                ...(process.env.OID4VP_WEBAPP_BASE_PATH ? {path: `${process.env.OID4VP_WEBAPP_BASE_PATH}/webapp/definitions/:definitionId/auth-requests`} : {})
             },
             webappAuthStatus: {
+                ...(process.env.OID4VP_WEBAPP_BASE_PATH ? {path: `${process.env.OID4VP_WEBAPP_BASE_PATH}/webapp/auth-status`} : {})
                 // webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             },
             webappDeleteAuthRequest: {
+                ...(process.env.OID4VP_WEBAPP_BASE_PATH ? {path: `${process.env.OID4VP_WEBAPP_BASE_PATH}/webapp/definitions/:definitionId/auth-requests/:correlationId`} : {})
                 // webappBaseURI: process.env.OID4VP_WEBAPP_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             },
             siopGetAuthRequest: {
+                ...(process.env.OID4VP_WEBAPP_BASE_PATH ? {path: `${process.env.OID4VP_WEBAPP_BASE_PATH}/siop/definitions/:definitionId/auth-requests/:correlationId`} : {})
                 // siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             },
             siopVerifyAuthResponse: {
+                ...(process.env.OID4VP_WEBAPP_BASE_PATH ? {path: `${process.env.OID4VP_WEBAPP_BASE_PATH}/siop/definitions/:definitionId/auth-responses/:correlationId`} : {})
                 // siopBaseURI: process.env.OID4VP_AGENT_BASE_URI ?? `http://localhost:${INTERNAL_PORT}`,
             }
         }
