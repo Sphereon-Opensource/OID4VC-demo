@@ -1,0 +1,8 @@
+{
+  "definitionId": "DIIPv2",
+  "rpOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}
