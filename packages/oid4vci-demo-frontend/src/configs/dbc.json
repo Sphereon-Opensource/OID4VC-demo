@@ -174,7 +174,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonWalletIdentity",
+      "vpDefinitionId": "dbc2023",
       "steps": [
         {
           "id": "startPage",
