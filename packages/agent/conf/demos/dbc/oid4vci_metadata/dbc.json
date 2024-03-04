@@ -14,51 +14,51 @@
       {
         "display": [
           {
-            "name": "Sphereon DIIP",
-            "description": "DIIP v2 Conformance",
+            "name": "DBC DIIP",
+            "description": "Interop v2 Conformance",
             "text_color": "#FFFFFF",
-            "background_image": {
-              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
-              "alt_text": "Black and white photo of tulips with one red tulip"
-            },
             "logo": {
-              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
-              "alt_text": "Red square depicting Sphereon logo."
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+              "alt_text": "An orange block shape, with the text Dutch Blockchain Coalition next to it, portraying the logo of the Dutch Blockchain Coalition."
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
+              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
             }
           },
           {
             "locale": "en-US",
-            "name": "Sphereon DIIP",
+            "name": "DBC DIIP",
             "description": "DIIP v2 Conformance",
             "text_color": "#FFFFFF",
-            "background_image": {
-              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
-              "alt_text": "Black and white photo of tulips with one red tulip"
-            },
             "logo": {
-              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
-              "alt_text": "Red square depicting Sphereon logo."
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+              "alt_text": "An orange block shape, with the text Dutch Blockchain Coalition next to it, portraying the logo of the Dutch Blockchain Coalition."
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
+              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
             }
           },
           {
             "locale": "nl-NL",
-            "name": "Sphereon DIIP",
-            "description": "DIIP v2 Conformiteit",
+            "name": "DBC DIIP",
+            "description": "Interop v2 Conformiteit",
             "text_color": "#FFFFFF",
-            "background_image": {
-              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
-              "alt_text": "Black and white photo of tulips with one red tulip"
-            },
             "logo": {
-              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
-              "alt_text": "Red square depicting Sphereon logo."
+              "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+              "alt_text": "Aaneengesloten open blokken in de kleur blauw, met een blok in de kleur oranje, die tesamen de achtergrond van de kaart vormen."
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/CHqjxrJ/dbc-card-hig-res.png",
+              "alt_text": "Connected open cubes in blue with one orange cube as a background of the card"
             }
           }
         ],
         "order": [
           "firstName",
           "lastName",
-          "email"
+          "emailAddress"
         ],
         "credentialSubject": {
           "firstName": {
@@ -93,7 +93,7 @@
               }
             ]
           },
-          "email": {
+          "emailAddress": {
             "value_type": "string",
             "display": [
               {
