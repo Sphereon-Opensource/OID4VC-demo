@@ -1,0 +1,25 @@
+{
+  "id": "sphereonGuest",
+  "purpose": "We want to know your name and e-mail address (will not be stored)",
+  "input_descriptors": [
+    {
+      "id": "c2834d0e-3c95-4721-b21a-40e3d7ea2549",
+      "name": "DBC DIIP interop",
+      "purpose": "To issue a new credential your DBC DIIP Guest credential is required.",
+      "constraints": {
+        "fields": [
+          {
+            "path": [
+              "$.credentialSubject.name",
+              "$.vc.credentialSubject.name"
+            ],
+            "filter": {
+              "type": "string",
+              "pattern": "^DBC.*$"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

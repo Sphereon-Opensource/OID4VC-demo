@@ -68,18 +68,20 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                       height={pageConfig.mobile?.logo?.height ?? 150}
                   />
               }
-            {pageConfig.showQRCodeTopTitle && (<div style={{
+            {!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && (<div style={{
                 display: 'flex',
                 flexDirection: 'column',
-                marginTop: 'auto',
+                marginTop: isTabletOrMobile ? 'auto' : '20%',
                 maxHeight: '300px'
               }}>
-                <Text style={{ textAlign: 'center'}}
+                <Text style={{ textAlign: 'center' }}
                       className={style.pReduceLineSpace}
+                      h2Style={pageConfig.rightPaneLeftPane.qrCode.topTitle.h2Style}
+                      pStyle={pageConfig.rightPaneLeftPane.qrCode.topTitle.pStyle}
                       title={t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
                       lines={t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
               </div>)}
-            {!pageConfig.showQRCodeTopTitle && <div style={{
+            {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
                     display: 'flex',
                     flexGrow: 1,
                     flexDirection: 'column',
@@ -97,12 +99,13 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                   >
                       {t('ssi_welcome_label')}
                   </div>
-              </div>}
-              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(pageConfig.showQRCodeTopTitle && { marginBottom: '31%'})}}>
-                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24 })}}>
-                      <div>
+              </div>
+              }
+              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginBottom: '31%'}), ...(isTabletOrMobile && pageConfig.mobile?.qrCode?.rootContainer?.style)}}>
+                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.qrCode?.container?.style) })}}>
+                    <div style={{...(isTabletOrMobile && { textAlign: 'center' })}}>
                           <NonMobileOS>
-                              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(pageConfig.showQRCodeTopTitle && { height: '100%', marginTop: '4%'})}}>
+                              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { height: '100%', marginTop: '4%'})}}>
                                   {/*Whether the QR code is shown (mobile) is handled in the component itself */}
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
@@ -127,13 +130,16 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               </div>
                           </MobileOS>
                           <Mobile>
-                              <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} poppins-semi-bold-16`}
-                                    lines={t('credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}
+                              <div style={{ display: 'none', ...(pageConfig.mobile?.qrCode?.bottomText?.style) }}></div>
+                              <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} ${ pageConfig.mobile?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16' }`}
+                                    pStyle={pageConfig.mobile?.qrCode?.bottomText?.pStyle}
+                                    lines={t(pageConfig.mobile?.qrCode?.bottomText?.paragraph ?? 'credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}
                               />
                           </Mobile>
                           <NonMobile>
-                              <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(pageConfig.showQRCodeTopTitle && { marginTop: '12%' })}}
-                                    className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className} poppins-semi-bold-16`}
+                              <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginTop: '12%' })}}
+                                    pStyle={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.pStyle}
+                                    className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
                                     title={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n')}
                                     lines={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_paragraph}`).split('\n')}
                               />

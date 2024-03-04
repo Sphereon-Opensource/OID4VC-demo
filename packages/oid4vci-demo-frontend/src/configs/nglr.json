@@ -1,0 +1,262 @@
+{
+  "general": {
+    "credentialName": "Land Registration",
+    "issueCredentialType": "LandRegistrationCredential",
+    "oid4vpAgentBaseUrl": "http://192.168.2.90:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.2.90:5000",
+    "verifierUrl": "https://example.com",
+    "verifierUrlCaption": "Verify",
+    "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
+  },
+  "pages": {
+    "download": {
+      "rightPane": {
+        "paradymWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/paradym_qrcode.svg",
+            "alt": "Paradym Wallet",
+            "width": 181,
+            "height": 181,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be76fT"
+        },
+        "sphereonWalletQRCode": {
+          "style": {
+            "width": 201,
+            "height": 287
+          },
+          "image": {
+            "src": "wallets/sphereon_qrcode.svg",
+            "alt": "Sphereon Wallet",
+            "width": 201,
+            "height": 201,
+            "style": {
+              "flexGrow": 1
+            }
+          },
+          "button": {
+            "style": {
+              "width": 198
+            },
+            "color": "#062058"
+          },
+          "downloadUrl": "https://qrco.de/be5xfh"
+        }
+      },
+      "leftPane": {
+        "leftPhone": {
+          "logo": {
+            "src": "wallets/paradym_logo.png",
+            "alt": "Paradym",
+            "width": 151,
+            "height": 59
+          },
+          "image": {
+            "src": "wallets/paradym_wallet.svg",
+            "alt": "Paradym Wallet",
+            "width": 392,
+            "height": 796
+          }
+        },
+        "rightPhone": {
+          "logo": {
+            "src": "wallets/sphereon_logo.png",
+            "alt": "Sphereon",
+            "width": 204,
+            "height": 43
+          },
+          "image": {
+            "src": "wallets/sphereon_wallet.svg",
+            "alt": "Sphereon Wallet",
+            "width": 392,
+            "height": 796
+          }
+        }
+      }
+    },
+    "infoFromVPRequest": {
+      "photoLeft": "dbc/DBC.png",
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+    },
+    "infoSuccess": {
+      "photoLeft": "dbc/DBC.png",
+      "photoRight": "triall/undraw_messenger_re_8bky_grey.svg.svg"
+    },
+    "issueSuccess": {
+      "photoLeft": "dbc/DBC.png",
+      "photoRight": "fmdm/undraw_messenger_re_8bky_grey.svg.svg",
+      "rightPaneButtonStepId": "toDBCDemo"
+    },
+    "infoSharedSuccess": {
+      "photoLeft": "fmdm/wallet.svg",
+      "photoLeftManual": "fmdm/wallet.svg",
+      "photoRight": "fmdm/undraw_certification_re_ifll_grey.svg"
+    },
+    "issueRequest": {
+      "photoManual": "dbc/DBC.png",
+      "photoWallet": "dbc/DBC.png"
+    },
+    "infoRequest": {
+      "photo": "dbc/DBC.png",
+      "photoManual": "dbc/DBC.png",
+      "sharing_data_right_pane_title": "manual_fill_data_right_pane_title",
+      "form": [
+        [
+          {
+            "id": "firstName",
+            "key": "firstName",
+            "label": "ssi_information_request_page_form_first_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "lastName",
+            "key": "lastName",
+            "label": "ssi_information_request_page_form_last_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "emailAddress",
+            "key": "emailAddress",
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
+    },
+    "startPage": {
+      "photoLeft": "fmdm/landing_manual_grey.svg",
+      "photoRight": "fmdm/landing_wallet_grey.svg",
+      "logo": {
+        "src": "dbc/dbc_logo.png",
+        "alt": "dbc",
+        "width": 167,
+        "height": 70
+      },
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#073340"
+        },
+        "leftCardView": {
+          "textColor": "#FBFBFB",
+          "backgroundColor": "#266B81"
+        },
+        "rightCardView": {
+          "buttonType": "primary"
+        }
+      }
+    },
+    "shareSuccess": {
+      "photoLeft": "dbc/DBC.png",
+      "photoLeftManual": "dbc/DBC.png",
+      "photoRight": "undraw_messenger_re_8bky_grey.svg"
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "sphereonWalletIdentity",
+      "steps": [
+        {
+          "id": "startPage",
+          "operation": "navigate",
+          "path": "/start",
+          "nextId": "infoFromVPRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
+          "nextId": "credentialOffer"
+        },
+        {
+          "id": "infoFromVPRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/vp/request",
+          "nextId": "infoRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "/credentials/issue/success",
+          "nextId": "toDBCDemo"
+        },
+        {
+          "id": "toDBCDemo",
+          "operation": "navigate",
+          "path": "https://www.dutchblockchaincoalition.org/userlogin"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#FBFBFB",
+          "textColor": "#303030"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#266B81"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "color": "#266B81"
+        }
+      }
+    },
+    "Text": {}
+  }
+}

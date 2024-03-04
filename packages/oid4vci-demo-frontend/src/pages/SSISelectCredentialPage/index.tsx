@@ -31,11 +31,10 @@ const SSISelectCredentialPage: React.FC = () => {
     const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+    const issuerUrl = DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL ?? generalConfig.oid4vciAgentBaseUrl ?? 'https://ssi.sphereon.com/issuer'
 
     useEffect((): void => {
-        MetadataClient.retrieveAllMetadata(DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL
-            ?? generalConfig.oid4vciAgentBaseUrl
-            ?? 'https://ssi.sphereon.com/issuer')
+        MetadataClient.retrieveAllMetadata(issuerUrl)
         .then(async (metadata: EndpointMetadataResult): Promise<void> => {
             setEndpointMetadata(metadata)
             if (!metadata.credentialIssuerMetadata) {

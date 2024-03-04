@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 import {BallTriangle} from 'react-loader-spinner'
-import {AuthorizationResponseStateStatus, AuthStatusResponse, GenerateAuthRequestURIResponse} from './auth-model'
+// import {AuthorizationResponseStateStatus, GenerateAuthRequestURIResponse} from './auth-model'
 import {CreateElementArgs, QRType, URIData, ValueResult} from '@sphereon/ssi-sdk.qr-code-generator'
+import { AuthStatusResponse, GenerateAuthRequestURIResponse } from '@sphereon/ssi-sdk.siopv2-oid4vp-common'
 
-import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
+import {AuthorizationResponsePayload, AuthorizationResponseStateStatus} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
 import {NonMobileOS} from "../../index"
 import {Ecosystem} from "../../ecosystem/ecosystem"
 import {APP_SSI_QR_CODE_EXPIRES_AFTER_SEC} from "../../environment"
+
 
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 

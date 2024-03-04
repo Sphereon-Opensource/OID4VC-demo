@@ -9,7 +9,7 @@ import Landing from "./pages/Landing"
 import SecretPage from "./pages/SecretPage"
 import ClassifiedPage from "./pages/ClassifiedPage"
 import {Col, Container, Row} from "react-bootstrap"
-import {CredentialMapper} from "@sphereon/ssi-types";
+import {CredentialMapper, UniformVerifiablePresentation} from "@sphereon/ssi-types";
 import {AuthorizationResponsePayload} from "@sphereon/ssi-sdk.siopv2-oid4vp-common";
 
 
@@ -125,15 +125,16 @@ class App extends Component<AppState> {
     }
 
     private signInOutButtons = () => {
-        const payload = this.state.payload!
+        const payload = this.state.payload
 
         if (payload) {
 
-            const presentation = CredentialMapper.toWrappedVerifiablePresentation(Array.isArray(payload.vp_token) ? payload.vp_token[0] : payload.vp_token!)
-            const subjects = presentation?.presentation?.verifiableCredential[0].credential.credentialSubject! // Although rare, a VC can have more than one subject
+            const wrappedPresentation = CredentialMapper.toWrappedVerifiablePresentation(Array.isArray(payload.vp_token) ? payload.vp_token[0] : payload.vp_token!)
+            const presentation = wrappedPresentation?.presentation as UniformVerifiablePresentation
+            const subjects = presentation?.verifiableCredential[0].credential.credentialSubject // Although rare, a VC can have more than one subject
             let subject2 = undefined
-            if (Array.isArray(presentation?.presentation?.verifiableCredential) && presentation.presentation.verifiableCredential.length > 1) {
-                const subjects2 = presentation.presentation.verifiableCredential[1]!.credential.credentialSubject
+            if (Array.isArray(presentation?.verifiableCredential) && presentation.verifiableCredential.length > 1) {
+                const subjects2 = presentation.verifiableCredential[1]!.credential.credentialSubject
                 if (subjects2) {
                     if (Array.isArray(subjects2)) {
                         subject2 = subjects2[0]

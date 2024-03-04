@@ -1,6 +1,8 @@
 {
   "common_left_pane_title": "\"Digitale identiteit is het paspoort naar de\nvirtuele wereld, waar gemak en\nconnectiviteit moeiteloos samenkomen.\"",
   "credentials_right_pane_bottom_paragraph_mobile": "Klik op de knop om je credential op te slaan.\nGa daarna terug naar dit scherm om door te gaan",
+  "credentials_right_pane_bottom_paragraph_mobile_notaris": "Klik op de knop\nom je credential op te slaan.",
+  "credentials_right_pane_bottom_paragraph_mobile_bank": "Klik op de knop\nom je credential op te slaan.",
   "credentials_right_pane_bottom_paragraph": "Scan deze QR-code met de QR-scanner van je wallet\nom je credential te accepteren en op te slaan.",
   "credentials_right_pane_top_paragraph": "Laten we een {{credentialName}} credential\ntoevoegen aan je wallet.",
   "credentials_right_pane_top_title": "Beveilig je {{credentialName}} credential",
