@@ -1,6 +1,6 @@
 {
   "correlationId": "sphereon",
-  "definitionId": "sphereonGuest",
+  "definitionId": "DIIPv2",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"
