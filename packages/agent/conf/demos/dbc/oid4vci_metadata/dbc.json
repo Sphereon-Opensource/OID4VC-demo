@@ -4,6 +4,7 @@
   "metadata": {
     "credential_issuer": "https://ssi.dutchblockchaincoalition.org/agent",
     "credential_endpoint": "https://ssi.dutchblockchaincoalition.org/agent/credentials",
+    "token_endpoint": "https://ssi.dutchblockchaincoalition.org/agent/token",
     "display": [
       {
         "name": "Dutch Blockchain Coalition",
@@ -14,9 +15,8 @@
       {
         "display": [
           {
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
-            "background_color": "#3B6F6D",
+            "name": "DBC DIIP",
+            "description": "Interop v2 Conformance",
             "text_color": "#FFFFFF",
             "logo": {
               "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
@@ -29,9 +29,8 @@
           },
           {
             "locale": "en-US",
-            "name": "Conference Attendee",
-            "description": "The DBC Conference Attendee credential is given to all visitors of the DBC conference.",
-            "background_color": "#3B6F6D",
+            "name": "DBC DIIP",
+            "description": "DIIP v2 Conformance",
             "text_color": "#FFFFFF",
             "logo": {
               "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
@@ -44,9 +43,8 @@
           },
           {
             "locale": "nl-NL",
-            "name": "Conferentie Deelnemer",
-            "description": "De DBC Conferentie Deelnemer credential wordt uitgegeven aan alle bezoekers van de DBC conferentie.",
-            "background_color": "#3B6F6D",
+            "name": "DBC DIIP",
+            "description": "Interop v2 Conformiteit",
             "text_color": "#FFFFFF",
             "logo": {
               "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
@@ -61,7 +59,7 @@
         "order": [
           "firstName",
           "lastName",
-          "email"
+          "emailAddress"
         ],
         "credentialSubject": {
           "firstName": {
@@ -96,7 +94,7 @@
               }
             ]
           },
-          "email": {
+          "emailAddress": {
             "value_type": "string",
             "display": [
               {
@@ -116,7 +114,7 @@
         "id": "dbc2023",
         "types": [
           "VerifiableCredential",
-          "DBCConferenceAttendee"
+          "DIIPv2"
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
@@ -124,9 +122,7 @@
           "did:jwk"
         ],
         "cryptographic_suites_supported": [
-          "ES256",
-          "ES256K",
-          "EdDSA"
+          "ES256"
         ]
       }
     ],
@@ -135,9 +131,9 @@
       "template_mappings": [
         {
           "credential_types": [
-            "DBCConferenceAttendee"
+            "DIIPv2"
           ],
-          "template_path": "DBCConferenceAttendee.hbs",
+          "template_path": "DIIPv2.hbs",
           "format": "jwt_vc_json"
         }
       ]
