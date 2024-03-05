@@ -11,6 +11,16 @@
       "alg": [
         "ES256"
       ]
+    },
+    "jwt_vc": {
+      "alg": [
+        "ES256"
+      ]
+    },
+    "jwt_vp": {
+      "alg": [
+        "ES256"
+      ]
     }
   },
   "input_descriptors": [
