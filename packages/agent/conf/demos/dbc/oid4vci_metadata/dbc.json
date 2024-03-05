@@ -1,5 +1,5 @@
 {
-  "correlationId": "dbc2023",
+  "correlationId": "https://ssi.dutchblockchaincoalition.org/agent",
   "overwriteExisting": true,
   "metadata": {
     "credential_issuer": "https://ssi.dutchblockchaincoalition.org/agent",
