@@ -115,7 +115,7 @@
           "VerifiableCredential",
           "DIIPv2"
         ],
-        "format": "jwt_vc_json",
+        "format": "jwt_vc",
         "cryptographic_binding_methods_supported": [
           "did:web",
           "did:jwk"
@@ -133,7 +133,7 @@
             "DIIPv2"
           ],
           "template_path": "DIIPv2.hbs",
-          "format": "jwt_vc_json"
+          "format": "jwt_vc"
         }
       ]
     }
