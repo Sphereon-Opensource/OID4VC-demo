@@ -5,6 +5,7 @@
       180,
       110
     ],
+    "responseMode": "direct_post",
     "clientMetadataOpts": {
       "idTokenSigningAlgValuesSupported": [
         "ES256"
