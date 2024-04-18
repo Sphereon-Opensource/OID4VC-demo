@@ -1,9 +1,9 @@
 {
   "general": {
-    "credentialName": "Conference Attendee",
+    "credentialName": "DBC Interop v2",
     "issueCredentialType": "dbc2023",
-    "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
-    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer",
+    "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/agent",
+    "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/agent",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",
     "verifierUrlCaption": "DBC website",
     "downloadUrl": "https://ssi.dutchblockchaincoalition.org/demo/issuer/#/download"
@@ -174,7 +174,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonWalletIdentity",
+      "vpDefinitionId": "dbc2023",
       "steps": [
         {
           "id": "startPage",

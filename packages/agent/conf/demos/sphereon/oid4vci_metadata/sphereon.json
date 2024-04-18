@@ -2,8 +2,8 @@
   "correlationId": "sphereon",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "http://internet.or.LAN.host:5000/sphereon",
-    "credential_endpoint": "http://internet.or.LAN.host:5000/sphereon/credentials",
+    "credential_issuer": "https://ssi.sphereon.com/agent",
+    "credential_endpoint": "https://ssi.sphereon.com/agent/credentials",
     "display": [
       {
         "name": "Sphereon International",
@@ -11,6 +11,119 @@
       }
     ],
     "credentials_supported": [
+      {
+        "display": [
+          {
+            "name": "Sphereon DIIP",
+            "description": "DIIP v2 Conformance",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Sphereon DIIP",
+            "description": "DIIP v2 Conformance",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Sphereon DIIP",
+            "description": "DIIP v2 Conformiteit",
+            "text_color": "#FFFFFF",
+            "background_image": {
+              "url": "https://i.ibb.co/kmfrH4F/tulips.png",
+              "alt_text": "Black and white photo of tulips with one red tulip"
+            },
+            "logo": {
+              "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+              "alt_text": "Red square depicting Sphereon logo."
+            }
+          }
+        ],
+        "order": [
+          "firstName",
+          "lastName",
+          "email"
+        ],
+        "credentialSubject": {
+          "firstName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "First Name"
+              },
+              {
+                "name": "First Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Voornaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "lastName": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Last Name"
+              },
+              {
+                "name": "Last Name",
+                "locale": "en-US"
+              },
+              {
+                "name": "Achternaam",
+                "locale": "nl-NL"
+              }
+            ]
+          },
+          "email": {
+            "value_type": "string",
+            "display": [
+              {
+                "name": "Email"
+              },
+              {
+                "name": "Email",
+                "locale": "en-US"
+              },
+              {
+                "name": "Email",
+                "locale": "nl-NL"
+              }
+            ]
+          }
+        },
+        "id": "DIIPv2",
+        "types": [
+          "VerifiableCredential",
+          "DIIPv2"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:web",
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
+        ]
+      },
       {
         "display": [
           {
@@ -42,7 +155,7 @@
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
-          "did:key"
+          "did:jwk"
         ],
         "cryptographic_suites_supported": [
           "EdDSA"
@@ -522,6 +635,13 @@
     "credential_supplier_config": {
       "templates_base_dir": "templates/sphereon",
       "template_mappings": [
+        {
+          "credential_types": [
+            "DIIPv2"
+          ],
+          "template_path": "DIIPv2.hbs",
+          "format": "jwt_vc_json"
+        },
         {
           "credential_types": [
             "GuestCredential"

@@ -3,13 +3,16 @@ import {IRPDefaultOpts, SIOPv2RP} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth"
 import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/src/types/ISIOPv2RP";
 import {
     createDidResolver,
-    definitionsOpts, getDefaultDID, getDefaultKid, getIdentifier,
+    definitionsOpts,
+    getDefaultDID,
+    getDefaultKid,
+    getIdentifier,
     IS_OID4VP_ENABLED,
     OID4VP_DEFINITIONS,
     OID4VPInstanceOpts,
     oid4vpInstanceOpts
 } from "../environment";
-import {CheckLinkedDomain} from "@sphereon/did-auth-siop";
+import {CheckLinkedDomain, SupportedVersion} from "@sphereon/did-auth-siop";
 import {Resolvable} from "did-resolver";
 
 
@@ -59,6 +62,7 @@ export async function getDefaultOID4VPRPOptions(args?: {
     }
     const resolver = args?.resolver ?? createDidResolver()
     return {
+        supportedVersions: [SupportedVersion.SIOPv2_D12_OID4VP_D18, SupportedVersion.JWT_VC_PRESENTATION_PROFILE_v1],
         didOpts: {
             resolveOpts: {
                 resolver
@@ -78,7 +82,7 @@ export async function createOID4VPRP(opts?: { resolver: Resolvable }) {
         return
     }
     return new SIOPv2RP({
-        instanceOpts: toPexInstanceOptions(oid4vpInstanceOpts.asArray, definitionsOpts.asArray, opts)
+        instanceOpts: toPexInstanceOptions(oid4vpInstanceOpts.asArray, definitionsOpts.asArray, opts),
     })
 
 }

@@ -2,11 +2,11 @@
   "general": {
     "credentialName": "Sphereon Guest",
     "issueCredentialType": "GuestCredential",
-    "oid4vpAgentBaseUrl": "https://ssi.sphereon.com/demo/issuer",
-    "oid4vciAgentBaseUrl": "https://ssi.sphereon.com/demo/issuer",
+    "oid4vpAgentBaseUrl": "http://192.168.2.90:5000/sphereon",
+    "oid4vciAgentBaseUrl": "http://192.168.2.90:5000/sphereon",
     "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
     "verifierUrlCaption": "Sphereon demo",
-    "downloadUrl": "https://ssi.sphereon.com/demo/issuer/#/download"
+    "downloadUrl": "http://192.168.2.90:5000/#/download"
   },
   "pages": {
     "download": {
@@ -183,7 +183,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonWalletIdentity",
+      "vpDefinitionId": "DIIPv2",
       "steps": [
         {
           "id": "startPage",

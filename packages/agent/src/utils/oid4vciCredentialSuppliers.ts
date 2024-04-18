@@ -26,7 +26,7 @@ class TemplateCredentialDataSupplier {
         const credentialSupplierConfig = args.credentialSupplierConfig as CredentialSupplierConfigWithTemplateSupport
         if (credentialSupplierConfig.template_mappings) {
             const templateMapping = credentialSupplierConfig.template_mappings
-                .find(mapping => mapping.credential_types.some(type => types.includes(type)))
+                .find(mapping => mapping.credential_types.some(type => type !== 'VerifiableCredential' && types.includes(type)))
             if (templateMapping) {
                 const templatePath = normalizeFilePath(CONF_PATH, credentialSupplierConfig?.templates_base_dir, templateMapping.template_path)
                 const credential = templateVCGenerator.generateCredential(templatePath, args.credentialDataSupplierInput)
