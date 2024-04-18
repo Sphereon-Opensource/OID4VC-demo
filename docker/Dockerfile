@@ -1,5 +1,5 @@
 # Builder stage
-FROM node:lts-bookworm AS oid4vc-demo-builder
+FROM node:hydrogen-bookworm AS oid4vc-demo-builder
 SHELL ["/bin/bash", "-c"]
 RUN npm -g install pnpm && SHELL=bash pnpm setup && source /root/.bashrc && pnpm add -g pnpm
 RUN pnpm add typescript tslib
@@ -11,7 +11,7 @@ RUN pnpm install -r
 RUN pnpm build
 
 # Final stage
-FROM node:lts-bookworm
+FROM node:hydrogen-bookworm
 ARG PACKAGE_PATH
 ARG NODE_SCRIPT
 ENV NODE_SCRIPT=${NODE_SCRIPT}
