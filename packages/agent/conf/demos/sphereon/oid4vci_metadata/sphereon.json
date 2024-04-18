@@ -2,8 +2,8 @@
   "correlationId": "sphereon",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://ssi.sphereon.com/agent",
-    "credential_endpoint": "https://ssi.sphereon.com/agent/credentials",
+    "credential_issuer": "https://agent.ssi.sphereon.com",
+    "credential_endpoint": "https://agent.ssi.sphereon.com/credentials",
     "display": [
       {
         "name": "Sphereon International",

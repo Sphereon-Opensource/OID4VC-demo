@@ -31,7 +31,7 @@ const getOrCreateAgent = (ecoSystemId: string, generalConfig: EcosystemGeneralCo
             new SIOPv2OID4VPRPRestClient({
                 baseUrl: DEV_OVERRIDE_OID4VP_AGENT_BASE_URL
                     ?? generalConfig.oid4vpAgentBaseUrl
-                    ?? 'https://ssi.sphereon.com/agent',
+                    ?? 'https://agent.ssi.sphereon.com',
                 authentication: buildAuthentication(generalConfig)
             }),
             new OID4VCIRestClient({

@@ -2,11 +2,11 @@
   "general": {
     "credentialName": "Sphereon Guest",
     "issueCredentialType": "GuestCredential",
-    "oid4vpAgentBaseUrl": "https://ssi.sphereon.com/agent",
-    "oid4vciAgentBaseUrl": "https://ssi.sphereon.com/agent",
+    "oid4vpAgentBaseUrl": "https://agent.ssi.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.ssi.sphereon.com",
     "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
     "verifierUrlCaption": "Sphereon demo",
-    "downloadUrl": "https://ssi.sphereon.com/agent/#/download"
+    "downloadUrl": "https://agent.ssi.sphereon.com/#/download"
   },
   "pages": {
     "download": {
