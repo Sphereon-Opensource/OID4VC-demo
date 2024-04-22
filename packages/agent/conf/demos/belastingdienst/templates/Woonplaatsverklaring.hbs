@@ -1,0 +1,22 @@
+{
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1", {
+            "description": {
+                "@id": "http://schema.org/description",
+                "@container": "@language"
+            },
+        }
+    ],
+    "type": [
+        "VerifiableCredential",
+        "Woonplaatsverklaring"
+    ],
+    "expirationDate": "{{{ dateTimeAfterMonths 12 }}}",
+    "credentialSubject": {
+        "description": {
+          "en": "Address data was registered with de Belastingdienst",
+          "nl": "Adresgegevens geregistreerd bij de Belastingdienst"
+         }
+        {{{mergeJSON @root}}}
+    }
+}

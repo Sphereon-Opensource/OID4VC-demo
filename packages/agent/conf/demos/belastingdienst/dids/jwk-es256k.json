@@ -1,0 +1,10 @@
+{
+  "createArgs": {
+    "provider": "did:jwk",
+    "options": {
+      "kid": "auth-key-es256k",
+      "type": "Secp256k1",
+      "keyType": "Secp256k1"
+    }
+  }
+}

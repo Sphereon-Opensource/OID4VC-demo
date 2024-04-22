@@ -108,5 +108,11 @@
   "welcome_page_confirm_account_subtitle": "We’ll first need to confirm your account",
   "welcome_page_confirm_identity_subtitle": "We would like to know a bit more about you",
   "welcome_page_confirm_account_description": "Confirm your account by providing some information and by replying to the verification e-mail we’ll sent.",
-  "welcome_page_confirm_identity_description": "<strong>Next steps:</strong><br>1. Provide some personal information<br>2. Upload a valid ID<br>3. Perform a liveliness check<br>4. Wait for confirmation"
+  "welcome_page_confirm_identity_description": "<strong>Next steps:</strong><br>1. Provide some personal information<br>2. Upload a valid ID<br>3. Perform a liveliness check<br>4. Wait for confirmation",
+  "street": "Street name",
+  "house_number": "House / apartment number",
+  "zip_code": "ZIP code",
+  "city": "City",
+  "add_named_credential": "Add {{credentialName}} credential",
+  "paragraph_add_named_credential": "It's now possible to add this credential to your wallet."
 }
