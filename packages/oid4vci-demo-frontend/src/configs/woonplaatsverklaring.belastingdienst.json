@@ -1,0 +1,295 @@
+{
+  "general": {
+    "oid4vpAgentBaseUrl": "https://woonplaatsverklaring.belastingdienst.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.belastingdienst.demo.sphereon.com",
+    "downloadUrl": "https://agent.belastingdienst.demo.sphereon.com/#/download"
+  },
+  "pages": {
+      "rightPane": {
+        "image": "banqup/flyng-iphone.svg",
+        "width": "100%",
+        "sphereonWalletQRCodes": [
+          {
+            "buttonCaptionResourceId": "label_download_ios",
+            "style": {},
+            "downloadUrl": "https://apps.apple.com/us/app/sphereon-wallet/id1661096796",
+            "target": "_blank"
+          },
+          {
+            "buttonCaptionResourceId": "label_download_android",
+            "enableQR": false,
+            "style": {},
+            "downloadUrl": "https://play.google.com/store/apps/details?id=com.sphereon.ssi.wallet&hl=en&gl=US",
+            "target": "_blank"
+          }
+        ],
+        "enablePrimaryButton": true,
+        "primaryButtonResourceId": "label_continue"
+      }
+    },
+    "verifyRequest": {
+      "downloadAppStepId": "downloadSphereonWallet",
+      "bottomParagraph": "coc_credential_verify_request_right_pane_bottom_paragraph",
+      "leftPaneWidth": "40%",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "photoLeft": "hat/background.jpg",
+      "logo": {
+        "src": "hat/logo.svg",
+        "width": 430,
+        "height": 63
+      },
+      "mobile": {
+        "backgroundColor": "#EFFFF5"
+      },
+      "rightPaneGrid": {
+        "style": {
+          "width": "100%"
+        }
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "style": {
+              "display": "none"
+            }
+          },
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "credential_verify_request_right_pane_bottom_title": "",
+            "credential_verify_request_right_pane_bottom_paragraph": ""
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      }
+    },
+    "issueSuccess": {
+      "leftPaneWidth": "40%",
+      "photoLeft": "hat/background.jpg",
+      "photoLeftManual": "hat/background.jpg",
+      "logo": {
+        "src": "hat/logo-transparent.png",
+        "width": 430,
+        "height": 63
+      },
+      "rightPaneTitle": "credentials_success_right_pane_banqup_title",
+      "rightPaneParagraph": "credentials_success_right_pane_verified_account_paragraph_hat",
+      "rightPaneButtonCaption": "label_finish",
+      "rightPaneTextHeight": "40%",
+      "rightPaneTextMarginTop": "0",
+      "rightPaneTextMarginBottom": "10%",
+      "rightPaneButtonWidth": "135px",
+      "rightPaneButtonHeight": "48px",
+      "rightPaneButtonStepId": "toStart",
+      "mobile": {
+      }
+    },
+    "infoRequest": {
+      "leftPaneWidth": "40%",
+      "sharing_data_right_pane_title": "ssi_information_request_page_title",
+      "sharing_data_right_pane_paragraph": "sharing_data_fill_out_right_pane_banqup_paragraph",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "photo": "hat/background.jpg",
+      "logo": {
+        "src": "hat/logo-transparent.png",
+        "width": 430,
+        "height": 63
+      },
+      "mobile": {
+        "backgroundColor": "#EFFFF5"
+      },
+      "form": [
+        [
+          {
+            "id": "face",
+            "key": "face",
+            "label": "ssi_information_request_page_form_profile_picture_label",
+            "type": "image",
+            "required": true,
+            "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        ],
+        [
+          {
+            "id": "fullName",
+            "key": "fullName",
+            "label": "ssi_information_request_page_form_full_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "dateOfBirth",
+            "key": "dateOfBirth",
+            "label": "ssi_information_request_page_form_date_of_birth_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "gender",
+            "key": "gender",
+            "label": "ssi_information_request_page_form_gender_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "city",
+            "key": "city",
+            "label": "ssi_information_request_page_form_city_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "phone",
+            "key": "phone",
+            "label": "ssi_information_request_page_form_phone_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "emailAddress",
+            "key": "email",
+            "label": "ssi_information_request_page_form_email_label",
+            "type": "text",
+            "required": true,
+            "customValidation": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          }
+        ],
+        [
+          {
+            "id": "vid",
+            "key": "VID",
+            "label": "ssi_information_request_page_form_account_id_label",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
+    },
+    "issueRequest": {
+      "leftPaneWidth": "40%",
+      "title": "title_secure_your_credential",
+      "topParagraph": "paragraph_add_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
+      "photoWallet": "hat/background.jpg",
+      "logo": {
+        "src": "hat/logo-transparent.png",
+        "width": 430,
+        "height": 63
+      },
+      "mobile": {
+      }
+    },
+    "shareSuccess": {
+      "leftPaneWidth": "40%",
+      "photoLeft": "hat/background.jpg",
+      "photoLeftManual": "hat/background.jpg",
+      "photoRight": "undraw_certification_re_ifll_2.svg",
+      "textRightTitle": "welcome_hat",
+      "textRight": "sharing_data_success_right_pane_text_hat",
+      "logo": {
+        "src": "hat/logo.svg",
+        "width": 430,
+        "height": 63
+      }
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "woonplaatsverklaring",
+      "steps": [
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "NotaryCompanyVerification"
+          },
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://belastingdienst.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "DeepLink": {},
+    "SSICardView": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#326D85",
+          "textColor": "#FBFBFB"
+        }
+      }
+    },
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#1A4BA6"
+        },
+        "button": {
+          "width": "220px"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#353438"
+        },
+        "button": {
+          "width": "220px"
+        }
+      }
+    },
+    "Text": {}
+  }
+}
