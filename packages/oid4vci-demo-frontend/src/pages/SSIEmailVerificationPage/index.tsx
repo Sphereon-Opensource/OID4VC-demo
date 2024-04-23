@@ -29,7 +29,7 @@ const SSIEmailVerificationPage: React.FC = (): ReactElement => {
                      flexDirection: 'column',
                      alignItems: 'center',
                      ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                     ...(pageConfig.logo && {justifyContent: 'center'})
+                     ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
                  }}
             >
                 {pageConfig.logo &&

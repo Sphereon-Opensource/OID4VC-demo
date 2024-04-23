@@ -108,10 +108,20 @@
   "welcome_page_confirm_identity_subtitle": "Wij willen graag wat meer over je weten",
   "welcome_page_confirm_account_description": "Bevestig je account door wat informatie te verstrekken en door de verificatie-e-mail te beantwoorden die we hebben verzonden.",
   "welcome_page_confirm_identity_description": "<strong>Volgende stappen:</strong><br>1. Verstrek enkele persoonlijke gegevens<br>2. Upload een geldig identiteitsbewijs<br>3. Voer een authenticiteitscontrole uit<br>4. Wacht op bevestiging",
+  "rsin": "RSIN nummer",
   "street": "Straatnaam",
   "house_number": "Huisnummer",
   "zip_code": "Postcode",
   "city": "Plaats",
   "add_named_credential": "Voeg {{credentialName}} credential toe",
-  "paragraph_add_named_credential": "Het is nu mogelijk om de credential toe te voegen aan uw wallet."
+  "paragraph_add_named_credential": "Het is nu mogelijk om de credential toe te voegen aan uw wallet.",
+  "credentials_available": "Beschikbare credentials",
+  "belastingdienst_landing_page_text": "U kan onderstaande credentials ontvangen in uw wallet.\nSelecteer een credential en volg de benodigde stappen.",
+  "woonplaats_verklaring": "Woonplaatsverklaring",
+  "omzetbelasting": "Omzetbelasting",
+  "btw_id": "BTW ID",
+  "ob_nummer": "OB nummer",
+  "belastingdienst_invullen": "Om te beginnen, zou u onderstaande gegevens kunnen invullen.",
+  "web_wallet_address": "Web wallet adres",
+  "go": "Ga"
 }

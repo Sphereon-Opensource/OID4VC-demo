@@ -6,18 +6,26 @@ import {useLocation} from 'react-router-dom'
 import {QRData, QRRenderingProps, QRType, URIData} from '@sphereon/ssi-sdk.qr-code-generator'
 import {IssueStatus, IssueStatusResponse} from "@sphereon/oid4vci-common"
 import DeepLinkButton from "../../components/DeepLinkButton"
-import {Mobile, MobileOS, NonMobile, NonMobileOS} from '../..'
+import {MobileOS, NonMobile, NonMobileOS} from '../..'
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {SSICredentialIssueRequestPageConfig} from "../../ecosystem/ecosystem-config"
+import InputField from "../../components/InputField";
+import SSIPrimaryButton from "../../components/SSIPrimaryButton";
+import styles from "../../components/DeepLinkButton/DeepLinkButton.module.css";
+import {FormFieldValue} from "../../types";
+
 
 type State = {
     uri: string,
     preAuthCode: string,
 }
 
+
 const SSICredentialIssueRequestPage: React.FC = () => {
+    const urlRegex = /^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(:\d+)?(\/.*)?$/;
+
     const location = useLocation()
     const ecosystem = useEcosystem()
     const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
@@ -26,6 +34,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const state: State | undefined = location.state
     const [qrCode, setQrCode] = useState<ReactElement>()
+    const [webWalletAddressValue, setWebWalletAddressValue] = useState<string>();
+
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -67,17 +77,34 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         }).then((qrCode: JSX.Element) => setQrCode(qrCode))
     }, [])
 
-    function determineWidth() {
+    function determineRightPaneWidth() {
         if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
         if (isTabletOrMobile && pageConfig.mobile?.rightPaneWidth) {
-          return pageConfig.mobile?.rightPaneWidth
+            return pageConfig.mobile?.rightPaneWidth
         }
-        return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '40%'
+        return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '100%'
     }
 
     const {t} = useTranslation()
+
+    const onWebWalletAddressChange = (value: FormFieldValue) => {
+        setWebWalletAddressValue(('' + value).trim());
+    };
+
+    const onWebWalletAddressClick = (): void => {
+        if (!webWalletAddressValue) {
+            throw new Error('Web wallet address must not be empty');
+        }
+        if (!urlRegex.test(webWalletAddressValue)) {
+            throw new Error('Web wallet address must be a valid https:// url');
+        }
+
+        const queryParamsStartIndex = qrData.object.indexOf('?');
+        const queryParams = qrData.object.substring(queryParamsStartIndex);
+        window.location.href = `${webWalletAddressValue}${queryParams}`;
+    };
 
 
     return (
@@ -86,12 +113,13 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                 <div style={{
                     display: 'flex',
                     width: pageConfig.leftPaneWidth ?? '60%',
+                    minWidth: pageConfig.leftPaneWidth ?? '60%',
                     height: '100%',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((pageConfig.photoWallet) && {background: `url(${pageConfig.photoWallet}) 0% 0% / cover`}),
                     ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                    ...(pageConfig.logo && {justifyContent: 'center'})
+                    ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
                 }}>
                     {pageConfig.logo &&
                         <img
@@ -118,7 +146,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
             </NonMobile>
             <div style={{
                 display: 'flex',
-                width: determineWidth(),
+                width: determineRightPaneWidth(),
                 height: '100%',
                 alignItems: 'center',
                 flexDirection: 'column',
@@ -137,7 +165,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    ...(!!pageConfig.rightPaneHeight && { height: pageConfig.rightPaneHeight }),
+                    ...(!!pageConfig.rightPaneHeight && {height: pageConfig.rightPaneHeight}),
                     ...(isTabletOrMobile && {height: '100%'}),
                     alignItems: 'center',
                 }}>
@@ -163,6 +191,27 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             <div style={{flexGrow: 1, marginBottom: 34}}>
                                 {qrCode}
                             </div>
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                verticalAlign: 'bottom',
+                                alignItems: 'flex-end'
+                            }}>
+                                <InputField
+                                    label={t('web_wallet_address')!}
+                                    type={'text'}
+                                    inlineStyle={{marginRight: '4px'}}
+                                    labelStyle={{textAlign: 'left'}}
+                                    onChange={async (value: FormFieldValue): Promise<void> => onWebWalletAddressChange(value)}
+                                />
+                                <SSIPrimaryButton
+                                    caption={t('go')}
+                                    style={{width: 87, ...styles}}
+                                    onClick={onWebWalletAddressClick}
+                                    disabled={webWalletAddressValue === undefined
+                                        || webWalletAddressValue.length === 0
+                                        || !urlRegex.test(webWalletAddressValue)}/>
+                            </div>
                         </NonMobileOS>
                         <MobileOS>
                             <div style={{
@@ -175,13 +224,17 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                                 {pageConfig.mobile?.image &&
                                     <img src={pageConfig.mobile?.image?.src}
                                          width={pageConfig.mobile?.image?.width}
-                                         height={pageConfig.mobile?.image?.height} alt="success" style={{overflow: 'hidden'}}/>
+                                         height={pageConfig.mobile?.image?.height} alt="success"
+                                         style={{overflow: 'hidden'}}/>
                                 }
                                 <DeepLinkButton style={{flexGrow: 1, marginTop: '20px'}} link={state?.uri!}/>
                             </div>
                         </MobileOS>
                     </div>
-                    <div style={{marginTop: "20px", textAlign: 'center', ...(isTabletOrMobile && { marginTop: 'inherit' })}}>
+                    <div style={{
+                        marginTop: "20px",
+                        textAlign: 'center', ...(isTabletOrMobile && {marginTop: 'inherit'})
+                    }}>
                         <NonMobileOS>
                             <Text
                                 style={{flexGrow: 1, maxWidth: 378}}

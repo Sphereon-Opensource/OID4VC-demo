@@ -1,5 +1,5 @@
 {
-  "correlationId": "belastingdienst",
+  "correlationId": "https://agent.belastingdienst.demo.sphereon.com",
   "overwriteExisting": true,
   "metadata": {
     "credential_issuer": "https://agent.belastingdienst.demo.sphereon.com",
@@ -65,13 +65,70 @@
         ],
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
-          "did:web",
           "did:jwk"
         ],
         "cryptographic_suites_supported": [
-          "ES256",
-          "ES256K",
-          "EdDSA"
+          "ES256"
+        ]
+      },
+      {
+        "display": [
+          {
+            "name": "Omzetbelasting",
+            "description": "Omzetbelastingverklaring Belastingdienst",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/pyZpF8m/Belastingdienst.png",
+              "alt_text": "Belastingdienst logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/c6hQwRP/hector-j-rivas.jpg",
+              "alt_text": "Mirrors background"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Tax registration statement",
+            "description": "Tax registration statement Belastingdienst",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/pyZpF8m/Belastingdienst.png",
+              "alt_text": "Belastingdienst logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/c6hQwRP/hector-j-rivas.jpg",
+              "alt_text": "Mirrors background"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "Omzetbelasting",
+            "description": "Omzetbelastingverklaring Belastingdienst",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/pyZpF8m/Belastingdienst.png",
+              "alt_text": "Belastingdienst logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/c6hQwRP/hector-j-rivas.jpg",
+              "alt_text": "Mirrors background"
+            }
+          }
+        ],
+        "id": "Omzetbelasting",
+        "types": [
+          "VerifiableCredential",
+          "Omzetbelasting"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
         ]
       }
     ],
@@ -83,6 +140,13 @@
             "Woonplaatsverklaring"
           ],
           "template_path": "Woonplaatsverklaring.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "Omzetbelasting"
+          ],
+          "template_path": "Omzetbelasting.hbs",
           "format": "jwt_vc_json"
         }
       ]

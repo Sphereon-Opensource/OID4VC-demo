@@ -17,6 +17,14 @@ export interface ImageProperties {
   height?: number
 }
 
+export interface ImageProperties2 {
+  src: string
+  alt: string
+  width?: string
+  height?: string
+  justifyContent?: string
+}
+
 export type FormOutputData = Record<string, FormFieldValue>
 export type FormFieldValue = string | number | ReadonlyArray<string> | boolean | undefined
 export type ImmutableRecord = Readonly<Record<string, ImmutableValue>>;

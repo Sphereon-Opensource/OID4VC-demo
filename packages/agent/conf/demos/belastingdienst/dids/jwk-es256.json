@@ -1,0 +1,11 @@
+{
+  "privateKeyHex": "357dd2e90677e15547d40375673b8d0fd0d230c6702c6c71334ba764883ef6bf",
+  "createArgs": {
+    "provider": "did:jwk",
+    "options": {
+      "kid": "es256-key",
+      "type": "Secp256r1",
+      "keyType": "Secp256r1"
+    }
+  }
+}

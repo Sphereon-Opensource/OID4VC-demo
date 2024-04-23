@@ -1,14 +1,14 @@
 {
   "general": {
-    "credentialName": "woonplaatsverklaring",
-    "oid4vpAgentBaseUrl": "https://woonplaatsverklaring.belastingdienst.demo.sphereon.com",
+    "credentialName": "omzetbelasting",
+    "oid4vpAgentBaseUrl": "https://omzetbelasting.belastingdienst.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.belastingdienst.demo.sphereon.com",
     "downloadUrl": "https://agent.belastingdienst.demo.sphereon.com/#/download"
   },
   "pages": {
     "infoRequest": {
       "leftPaneWidth": "535px",
-      "sharing_data_right_pane_title": "woonplaats_verklaring",
+      "sharing_data_right_pane_title": "omzetbelasting",
       "sharing_data_right_pane_paragraph": "belastingdienst_invullen",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
@@ -43,34 +43,18 @@
         ],
         [
           {
-            "id": "street",
-            "key": "straatnaam",
-            "label": "street",
+            "id": "btwId",
+            "key": "btwId",
+            "label": "btw_id",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "house_number",
-            "key": "huisnummer",
-            "label": "house_number",
-            "type": "text",
-            "required": true
-          },
-          {
-            "id": "zip_code",
-            "key": "postcode",
-            "label": "zip_code",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "city",
-            "key": "plaats",
-            "label": "city",
+            "id": "obNummer",
+            "key": "obNummer",
+            "label": "ob_nummer",
             "type": "text",
             "required": true
           }
@@ -111,7 +95,7 @@
           "operation": "execute",
           "action": "create-credential-offer",
           "actionParams": {
-            "issueCredentialType": "Woonplaatsverklaring"
+            "issueCredentialType": "Omzetbelasting"
           },
           "nextId": "issueRequest"
         },
