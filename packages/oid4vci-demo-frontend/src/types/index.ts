@@ -17,7 +17,7 @@ export interface ImageProperties {
   height?: number
 }
 
-export interface ImageProperties2 {
+export interface ImagePropertiesExt {
   src: string
   alt: string
   width?: string
