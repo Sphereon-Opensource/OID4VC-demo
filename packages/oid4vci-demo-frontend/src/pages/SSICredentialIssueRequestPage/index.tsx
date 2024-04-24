@@ -77,9 +77,6 @@ const SSICredentialIssueRequestPage: React.FC = () => {
     }, [])
 
     function determineRightPaneWidth() {
-        if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
-            return '100%'
-        }
         if (isTabletOrMobile && pageConfig.mobile?.rightPaneWidth) {
             return pageConfig.mobile?.rightPaneWidth
         }
