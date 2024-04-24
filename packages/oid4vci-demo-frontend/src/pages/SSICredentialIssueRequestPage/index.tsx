@@ -101,7 +101,6 @@ const SSICredentialIssueRequestPage: React.FC = () => {
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? '60%',
                     minWidth: pageConfig.leftPaneWidth ?? '60%',
                     height: '100%',
                     flexDirection: 'column',
