@@ -22,12 +22,11 @@ type State = {
     preAuthCode: string,
 }
 
-
 const SSICredentialIssueRequestPage: React.FC = () => {
-    const urlRegex = /^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(:\d+)?(\/.*)?$/;
 
     const location = useLocation()
     const ecosystem = useEcosystem()
+    const {t} = useTranslation()
     const flowRouter = useFlowRouter<SSICredentialIssueRequestPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
     const generalConfig = ecosystem.getGeneralConfig()
@@ -87,8 +86,6 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '100%'
     }
 
-    const {t} = useTranslation()
-
     const onWebWalletAddressChange = (value: FormFieldValue) => {
         setWebWalletAddressValue(('' + value).trim());
     };
@@ -97,13 +94,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (!webWalletAddressValue) {
             throw new Error('Web wallet address must not be empty');
         }
-        if (!urlRegex.test(webWalletAddressValue)) {
-            throw new Error('Web wallet address must be a valid https:// url');
-        }
 
-        const queryParamsStartIndex = qrData.object.indexOf('?');
-        const queryParams = qrData.object.substring(queryParamsStartIndex);
-        window.location.href = `${webWalletAddressValue}${queryParams}`;
+        window.location.href = mergeQueryParams(webWalletAddressValue, qrData.object.toString());
     };
 
 
@@ -256,6 +248,30 @@ const SSICredentialIssueRequestPage: React.FC = () => {
             </div>
         </div>
     )
+}
+
+
+const urlRegex = /^(https?:\/\/)(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost|([a-z\d]([a-z\d-]*[a-z\d])?\.local)|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i;
+
+function mergeQueryParams(url1: string, url2: string) {
+    if (!urlRegex.test(url1)) {
+        throw new Error('Web wallet address must be a valid https:// url');
+    }
+    // Extract the base URL and any existing query parameters from webWalletAddressValue
+    const webWalletUrl = new URL(url1);
+    const walletParams = new URLSearchParams(webWalletUrl.search);
+
+    // Extract the query parameters from qrData.object
+    const queryParamsStartIndex = url2.indexOf('?');
+    const qrParams = new URLSearchParams(url2.substring(queryParamsStartIndex));
+
+    // Merge parameters: qrParams will overwrite existing params in walletParams
+    qrParams.forEach((value, key) => {
+        walletParams.set(key, value);
+    });
+
+    webWalletUrl.search = walletParams.toString();
+    return webWalletUrl.toString();
 }
 
 export default SSICredentialIssueRequestPage
