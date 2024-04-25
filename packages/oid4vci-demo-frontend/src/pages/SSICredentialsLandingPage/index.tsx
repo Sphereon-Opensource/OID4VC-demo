@@ -19,8 +19,6 @@ const SSICredentialsLandingPage: React.FC = () => {
     return (
         <div style={{
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around',
             alignContent: 'center',
             flex: 1,
             height: '100vh',
@@ -48,7 +46,8 @@ const SSICredentialsLandingPage: React.FC = () => {
             </NonMobile>
             <div style={{
                 width: isTabletOrMobile ? '100%' : '65%',
-                height: isTabletOrMobile ? '90%' : '60%'
+                height: isTabletOrMobile ? '90%' : '60%',
+                display: 'grid'
             }}>
                 <div style={{
                     margin: 'auto',
