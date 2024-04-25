@@ -80,7 +80,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         if (isTabletOrMobile && pageConfig.mobile?.rightPaneWidth) {
             return pageConfig.mobile?.rightPaneWidth
         }
-        return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '100%'
+        return isTabletOrMobile ? pageConfig.mobile?.width ?? '100%' : '100%'
     }
 
     const onWebWalletAddressChange = (value: FormFieldValue) => {
@@ -101,8 +101,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    minWidth: pageConfig.leftPaneWidth ?? '60%',
-                    height: '100%',
+                    width: pageConfig.leftPaneWidth ?? 'auto',
+                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((pageConfig.photoWallet) && {background: `url(${pageConfig.photoWallet}) 0% 0% / cover`}),
@@ -225,7 +225,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                     }}>
                         <NonMobileOS>
                             <Text
-                                style={{flexGrow: 1, maxWidth: 378}}
+                                style={{flexGrow: 1}}
                                 pStyle={pageConfig.qrCode?.bottomText?.pStyle}
                                 className={`${style.pReduceLineSpace} ${pageConfig.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
                                 lines={pageConfig.bottomParagraph ? t(pageConfig.bottomParagraph).split('\n') : []} // FIXME DPP-84

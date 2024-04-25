@@ -98,7 +98,7 @@
   "title_fill_5_digits": "Fill in the 5-digit code from the confirmation e-mail.",
   "paragraph_add_credential": "Let's add the credential to your wallet",
   "paragraph_add_credential_notaris": "Let's add the {{credentialName}} credential to your wallet.",
-  "paragraph_scan_this_qr": "Scan this QR code using your wallet's QR scanner. When you already on your phone open your wallet by clicking on the Open in wallet button.",
+  "paragraph_scan_this_qr": "Scan this QR code with your mobile wallet's QR code scanner. \nOr enter the address of your web wallet to open your web wallet.",
   "paragraph_scan_this_qr_notaris": "Scan this QR code using your wallet's QR\n scanner to accept and store your credential.",
   "paragraph_confirm_email": "Confirm your account by entering the 5 digit confirmation code from the email.",
   "loading_verify_company_information_caption": "Verifying the company information",

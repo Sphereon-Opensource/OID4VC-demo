@@ -1,7 +1,6 @@
 {
   "pages": {
     "landingPage": {
-      "leftPaneWidth": "21%",
       "logo": {
         "src": "belastingdienst/visie-missie-scaled.png",
         "alt": "logo",

@@ -7,18 +7,15 @@
   },
   "pages": {
     "infoRequest": {
-      "leftPaneWidth": "535px",
+      "logo": {
+        "src": "belastingdienst/visie-missie-scaled.png",
+        "alt": "logo",
+        "height": "100%"
+      },
       "sharing_data_right_pane_title": "omzetbelasting",
       "sharing_data_right_pane_paragraph": "belastingdienst_invullen",
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
-      "photo": "belastingdienst/visie-missie-scaled.png",
-      "logo": {
-        "src": "belastingdienst/logo.svg",
-        "width": 246,
-        "height": 137,
-        "justifyContent": "flex-start"
-      },
       "mobile": {
         "backgroundColor": "#FFFFFF"
       },
@@ -62,16 +59,13 @@
       ]
     },
     "issueRequest": {
-      "leftPaneWidth": "535px",
       "title": "add_named_credential",
       "topParagraph": "paragraph_add_named_credential",
       "bottomParagraph": "paragraph_scan_this_qr",
-      "photoWallet": "belastingdienst/visie-missie-scaled.png",
       "logo": {
-        "src": "belastingdienst/logo.svg",
-        "width": 246,
-        "height": 137,
-        "justifyContent": "flex-start"
+        "src": "belastingdienst/visie-missie-scaled.png",
+        "alt": "logo",
+        "height": "100%"
       },
       "mobile": {
       },

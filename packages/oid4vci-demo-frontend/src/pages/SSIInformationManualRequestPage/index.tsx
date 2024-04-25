@@ -82,8 +82,8 @@ const SSIInformationManualRequestPage: React.FC = () => {
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? '60%',
-                    height: '100%',
+                    width: pageConfig.leftPaneWidth ?? 'auto',
+                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / cover`}),
