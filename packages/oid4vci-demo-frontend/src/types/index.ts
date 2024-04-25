@@ -17,7 +17,7 @@ export interface ImageProperties {
   height?: number
 }
 
-export interface ImagePropertiesExt {
+export interface LogoProperties {
   src: string
   alt: string
   width?: string
