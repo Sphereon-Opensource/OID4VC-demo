@@ -171,7 +171,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         height: `${pageConfig?.qrCodeContainer?.height}` ?? '50vh',
-                        marginBottom: isTabletOrMobile ? 40 : '15%',
+                        marginBottom: isTabletOrMobile ? 40 : '4px%',
                         marginTop: isTabletOrMobile ? 20 : '15%',
                         alignItems: 'center'
                     }}>
