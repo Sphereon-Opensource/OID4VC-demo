@@ -15,7 +15,7 @@ import {
     CredentialHandlerLDLocal,
     LdDefaultContexts,
     MethodNames,
-    SphereonBbsBlsSignature2020,
+    //SphereonBbsBlsSignature2020,
     SphereonEd25519Signature2018,
     SphereonEd25519Signature2020,
     SphereonJsonWebSignature2020,
@@ -109,7 +109,7 @@ const plugins: IAgentPlugin[] = [
         suites: [
             new SphereonEd25519Signature2018(),
             new SphereonEd25519Signature2020(),
-            new SphereonBbsBlsSignature2020(),
+//            new SphereonBbsBlsSignature2020(),
             new SphereonJsonWebSignature2020(),
         ],
         bindingOverrides: new Map([
