@@ -6,8 +6,8 @@
     "credential_endpoint": "https://agent.belastingdienst.demo.sphereon.com/credentials",
     "display": [
       {
-        "name": "De Belastingdienst",
-        "description": "De Belastingdienst Issuer"
+        "name": "Belastingdienst",
+        "description": "Belastingdienst Issuer"
       }
     ],
     "credentials_supported": [
