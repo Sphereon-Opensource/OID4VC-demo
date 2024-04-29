@@ -46,25 +46,28 @@
             "label": "street",
             "type": "text",
             "required": true
-          }
-        ],
-        [
+          },
           {
             "id": "house_number",
             "key": "huisnummer",
             "label": "house_number",
             "type": "text",
+            "inputStyle": {"width": "60px"},
             "required": true
-          },
+          }
+        ],
+        [
           {
             "id": "zip_code",
             "key": "postcode",
             "label": "zip_code",
             "type": "text",
-            "required": true
-          }
-        ],
-        [
+            "required": true,
+            "inputStyle": {
+              "width": "110px",
+              "data-lpignore": "true"
+            }
+          },
           {
             "id": "city",
             "key": "plaats",
