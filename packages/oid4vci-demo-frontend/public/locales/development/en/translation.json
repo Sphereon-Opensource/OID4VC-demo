@@ -111,7 +111,7 @@
   "welcome_page_confirm_identity_description": "<strong>Next steps:</strong><br>1. Provide some personal information<br>2. Upload a valid ID<br>3. Perform a liveliness check<br>4. Wait for confirmation",
   "rsin": "RSIN number",
   "street": "Street name",
-  "house_number": "House / apartment number",
+  "house_number": "Number",
   "zip_code": "ZIP code",
   "city": "City",
   "add_named_credential": "Add {{credentialName}} credential",
