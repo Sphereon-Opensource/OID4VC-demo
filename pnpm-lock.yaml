@@ -11,10 +11,10 @@ overrides:
   '@sphereon/ssi-types': 0.23.0
   '@sphereon/ssi-sdk.core': 0.23.0
   '@sphereon/ssi-sdk.data-store': 0.23.0
-  '@sphereon/oid4vci-client': 0.10.3
-  '@sphereon/oid4vci-common': 0.10.3
-  '@sphereon/oid4vci-issuer': 0.10.3
-  '@sphereon/oid4vci-issuer-server': 0.10.3
+  '@sphereon/oid4vci-client': 0.10.4-unstable.15+da46f08
+  '@sphereon/oid4vci-common': 0.10.4-unstable.15+da46f08
+  '@sphereon/oid4vci-issuer': 0.10.4-unstable.15+da46f08
+  '@sphereon/oid4vci-issuer-server': 0.10.4-unstable.15+da46f08
   '@sphereon/pex': 3.3.2
   '@sphereon/pex-models': 2.2.4
   '@sphereon/did-auth-siop': 0.6.4
@@ -80,14 +80,14 @@ importers:
         specifier: 0.6.3-unstable.1
         version: 0.6.3-unstable.1
       '@sphereon/oid4vci-common':
-        specifier: 0.10.3
-        version: 0.10.3(msrcrypto@1.5.8)
+        specifier: 0.10.4-unstable.15+da46f08
+        version: 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/oid4vci-issuer':
-        specifier: 0.10.3
-        version: 0.10.3(msrcrypto@1.5.8)
+        specifier: 0.10.4-unstable.15+da46f08
+        version: 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/oid4vci-issuer-server':
-        specifier: 0.10.3
-        version: 0.10.3(msrcrypto@1.5.8)(passport-http-bearer@1.0.1)
+        specifier: 0.10.4-unstable.15+da46f08
+        version: 0.10.4-unstable.15(msrcrypto@1.5.8)(passport-http-bearer@1.0.1)
       '@sphereon/pex':
         specifier: 3.3.2
         version: 3.3.2
@@ -312,11 +312,11 @@ importers:
         specifier: 0.6.4
         version: 0.6.4
       '@sphereon/oid4vci-client':
-        specifier: 0.10.3
-        version: 0.10.3
+        specifier: 0.10.4-unstable.15+da46f08
+        version: 0.10.4-unstable.15
       '@sphereon/oid4vci-common':
-        specifier: 0.10.3
-        version: 0.10.3(msrcrypto@1.5.8)
+        specifier: 0.10.4-unstable.15+da46f08
+        version: 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/ssi-sdk.data-store':
         specifier: 0.23.0
         version: 0.23.0(sqlite3@5.1.7)(ts-node@10.9.2)
@@ -4589,11 +4589,11 @@ packages:
       webcrypto-shim: 0.1.7
     dev: false
 
-  /@sphereon/oid4vci-client@0.10.3:
-    resolution: {integrity: sha512-PkIZrwTMrHlgwcDNimWDQaAgi+9ptkV79g/sQJJAe4g8NCt3WyXtsV9l88CdzxDGVGDtzsnYqPXkimxP4eSScw==}
+  /@sphereon/oid4vci-client@0.10.4-unstable.15:
+    resolution: {integrity: sha512-EMc5cBNoxNDB/esRAsUPF4lqnOUxS0C3zYpJQ+hcWlSPCv/+tVgxQH1Y/poNSWHyPxuZcB9daB45J9NVRbB/QQ==}
     engines: {node: '>=18'}
     dependencies:
-      '@sphereon/oid4vci-common': 0.10.3(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-common': 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/ssi-types': 0.23.0
       cross-fetch: 3.1.8
       debug: 4.3.4(supports-color@5.5.0)
@@ -4603,8 +4603,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/oid4vci-common@0.10.3(msrcrypto@1.5.8):
-    resolution: {integrity: sha512-VsUnDKkKm2yQ3lzAt2CY6vL06mZDK9dhwFT6T92aq03ncbUcS6gelwccdsXEMEfi5r4baFemiFM1O5v+mPjuEA==}
+  /@sphereon/oid4vci-common@0.10.4-unstable.15(msrcrypto@1.5.8):
+    resolution: {integrity: sha512-aSdCnfvf5/IRg2+dKcfS3LvcE2ox9uvMdrwaK/97xh54I/o5HO7bYkftYQStQsdBxZeDHasGY06mSGp5jllzTw==}
     engines: {node: '>=18'}
     peerDependencies:
       msrcrypto: ^1.5.8
@@ -4622,12 +4622,12 @@ packages:
       - encoding
     dev: false
 
-  /@sphereon/oid4vci-issuer-server@0.10.3(msrcrypto@1.5.8)(passport-http-bearer@1.0.1):
-    resolution: {integrity: sha512-tNXUnoKcevdKPaoL4kVwuQhAjkIs/aSnyCgls0Fqkxb6MvUmN4903/KYMBHqH5csH2uaK24+Grnmng3SlRhJKw==}
+  /@sphereon/oid4vci-issuer-server@0.10.4-unstable.15(msrcrypto@1.5.8)(passport-http-bearer@1.0.1):
+    resolution: {integrity: sha512-HTfW5sXjsv2fBGj5KS/1Da0ruSk/z9ZTmTO6xR+2a44fVznfj4kuaBcusfWoO4CXQwsd4/82gyOiUv1ShWOm2Q==}
     engines: {node: '>=18'}
     dependencies:
-      '@sphereon/oid4vci-common': 0.10.3(msrcrypto@1.5.8)
-      '@sphereon/oid4vci-issuer': 0.10.3(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-common': 0.10.4-unstable.15(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-issuer': 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/ssi-express-support': 0.23.0(@noble/hashes@1.3.3)(passport-http-bearer@1.0.1)
       '@sphereon/ssi-types': 0.23.0
       body-parser: 1.20.2
@@ -4648,8 +4648,8 @@ packages:
       - supports-color
     dev: false
 
-  /@sphereon/oid4vci-issuer@0.10.3(msrcrypto@1.5.8):
-    resolution: {integrity: sha512-qhm8ypkXuYsaG5XmXIFwL9DUJQ0TJScNjvg5w7beAm+zjz0sOkwIjXdS7S+29LfWj0BkYiRZp1d3mj8H/rmdUw==}
+  /@sphereon/oid4vci-issuer@0.10.4-unstable.15(msrcrypto@1.5.8):
+    resolution: {integrity: sha512-Co+bni+DPSDlfg/LGpPSEX3bbI8uK7hMRpY5ShRaXSwGPG795tWwAjy+gnh+iT22TtvssMqOS1xtoL6vZp6ETw==}
     engines: {node: '>=18'}
     peerDependencies:
       awesome-qr: ^2.1.5-rc.0
@@ -4657,7 +4657,7 @@ packages:
       awesome-qr:
         optional: true
     dependencies:
-      '@sphereon/oid4vci-common': 0.10.3(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-common': 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/ssi-types': 0.23.0
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -5038,9 +5038,9 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer-rest-api@0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(passport-http-bearer@1.0.1)(react-native-securerandom@1.0.1)(react-native@0.73.5)(sqlite3@5.1.7)(ts-node@10.9.2):
     resolution: {integrity: sha512-xp2Y4c+qDA4d7QTJFI+VzvfNKM7SyPO8MamcXkA5WDNW9Qu8Rhc4T3+9Yil8CzRc5K3oCVERMQCo3aBaTPalJQ==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.10.3(msrcrypto@1.5.8)
-      '@sphereon/oid4vci-issuer': 0.10.3(msrcrypto@1.5.8)
-      '@sphereon/oid4vci-issuer-server': 0.10.3(msrcrypto@1.5.8)(passport-http-bearer@1.0.1)
+      '@sphereon/oid4vci-common': 0.10.4-unstable.15(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-issuer': 0.10.4-unstable.15(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-issuer-server': 0.10.4-unstable.15(msrcrypto@1.5.8)(passport-http-bearer@1.0.1)
       '@sphereon/ssi-express-support': 0.23.0(@noble/hashes@1.3.3)(passport-http-bearer@1.0.1)
       '@sphereon/ssi-sdk.kv-store-temp': 0.23.0(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.oid4vci-issuer': 0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.73.5)(sqlite3@5.1.7)(ts-node@10.9.2)
@@ -5092,7 +5092,7 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer-rest-client@0.23.0:
     resolution: {integrity: sha512-LaWJZKlQQHkfzcsMyrm5vWSDCyidPcYxkdsYuBuhFPVLUK3JNJQ/cFIfsFW1NYgDPS7IDZfYi9Pag2uqvIkLPg==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.10.3(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-common': 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/ssi-types': 0.23.0
       '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
       cross-fetch: 3.1.8
@@ -5105,7 +5105,7 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer-store@0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.73.5)(sqlite3@5.1.7)(ts-node@10.9.2):
     resolution: {integrity: sha512-8xOxnTY131Njj8S2a2OwUz2tyTRamTcYLzCKlidNINeEi7bS2r37Dxr3DvtsBflhIhr+tUCROimbM4IhdkUSPg==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.10.3(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-common': 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/ssi-sdk-ext.did-utils': 0.18.1(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)
       '@sphereon/ssi-sdk.kv-store-temp': 0.23.0(sqlite3@5.1.7)(ts-node@10.9.2)
       '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
@@ -5144,8 +5144,8 @@ packages:
   /@sphereon/ssi-sdk.oid4vci-issuer@0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.73.5)(sqlite3@5.1.7)(ts-node@10.9.2):
     resolution: {integrity: sha512-e/Wu+roDZGNjn8eZJaTcyCmtAunRBHAn4JyegEZCbIjRUkZlwwxfI7NK2m8aMroQ9lnItXolr75jqfX48fNFZA==}
     dependencies:
-      '@sphereon/oid4vci-common': 0.10.3(msrcrypto@1.5.8)
-      '@sphereon/oid4vci-issuer': 0.10.3(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-common': 0.10.4-unstable.15(msrcrypto@1.5.8)
+      '@sphereon/oid4vci-issuer': 0.10.4-unstable.15(msrcrypto@1.5.8)
       '@sphereon/ssi-sdk-ext.did-utils': 0.18.1(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)
       '@sphereon/ssi-sdk.core': 0.23.0
       '@sphereon/ssi-sdk.kv-store-temp': 0.23.0(sqlite3@5.1.7)(ts-node@10.9.2)
