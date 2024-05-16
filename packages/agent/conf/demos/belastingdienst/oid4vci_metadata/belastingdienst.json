@@ -4,9 +4,6 @@
   "metadata": {
     "credential_issuer": "https://agent.belastingdienst.demo.sphereon.com",
     "credential_endpoint": "https://agent.belastingdienst.demo.sphereon.com/credentials",
-    "authorization_servers": [
-      "https://agent.belastingdienst.demo.sphereon.com"
-    ],
     "display": [
       {
         "name": "Belastingdienst",
