@@ -45,10 +45,10 @@
       "@sphereon/ssi-sdk.qr-code-generator": "0.23.5-unstable.29+f0cf34b7",
       "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client": "0.23.5-unstable.29+f0cf34b7",
 
-      "@sphereon/oid4vci-client": "0.10.4-unstable.37+b8bb359",
-      "@sphereon/oid4vci-common": "0.10.4-unstable.37+b8bb359",
-      "@sphereon/oid4vci-issuer": "0.10.4-unstable.37+b8bb359",
-      "@sphereon/oid4vci-issuer-server": "0.10.4-unstable.37+b8bb359",
+      "@sphereon/oid4vci-client": "0.10.4-unstable.38+354e8ad",
+      "@sphereon/oid4vci-common": "0.10.4-unstable.38+354e8ad",
+      "@sphereon/oid4vci-issuer": "0.10.4-unstable.38+354e8ad",
+      "@sphereon/oid4vci-issuer-server": "0.10.4-unstable.38+354e8ad",
 
       "@sphereon/pex": "3.3.2",
       "@sphereon/pex-models": "2.2.4",
