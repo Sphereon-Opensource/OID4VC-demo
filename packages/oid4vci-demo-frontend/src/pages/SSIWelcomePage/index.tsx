@@ -21,8 +21,8 @@ const SSIWelcomePage: React.FC = (): ReactElement => {
             <div id={"photo"}
                  style={{
                      display: 'flex',
-                     width: pageConfig.leftPaneWidth ?? '60%',
-                     height: isTabletOrMobile ? '100%': '100vh',
+                     width: pageConfig.leftPaneWidth ?? 'auto',
+                     height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                      flexDirection: 'column',
                      alignItems: 'center',
                      ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
@@ -56,7 +56,7 @@ const SSIWelcomePage: React.FC = (): ReactElement => {
                     </div>
                     { pageConfig.right_pane_paragraph &&
                         // @ts-ignore
-                        <div className={style.description} style={{...(pageConfig.right_pane_paragraph_text_align && { textAlign: pageConfig.right_pane_paragraph_text_align})}}dangerouslySetInnerHTML={{ __html: t(pageConfig.right_pane_paragraph)}}/>
+                        <div className={style.description} style={{...(pageConfig.right_pane_paragraph_text_align && { textAlign: pageConfig.right_pane_paragraph_text_align})}} dangerouslySetInnerHTML={{ __html: t(pageConfig.right_pane_paragraph)}}/>
                     }
                 </div>
                 <SSIPrimaryButton

@@ -82,13 +82,13 @@ const SSIInformationManualRequestPage: React.FC = () => {
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? '60%',
-                    height: '100%',
+                    width: pageConfig.leftPaneWidth ?? 'auto',
+                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / cover`}),
                     ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                    ...(pageConfig.logo && {justifyContent: 'center'})
+                    ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
                 }}>
                     {pageConfig.logo &&
                         <img
@@ -148,7 +148,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                         </p>
                         <p
                             className={"poppins-normal-14"}
-                            style={{maxWidth: 313, textAlign: 'center', ...(pageConfig?.sharing_data_right_pane_paragraph_style)}}
+                            style={{textAlign: 'center', ...(pageConfig?.sharing_data_right_pane_paragraph_style)}}
                         >
                             {t(pageConfig.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName})}
                         </p>

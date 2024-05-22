@@ -1,0 +1,60 @@
+{
+  "pages": {
+    "landingPage": {
+      "logo": {
+        "src": "belastingdienst/visie-missie-scaled.png",
+        "alt": "logo",
+        "height": "100%"
+      },
+      "mobile": {
+        "logo": {
+          "src": "belastingdienst/logo.svg",
+          "alt": "logo",
+          "width": "100%"
+        }
+      },
+      "backgroundColor": "#FFFFFF",
+      "pageTitle": "credentials_available",
+      "text": "belastingdienst_landing_page_text",
+      "credentials": [
+        {
+          "name": "Omzetbelasting",
+          "description": "Belastingdienst",
+          "route": "https://omzetbelasting.belastingdienst.demo.sphereon.com",
+          "backgroundImage": "belastingdienst/hector-j-rivas.jpg",
+          "logo": {
+            "src": "belastingdienst/logo.svg",
+            "alt": "belastingdienst",
+            "width": 246,
+            "height": 137
+          }
+        },
+        {
+          "name": "Woonplaatsverklaring",
+          "description": "Belastingdienst",
+          "route": "https://woonplaatsverklaring.belastingdienst.demo.sphereon.com",
+          "backgroundImage": "belastingdienst/grant-richie.png",
+          "logo": {
+            "src": "belastingdienst/logo.svg",
+            "alt": "belastingdienst",
+            "width": 246,
+            "height": 137
+          }
+        }
+      ]
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landing",
+          "isDefaultRoute": true
+        }
+      ]
+    }
+  ]
+}

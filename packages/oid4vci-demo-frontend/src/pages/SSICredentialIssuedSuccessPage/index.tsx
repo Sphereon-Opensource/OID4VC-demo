@@ -28,8 +28,8 @@ const SSICredentialIssuedSuccessPage: React.FC = () => {
             <NonMobile>
                 <div style={{
                     display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? '60%',
-                    height: '100%',
+                    width: pageConfig.leftPaneWidth ?? 'auto',
+                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                     flexDirection: 'column',
                     ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
                     ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),

@@ -26,8 +26,8 @@ const SSIIdentityVerificationPage: React.FC = (): ReactElement => {
             <div id={"photo"}
                  style={{
                     display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? '60%',
-                    height: isTabletOrMobile ? '100%': '100vh',
+                     width: pageConfig.leftPaneWidth ?? 'auto',
+                     height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),

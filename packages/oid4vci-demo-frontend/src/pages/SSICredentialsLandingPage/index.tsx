@@ -19,8 +19,6 @@ const SSICredentialsLandingPage: React.FC = () => {
     return (
         <div style={{
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-around',
             alignContent: 'center',
             flex: 1,
             height: '100vh',
@@ -29,12 +27,12 @@ const SSICredentialsLandingPage: React.FC = () => {
             <NonMobile>
                 <div id={"photo"} style={{
                     display: 'flex',
-                    width: '35%',
-                    height: '100%',
+                    width: pageConfig.leftPaneWidth ?? 'auto',
+                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                     flexDirection: 'column',
                     alignItems: 'center',
                     ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                    ...(pageConfig.logo && {justifyContent: 'center'})
+                    ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ??'center'})
                 }}>
                     {pageConfig.logo &&
                         <img
@@ -48,7 +46,8 @@ const SSICredentialsLandingPage: React.FC = () => {
             </NonMobile>
             <div style={{
                 width: isTabletOrMobile ? '100%' : '65%',
-                height: isTabletOrMobile ? '90%' : '60%'
+                height: isTabletOrMobile ? '90%' : '60%',
+                display: 'grid'
             }}>
                 <div style={{
                     margin: 'auto',
@@ -80,11 +79,11 @@ const SSICredentialsLandingPage: React.FC = () => {
                     }}>
                         <Mobile>
                             <span style={{fontWeight: '600', fontSize: '24px', width: '100%'}}>{t(pageConfig.pageTitle)}</span><br/>
-                            <span style={{fontSize: '11px'}}>{t(pageConfig.text)}</span>
+                            <span style={{fontSize: '11px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}}></span>
                         </Mobile>
                         <NonMobile>
                             <span style={{fontWeight: '600', fontSize: '32px'}}>{t(pageConfig.pageTitle)}</span><br/>
-                            <span style={{fontSize: '20px'}}>{t(pageConfig.text)}</span>
+                            <span style={{fontSize: '20px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}} ></span>
                         </NonMobile>
                     </div>
                     {pageConfig.credentials.map(value => (

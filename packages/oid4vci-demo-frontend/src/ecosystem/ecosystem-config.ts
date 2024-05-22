@@ -1,4 +1,4 @@
-import {FormFieldValue, ImageProperties} from "../types"
+import {FormFieldValue, ImageProperties, LogoProperties} from "../types"
 import {CSSProperties, HTMLAttributeAnchorTarget, HTMLInputTypeAttribute} from "react"
 import {IProps} from "../components/SSISecondaryButton"
 
@@ -19,7 +19,7 @@ export interface SSICredentialVerifyFromVPRequestPageConfig extends PageConfig {
   photoRight: string
   photoLeft?: string
   backgroundColor?: string
-  logo?: ImageProperties
+  logo?: LogoProperties
   textColor?: string
   rightPaneLeftPane?: {
     grid?: {
@@ -57,7 +57,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     photoLeft?: string
     photoRight: string
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     enableRightPaneButton?: boolean
     rightPaneButtonStepId?: string
     downloadAppStepId?: string
@@ -116,23 +116,23 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     }
     mostRightPanel?: {
       separator?: {
-        logo?: ImageProperties
+        logo?: LogoProperties
       },
       width?: string
       height?: string
-      logo?: ImageProperties
+      logo?: LogoProperties
     }
 }
 
 export interface SSILoadingPageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph: string
     spinnerColor?: string
     mobile?: {
-        logo?: ImageProperties
+        logo?: LogoProperties
         backgroundColor?: string
         image?: string
     },
@@ -141,10 +141,10 @@ export interface SSILoadingPageConfig extends PageConfig {
 export interface SSIIdentityVerificationPageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     sharing_data_right_pane_title: string
     mobile?: {
-        logo?: ImageProperties
+        logo?: LogoProperties
         backgroundColor?: string
         image?: string
     },
@@ -153,14 +153,14 @@ export interface SSIIdentityVerificationPageConfig extends PageConfig {
 export interface SSIWelcomePageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     right_pane_title?: string
     right_pane_subtitle?: string
     right_pane_paragraph?: string
     right_pane_paragraph_text_align?: string
     rightPaneButtonStepId?: string
     mobile?: {
-        logo?: ImageProperties
+        logo?: LogoProperties
         backgroundColor?: string
         image?: string
     },
@@ -168,7 +168,7 @@ export interface SSIWelcomePageConfig extends PageConfig {
 export interface SSIVerifyEmailPageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     rightPaneTitle: string
     rightPaneParagraph: string
     verifyDigitsTitle: string
@@ -176,7 +176,7 @@ export interface SSIVerifyEmailPageConfig extends PageConfig {
     primaryButtonResourceId?: string
     primaryButtonStepId?: string
     mobile?: {
-        logo?: ImageProperties
+        logo?: LogoProperties
         backgroundColor?: string
         image?: string
     },
@@ -185,7 +185,7 @@ export interface SSIVerifyEmailPageConfig extends PageConfig {
 export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     photoLeft?: string
     photoRight: string
     rightPaneButtonStepId?: string
@@ -200,9 +200,10 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
 }
 
 export interface SSICredentialsLandingPageConfig extends PageConfig {
-    logo?: ImageProperties
+    leftPaneWidth?: string
+    logo?: LogoProperties
     mobile?: {
-        logo?: ImageProperties
+        logo?: LogoProperties
     }
     backgroundColor?: string
     pageTitle: string
@@ -222,7 +223,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
         logo: ImageProperties
     },
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {
@@ -230,14 +231,15 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     photoWallet?: string
     textLeft?: string
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     title?: string
     topParagraph?: string
     bottomParagraph?: string
     rightPaneHeight?: string | number
+    enableWebWalletAddress?: boolean
     mobile?: {
         width?: string | number
-        logo?: ImageProperties
+        logo?: LogoProperties
         backgroundColor?: string
         image?: ImageProperties
         bottomParagraph?: string
@@ -275,11 +277,11 @@ export interface SSIInformationManualRequestPageConfig extends PageConfig {
     form: DataFormRow[]
     mobile?: {
         width?: string | number
-        logo?: ImageProperties
+        logo?: LogoProperties
         backgroundColor?: string
     },
     backgroundColor?: string
-    logo?: ImageProperties
+    logo?: LogoProperties
     title?: string
     topParagraph?: string
 }
@@ -349,9 +351,9 @@ export interface SphereonWalletPageConfig extends PageConfig {
         image?: string
         backgroundColor?: string
         width?: string
-        logo?: ImageProperties,
+        logo?: LogoProperties,
         mobile?: {
-            logo?: ImageProperties
+            logo?: LogoProperties
             backgroundColor?: string
             image?: string
         },

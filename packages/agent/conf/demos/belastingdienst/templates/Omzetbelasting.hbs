@@ -1,5 +1,6 @@
 {
     "@context": [
+        "https://raw.githubusercontent.com/Sphereon-Opensource/vc-contexts/master/e-invoicing/omzetbelasting.schema.json",
         "https://www.w3.org/2018/credentials/v1", {
             "description": {
                 "@id": "http://schema.org/description",
@@ -9,14 +10,13 @@
     ],
     "type": [
         "VerifiableCredential",
-        "NotaryCompanyVerification"
+        "Omzetbelasting"
     ],
     "expirationDate": "{{{ dateTimeAfterMonths 12 }}}",
     "credentialSubject": {
-        "description": {
-          "en": "Company has been verified by the notary",
-          "nl": "Bedrijf is geverifieerd door de notaris"
-         }
-        {{{mergeJSON @root}}}
+        "naam": "{{naam}}",
+        "rsin": "{{rsin}}",
+        "btw-id": "{{btwId}}",
+        "ob-nummer": "{{obNummer}}"
     }
 }

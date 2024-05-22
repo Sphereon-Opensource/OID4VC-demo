@@ -118,8 +118,8 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
         return (<NonMobile>
                     <div id={"photo"} style={{
                         display: 'flex',
-                        width: pageConfig.leftPaneWidth ?? '60%',
-                        height: '100%',
+                        width: pageConfig.leftPaneWidth ?? 'auto',
+                        height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                         flexDirection: 'column',
                         alignItems: 'center',
                         ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),

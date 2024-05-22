@@ -1,0 +1,139 @@
+{
+  "general": {
+    "credentialName": "omzetbelasting",
+    "oid4vpAgentBaseUrl": "https://omzetbelasting.belastingdienst.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.belastingdienst.demo.sphereon.com",
+    "downloadUrl": "https://agent.belastingdienst.demo.sphereon.com/#/download"
+  },
+  "pages": {
+    "infoRequest": {
+      "logo": {
+        "src": "belastingdienst/visie-missie-scaled.png",
+        "alt": "logo",
+        "height": "100%"
+      },
+      "sharing_data_right_pane_title": "omzetbelasting",
+      "sharing_data_right_pane_paragraph": "belastingdienst_invullen",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "mobile": {
+        "backgroundColor": "#FFFFFF"
+      },
+      "form": [
+        [
+          {
+            "id": "naam",
+            "key": "naam",
+            "label": "ssi_information_request_page_form_company_name_label",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "rsin",
+            "key": "rsin",
+            "label": "rsin",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "btwId",
+            "key": "btwId",
+            "label": "btw_id",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "obNummer",
+            "key": "obNummer",
+            "label": "ob_nummer",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
+    },
+    "issueRequest": {
+      "title": "add_named_credential",
+      "topParagraph": "paragraph_add_named_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
+      "logo": {
+        "src": "belastingdienst/visie-missie-scaled.png",
+        "alt": "logo",
+        "height": "100%"
+      },
+      "mobile": {
+      },
+      "enableWebWalletAddress": true
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "belastingdienst",
+      "steps": [
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "Omzetbelasting"
+          },
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://belastingdienst.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "DeepLink": {},
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#2A6797"
+        },
+        "button": {
+          "width": "220px"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#353438"
+        },
+        "button": {
+          "width": "220px"
+        }
+      }
+    },
+    "Text": {}
+  }
+}
