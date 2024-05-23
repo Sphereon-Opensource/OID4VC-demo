@@ -1,6 +1,10 @@
 {
   "definitionId": "konkukStudent",
   "rpOpts": {
+    "supportedVersions": [
+      180,
+      110
+    ],
     "didOpts": {
       "checkLinkedDomains": "if_present"
     }
