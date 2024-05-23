@@ -30,6 +30,8 @@ export interface SSICredentialVerifyFromVPRequestPageConfig extends PageConfig {
     welcomeLabel?: {
       style?: CSSProperties
       className?: string
+      headerResourceId: string
+      descriptionResourceId: string
     }
     qrCode?: {
       topTitle?: {

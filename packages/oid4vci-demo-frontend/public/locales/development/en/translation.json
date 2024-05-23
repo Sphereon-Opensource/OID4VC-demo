@@ -127,7 +127,7 @@
   "vismayuki_landing_page_title": "Available verification flows",
   "vismayuki_landing_page_description": "Through this demo you can be asked for various credentials. Choose an option.",
   "vismayuki_verify_top_title": "We would like to receive 1 or more credentials from you",
-  "vismayuki_verify_top_description": "Reason: [purpose string from PD here]",
+  "vismayuki_verify_top_description": "Reason: {{purpose}}",
   "vismayuki_verify_bottom_description": "Scan this QR code with your mobile wallet's QR code scanner. \nOr enter your web wallet address to open your web wallet.",
   "vismayuki_share_success_top_title": "bedankt voor het insturen van de informatie",
   "vismayuki_share_success_top_description": "Deze is succesvol ontvangen.",
