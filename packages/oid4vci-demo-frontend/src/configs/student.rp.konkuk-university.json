@@ -1,21 +1,22 @@
 {
   "general": {
     "credentialName": "Verified Account",
-    "oid4vpAgentBaseUrl": "https://agent.visma-yuki.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.visma-yuki.demo.sphereon.com",
-    "downloadUrl": "https://agent.visma-yuki.demo.sphereon.com/#/download",
-    "verifierUrl": "https://agent.visma-yuki.demo.sphereon.com"
+    "oid4vpAgentBaseUrl": "https://agent.rp.konkuk-university.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.rp.konkuk-university.demo.sphereon.com",
+    "downloadUrl": "https://agent.rp.konkuk-university.demo.sphereon.com/#/download",
+    "verifierUrl": "https://agent.rp.konkuk-university.demo.sphereon.com"
   },
   "pages": {
     "landingPage": {
+      "backgroundColor": "#005128",
+      "leftPaneWidth": "25%",
       "logo": {
-        "src": "vismayuki/background.png",
-        "alt": "background",
-        "height": "100%"
+        "src": "konkuk/logo.svg",
+        "alt": "logo"
       },
       "mobile": {
         "logo": {
-          "src": "vismayuki/background.png",
+          "src": "konkuk/logo.svg",
           "alt": "background",
           "width": "100%"
         }
@@ -24,24 +25,24 @@
       "text": "vismayuki_landing_page_description",
       "presentationDefinitions": [
         {
-          "name": "Presentation definition naam",
-          "route": "https://account.banqup.demo.sphereon.com",
+          "name": "Konkuk University Student",
+          "route": "https://rp.konkuk-university.demo.sphereon.com",
           "description": "Purpose",
-          "backgroundColor": "#5BDED2",
+          "backgroundColor": "#AAC930",
           "logo": {
-            "src": "vismayuki/pd_logo.svg",
-            "alt_text": "Banqup logo",
-            "width": 231,
-            "height": 36
+            "src": "konkuk/logo.svg",
+            "alt_text": "Konkuk logo",
+            "width": 790,
+            "height": 330
           }
         },
         {
-          "name": "Presentation definition naam",
-          "route": "https://account.banqup.demo.sphereon.com",
+          "name": "Konkuk University Employee",
+          "route": "https://rp.konkuk-university.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "#4542F2",
           "logo": {
-            "src": "vismayuki/pd_logo.svg",
+            "src": "konkuk/logo.svg",
             "alt_text": "VismaYuki logo",
             "width": 231,
             "height": 36
@@ -52,10 +53,11 @@
     "verifyRequest": {
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#005128",
+      "leftPaneWidth": "25%",
       "logo": {
-        "src": "vismayuki/background.png",
-        "alt": "background",
-        "height": "100%"
+        "src": "konkuk/logo.svg",
+        "alt": "logo"
       },
       "rightPaneLeftPane": {
         "width": "50%",
@@ -70,7 +72,7 @@
         },
         "qrCode": {
           "pane": {
-            "height": "50%"
+            "height": "40%"
           },
           "topTitle": {
             "value": "vismayuki_verify_top_title",
@@ -95,9 +97,8 @@
     },
     "shareSuccess": {
       "sideImage": {
-        "src": "vismayuki/background.png",
-        "alt": "background",
-        "height": "100%"
+        "src": "konkuk/logo.svg",
+        "alt": "background"
       },
       "photoRight": "undraw_messenger_re_8bky_grey.svg",
       "topTitle": "vismayuki_share_success_top_title",
@@ -108,7 +109,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonWalletIdentity",
+      "vpDefinitionId": "konkukStudent",
       "steps": [
         {
           "id": "landingPage",
