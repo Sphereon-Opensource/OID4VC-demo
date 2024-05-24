@@ -38,16 +38,29 @@ const SSIInformationSuccessPage: React.FC = () => {
                     ? <SSIInformationSharedSuccessPageLeftPanel/>
                     : <div
                         style={{
-                            flex: 1,
                             display: 'flex',
                             flexDirection: 'column',
                             ...(pageConfig.photoLeft && {
                                 background: `url(${pageConfig.photoLeft})`,
                                 backgroundSize: 'cover',
                             }),
-                            height: '100%'
+//                            height: '100%',
+                            width: pageConfig.leftPaneWidth ?? 'auto',
+                            height: pageConfig.leftPaneWidth ? '100%' : 'auto',
+                            alignItems: 'center',
+//                            ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),
+                            ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                            ...(pageConfig.logo && { justifyContent: 'center' })
                         }}
                     >
+                        { pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
+                            />
+                        }
                         {pageConfig.sideImage &&
                             <img
                                 src={pageConfig.sideImage?.src}
@@ -69,7 +82,7 @@ const SSIInformationSuccessPage: React.FC = () => {
             </NonMobile>
             <div style={{
                 display: 'flex',
-                width: `${(isTabletOrMobile || pageConfig.sideImage) ? '100%' : '40%'}`,
+                width: `${(isTabletOrMobile || pageConfig.sideImage || pageConfig.logo) ? '100%' : '40%'}`,
                 height: '100%',
                 backgroundColor: '#FFFFFF',
                 alignItems: 'center',

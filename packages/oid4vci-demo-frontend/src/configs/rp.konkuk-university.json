@@ -25,6 +25,7 @@
       "text": "vismayuki_landing_page_description",
       "presentationDefinitions": [
         {
+          "id": "konkukStudent",
           "name": "Konkuk University Student",
           "route": "https://rp.konkuk-university.demo.sphereon.com",
           "description": "Purpose",
@@ -32,11 +33,12 @@
           "logo": {
             "src": "konkuk/logo.svg",
             "alt_text": "Konkuk logo",
-            "width": 790,
-            "height": 330
+            "width": 62,
+            "height": 22
           }
         },
         {
+          "id": "konkukEmployee",
           "name": "Konkuk University Employee",
           "route": "https://rp.konkuk-university.demo.sphereon.com",
           "description": "Purpose",
@@ -44,8 +46,8 @@
           "logo": {
             "src": "konkuk/logo.svg",
             "alt_text": "VismaYuki logo",
-            "width": 231,
-            "height": 36
+            "width": 62,
+            "height": 22
           }
         }
       ]
@@ -96,9 +98,11 @@
       }
     },
     "shareSuccess": {
-      "sideImage": {
+      "backgroundColor": "#005128",
+      "leftPaneWidth": "25%",
+      "logo": {
         "src": "konkuk/logo.svg",
-        "alt": "background"
+        "alt": "logo"
       },
       "photoRight": "undraw_messenger_re_8bky_grey.svg",
       "topTitle": "vismayuki_share_success_top_title",

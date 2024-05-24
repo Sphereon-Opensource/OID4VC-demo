@@ -171,7 +171,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                                 }
                                             }),
                                             style: {
-                                                height: 11
+                                                height: 32
                                             }
                                         }}
                                     />
