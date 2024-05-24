@@ -28,6 +28,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
 
     const location = useLocation();
     const state = location.state // TODO get pd's
+    const {pd} = state
 
     const onWebWalletAddressChange = (value: FormFieldValue) => {
         setWebWalletAddressValue(('' + value).trim());
@@ -100,8 +101,11 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                       className={style.pReduceLineSpace}
                       h2Style={pageConfig.rightPaneLeftPane.qrCode.topTitle.h2Style}
                       pStyle={pageConfig.rightPaneLeftPane.qrCode.topTitle.pStyle}
-                      title={pageConfig.rightPaneLeftPane.qrCode.topTitle.value ? t(pageConfig.rightPaneLeftPane.qrCode.topTitle.value).split('\n') : t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
-                      lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription).split('\n') : t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
+                      title={pageConfig.rightPaneLeftPane.qrCode.topTitle.value ? t(pageConfig.rightPaneLeftPane.qrCode.topTitle.value).split('\n')
+                          : t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
+
+                      lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd.purpose}).split('\n')
+                          : t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
               </div>)}
             {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
                     display: 'flex',
@@ -132,7 +136,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                             vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                             vpDefinitionId={pd.pdId ?? flowRouter.getVpDefinitionId()}
                                                              onAuthRequestRetrieved={console.log}
                                                              onSignInComplete={onSignInComplete}
                                                              setQrCodeData={setDeepLink}/>}
