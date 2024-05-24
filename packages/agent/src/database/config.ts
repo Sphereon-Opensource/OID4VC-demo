@@ -1,5 +1,9 @@
 import { Entities as VeramoDataStoreEntities, migrations as VeramoDataStoreMigrations } from '@veramo/data-store'
-import { DataStoreContactEntities, DataStoreMigrations, PresentationDefinitionItemEntities } from '@sphereon/ssi-sdk.data-store'
+import {
+  DataStoreContactEntities,
+  DataStoreMigrations,
+  DataStorePresentationDefinitionItemEntities
+} from '@sphereon/ssi-sdk.data-store'
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
 import { KeyValueStoreEntity, kvStoreMigrations } from '@sphereon/ssi-sdk.kv-store-temp'
 import {DB_SQLITE_FILE} from "../environment";
@@ -14,7 +18,7 @@ const sqliteConfig: SqliteConnectionOptions = {
   entities: [
       ...VeramoDataStoreEntities,
     ...DataStoreContactEntities,
-    ...PresentationDefinitionItemEntities,
+    ...DataStorePresentationDefinitionItemEntities,
     KeyValueStoreEntity
   ],
   migrations: [

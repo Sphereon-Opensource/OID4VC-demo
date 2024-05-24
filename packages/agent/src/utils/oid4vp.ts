@@ -3,25 +3,28 @@ import {IRPDefaultOpts, SIOPv2RP} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth"
 import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/src/types/ISIOPv2RP";
 import {
     createDidResolver,
-    definitionsOpts,
+    syncDefinitionsOpts,
     getDefaultDID,
     getDefaultKid,
     getIdentifier,
     IS_OID4VP_ENABLED,
     OID4VP_DEFINITIONS,
     OID4VPInstanceOpts,
-    oid4vpInstanceOpts
+    oid4vpInstanceOpts, getDbConnection
 } from "../environment";
 import {CheckLinkedDomain, SupportedVersion} from "@sphereon/did-auth-siop";
 import {Resolvable} from "did-resolver";
+import {OrPromise} from "@veramo/utils";
+import {DataSource} from "typeorm";
+import {AbstractPdStore} from "@sphereon/ssi-sdk.data-store";
 
 
-function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definitions: IPresentationDefinition[], opts?: {
+function toPexInstanceOptions(pdStore: AbstractPdStore, oid4vpInstanceOpts: OID4VPInstanceOpts[], syncDefinitions: IPresentationDefinition[], opts?: {
     resolver: Resolvable
 }): IPEXInstanceOptions[] {
     const result: IPEXInstanceOptions[] = []
     oid4vpInstanceOpts.map(opt => {
-        const definition = definitions.find(pd => pd.id === opt.definitionId || pd.name === opt.definitionId)
+        opt.store = pdStore
         if (opt.rpOpts && !opt.rpOpts.didOpts?.resolveOpts) {
             if (!opt.rpOpts.didOpts) {
                 // @ts-ignore
@@ -32,6 +35,7 @@ function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], definiti
                 opt.rpOpts.didOpts.resolveOpts.resolver = opts?.resolver ?? createDidResolver()
             }
         }
+        const definition = syncDefinitions.find(pd => pd.id === opt.definitionId || pd.name === opt.definitionId)
         if (definition) {
             if (OID4VP_DEFINITIONS.length === 0 || OID4VP_DEFINITIONS.includes(definition.id) || (definition.name && OID4VP_DEFINITIONS.includes(definition.name))) {
                 console.log(`[OID4VP] Enabling Presentation Definition with name '${definition.name ?? '<none>'}' and id '${definition.id}'`)
@@ -77,12 +81,15 @@ export async function getDefaultOID4VPRPOptions(args?: {
 
 }
 
-export async function createOID4VPRP(opts?: { resolver: Resolvable }) {
+export async function createOID4VPRP(opts: { resolver: Resolvable, pdStore: AbstractPdStore }) {
     if (!IS_OID4VP_ENABLED) {
         return
     }
-    return new SIOPv2RP({
-        instanceOpts: toPexInstanceOptions(oid4vpInstanceOpts.asArray, definitionsOpts.asArray, opts),
-    })
-
+    const sioPv2RP = new SIOPv2RP({
+        instanceOpts: toPexInstanceOptions(
+            opts.pdStore,
+            oid4vpInstanceOpts.asArray,
+            syncDefinitionsOpts.asArray, opts),
+    });
+    return sioPv2RP
 }

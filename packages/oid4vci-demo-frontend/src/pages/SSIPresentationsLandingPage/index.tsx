@@ -27,7 +27,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
 
                 const pdWithBrandingMap = pds.map(pd => {
                     const ssiPDCardConfig = pageConfig.presentationDefinitions
-                        .find(value => value.id === pd.pdId)
+                        .find(value => value.id === pd.definitionId)
                     const pdWithBranding: PDWithBranding = {
                         ...pd,
                         branding: {
