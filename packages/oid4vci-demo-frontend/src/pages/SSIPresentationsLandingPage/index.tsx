@@ -4,26 +4,48 @@ import {useTranslation} from 'react-i18next'
 import {Mobile, NonMobile} from "../../index"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
-import {SSICredentialsLandingPageConfig, SSIPresentationDefinitionCardConfig} from "../../ecosystem/ecosystem-config"
+import {SSICredentialsLandingPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem";
+import {PresentationDefinitionItem} from "@sphereon/ssi-sdk.data-store";
+import {ImageProperties} from "../../types";
 
+type PDWithBranding = PresentationDefinitionItem & {
+    branding: { backgroundColor?: string, backgroundImage?: string, logo?: ImageProperties }
+}
 
 const SSIPresentationsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
     const pageConfig= flowRouter.getPageConfig()
-    const [presentationDefinitions, setPresentationDefinitions] = useState<Array<SSIPresentationDefinitionCardConfig>>([])
+    const [presentationDefinitions, setPresentationDefinitions] = useState<Array<PDWithBranding>>([])
     const ecosystem = useEcosystem()
 
     useEffect((): void => {
         ecosystem.getAgent().pdmGetDefinitions()
-            .then((pds) => setPresentationDefinitions([...pds, ...pageConfig.presentationDefinitions]))
-    }, [pageConfig.presentationDefinitions]);
+            .then((pds) => {
 
-    const handlePresentationDefinitionClick = async (value: SSIPresentationDefinitionCardConfig)=> {
-        await flowRouter.nextStep({payload: 'hello'})
-        // window.location.href = value.route
+                const pdWithBrandingMap = pds.map(pd => {
+                    const ssiPDCardConfig = pageConfig.presentationDefinitions
+                        .find(value => value.id === pd.pdId)
+                    const pdWithBranding: PDWithBranding = {
+                        ...pd,
+                        branding: {
+                            ...(ssiPDCardConfig && {
+                                backgroundColor: ssiPDCardConfig.backgroundColor,
+                                backgroundImage: ssiPDCardConfig.backgroundImage,
+                                logo: ssiPDCardConfig.logo
+                            })
+                        }
+                    };
+                    return pdWithBranding
+                })
+                setPresentationDefinitions(pdWithBrandingMap);
+            })
+    }, []);
+
+    const handlePresentationDefinitionClick = async (pdDefinitionItem: PresentationDefinitionItem)=> {
+        await flowRouter.nextStep({pd: pdDefinitionItem.definitionPayload})
     }
 
     return (
@@ -95,8 +117,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
                             <span style={{fontSize: '20px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}} ></span>
                         </NonMobile>
                     </div>
-                    {presentationDefinitions.map(value => (
-                        <div onClick={() => handlePresentationDefinitionClick(value)}>
+                    {presentationDefinitions.map(pdItem => (
+                        <div onClick={() => handlePresentationDefinitionClick(pdItem)}>
                             <Mobile>
                                 <div style={{
                                     display: 'flex',
@@ -105,14 +127,14 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                     cursor: 'pointer'
                                 }}>
                                     <CredentialMiniCardView
-                                        backgroundImage={{uri: value.backgroundImage}}
-                                        backgroundColor={value.backgroundColor}
+                                        backgroundImage={{uri: pdItem.branding?.backgroundImage}}
+                                        backgroundColor={pdItem.branding?.backgroundColor}
                                         logo={{
-                                            uri: value.logo?.src,
-                                            ...((value.logo?.height && value.logo?.width) && {
+                                            uri: pdItem.branding?.logo?.src,
+                                            ...((pdItem.branding?.logo?.height && pdItem.branding?.logo?.width) && {
                                                 dimensions: {
-                                                    height: value.logo?.height,
-                                                    width: value.logo?.width,
+                                                    height: pdItem.branding?.logo?.height,
+                                                    width: pdItem.branding?.logo?.width,
                                                 }
                                             }),
                                             style: {
@@ -121,8 +143,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                         }}
                                     />
                                     <div style={{width: 200, paddingLeft: '5px'}}>
-                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span><br/>
-                                        <span style={{fontSize: '10px'}}>{value.description}</span>
+                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.definitionPayload.name}</span><br/>
+                                        <span style={{fontSize: '10px'}}>{pdItem.definitionPayload.purpose}</span>
                                     </div>
                                 </div>
                             </Mobile>
@@ -136,16 +158,16 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                 }}>
                                     <CredentialMiniCardView
                                         style={{width: 140, height: 90}}
-                                        backgroundColor={value.backgroundColor}
+                                        backgroundColor={pdItem.branding?.backgroundColor}
                                         backgroundImage={{
-                                            uri: value.backgroundImage
+                                            uri: pdItem.branding?.backgroundImage
                                         }}
                                         logo={{
-                                            uri: value.logo?.src,
-                                            ...((value.logo?.height && value.logo?.width) && {
+                                            uri: pdItem.branding?.logo?.src,
+                                            ...((pdItem.branding?.logo?.height && pdItem.branding?.logo?.width) && {
                                                 dimensions: {
-                                                    height: value.logo?.height,
-                                                    width: value.logo?.width,
+                                                    height: pdItem.branding?.logo?.height,
+                                                    width: pdItem.branding?.logo?.width,
                                                 }
                                             }),
                                             style: {
@@ -158,8 +180,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                                                                fontSize: '30px',
                                                                                fontWeight: '600',
                                                                                color: '#303030'
-                                                                           }}>{value.name}</span><br/>
-                                        <span style={{fontSize: '18px', color: '#303030',}}>{value.description}</span>
+                                                                           }}>{pdItem.definitionPayload.name}</span><br/>
+                                        <span style={{fontSize: '18px', color: '#303030',}}>{pdItem.definitionPayload.purpose}</span>
                                     </div>
                                 </div>
                             </NonMobile>

@@ -31,7 +31,7 @@ import {getDbConnection} from './database'
 import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
-import {PDStore} from '@sphereon/ssi-sdk.data-store'
+import {NonPersistedPresentationDefinitionItem, PDStore, PresentationDefinitionItem} from '@sphereon/ssi-sdk.data-store'
 import {
     createDidProviders,
     createDidResolver,
@@ -44,7 +44,7 @@ import {
 } from "./utils";
 import {
     DB_CONNECTION_NAME,
-    DB_ENCRYPTION_KEY,
+    DB_ENCRYPTION_KEY, definitionsOpts,
     DID_PREFIX,
     DIDMethods,
     INTERNAL_HOSTNAME_OR_IP,
@@ -269,3 +269,20 @@ if (expressSupport) {
         },
     })
 }
+
+definitionsOpts.asArray.forEach(confPD => {
+    // TODO add update handling and version control and make sure SOIPRP gets the PDs from the PDManager
+    agent.pdmGetDefinitions({filter: [{pdId: confPD.id}]}).then(resultItems => {
+        if (!resultItems || resultItems.length == 0) {
+            const pdItem:NonPersistedPresentationDefinitionItem = {
+                pdId: confPD.id,
+                purpose: confPD.purpose,
+                version: '1',
+                definitionPayload: confPD
+            };
+            agent.pdmAddDefinition(pdItem).then(insertedPdItem => {
+                console.log(`Inserted PD ${insertedPdItem.pdId} under DB id ${insertedPdItem.id}`)
+            })
+        }
+    })
+})

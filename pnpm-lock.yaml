@@ -10,11 +10,14 @@ overrides:
   ethr-did: 2.3.9
   '@sphereon/ssi-types': 0.23.0
   '@sphereon/ssi-sdk.core': 0.23.0
-  '@sphereon/ssi-sdk.data-store': file://C:\Git\Sphereon-Opensource\ssi-sdk\packages\data-store\sphereon-ssi-sdk.data-store-0.222.4-bram.tgz
+  '@sphereon/ssi-sdk.data-store': 0.23.5-unstable.27
+  '@sphereon/ssi-sdk.pd-manager': 0.23.5-unstable.27
   '@sphereon/oid4vci-client': 0.10.3
   '@sphereon/oid4vci-common': 0.10.3
   '@sphereon/oid4vci-issuer': 0.10.3
   '@sphereon/oid4vci-issuer-server': 0.10.3
+  '@sphereon/ui-components.core': 0.2.1-unstable.2
+  '@sphereon/ui-components.ssi-react': 0.2.1-unstable.2
   '@sphereon/pex': 3.3.2
   '@sphereon/pex-models': 2.2.4
   '@sphereon/did-auth-siop': 0.6.4
@@ -125,8 +128,8 @@ importers:
         specifier: 0.23.0
         version: 0.23.0
       '@sphereon/ssi-sdk.data-store':
-        specifier: file://C:\Git\Sphereon-Opensource\ssi-sdk\packages\data-store\sphereon-ssi-sdk.data-store-0.222.4-bram.tgz
-        version: file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2)
+        specifier: 0.23.5-unstable.27
+        version: 0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.kv-store-temp':
         specifier: 0.23.0
         version: 0.23.0(sqlite3@5.1.7)(ts-node@10.9.2)
@@ -140,8 +143,8 @@ importers:
         specifier: 0.23.0
         version: 0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.73.5)(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.pd-manager':
-        specifier: file://C:\Git\Sphereon-Opensource\ssi-sdk\packages\pd-manager\sphereon-ssi-sdk.pd-manager-0.222.4-bram.tgz
-        version: file:../ssi-sdk/packages/pd-manager/sphereon-ssi-sdk.pd-manager-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2)
+        specifier: 0.23.5-unstable.27
+        version: 0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.presentation-exchange':
         specifier: 0.23.0
         version: 0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(sqlite3@5.1.7)(ts-node@10.9.2)
@@ -327,14 +330,14 @@ importers:
         specifier: 0.10.3
         version: 0.10.3(msrcrypto@1.5.8)
       '@sphereon/ssi-sdk.data-store':
-        specifier: file://C:\Git\Sphereon-Opensource\ssi-sdk\packages\data-store\sphereon-ssi-sdk.data-store-0.222.4-bram.tgz
-        version: file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2)
+        specifier: 0.23.5-unstable.27
+        version: 0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.oid4vci-issuer-rest-client':
         specifier: 0.23.0
         version: 0.23.0
       '@sphereon/ssi-sdk.pd-manager':
-        specifier: file://C:\Git\Sphereon-Opensource\ssi-sdk\packages\pd-manager\sphereon-ssi-sdk.pd-manager-0.222.4-bram.tgz
-        version: file:../ssi-sdk/packages/pd-manager/sphereon-ssi-sdk.pd-manager-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2)
+        specifier: 0.23.5-unstable.27
+        version: 0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.qr-code-generator':
         specifier: 0.23.0
         version: 0.23.0
@@ -348,11 +351,11 @@ importers:
         specifier: 0.23.0
         version: 0.23.0
       '@sphereon/ui-components.core':
-        specifier: file://C:\Git\Sphereon-Opensource\UI-Components\packages\core\sphereon-ui-components.core-0.2.2-bram.tgz
-        version: file:../UI-Components/packages/core/sphereon-ui-components.core-0.2.2-bram.tgz(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+        specifier: 0.2.1-unstable.2
+        version: 0.2.1-unstable.2(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       '@sphereon/ui-components.ssi-react':
-        specifier: file://C:\Git\Sphereon-Opensource\UI-Components\packages\ssi-react\sphereon-ui-components.ssi-react-0.2.10-bram.tgz
-        version: file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-0.2.10-bram.tgz(@babel/core@7.24.0)(@types/react@18.2.63)(dayjs@1.10.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+        specifier: 0.2.1-unstable.2
+        version: 0.2.1-unstable.2(@babel/core@7.24.0)(@types/react@18.2.63)(dayjs@1.10.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
       '@veramo/core':
         specifier: 4.2.0
         version: 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
@@ -5444,6 +5447,39 @@ packages:
       - supports-color
     dev: false
 
+  /@sphereon/ssi-sdk.data-store@0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2):
+    resolution: {integrity: sha512-aDIT59GPX5kSUiiL/biHrgOpLUxe2DgoHU2znzaiCYMfdm1tDBWSbnXO5hTbOwsDdlIyGzBe+W2XXJi7Rcc9Vg==}
+    dependencies:
+      '@sphereon/pex': 3.3.2
+      '@sphereon/ssi-sdk.core': 0.23.0
+      '@sphereon/ssi-types': 0.23.0
+      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/utils': 4.2.0
+      class-validator: 0.14.1
+      debug: 4.3.4(supports-color@5.5.0)
+      typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2)
+    transitivePeerDependencies:
+      - '@google-cloud/spanner'
+      - '@sap/hana-client'
+      - better-sqlite3
+      - encoding
+      - hdb-pool
+      - ioredis
+      - mongodb
+      - mssql
+      - mysql2
+      - oracledb
+      - pg
+      - pg-native
+      - pg-query-stream
+      - redis
+      - sql.js
+      - sqlite3
+      - supports-color
+      - ts-node
+      - typeorm-aurora-data-api-driver
+    dev: false
+
   /@sphereon/ssi-sdk.kv-store-temp@0.23.0(sqlite3@5.1.7)(ts-node@10.9.2):
     resolution: {integrity: sha512-aJdhfCLbbsYWmfjLO1HRvVaj/7Oa504fc6UEuiQezCMn7avH8sGF5UT785aWrhBGgQtCcEZ51G41tF0Z81aMkA==}
     dependencies:
@@ -5624,6 +5660,37 @@ packages:
       - ts-node
       - typeorm-aurora-data-api-driver
       - web-streams-polyfill
+    dev: false
+
+  /@sphereon/ssi-sdk.pd-manager@0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2):
+    resolution: {integrity: sha512-A859L2n2WaxK0bagknih1ocaunYC8gN+bvuYbx9+Yij8bhHYZtox5KLK8UxctqtOflD2THIWmff79P5WE8WMQw==}
+    dependencies:
+      '@sphereon/pex': 3.3.2
+      '@sphereon/pex-models': 2.2.4
+      '@sphereon/ssi-sdk.data-store': 0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2)
+      cross-fetch: 3.1.8
+      debug: 4.3.4(supports-color@5.5.0)
+      typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2)
+    transitivePeerDependencies:
+      - '@google-cloud/spanner'
+      - '@sap/hana-client'
+      - better-sqlite3
+      - encoding
+      - hdb-pool
+      - ioredis
+      - mongodb
+      - mssql
+      - mysql2
+      - oracledb
+      - pg
+      - pg-native
+      - pg-query-stream
+      - redis
+      - sql.js
+      - sqlite3
+      - supports-color
+      - ts-node
+      - typeorm-aurora-data-api-driver
     dev: false
 
   /@sphereon/ssi-sdk.presentation-exchange@0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(sqlite3@5.1.7)(ts-node@10.9.2):
@@ -5829,7 +5896,7 @@ packages:
       '@sphereon/ssi-sdk-ext.key-utils': 0.18.1(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)
       '@sphereon/ssi-sdk.agent-config': 0.23.0(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.core': 0.23.0
-      '@sphereon/ssi-sdk.data-store': file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2)
+      '@sphereon/ssi-sdk.data-store': 0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.vc-status-list': 0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.73.5)
       '@sphereon/ssi-sdk.vc-status-list-issuer-drivers': 0.23.0(@noble/hashes@1.3.3)(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(passport-http-bearer@1.0.1)(react-native-securerandom@1.0.1)(react-native@0.73.5)(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-types': 0.23.0
@@ -5893,7 +5960,7 @@ packages:
       '@sphereon/ssi-sdk-ext.did-utils': 0.18.2(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)
       '@sphereon/ssi-sdk.agent-config': 0.23.0(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.core': 0.23.0
-      '@sphereon/ssi-sdk.data-store': file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2)
+      '@sphereon/ssi-sdk.data-store': 0.23.5-unstable.27(sqlite3@5.1.7)(ts-node@10.9.2)
       '@sphereon/ssi-sdk.vc-status-list': 0.23.0(expo-crypto@12.8.1)(expo@50.0.8)(msrcrypto@1.5.8)(react-native-securerandom@1.0.1)(react-native@0.73.5)
       '@sphereon/ssi-types': 0.23.0
       '@sphereon/vc-status-list': 7.0.0-next.0(expo@50.0.8)(react-native@0.73.5)
@@ -5961,6 +6028,61 @@ packages:
     dependencies:
       '@sd-jwt/decode': 0.6.1
       jwt-decode: 3.1.2
+    dev: false
+
+  /@sphereon/ui-components.core@0.2.1-unstable.2(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-jgcnznFiwuxG/vXB/idLH7D3Od5rzj3yWVNkuhIrN5FviUgSWsmx8FY5ZnNMnltfxXzQwFjCXa6J2XykkT4dGQ==}
+    peerDependencies:
+      react: '>= 18'
+    dependencies:
+      i18n-js: 3.9.2
+      lodash.memoize: 4.1.2
+      react: 18.2.0
+      styled-components: 5.3.11(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - react-dom
+      - react-is
+    dev: false
+
+  /@sphereon/ui-components.ssi-react@0.2.1-unstable.2(@babel/core@7.24.0)(@types/react@18.2.63)(dayjs@1.10.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-BkfCV3+dgF0cym+UaOgG789PPi1k9mKufQhVL4xk+2OJmmUufryQxXrrZH2O3ftjdhSPeitXcDLkXhqjJWKh1w==}
+    peerDependencies:
+      react: '>= 18'
+    dependencies:
+      '@emotion/react': 11.11.4(@types/react@18.2.63)(react@18.2.0)
+      '@emotion/styled': 11.11.5(@emotion/react@11.11.4)(@types/react@18.2.63)(react@18.2.0)
+      '@jsonforms/core': 3.2.1
+      '@jsonforms/material-renderers': 3.2.1(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@jsonforms/core@3.2.1)(@jsonforms/react@3.2.1)(@mui/icons-material@5.15.18)(@mui/material@5.15.18)(@mui/x-date-pickers@6.19.12)(react@18.2.0)
+      '@jsonforms/react': 3.2.1(@jsonforms/core@3.2.1)(react@18.2.0)
+      '@jsonforms/vanilla-renderers': 3.2.1(@jsonforms/core@3.2.1)(@jsonforms/react@3.2.1)(react@18.2.0)
+      '@mui/icons-material': 5.15.18(@mui/material@5.15.18)(@types/react@18.2.63)(react@18.2.0)
+      '@mui/material': 5.15.18(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.63)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/styled-engine-sc': 5.14.12(styled-components@5.3.11)
+      '@mui/system': 5.15.15(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.63)(react@18.2.0)
+      '@mui/x-date-pickers': 6.19.12(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@mui/material@5.15.18)(@mui/system@5.15.15)(@types/react@18.2.63)(dayjs@1.10.7)(react-dom@18.2.0)(react@18.2.0)
+      '@sphereon/ui-components.core': 0.2.1-unstable.2(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      '@tanstack/react-table': 8.13.2(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-json-tree: 0.18.0(@types/react@18.2.63)(react@18.2.0)
+      react-loader-spinner: 5.4.5(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)
+      react-select: 5.8.0(@types/react@18.2.63)(react-dom@18.2.0)(react@18.2.0)
+      react-toastify: 9.1.3(react-dom@18.2.0)(react@18.2.0)
+      styled-components: 5.3.11(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      uint8arrays: 3.1.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - '@types/styled-components'
+      - date-fns
+      - date-fns-jalali
+      - dayjs
+      - luxon
+      - moment
+      - moment-hijri
+      - moment-jalaali
+      - react-dom
+      - react-is
     dev: false
 
   /@sphereon/vc-status-list@7.0.0-next.0(expo@50.0.8)(react-native@0.73.5):
@@ -21817,137 +21939,6 @@ packages:
       validator: 13.11.0
     optionalDependencies:
       commander: 9.5.0
-    dev: false
-
-  file:../UI-Components/packages/core/sphereon-ui-components.core-0.2.2-bram.tgz(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-TVQIBrlWBRz0RK4Hxauf5MwyZ2cWtEEtvUMvOpKcq98X+CoEXXhljBgDuCuESHuwviU6zR+VkgRnhU4nmJqvfA==, tarball: file:../UI-Components/packages/core/sphereon-ui-components.core-0.2.2-bram.tgz}
-    id: file:../UI-Components/packages/core/sphereon-ui-components.core-0.2.2-bram.tgz
-    name: '@sphereon/ui-components.core'
-    version: 0.2.2-bram
-    peerDependencies:
-      react: '>= 18'
-    dependencies:
-      i18n-js: 3.9.2
-      lodash.memoize: 4.1.2
-      react: 18.2.0
-      styled-components: 5.3.11(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - react-dom
-      - react-is
-    dev: false
-
-  file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-0.2.10-bram.tgz(@babel/core@7.24.0)(@types/react@18.2.63)(dayjs@1.10.7)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-JZjad7miMSLzPgiFR9Z+vjGAKwPW7DlzIyycYySgC+cIzgy6I9+TvxiLM29T5I0w0ENKMcQfgvDxRteO4zsiLQ==, tarball: file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-0.2.10-bram.tgz}
-    id: file:../UI-Components/packages/ssi-react/sphereon-ui-components.ssi-react-0.2.10-bram.tgz
-    name: '@sphereon/ui-components.ssi-react'
-    version: 0.2.10-bram
-    peerDependencies:
-      react: '>= 18'
-    dependencies:
-      '@emotion/react': 11.11.4(@types/react@18.2.63)(react@18.2.0)
-      '@emotion/styled': 11.11.5(@emotion/react@11.11.4)(@types/react@18.2.63)(react@18.2.0)
-      '@jsonforms/core': 3.2.1
-      '@jsonforms/material-renderers': 3.2.1(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@jsonforms/core@3.2.1)(@jsonforms/react@3.2.1)(@mui/icons-material@5.15.18)(@mui/material@5.15.18)(@mui/x-date-pickers@6.19.12)(react@18.2.0)
-      '@jsonforms/react': 3.2.1(@jsonforms/core@3.2.1)(react@18.2.0)
-      '@jsonforms/vanilla-renderers': 3.2.1(@jsonforms/core@3.2.1)(@jsonforms/react@3.2.1)(react@18.2.0)
-      '@mui/icons-material': 5.15.18(@mui/material@5.15.18)(@types/react@18.2.63)(react@18.2.0)
-      '@mui/material': 5.15.18(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.63)(react-dom@18.2.0)(react@18.2.0)
-      '@mui/styled-engine-sc': 5.14.12(styled-components@5.3.11)
-      '@mui/system': 5.15.15(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@types/react@18.2.63)(react@18.2.0)
-      '@mui/x-date-pickers': 6.19.12(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(@mui/material@5.15.18)(@mui/system@5.15.15)(@types/react@18.2.63)(dayjs@1.10.7)(react-dom@18.2.0)(react@18.2.0)
-      '@sphereon/ui-components.core': file:../UI-Components/packages/core/sphereon-ui-components.core-0.2.2-bram.tgz(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      '@tanstack/react-table': 8.13.2(react-dom@18.2.0)(react@18.2.0)
-      react: 18.2.0
-      react-json-tree: 0.18.0(@types/react@18.2.63)(react@18.2.0)
-      react-loader-spinner: 5.4.5(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)
-      react-select: 5.8.0(@types/react@18.2.63)(react-dom@18.2.0)(react@18.2.0)
-      react-toastify: 9.1.3(react-dom@18.2.0)(react@18.2.0)
-      styled-components: 5.3.11(@babel/core@7.24.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
-      uint8arrays: 3.1.1
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@types/react'
-      - '@types/styled-components'
-      - date-fns
-      - date-fns-jalali
-      - dayjs
-      - luxon
-      - moment
-      - moment-hijri
-      - moment-jalaali
-      - react-dom
-      - react-is
-    dev: false
-
-  file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2):
-    resolution: {integrity: sha512-XT2dAizE0tLnjRhfWP1b065GAmrhwJAvlBtAp5nmT7uvS5m5VneR+mOa3bfCJDxumVPrg5JD/mLtVVUsbjGXLA==, tarball: file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz}
-    id: file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz
-    name: '@sphereon/ssi-sdk.data-store'
-    version: 0.222.4-bram
-    dependencies:
-      '@sphereon/pex': 3.3.2
-      '@sphereon/ssi-sdk.core': 0.23.0
-      '@sphereon/ssi-types': 0.23.0
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      '@veramo/utils': 4.2.0
-      class-validator: 0.14.1
-      debug: 4.3.4(supports-color@5.5.0)
-      typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2)
-    transitivePeerDependencies:
-      - '@google-cloud/spanner'
-      - '@sap/hana-client'
-      - better-sqlite3
-      - encoding
-      - hdb-pool
-      - ioredis
-      - mongodb
-      - mssql
-      - mysql2
-      - oracledb
-      - pg
-      - pg-native
-      - pg-query-stream
-      - redis
-      - sql.js
-      - sqlite3
-      - supports-color
-      - ts-node
-      - typeorm-aurora-data-api-driver
-    dev: false
-
-  file:../ssi-sdk/packages/pd-manager/sphereon-ssi-sdk.pd-manager-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2):
-    resolution: {integrity: sha512-osIkgoK3cTC1HbzD04HwG5JbPRmyC8FSX8jOatcsU072r4jWYlbahP9IaxUctDALK5kDcFXWMGjUR6eMFW5UlA==, tarball: file:../ssi-sdk/packages/pd-manager/sphereon-ssi-sdk.pd-manager-0.222.4-bram.tgz}
-    id: file:../ssi-sdk/packages/pd-manager/sphereon-ssi-sdk.pd-manager-0.222.4-bram.tgz
-    name: '@sphereon/ssi-sdk.pd-manager'
-    version: 0.222.4-bram
-    dependencies:
-      '@sphereon/pex': 3.3.2
-      '@sphereon/pex-models': 2.2.4
-      '@sphereon/ssi-sdk.data-store': file:../ssi-sdk/packages/data-store/sphereon-ssi-sdk.data-store-0.222.4-bram.tgz(sqlite3@5.1.7)(ts-node@10.9.2)
-      cross-fetch: 3.1.8
-      debug: 4.3.4(supports-color@5.5.0)
-      typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2)
-    transitivePeerDependencies:
-      - '@google-cloud/spanner'
-      - '@sap/hana-client'
-      - better-sqlite3
-      - encoding
-      - hdb-pool
-      - ioredis
-      - mongodb
-      - mssql
-      - mysql2
-      - oracledb
-      - pg
-      - pg-native
-      - pg-query-stream
-      - redis
-      - sql.js
-      - sqlite3
-      - supports-color
-      - ts-node
-      - typeorm-aurora-data-api-driver
     dev: false
 
   github.com/uport-project/EcdsaSecp256k1RecoverySignature2020/ab0db52de6f4e6663ef271a48009ba26e688ef9b(expo@50.0.8)(react-native@0.73.5):

@@ -419,6 +419,7 @@ export interface SSICredentialCardConfig extends ComponentConfig {
 }
 
 export interface SSIPresentationDefinitionCardConfig extends ComponentConfig {
+    id: string
     name: string
     route: string
     description?: string
