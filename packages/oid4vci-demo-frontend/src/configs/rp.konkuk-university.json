@@ -105,9 +105,9 @@
         "alt": "logo"
       },
       "photoRight": "undraw_messenger_re_8bky_grey.svg",
-      "topTitle": "vismayuki_share_success_top_title",
-      "topDescription": "vismayuki_share_success_top_description",
-      "buttonCaption": "vismayuki_share_success_button_caption"
+      "topTitle": "konkuk_share_success_top_title",
+      "topDescription": "konkuk_share_success_top_description",
+      "buttonCaption": "konkuk_share_success_button_caption"
     }
   },
   "routes": [

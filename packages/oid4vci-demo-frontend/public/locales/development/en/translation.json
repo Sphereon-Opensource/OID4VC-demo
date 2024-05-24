@@ -131,5 +131,8 @@
   "vismayuki_verify_bottom_description": "Scan this QR code with your mobile wallet's QR code scanner. \nOr enter your web wallet address to open your web wallet.",
   "vismayuki_share_success_top_title": "bedankt voor het insturen van de informatie",
   "vismayuki_share_success_top_description": "Deze is succesvol ontvangen.",
-  "vismayuki_share_success_button_caption": "Ga terug naar begin pagina"
+  "vismayuki_share_success_button_caption": "Ga terug naar begin pagina",
+  "konkuk_share_success_top_title": "Thanks for submitting the information",
+  "konkuk_share_success_top_description": "This has been received successfully.",
+  "konkuk_share_success_button_caption": "Return to first pages"
 }
