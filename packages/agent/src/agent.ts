@@ -31,7 +31,7 @@ import {getDbConnection} from './database'
 import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
-import {NonPersistedPresentationDefinitionItem, PDStore, PresentationDefinitionItem} from '@sphereon/ssi-sdk.data-store'
+import {NonPersistedPresentationDefinitionItem, PDStore} from '@sphereon/ssi-sdk.data-store'
 import {
     createDidProviders,
     createDidResolver,
@@ -44,7 +44,8 @@ import {
 } from "./utils";
 import {
     DB_CONNECTION_NAME,
-    DB_ENCRYPTION_KEY, definitionsOpts,
+    DB_ENCRYPTION_KEY,
+    definitionsOpts,
     DID_PREFIX,
     DIDMethods,
     INTERNAL_HOSTNAME_OR_IP,
@@ -156,9 +157,7 @@ if (!defaultDID || !defaultKid || !(await getIdentifier(defaultDID))) {
 const oid4vpOpts = IS_OID4VP_ENABLED ? await getDefaultOID4VPRPOptions({did: defaultDID, resolver}) : undefined
 if (oid4vpOpts && oid4vpRP) {
     oid4vpRP.setDefaultOpts(oid4vpOpts, context)
-
 }
-
 
 StaticBearerAuth.init('bearer-auth').addUser({name: 'demo', id: 'demo', token: 'demo'}).connectPassport()
 
