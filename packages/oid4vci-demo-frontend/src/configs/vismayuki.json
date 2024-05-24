@@ -114,7 +114,8 @@
           "id": "landingPage",
           "operation": "navigate",
           "path": "/landingvp",
-          "nextId": "verifyRequest"
+          "nextId": "verifyRequest",
+          "isDefaultRoute": true
         },
         {
           "id": "verifyRequest",
@@ -126,8 +127,7 @@
           "id": "shareSuccess",
           "operation": "navigate",
           "path": "/information/success",
-          "nextId": "backToHome",
-          "isDefaultRoute": true
+          "nextId": "backToHome"
         },
         {
           "id": "backToHome",

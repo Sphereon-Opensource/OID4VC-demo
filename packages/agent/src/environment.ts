@@ -39,7 +39,6 @@ export const didOptConfigs = loadJsonFiles<IDIDOpts>({path: DID_OPTIONS_PATH})
 export const IS_OID4VP_ENABLED = process.env.OID4VP_ENABLED === undefined || process.env.OID4VP_ENABLED
 export const IS_OID4VCI_ENABLED = process.env.OID4VCI_ENABLED === undefined || process.env.OID4VCI_ENABLED
 
-
 export * from './types'
 export * from './utils'
 export * from './database'

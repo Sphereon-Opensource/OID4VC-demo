@@ -5,6 +5,8 @@ import {Mobile, NonMobile} from "../../index"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {SSICredentialsLandingPageConfig, SSIPresentationDefinitionCardConfig} from "../../ecosystem/ecosystem-config"
+import {useEcosystem} from "../../ecosystem/ecosystem";
+
 
 const SSIPresentationsLandingPage: React.FC = () => {
     const {t} = useTranslation()
@@ -12,10 +14,11 @@ const SSIPresentationsLandingPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
     const pageConfig= flowRouter.getPageConfig()
     const [presentationDefinitions, setPresentationDefinitions] = useState<Array<SSIPresentationDefinitionCardConfig>>([])
+    const ecosystem = useEcosystem()
 
     useEffect((): void => {
-        // TODO fetch pd's from the agent here
-        setPresentationDefinitions(pageConfig.presentationDefinitions)
+        ecosystem.getAgent().pdmGetDefinitions()
+            .then((pds) => setPresentationDefinitions([...pds, ...pageConfig.presentationDefinitions]))
     }, [pageConfig.presentationDefinitions]);
 
     const handlePresentationDefinitionClick = async (value: SSIPresentationDefinitionCardConfig)=> {

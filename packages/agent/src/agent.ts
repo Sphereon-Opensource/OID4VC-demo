@@ -31,6 +31,7 @@ import {getDbConnection} from './database'
 import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
+import {PDStore} from '@sphereon/ssi-sdk.data-store'
 import {
     createDidProviders,
     createDidResolver,
@@ -65,7 +66,8 @@ import {
 import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
-
+import {RemoteServerApiServer} from "@sphereon/ssi-sdk.remote-server-rest-api";
+import {pdManagerMethods, IPDManager, PDManager} from '@sphereon/ssi-sdk.pd-manager'
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -80,7 +82,8 @@ type TAgentTypes = ISIOPv2RP &
     IDataStore &
     IDataStoreORM &
     ICredentialVerifier &
-    ICredentialIssuer
+    ICredentialIssuer &
+    IPDManager
 
 
 const plugins: IAgentPlugin[] = [
@@ -101,8 +104,6 @@ const plugins: IAgentPlugin[] = [
         resolver,
     }),
     new PresentationExchange(),
-
-
     new CredentialPlugin(),
     new CredentialHandlerLDLocal({
         contextMaps: [LdDefaultContexts],
@@ -118,6 +119,7 @@ const plugins: IAgentPlugin[] = [
         ]),
         keyStore: privateKeyStore,
     }),
+    new PDManager({ store: new PDStore(dbConnection) })
 ]
 const oid4vpRP = IS_OID4VP_ENABLED ? await createOID4VPRP({resolver}) : undefined;
 if (oid4vpRP) {
@@ -250,3 +252,20 @@ if (IS_OID4VCI_ENABLED) {
 }
 
 expressSupport?.start()
+
+if (expressSupport) {
+    new RemoteServerApiServer({
+        agent,
+        expressSupport,
+        opts: {
+            exposedMethods: [...pdManagerMethods],
+            endpointOpts: {
+                globalAuth: {
+                    authentication: {
+                        enabled: false,
+                    },
+                },
+            },
+        },
+    })
+}

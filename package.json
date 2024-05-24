@@ -30,7 +30,7 @@
       "ethr-did": "2.3.9",
       "@sphereon/ssi-types": "0.23.0",
       "@sphereon/ssi-sdk.core": "0.23.0",
-      "@sphereon/ssi-sdk.data-store": "0.23.0",
+      "@sphereon/ssi-sdk.data-store": "file://C:\\Git\\Sphereon-Opensource\\ssi-sdk\\packages\\data-store\\sphereon-ssi-sdk.data-store-0.222.4-bram.tgz",
       "@sphereon/oid4vci-client": "0.10.3",
       "@sphereon/oid4vci-common": "0.10.3",
       "@sphereon/oid4vci-issuer": "0.10.3",
