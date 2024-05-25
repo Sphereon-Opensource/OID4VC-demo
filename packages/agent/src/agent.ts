@@ -50,7 +50,7 @@ import {
     INTERNAL_PORT,
     IS_OID4VCI_ENABLED,
     IS_OID4VP_ENABLED,
-    oid4vciInstanceOpts, syncDefinitionsOpts
+    oid4vciInstanceOpts, OID4VP_DEFINITIONS, syncDefinitionsOpts
 } from "./environment";
 import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
@@ -67,6 +67,7 @@ import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
 import {RemoteServerApiServer} from "@sphereon/ssi-sdk.remote-server-rest-api";
 import {IPDManager, PDManager, pdManagerMethods} from '@sphereon/ssi-sdk.pd-manager'
+import {IPresentationDefinition} from "@sphereon/pex";
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -119,7 +120,7 @@ const plugins: IAgentPlugin[] = [
         ]),
         keyStore: privateKeyStore,
     }),
-    new PDManager({ store: pdStore })
+    new PDManager({store: pdStore})
 ]
 const oid4vpRP = IS_OID4VP_ENABLED ? await createOID4VPRP({resolver, pdStore}) : undefined;
 if (oid4vpRP) {
@@ -270,7 +271,19 @@ if (expressSupport) {
     })
 }
 
-// temp hack because pexStorePersistDefinition by SIOPv2RP is lazy and this way the pd landing page won't be able to download the PDs
-syncDefinitionsOpts.asArray.forEach(confPD => {
-    agent.siopGetAuthRequestState({definitionId: confPD.id, correlationId: '123'})
+// Import presentation definitions from disk.
+const definitionsToImport: Array<IPresentationDefinition> = syncDefinitionsOpts.asArray.filter(definition => {
+    const {id, name} = definition ?? {};
+    if (definition && (OID4VP_DEFINITIONS.length === 0 || OID4VP_DEFINITIONS.includes(id) || (name && OID4VP_DEFINITIONS.includes(name)))) {
+        console.log(`[OID4VP] Enabling Presentation Definition with name '${name ?? '<none>'}' and id '${id}'`);
+        return true
+    }
+    return false
 })
+
+if (definitionsToImport.length > 0) {
+    agent.siopImportDefinitions({
+        definitions: definitionsToImport,
+        versionControlMode: 'AutoIncrementMajor' // This is the default, but just to indicate here it exists
+    })
+}
