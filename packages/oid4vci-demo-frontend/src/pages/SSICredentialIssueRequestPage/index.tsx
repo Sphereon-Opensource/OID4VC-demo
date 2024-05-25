@@ -92,7 +92,8 @@ const SSICredentialIssueRequestPage: React.FC = () => {
             throw new Error('Web wallet address must not be empty');
         }
 
-        window.location.href = mergeQueryParams(webWalletAddressValue, qrData.object.toString());
+        const queryString = qrData.object.split('://')[1];
+        window.location.href = mergeQueryParams(webWalletAddressValue, queryString);
     };
 
 
