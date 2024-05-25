@@ -74,11 +74,10 @@ export async function createOID4VPRP(opts: { resolver: Resolvable, pdStore: Abst
     if (!IS_OID4VP_ENABLED) {
         return
     }
-    const sioPv2RP = new SIOPv2RP({
+    return new SIOPv2RP({
         instanceOpts: toPexInstanceOptions(
             opts.pdStore,
             oid4vpInstanceOpts.asArray,
             opts),
-    });
-    return sioPv2RP
+    })
 }
