@@ -15,7 +15,6 @@ import {
     CredentialHandlerLDLocal,
     LdDefaultContexts,
     MethodNames,
-    //SphereonBbsBlsSignature2020,
     SphereonEd25519Signature2018,
     SphereonEd25519Signature2020,
     SphereonJsonWebSignature2020,
@@ -31,7 +30,7 @@ import {getDbConnection} from './database'
 import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
 import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
-import {NonPersistedPresentationDefinitionItem, PDStore} from '@sphereon/ssi-sdk.data-store'
+import {PDStore} from '@sphereon/ssi-sdk.data-store'
 import {
     createDidProviders,
     createDidResolver,
@@ -45,14 +44,13 @@ import {
 import {
     DB_CONNECTION_NAME,
     DB_ENCRYPTION_KEY,
-    definitionsOpts,
     DID_PREFIX,
     DIDMethods,
     INTERNAL_HOSTNAME_OR_IP,
     INTERNAL_PORT,
     IS_OID4VCI_ENABLED,
     IS_OID4VP_ENABLED,
-    oid4vciInstanceOpts
+    oid4vciInstanceOpts, OID4VP_DEFINITIONS, syncDefinitionsOpts
 } from "./environment";
 import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
@@ -68,7 +66,8 @@ import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
 import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
 import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
 import {RemoteServerApiServer} from "@sphereon/ssi-sdk.remote-server-rest-api";
-import {pdManagerMethods, IPDManager, PDManager} from '@sphereon/ssi-sdk.pd-manager'
+import {IPDManager, PDManager, pdManagerMethods} from '@sphereon/ssi-sdk.pd-manager'
+import {IPresentationDefinition} from "@sphereon/pex";
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -87,6 +86,7 @@ type TAgentTypes = ISIOPv2RP &
     IPDManager
 
 
+const pdStore = new PDStore(dbConnection);
 const plugins: IAgentPlugin[] = [
     new DataStore(dbConnection),
     new DataStoreORM(dbConnection),
@@ -104,7 +104,7 @@ const plugins: IAgentPlugin[] = [
     new DIDResolverPlugin({
         resolver,
     }),
-    new PresentationExchange(),
+    new PresentationExchange({pdStore}),
     new CredentialPlugin(),
     new CredentialHandlerLDLocal({
         contextMaps: [LdDefaultContexts],
@@ -120,9 +120,9 @@ const plugins: IAgentPlugin[] = [
         ]),
         keyStore: privateKeyStore,
     }),
-    new PDManager({ store: new PDStore(dbConnection) })
+    new PDManager({store: pdStore})
 ]
-const oid4vpRP = IS_OID4VP_ENABLED ? await createOID4VPRP({resolver}) : undefined;
+const oid4vpRP = IS_OID4VP_ENABLED ? await createOID4VPRP({resolver, pdStore}) : undefined;
 if (oid4vpRP) {
     plugins.push(oid4vpRP)
 }
@@ -269,19 +269,19 @@ if (expressSupport) {
     })
 }
 
-definitionsOpts.asArray.forEach(confPD => {
-    // TODO add update handling and version control and make sure SOIPRP gets the PDs from the PDManager
-    agent.pdmGetDefinitions({filter: [{pdId: confPD.id}]}).then(resultItems => {
-        if (!resultItems || resultItems.length == 0) {
-            const pdItem:NonPersistedPresentationDefinitionItem = {
-                pdId: confPD.id,
-                purpose: confPD.purpose,
-                version: '1',
-                definitionPayload: confPD
-            };
-            agent.pdmAddDefinition(pdItem).then(insertedPdItem => {
-                console.log(`Inserted PD ${insertedPdItem.pdId} under DB id ${insertedPdItem.id}`)
-            })
-        }
-    })
+// Import presentation definitions from disk.
+const definitionsToImport: Array<IPresentationDefinition> = syncDefinitionsOpts.asArray.filter(definition => {
+    const {id, name} = definition ?? {};
+    if (definition && (OID4VP_DEFINITIONS.length === 0 || OID4VP_DEFINITIONS.includes(id) || (name && OID4VP_DEFINITIONS.includes(name)))) {
+        console.log(`[OID4VP] Enabling Presentation Definition with name '${name ?? '<none>'}' and id '${id}'`);
+        return true
+    }
+    return false
 })
+
+if (definitionsToImport.length > 0) {
+    agent.siopImportDefinitions({
+        definitions: definitionsToImport,
+        versionControlMode: 'AutoIncrementMajor' // This is the default, but just to indicate here it exists
+    })
+}

@@ -136,7 +136,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                             vpDefinitionId={pd.pdId ?? flowRouter.getVpDefinitionId()}
+                                                             vpDefinitionId={pd.definitionId ?? flowRouter.getVpDefinitionId()}
                                                              onAuthRequestRetrieved={console.log}
                                                              onSignInComplete={onSignInComplete}
                                                              setQrCodeData={setDeepLink}/>}
