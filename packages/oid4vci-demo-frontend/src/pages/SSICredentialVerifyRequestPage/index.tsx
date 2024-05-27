@@ -27,7 +27,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const [webWalletAddressValue, setWebWalletAddressValue] = useState<string>();
 
     const location = useLocation();
-    const state = location.state // TODO get pd's
+    const state = location.state
     const {pd} = state
 
     const onWebWalletAddressChange = (value: FormFieldValue) => {
@@ -136,7 +136,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                             vpDefinitionId={pd.definitionId ?? flowRouter.getVpDefinitionId()}
+                                                             vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
                                                              onAuthRequestRetrieved={console.log}
                                                              onSignInComplete={onSignInComplete}
                                                              setQrCodeData={setDeepLink}/>}
@@ -166,7 +166,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                           </NonMobileOS>
                           <MobileOS>
                               {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                         vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                         vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
                                                          onAuthRequestRetrieved={console.log}
                                                          onSignInComplete={onSignInComplete}
                                                          setQrCodeData={setDeepLink}/>}

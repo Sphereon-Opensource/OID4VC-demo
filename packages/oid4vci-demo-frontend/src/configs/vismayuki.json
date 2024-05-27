@@ -1,8 +1,8 @@
 {
   "general": {
     "credentialName": "Verified Account",
-    "oid4vpAgentBaseUrl": "https://agent.visma-yuki.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.visma-yuki.demo.sphereon.com",
+    "oid4vpAgentBaseUrl": "http://localhost:5010",
+    "oid4vciAgentBaseUrl": "http://localhost:5010",
     "downloadUrl": "https://agent.visma-yuki.demo.sphereon.com/#/download",
     "verifierUrl": "https://agent.visma-yuki.demo.sphereon.com"
   },
@@ -108,7 +108,6 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "sphereonWalletIdentity",
       "steps": [
         {
           "id": "landingPage",
