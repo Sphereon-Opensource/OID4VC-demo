@@ -22,18 +22,22 @@ type CredentialOfferState = {
 }
 export const createCredentialOffer = async (actionParams: Record<string, any>, state: CredentialOfferState, ecosystem: Ecosystem): Promise<QRState> => {
     const generalConfig = ecosystem.getGeneralConfig() // TODO delete me after all configs use actionParams.issueCredentialType
+    if(!generalConfig.oid4vciAgentBaseUrl) {
+        throw new Error('VCI is not enabled because oid4vciAgentBaseUrl is not set in the ecosystem config')
+    }
+
     const shortUuid = short.generate()
     const uriData: IOID4VCIClientCreateOfferUriResponse = await ecosystem.getAgent().oid4vciClientCreateOfferUri({
         grants: {
             'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
-                'pre-authorized_code': shortUuid,
-                user_pin_required: false,
+                'pre-authorized_code': shortUuid
             },
         },
         credentialDataSupplierInput: {
             ...state.payload
         },
-        credentials: [state.credentialType ?? ("issueCredentialType" in actionParams ? actionParams.issueCredentialType : generalConfig.issueCredentialType)],
+        credential_configuration_ids: [state.credentialType ?? ("issueCredentialType" in actionParams ? actionParams.issueCredentialType : generalConfig.issueCredentialType)],
+        credential_issuer: generalConfig.oid4vciAgentBaseUrl
     })
 
     return {

@@ -1,4 +1,8 @@
-import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadataResult} from '@sphereon/oid4vci-common'
+import {
+    CredentialConfigurationSupported,
+    CredentialsSupportedDisplay,
+    EndpointMetadataResult
+} from '@sphereon/oid4vci-common'
 import {IBasicCredentialLocaleBranding} from '@sphereon/ssi-sdk.data-store'
 
 export const credentialLocaleBrandingFrom = async (credentialDisplay: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> => {
@@ -51,15 +55,21 @@ export const getCredentialBrandings = async (metadata: EndpointMetadataResult): 
     const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>()
 
     Promise.all(
-        (metadata.credentialIssuerMetadata!.credentials_supported as CredentialSupported[]).map(async (credentialsSupported: CredentialSupported): Promise<void> => {
+        (Object.values(metadata.credentialIssuerMetadata!.credential_configurations_supported as Record<string, CredentialConfigurationSupported>))
+            .map(async (credentialsConfigSupported: CredentialConfigurationSupported): Promise<void> => {
             const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
-                (credentialsSupported.display ?? []).map(
+                (credentialsConfigSupported.display ?? []).map(
                     async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
                         await credentialLocaleBrandingFrom(display)
                 ),
             );
 
-            const types = 'types' in credentialsSupported ? credentialsSupported.types : undefined
+            const types = 'types' in credentialsConfigSupported // TODO credentialsConfigSupported.types is deprecated
+                ? credentialsConfigSupported.types as string[]
+                : 'credential_definition' in credentialsConfigSupported
+                    ? credentialsConfigSupported.credential_definition.type
+                    : undefined
+
             if (types) {
                 const credentialTypes: Array<string> =
                     types.length > 1
