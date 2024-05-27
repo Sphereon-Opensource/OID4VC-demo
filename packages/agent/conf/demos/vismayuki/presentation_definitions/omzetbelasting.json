@@ -1,0 +1,17 @@
+{
+  "id":"omzetbelasting",
+  "name":"Omzetbelasting",
+  "purpose":"We need to verify that you are something",
+  "input_descriptors":[
+    {
+      "id":"261ad72d-a018-4c84-a335-5d11ec6b2655",
+      "name":"Omzetbelasting verification",
+      "purpose":"We need to verify that you are something",
+      "schema":[
+        {
+          "uri":"Omzetbelasting"
+        }
+      ]
+    }
+  ]
+}

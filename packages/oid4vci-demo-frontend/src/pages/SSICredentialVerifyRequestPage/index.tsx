@@ -94,7 +94,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
             {!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && (<div style={{
                 display: 'flex',
                 flexDirection: 'column',
-                marginTop: isTabletOrMobile ? 'auto' : '5%',
+                marginTop: isTabletOrMobile ? 'auto' : '20%',
                 maxHeight: '300px'
               }}>
                 <Text style={{ textAlign: 'center' }}
