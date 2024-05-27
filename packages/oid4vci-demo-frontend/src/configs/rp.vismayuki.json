@@ -132,7 +132,7 @@
         {
           "id": "backToHome",
           "operation": "navigate",
-          "path": "http://localhost:5001"
+          "path": "https://rp.vismayuki.demo.sphereon.com/"
         }
       ]
     }
