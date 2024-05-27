@@ -1,9 +1,9 @@
 {
   "general": {
     "credentialName": "omzetbelasting",
-    "oid4vpAgentBaseUrl": "https://omzetbelasting.belastingdienst.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.belastingdienst.demo.sphereon.com",
-    "downloadUrl": "https://agent.belastingdienst.demo.sphereon.com/#/download"
+    "oid4vpAgentBaseUrl": "https://omzetbelasting.bd.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.issuer.bd.demo.sphereon.com",
+    "downloadUrl": "https://agent.issuer.bd.demo.sphereon.com/#/download"
   },
   "pages": {
     "infoRequest": {
@@ -102,7 +102,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://belastingdienst.demo.sphereon.com"
+          "path": "https://bd.demo.sphereon.com"
         },
         {
           "id": "download",

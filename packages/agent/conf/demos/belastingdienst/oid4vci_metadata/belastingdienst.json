@@ -1,9 +1,9 @@
 {
-  "correlationId": "https://agent.belastingdienst.demo.sphereon.com",
+  "correlationId": "https://agent.issuer.bd.demo.sphereon.com",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://agent.belastingdienst.demo.sphereon.com",
-    "credential_endpoint": "https://agent.belastingdienst.demo.sphereon.com/credentials",
+    "credential_issuer": "https://agent.issuer.bd.demo.sphereon.com",
+    "credential_endpoint": "https://agent.issuer.bd.demo.sphereon.com/credentials",
     "display": [
       {
         "name": "Belastingdienst",
