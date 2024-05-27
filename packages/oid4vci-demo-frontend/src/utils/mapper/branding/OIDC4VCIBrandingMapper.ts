@@ -55,7 +55,7 @@ export const getCredentialBrandings = async (metadata: EndpointMetadataResult): 
     const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>()
 
     Promise.all(
-        (metadata.credentialIssuerMetadata!.credential_configurations_supported as CredentialConfigurationSupported[])
+        (Object.values(metadata.credentialIssuerMetadata!.credential_configurations_supported as Record<string, CredentialConfigurationSupported>))
             .map(async (credentialsConfigSupported: CredentialConfigurationSupported): Promise<void> => {
             const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
                 (credentialsConfigSupported.display ?? []).map(
