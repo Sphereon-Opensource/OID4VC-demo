@@ -1,8 +1,8 @@
 {
   "general": {
     "credentialName": "Verified Account",
-    "oid4vpAgentBaseUrl": "http://10.0.0.12:5000",
-    "oid4vciAgentBaseUrl": "http://10.0.0.12:5000",
+    "oid4vpAgentBaseUrl": "https://rp.agent.vismayuki.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://rp.agent.vismayuki.demo.sphereon.com",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download",
     "verifierUrl": "https:/account.banqup.demo.sphereon.com"
   },
