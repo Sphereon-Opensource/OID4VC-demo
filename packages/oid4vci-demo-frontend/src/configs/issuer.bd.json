@@ -20,7 +20,7 @@
         {
           "name": "Omzetbelasting",
           "description": "Belastingdienst",
-          "route": "https://omzetbelasting.belastingdienst.demo.sphereon.com",
+          "route": "https://omzetbelasting.bd.demo.sphereon.com",
           "backgroundImage": "belastingdienst/hector-j-rivas.jpg",
           "logo": {
             "src": "belastingdienst/logo.svg",
@@ -32,7 +32,7 @@
         {
           "name": "Woonplaatsverklaring",
           "description": "Belastingdienst",
-          "route": "https://woonplaatsverklaring.belastingdienst.demo.sphereon.com",
+          "route": "https://woonplaatsverklaring.bd.demo.sphereon.com",
           "backgroundImage": "belastingdienst/grant-richie.png",
           "logo": {
             "src": "belastingdienst/logo.svg",
