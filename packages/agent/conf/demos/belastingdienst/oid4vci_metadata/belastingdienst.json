@@ -10,8 +10,15 @@
         "description": "Belastingdienst Issuer"
       }
     ],
-    "credentials_supported": [
-      {
+    "credential_configurations_supported": {
+      "Woonplaatsverklaring": {
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
+        ],
         "display": [
           {
             "name": "Woonplaatsverklaring",
@@ -58,20 +65,21 @@
             }
           }
         ],
-        "id": "Woonplaatsverklaring",
-        "types": [
-          "VerifiableCredential",
-          "Woonplaatsverklaring"
-        ],
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "Woonplaatsverklaring"
+          ]
+        }
+      },
+      "Omzetbelasting": {
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
           "did:jwk"
         ],
         "cryptographic_suites_supported": [
           "ES256"
-        ]
-      },
-      {
+        ],
         "display": [
           {
             "name": "Omzetbelasting",
@@ -118,20 +126,14 @@
             }
           }
         ],
-        "id": "Omzetbelasting",
-        "types": [
-          "VerifiableCredential",
-          "Omzetbelasting"
-        ],
-        "format": "jwt_vc_json",
-        "cryptographic_binding_methods_supported": [
-          "did:jwk"
-        ],
-        "cryptographic_suites_supported": [
-          "ES256"
-        ]
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "Omzetbelasting"
+          ]
+        }
       }
-    ],
+    },
     "credential_supplier_config": {
       "templates_base_dir": "templates",
       "template_mappings": [
