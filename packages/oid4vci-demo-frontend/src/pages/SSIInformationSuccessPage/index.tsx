@@ -4,7 +4,6 @@ import style from '../../components/Text/Text.module.css'
 import { Trans, useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 import SSIPrimaryButton from '../../components/SSIPrimaryButton'
-
 import { NonMobile } from '../..'
 import { useMediaQuery } from 'react-responsive'
 import { useFlowRouter } from '../../router/flow-router'
@@ -44,11 +43,9 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 background: `url(${pageConfig.photoLeft})`,
                                 backgroundSize: 'cover',
                             }),
-//                            height: '100%',
                             width: pageConfig.leftPaneWidth ?? 'auto',
                             height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                             alignItems: 'center',
-//                            ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),
                             ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
                             ...(pageConfig.logo && { justifyContent: 'center' })
                         }}

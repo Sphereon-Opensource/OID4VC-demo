@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next'
 import {Mobile, NonMobile} from "../../index"
 import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
-import {SSICredentialsLandingPageConfig} from "../../ecosystem/ecosystem-config"
+import {SSIPresentationsLandingPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem";
 import {PresentationDefinitionItem} from "@sphereon/ssi-sdk.data-store";
 import {ImageProperties} from "../../types";
@@ -16,7 +16,7 @@ type PDWithBranding = PresentationDefinitionItem & {
 const SSIPresentationsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
-    const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
+    const flowRouter = useFlowRouter<SSIPresentationsLandingPageConfig>()
     const pageConfig= flowRouter.getPageConfig()
     const [presentationDefinitions, setPresentationDefinitions] = useState<Array<PDWithBranding>>([])
     const ecosystem = useEcosystem()

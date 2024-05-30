@@ -213,6 +213,17 @@ export interface SSICredentialsLandingPageConfig extends PageConfig { // TODO
     pageTitle: string
     text: string
     credentials: SSICredentialCardConfig[]
+}
+
+export interface SSIPresentationsLandingPageConfig extends PageConfig {
+    leftPaneWidth?: string
+    logo?: LogoProperties
+    mobile?: {
+        logo?: LogoProperties
+    }
+    backgroundColor?: string
+    pageTitle: string
+    text: string
     presentationDefinitions: SSIPresentationDefinitionCardConfig[]
 }
 
@@ -498,6 +509,7 @@ export interface VCIConfigPages {
     SSIDownloadPage: SSIDownloadPageConfig
     SSISelectCredentialPage: SSISelectCredentialPageConfig
     SSICredentialsLandingPage: SSICredentialsLandingPageConfig
+    SSIPresentationsLandingPageConfig: SSIPresentationsLandingPageConfig
     SSILoadingPage: SSILoadingPageConfig
     SSIWelcomePage: SSIWelcomePageConfig
     SSIIdentityVerificationPage: SSIIdentityVerificationPageConfig

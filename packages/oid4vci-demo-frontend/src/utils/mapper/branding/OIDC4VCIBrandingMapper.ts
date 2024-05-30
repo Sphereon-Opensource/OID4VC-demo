@@ -64,7 +64,7 @@ export const getCredentialBrandings = async (metadata: EndpointMetadataResult): 
                     ),
                 );
 
-                const types = 'types' in credentialsConfigSupported // TODO credentialsConfigSupported.types is deprecated
+                const types = 'types' in credentialsConfigSupported // TODO CWALL-239 credentialsConfigSupported.types is deprecated
                     ? credentialsConfigSupported.types as string[]
                     : 'credential_definition' in credentialsConfigSupported
                         ? credentialsConfigSupported.credential_definition.type
