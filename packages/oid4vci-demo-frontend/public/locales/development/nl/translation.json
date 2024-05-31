@@ -129,7 +129,7 @@
   "vismayuki_verify_top_title": "Graag ontvangen we van u 1 of meer credentials",
   "vismayuki_verify_top_description": "Reden: {{purpose}}",
   "vismayuki_verify_bottom_description": "Scan deze QR-code met u mobiele wallet’s QR-code scanner. \nOf vul het adres van uw web wallet in om uw web wallet te openen.",
-  "konkuk_share_success_top_title": "Thanks for submitting the information",
-  "konkuk_share_success_top_description": "This has been received successfully.",
-  "konkuk_share_success_button_caption": "Return to first pages"
+  "konkuk_share_success_top_title": "Bedankt voor het indienen van de informatie",
+  "konkuk_share_success_top_description": "Deze is succesvol ontvangen.",
+  "konkuk_share_success_button_caption": "Terug naar de eerste pagina's"
 }
