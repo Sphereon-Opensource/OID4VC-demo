@@ -16,10 +16,12 @@ import SSIEmailVerificationPage from "../pages/SSIEmailVerificationPage"
 import SSIWelcomePage from '../pages/SSIWelcomePage'
 import SSIIdentityVerificationPage from '../pages/SSIIdentityVerificationPage'
 import SSICredentialVerifyFromVPRequestPage from '../pages/SSICredentialVerifyFromVPRequest'
+import SSIPresentationsLandingPage from "../pages/SSIPresentationsLandingPage";
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
     '/landing': <SSICredentialsLandingPage/>,
+    '/landingvp': <SSIPresentationsLandingPage/>,
     '/information/manual/request': <SSIInformationManualRequestPage/>,
     '/information/success': <SSIInformationSuccessPage/>,
     '/credentials/select': <SSISelectCredentialPage/>,

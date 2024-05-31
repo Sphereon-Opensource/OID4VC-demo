@@ -11,6 +11,10 @@ import {Mobile, MobileOS, NonMobile, NonMobileOS} from "../../index"
 import {useFlowRouter} from "../../router/flow-router"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {SSICredentialVerifyRequestPageConfig} from "../../ecosystem/ecosystem-config"
+import {useLocation} from "react-router-dom";
+import InputField from "../../components/InputField";
+import {FormFieldValue} from "../../types";
+import styles from "../../components/DeepLinkButton/DeepLinkButton.module.css";
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const ecosystem = useEcosystem()
@@ -20,6 +24,25 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const credentialName = useEcosystem().getGeneralConfig().credentialName
     const [deepLink, setDeepLink] = useState<string>('')
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
+    const [webWalletAddressValue, setWebWalletAddressValue] = useState<string>();
+
+    const location = useLocation();
+    const state = location.state
+    const {pd} = state
+
+    const onWebWalletAddressChange = (value: FormFieldValue) => {
+        setWebWalletAddressValue(('' + value).trim());
+    };
+
+    const onWebWalletAddressClick = (): void => {
+        if (!webWalletAddressValue) {
+            throw new Error('Web wallet address must not be empty');
+        }
+
+        window.location.href = mergeQueryParams(webWalletAddressValue, deepLink.toString());
+    };
+
+
     const onSignInComplete = async (data: AuthorizationResponsePayload): Promise<void> => {
         const state = {
             data: {
@@ -71,15 +94,18 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
             {!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && (<div style={{
                 display: 'flex',
                 flexDirection: 'column',
-                marginTop: isTabletOrMobile ? 'auto' : '20%',
+                marginTop: isTabletOrMobile ? 'auto' : '5%',
                 maxHeight: '300px'
               }}>
                 <Text style={{ textAlign: 'center' }}
                       className={style.pReduceLineSpace}
                       h2Style={pageConfig.rightPaneLeftPane.qrCode.topTitle.h2Style}
                       pStyle={pageConfig.rightPaneLeftPane.qrCode.topTitle.pStyle}
-                      title={t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
-                      lines={t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
+                      title={pageConfig.rightPaneLeftPane.qrCode.topTitle.value ? t(pageConfig.rightPaneLeftPane.qrCode.topTitle.value).split('\n')
+                          : t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
+
+                      lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd.purpose}).split('\n')
+                          : t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
               </div>)}
             {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
                     display: 'flex',
@@ -110,15 +136,37 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                             vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                             vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
                                                              onAuthRequestRetrieved={console.log}
                                                              onSignInComplete={onSignInComplete}
                                                              setQrCodeData={setDeepLink}/>}
                               </div>
+                              <div style={{
+                                  display: 'flex',
+                                  flexDirection: 'row',
+                                  verticalAlign: 'bottom',
+                                  alignItems: 'flex-end',
+                                  justifyContent: 'center'
+                              }}>
+                                  <InputField
+                                      label={t('web_wallet_address')!}
+                                      type={'text'}
+                                      inlineStyle={{marginRight: '4px'}}
+                                      labelStyle={{textAlign: 'left'}}
+                                      onChange={async (value: FormFieldValue): Promise<void> => onWebWalletAddressChange(value)}
+                                  />
+                                  <SSIPrimaryButton
+                                      caption={t('go')}
+                                      style={{width: 87, ...styles}}
+                                      onClick={onWebWalletAddressClick}
+                                      disabled={webWalletAddressValue === undefined
+                                          || webWalletAddressValue.length === 0
+                                          || !urlRegex.test(webWalletAddressValue)}/>
+                              </div>
                           </NonMobileOS>
                           <MobileOS>
                               {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                         vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                         vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
                                                          onAuthRequestRetrieved={console.log}
                                                          onSignInComplete={onSignInComplete}
                                                          setQrCodeData={setDeepLink}/>}
@@ -140,7 +188,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginTop: '12%' })}}
                                     pStyle={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.pStyle}
                                     className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
-                                    title={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n')}
+                                    title={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title ? t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n') : []}
                                     lines={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_paragraph}`).split('\n')}
                               />
                           </NonMobile>
@@ -184,4 +232,27 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
         </div>
       </div>
     )
+}
+
+const urlRegex = /^(https?:\/\/)(([a-z\d]([a-z\d-]*[a-z\d])?\.)+[a-z]{2,}|localhost|([a-z\d]([a-z\d-]*[a-z\d])?\.local)|\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})(:\d+)?(\/[-a-z\d%_.~+]*)*(\?[;&a-z\d%_.~+=-]*)?(\#[-a-z\d_]*)?$/i;
+
+function mergeQueryParams(url1: string, url2: string) {
+    if (!urlRegex.test(url1)) {
+        throw new Error('Web wallet address must be a valid https:// url');
+    }
+    // Extract the base URL and any existing query parameters from webWalletAddressValue
+    const webWalletUrl = new URL(url1);
+    const walletParams = new URLSearchParams(webWalletUrl.search);
+
+    // Extract the query parameters from qrData.object
+    const queryParamsStartIndex = url2.indexOf('?');
+    const qrParams = new URLSearchParams(url2.substring(queryParamsStartIndex));
+
+    // Merge parameters: qrParams will overwrite existing params in walletParams
+    qrParams.forEach((value, key) => {
+        walletParams.set(key, value);
+    });
+
+    webWalletUrl.search = walletParams.toString();
+    return webWalletUrl.toString();
 }

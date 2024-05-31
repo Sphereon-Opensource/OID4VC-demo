@@ -1,4 +1,8 @@
-import {CredentialsSupportedDisplay, CredentialSupported, EndpointMetadataResult} from '@sphereon/oid4vci-common'
+import {
+    CredentialConfigurationSupported,
+    CredentialsSupportedDisplay,
+    EndpointMetadataResult
+} from '@sphereon/oid4vci-common'
 import {IBasicCredentialLocaleBranding} from '@sphereon/ssi-sdk.data-store'
 
 export const credentialLocaleBrandingFrom = async (credentialDisplay: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> => {
@@ -51,26 +55,32 @@ export const getCredentialBrandings = async (metadata: EndpointMetadataResult): 
     const credentialBranding = new Map<string, Array<IBasicCredentialLocaleBranding>>()
 
     Promise.all(
-        (metadata.credentialIssuerMetadata!.credentials_supported as CredentialSupported[]).map(async (credentialsSupported: CredentialSupported): Promise<void> => {
-            const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
-                (credentialsSupported.display ?? []).map(
-                    async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
-                        await credentialLocaleBrandingFrom(display)
-                ),
-            );
+        (Object.values(metadata.credentialIssuerMetadata!.credential_configurations_supported as Record<string, CredentialConfigurationSupported>))
+            .map(async (credentialsConfigSupported: CredentialConfigurationSupported): Promise<void> => {
+                const localeBranding: Array<IBasicCredentialLocaleBranding> = await Promise.all(
+                    (credentialsConfigSupported.display ?? []).map(
+                        async (display: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> =>
+                            await credentialLocaleBrandingFrom(display)
+                    ),
+                );
 
-            const types = 'types' in credentialsSupported ? credentialsSupported.types : undefined
-            if (types) {
-                const credentialTypes: Array<string> =
-                    types.length > 1
-                        ? types.filter((type: string) => type !== 'VerifiableCredential')
-                        : types.length === 0
-                            ? ['VerifiableCredential']
-                            : types
+                const types = 'types' in credentialsConfigSupported // TODO CWALL-239 credentialsConfigSupported.types is deprecated
+                    ? credentialsConfigSupported.types as string[]
+                    : 'credential_definition' in credentialsConfigSupported
+                        ? credentialsConfigSupported.credential_definition.type
+                        : undefined
 
-                credentialBranding.set(credentialTypes[0], localeBranding)
-            }
-        }))
+                if (types) {
+                    const credentialTypes: Array<string> =
+                        types.length > 1
+                            ? types.filter((type: string) => type !== 'VerifiableCredential')
+                            : types.length === 0
+                                ? ['VerifiableCredential']
+                                : types
+
+                    credentialBranding.set(credentialTypes[0], localeBranding)
+                }
+            }))
 
     return credentialBranding
 }

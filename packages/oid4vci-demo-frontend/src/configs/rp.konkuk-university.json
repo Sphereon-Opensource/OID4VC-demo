@@ -1,0 +1,157 @@
+{
+  "general": {
+    "credentialName": "Verified Account",
+    "oid4vpAgentBaseUrl": "https://agent.rp.konkuk-university.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.rp.konkuk-university.demo.sphereon.com",
+    "downloadUrl": "https://agent.rp.konkuk-university.demo.sphereon.com/#/download",
+    "verifierUrl": "https://agent.rp.konkuk-university.demo.sphereon.com"
+  },
+  "pages": {
+    "landingPage": {
+      "backgroundColor": "#005128",
+      "leftPaneWidth": "25%",
+      "logo": {
+        "src": "konkuk/logo.svg",
+        "alt": "logo"
+      },
+      "mobile": {
+        "logo": {
+          "src": "konkuk/logo.svg",
+          "alt": "background",
+          "width": "100%"
+        }
+      },
+      "pageTitle": "vismayuki_landing_page_title",
+      "text": "vismayuki_landing_page_description",
+      "presentationDefinitions": [
+        {
+          "id": "konkukStudent",
+          "name": "Konkuk University Student",
+          "route": "https://rp.konkuk-university.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "#AAC930",
+          "logo": {
+            "src": "konkuk/logo.svg",
+            "alt_text": "Konkuk logo",
+            "width": 62,
+            "height": 22
+          }
+        },
+        {
+          "id": "konkukEmployee",
+          "name": "Konkuk University Employee",
+          "route": "https://rp.konkuk-university.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "#4542F2",
+          "logo": {
+            "src": "konkuk/logo.svg",
+            "alt_text": "VismaYuki logo",
+            "width": 62,
+            "height": 22
+          }
+        }
+      ]
+    },
+    "verifyRequest": {
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "backgroundColor": "#005128",
+      "leftPaneWidth": "25%",
+      "logo": {
+        "src": "konkuk/logo.svg",
+        "alt": "logo"
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "40%"
+          },
+          "topTitle": {
+            "value": "vismayuki_verify_top_title",
+            "style": {
+              "display": "none"
+            }
+          },
+          "topDescription": "vismayuki_verify_top_description",
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "pStyle": {
+              "textAlign": "center"
+            },
+            "credential_verify_request_right_pane_bottom_paragraph": "vismayuki_verify_bottom_description"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      }
+    },
+    "shareSuccess": {
+      "backgroundColor": "#005128",
+      "leftPaneWidth": "25%",
+      "logo": {
+        "src": "konkuk/logo.svg",
+        "alt": "logo"
+      },
+      "photoRight": "undraw_messenger_re_8bky_grey.svg",
+      "topTitle": "konkuk_share_success_top_title",
+      "topDescription": "konkuk_share_success_top_description",
+      "buttonCaption": "konkuk_share_success_button_caption"
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "konkukStudent",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landingvp",
+          "nextId": "verifyRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
+          "nextId": "backToHome"
+        },
+        {
+          "id": "backToHome",
+          "operation": "navigate",
+          "path": "http://localhost:5001"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#501592"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "general": {
+    "credentialName": "Verified Account",
+    "oid4vpAgentBaseUrl": "http://localhost:5010",
+    "oid4vciAgentBaseUrl": "http://localhost:5010",
+    "downloadUrl": "https://agent.visma-yuki.demo.sphereon.com/#/download",
+    "verifierUrl": "https://agent.visma-yuki.demo.sphereon.com"
+  },
+  "pages": {
+    "landingPage": {
+      "logo": {
+        "src": "vismayuki/background.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "mobile": {
+        "logo": {
+          "src": "vismayuki/background.png",
+          "alt": "background",
+          "width": "100%"
+        }
+      },
+      "pageTitle": "vismayuki_landing_page_title",
+      "text": "vismayuki_landing_page_description",
+      "presentationDefinitions": [
+        {
+          "name": "Presentation definition naam",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "#5BDED2",
+          "logo": {
+            "src": "vismayuki/pd_logo.svg",
+            "alt_text": "Banqup logo",
+            "width": 231,
+            "height": 36
+          }
+        },
+        {
+          "name": "Presentation definition naam",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "#4542F2",
+          "logo": {
+            "src": "vismayuki/pd_logo.svg",
+            "alt_text": "VismaYuki logo",
+            "width": 231,
+            "height": 36
+          }
+        }
+      ]
+    },
+    "verifyRequest": {
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "logo": {
+        "src": "vismayuki/background.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "value": "vismayuki_verify_top_title",
+            "style": {
+              "display": "none"
+            }
+          },
+          "topDescription": "vismayuki_verify_top_description",
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "pStyle": {
+              "textAlign": "center"
+            },
+            "credential_verify_request_right_pane_bottom_paragraph": "vismayuki_verify_bottom_description"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      }
+    },
+    "shareSuccess": {
+      "sideImage": {
+        "src": "vismayuki/background.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "photoRight": "undraw_messenger_re_8bky_grey.svg",
+      "topTitle": "vismayuki_share_success_top_title",
+      "topDescription": "vismayuki_share_success_top_description",
+      "buttonCaption": "vismayuki_share_success_button_caption"
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landingvp",
+          "nextId": "verifyRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
+          "nextId": "backToHome"
+        },
+        {
+          "id": "backToHome",
+          "operation": "navigate",
+          "path": "http://localhost:5001"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#501592"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    }
+  }
+}
