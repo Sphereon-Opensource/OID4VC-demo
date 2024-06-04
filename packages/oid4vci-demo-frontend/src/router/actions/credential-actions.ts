@@ -1,17 +1,6 @@
 import short from "short-uuid"
-import {IOID4VCIClientCreateOfferUriResponse, IOID4VCIRestClient} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
-import {Ecosystem, useEcosystem} from "../../ecosystem/ecosystem"
-import {
-    ComponentConfig,
-    EcosystemGeneralConfig,
-    PageConfig,
-    VCIConfig,
-    VCIConfigRoute
-} from "../../ecosystem/ecosystem-config"
-import {IAgent, RemoveContext} from "@veramo/core"
-import {IQRCodeGenerator} from "@sphereon/ssi-sdk.qr-code-generator"
-import {ISIOPv2OID4VPRPRestClient} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client"
-
+import {IOID4VCIClientCreateOfferUriResponse} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-client"
+import {Ecosystem} from "../../ecosystem/ecosystem"
 
 type Payload = Record<string, string>
 type QRState = Record<string, any>
@@ -28,9 +17,10 @@ export const createCredentialOffer = async (actionParams: Record<string, any>, s
 
     const shortUuid = short.generate()
     const uriData: IOID4VCIClientCreateOfferUriResponse = await ecosystem.getAgent().oid4vciClientCreateOfferUri({
-        grants: {
+      credential_issuer: generalConfig.oid4vciAgentBaseUrl,
+      grants: {
             'urn:ietf:params:oauth:grant-type:pre-authorized_code': {
-                'pre-authorized_code': shortUuid
+                'pre-authorized_code': shortUuid,
             },
         },
         credentialDataSupplierInput: {
