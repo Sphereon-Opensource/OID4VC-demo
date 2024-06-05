@@ -17,6 +17,7 @@
 
     "@sphereon/ui-components.ssi-react": "0.2.0",
     "@veramo/core": "4.2.0",
+    "@veramo/remote-client": "4.2.0",
     "buffer": "^6.0.3",
     "debug": "^4.3.4",
     "i18next": "^22.5.1",

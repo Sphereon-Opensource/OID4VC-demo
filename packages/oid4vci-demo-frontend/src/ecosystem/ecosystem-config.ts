@@ -30,6 +30,8 @@ export interface SSICredentialVerifyFromVPRequestPageConfig extends PageConfig {
     welcomeLabel?: {
       style?: CSSProperties
       className?: string
+      headerResourceId: string
+      descriptionResourceId: string
     }
     qrCode?: {
       topTitle?: {
@@ -93,10 +95,12 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
       qrCode?: {
         fgColor?: string
         topTitle?: {
+          value?: string
           style?: CSSProperties
           h2Style?: CSSProperties
           pStyle?: CSSProperties
         },
+        topDescription?: string
         bottomText?: {
           fontColor?: string
           pStyle?: CSSProperties
@@ -199,7 +203,7 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
     rightPaneButtonHeight?: string
 }
 
-export interface SSICredentialsLandingPageConfig extends PageConfig {
+export interface SSICredentialsLandingPageConfig extends PageConfig { // TODO
     leftPaneWidth?: string
     logo?: LogoProperties
     mobile?: {
@@ -209,9 +213,13 @@ export interface SSICredentialsLandingPageConfig extends PageConfig {
     pageTitle: string
     text: string
     credentials: SSICredentialCardConfig[]
+    presentationDefinitions: SSIPresentationDefinitionCardConfig[]
 }
 
 export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
+    topTitle?: string
+    topDescription?: string
+    buttonCaption?: string
     leftPaneWidth?: string
     photoLeft?: string
     photoLeftManual?: string
@@ -224,6 +232,7 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
     },
     backgroundColor?: string
     logo?: LogoProperties
+    sideImage?: LogoProperties
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {
@@ -410,6 +419,17 @@ export interface SSICredentialCardConfig extends ComponentConfig {
     backgroundImage?: string
     logo?: ImageProperties
 }
+
+export interface SSIPresentationDefinitionCardConfig extends ComponentConfig {
+    id: string
+    name: string
+    route: string
+    description?: string
+    backgroundColor?: string
+    backgroundImage?: string
+    logo?: ImageProperties
+}
+
 
 export interface SSIDeepLinkConfig extends ComponentConfig {
 }

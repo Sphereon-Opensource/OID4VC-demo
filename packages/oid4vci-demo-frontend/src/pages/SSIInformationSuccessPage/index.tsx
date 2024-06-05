@@ -26,9 +26,9 @@ const SSIInformationSuccessPage: React.FC = () => {
     const pageConfig = flowRouter.getPageConfig()
     const generalConfig = useEcosystem().getGeneralConfig()
     const {t} = useTranslation()
-    const firstName = state!.payload?.['firstName'] ?? ''
+    const firstName = state?.payload?.['firstName'] ?? ''
     const onIssueCredential = async (): Promise<void> => await flowRouter.nextStep({
-        payload: state!.payload,
+        payload: state?.payload,
         credentialType: generalConfig.issueCredentialType
   })
     return (
@@ -38,13 +38,37 @@ const SSIInformationSuccessPage: React.FC = () => {
                     ? <SSIInformationSharedSuccessPageLeftPanel/>
                     : <div
                         style={{
-                            flex: 1,
                             display: 'flex',
                             flexDirection: 'column',
-                            background: `url(${pageConfig.photoLeft})`,
-                            backgroundSize: 'cover',
+                            ...(pageConfig.photoLeft && {
+                                background: `url(${pageConfig.photoLeft})`,
+                                backgroundSize: 'cover',
+                            }),
+//                            height: '100%',
+                            width: pageConfig.leftPaneWidth ?? 'auto',
+                            height: pageConfig.leftPaneWidth ? '100%' : 'auto',
+                            alignItems: 'center',
+//                            ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && { background: `url(${state?.isManualIdentification? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),
+                            ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                            ...(pageConfig.logo && { justifyContent: 'center' })
                         }}
                     >
+                        { pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
+                            />
+                        }
+                        {pageConfig.sideImage &&
+                            <img
+                                src={pageConfig.sideImage?.src}
+                                alt={pageConfig.sideImage?.alt}
+                                width={pageConfig.sideImage?.width}
+                                height={pageConfig.sideImage?.height}
+                            />
+                        }
                         {(pageConfig.textLeft) && (
                             <div style={{marginTop: 'auto', marginBottom: 153}}>
                                 <Text
@@ -58,12 +82,12 @@ const SSIInformationSuccessPage: React.FC = () => {
             </NonMobile>
             <div style={{
                 display: 'flex',
-                width: `${isTabletOrMobile ? '100%' : '40%'}`,
+                width: `${(isTabletOrMobile || pageConfig.sideImage || pageConfig.logo) ? '100%' : '40%'}`,
                 height: '100%',
                 backgroundColor: '#FFFFFF',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flexDirection: 'column'
+                flexDirection: 'column',
             }}>
                 <div style={{
                     display: 'flex',
@@ -71,7 +95,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     height: '70%',
-                    marginTop: '6%'
+                    marginTop: '6%',
                 }}>
                     <Trans>
                         <Text
@@ -80,8 +104,8 @@ const SSIInformationSuccessPage: React.FC = () => {
                                 flexGrow: 1,
                                 textAlign: 'center'
                             }}
-                            title={t('sharing_data_success_right_pane_title', {firstName}).split('\n')}
-                            lines={t(`${pageConfig.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph'}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
+                            title={t(pageConfig.topTitle ?? 'sharing_data_success_right_pane_title', {firstName}).split('\n')}
+                            lines={t(`${pageConfig.topDescription ?? (pageConfig.textRight && !state?.isManualIdentification? 'sharing_data_success_right_pane_paragraph_short': 'sharing_data_success_right_pane_paragraph')}`, {downloadUrl: generalConfig.downloadUrl}).split('\r\n')}
                         />
                     </Trans>
                     <div style={{
@@ -89,14 +113,17 @@ const SSIInformationSuccessPage: React.FC = () => {
                         height: '397px',
                         flexGrow: 1
                     }}>
-                        <img src={pageConfig.photoRight} alt="success"/>
+                        <img
+                            src={pageConfig.photoRight}
+                            alt="success"
+                        />
                     </div>
                     <div style={{
                         width: '100%',
                         alignSelf: 'flex-end',
                     }}>
                         <SSIPrimaryButton
-                            caption={t('label_next')}
+                            caption={t(pageConfig.buttonCaption ?? 'label_next')}
                             style={{width: '100%'}}
                             onClick={async () => await onIssueCredential()}
                         />
