@@ -70,7 +70,10 @@
             "VerifiableCredential",
             "Woonplaatsverklaring"
           ]
-        }
+        },
+        "types": [
+          "Woonplaatsverklaring"
+        ]
       },
       "Omzetbelasting": {
         "format": "jwt_vc_json",
@@ -131,7 +134,10 @@
             "VerifiableCredential",
             "Omzetbelasting"
           ]
-        }
+        },
+        "types": [
+          "Omzetbelasting"
+        ]
       }
     },
     "credential_supplier_config": {
