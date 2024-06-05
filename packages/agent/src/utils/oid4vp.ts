@@ -11,15 +11,13 @@ import {
 } from "../environment";
 import {CheckLinkedDomain, SupportedVersion} from "@sphereon/did-auth-siop";
 import {Resolvable} from "did-resolver";
-import {AbstractPdStore} from "@sphereon/ssi-sdk.data-store";
 
 
-function toPexInstanceOptions(pdStore: AbstractPdStore, oid4vpInstanceOpts: OID4VPInstanceOpts[], opts?: {
+function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], opts?: {
     resolver: Resolvable
 }): IPEXInstanceOptions[] {
     const result: IPEXInstanceOptions[] = []
     oid4vpInstanceOpts.map(opt => {
-        opt.store = pdStore
         if (opt.rpOpts && !opt.rpOpts.didOpts?.resolveOpts) {
             if (!opt.rpOpts.didOpts) {
                 // @ts-ignore
@@ -70,13 +68,12 @@ export async function getDefaultOID4VPRPOptions(args?: {
 
 }
 
-export async function createOID4VPRP(opts: { resolver: Resolvable, pdStore: AbstractPdStore }) {
+export async function createOID4VPRP(opts: { resolver: Resolvable }) {
     if (!IS_OID4VP_ENABLED) {
         return
     }
     return new SIOPv2RP({
         instanceOpts: toPexInstanceOptions(
-            opts.pdStore,
             oid4vpInstanceOpts.asArray,
             opts),
     })
