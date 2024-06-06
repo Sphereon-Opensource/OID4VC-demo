@@ -57,6 +57,19 @@
           ]
         }
       }
+    },
+    "credential_supplier_config": {
+      "templates_base_dir": "templates/",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "KvkInschrijving"
+          ],
+          "template_path": "KvkInschrijving.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
     }
   }
+}
 }
