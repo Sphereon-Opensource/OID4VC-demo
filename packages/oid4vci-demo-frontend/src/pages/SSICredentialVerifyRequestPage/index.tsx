@@ -35,7 +35,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
         if(pd === undefined) {
             ecosystem.getAgent().pdmGetDefinitions()
                 .then((pds) => {
-                    const presentationDefinitionItem = pds.find(pd => pd.id === flowRouter.getVpDefinitionId());
+                    const presentationDefinitionItem = pds.find(pd => pd.definitionId === flowRouter.getVpDefinitionId());
                     if (presentationDefinitionItem !== undefined) {
                         setPd(presentationDefinitionItem);
                     }
