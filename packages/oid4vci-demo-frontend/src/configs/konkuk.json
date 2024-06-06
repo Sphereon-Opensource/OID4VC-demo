@@ -1,0 +1,46 @@
+{
+  "pages": {
+    "landingPage": {
+      "backgroundColor": "#FFFFFF",
+      "credentials": [
+        {
+          "name": "Konkuk University Employee",
+          "description": "We need to verify that you are an employee",
+          "route": "https://agent.konkuk.demo.sphereon.com",
+          "backgroundColor": "#4542f2",
+          "logo": {
+            "src": "konkuk/konkuk_logo.svg",
+            "alt": "konkuk university",
+            "width": 400,
+            "height": 146
+          }
+        },
+        {
+          "name": "Konkuk University Student",
+          "description": "We need to verify that you are a student",
+          "route": "https://agent.konkuk.demo.sphereon.com",
+          "backgroundColor": "#aac930",
+          "logo": {
+            "src": "konkuk/konkuk_logo.svg",
+            "alt": "konkuk university",
+            "width": 400,
+            "height": 146
+          }
+        }
+      ]
+    }
+    },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landing",
+          "isDefaultRoute": true
+        }
+      ]
+    }
+  ]
+}
