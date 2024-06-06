@@ -1,0 +1,9 @@
+{
+  "definitionId": "ubo-kvk",
+  "correlationId": "https://agent.issuer.ubo.demo.sphereon.com",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "ubo-kvk",
+  "purpose": "KvK inschrijving",
+  "input_descriptors": [
+    {
+      "id": "0606cff1-0234-4f35-9d21-251668a60950",
+      "name": "Verificatie",
+      "purpose": "We hebben een KvK inschrijvingsbewijs nodig.",
+      "schema": [
+        {
+          "uri": "KvkInschrijving"
+        }
+      ]
+    }
+  ]
+}

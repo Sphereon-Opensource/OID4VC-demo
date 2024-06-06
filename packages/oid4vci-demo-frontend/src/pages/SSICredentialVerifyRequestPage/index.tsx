@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Text} from "../../components/Text"
 import style from '../../components/Text/Text.module.css'
 import DeepLinkButton from "../../components/DeepLinkButton"
@@ -15,6 +15,7 @@ import {useLocation} from "react-router-dom";
 import InputField from "../../components/InputField";
 import {FormFieldValue} from "../../types";
 import styles from "../../components/DeepLinkButton/DeepLinkButton.module.css";
+import {PresentationDefinitionItem} from "@sphereon/ssi-sdk.data-store";
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const ecosystem = useEcosystem()
@@ -27,8 +28,21 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     const [webWalletAddressValue, setWebWalletAddressValue] = useState<string>();
 
     const location = useLocation();
-    const state = location.state // TODO get pd's
-    const {pd} = state
+    const statePd = location.state?.pd;
+    const [pd, setPd] = useState<PresentationDefinitionItem | undefined>(statePd);
+
+    useEffect(() => {
+        if(pd === undefined) {
+            ecosystem.getAgent().pdmGetDefinitions()
+                .then((pds) => {
+                    const presentationDefinitionItem = pds.find(pd => pd.id === flowRouter.getVpDefinitionId());
+                    if (presentationDefinitionItem !== undefined) {
+                        setPd(presentationDefinitionItem);
+                    }
+                });
+        }
+    }, [pd, ecosystem, flowRouter]);
+
 
     const onWebWalletAddressChange = (value: FormFieldValue) => {
         setWebWalletAddressValue(('' + value).trim());
@@ -104,7 +118,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                       title={pageConfig.rightPaneLeftPane.qrCode.topTitle.value ? t(pageConfig.rightPaneLeftPane.qrCode.topTitle.value).split('\n')
                           : t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
 
-                      lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd.purpose}).split('\n')
+                      lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd?.purpose ?? pd?.definitionPayload.purpose}).split('\n')
                           : t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
               </div>)}
             {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
@@ -136,7 +150,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                   {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                             vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
+                                                             vpDefinitionId={pd?.id ?? flowRouter.getVpDefinitionId()}
                                                              onAuthRequestRetrieved={console.log}
                                                              onSignInComplete={onSignInComplete}
                                                              setQrCodeData={setDeepLink}/>}
@@ -166,7 +180,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                           </NonMobileOS>
                           <MobileOS>
                               {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                         vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
+                                                         vpDefinitionId={pd?.id ?? flowRouter.getVpDefinitionId()}
                                                          onAuthRequestRetrieved={console.log}
                                                          onSignInComplete={onSignInComplete}
                                                          setQrCodeData={setDeepLink}/>}

@@ -1,0 +1,62 @@
+{
+  "correlationId": "https://agent.issuer.ubo.demo.sphereon.com",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://agent.issuer.ubo.demo.sphereon.com",
+    "credential_endpoint": "https://agent.issuer.ubo.demo.sphereon.com/credentials",
+    "display": [
+      {
+        "name": "KVK Credential",
+        "description": "KVK Credential"
+      }
+    ],
+    "credential_configurations_supported": {
+      "KvkInschrijving": {
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
+        ],
+        "display": [
+          {
+            "name": "KVK Credential",
+            "description": "KVK Credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/6Xt6HSt/kvk-logo.png",
+              "alt_text": "KVK logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/K7ch7MX/kvk-bg.png",
+              "alt_text": "Crops background"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "KVK Credential",
+            "description": "KVK Credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/6Xt6HSt/kvk-logo.png",
+              "alt_text": "KVK logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/K7ch7MX/kvk-bg.png",
+              "alt_text": "Crops background"
+            }
+          }
+        ],
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "KvkInschrijving"
+          ]
+        }
+      }
+    }
+  }
+}

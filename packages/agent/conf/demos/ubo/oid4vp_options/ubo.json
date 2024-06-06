@@ -1,0 +1,8 @@
+{
+  "definitionId": "ubo-kvk",
+  "rpOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}

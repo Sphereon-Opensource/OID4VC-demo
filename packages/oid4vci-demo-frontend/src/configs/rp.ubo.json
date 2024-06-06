@@ -1,0 +1,104 @@
+{
+  "general": {
+    "credentialName": "KvkInschrijving",
+    "oid4vpAgentBaseUrl": "https://agent.issuer.ubo.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.issuer.ubo.demo.sphereon.com",
+    "downloadUrl": "https://rp.ubo.demo.sphereon.com/#/download",
+    "verifierUrl": "https://agent.issuer.ubo.demo.sphereon.com"
+  },
+  "pages": {
+    "verifyRequest": {
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "logo": {
+        "src": "vismayuki/background.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "value": "vismayuki_verify_top_title",
+            "style": {
+              "display": "none"
+            }
+          },
+          "topDescription": "vismayuki_verify_top_description",
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "pStyle": {
+              "textAlign": "center"
+            },
+            "credential_verify_request_right_pane_bottom_paragraph": "vismayuki_verify_bottom_description"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      }
+    },
+    "shareSuccess": {
+      "sideImage": {
+        "src": "vismayuki/background.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "photoRight": "undraw_messenger_re_8bky_grey.svg",
+      "topTitle": "vismayuki_share_success_top_title",
+      "topDescription": "vismayuki_share_success_top_description",
+      "buttonCaption": "vismayuki_share_success_button_caption"
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "ubo-kvk",
+      "steps": [
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "shareSuccess",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
+          "nextId": "backToHome"
+        },
+        {
+          "id": "backToHome",
+          "operation": "navigate",
+          "path": "https://rp.vismayuki.demo.sphereon.com/"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#501592"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    }
+  }
+}
