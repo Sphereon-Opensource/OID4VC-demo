@@ -342,22 +342,11 @@
       "vpDefinitionId": "knb-kvk",
       "steps": [
         {
-          "id": "download",
-          "operation": "navigate",
-          "path": "/download"
-        },
-        {
-          "id": "verifyRequest",
-          "operation": "navigate",
-          "path": "/credentials/verify/request",
-          "nextId": "infoRequest",
-          "isDefaultRoute": true
-        },
-        {
           "id": "infoRequest",
           "operation": "navigate",
           "path": "/information/manual/request",
-          "nextId": "credentialOffer"
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
         },
         {
           "id": "credentialOffer",
