@@ -1,14 +1,14 @@
 {
-  "id": "ubo-kvk",
-  "purpose": "KvK inschrijving",
+  "id": "ubo",
+  "purpose": "UBO credential",
   "input_descriptors": [
     {
-      "id": "0606cff1-0234-4f35-9d21-251668a60950",
+      "id": "0706cff1-0234-4f35-9d21-251668a60950",
       "name": "Verificatie",
-      "purpose": "We hebben een KvK inschrijvingsbewijs nodig.",
+      "purpose": "We hebben UBO credential nodig.",
       "schema": [
         {
-          "uri": "KvkInschrijving"
+          "uri": "UBO"
         }
       ]
     }

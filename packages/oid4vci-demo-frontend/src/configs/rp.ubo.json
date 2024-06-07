@@ -1,6 +1,6 @@
 {
   "general": {
-    "credentialName": "KvkInschrijving",
+    "credentialName": "UBO",
     "oid4vpAgentBaseUrl": "https://agent.issuer.ubo.demo.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.issuer.ubo.demo.sphereon.com",
     "downloadUrl": "https://rp.ubo.demo.sphereon.com/#/download",
@@ -67,7 +67,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "ubo-kvk",
+      "vpDefinitionId": "ubo",
       "steps": [
         {
           "id": "verifyRequest",
