@@ -11,8 +11,9 @@
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
       "logo": {
-        "src": "vismayuki/background.png",
+        "src": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
         "alt": "background",
+        "width": "1140px",
         "height": "100%"
       },
       "rightPaneLeftPane": {
@@ -53,7 +54,7 @@
     },
     "shareSuccess": {
       "sideImage": {
-        "src": "vismayuki/background.png",
+        "src": "luke-porter-UGX2qdjdKkw-unsplash_1.png",
         "alt": "background",
         "height": "100%"
       },
