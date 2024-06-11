@@ -1,17 +1,24 @@
 {
-  "correlationId": "https://agent.konkuk.demo.sphereon.com",
+  "correlationId": "https://agent.issuer.konkuk.demo.sphereon.com",
   "overwriteExisting": true,
   "metadata": {
-    "credential_issuer": "https://agent.konkuk.demo.sphereon.com",
-    "credential_endpoint": "https://agent.konkuk.demo.sphereon.com/credentials",
+    "credential_issuer": "https://agent.issuer.konkuk.demo.sphereon.com",
+    "credential_endpoint": "https://agent.issuer.konkuk.demo.sphereon.com/credentials",
     "display": [
       {
         "name": "Konkuk University",
         "description": "Konkuk University Issuer"
       }
     ],
-    "credentials_supported": [
-      {
+    "credential_configurations_supported": {
+      "Woonplaatsverklaring": {
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
+        ],
         "display": [
           {
             "name": "Student credential",
@@ -42,93 +49,22 @@
               "alt_text": "A guy in front of the window"
             }
           }
-        ],
-        "order": [
-          "firstName",
-          "lastName",
-          "dateOfBirth",
-          "studentNumber",
-          "subject"
-        ],
-        "credentialSubject": {
-          "firstName": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "First Name"
-              },
-              {
-                "name": "First Name",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "lastName": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Last Name"
-              },
-              {
-                "name": "Last Name",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "dateOfBirth": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Date Of Birth"
-              },
-              {
-                "name": "Date Of Birth",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "studentNumber": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Student Number"
-              },
-              {
-                "name": "Student Number",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "subject": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Subject"
-              },
-              {
-                "name": "Subject",
-                "locale": "en-US"
-              }
-            ]
-          }
-        },
-        "id": "konkuk_university",
-        "types": [
-          "VerifiableCredential",
-          "StudentCredential"
-        ],
+          ],
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "StudentCredential"
+          ]
+        }
+      },
+      "Omzetbelasting": {
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
-          "did:web",
           "did:jwk"
         ],
         "cryptographic_suites_supported": [
-          "ES256",
-          "ES256K",
-          "EdDSA"
-        ]
-      },
-      {
+          "ES256"
+        ],
         "display": [
           {
             "name": "Employee credential",
@@ -147,7 +83,7 @@
           {
             "locale": "en-US",
             "name": "Employee credential",
-            "description": "employee credential",
+            "description": "Employee credential",
             "background_color": "rgba(0, 0, 0, 0.2)",
             "text_color": "#FBFBFB",
             "logo": {
@@ -160,68 +96,16 @@
             }
           }
         ],
-        "order": [
-          "firstName",
-          "lastName",
-          "dateOfBirth"
-        ],
-        "credentialSubject": {
-          "firstName": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "First Name"
-              },
-              {
-                "name": "First Name",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "lastName": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Last Name"
-              },
-              {
-                "name": "Last Name",
-                "locale": "en-US"
-              }
-            ]
-          },
-          "dateOfBirth": {
-            "value_type": "string",
-            "display": [
-              {
-                "name": "Date Of Birth"
-              },
-              {
-                "name": "Date Of Birth",
-                "locale": "en-US"
-              }
-            ]
-          }
-        },
-        "id": "konkuk_university",
-        "types": [
-          "VerifiableCredential",
-          "EmployeeCredential"
-        ],
-        "format": "jwt_vc_json",
-        "cryptographic_binding_methods_supported": [
-          "did:web",
-          "did:jwk"
-        ],
-        "cryptographic_suites_supported": [
-          "ES256",
-          "ES256K",
-          "EdDSA"
-        ]
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "EmployeeCredential"
+          ]
+        }
       }
     ],
     "credential_supplier_config": {
-      "templates_base_dir": "templates/konkuk",
+      "templates_base_dir": "templates",
       "template_mappings": [
         {
           "credential_types": [
