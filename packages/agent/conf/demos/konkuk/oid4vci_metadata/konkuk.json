@@ -1,0 +1,127 @@
+{
+  "correlationId": "https://agent.issuer.konkuk.demo.sphereon.com",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://agent.issuer.konkuk.demo.sphereon.com",
+    "credential_endpoint": "https://agent.issuer.konkuk.demo.sphereon.com/credentials",
+    "display": [
+      {
+        "name": "Konkuk University",
+        "description": "Konkuk University Issuer"
+      }
+    ],
+    "credential_configurations_supported": {
+      "StudentCredential": {
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
+        ],
+        "display": [
+          {
+            "name": "Student credential",
+            "description": "Student credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/PwfCJFK/konkuk-logo.png",
+              "alt_text": "Konkuk University logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/6tKP1rs/konkuk-bg.png",
+              "alt_text": "A guy in front of the window"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Student credential",
+            "description": "student credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/PwfCJFK/konkuk-logo.png",
+              "alt_text": "Konkuk University logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/6tKP1rs/konkuk-bg.png",
+              "alt_text": "A guy in front of the window"
+            }
+          }
+        ],
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "StudentCredential"
+          ]
+        }
+      },
+      "EmployeeCredential": {
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
+        ],
+        "display": [
+          {
+            "name": "Employee credential",
+            "description": "Employee credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/PwfCJFK/konkuk-logo.png",
+              "alt_text": "Konkuk University logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/6tKP1rs/konkuk-bg.png",
+              "alt_text": "A guy in front of the window"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "Employee credential",
+            "description": "Employee credential",
+            "background_color": "rgba(0, 0, 0, 0.2)",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/PwfCJFK/konkuk-logo.png",
+              "alt_text": "Konkuk University logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/6tKP1rs/konkuk-bg.png",
+              "alt_text": "A guy in front of the window"
+            }
+          }
+        ],
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "EmployeeCredential"
+          ]
+        }
+      }
+    },
+    "credential_supplier_config": {
+      "templates_base_dir": "templates",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "StudentCredential"
+          ],
+          "template_path": "StudentCredential.hbs",
+          "format": "jwt_vc_json"
+        },
+        {
+          "credential_types": [
+            "EmployeeCredential"
+          ],
+          "template_path": "EmployeeCredential.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
+  }
+}

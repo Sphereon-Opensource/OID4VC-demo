@@ -1,0 +1,9 @@
+{
+  "definitionId": "konkuk",
+  "correlationId": "https://agent.issuer.konkuk.demo.sphereon.com",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}
