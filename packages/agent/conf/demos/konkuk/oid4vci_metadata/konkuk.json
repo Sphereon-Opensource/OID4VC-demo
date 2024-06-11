@@ -11,7 +11,7 @@
       }
     ],
     "credential_configurations_supported": {
-      "Woonplaatsverklaring": {
+      "StudentCredential": {
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
           "did:jwk"
@@ -49,7 +49,7 @@
               "alt_text": "A guy in front of the window"
             }
           }
-          ],
+        ],
         "credential_definition": {
           "type": [
             "VerifiableCredential",
@@ -57,7 +57,7 @@
           ]
         }
       },
-      "Omzetbelasting": {
+      "EmployeeCredential": {
         "format": "jwt_vc_json",
         "cryptographic_binding_methods_supported": [
           "did:jwk"
@@ -103,7 +103,7 @@
           ]
         }
       }
-    ],
+    },
     "credential_supplier_config": {
       "templates_base_dir": "templates",
       "template_mappings": [
