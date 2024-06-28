@@ -1,0 +1,23 @@
+{
+    "@context": [
+        "https://raw.githubusercontent.com/Sphereon-Opensource/vc-contexts/master/abn-amro/iban-legalperson.schema.json",
+        "https://www.w3.org/2018/credentials/v1", {
+            "description": {
+                "@id": "http://schema.org/description",
+                "@container": "@language"
+            }
+        }
+    ],
+    "type": [
+        "VerifiableCredential",
+        "IBANLegalPerson"
+    ],
+    "expirationDate": "{{{ dateTimeAfterMonths 12 }}}",
+    "credentialSubject": {
+        "bankName": "{{bankName}}",
+        "leiCodeBank": "{{leiCodeBank}}",
+        "swiftNumber": "{{swiftNumber}}",
+        "iban": "{{iban}}",
+        "accountHolder": "{{accountHolder}}",
+    }
+}

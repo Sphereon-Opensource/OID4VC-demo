@@ -1,0 +1,9 @@
+{
+  "definitionId": "belastingdienst",
+  "correlationId": "https://agent.belastingdienst.demo.sphereon.com",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}
