@@ -90,7 +90,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "ibanLegalPerson",
+      "vpDefinitionId": "IBANLegalPerson",
       "steps": [
         {
           "id": "infoRequest",
@@ -104,7 +104,7 @@
           "operation": "execute",
           "action": "create-credential-offer",
           "actionParams": {
-            "issueCredentialType": "ibanLegalPerson"
+            "issueCredentialType": "IBANLegalPerson"
           },
           "nextId": "issueRequest"
         },

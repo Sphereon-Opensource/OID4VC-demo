@@ -11,18 +11,18 @@
       }
     ],
     "credential_configurations_supported": {
-      "ibanLegalPerson": {
+      "IBANLegalPerson": {
         "display": [
           {
             "name": "IBAN legal person",
             "description": "IBAN legal person",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://ibb.co/kKx1j4D",
+              "url": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
               "alt_text": "ABN Amro logo"
             },
             "background_image": {
-              "url": "https://ibb.co/C0CMQhb",
+              "url": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
               "alt_text": "ABN Amro Card"
             }
           },
@@ -32,11 +32,11 @@
             "description": "IBAN legal person",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://ibb.co/kKx1j4D",
+              "url": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
               "alt_text": "ABN Amro logo"
             },
             "background_image": {
-              "url": "https://ibb.co/C0CMQhb",
+              "url": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
               "alt_text": "ABN Amro Card"
             }
           },
@@ -46,16 +46,16 @@
             "description": "IBAN legal person",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://ibb.co/kKx1j4D",
+              "url": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
               "alt_text": "ABN Amro logo"
             },
             "background_image": {
-              "url": "https://ibb.co/C0CMQhb",
+              "url": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
               "alt_text": "ABN Amro Card"
             }
           }
         ],
-        "id": "ibanLegalPerson",
+        "id": "IBANLegalPerson",
         "types": [
           "VerifiableCredential",
           "IBANLegalPerson"
