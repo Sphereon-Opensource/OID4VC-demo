@@ -138,5 +138,9 @@
   "abn_landing_page_text": "You can receive the credentials below in your wallet.<br>Select a credential and follow the necessary steps.",
   "iban_legal_person": "IBAN legal person",
   "abn_invullen": "To get started, you could fill in the information below.",
-  "ssi_information_request_page_form_bankname_label": "Bank name"
+  "bank_name": "Bank name",
+  "leicode_bank": "LEI Code bank",
+  "swift_number": "SWIFT Number",
+  "account_holder": "Account holder",
+  "iban": "IBAN"
 }

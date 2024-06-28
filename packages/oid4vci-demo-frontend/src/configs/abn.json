@@ -21,13 +21,7 @@
           "name": "IBAN legal person",
           "description": "IBAN legal person",
           "route": "https://iban-legalperson.abn.demo.sphereon.com",
-          "backgroundImage": "abn/abncard-iban-lp.png",
-          "logo": {
-            "src": "abn/logo.svg",
-            "alt": "abn amro",
-            "width": 246,
-            "height": 137
-          }
+          "backgroundImage": "abn/credential-iban-lp.png"
         }
       ]
     }
