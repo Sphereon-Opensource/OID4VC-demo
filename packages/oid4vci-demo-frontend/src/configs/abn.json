@@ -1,139 +1,48 @@
 {
-  "general": {
-    "credentialName": "iban-legalperson",
-    "oid4vpAgentBaseUrl": "https://abn.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.abn.demo.sphereon.com",
-    "downloadUrl": "https://agent.abn.demo.sphereon.com/#/download"
-  },
   "pages": {
-    "infoRequest": {
+    "landingPage": {
       "logo": {
-        "src": "abn/logo.png",
-        "alt": "abn-amro",
-        "height": "100%"
-      },
-      "sharing_data_right_pane_title": "abn_legalperson",
-      "sharing_data_right_pane_paragraph": "abn_legalperson_invullen",
-      "primaryButtonResourceId": "label_continue",
-      "primaryButtonManualResourceId": "label_continue",
-      "mobile": {
-        "backgroundColor": "#FFFFFF"
-      },
-      "form": [
-        [
-          {
-            "id": "naam",
-            "key": "naam",
-            "label": "ssi_information_request_page_form_company_name_label",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "rsin",
-            "key": "rsin",
-            "label": "rsin",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "btwId",
-            "key": "btwId",
-            "label": "btw_id",
-            "type": "text",
-            "required": true
-          }
-        ],
-        [
-          {
-            "id": "obNummer",
-            "key": "obNummer",
-            "label": "ob_nummer",
-            "type": "text",
-            "required": true
-          }
-        ]
-      ]
-    },
-    "issueRequest": {
-      "title": "add_named_credential",
-      "topParagraph": "paragraph_add_named_credential",
-      "bottomParagraph": "paragraph_scan_this_qr",
-      "logo": {
-        "src": "belastingdienst/visie-missie-scaled.png",
+        "src": "abn/img_1.png",
         "alt": "logo",
         "height": "100%"
       },
       "mobile": {
+        "logo": {
+          "src": "abn/logo.svg",
+          "alt": "logo",
+          "width": "100%"
+        }
       },
-      "enableWebWalletAddress": true
+      "backgroundColor": "#FFFFFF",
+      "pageTitle": "credentials_available",
+      "text": "abn_landing_page_text",
+      "credentials": [
+        {
+          "name": "IBAN legal person",
+          "description": "IBAN legal person",
+          "route": "https://iban-legalperson.abn.demo.sphereon.com",
+          "backgroundImage": "abn/abncard-iban-lp.png",
+          "logo": {
+            "src": "abn/logo.svg",
+            "alt": "abn amro",
+            "width": 246,
+            "height": 137
+          }
+        }
+      ]
     }
   },
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "abn",
       "steps": [
         {
-          "id": "infoRequest",
+          "id": "landingPage",
           "operation": "navigate",
-          "path": "/information/manual/request",
-          "nextId": "credentialOffer",
+          "path": "/landing",
           "isDefaultRoute": true
-        },
-        {
-          "id": "credentialOffer",
-          "operation": "execute",
-          "action": "create-credential-offer",
-          "actionParams": {
-            "issueCredentialType": "IBANLegalPerson"
-          },
-          "nextId": "issueRequest"
-        },
-        {
-          "id": "issueRequest",
-          "operation": "navigate",
-          "path": "/credentials/issue/request",
-          "nextId": "issueSuccess"
-        },
-        {
-          "id": "issueSuccess",
-          "operation": "navigate",
-          "path": "https://abn.demo.sphereon.com"
-        },
-        {
-          "id": "download",
-          "operation": "navigate",
-          "path": "/download"
         }
       ]
     }
-  ],
-  "components": {
-    "DeepLink": {},
-    "SSIPrimaryButton": {
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#2A6797"
-        },
-        "button": {
-          "width": "220px"
-        }
-      }
-    },
-    "SSISecondaryButton": {
-      "styles": {
-        "mainContainer": {
-          "backgroundColor": "#353438"
-        },
-        "button": {
-          "width": "220px"
-        }
-      }
-    },
-    "Text": {}
-  }
+  ]
 }

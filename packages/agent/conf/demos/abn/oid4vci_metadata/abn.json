@@ -7,54 +7,51 @@
     "display": [
       {
         "name": "ABN AMRO",
-        "description": "Belastingdienst Issuer"
+        "description": "ABN Issuer"
       }
     ],
     "credential_configurations_supported": {
       "ibanLegalPerson": {
         "display": [
           {
-            "name": "A",
-            "description": "Woonplaatsverklaring Belastingdienst",
-            "background_color": "rgba(0, 0, 0, 0.2)",
+            "name": "IBAN legal person",
+            "description": "IBAN legal person",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://i.ibb.co/pyZpF8m/Belastingdienst.png",
-              "alt_text": "Belastingdienst logo"
+              "url": "https://ibb.co/kKx1j4D",
+              "alt_text": "ABN Amro logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/jWF45Xw/grant-ritchie.png",
-              "alt_text": "Skyscrapers background"
+              "url": "https://ibb.co/C0CMQhb",
+              "alt_text": "ABN Amro Card"
             }
           },
           {
             "locale": "en-US",
-            "name": "Residence statement",
-            "description": "Residence statement Belastingdienst",
-            "background_color": "rgba(0, 0, 0, 0.2)",
+            "name": "IBAN legal person",
+            "description": "IBAN legal person",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://i.ibb.co/pyZpF8m/Belastingdienst.png",
-              "alt_text": "Belastingdienst logo"
+              "url": "https://ibb.co/kKx1j4D",
+              "alt_text": "ABN Amro logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/jWF45Xw/grant-ritchie.png",
-              "alt_text": "Skyscrapers background"
+              "url": "https://ibb.co/C0CMQhb",
+              "alt_text": "ABN Amro Card"
             }
           },
           {
             "locale": "nl-NL",
-            "name": "Woonplaatsverklaring",
-            "description": "Woonplaatsverklaring Belastingdienst",
-            "background_color": "rgba(0, 0, 0, 0.2)",
+            "name": "IBAN legal person",
+            "description": "IBAN legal person",
             "text_color": "#FBFBFB",
             "logo": {
-              "url": "https://i.ibb.co/pyZpF8m/Belastingdienst.png",
-              "alt_text": "Belastingdienst logo"
+              "url": "https://ibb.co/kKx1j4D",
+              "alt_text": "ABN Amro logo"
             },
             "background_image": {
-              "url": "https://i.ibb.co/jWF45Xw/grant-ritchie.png",
-              "alt_text": "Skyscrapers background"
+              "url": "https://ibb.co/C0CMQhb",
+              "alt_text": "ABN Amro Card"
             }
           }
         ],
@@ -77,16 +74,9 @@
       "template_mappings": [
         {
           "credential_types": [
-            "Woonplaatsverklaring"
+            "IBANLegalPerson"
           ],
-          "template_path": "Woonplaatsverklaring.hbs",
-          "format": "jwt_vc_json"
-        },
-        {
-          "credential_types": [
-            "Omzetbelasting"
-          ],
-          "template_path": "abncred.hbs",
+          "template_path": "ibanLegalPerson.hbs",
           "format": "jwt_vc_json"
         }
       ]
