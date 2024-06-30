@@ -1,4 +1,11 @@
 {
+  "general": {
+    "credentialName": "IBAN Legal Person",
+    "oid4vpAgentBaseUrl": "https://agent.abn.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.abn.demo.sphereon.com",
+    "downloadUrl": "https://agent.abn.demo.sphereon.com/#/download",
+    "verifierUrl": "https:/account.abn.demo.sphereon.com"
+  },
   "pages": {
     "landingPage": {
       "logo": {
