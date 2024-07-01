@@ -59,6 +59,12 @@
           }
         ],
         "id": "Woonplaatsverklaring",
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "Woonplaatsverklaring"
+          ]
+        },
         "types": [
           "VerifiableCredential",
           "Woonplaatsverklaring"
@@ -119,6 +125,12 @@
           }
         ],
         "id": "Omzetbelasting",
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "Woonplaatsverklaring"
+          ]
+        },
         "types": [
           "VerifiableCredential",
           "Omzetbelasting"
