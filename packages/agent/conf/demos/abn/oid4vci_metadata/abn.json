@@ -60,7 +60,70 @@
           "type": [
             "VerifiableCredential",
             "IBANLegalPerson"
-          ]
+          ],
+          "credentialSubject": {
+            "bankName": {
+              "display": [
+                {
+                  "name": "Bank name",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "Bank naam",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "leiCodeBank": {
+              "display": [
+                {
+                  "name": "LEI code",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "LEI code",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "swiftNumber": {
+              "display": [
+                {
+                  "name": "SWIFT code",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "SWIFT code",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "iban": {
+              "display": [
+                {
+                  "name": "IBAN",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "IBAN",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "accountHolder": {
+              "display": [
+                {
+                  "name": "Account Holder",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "Rekeninghouder",
+                  "locale": "nl-NL"
+                }
+
+              ]
+            }
+          }
         },
         "types": [
           "VerifiableCredential",
@@ -74,7 +137,7 @@
           "ES256"
         ]
       }
-      },
+    },
     "credential_supplier_config": {
       "templates_base_dir": "templates",
       "template_mappings": [
