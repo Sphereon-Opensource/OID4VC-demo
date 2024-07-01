@@ -1,0 +1,9 @@
+{
+  "definitionId": "abn",
+  "correlationId": "https://agent.abn.demo.sphereon.com",
+  "issuerOpts": {
+    "didOpts": {
+      "checkLinkedDomains": "if_present"
+    }
+  }
+}

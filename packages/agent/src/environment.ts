@@ -11,6 +11,9 @@ import {
 
 dotenvConfig()
 
+const toBoolean = (value?: string): boolean => value === undefined || value === 'true';
+
+
 export const DB_CONNECTION_NAME = process.env.DB_CONNECTION_NAME ?? 'default'
 export const DB_SQLITE_FILE = process.env.DB_SQLITE_FILE ?? 'database/agent_default.sqlite'
 
@@ -36,8 +39,8 @@ export const oid4vciInstanceOpts = loadJsonFiles<IIssuerOptsImportArgs>({path: O
 export const oid4vciMetadataOpts = loadJsonFiles<IMetadataImportArgs>({path: OID4VCI_ISSUER_METADATA_PATH})
 export const syncDefinitionsOpts = loadJsonFiles<IPresentationDefinition>({path: OID4VP_PRESENTATION_DEFINITION_PATH})
 export const didOptConfigs = loadJsonFiles<IDIDOpts>({path: DID_OPTIONS_PATH})
-export const IS_OID4VP_ENABLED = process.env.OID4VP_ENABLED === undefined || process.env.OID4VP_ENABLED
-export const IS_OID4VCI_ENABLED = process.env.OID4VCI_ENABLED === undefined || process.env.OID4VCI_ENABLED
+export const IS_OID4VP_ENABLED = toBoolean(process.env.OID4VP_ENABLED)
+export const IS_OID4VCI_ENABLED = toBoolean(process.env.OID4VCI_ENABLED )
 
 export * from './types'
 export * from './utils'

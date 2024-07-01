@@ -1,0 +1,42 @@
+{
+  "pages": {
+    "landingPage": {
+      "logo": {
+        "src": "abn/img_1.png",
+        "alt": "logo",
+        "height": "100%"
+      },
+      "mobile": {
+        "logo": {
+          "src": "abn/logo.svg",
+          "alt": "logo",
+          "width": "100%"
+        }
+      },
+      "backgroundColor": "#FFFFFF",
+      "pageTitle": "credentials_available",
+      "text": "abn_landing_page_text",
+      "credentials": [
+        {
+          "name": "IBAN legal person",
+          "description": "IBAN legal person",
+          "route": "https://iban-legalperson.abn.demo.sphereon.com",
+          "backgroundImage": "abn/credential-iban-lp.png"
+        }
+      ]
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landing",
+          "isDefaultRoute": true
+        }
+      ]
+    }
+  ]
+}

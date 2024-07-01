@@ -1,0 +1,153 @@
+{
+  "correlationId": "https://agent.abn.demo.sphereon.com",
+  "overwriteExisting": true,
+  "metadata": {
+    "credential_issuer": "https://agent.abn.demo.sphereon.com",
+    "credential_endpoint": "https://agent.abn.demo.sphereon.com/credentials",
+    "display": [
+      {
+        "name": "ABN AMRO",
+        "description": "ABN Issuer"
+      }
+    ],
+    "credential_configurations_supported": {
+      "IBANLegalPerson": {
+        "display": [
+          {
+            "name": "IBAN legal person",
+            "description": "IBAN legal person",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
+              "alt_text": "ABN Amro logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
+              "alt_text": "ABN Amro Card"
+            }
+          },
+          {
+            "locale": "en-US",
+            "name": "IBAN legal person",
+            "description": "IBAN legal person",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
+              "alt_text": "ABN Amro logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
+              "alt_text": "ABN Amro Card"
+            }
+          },
+          {
+            "locale": "nl-NL",
+            "name": "IBAN legal person",
+            "description": "IBAN legal person",
+            "text_color": "#FBFBFB",
+            "logo": {
+              "url": "https://i.ibb.co/ZdVm5Bg/abn-logo.png",
+              "alt_text": "ABN Amro logo"
+            },
+            "background_image": {
+              "url": "https://i.ibb.co/kcb9XQ4/abncard-iban-lp.png",
+              "alt_text": "ABN Amro Card"
+            }
+          }
+        ],
+        "id": "IBANLegalPerson",
+        "credential_definition": {
+          "type": [
+            "VerifiableCredential",
+            "IBANLegalPerson"
+          ],
+          "credentialSubject": {
+            "bankName": {
+              "display": [
+                {
+                  "name": "Bank name",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "Bank naam",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "leiCodeBank": {
+              "display": [
+                {
+                  "name": "LEI code",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "LEI code",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "swiftNumber": {
+              "display": [
+                {
+                  "name": "SWIFT code",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "SWIFT code",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "iban": {
+              "display": [
+                {
+                  "name": "IBAN",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "IBAN",
+                  "locale": "nl-NL"
+                }
+              ]
+            },
+            "accountHolder": {
+              "display": [
+                {
+                  "name": "Account Holder",
+                  "locale": "en-US"
+                },
+                {
+                  "name": "Rekeninghouder",
+                  "locale": "nl-NL"
+                }
+              ]
+            }
+          }
+        },
+        "types": [
+          "VerifiableCredential",
+          "IBANLegalPerson"
+        ],
+        "format": "jwt_vc_json",
+        "cryptographic_binding_methods_supported": [
+          "did:jwk"
+        ],
+        "cryptographic_suites_supported": [
+          "ES256"
+        ]
+      }
+    },
+    "credential_supplier_config": {
+      "templates_base_dir": "templates",
+      "template_mappings": [
+        {
+          "credential_types": [
+            "IBANLegalPerson"
+          ],
+          "template_path": "ibanLegalPerson.hbs",
+          "format": "jwt_vc_json"
+        }
+      ]
+    }
+  }
+}
