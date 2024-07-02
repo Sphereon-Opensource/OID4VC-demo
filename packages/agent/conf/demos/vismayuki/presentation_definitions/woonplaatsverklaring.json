@@ -11,7 +11,21 @@
             {
                "uri":"Woonplaatsverklaring"
             }
-         ]
+         ],
+         "constraints": {
+            "fields": [
+               {
+                  "path": [
+                     "$.type",
+                     "$.vc.type"
+                  ],
+                  "filter": {
+                     "type": "string",
+                     "pattern": "Woonplaatsverklaring"
+                  }
+               }
+            ]
+         }
       }
    ]
 }
