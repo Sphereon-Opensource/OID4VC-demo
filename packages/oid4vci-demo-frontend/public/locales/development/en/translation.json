@@ -134,5 +134,13 @@
   "vismayuki_share_success_button_caption": "Ga terug naar begin pagina",
   "konkuk_share_success_top_title": "Thanks for submitting the information",
   "konkuk_share_success_top_description": "This has been received successfully.",
-  "konkuk_share_success_button_caption": "Return to first pages"
+  "konkuk_share_success_button_caption": "Return to first pages",
+  "abn_landing_page_text": "You can receive the credentials below in your wallet.<br>Select a credential and follow the necessary steps.",
+  "iban_legal_person": "IBAN legal person",
+  "abn_invullen": "To get started, you could fill in the information below.",
+  "bank_name": "Bank name",
+  "leicode_bank": "LEI Code bank",
+  "swift_number": "SWIFT Number",
+  "account_holder": "Account holder",
+  "iban": "IBAN"
 }

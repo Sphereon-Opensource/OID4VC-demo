@@ -131,5 +131,13 @@
   "vismayuki_verify_bottom_description": "Scan deze QR-code met u mobiele wallet’s QR-code scanner. \nOf vul het adres van uw web wallet in om uw web wallet te openen.",
   "konkuk_share_success_top_title": "Bedankt voor het indienen van de informatie",
   "konkuk_share_success_top_description": "Deze is succesvol ontvangen.",
-  "konkuk_share_success_button_caption": "Terug naar de eerste pagina's"
+  "konkuk_share_success_button_caption": "Terug naar de eerste pagina's",
+  "abn_landing_page_text": "U kunt de onderstaande referenties in uw wallet ontvangen.<br>Selecteer een referentie en volg de noodzakelijke stappen.",
+  "iban_legal_person": "IBAN rechtspersoon",
+  "abn_invullen": "Om te beginnen kunt u de onderstaande informatie invullen.",
+  "bank_name": "Banknaam",
+  "leicode_bank": "LEI-code bank",
+  "swift_number": "SWIFT-nummer",
+  "account_holder": "Rekeninghouder",
+  "iban": "IBAN"
 }

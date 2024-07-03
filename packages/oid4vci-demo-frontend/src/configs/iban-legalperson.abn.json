@@ -1,0 +1,154 @@
+{
+  "general": {
+    "credentialName": "IBAN LegalPerson",
+    "oid4vpAgentBaseUrl": "https://agent.abn.demo.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.abn.demo.sphereon.com",
+    "downloadUrl": "https://agent.abn.demo.sphereon.com/#/download"
+  },
+  "pages": {
+    "infoRequest": {
+      "logo": {
+        "src": "abn/img_1.png",
+        "alt": "logo",
+        "height": "100%"
+      },
+      "sharing_data_right_pane_title": "iban_legal_person",
+      "sharing_data_right_pane_paragraph": "abn_invullen",
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "mobile": {
+        "backgroundColor": "#FFFFFF"
+      },
+      "form": [
+        [
+          {
+            "id": "bankName",
+            "key": "bankName",
+            "label": "bank_name",
+            "defaultValue": "ABN AMRO Bank N.V.",
+            "readonly": true,
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "leiCodeBank",
+            "key": "leiCodeBank",
+            "label": "leicode_bank",
+            "defaultValue": "BFXS5XCH7N0Y05NIXW11",
+            "readonly": true,
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "swiftNumber",
+            "key": "swiftNumber",
+            "label": "swift_number",
+            "defaultValue": "ABNANL2A",
+            "readonly": true,
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "accountHolder",
+            "key": "accountHolder",
+            "label": "account_holder",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "iban",
+            "key": "iban",
+            "label": "iban",
+            "type": "text",
+            "required": true
+          }
+        ]
+      ]
+    },
+    "issueRequest": {
+      "title": "add_named_credential",
+      "topParagraph": "paragraph_add_named_credential",
+      "bottomParagraph": "paragraph_scan_this_qr",
+      "logo": {
+        "src": "abn/img_1.png",
+        "alt": "logo",
+        "height": "100%"
+      },
+      "mobile": {
+      },
+      "enableWebWalletAddress": true
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "IBANLegalPerson",
+      "steps": [
+        {
+          "id": "infoRequest",
+          "operation": "navigate",
+          "path": "/information/manual/request",
+          "nextId": "credentialOffer",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "credentialOffer",
+          "operation": "execute",
+          "action": "create-credential-offer",
+          "actionParams": {
+            "issueCredentialType": "IBANLegalPerson"
+          },
+          "nextId": "issueRequest"
+        },
+        {
+          "id": "issueRequest",
+          "operation": "navigate",
+          "path": "/credentials/issue/request",
+          "nextId": "issueSuccess"
+        },
+        {
+          "id": "issueSuccess",
+          "operation": "navigate",
+          "path": "https://abn.demo.sphereon.com"
+        },
+        {
+          "id": "download",
+          "operation": "navigate",
+          "path": "/download"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "DeepLink": {},
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#2A6797"
+        },
+        "button": {
+          "width": "220px"
+        }
+      }
+    },
+    "SSISecondaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#353438"
+        },
+        "button": {
+          "width": "220px"
+        }
+      }
+    },
+    "Text": {}
+  }
+}
