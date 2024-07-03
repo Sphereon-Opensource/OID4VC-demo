@@ -7,11 +7,15 @@
     "display": [
       {
         "name": "Future Mobility Alliance",
-        "description": "Future Data Market Place Issuer"
+        "description": "Future Data Market Place Issuer",
+        "logo": {
+          "url": "https://i.ibb.co/vkfZCvr/FMDM-card-logo.png",
+          "alt_text": "A green and blue circle shape, with the text Future Mobility Data Marketplace next to it, portraying the logo of the Future Mobility Alliance."
+        }
       }
     ],
-    "credentials_supported": [
-      {
+    "credential_configurations_supported": {
+      "GuestCredential":{
         "display": [
           {
             "name": "FMA Guest",
@@ -130,7 +134,6 @@
             ]
           }
         },
-        "id": "fmdm2023",
         "types": [
           "VerifiableCredential",
           "GuestCredential"
@@ -146,7 +149,7 @@
           "EdDSA"
         ]
       }
-    ],
+    },
     "credential_supplier_config": {
       "templates_base_dir": "templates/fmdm",
       "template_mappings": [

@@ -8,11 +8,15 @@
     "display": [
       {
         "name": "Dutch Blockchain Coalition",
-        "description": "Dutch Blockchain Coalition Issuer"
+        "description": "Dutch Blockchain Coalition Issuer",
+        "logo": {
+          "url": "https://dutchblockchaincoalition.org/assets/images/icons/Logo-DBC.png",
+          "alt_text": "An orange block shape, with the text Dutch Blockchain Coalition next to it, portraying the logo of the Dutch Blockchain Coalition."
+        }
       }
     ],
-    "credentials_supported": [
-      {
+    "credential_configurations_supported": {
+      "DIIPv2": {
         "display": [
           {
             "name": "DBC DIIP",
@@ -111,7 +115,6 @@
             ]
           }
         },
-        "id": "dbc2023",
         "types": [
           "VerifiableCredential",
           "DIIPv2"
@@ -125,7 +128,7 @@
           "ES256"
         ]
       }
-    ],
+    },
     "credential_supplier_config": {
       "templates_base_dir": "templates/dbc",
       "template_mappings": [
