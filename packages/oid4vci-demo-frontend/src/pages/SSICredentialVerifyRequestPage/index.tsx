@@ -39,7 +39,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
             throw new Error('Web wallet address must not be empty');
         }
 
-        window.location.href = mergeQueryParams(webWalletAddressValue, deepLink.toString());
+        window.open(mergeQueryParams(webWalletAddressValue, deepLink.toString()), '_blank');
     };
 
 
