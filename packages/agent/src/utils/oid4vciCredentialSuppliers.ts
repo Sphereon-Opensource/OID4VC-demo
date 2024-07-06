@@ -22,7 +22,16 @@ class TemplateCredentialDataSupplier {
     }
 
     public async generateCredentialData(args: CredentialDataSupplierArgs): Promise<CredentialDataSupplierResult> {
-        const types: string[] = getTypesFromRequest(args.credentialRequest)
+
+        let types: string[]
+        if ('credential_identifier' in args.credentialRequest) {
+            if(!args.credentialRequest.credential_identifier || args.credentialRequest.credential_identifier.length === 0) {
+                throw Error('credential_identifier may not be blank')
+            }
+            types = [args.credentialRequest.credential_identifier]
+        } else {
+            types = getTypesFromRequest(args.credentialRequest)
+        }
         const credentialSupplierConfig = args.credentialSupplierConfig as CredentialSupplierConfigWithTemplateSupport
         if (credentialSupplierConfig.template_mappings) {
             const templateMapping = credentialSupplierConfig.template_mappings

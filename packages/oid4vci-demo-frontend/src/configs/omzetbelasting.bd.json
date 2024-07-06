@@ -102,7 +102,7 @@
         {
           "id": "issueSuccess",
           "operation": "navigate",
-          "path": "https://bd.demo.sphereon.com"
+          "path": "https://issuer.bd.demo.sphereon.com"
         },
         {
           "id": "download",

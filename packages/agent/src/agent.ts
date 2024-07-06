@@ -104,7 +104,7 @@ const plugins: IAgentPlugin[] = [
     new DIDResolverPlugin({
         resolver,
     }),
-    new PresentationExchange({pdStore}),
+    new PresentationExchange(),
     new CredentialPlugin(),
     new CredentialHandlerLDLocal({
         contextMaps: [LdDefaultContexts],
@@ -122,7 +122,7 @@ const plugins: IAgentPlugin[] = [
     }),
     new PDManager({store: pdStore})
 ]
-const oid4vpRP = IS_OID4VP_ENABLED ? await createOID4VPRP({resolver, pdStore}) : undefined;
+const oid4vpRP = IS_OID4VP_ENABLED ? await createOID4VPRP({resolver}) : undefined;
 if (oid4vpRP) {
     plugins.push(oid4vpRP)
 }

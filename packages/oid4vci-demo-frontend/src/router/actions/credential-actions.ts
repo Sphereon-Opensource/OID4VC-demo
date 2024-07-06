@@ -27,7 +27,6 @@ export const createCredentialOffer = async (actionParams: Record<string, any>, s
             ...state.payload
         },
         credential_configuration_ids: [state.credentialType ?? ("issueCredentialType" in actionParams ? actionParams.issueCredentialType : generalConfig.issueCredentialType)],
-        credential_issuer: generalConfig.oid4vciAgentBaseUrl
     })
 
     return {
