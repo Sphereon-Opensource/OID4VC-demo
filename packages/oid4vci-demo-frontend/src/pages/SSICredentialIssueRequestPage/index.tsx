@@ -93,7 +93,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
         }
 
         const queryString = qrData.object.split('://')[1];
-        window.location.href = mergeQueryParams(webWalletAddressValue, queryString);
+        window.open(mergeQueryParams(webWalletAddressValue, queryString), '_blank');
     };
 
 
