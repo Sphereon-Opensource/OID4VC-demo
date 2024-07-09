@@ -15,7 +15,7 @@
       }
     ],
     "credential_configurations_supported": {
-      "GuestCredential":{
+      "GuestCredential": {
         "display": [
           {
             "name": "FMA Guest",

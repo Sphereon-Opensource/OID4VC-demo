@@ -174,7 +174,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "DIIPv2",
+      "vpDefinitionId": "dbc2023",
       "steps": [
         {
           "id": "startPage",

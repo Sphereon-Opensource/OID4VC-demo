@@ -2,8 +2,8 @@
   "general": {
     "credentialName": "FMA Guest",
     "issueCredentialType": "GuestCredential",
-    "oid4vpAgentBaseUrl": "http://192.168.178.110:5000",
-    "oid4vciAgentBaseUrl": "http://192.168.178.110:5000",
+    "oid4vpAgentBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
+    "oid4vciAgentBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
     "verifierUrl": "https://marketplace.future-mobility-alliance.org",
     "verifierUrlCaption": "FMDM marketplace",
     "downloadUrl": "https://ssi.future-mobility-alliance.org/demo/issuer/#/download"
