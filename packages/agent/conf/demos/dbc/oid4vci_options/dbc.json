@@ -1,6 +1,6 @@
 {
   "correlationId": "https://ssi.dutchblockchaincoalition.org/agent",
-  "definitionId": "dbc2023",
+  "definitionId": "DIIPv2",
   "issuerOpts": {
     "didOpts": {
       "checkLinkedDomains": "if_present"

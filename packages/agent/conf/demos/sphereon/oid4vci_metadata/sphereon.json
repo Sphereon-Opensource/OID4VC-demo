@@ -7,11 +7,15 @@
     "display": [
       {
         "name": "Sphereon International",
-        "description": "Sphereon International"
+        "description": "Sphereon International",
+        "logo": {
+          "url": "https://i.ibb.co/NWQQ9kt/sphereon-logo.png",
+          "alt_text": "Red square depicting Sphereon logo."
+        }
       }
     ],
-    "credentials_supported": [
-      {
+    "credential_configurations_supported": {
+      "DIIPv2": {
         "display": [
           {
             "name": "Sphereon DIIP",
@@ -110,7 +114,6 @@
             ]
           }
         },
-        "id": "DIIPv2",
         "types": [
           "VerifiableCredential",
           "DIIPv2"
@@ -124,7 +127,7 @@
           "ES256"
         ]
       },
-      {
+      "OpenBadgeCredential":{
         "display": [
           {
             "name": "Example University Degree",
@@ -148,7 +151,6 @@
             }
           }
         ],
-        "id": "OpenBadgeCredentialJwt",
         "types": [
           "VerifiableCredential",
           "OpenBadgeCredential"
@@ -161,7 +163,7 @@
           "EdDSA"
         ]
       },
-      {
+      "PermanentResidentCard":{
         "display": [
           {
             "name": "Permanent Resident Card",
@@ -185,7 +187,6 @@
             }
           }
         ],
-        "id": "PermantResidentCardJwt",
         "types": [
           "VerifiableCredential",
           "PermanentResidentCard"
@@ -201,7 +202,7 @@
           "EdDSA"
         ]
       },
-      {
+      "GuestCredential":{
         "display": [
           {
             "name": "Sphereon guest",
@@ -317,7 +318,6 @@
             ]
           }
         },
-        "id": "sphereon2023",
         "types": [
           "VerifiableCredential",
           "GuestCredential"
@@ -333,7 +333,7 @@
           "EdDSA"
         ]
       },
-      {
+      "MembershipExample":{
         "display": [
           {
             "name": "Membership Example",
@@ -449,7 +449,6 @@
             ]
           }
         },
-        "id": "MembershipExample",
         "types": [
           "VerifiableCredential",
           "MembershipExample"
@@ -465,7 +464,7 @@
           "EdDSA"
         ]
       },
-      {
+      "VerifiedEmployee":{
         "display": [
           {
             "name": "Verified Employee",
@@ -615,7 +614,6 @@
             ]
           }
         },
-        "id": "VerifiedEmployee",
         "types": [
           "VerifiableCredential",
           "VerifiedEmployee"
@@ -631,7 +629,7 @@
           "EdDSA"
         ]
       }
-    ],
+    },
     "credential_supplier_config": {
       "templates_base_dir": "templates/sphereon",
       "template_mappings": [

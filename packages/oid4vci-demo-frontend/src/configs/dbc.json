@@ -1,7 +1,7 @@
 {
   "general": {
     "credentialName": "DBC Interop v2",
-    "issueCredentialType": "dbc2023",
+    "issueCredentialType": "DIIPv2",
     "oid4vpAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/agent",
     "oid4vciAgentBaseUrl": "https://ssi.dutchblockchaincoalition.org/agent",
     "verifierUrl": "https://www.dutchblockchaincoalition.org/userlogin",

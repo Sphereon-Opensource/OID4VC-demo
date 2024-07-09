@@ -1,7 +1,7 @@
 {
   "general": {
     "credentialName": "FMA Guest",
-    "issueCredentialType": "fmdm2023",
+    "issueCredentialType": "GuestCredential",
     "oid4vpAgentBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
     "oid4vciAgentBaseUrl": "https://ssi.future-mobility-alliance.org/demo/issuer",
     "verifierUrl": "https://marketplace.future-mobility-alliance.org",
