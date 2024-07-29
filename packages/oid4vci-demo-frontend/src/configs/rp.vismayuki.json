@@ -24,24 +24,28 @@
       "text": "vismayuki_landing_page_description",
       "presentationDefinitions": [
         {
+          "id": "omzetbelasting",
           "name": "Presentation definition naam",
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "#5BDED2",
+          "backgroundImage": "belastingdienst/hector-j-rivas.jpg",
           "logo": {
-            "src": "vismayuki/pd_logo.svg",
+            "src": "belastingdienst/logo.svg",
             "alt_text": "Banqup logo",
             "width": 231,
             "height": 36
           }
         },
         {
+          "id": "woonplaatsverklaring",
           "name": "Presentation definition naam",
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "#4542F2",
+          "backgroundImage": "belastingdienst/grant-richie.png",
           "logo": {
-            "src": "vismayuki/pd_logo.svg",
+            "src": "belastingdienst/logo.svg",
             "alt_text": "VismaYuki logo",
             "width": 231,
             "height": 36
