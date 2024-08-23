@@ -29,7 +29,7 @@ import {SphereonKeyManagementSystem} from '@sphereon/ssi-sdk-ext.kms-local'
 import {getDbConnection} from './database'
 import {ISIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {IPresentationExchange, PresentationExchange} from '@sphereon/ssi-sdk.presentation-exchange'
-import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api";
+import {ISIOPv2RPRestAPIOpts, SIOPv2RPApiServer} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-api'
 import {PDStore} from '@sphereon/ssi-sdk.data-store'
 import {
     createDidProviders,
@@ -51,9 +51,9 @@ import {
     IS_OID4VCI_ENABLED,
     IS_OID4VP_ENABLED,
     oid4vciInstanceOpts, OID4VP_DEFINITIONS, syncDefinitionsOpts
-} from "./environment";
-import {IOID4VCIStore, OID4VCIStore} from "@sphereon/ssi-sdk.oid4vci-issuer-store";
-import {IOID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
+} from './environment'
+import {IOID4VCIStore, OID4VCIStore} from '@sphereon/ssi-sdk.oid4vci-issuer-store'
+import {IOID4VCIIssuer} from '@sphereon/ssi-sdk.oid4vci-issuer'
 import {
     addDefaultsToOpts,
     createOID4VCIIssuer,
@@ -61,13 +61,17 @@ import {
     getDefaultOID4VCIIssuerOptions,
     issuerPersistToInstanceOpts,
     toImportIssuerOptions
-} from "./utils/oid4vci";
-import {OID4VCIRestAPI} from "@sphereon/ssi-sdk.oid4vci-issuer-rest-api";
-import {getCredentialDataSupplier} from "./utils/oid4vciCredentialSuppliers";
-import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from "@sphereon/ssi-express-support";
-import {RemoteServerApiServer} from "@sphereon/ssi-sdk.remote-server-rest-api";
+} from './utils/oid4vci'
+import {OID4VCIRestAPI} from '@sphereon/ssi-sdk.oid4vci-issuer-rest-api'
+import {getCredentialDataSupplier} from './utils/oid4vciCredentialSuppliers'
+import {ExpressBuilder, ExpressCorsConfigurer, StaticBearerAuth} from '@sphereon/ssi-express-support'
+import {RemoteServerApiServer} from '@sphereon/ssi-sdk.remote-server-rest-api'
 import {IPDManager, PDManager, pdManagerMethods} from '@sphereon/ssi-sdk.pd-manager'
-import {IPresentationDefinition} from "@sphereon/pex";
+import {IPresentationDefinition} from '@sphereon/pex'
+import {IIdentifierResolution} from '@sphereon/ssi-sdk-ext.identifier-resolution'
+import {ISDJwtPlugin} from '@sphereon/ssi-sdk.sd-jwt'
+import {IJwtService} from '@sphereon/ssi-sdk-ext.jwt-service'
+import {IIssuerDefaultOpts} from '@sphereon/ssi-sdk.oid4vci-issuer-store'
 
 const resolver = createDidResolver()
 const dbConnection = getDbConnection(DB_CONNECTION_NAME)
@@ -83,7 +87,10 @@ type TAgentTypes = ISIOPv2RP &
     IDataStoreORM &
     ICredentialVerifier &
     ICredentialIssuer &
-    IPDManager
+    IPDManager &
+    IIdentifierResolution &
+    ISDJwtPlugin &
+    IJwtService
 
 
 const pdStore = new PDStore(dbConnection);
@@ -154,6 +161,7 @@ if (!defaultDID || !defaultKid || !(await getIdentifier(defaultDID))) {
     console.log('TODO create identifier and write config')
     // create Identifier
 }
+
 const oid4vpOpts = IS_OID4VP_ENABLED ? await getDefaultOID4VPRPOptions({did: defaultDID, resolver}) : undefined
 if (oid4vpOpts && oid4vpRP) {
     oid4vpRP.setDefaultOpts(oid4vpOpts, context)
@@ -216,7 +224,8 @@ if (IS_OID4VCI_ENABLED) {
         throw Error('Express support needs to be configured when exposing OID4VP')
     }
     if (oid4vciStore) {
-        const defaultOpts = await getDefaultOID4VCIIssuerOptions({resolver})
+        //fixme strict type check here: Types of property didOpts are incompatible. Type IDIDOptions | undefined is not assignable to type IDIDOptions
+        const defaultOpts: IIssuerDefaultOpts | undefined = await getDefaultOID4VCIIssuerOptions({resolver}) as IIssuerDefaultOpts | undefined
         const importIssuerPersistArgs = toImportIssuerOptions()
         for (const opt of importIssuerPersistArgs) {
             await addDefaultsToOpts(opt.issuerOpts);
@@ -283,6 +292,6 @@ const definitionsToImport: Array<IPresentationDefinition> = syncDefinitionsOpts.
 if (definitionsToImport.length > 0) {
     agent.siopImportDefinitions({
         definitions: definitionsToImport,
-        versionControlMode: 'AutoIncrementMajor' // This is the default, but just to indicate here it exists
+        versionControlMode: 'AutoIncrement' // This is the default, but just to indicate here it exists
     })
 }

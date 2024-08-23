@@ -1,5 +1,5 @@
-import {IRPDefaultOpts, SIOPv2RP} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth";
-import {IPEXInstanceOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/src/types/ISIOPv2RP";
+import {IRPDefaultOpts, SIOPv2RP} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
+import {IPEXInstanceOptions} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth'
 import {
     createDidResolver,
     getDefaultDID,
@@ -8,9 +8,12 @@ import {
     IS_OID4VP_ENABLED,
     OID4VPInstanceOpts,
     oid4vpInstanceOpts
-} from "../environment";
-import {CheckLinkedDomain, SupportedVersion} from "@sphereon/did-auth-siop";
-import {Resolvable} from "did-resolver";
+} from '../environment'
+import {SupportedVersion, VerifyJwtCallback} from '@sphereon/did-auth-siop'
+import {CheckLinkedDomain} from '@sphereon/did-auth-siop-adapter'
+import {Resolvable} from 'did-resolver'
+import {ISIOPIdentifierOptions} from "@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth/src/types/ISIOPv2RP";
+import {JwtHeader, JwtPayload} from '@sphereon/oid4vc-common'
 
 
 function toPexInstanceOptions(oid4vpInstanceOpts: OID4VPInstanceOpts[], opts?: {
@@ -58,12 +61,12 @@ export async function getDefaultOID4VPRPOptions(args?: {
             resolveOpts: {
                 resolver
             },
-            checkLinkedDomains: CheckLinkedDomain.IF_PRESENT,
-            identifierOpts: {
-                identifier,
-                kid: await getDefaultKid({did})
+            idOpts: {
+                identifier
             }
-        }
+        },
+        //fixme: write the verifyJwt function
+        verifyJwtCallback: async (jwtVerifier: any, jwt: { header: JwtHeader; payload: JwtPayload; raw: string },) => {return true}
     }
 
 }

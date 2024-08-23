@@ -7,7 +7,7 @@ import {
     oid4vciInstanceOpts,
     oid4vciMetadataOpts
 } from "../environment";
-import {IIssuerDefaultOpts, OID4VCIIssuer} from "@sphereon/ssi-sdk.oid4vci-issuer";
+import {IIssuerOptions as IssuerOpts, OID4VCIIssuer} from '@sphereon/ssi-sdk.oid4vci-issuer'
 import {Resolvable} from "did-resolver";
 import {
     IIssuerInstanceOptions,
@@ -16,6 +16,8 @@ import {
     OID4VCIStore
 } from "@sphereon/ssi-sdk.oid4vci-issuer-store";
 import {IIssuerOptsImportArgs} from "@sphereon/ssi-sdk.oid4vci-issuer-store/src/types/IOID4VCIStore";
+import agent from '../agent'
+import {ManagedIdentifierOpts} from "@sphereon/ssi-sdk-ext.identifier-resolution";
 
 
 export function toImportIssuerOptions(args?: { oid4vciInstanceOpts: IIssuerOptsImportArgs[] }): IIssuerOptsImportArgs[] {
@@ -23,7 +25,7 @@ export function toImportIssuerOptions(args?: { oid4vciInstanceOpts: IIssuerOptsI
 }
 
 
-export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string, resolver?: Resolvable }): Promise<IIssuerDefaultOpts | undefined> {
+export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string, resolver?: Resolvable }): Promise<IssuerOpts | undefined> {
     if (!IS_OID4VCI_ENABLED) {
         return
     }
@@ -31,38 +33,34 @@ export async function getDefaultOID4VCIIssuerOptions(args?: { did?: string, reso
     if (!did) {
         return
     }
-    const identifier = await getIdentifier(did)
+    const identifier = await agent.identifierManagedGet({identifier: did})
     if (!identifier) {
         return
     }
+    //fixme: remove the casting
     return {
         userPinRequired: process.env.OID4VCI_DEFAULTS_USER_PIN_REQUIRED?.toLowerCase() !== 'false' ?? false,
-        didOpts: {
-            resolveOpts: {
-                resolver: args?.resolver ?? createDidResolver()
-            },
-            identifierOpts: {
-                identifier,
-                kid: await getDefaultKid({did})
-            }
-        }
+        idOpts: {
+            method: identifier.method,
+            identifier: identifier
+        } as unknown as ManagedIdentifierOpts
     }
 
 }
 
 
 export async function addDefaultsToOpts(issuerOpts: IIssuerOptions) {
-    const defaultOpts = await getDefaultOID4VCIIssuerOptions({resolver: issuerOpts?.didOpts?.resolveOpts?.resolver})
-    let identifierOpts = issuerOpts?.didOpts?.identifierOpts ?? defaultOpts?.didOpts.identifierOpts
-    let resolveOpts = issuerOpts.didOpts.resolveOpts ?? defaultOpts?.didOpts.resolveOpts
+    const defaultOpts: IssuerOpts | undefined = await getDefaultOID4VCIIssuerOptions({resolver: issuerOpts?.didOpts?.resolveOpts?.resolver})
+    let idOpts = issuerOpts?.didOpts?.idOpts ?? defaultOpts?.didOpts?.idOpts
+    let resolveOpts = issuerOpts.didOpts.resolveOpts ?? defaultOpts?.resolveOpts
     if (!issuerOpts.didOpts) {
         issuerOpts.didOpts = {
-            identifierOpts,
+            idOpts,
             resolveOpts
         }
     }
-    if (!issuerOpts.didOpts.identifierOpts) {
-        issuerOpts.didOpts.identifierOpts = identifierOpts
+    if (!issuerOpts.didOpts.idOpts) {
+        issuerOpts.didOpts.idOpts = idOpts
     }
     if (!issuerOpts.didOpts.resolveOpts) {
         issuerOpts.didOpts.resolveOpts = resolveOpts

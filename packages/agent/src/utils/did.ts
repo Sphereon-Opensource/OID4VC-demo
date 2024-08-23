@@ -86,9 +86,10 @@ export async function getDefaultKid({did, verificationMethodName, verificationMe
     if (!identifier) {
         return undefined
     }
-    let keys = await mapIdentifierKeysToDocWithJwkSupport(identifier, verificationMethodName ?? 'assertionMethod', context)
+    let keys = await mapIdentifierKeysToDocWithJwkSupport({identifier, vmRelationship: verificationMethodName ?? 'assertionMethod'
+}, context)
     if (keys.length === 0 && (verificationMethodFallback === undefined || verificationMethodFallback)) {
-        keys = await mapIdentifierKeysToDocWithJwkSupport(identifier, 'verificationMethod', context)
+        keys = await mapIdentifierKeysToDocWithJwkSupport({identifier, vmRelationship: 'verificationMethod'}, context)
     }
     if (keys.length === 0) {
         return undefined
