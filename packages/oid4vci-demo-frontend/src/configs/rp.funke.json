@@ -1,10 +1,10 @@
 {
   "general": {
     "credentialName": "Verified Account",
-    "oid4vpAgentBaseUrl": "https://agent.rp.funke.demo.sphereon.com",
-    "oid4vciAgentBaseUrl": "https://agent.rp.funke.demo.sphereon.com",
+    "oid4vpAgentBaseUrl": "http://192.168.178.110:5000",
+    "oid4vciAgentBaseUrl": "http://192.168.178.110:5000",
     "downloadUrl": "https://agent.demo.sphereon.com/#/download",
-    "verifierUrl": "https://agent.rp.funke.demo.sphereon.com"
+    "verifierUrl": "http://192.168.178.110:5000"
   },
   "pages": {
     "landingPage": {
@@ -28,13 +28,13 @@
           "name": "Presentation definition naam",
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
-          "backgroundColor": "#5BDED2",
-          "backgroundImage": "belastingdienst/hector-j-rivas.jpg",
+          "backgroundColor": "grey",
+          "backgroundImage": "funke/pd_bg.svg",
           "logo": {
-            "src": "belastingdienst/logo.svg",
-            "alt_text": "Banqup logo",
-            "width": 231,
-            "height": 36
+            "src": "funke/pd_logo.svg",
+            "alt_text": "funke pd 2",
+            "width": 60,
+            "height": 60
           }
         },
         {
@@ -42,13 +42,13 @@
           "name": "Presentation definition naam",
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
-          "backgroundColor": "#4542F2",
-          "backgroundImage": "belastingdienst/grant-richie.png",
+          "backgroundColor": "grey",
+          "backgroundImage": "funke/pd_bg.svg",
           "logo": {
-            "src": "belastingdienst/logo.svg",
-            "alt_text": "VismaYuki logo",
-            "width": 231,
-            "height": 36
+            "src": "funke/pd_logo.svg",
+            "alt_text": "funke pd 2",
+            "width": 60,
+            "height": 60
           }
         }
       ]
