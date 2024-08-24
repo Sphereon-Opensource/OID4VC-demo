@@ -235,6 +235,15 @@ export interface SSIInformationSharedSuccessPageConfig extends PageConfig {
     sideImage?: LogoProperties
 }
 
+export interface SSIInformationVerifyPageConfig extends PageConfig {
+    topTitle?: string
+    topDescription?: string
+    photoLeft?: string
+    leftPaneWidth?: string
+    backgroundColor?: string
+    logo?: LogoProperties
+}
+
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photoWallet?: string
@@ -491,6 +500,7 @@ export interface VCIConfigPages {
     SSICredentialIssuedSuccessPage: SSICredentialIssuedSuccessPageConfig
     SSICredentialVerifyFromVPRequestPage?: SSICredentialVerifyFromVPRequestPageConfig
     SSICredentialVerifyRequestPage?: SSICredentialVerifyRequestPageConfig
+    SSIInformationVerifyPage?: SSIInformationVerifyPageConfig
     SSIInformationSharedSuccessPage: SSIInformationSharedSuccessPageConfig
     SSILandingPage: SSILandingPageConfig
     SSICredentialIssueRequestPage: SSICredentialIssueRequestPageConfig

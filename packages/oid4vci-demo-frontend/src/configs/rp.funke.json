@@ -97,6 +97,15 @@
         }
       }
     },
+    "verifyShare": {
+      "topTitle": "sharing_data_confirm_right_pane_title",
+      "topDescription": "sharing_data_confirm_right_pane_paragraph",
+      "logo": {
+        "src": "image_4.svg",
+        "alt": "background",
+        "height": "100%"
+      }
+    },
     "shareSuccess": {
       "sideImage": {
         "src": "image_4.svg",
@@ -125,6 +134,12 @@
           "id": "verifyRequest",
           "operation": "navigate",
           "path": "/credentials/verify/request",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "verifyShare",
+          "operation": "navigate",
+          "path": "/credentials/verify/share",
           "nextId": "shareSuccess"
         },
         {

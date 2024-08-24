@@ -142,5 +142,7 @@
   "funke_verify_bottom_description": "Scan this QR code with your mobile wallet's QR code scanner. \nOr enter your web wallet address to open it.",
   "funke_share_success_top_title": "Thank you for providing the below information",
   "funke_share_success_top_description": "Almost there. This is what we received from you.",
-  "funke_share_success_button_caption": "Return to first page"
+  "funke_share_success_button_caption": "Return to first page",
+  "sharing_data_confirm_right_pane_title": "Thank you for providing the below information",
+  "sharing_data_confirm_right_pane_paragraph": "Almost there. This is what we received from you."
 }

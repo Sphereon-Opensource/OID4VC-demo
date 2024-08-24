@@ -17,6 +17,7 @@ import SSIWelcomePage from '../pages/SSIWelcomePage'
 import SSIIdentityVerificationPage from '../pages/SSIIdentityVerificationPage'
 import SSICredentialVerifyFromVPRequestPage from '../pages/SSICredentialVerifyFromVPRequest'
 import SSIPresentationsLandingPage from "../pages/SSIPresentationsLandingPage";
+import SSIInformationVerifyPage from "../pages/SSIInformationVerifyPage";
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
@@ -26,6 +27,7 @@ export const routes: Record<string, any> = {
     '/information/success': <SSIInformationSuccessPage/>,
     '/credentials/select': <SSISelectCredentialPage/>,
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
+    '/credentials/verify/share': <SSIInformationVerifyPage/>,
     '/credentials/verify/vp/request': <SSICredentialVerifyFromVPRequestPage/>,
     '/credentials/issue/request': <SSICredentialIssueRequestPage/>,
     '/credentials/issue/success': <SSICredentialIssuedSuccessPage/>,

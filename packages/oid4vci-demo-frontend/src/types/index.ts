@@ -29,3 +29,12 @@ export type FormOutputData = Record<string, FormFieldValue>
 export type FormFieldValue = string | number | ReadonlyArray<string> | boolean | undefined
 export type ImmutableRecord = Readonly<Record<string, ImmutableValue>>;
 export type ImmutableValue = Readonly<string | number | ReadonlyArray<string> | boolean | undefined>;
+
+export type UniformCredential = {
+  //fixme: after updating to the latest ssi-types we should be able strictly type this
+  original: any
+  //original claims that can be found in the credential
+  subjectClaim: Record<string, any>
+  //transformed claims. altered form of the subject claim
+  transformedClaims: Record<string, string>
+}
