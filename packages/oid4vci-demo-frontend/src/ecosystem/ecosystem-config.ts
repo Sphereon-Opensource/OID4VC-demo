@@ -242,6 +242,7 @@ export interface SSIInformationVerifyPageConfig extends PageConfig {
     leftPaneWidth?: string
     backgroundColor?: string
     logo?: LogoProperties
+    numberOfColumns?: number
 }
 
 export interface SSICredentialIssueRequestPageConfig extends PageConfig {

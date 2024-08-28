@@ -24,10 +24,11 @@ const SSIInformationVerifyPage: React.FC = () => {
     const generalConfig = useEcosystem().getGeneralConfig();
     const { t } = useTranslation();
     const [payload, setPayload] = useState<Record<string, any> | null>(null);
-
+    const credential = state?.credential
     // Mock data for testing
     // const credential = getMockCredentialSdJwt();
-    const credential = getMockCredentialMdoc();
+    //const credential = getMockCredentialMdoc();
+    const numberOfColumns = pageConfig.numberOfColumns ?? 1;
 
     useEffect(() => {
         const fetchData = async () => {
