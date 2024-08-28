@@ -12,6 +12,7 @@ import { convertPIDToUniformCredential } from '../../utils/mapper/PIDMapper';
 import { NonMobile } from "../..";
 
 type State = {
+    data: object | undefined // raw credential
     credential: UniformCredential;
 };
 
@@ -19,12 +20,21 @@ const SSIInformationVerifyPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationVerifyPageConfig>();
     const location = useLocation();
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 767px)' });
-    const state: State | undefined = location.state;
+    
     const pageConfig = flowRouter.getPageConfig();
     const generalConfig = useEcosystem().getGeneralConfig();
     const { t } = useTranslation();
     const [payload, setPayload] = useState<Record<string, any> | null>(null);
-    const credential = state?.credential
+    const [state, setState] = useState<State>(() => {
+        const locationState = location.state as State | undefined
+        return {
+            data: locationState?.data,
+            credential: locationState?.credential || ({} as UniformCredential)
+        }
+    })
+
+
+    const credential = state?.data
     // Mock data for testing
     // const credential = getMockCredentialSdJwt();
     //const credential = getMockCredentialMdoc();
@@ -32,16 +42,18 @@ const SSIInformationVerifyPage: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const result = await convertPIDToUniformCredential(credential);
-                setPayload(result);
-            } catch (error) {
-                console.error('Error converting credential:', error);
+            if (state.data && 'vp_token' in state.data) {
+                const uniformCredential = await convertPIDToUniformCredential(state.data.vp_token)
+                setPayload(uniformCredential)
+                setState(prevState => ({
+                    ...prevState,
+                    credential: uniformCredential
+                }))
             }
-        };
+        }
 
-        fetchData();
-    }, [credential]);
+        fetchData()
+    }, [state.data])
 
     if (!payload) {
         return <div>Loading...</div>;

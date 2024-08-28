@@ -1,21 +1,27 @@
 import {UniformCredential} from "../../types";
 import {CredentialDetailsRow, toNonPersistedCredentialSummary} from "@sphereon/ui-components.credential-branding";
 import {CredentialMapper, SdJwtDecodedVerifiableCredentialPayload} from "@sphereon/ssi-types";
+// @ts-ignore
+import crypto from 'crypto-browserify'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function convertPIDToUniformCredential(credential: any): Promise<UniformCredential> {
     //fixme: we have a problem with crypto library that should be fixed when we update the sdk libs version. for now, we're assuming that sd-jwt credential that we have here is already decoded
-    /*if (CredentialMapper.isSdJwtEncoded(credential)) {
+
+   if (CredentialMapper.isSdJwtEncoded(credential)) {
         // @ts-ignore
-        const hasher = (data, algorithm) => createHash(algorithm).update(data).digest()
+        const hasher = (data, algorithm) => {
+            const sanitizedAlgorithm = algorithm.toLowerCase().replace(/[-_]/g, '')
+            return crypto.createHash(sanitizedAlgorithm).update(data).digest();
+        }
         // @ts-ignore
-        const sdJwtDecodedVc: SdJwtDecodedVerifiableCredential = CredentialMapper.decodeSdJwtVcAsync(credential as string, hasher)
+        const sdJwtDecodedVc: SdJwtDecodedVerifiableCredential = await CredentialMapper.decodeSdJwtVcAsync(credential as string, hasher)
         return {
             original: credential,
             subjectClaim: sdJwtDecodedVc.decodedPayload as Record<string, any>,
             transformedClaims: convertPIDSdJwtWellknownPayloadValues(sdJwtDecodedVc.decodedPayload)
         }
-    }*/
+    }
     if ('vct' in credential) {
         return {
             original: credential,
