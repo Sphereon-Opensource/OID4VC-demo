@@ -1,5 +1,4 @@
 // noinspection JSUnusedGlobalSymbols
-import {AuthorizationResponsePayload} from '@sphereon/did-auth-siop'
 
 export interface ClaimPayloadCommonOpts {
   [x: string]: any

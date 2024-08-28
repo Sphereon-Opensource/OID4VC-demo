@@ -3,7 +3,6 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import './index.module.css'
 import { MetadataClient } from '@sphereon/oid4vci-client'
-import { EndpointMetadataResult } from '@sphereon/oid4vci-common'
 import { IBasicCredentialLocaleBranding, IBasicImageDimensions } from '@sphereon/ssi-sdk.data-store'
 import { getCredentialBrandings } from '../../utils/mapper/branding/OIDC4VCIBrandingMapper'
 import { useTranslation } from "react-i18next"
@@ -15,6 +14,7 @@ import {SSISelectCredentialPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem"
 import {SSICredentialCardView} from "@sphereon/ui-components.ssi-react"
 import {DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL} from "../../environment"
+import {EndpointMetadataResult} from "@sphereon/oid4vci-common";
 
 const short = require('short-uuid');
 

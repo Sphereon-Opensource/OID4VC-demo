@@ -134,7 +134,7 @@
           "id": "verifyRequest",
           "operation": "navigate",
           "path": "/credentials/verify/request",
-          "nextId": "shareSuccess"
+          "nextId": "verifyShare"
         },
         {
           "id": "verifyShare",
