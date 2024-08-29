@@ -52,7 +52,7 @@ export async function convertPIDToUniformCredential(credential: any): Promise<Un
 function convertPIDSdJwtWellknownPayloadValues(payload: SdJwtDecodedVerifiableCredentialPayload) {
     const humanReadablePayload: Record<string, string> = {};
 
-    const exclusions: string[] = ['vct', 'iss', 'age_equal_or_over'];
+    const exclusions: string[] = ['vct', 'iss', 'exp', 'iat', 'cnf', 'age_equal_or_over'];
 
     const isAgeKey = (key: string): boolean => !isNaN(Number(key));
 
