@@ -93,14 +93,16 @@ function convertPIDSdJwtWellknownPayloadValues(payload: SdJwtDecodedVerifiableCr
         const ageKeys: number[] = Object.keys(payload.age_equal_or_over)
             .map(Number)
             .sort((a, b) => a - b);
-        const lowerLimit: number = ageKeys[0];
-        const upperLimit: number = ageKeys[ageKeys.length - 1];
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        humanReadablePayload[`Age is above ${lowerLimit}`] = convertToString(payload.age_equal_or_over[lowerLimit.toString()]);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        humanReadablePayload[`Age is above ${upperLimit}`] = convertToString(payload.age_equal_or_over[upperLimit.toString()]);
+        if (ageKeys.length > 0) {
+            const lowerLimit: number = ageKeys[0];
+            const upperLimit: number = ageKeys[ageKeys.length - 1];
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            humanReadablePayload[`Age is above ${lowerLimit}`] = convertToString(payload.age_equal_or_over[lowerLimit.toString()]);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            humanReadablePayload[`Age is above ${upperLimit}`] = convertToString(payload.age_equal_or_over[upperLimit.toString()]);
+        }
     }
 
     return humanReadablePayload;

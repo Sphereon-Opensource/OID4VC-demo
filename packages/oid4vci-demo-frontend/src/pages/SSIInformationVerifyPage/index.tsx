@@ -22,7 +22,6 @@ const SSIInformationVerifyPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 767px)' });
     
     const pageConfig = flowRouter.getPageConfig();
-    const generalConfig = useEcosystem().getGeneralConfig();
     const { t } = useTranslation();
     const [payload, setPayload] = useState<Record<string, any> | null>(null);
     const [state, setState] = useState<State>(() => {
