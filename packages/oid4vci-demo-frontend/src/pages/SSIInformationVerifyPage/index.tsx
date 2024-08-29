@@ -111,7 +111,7 @@ const SSIInformationVerifyPage: React.FC = () => {
                         <Text
                             style={{
                                 whiteSpace: 'pre-line',
-                                flexGrow: 1,
+                                flexGrow: 0,
                                 textAlign: 'center',
                             }}
                             title={t(pageConfig.topTitle ?? 'sharing_data_confirm_right_pane_title').split('\n')}
