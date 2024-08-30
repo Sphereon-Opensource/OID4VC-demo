@@ -24,28 +24,28 @@
       "text": "funke_landing_page_description",
       "presentationDefinitions": [
         {
-          "id": "omzetbelasting",
+          "id": "pid-sdjwt",
           "name": "Presentation definition naam",
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "grey",
-          "backgroundImage": "funke/pd_bg.svg",
+          "backgroundImage": "https://i.ibb.co/xShshGk/pd-bgf-min.png",
           "logo": {
-            "src": "funke/pd_logo.svg",
+            "src": "https://i.ibb.co/PmHTwvX/pd-logo.png",
             "alt_text": "funke pd 2",
             "width": 60,
             "height": 60
           }
         },
         {
-          "id": "woonplaatsverklaring",
+          "id": "PID-mdoc-req",
           "name": "Presentation definition naam",
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "grey",
-          "backgroundImage": "funke/pd_bg.svg",
+          "backgroundImage": "https://i.ibb.co/xShshGk/pd-bgf-min.png",
           "logo": {
-            "src": "funke/pd_logo.svg",
+            "src": "https://i.ibb.co/PmHTwvX/pd-logo.png",
             "alt_text": "funke pd 2",
             "width": 60,
             "height": 60
