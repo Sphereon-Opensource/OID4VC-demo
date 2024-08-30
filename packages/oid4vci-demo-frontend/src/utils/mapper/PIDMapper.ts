@@ -69,13 +69,17 @@ function convertPIDSdJwtWellknownPayloadValues(payload: SdJwtDecodedVerifiableCr
         } else {
             const humanReadableKey = toHumanReadable(key);
 
-            if (typeof value === 'object' && value !== null) {
-                const concatenatedValues = Object.values(value)
-                    .filter(part => part)
-                    .join(', ');
-                humanReadablePayload[humanReadableKey] = concatenatedValues;
+            if (typeof value === 'object') {
+                if(value !== null && Object.keys(value).length > 0) {
+                    const concatenatedValues = Object.values(value)
+                        .filter(part => part)
+                        .join(', ');
+                    humanReadablePayload[humanReadableKey] = concatenatedValues;
+                }
             } else {
-                humanReadablePayload[humanReadableKey] = convertToString(value);
+                if(typeof(value) !== 'string' || value != '') {
+                    humanReadablePayload[humanReadableKey] = convertToString(value);
+                }
             }
         }
     }
