@@ -38,7 +38,7 @@
           }
         },
         {
-          "id": "PID-mdoc-req",
+          "id": "PID-mdoc",
           "name": "Presentation definition naam",
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
