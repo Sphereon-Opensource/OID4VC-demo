@@ -1,8 +1,9 @@
 import {UniformCredential} from "../../types";
 import {CredentialDetailsRow, toNonPersistedCredentialSummary} from "@sphereon/ui-components.credential-branding";
-import {CredentialMapper, SdJwtDecodedVerifiableCredentialPayload} from "@sphereon/ssi-types";
+import {CredentialMapper, SdJwtDecodedVerifiableCredentialPayload, W3CVerifiableCredential} from "@sphereon/ssi-types";
 // @ts-ignore
 import crypto from 'crypto-browserify'
+import {VerifiableCredential} from "@veramo/core";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function convertPIDToUniformCredential(credential: any): Promise<UniformCredential> {
@@ -22,19 +23,24 @@ export async function convertPIDToUniformCredential(credential: any): Promise<Un
             transformedClaims: convertPIDSdJwtWellknownPayloadValues(sdJwtDecodedVc.decodedPayload)
         }
     }
+    if(CredentialMapper.isMsoMdocOid4VPEncoded(credential)) {
+        const wvp = CredentialMapper.toWrappedVerifiablePresentation(credential)
+        if(!wvp.vcs ||  wvp.vcs.length == 0) {
+            return Promise.reject('Missing decoded MDOC credential')
+        }
+        const decodedCredential = wvp.vcs[0].credential as any // FIXME
+        const credentialSubject = CredentialMapper.toUniformCredential(decodedCredential).credentialSubject as Record<string, unknown>;
+        return {
+            original: credential,
+            subjectClaim:  credentialSubject,
+            transformedClaims: convertPIDMdocWellknownPayloadValues(credentialSubject)
+        }
+    }
     if ('vct' in credential) {
         return {
             original: credential,
             subjectClaim: credential,
             transformedClaims: convertPIDSdJwtWellknownPayloadValues(credential)
-        }
-    }
-    //fixme: we should decode the mdoc here. for now I'm assuming that I'm getting the decoded value here
-    else if (isMdoc(credential)) {
-        return {
-            original: credential,
-            subjectClaim: credential,
-            transformedClaims: convertPIDMdocWellknownPayloadValues(credential)
         }
     }
     const credentialSummary = await toNonPersistedCredentialSummary(credential)
