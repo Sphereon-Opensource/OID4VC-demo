@@ -8,7 +8,7 @@ WORKDIR /opt/oid4vc-demo
 COPY /. .
 RUN rm -rf /root/.local/share/pnpm/store
 RUN pnpm install -r
-RUN pnpm build
+# RUN pnpm build we use pnpm:dev
 
 # Final stage
 FROM node:lts-bookworm
