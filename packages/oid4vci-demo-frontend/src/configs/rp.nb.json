@@ -1,0 +1,171 @@
+{
+  "general": {
+    "credentialName": "Verified Account",
+    "oid4vpAgentBaseUrl": "https://ssi-agent.sander.home.sphereon.com/",
+    "oid4vciAgentBaseUrl": "https://ssi-agent.sander.home.sphereon.com/",
+    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
+    "verifierUrl": "https://ssi-agent.sander.home.sphereon.com/"
+  },
+  "pages": {
+    "landingPage": {
+      "logo": {
+        "src": "image_4.svg",
+        "alt": "background",
+        "height": "100%"
+      },
+      "mobile": {
+        "logo": {
+          "src": "image_4.svg",
+          "alt": "background",
+          "width": "100%"
+        }
+      },
+      "pageTitle": "funke_landing_page_title",
+      "text": "funke_landing_page_description",
+      "presentationDefinitions": [
+        {
+          "id": "employee",
+          "name": "Presentation definition naam",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "grey",
+          "backgroundImage": "https://i.ibb.co/xShshGk/pd-bgf-min.png",
+          "logo": {
+            "src": "https://i.ibb.co/PmHTwvX/pd-logo.png",
+            "alt_text": "funke pd 2",
+            "width": 60,
+            "height": 60
+          }
+        },
+        {
+          "id": "loyalty",
+          "name": "Presentation definition naam",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "grey",
+          "backgroundImage": "https://i.ibb.co/xShshGk/pd-bgf-min.png",
+          "logo": {
+            "src": "https://i.ibb.co/PmHTwvX/pd-logo.png",
+            "alt_text": "funke pd 2",
+            "width": 60,
+            "height": 60
+          }
+        }
+      ]
+    },
+    "verifyRequest": {
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "logo": {
+        "src": "image_4.svg",
+        "alt": "background",
+        "height": "100%"
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "value": "funke_verify_top_title",
+            "style": {
+              "display": "none"
+            }
+          },
+          "topDescription": "funke_verify_top_description",
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "pStyle": {
+              "textAlign": "center"
+            },
+            "credential_verify_request_right_pane_bottom_paragraph": "funke_verify_bottom_description"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      }
+    },
+    "verifyShare": {
+      "topTitle": "sharing_data_confirm_right_pane_title",
+      "topDescription": "sharing_data_confirm_right_pane_paragraph",
+      "logo": {
+        "src": "image_4.svg",
+        "alt": "background",
+        "height": "100%"
+      }
+    },
+    "shareSuccess": {
+      "sideImage": {
+        "src": "image_4.svg",
+        "alt": "background",
+        "height": "100%"
+      },
+      "photoRight": "undraw_messenger_re_8bky_grey.svg",
+      "topTitle": "funke_share_success_top_title",
+      "topDescription": "funke_share_success_top_description",
+      "buttonCaption": "funke_share_success_button_caption"
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "Employee",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landingvp",
+          "nextId": "verifyRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "verifyShare"
+        },
+        {
+          "id": "verifyShare",
+          "operation": "navigate",
+          "path": "/credentials/verify/share",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
+          "nextId": "backToHome"
+        },
+        {
+          "id": "backToHome",
+          "operation": "navigate",
+          "path": "https://funke.demo.sphereon.com/"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#501592"
+        },
+        "button": {
+          "width" : "220px"
+        }
+      }
+    }
+  }
+}

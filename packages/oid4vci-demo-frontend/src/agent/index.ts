@@ -38,8 +38,8 @@ const getOrCreateAgent = (ecoSystemId: string, generalConfig: EcosystemGeneralCo
                 authentication: buildAuthentication(generalConfig)
             }),
             new AgentRestClient({
-                url: DEV_OVERRIDE_OID4VCI_AGENT_BASE_URL
-                    ?? generalConfig.oid4vciAgentBaseUrl
+                url: DEV_OVERRIDE_OID4VP_AGENT_BASE_URL
+                    ?? generalConfig.oid4vpAgentBaseUrl
                     ?? 'https://ssi.sphereon.com/issuer',
                 enabledMethods: [...pdManagerMethods],
             }),
