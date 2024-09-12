@@ -261,7 +261,7 @@
         {
           "id": "toNBDemo",
           "operation": "navigate",
-          "path": "https://employee.nb.dev.sphereon.com/"
+          "path": "https://loyalty.nb.dev.sphereon.com/"
         },
         {
           "id": "download",
