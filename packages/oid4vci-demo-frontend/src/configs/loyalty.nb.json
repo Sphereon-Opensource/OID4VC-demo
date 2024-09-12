@@ -1,11 +1,11 @@
 {
   "general": {
-    "credentialName": "IATA Employee",
-    "issueCredentialType": "Employee",
+    "credentialName": "IATA Loyalty",
+    "issueCredentialType": "Loyalty",
     "oid4vpAgentBaseUrl": "https://agent.nb.dev.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.nb.dev.sphereon.com/oid4vci",
     "verifierUrl": "https://agent.nb.dev.sphereon.com/verifier",
-    "verifierUrlCaption": "IATA Employee demo",
+    "verifierUrlCaption": "IATA Loyalty demo",
     "downloadUrl": "https://employee.nb.dev.sphereon.com/#/download"
   },
   "pages": {
@@ -157,27 +157,45 @@
         ],
         [
           {
-            "id": "numberIdentifier",
-            "key": "numberIdentifier",
-            "label": "Number Identifier",
+            "id": "loyaltyProgramAccountIdentifier",
+            "key": "loyaltyProgramAccountIdentifier",
+            "label": "Loyalty Program Account Identifier",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "orgIdentifier",
-            "key": "orgIdentifier",
-            "label": "Organization Identifier",
+            "id": "loyaltyProgramAccountTierLevelCode",
+            "key": "loyaltyProgramAccountTierLevelCode",
+            "label": "Loyalty Program Account Tier Level Code",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "orgName",
-            "key": "orgName",
-            "label": "Surname",
+            "id": "loyaltyProgramCode",
+            "key": "loyaltyProgramCode",
+            "label": "Loyalty Program Code",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "loyaltyProgramName",
+            "key": "loyaltyProgramName",
+            "label": "Loyalty Program Name",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "providerName",
+            "key": "providerName",
+            "label": "Provider Name",
             "type": "text",
             "required": true
           }
@@ -224,7 +242,7 @@
           "operation": "execute",
           "action": "create-credential-offer",
           "actionParams": {
-            "issueCredentialType": "Employee"
+            "issueCredentialType": "Loyalty"
           },
           "nextId": "issueRequest"
         },
