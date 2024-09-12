@@ -1,10 +1,11 @@
 {
   "general": {
-    "credentialName": "Verified Account",
-    "oid4vpAgentBaseUrl": "https://ssi-agent.sander.home.sphereon.com/",
-    "oid4vciAgentBaseUrl": "https://ssi-agent.sander.home.sphereon.com/",
-    "downloadUrl": "https://agent.demo.sphereon.com/#/download",
-    "verifierUrl": "https://ssi-agent.sander.home.sphereon.com/"
+    "credentialName": "IATA",
+    "oid4vpAgentBaseUrl": "https://agent.nb.dev.sphereon.com",
+    "oid4vciAgentBaseUrl": "https://agent.nb.dev.sphereon.com/oid4vci",
+    "verifierUrl": "https://agent.nb.dev.sphereon.com/verifier",
+    "verifierUrlCaption": "IATA demo",
+    "downloadUrl": "https://employee.nb.dev.sphereon.com/#/download"
   },
   "pages": {
     "landingPage": {
