@@ -1,12 +1,12 @@
 {
   "general": {
-    "credentialName": "Northern Block Guest",
-    "issueCredentialType": "GuestCredential",
+    "credentialName": "IATA Employee",
+    "issueCredentialType": "Employee",
     "oid4vpAgentBaseUrl": "https://agent.nb.dev.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.nb.dev.sphereon.com/oid4vci",
-    "verifierUrl": "https://ssi.sphereon.com/demo/verifier",
-    "verifierUrlCaption": "Northern Block demo",
-    "downloadUrl": "http://192.168.2.90:5000/#/download"
+    "verifierUrl": "https://agent.nb.dev.sphereon.com/verifier",
+    "verifierUrlCaption": "IATA Employee demo",
+    "downloadUrl": "https://employee.nb.dev.sphereon.com/#/download"
   },
   "pages": {
     "download": {
@@ -243,7 +243,7 @@
         {
           "id": "toNBDemo",
           "operation": "navigate",
-          "path": "https://ssi.sphereon.com"
+          "path": "https://employee.nb.dev.sphereon.com/"
         },
         {
           "id": "download",
