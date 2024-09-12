@@ -10,7 +10,6 @@ WORKDIR /opt/oid4vc-demo
 COPY /. .
 RUN rm -rf /root/.local/share/pnpm/store
 RUN pnpm install -r
-RUN pnpm build
 ENV NODE_SCRIPT=${NODE_SCRIPT}
 WORKDIR /opt/oid4vc-demo/${PACKAGE_PATH}
 ENTRYPOINT pnpm ${NODE_SCRIPT}
