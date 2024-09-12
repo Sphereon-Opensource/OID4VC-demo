@@ -152,7 +152,7 @@
         {
           "id": "backToHome",
           "operation": "navigate",
-          "path": "https://funke.demo.sphereon.com/"
+          "path": "https://rp.nb.dev.sphereon.com/"
         }
       ]
     }
