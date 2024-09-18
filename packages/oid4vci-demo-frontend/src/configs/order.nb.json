@@ -132,12 +132,10 @@
           {
             "id": "givenName",
             "key": "givenName",
-            "label": "Given Name",
-            "type": "text",
+            "label": "Given name",
+            "type": "string",
             "required": true
-          }
-        ],
-        [
+          },
           {
             "id": "surname",
             "key": "surname",
@@ -150,35 +148,81 @@
           {
             "id": "titleName",
             "key": "titleName",
-            "label": "Title Name",
+            "label": "Title",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "numberIdentifier",
-            "key": "numberIdentifier",
-            "label": "Number Identifier",
+            "id": "orderIdentifier",
+            "key": "orderIdentifier",
+            "label": "Order identifier",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "orgIdentifier",
-            "key": "orgIdentifier",
-            "label": "Organization Identifier",
+            "id": "bookingStatusCode",
+            "key": "bookingStatusCode",
+            "label": "Booking status",
             "type": "text",
             "required": true
           }
         ],
         [
           {
-            "id": "orgName",
-            "key": "orgName",
-            "label": "Organization Name",
+            "id": "originStationIATALocationCode",
+            "key": "originStationIATALocationCode",
+            "label": "Origin Station Code",
             "type": "text",
+            "required": true
+          },
+          {
+            "id": "destStationIATALocationCode",
+            "key": "destStationIATALocationCode",
+            "label": "Destination Station Code",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "flightIdentifierDate",
+            "key": "flightIdentifierDate",
+            "label": "Flight identifier date",
+            "type": "date",
+            "required": true
+          },
+          {
+            "id": "operatingCarrierAirlineDesigCode",
+            "key": "operatingCarrierAirlineDesigCode",
+            "label": "Airline code",
+            "type": "text",
+            "required": true
+          },
+          {
+            "id": "operatingCarrierFlightNumber",
+            "key": "operatingCarrierFlightNumber",
+            "label": "Flight number",
+            "type": "text",
+            "required": true
+          }
+        ],
+        [
+          {
+            "id": "scheduledDepartureTime",
+            "key": "scheduledDepartureTime",
+            "label": "scheduled departure",
+            "type": "date",
+            "required": true
+          },
+          {
+            "id": "scheduledArrivalTime",
+            "key": "scheduledArrivalTime",
+            "label": "Scheduled arrival",
+            "type": "date",
             "required": true
           }
         ]
