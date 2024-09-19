@@ -1,7 +1,7 @@
 {
   "general": {
-    "credentialName": "IATA Employee",
-    "issueCredentialType": "Employee",
+    "credentialName": "IATA Order",
+    "issueCredentialType": "Order",
     "oid4vpAgentBaseUrl": "https://agent.nb.dev.sphereon.com",
     "oid4vciAgentBaseUrl": "https://agent.nb.dev.sphereon.com/oid4vci",
     "verifierUrl": "https://agent.nb.dev.sphereon.com/verifier",
@@ -254,7 +254,7 @@
   "routes": [
     {
       "id": "default",
-      "vpDefinitionId": "employee",
+      "vpDefinitionId": "order",
       "steps": [
         {
           "id": "infoRequest",
@@ -268,7 +268,7 @@
           "operation": "execute",
           "action": "create-credential-offer",
           "actionParams": {
-            "issueCredentialType": "Employee"
+            "issueCredentialType": "Order"
           },
           "nextId": "issueRequest"
         },
