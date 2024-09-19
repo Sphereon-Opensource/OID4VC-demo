@@ -32,10 +32,10 @@
           "backgroundColor": "grey",
           "backgroundImage": "https://i.ibb.co/xShshGk/pd-bgf-min.png",
           "logo": {
-            "src": "https://i.ibb.co/PmHTwvX/pd-logo.png",
+            "src": "https://www.iata.org/contentassets/3e83770142a040d688e269bb2f709b7b/iata-logo-header.svg?height=127&rmode=crop&v=20240116100112",
             "alt_text": "funke pd 2",
-            "width": 60,
-            "height": 60
+            "width": 120,
+            "height": 120
           }
         },
         {
@@ -46,10 +46,24 @@
           "backgroundColor": "grey",
           "backgroundImage": "https://i.ibb.co/xShshGk/pd-bgf-min.png",
           "logo": {
-            "src": "https://i.ibb.co/PmHTwvX/pd-logo.png",
+            "src": "https://www.iata.org/contentassets/3e83770142a040d688e269bb2f709b7b/iata-logo-header.svg?height=127&rmode=crop&v=20240116100112",
             "alt_text": "funke pd 2",
-            "width": 60,
-            "height": 60
+            "width": 120,
+            "height": 120
+          }
+        },
+        {
+          "id": "Order and ePassport",
+          "name": "Presentation definition naam",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "grey",
+          "backgroundImage": "https://i.ibb.co/xShshGk/pd-bgf-min.png",
+          "logo": {
+            "src": "https://www.iata.org/contentassets/3e83770142a040d688e269bb2f709b7b/iata-logo-header.svg?height=127&rmode=crop&v=20240116100112",
+            "alt_text": "funke pd 2",
+            "width": 120,
+            "height": 120
           }
         }
       ]
