@@ -133,7 +133,7 @@
             "id": "givenName",
             "key": "givenName",
             "label": "Given name",
-            "type": "string",
+            "type": "text",
             "required": true
           },
           {
