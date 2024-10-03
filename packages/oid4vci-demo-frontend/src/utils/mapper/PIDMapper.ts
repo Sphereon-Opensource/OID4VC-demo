@@ -83,6 +83,9 @@ function convertPIDSdJwtWellknownPayloadValues(payload: SdJwtDecodedVerifiableCr
                 if(value !== null && Object.keys(value).length > 0) {
                     const concatenatedValues = Object.values(value)
                         .filter(part => part)
+                        .map(part => {
+                            return typeof part === 'string' ? part : JSON.stringify(part);
+                        })
                         .join(', ');
                     humanReadablePayload[humanReadableKey] = concatenatedValues;
                 }
