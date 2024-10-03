@@ -9,7 +9,7 @@ import {VerifiableCredential} from "@veramo/core";
 export async function convertPIDToUniformCredential(credentials: Array<any>): Promise<Array<UniformCredential>> {
     //fixme: we have a problem with crypto library that should be fixed when we update the sdk libs version. for now, we're assuming that sd-jwt credential that we have here is already decoded
 
-    const result =  credentials.map(async credential => {
+    const result = credentials.map(async credential => {
         if (CredentialMapper.isSdJwtEncoded(credential)) {
             // @ts-ignore
             const hasher = (data, algorithm) => {
@@ -49,7 +49,7 @@ export async function convertPIDToUniformCredential(credentials: Array<any>): Pr
             original: credential,
             subjectClaim: CredentialMapper.toUniformCredential(credential).credentialSubject as Record<string, unknown>,
             transformedClaims: convertPIDUniformVCWellknownPayloadValues(credentialSummary.properties)
-    }
+        }
     })
     return Promise.all(result)
 }
@@ -58,71 +58,67 @@ export async function convertPIDToUniformCredential(credentials: Array<any>): Pr
  * This function reduces the payload to show only the important parts of the claims in a human-readable fashion. We're doing this with keeping the pid credential in mind
  * @param payload
  */
-function convertPIDSdJwtWellknownPayloadValues(payload: SdJwtDecodedVerifiableCredentialPayload) {
-    const humanReadablePayload: Record<string, string> = {};
+function convertPIDSdJwtWellknownPayloadValues(payload: Record<string, any>) {
+    const humanReadablePayload: Record<string, any> = {}
 
-    const exclusions: string[] = ['vct', 'iss', 'exp', 'iat', 'cnf', 'age_equal_or_over'];
+    const exclusions: string[] = ['vct', 'iss', 'exp', 'iat', 'cnf', 'age_equal_or_over']
 
-    const isAgeKey = (key: string): boolean => !isNaN(Number(key));
+    const isAgeKey = (key: string): boolean => !isNaN(Number(key))
 
-    // Collect numeric age keys to process after the loop
-    const numericAgeKeys: number[] = [];
-
+    const numericAgeKeys: number[] = []
 
     for (const [key, value] of Object.entries(payload)) {
         if (exclusions.includes(key)) {
-            continue; // Skip the keys that are in the exclusions array
+            continue
         }
 
         if (isAgeKey(key)) {
-            numericAgeKeys.push(Number(key));
+            numericAgeKeys.push(Number(key))
         } else {
-            const humanReadableKey = toHumanReadable(key);
+            const humanReadableKey = toHumanReadable(key)
 
-            if (typeof value === 'object') {
-                if(value !== null && Object.keys(value).length > 0) {
-                    const concatenatedValues = Object.values(value)
-                        .filter(part => part)
-                        .map(part => {
-                            return typeof part === 'string' ? part : JSON.stringify(part);
-                        })
-                        .join(', ');
-                    humanReadablePayload[humanReadableKey] = concatenatedValues;
+            if (Array.isArray(value)) {
+                value.forEach(arrayElem => {
+                    humanReadablePayload[humanReadableKey] = convertPIDSdJwtWellknownPayloadValues(arrayElem)
+                })
+            } else if (typeof value === 'object') {
+                if (value !== null && Object.keys(value).length > 0) {
+                    humanReadablePayload[humanReadableKey] = convertPIDSdJwtWellknownPayloadValues(value)
                 }
             } else {
-                if(typeof(value) !== 'string' || value != '') {
-                    humanReadablePayload[humanReadableKey] = convertToString(value);
+                if (typeof (value) !== 'string' || value !== '') {
+                    humanReadablePayload[humanReadableKey] = convertToString(value)
                 }
             }
         }
     }
 
     if (numericAgeKeys.length > 0) {
-        numericAgeKeys.sort((a, b) => a - b);
-        const lowerLimit = numericAgeKeys[0];
-        const upperLimit = numericAgeKeys[numericAgeKeys.length - 1];
+        numericAgeKeys.sort((a, b) => a - b)
+        const lowerLimit = numericAgeKeys[0]
+        const upperLimit = numericAgeKeys[numericAgeKeys.length - 1]
 
-        humanReadablePayload[`Age is above ${lowerLimit}`] = convertToString(payload[lowerLimit.toString()]);
-        humanReadablePayload[`Age is above ${upperLimit}`] = convertToString(payload[upperLimit.toString()]);
+        humanReadablePayload[`Age is above ${lowerLimit}`] = convertToString(payload[lowerLimit.toString()])
+        humanReadablePayload[`Age is above ${upperLimit}`] = convertToString(payload[upperLimit.toString()])
     }
 
     if (payload.age_equal_or_over) {
         const ageKeys: number[] = Object.keys(payload.age_equal_or_over)
             .map(Number)
-            .sort((a, b) => a - b);
+            .sort((a, b) => a - b)
         if (ageKeys.length > 0) {
-            const lowerLimit: number = ageKeys[0];
-            const upperLimit: number = ageKeys[ageKeys.length - 1];
+            const lowerLimit: number = ageKeys[0]
+            const upperLimit: number = ageKeys[ageKeys.length - 1]
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            humanReadablePayload[`Age is above ${lowerLimit}`] = convertToString(payload.age_equal_or_over[lowerLimit.toString()]);
+            humanReadablePayload[`Age is above ${lowerLimit}`] = convertToString(payload.age_equal_or_over[lowerLimit.toString()])
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            humanReadablePayload[`Age is above ${upperLimit}`] = convertToString(payload.age_equal_or_over[upperLimit.toString()]);
+            humanReadablePayload[`Age is above ${upperLimit}`] = convertToString(payload.age_equal_or_over[upperLimit.toString()])
         }
     }
 
-    return humanReadablePayload;
+    return humanReadablePayload
 }
 
 function convertToString(value: unknown): string {
@@ -215,7 +211,7 @@ function convertPIDUniformVCWellknownPayloadValues(properties: CredentialDetails
     };
 
     properties.forEach(property => {
-        const { id, value } = property;
+        const {id, value} = property;
 
         if (keyMappings[id]) {
             humanReadablePayload[keyMappings[id]] = convertToString(value);
@@ -227,7 +223,7 @@ function convertPIDUniformVCWellknownPayloadValues(properties: CredentialDetails
             humanReadablePayload[`Age is above ${lowerLimit}`] = value[lowerLimit.toString()];
             humanReadablePayload[`Age is above ${upperLimit}`] = value[upperLimit.toString()];
         } else if (id === "address" && typeof value === "object" && value !== null) {
-            const { street_address, locality, postal_code } = value;
+            const {street_address, locality, postal_code} = value;
             const addressParts = [street_address, postal_code, locality].filter(part => part);
             humanReadablePayload["Address"] = addressParts.join(', ');
         }

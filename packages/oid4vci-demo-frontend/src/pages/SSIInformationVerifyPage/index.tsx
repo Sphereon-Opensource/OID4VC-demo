@@ -10,6 +10,7 @@ import { Text } from '../../components/Text';
 import SSIPrimaryButton from '../../components/SSIPrimaryButton';
 import { convertPIDToUniformCredential } from '../../utils/mapper/PIDMapper';
 import { NonMobile } from "../..";
+import RenderClaims from "../../components/RenderClaims";
 
 type State = {
     data: object | undefined // raw credential
@@ -120,18 +121,9 @@ const SSIInformationVerifyPage: React.FC = () => {
                         />
                     </Trans>
                     {payload.map((credential, index) => (
-                        <div key={index} style={{marginTop: '20px', textAlign: 'center', width: '80%'}}>
+                        <div key={index} style={{marginTop: '20px', textAlign: 'left', width: '80%'}}>
                             {credential.transformedClaims &&
-                                Object.entries(credential.transformedClaims).map(([key, value], innerIndex) => (
-                                    <div key={innerIndex} style={{marginBottom: '15px'}}>
-                                        {key}
-                                        <div>
-                                            {typeof value === 'object' && value !== null
-                                                ? JSON.stringify(value)
-                                                : String(value)}
-                                        </div>
-                                    </div>
-                                ))}
+                                <RenderClaims payload={credential.transformedClaims} /> }
                         </div>
                     ))}
                     <div style={{width: '100%', alignSelf: 'flex-end' }}>
