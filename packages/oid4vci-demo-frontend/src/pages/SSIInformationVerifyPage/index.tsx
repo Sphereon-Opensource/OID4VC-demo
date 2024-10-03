@@ -13,7 +13,7 @@ import { NonMobile } from "../..";
 
 type State = {
     data: object | undefined // raw credential
-    credential: UniformCredential;
+    credentials: UniformCredential[];
 };
 
 const SSIInformationVerifyPage: React.FC = () => {
@@ -23,12 +23,12 @@ const SSIInformationVerifyPage: React.FC = () => {
     
     const pageConfig = flowRouter.getPageConfig();
     const { t } = useTranslation();
-    const [payload, setPayload] = useState<Record<string, any> | null>(null);
+    const [payload, setPayload] = useState<UniformCredential[] | null>(null);
     const [state, setState] = useState<State>(() => {
         const locationState = location.state as State | undefined
         return {
             data: locationState?.data,
-            credential: locationState?.credential || ({} as UniformCredential)
+            credentials: locationState?.credentials || []
         }
     })
 
@@ -42,11 +42,12 @@ const SSIInformationVerifyPage: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (state.data && 'vp_token' in state.data) {
-                const uniformCredential = await convertPIDToUniformCredential(state.data.vp_token)
-                setPayload(uniformCredential)
+                const vp_tokens = Array.isArray(state.data.vp_token) ? state.data.vp_token : [state.data.vp_token]
+                const uniformCredentials = await convertPIDToUniformCredential(vp_tokens)
+                setPayload(uniformCredentials)
                 setState(prevState => ({
                     ...prevState,
-                    credential: uniformCredential
+                    credentials: uniformCredentials
                 }))
             }
         }
@@ -118,24 +119,26 @@ const SSIInformationVerifyPage: React.FC = () => {
                             lines={t(`${pageConfig.topDescription ?? 'sharing_data_confirm_right_pane_paragraph'}`).split('\r\n')}
                         />
                     </Trans>
-                    <div style={{marginTop: '20px', textAlign: 'center', width: '80%'}}>
-                        {payload.transformedClaims &&
-                            Object.entries(payload.transformedClaims).map(([key, value], index) => (
-                                <div key={index} style={{marginBottom: '15px'}}>
-                                    {key}
-                                    <div>
-                                        {typeof value === 'object' && value !== null
-                                            ? JSON.stringify(value)
-                                            : String(value)}
+                    {payload.map((credential, index) => (
+                        <div key={index} style={{marginTop: '20px', textAlign: 'center', width: '80%'}}>
+                            {credential.transformedClaims &&
+                                Object.entries(credential.transformedClaims).map(([key, value], innerIndex) => (
+                                    <div key={innerIndex} style={{marginBottom: '15px'}}>
+                                        {key}
+                                        <div>
+                                            {typeof value === 'object' && value !== null
+                                                ? JSON.stringify(value)
+                                                : String(value)}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                    </div>
+                                ))}
+                        </div>
+                    ))}
                     <div style={{width: '100%', alignSelf: 'flex-end' }}>
                         <SSIPrimaryButton
                             caption={t('label_next')}
                             style={{ width: '100%' }}
-                            onClick={async () => await flowRouter.nextStep({ payload: state?.credential.original })}
+                            onClick={async () => await flowRouter.nextStep({ payload: state?.credentials })}
                         />
                     </div>
                 </div>

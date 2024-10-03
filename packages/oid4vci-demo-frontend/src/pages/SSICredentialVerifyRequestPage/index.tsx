@@ -137,6 +137,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
                                                              vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
+                                                             /*redirectUri={`https://sphereon.com?definition_id=${flowRouter.getVpDefinitionId()}&correlationId=:correlation_id`}*/ 
                                                              onAuthRequestRetrieved={console.log}
                                                              onSignInComplete={onSignInComplete}
                                                              setQrCodeData={setDeepLink}/>}

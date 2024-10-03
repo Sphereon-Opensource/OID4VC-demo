@@ -16,6 +16,7 @@ const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 export type AuthenticationQRProps = {
   vpDefinitionId: string
   ecosystem: Ecosystem
+  redirectUri?: string
   width?: number
   fgColor?: string
   onAuthRequestRetrieved: () => void
@@ -62,9 +63,10 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   }
 
   private generateNewQRCode() {
-    const {ecosystem, vpDefinitionId, setQrCodeData} = this.props
+    const {ecosystem, vpDefinitionId, redirectUri, setQrCodeData} = this.props
+    
       ecosystem.getAgent()
-      .siopClientCreateAuthRequest({definitionId: vpDefinitionId})
+      .siopClientCreateAuthRequest({definitionId: vpDefinitionId, redirectUri})
       .then((authRequestURIResponse) => {
         setQrCodeData(authRequestURIResponse.authRequestURI)
         ecosystem.getAgent()

@@ -6,49 +6,52 @@ import crypto from 'crypto-browserify'
 import {VerifiableCredential} from "@veramo/core";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function convertPIDToUniformCredential(credential: any): Promise<UniformCredential> {
+export async function convertPIDToUniformCredential(credentials: Array<any>): Promise<Array<UniformCredential>> {
     //fixme: we have a problem with crypto library that should be fixed when we update the sdk libs version. for now, we're assuming that sd-jwt credential that we have here is already decoded
 
-   if (CredentialMapper.isSdJwtEncoded(credential)) {
-        // @ts-ignore
-        const hasher = (data, algorithm) => {
-            const sanitizedAlgorithm = algorithm.toLowerCase().replace(/[-_]/g, '')
-            return crypto.createHash(sanitizedAlgorithm).update(data).digest();
+    const result =  credentials.map(async credential => {
+        if (CredentialMapper.isSdJwtEncoded(credential)) {
+            // @ts-ignore
+            const hasher = (data, algorithm) => {
+                const sanitizedAlgorithm = algorithm.toLowerCase().replace(/[-_]/g, '')
+                return crypto.createHash(sanitizedAlgorithm).update(data).digest();
+            }
+            // @ts-ignore
+            const sdJwtDecodedVc: SdJwtDecodedVerifiableCredential = await CredentialMapper.decodeSdJwtVcAsync(credential as string, hasher)
+            return {
+                original: credential,
+                subjectClaim: sdJwtDecodedVc.decodedPayload as Record<string, any>,
+                transformedClaims: convertPIDSdJwtWellknownPayloadValues(sdJwtDecodedVc.decodedPayload)
+            }
         }
-        // @ts-ignore
-        const sdJwtDecodedVc: SdJwtDecodedVerifiableCredential = await CredentialMapper.decodeSdJwtVcAsync(credential as string, hasher)
+        if (CredentialMapper.isMsoMdocOid4VPEncoded(credential)) {
+            const wvp = CredentialMapper.toWrappedVerifiablePresentation(credential)
+            if (!wvp.vcs || wvp.vcs.length == 0) {
+                return Promise.reject('Missing decoded MDOC credential')
+            }
+            const decodedCredential = wvp.vcs[0].credential as any // FIXME
+            const credentialSubject = CredentialMapper.toUniformCredential(decodedCredential).credentialSubject as Record<string, unknown>;
+            return {
+                original: credential,
+                subjectClaim: credentialSubject,
+                transformedClaims: convertPIDMdocWellknownPayloadValues(credentialSubject)
+            }
+        }
+        if ('vct' in credential) {
+            return {
+                original: credential,
+                subjectClaim: credential,
+                transformedClaims: convertPIDSdJwtWellknownPayloadValues(credential)
+            }
+        }
+        const credentialSummary = await toNonPersistedCredentialSummary(credential)
         return {
             original: credential,
-            subjectClaim: sdJwtDecodedVc.decodedPayload as Record<string, any>,
-            transformedClaims: convertPIDSdJwtWellknownPayloadValues(sdJwtDecodedVc.decodedPayload)
-        }
+            subjectClaim: CredentialMapper.toUniformCredential(credential).credentialSubject as Record<string, unknown>,
+            transformedClaims: convertPIDUniformVCWellknownPayloadValues(credentialSummary.properties)
     }
-    if(CredentialMapper.isMsoMdocOid4VPEncoded(credential)) {
-        const wvp = CredentialMapper.toWrappedVerifiablePresentation(credential)
-        if(!wvp.vcs ||  wvp.vcs.length == 0) {
-            return Promise.reject('Missing decoded MDOC credential')
-        }
-        const decodedCredential = wvp.vcs[0].credential as any // FIXME
-        const credentialSubject = CredentialMapper.toUniformCredential(decodedCredential).credentialSubject as Record<string, unknown>;
-        return {
-            original: credential,
-            subjectClaim:  credentialSubject,
-            transformedClaims: convertPIDMdocWellknownPayloadValues(credentialSubject)
-        }
-    }
-    if ('vct' in credential) {
-        return {
-            original: credential,
-            subjectClaim: credential,
-            transformedClaims: convertPIDSdJwtWellknownPayloadValues(credential)
-        }
-    }
-    const credentialSummary = await toNonPersistedCredentialSummary(credential)
-    return {
-        original: credential,
-        subjectClaim: CredentialMapper.toUniformCredential(credential).credentialSubject as Record<string, unknown>,
-        transformedClaims: convertPIDUniformVCWellknownPayloadValues(credentialSummary.properties)
-    }
+    })
+    return Promise.all(result)
 }
 
 /**
@@ -64,6 +67,7 @@ function convertPIDSdJwtWellknownPayloadValues(payload: SdJwtDecodedVerifiableCr
 
     // Collect numeric age keys to process after the loop
     const numericAgeKeys: number[] = [];
+
 
     for (const [key, value] of Object.entries(payload)) {
         if (exclusions.includes(key)) {
