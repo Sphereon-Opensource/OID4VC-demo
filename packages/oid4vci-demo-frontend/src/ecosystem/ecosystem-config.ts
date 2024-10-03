@@ -63,6 +63,7 @@ export interface SSICredentialVerifyRequestPageConfig extends PageConfig {
     enableRightPaneButton?: boolean
     rightPaneButtonStepId?: string
     downloadAppStepId?: string
+    responseRedirectURI?: string
     bottomParagraph?: string
     mobile?: {
         height?: string | number

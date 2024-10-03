@@ -19,7 +19,7 @@ import styles from "../../components/DeepLinkButton/DeepLinkButton.module.css";
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const ecosystem = useEcosystem()
     const flowRouter = useFlowRouter<SSICredentialVerifyRequestPageConfig>()
-    const pageConfig = flowRouter.getPageConfig()
+    const pageConfig:SSICredentialVerifyRequestPageConfig = flowRouter.getPageConfig()
     const {t} = useTranslation()
     const credentialName = useEcosystem().getGeneralConfig().credentialName
     const [deepLink, setDeepLink] = useState<string>('')
@@ -52,6 +52,10 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
         await flowRouter.nextStep(state)
     }
 
+    const responseRedirectUri = pageConfig.responseRedirectURI?.
+    replace(":definition_id", flowRouter.getVpDefinitionId()).
+    replace(":definitionId", flowRouter.getVpDefinitionId())
+    
     return (
         <div style={{display: 'flex', height: '100vh', width: '100%'}}>
             <NonMobile>
@@ -137,7 +141,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                                              fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                              width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
                                                              vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
-                                                             /*redirectUri={`https://sphereon.com?definition_id=${flowRouter.getVpDefinitionId()}&correlationId=:correlation_id`}*/ 
+                                                             responseRedirectUri={responseRedirectUri} 
                                                              onAuthRequestRetrieved={console.log}
                                                              onSignInComplete={onSignInComplete}
                                                              setQrCodeData={setDeepLink}/>}
