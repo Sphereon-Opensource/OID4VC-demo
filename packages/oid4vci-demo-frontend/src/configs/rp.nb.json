@@ -71,7 +71,7 @@
     "verifyRequest": {
       "primaryButtonResourceId": "label_continue",
       "primaryButtonManualResourceId": "label_continue",
-      "responseRedirectURI": "https://sphereon.com?definition_id=:definition_id",
+      "responseRedirectURI": "https://northernblock.io/:correlation_id?definition_id=corporate",
       "logo": {
         "src": "image_4.svg",
         "alt": "background",
