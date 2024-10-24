@@ -79,7 +79,13 @@ function convertPIDSdJwtWellknownPayloadValues(payload: Record<string, any>) {
 
             if (Array.isArray(value)) {
                 value.forEach(arrayElem => {
-                    humanReadablePayload[humanReadableKey] = convertPIDSdJwtWellknownPayloadValues(arrayElem)
+                    if (typeof arrayElem === 'object') {
+                        if (arrayElem !== null && Object.keys(arrayElem).length > 0) {
+                            humanReadablePayload[humanReadableKey] = convertPIDSdJwtWellknownPayloadValues(arrayElem)
+                        }
+                    } else if (typeof (arrayElem) !== 'string' || arrayElem !== '') {
+                        humanReadablePayload[humanReadableKey] = convertToString(arrayElem)
+                    }
                 })
             } else if (typeof value === 'object') {
                 if (value !== null && Object.keys(value).length > 0) {
