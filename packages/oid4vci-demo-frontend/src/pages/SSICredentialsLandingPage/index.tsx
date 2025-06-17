@@ -14,48 +14,55 @@ const SSICredentialsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
-    const pageConfig= flowRouter.getPageConfig()
+    const pageConfig = flowRouter.getPageConfig()
 
     return (
         <div style={{
             display: 'flex',
-            alignContent: 'center',
-            flex: 1,
             height: '100vh',
+            background: '#E2E4FE',
+            overflow: 'hidden',
         }}>
 
-            <NonMobile>
-                <div id={"photo"} style={{
-                    display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? 'auto',
-                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                    ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ??'center'})
-                }}>
-                    {pageConfig.logo &&
-                        <img
-                            src={pageConfig.logo.src}
-                            alt={pageConfig.logo.alt}
-                            width={pageConfig.logo.width}
-                            height={pageConfig.logo.height}
-                        />
-                    }
-                </div>
-            </NonMobile>
             <div style={{
-                width: isTabletOrMobile ? '100%' : '65%',
-                height: isTabletOrMobile ? '90%' : '60%',
-                display: 'grid'
+                display: 'flex',
+                alignContent: 'center',
+                margin: '15px',
+                flex: 1,
+                backgroundColor: '#FBFBFB',
+                borderRadius: '15px',
+                borderTopLeftRadius: '15px',
+                borderBottomLeftRadius: '15px',
+                overflow: 'hidden',
             }}>
+
+                <NonMobile>
+                    <div id={"photo"} style={{
+                        display: 'flex',
+                        width: pageConfig.leftPaneWidth ?? 'auto',
+                        height: pageConfig.leftPaneWidth ? '100%' : 'auto',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
+                        ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
+                    }}>
+                        {pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
+                            />
+                        }
+                    </div>
+                </NonMobile>
                 <div style={{
                     margin: 'auto',
                     gap: isTabletOrMobile ? 28 : 65,
                     flexDirection: 'column',
                     display: 'flex',
                     width: '70%',
-                    height: '60%',
+                    height: '83%',
                     alignItems: 'center'
                 }}>
                     <Mobile>
@@ -79,77 +86,88 @@ const SSICredentialsLandingPage: React.FC = () => {
                     }}>
                         <Mobile>
                             <span style={{fontWeight: '600', fontSize: '24px', width: '100%'}}>{t(pageConfig.pageTitle)}</span><br/>
-                            <span style={{fontSize: '11px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}}></span>
+                            <span style={{fontSize: '11px'}} dangerouslySetInnerHTML={{__html: t(pageConfig.text) ?? ''}}></span>
                         </Mobile>
                         <NonMobile>
                             <span style={{fontWeight: '600', fontSize: '32px'}}>{t(pageConfig.pageTitle)}</span><br/>
-                            <span style={{fontSize: '20px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}} ></span>
+                            <span style={{fontSize: '20px'}} dangerouslySetInnerHTML={{__html: t(pageConfig.text) ?? ''}}></span>
                         </NonMobile>
                     </div>
-                    {pageConfig.credentials.map(value => (
-                        <div onClick={() => handleCredentialClick(value)}>
-                            <Mobile>
-                                <div style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-evenly',
-                                    alignContent: 'space-between',
-                                    cursor: 'pointer'
-                                }}>
-                                    <CredentialMiniCardView
-                                        backgroundImage={{uri: value.backgroundImage}}
-                                        backgroundColor={value.backgroundColor}
-                                        logo={{
-                                            uri: value.logo?.src,
-                                            ...((value.logo?.height && value.logo?.width) && {
-                                                dimensions: {
-                                                    height: value.logo?.height,
-                                                    width: value.logo?.width,
-                                                }
-                                            })
-                                        }}
-                                    />
-                                    <div style={{width: 200, paddingLeft: '5px'}}>
-                                        <span style={{fontSize: '10px'}}>{value.description}</span><br/>
-                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span>
+                    <div style={{
+                        width: isTabletOrMobile ? '100%' : '100%',
+                        height: isTabletOrMobile ? '90%' : '90%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-evenly',
+                        overflow: 'auto',
+                        gap: '20px',
+                    }}>
+
+                        {pageConfig.credentials.map(value => (
+                            <div onClick={() => handleCredentialClick(value)}>
+                                <Mobile>
+                                    <div style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-evenly',
+                                        alignContent: 'space-between',
+                                        cursor: 'pointer'
+                                    }}>
+                                        <CredentialMiniCardView
+                                            backgroundImage={{uri: value.backgroundImage}}
+                                            backgroundColor={value.backgroundColor}
+                                            logo={{
+                                                uri: value.logo?.src,
+                                                ...((value.logo?.height && value.logo?.width) && {
+                                                    dimensions: {
+                                                        height: value.logo?.height,
+                                                        width: value.logo?.width,
+                                                    }
+                                                })
+                                            }}
+                                        />
+                                        <div style={{width: 200, paddingLeft: '5px'}}>
+                                            <span style={{fontSize: '10px'}}>{value.description}</span><br/>
+                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{value.name}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </Mobile>
-                            <NonMobile>
-                                <div style={{
-                                    display: 'flex',
-                                    textAlign: 'center',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    cursor: 'pointer'
-                                }}>
-                                    <CredentialMiniCardView
-                                        style={{width: 140, height: 90}}
-                                        backgroundColor={value.backgroundColor}
-                                        backgroundImage={{
-                                            uri: value.backgroundImage
-                                        }}
-                                        logo={{
-                                            uri: value.logo?.src,
-                                            ...((value.logo?.height && value.logo?.width) && {
-                                                dimensions: {
-                                                    height: value.logo?.height,
-                                                    width: value.logo?.width,
-                                                }
-                                            })
-                                        }}
-                                    />
-                                    <div style={{width: '450px', textAlign: 'left', paddingLeft: '3%'}}>
-                                        <span style={{fontSize: '18px', color: '#303030',}}>{value.description}</span><br/>
-                                        <span style={{
-                                            fontSize: '30px',
-                                            fontWeight: '500',
-                                            color: '#303030'
-                                        }}>{value.name}</span>
+                                </Mobile>
+                                <NonMobile>
+                                    <div style={{
+                                        display: 'flex',
+                                        textAlign: 'center',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        cursor: 'pointer'
+                                    }}>
+                                        <CredentialMiniCardView
+                                            style={{width: 140, height: 90}}
+                                            backgroundColor={value.backgroundColor}
+                                            backgroundImage={{
+                                                uri: value.backgroundImage
+                                            }}
+                                            logo={{
+                                                uri: value.logo?.src,
+                                                ...((value.logo?.height && value.logo?.width) && {
+                                                    dimensions: {
+                                                        height: value.logo?.height,
+                                                        width: value.logo?.width,
+                                                    }
+                                                })
+                                            }}
+                                        />
+                                        <div style={{width: '50%', textAlign: 'left', paddingLeft: '3%'}}>
+                                            <span style={{fontSize: '18px', color: '#303030',}}>{value.description}</span><br/>
+                                            <span style={{
+                                                fontSize: '30px',
+                                                fontWeight: '500',
+                                                color: '#303030'
+                                            }}>{value.name}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </NonMobile>
-                        </div>
-                    ))}
+                                </NonMobile>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
