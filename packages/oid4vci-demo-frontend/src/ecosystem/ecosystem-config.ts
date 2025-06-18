@@ -285,6 +285,11 @@ export interface SSICredentialIssueRequestPageConfig extends PageConfig {
   }
 }
 
+export interface FilterItem {
+    filterKey: string
+    filterValue: string
+}
+
 export interface SSIInformationManualRequestPageConfig extends PageConfig {
     leftPaneWidth?: string
     photo?: string
@@ -295,7 +300,15 @@ export interface SSIInformationManualRequestPageConfig extends PageConfig {
     sharing_data_right_pane_title: string
     sharing_data_right_pane_paragraph?: string
     primaryButtonResourceId?: string
+
     form: DataFormRow[]
+    formDefaultsFromJson?: {
+        jsonFile: string
+        value: string
+        caption?: string
+        filters?: FilterItem[]
+    }
+
     mobile?: {
         width?: string | number
         logo?: LogoProperties
@@ -322,7 +335,14 @@ export interface DataFormElement {
     labelStyle?: CSSProperties
     inputStyle?: CSSProperties
     readonly?: boolean
+    editable?: boolean
     customValidation?: string
+    itemsFromJson?: {
+        jsonFile: string
+        value: string
+        caption?: string
+        filters?: FilterItem[]
+    }
     display?: {
         checkboxBorderColor?: string
         checkboxLabelColor?: string
@@ -542,7 +562,14 @@ export interface VCIConfigRouteStep {
 
 export interface VCINavigationStep extends VCIConfigRouteStep {
     path: string
+    conditions?: {
+        fieldKey: string
+        value: string
+        nextId: string
+        path?: string
+    }[]
 }
+
 
 export interface VCIExecuteStep extends VCIConfigRouteStep {
     action: VCIAction

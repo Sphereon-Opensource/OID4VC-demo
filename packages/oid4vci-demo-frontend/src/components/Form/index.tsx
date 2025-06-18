@@ -1,77 +1,272 @@
-import React, {CSSProperties, FC, ReactElement, ReactNode, useEffect, useState} from 'react'
+import React, {FC, ReactElement, ReactNode, useEffect, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
-import {DataFormElement, DataFormRow} from '../../ecosystem/ecosystem-config'
+import {DataFormElement, DataFormRow, FilterItem} from '../../ecosystem/ecosystem-config'
 import {generateRandomIBAN} from '../../utils/iban'
 import {transformFormConfigToEmptyObject} from '../../utils/ObjectUtils'
 import InputField from '../InputField'
-import {FormOutputData, FormFieldValue, ImmutableRecord} from '../../types'
+import {FormFieldValue, FormOutputData, ImmutableRecord} from '../../types'
 import style from './index.module.css'
+import {extractComboboxItems, extractFormDefaults, JsonDataItem, loadJsonData} from '../../utils/jsonLoader'
+import {Text} from "../Text";
 
 type Props = {
     inputBackgroundColor?: string
     formConfig: DataFormRow[]
     formInitData?: ImmutableRecord
+    formDefaultsFromJson?: {
+        jsonFile: string
+        value: string
+        caption?: string
+        filters?: FilterItem[]
+    }
     onChange?: (formData: FormOutputData) => Promise<void>
+}
+
+interface ComboboxData {
+    [fieldKey: string]: Array<{ value: string, caption: string }>
 }
 
 function getInitialState(form: DataFormRow[]): FormOutputData {
     return transformFormConfigToEmptyObject(form)
 }
 
-const evaluateDefaultValue = (field: DataFormElement, formInitData: ImmutableRecord | undefined, formData: FormOutputData): FormFieldValue => {
+// Helper function to resolve filter values with placeholders
+const resolveFilters = (filters: FilterItem[], formData: FormOutputData): FilterItem[] => {
+    return filters
+        .filter(filter => filter?.filterKey && filter?.filterValue)
+        .map(filter => ({
+        ...filter,
+        filterValue: filter.filterValue.startsWith('${') && filter.filterValue.endsWith('}')
+            ? formData[filter.filterValue.slice(2, -1)]?.toString() || ''
+            : filter.filterValue
+    }))
+}
+
+const evaluateDefaultValue = (
+    field: DataFormElement,
+    formInitData: ImmutableRecord | undefined,
+    formData: FormOutputData,
+    jsonDefaults?: JsonDataItem
+): FormFieldValue => {
     const fieldValue = formData[field.key]
     if (fieldValue) {
         return fieldValue
     }
 
     let defaultValue: FormFieldValue = formInitData?.[field.key] ?? field.defaultValue ?? ''
-    if (defaultValue === '*RANDOM8') { // TODO this is for a demo, create something more sophisticated later
+
+    // Check if we have JSON defaults for this field
+    if (jsonDefaults && jsonDefaults[field.key] !== undefined) {
+        defaultValue = jsonDefaults[field.key]
+    }
+
+    if (defaultValue === '*RANDOM8') {
         defaultValue = Math.floor(Math.random() * 89999999 + 10000000)
     } else if (defaultValue === '*RANDOM-IBAN') { // TODO this is for a demo, create something more sophisticated later
         defaultValue = generateRandomIBAN()
     }
+
     formData[field.key] = `${defaultValue}`
     return defaultValue
 }
 
 const Form: FC<Props> = (props: Props): ReactElement => {
-    const {formConfig, formInitData, onChange} = props
+    const {formConfig, formInitData, formDefaultsFromJson, onChange} = props
     const {t} = useTranslation()
     const [formData, setFormData] = useState<FormOutputData>(getInitialState(formConfig))
+    const [comboboxData, setComboboxData] = useState<ComboboxData>({})
+    const [loadingCombobox, setLoadingCombobox] = useState<{ [key: string]: boolean }>({})
+    const [jsonDefaults, setJsonDefaults] = useState<JsonDataItem | undefined>()
+    const [defaultsLoaded, setDefaultsLoaded] = useState<boolean>(false)
 
     const onChangeValue = async (value: FormFieldValue, key: string): Promise<void> => {
         const data = {...formData, [key]: value}
         setFormData(data)
+
+        // Check if this change affects any dependent comboboxes
+        await updateDependentComboboxes(key, value, data)
+
+        // Check if this change affects the form defaults
+        if (formDefaultsFromJson) {
+            await loadFormDefaults(data)
+        }
+
         if (onChange) {
             await onChange(data)
         }
     }
 
+    const loadFormDefaults = async (currentFormData: FormOutputData): Promise<void> => {
+        if (!formDefaultsFromJson) {
+            return
+        }
+
+        try {
+            const jsonData = await loadJsonData(formDefaultsFromJson.jsonFile)
+
+            // Resolve filter values with current form data
+            const resolvedFilters = formDefaultsFromJson.filters
+                ? resolveFilters(formDefaultsFromJson.filters, currentFormData)
+                : undefined
+
+            const defaults = extractFormDefaults(jsonData, resolvedFilters)
+            setJsonDefaults(defaults)
+
+            // Update form data with defaults (but don't overwrite existing values)
+            if (defaults) {
+                const updatedFormData = {...currentFormData}
+                let hasChanges = false
+
+                Object.keys(defaults).forEach(key => {
+                    if (!updatedFormData[key] || updatedFormData[key] === '') {
+                        updatedFormData[key] = defaults[key]?.toString() || ''
+                        hasChanges = true
+                    }
+                })
+
+                if (hasChanges) {
+                    setFormData(updatedFormData)
+                    if (onChange) {
+                        await onChange(updatedFormData)
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load form defaults:', error)
+        }
+    }
+
+    const updateDependentComboboxes = async (changedKey: string, changedValue: FormFieldValue, currentFormData: FormOutputData): Promise<void> => {
+        // Find all combobox fields that depend on the changed field
+        const allFields = formConfig.flat()
+        const dependentFields = allFields.filter(field =>
+            field.type === 'combobox' &&
+            field.itemsFromJson?.filters?.some(filter =>
+                filter.filterKey?.replace('/', '') === changedKey
+            )
+        )
+
+        for (const field of dependentFields) {
+            if (field.itemsFromJson) {
+                await loadComboboxData(field, currentFormData)
+            }
+        }
+    }
+
+    const loadComboboxData = async (field: DataFormElement, currentFormData?: FormOutputData): Promise<void> => {
+        if (!field.itemsFromJson) {
+            return
+        }
+
+        const {jsonFile, value, caption, filters} = field.itemsFromJson
+
+        setLoadingCombobox(prev => ({...prev, [field.key]: true}))
+
+        try {
+            const jsonData = await loadJsonData(jsonFile)
+
+            // Resolve filter values with current form data
+            const resolvedFilters = filters && currentFormData
+                ? resolveFilters(filters, currentFormData)
+                : undefined
+
+            const items = extractComboboxItems(
+                jsonData,
+                value,
+                caption,
+                resolvedFilters
+            )
+
+            setComboboxData(prev => ({
+                ...prev,
+                [field.key]: items
+            }))
+        } catch (error) {
+            console.error(`Failed to load combobox data for field ${field.key}:`, error)
+            setComboboxData(prev => ({
+                ...prev,
+                [field.key]: []
+            }))
+        } finally {
+            setLoadingCombobox(prev => ({...prev, [field.key]: false}))
+        }
+    }
+
     const getFieldElementFrom = (field: DataFormElement): ReactElement => {
-        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formInitData, formData)
+        const defaultValue: FormFieldValue = evaluateDefaultValue(field, formInitData, formData, jsonDefaults)
+
         switch (field.type) {
             case 'checkbox':
                 return <SSICheckbox
                     borderColor={field.display?.checkboxBorderColor}
                     selectedColor={field.display?.checkboxSelectedColor}
                     // @ts-ignore // FIXME __html complaining
-                    label={field.labelUrl ? <div dangerouslySetInnerHTML={{ __html: t(field.label, { url: field.labelUrl })}}/> : field.label}
-                    disabled={field.readonly || formInitData?.[field.id] !== undefined }
+                    label={field.labelUrl ? <div dangerouslySetInnerHTML={{__html: t(field.label, {url: field.labelUrl})}}/> : field.label}
+                    disabled={field.readonly || formInitData?.[field.id] !== undefined}
                     labelColor={field.display?.checkboxLabelColor}
                     onValueChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
                 />
-          case 'text':
-          case 'date':
+
+            case 'combobox':
+                const items = comboboxData[field.key] || []
+                const isLoading = loadingCombobox[field.key]
+                const isComboReadonly = field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)
+
+                return <div style={{width: '100%', ...field.inputStyle}}>
+                    {field.label && (
+                        <label
+                            htmlFor={field.id}
+                            style={field.labelStyle}
+                        >
+                            {t(field.label)}
+                        </label>
+                    )}
+                    <select
+                        id={field.id}
+                        disabled={isComboReadonly || isLoading}
+                        value={defaultValue?.toString() || ''}
+                        onChange={(e) => onChangeValue(e.target.value, field.key)}
+                        style={{
+                            width: '100%',
+                            padding: '8px',
+                            border: '1px solid #ccc',
+                            borderRadius: '4px',
+                            backgroundColor: isComboReadonly && props.inputBackgroundColor ? props.inputBackgroundColor : undefined,
+                            ...field.inputStyle
+                        }}
+                    >
+                        <option value="">{isLoading ? 'Loading...' : 'Select...'}</option>
+                        {items.map((item, index) => (
+                            <option key={index} value={item.value}>
+                                {item.caption}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            case 'header':
+                return <h4 style={{ margin: 0 }}>{field.label}{defaultValue && `: ${defaultValue}`}</h4>
+            case 'text-area':
+                return <Text
+                    title={[field.label ?? '']}
+                    lines={[`${defaultValue}`]}
+                    h2Style={{ fontSize: '1em', fontWeight: 'bold', margin: '0 0 4px 0' }}
+                    pStyle={{ fontSize: '0.9em', margin: 0 }}
+                />
+
+            case 'text':
+            case 'date':
                 const isReadonly = field.readonly || formInitData?.[field.key] !== undefined || Boolean(field.readonlyWhenAbsentInPayload)
+                const isEditable = field.editable !== false // Default to true if not specified
 
                 return <InputField
                     id={field.id}
                     labelStyle={field.labelStyle}
-                    inlineStyle={{ width: '100%', ...(isReadonly && !!props.inputBackgroundColor && { backgroundColor: props.inputBackgroundColor }), ...field.inputStyle }}
+                    inlineStyle={{width: '100%', ...(isReadonly && !!props.inputBackgroundColor && {backgroundColor: props.inputBackgroundColor}), ...field.inputStyle}}
                     label={field.label ? t(field.label) ?? undefined : undefined}
                     type={field.type}
                     readonly={isReadonly}
+                    editable={isEditable}
                     defaultValue={defaultValue}
                     customValidation={field.customValidation ? new RegExp(field.customValidation) : undefined}
                     onChange={async (value: FormFieldValue): Promise<void> => onChangeValue(value, field.key)}
@@ -94,7 +289,29 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     }
 
     useEffect((): void => {
-        if (onChange && formInitData) { // Update host form to update enable nxt button
+        // Load initial combobox data for fields without dependencies
+        const allFields = formConfig.flat()
+        const comboboxFields = allFields.filter(field =>
+            field.type === 'combobox' && field.itemsFromJson
+        )
+
+        comboboxFields.forEach(field => {
+            if (!field.itemsFromJson?.filters || field.itemsFromJson.filters.length === 0) {
+                // Load data for non-dependent comboboxes
+                loadComboboxData(field)
+            }
+        })
+
+        // Load initial form defaults
+        if (formDefaultsFromJson) {
+            loadFormDefaults(formData)
+        }
+
+        setDefaultsLoaded(true)
+    }, [formConfig])
+
+    useEffect((): void => {
+        if (onChange && formInitData) {
             onChange(formData)
         }
     })

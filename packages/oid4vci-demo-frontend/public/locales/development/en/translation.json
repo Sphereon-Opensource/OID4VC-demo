@@ -144,5 +144,9 @@
   "funke_share_success_top_description": "Almost there. This is what we received from you.",
   "funke_share_success_button_caption": "Return to first page",
   "sharing_data_confirm_right_pane_title": "Thank you for providing the below information",
-  "sharing_data_confirm_right_pane_paragraph": "Almost there. This is what we received from you."
+  "sharing_data_confirm_right_pane_paragraph": "Almost there. This is what we received from you.",
+  "eduskills_my_env": "My environment EDUSKILLS",
+  "eduskills_select_candidate": "Select the candidate.",
+  "eduskills_get_started": "To get started, please fill out the information below.",
+  "eduskills_cert_type": "Certificate type: {{certificaat_type}}"
 }

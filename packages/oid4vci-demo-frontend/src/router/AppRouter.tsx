@@ -18,12 +18,14 @@ import SSIIdentityVerificationPage from '../pages/SSIIdentityVerificationPage'
 import SSICredentialVerifyFromVPRequestPage from '../pages/SSICredentialVerifyFromVPRequest'
 import SSIPresentationsLandingPage from "../pages/SSIPresentationsLandingPage";
 import SSIInformationVerifyPage from "../pages/SSIInformationVerifyPage";
+import {Navigate} from "react-router";
 
 export const routes: Record<string, any> = {
     '/start': <SSILandingPage/>,
     '/landing': <SSICredentialsLandingPage/>,
     '/landingvp': <SSIPresentationsLandingPage/>,
-    '/information/manual/request': <SSIInformationManualRequestPage/>,
+    '/information/manual/request/:pageId': <SSIInformationManualRequestPage/>,
+    '/information/manual/request': <SSIInformationManualRequestPage/>, // Kept for backward compatibility
     '/information/success': <SSIInformationSuccessPage/>,
     '/credentials/select': <SSISelectCredentialPage/>,
     '/credentials/verify/request': <SSICredentialVerifyRequestPage/>,
@@ -39,16 +41,27 @@ export const routes: Record<string, any> = {
     '/welcome': <SSIWelcomePage/>
 }
 
+const DefaultRouteRedirect: React.FC = () => {
+    const flowAppRouter = useFlowAppRouter()
+    const defaultRoute = flowAppRouter.getDefaultLocation()
+
+    console.log('Redirecting to default route:', defaultRoute)
+
+    return <Navigate to={defaultRoute} replace/>
+}
+
 const AppRouter: React.FC = () => {
-    const defaultRoute = useFlowAppRouter().getDefaultLocation()
     return (
         <HashRouter>
             <Routes>
-                {Object.entries(routes)
-                    .filter(([path]) => path === defaultRoute)
-                    .map(([path, component]) => (
-                        <Route key='/' path='/' element={component}/>
-                    ))}
+                {/* Redirect root path to the actual default route */}
+                <Route
+                    key="default-root"
+                    path="/"
+                    element={<DefaultRouteRedirect/>}
+                />
+
+                {/* Map all defined routes */}
                 {Object.entries(routes).map(([path, component]) => (
                     <Route key={path} path={path} element={component}/>
                 ))}

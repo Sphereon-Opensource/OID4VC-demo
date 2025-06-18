@@ -26,7 +26,10 @@ export const createCredentialOffer = async (actionParams: Record<string, any>, s
         credentialDataSupplierInput: {
             ...state.payload
         },
-        credential_configuration_ids: [state.credentialType ?? ("issueCredentialType" in actionParams ? actionParams.issueCredentialType : generalConfig.issueCredentialType)],
+        credential_configuration_ids: [
+            state.credentialType
+            ?? state.payload.vct
+            ?? ("issueCredentialType" in actionParams ? actionParams.issueCredentialType : generalConfig.issueCredentialType)],
     })
 
     return {

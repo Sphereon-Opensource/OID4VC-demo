@@ -19,10 +19,10 @@ type State = {
 }
 
 function getInitialState(formConfig: SSIInformationManualRequestPageConfig) {
-  if (!formConfig.form) {
-      return {}
-  }
-  return transformFormConfigToEmptyObject(formConfig.form)
+    if (!formConfig.form) {
+        return {}
+    }
+    return transformFormConfigToEmptyObject(formConfig.form)
 }
 
 function isFormDataValid(formData: FormOutputData, form: DataFormRow[]) {
@@ -60,8 +60,8 @@ const SSIInformationManualRequestPage: React.FC = () => {
         setFormData(formData)
     }
 
-	function determineWidth() {
-        if(pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
+    function determineWidth() {
+        if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
             return '100%'
         }
         return isTabletOrMobile ? pageConfig.mobile?.width ?? '50%' : '40%'
@@ -70,104 +70,130 @@ const SSIInformationManualRequestPage: React.FC = () => {
     return (
         <div style={{
             display: 'flex',
-            height: "100vh",
-            width: '100vw',
-            ...(isTabletOrMobile && {
-                overflowX: "hidden",
-                ...(pageConfig.mobile?.backgroundColor && {
-                    backgroundColor: pageConfig.mobile.backgroundColor
-                })
-            })
+            height: '100vh',
+            background: '#E2E4FE',
+            overflow: 'hidden',
         }}>
-            <NonMobile>
-                <div id={"photo"} style={{
-                    display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? 'auto',
-                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / cover`}),
-                    ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                    ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
-                }}>
-                    {pageConfig.logo &&
-                        <img
-                            src={pageConfig.logo.src}
-                            alt={pageConfig.logo.alt}
-                            width={pageConfig.logo.width}
-                            height={pageConfig.logo.height}
-                        />
-                    }
-                    { pageConfig.text_top_of_image &&
-                         <p
-                             className={"poppins-medium-36"}
-                             style={{maxWidth: 735, color: pageConfig.textTopOfImageColor ?? '#FBFBFB', marginTop: "auto", marginBottom: 120, marginLeft: 20}}
-                         >
-                             {t(`${pageConfig.text_top_of_image}`)}
-                         </p>
-                    }
-                </div>
-            </NonMobile>
+            <style>
+                {`
+                .Form_container__WhrAe {
+                    width: 530px !important;
+                }
+                `}
+            </style>
             <div style={{
                 display: 'flex',
-                flexGrow: 1,
-                width: determineWidth(),
-                alignItems: 'center',
-                flexDirection: 'column',
-                ...(isTabletOrMobile && { height: '100vh' }),
-                ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
-                ...(!isTabletOrMobile && { justifyContent: 'center', backgroundColor: '#FFFFFF' }),
+                alignContent: 'center',
+                margin: '15px',
+                flex: 1,
+                backgroundColor: '#FBFBFB',
+                borderRadius: '15px',
+                borderTopLeftRadius: '15px',
+                borderBottomLeftRadius: '15px',
+                overflow: 'hidden',
             }}>
-                {(isTabletOrMobile && pageConfig.mobile?.logo) &&
-                    <img
-                        src={pageConfig.mobile.logo.src}
-                        alt={pageConfig.mobile.logo.alt}
-                        width={pageConfig.mobile.logo?.width ?? 150}
-                        height={pageConfig.mobile.logo?.height ?? 150}
-                    />
-                }
+                <NonMobile>
+                    <div id={"photo"} style={{
+                        display: 'flex',
+                        width: pageConfig.leftPaneWidth ?? 'auto',
+                        height: pageConfig.leftPaneWidth ? '100%' : 'auto',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / cover`}),
+                        ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
+                        ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
+                    }}>
+                        {pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
+                            />
+                        }
+                        {pageConfig.text_top_of_image &&
+                            <p
+                                className={"poppins-medium-36"}
+                                style={{maxWidth: 735, color: pageConfig.textTopOfImageColor ?? '#FBFBFB', marginTop: "auto", marginBottom: 120, marginLeft: 20}}
+                            >
+                                {t(`${pageConfig.text_top_of_image}`)}
+                            </p>
+                        }
+                    </div>
+                </NonMobile>
                 <div style={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
+                    flexGrow: 1,
+                    width: determineWidth(),
                     alignItems: 'center',
-                    height: '63%',
+                    flexDirection: 'column',
+                    ...(isTabletOrMobile && {height: '100vh'}),
+                    ...(isTabletOrMobile && {gap: 24, ...(pageConfig.mobile?.backgroundColor && {backgroundColor: pageConfig.mobile.backgroundColor})}),
+                    ...(!isTabletOrMobile && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
                 }}>
-                    <div
-                        style={{
+                    {(isTabletOrMobile && pageConfig.mobile?.logo) &&
+                        <img
+                            src={pageConfig.mobile.logo.src}
+                            alt={pageConfig.mobile.logo.alt}
+                            width={pageConfig.mobile.logo?.width ?? 150}
+                            height={pageConfig.mobile.logo?.height ?? 150}
+                        />
+                    }
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        height: '83%',
+                    }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <p
+                                className={"inter-normal-24"}
+                                style={{marginBottom: 12, ...(pageConfig?.sharing_data_right_pane_title_style)}}
+                            >
+                                {t(pageConfig.sharing_data_right_pane_title, {credentialName, certificaat_type: formData['certificaat_type']})}
+                            </p>
+                            <p
+                                className={"poppins-normal-14"}
+                                style={{textAlign: 'center', ...(pageConfig?.sharing_data_right_pane_paragraph_style)}}
+                            >
+                                {t(pageConfig.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName})}
+                            </p>
+                        </div>
+                        <div style={{
+                            overflowY: 'auto',
+                            overflowX: 'hidden',
+                            width: '90%',
                             display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <p
-                            className={"inter-normal-24"}
-                            style={{marginBottom: 12, ...(pageConfig?.sharing_data_right_pane_title_style)}}
-                        >
-                            {t(pageConfig.sharing_data_right_pane_title)}
-                        </p>
-                        <p
-                            className={"poppins-normal-14"}
-                            style={{textAlign: 'center', ...(pageConfig?.sharing_data_right_pane_paragraph_style)}}
-                        >
-                            {t(pageConfig.sharing_data_right_pane_paragraph ?? 'sharing_data_right_pane_paragraph', {credentialName})}
-                        </p>
-                    </div>
-                    <div/>
-                    {initComplete && ( // We should not render the form until handleVPToken's result came back
-                        <Form
-                            inputBackgroundColor={(isTabletOrMobile ? pageConfig.mobile?.backgroundColor : undefined) }
-                            formConfig={pageConfig.form}
-                            formInitData={credentialsData}
-                            onChange={onFormValueChange}
-                        />
-                    )}
-                    <div>
-                        <SSIPrimaryButton
-                            caption={t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
-                            disabled={!isFormDataValid(formData, pageConfig.form)}
-                            onClick={async () => await flowRouter.nextStep({payload: formData})}
-                        />
+                            justifyContent: 'center',
+                            marginTop: '8px',
+                            marginBottom: '8px',
+                            paddingRight: '25px',
+                            paddingLeft: '25px',
+                        }}>
+                            {initComplete && ( // We should not render the form until handleVPToken's result came back
+                                <Form
+                                    inputBackgroundColor={(isTabletOrMobile ? pageConfig.mobile?.backgroundColor : undefined)}
+                                    formConfig={pageConfig.form}
+                                    formInitData={credentialsData}
+                                    formDefaultsFromJson={pageConfig.formDefaultsFromJson}
+                                    onChange={onFormValueChange}
+                                />
+                            )}
+                        </div>
+                        <div>
+                            <SSIPrimaryButton
+                                caption={t(pageConfig.primaryButtonResourceId ?? 'label_continue')}
+                                disabled={!isFormDataValid(formData, pageConfig.form)}
+                                onClick={async () => await flowRouter.nextStep({payload: formData})}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

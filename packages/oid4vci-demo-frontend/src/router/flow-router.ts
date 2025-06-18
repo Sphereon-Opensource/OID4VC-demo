@@ -1,19 +1,10 @@
 import {useLocation, useNavigate} from "react-router-dom"
-import {
-    PageConfig,
-    VCIAction,
-    VCIConfigRoute,
-    VCIConfigRouteStep,
-    VCIExecuteStep,
-    VCINavigationStep,
-    VCIOperation
-} from "../ecosystem/ecosystem-config"
+import {PageConfig, VCIAction, VCIConfigRoute, VCIConfigRouteStep, VCIExecuteStep, VCINavigationStep, VCIOperation} from "../ecosystem/ecosystem-config"
 import {useMemo, useState} from "react"
 import {createCredentialOffer} from "./actions/credential-actions"
 import {useEcosystem} from "../ecosystem/ecosystem"
 
-
-type StepsByIdType = { [key: string]: VCIConfigRouteStep };
+type StepsByIdType = { [key: string]: VCIConfigRouteStep }
 
 interface StepState {
     currentStep?: VCIConfigRouteStep
@@ -24,10 +15,10 @@ export function useFlowAppRouter() {
     const ecosystem = useEcosystem()
     const routes = ecosystem.getRoutes()
     const [currentRouteId, setCurrentRouteId] = useState<string>('default')
-    const [stepsById] = useState<StepsByIdType>(buildStepsByIdMap(getCurrentRoute(routes, currentRouteId)))
+    const stepsById = buildStepsByIdMap(getCurrentRoute(routes, currentRouteId))
 
-    function getDefaultLocation(state?: any): string {
-        return defaultLocation(stepsById)
+    function getDefaultLocation(): string {
+        return getDefaultLocationPath(stepsById)
     }
 
     return {
@@ -48,19 +39,33 @@ export function useFlowRouter<T extends PageConfig>() {
 
     function initStepState(): StepState {
         const stepState = {} as StepState
-
         const currentLocation = pageLocation.pathname
-        const defaultLocation = getDefaultLocation()
+        const defaultLocationPath = getDefaultLocationPath(stepsById)
+
         for (const step of Object.values(stepsById)) {
             switch (step.operation) {
                 case VCIOperation.NAVIGATE:
-                    const path = (step as VCINavigationStep).path
-                    if (path === currentLocation || (currentLocation === '/' && path === defaultLocation)) {
+                    const navStep = step as VCINavigationStep
+                    const path = navStep.path
+
+                    // Check for exact match first
+                    if (path === currentLocation || (currentLocation === '/' && path === defaultLocationPath)) {
                         stepState.currentStep = step
+                        break
+                    }
+
+                    // Check for parameterized path match
+                    if (path.includes(':pageId')) {
+                        const resolvedPath = path.replace(':pageId', step.id)
+                        if (resolvedPath === currentLocation) {
+                            stepState.currentStep = step
+                            break
+                        }
                     }
                     break
             }
         }
+
         const currentStep = stepState.currentStep
         if (!currentStep) {
             throw new Error(`can't determine current step for location path ${currentLocation}`)
@@ -72,20 +77,41 @@ export function useFlowRouter<T extends PageConfig>() {
     }
 
     function getDefaultLocation(): string {
-        return defaultLocation(stepsById)
+        return getDefaultLocationPath(stepsById)
     }
 
     function getNextId(): string | undefined {
-      return stepState.currentStep?.nextId
+        return stepState.currentStep?.nextId
     }
 
-    async function nextStep(updatedState ?: any) {
+    async function nextStep(updatedState?: any) {
         const currentStep = stepState.currentStep
         if (!currentStep) {
             throw new Error('current route/step is unknown')
         }
-        if (currentStep.nextId) {
-            await goToStep(currentStep.nextId, updatedState)
+
+        let nextId = currentStep.nextId
+
+        // Check for conditional navigation on navigation steps
+        if (currentStep.operation === VCIOperation.NAVIGATE) {
+            const navStep = currentStep as VCINavigationStep
+            if (navStep.conditions && updatedState?.payload) {
+                const formData = updatedState.payload
+
+                // Check each condition
+                for (const condition of navStep.conditions) {
+                    const fieldValue = formData[condition.fieldKey]
+                    if (fieldValue === condition.value) {
+                        console.debug(`Condition matched: ${condition.fieldKey} = ${condition.value}, routing to ${condition.nextId}`)
+                        nextId = condition.nextId
+                        break
+                    }
+                }
+            }
+        }
+
+        if (nextId) {
+            await goToStep(nextId, updatedState)
         } else {
             throw new Error(`There is no next step defined in step ${currentStep.id} in the sequence element of the ecosystem json`)
         }
@@ -104,15 +130,19 @@ export function useFlowRouter<T extends PageConfig>() {
                 if (!navStep.path) {
                     throw new Error(`Field path of navigation step with id ${navStep.id} is empty!`)
                 }
-                if (navStep.path.includes('://')) {
+
+                // Substitute :pageId with the actual step ID
+                let resolvedPath = navStep.path.replace(':pageId', stepId)
+
+                if (resolvedPath.includes('://')) {
                     // eslint-disable-next-line no-restricted-globals
-                    location.href = navStep.path
+                    location.href = resolvedPath
                     return
                 } else {
                     if (navigate === undefined) {
                         throw new Error(`Can't navigate from this page because we could not get the navigation hook.`)
                     }
-                    navigate(navStep.path, {state: updatedState})
+                    navigate(resolvedPath, {state: updatedState})
                 }
                 break
             case VCIOperation.EXECUTE:
@@ -127,7 +157,7 @@ export function useFlowRouter<T extends PageConfig>() {
             let outState
             switch (executeStep.action) {
                 case VCIAction.CREATE_CREDENTIAL_OFFER:
-                    outState = await createCredentialOffer(executeStep.actionParams, {...updatedState, ...pageLocation.state}, ecosystem)
+                    outState = await createCredentialOffer(executeStep.actionParams, deepMerge(updatedState, pageLocation.state), ecosystem)
                     break
             }
             stepState.currentStep = executeStep
@@ -186,7 +216,7 @@ function buildStepsByIdMap(currentRoute: VCIConfigRoute): StepsByIdType {
     }, {} as StepsByIdType)
 }
 
-function defaultLocation(stepsById: StepsByIdType) {
+function getDefaultLocationPath(stepsById: StepsByIdType): string {
     // Take the first navigate step in the list with isDefaultRoute set to true
     for (const step of Object.values(stepsById)) {
         switch (step.operation) {
@@ -196,10 +226,29 @@ function defaultLocation(stepsById: StepsByIdType) {
                     if (!navStep.path) {
                         throw new Error(`Field path of navigation step with id ${navStep.id} is empty!`)
                     }
-                    return navStep.path
+                    // Substitute :pageId with the step ID for default location
+                    return navStep.path.replace(':pageId', step.id)
                 }
         }
     }
     throw new Error('No navigation steps have been defined in the sequence element of the ecosystem json')
 }
 
+
+function deepMerge(target: any, source: any): any {
+    const clonedTarget = structuredClone(target)
+
+    function merge(obj: any, src: any) {
+        for (const key in src) {
+            if (src[key] && typeof src[key] === 'object' && !Array.isArray(src[key])) {
+                obj[key] = obj[key] || {}
+                merge(obj[key], src[key])
+            } else {
+                obj[key] = src[key]
+            }
+        }
+    }
+
+    merge(clonedTarget, source)
+    return clonedTarget
+}

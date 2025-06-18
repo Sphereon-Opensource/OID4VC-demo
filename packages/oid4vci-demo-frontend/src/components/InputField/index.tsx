@@ -14,6 +14,7 @@ type Props = {
     defaultValue?: FormFieldValue
     placeholder?: string
     readonly?: boolean
+    editable?: boolean
     customValidation?: RegExp
     onChange?: (value: FormFieldValue) => Promise<void>
 }
@@ -23,6 +24,7 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
         labelStyle,
         inlineStyle,
         readonly = false,
+        editable = true,
         defaultValue,
         placeholder,
         label,
@@ -35,13 +37,19 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
     const [value, setValue] = useState<FormFieldValue>(defaultValue)
     const [isValid, setIsValid] = useState<boolean>(true)
     const isCheckBox = type === 'checkbox'
+    const shouldShowBorder = !readonly
+    const isInputDisabled = readonly || !editable
 
     useEffect(() => { // It can be that the form is rendered without payload data the first time
         setValue(defaultValue);
     }, [defaultValue]);
 
     const onChangeValue = async (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): Promise<void> => {
-        const value: string | boolean = isCheckBox 
+        if (!editable) {
+            return // Don't process changes if not editable
+        }
+
+        const value: string | boolean = isCheckBox
             ? (event.target as HTMLInputElement).checked 
             : event.target.value
         setValue(value)
@@ -59,7 +67,6 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
             setIsValid(customValidation.test(value.toString()))
         }
     }
-
     return <div style={{ ...(inlineStyle ?? {})}} className={style.container}>
         { label &&
             <label style={labelStyle} className="poppins-normal-10 inputFieldLabel">
@@ -72,8 +79,8 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
                 onChange={onChangeValue}
                 onBlur={onBlur}
                 value={value as string}
-                className={`${style.inputField}${!readonly ? ` ${style.enabled}` : ''}`}
-                disabled={readonly}
+                className={`${style.inputField}${shouldShowBorder ? ` ${style.enabled}` : ''}`}
+                disabled={isInputDisabled}
             >
                 {placeholder && <option value="" disabled>{placeholder}</option>}
                 {options.map((option, index) => (
@@ -88,10 +95,11 @@ const InputField: FC<Props> = (props: Props): ReactElement => {
             style={{...inlineStyle, ...(!isValid && { borderColor: 'red' })}}
             placeholder={placeholder}
             readOnly={readonly}
-            tabIndex={readonly ? -1 : undefined} // Do not tab-stop in read-only fields
+            disabled={!editable && !readonly} // Only disable if not editable and not readonly
+            tabIndex={isInputDisabled ? -1 : undefined}
             onChange={onChangeValue}
             onBlur={onBlur}
-            className={`${style.inputField}${!readonly ? ` ${style.enabled}` : ''}`}
+            className={`${style.inputField}${shouldShowBorder ? ` ${style.enabled}` : ''}`}
             {...(!isCheckBox && { defaultValue: defaultValue as InputValue })}
             {...(!isCheckBox && { value: value as InputValue})}
             {...(isCheckBox && { checked: value as boolean})}
