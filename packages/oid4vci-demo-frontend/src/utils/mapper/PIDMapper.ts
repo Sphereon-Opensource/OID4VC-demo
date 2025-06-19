@@ -147,9 +147,11 @@ function convertToString(value: unknown): string {
         return ''
     }
     let result = String(value);
+/*
     if(result.length > 50) {
         result = result.substring(0, 50) + '...'
     }
+*/
     return result
 }
 

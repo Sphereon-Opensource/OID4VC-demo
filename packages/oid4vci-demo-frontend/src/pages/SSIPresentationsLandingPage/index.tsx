@@ -17,7 +17,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
-    const pageConfig= flowRouter.getPageConfig()
+    const pageConfig: SSICredentialsLandingPageConfig = flowRouter.getPageConfig()
     const [presentationDefinitions, setPresentationDefinitions] = useState<Array<PDWithBranding>>([])
     const ecosystem = useEcosystem()
 
@@ -51,142 +51,164 @@ const SSIPresentationsLandingPage: React.FC = () => {
     return (
         <div style={{
             display: 'flex',
-            alignContent: 'center',
-            flex: 1,
             height: '100vh',
+            background: '#E2E4FE',
+            overflow: 'hidden',
         }}>
-            <NonMobile>
-                <div id={"photo"} style={{
-                    display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? 'auto',
-                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                    ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ??'center'})
-                }}>
-                    {pageConfig.logo &&
-                        <img
-                            src={pageConfig.logo.src}
-                            alt={pageConfig.logo.alt}
-                            width={pageConfig.logo.width}
-                            height={pageConfig.logo.height}
-                        />
-                    }
-                </div>
-            </NonMobile>
             <div style={{
-                width: isTabletOrMobile ? '100%' : '65%',
-                height: isTabletOrMobile ? '90%' : '60%',
-                display: 'grid'
+                display: 'flex',
+                alignContent: 'center',
+                margin: '15px',
+                flex: 1,
+                backgroundColor: '#FBFBFB',
+                borderRadius: '15px',
+                borderTopLeftRadius: '15px',
+                borderBottomLeftRadius: '15px',
+                overflow: 'hidden',
             }}>
+                <NonMobile>
+                    <div id={"photo"} style={{
+                        display: 'flex',
+                        width: pageConfig.leftPaneWidth ?? 'auto',
+                        height: pageConfig.leftPaneWidth ? '100%' : 'auto',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
+                        ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ??'center'})
+                    }}>
+                        {pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
+                            />
+                        }
+                    </div>
+                </NonMobile>
                 <div style={{
-                    margin: 'auto',
-                    gap: isTabletOrMobile ? 28 : 65,
-                    flexDirection: 'column',
                     display: 'flex',
-                    width: '70%',
-                    height: '60%',
-                    alignItems: 'center'
+                    flexGrow: 1,
+                    width: isTabletOrMobile ? '100%' : '65%',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    ...(isTabletOrMobile && {height: '100vh'}),
+                    ...(isTabletOrMobile && {gap: 24}),
+                    ...(!isTabletOrMobile && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
                 }}>
-                    <Mobile>
-                        <img
-                            style={{marginBottom: 30}}
-                            src={pageConfig.mobile?.logo?.src ?? 'wallets/sphereon_logo.png'}
-                            alt={pageConfig.mobile?.logo?.alt ?? 'logo'}
-                            width={pageConfig.mobile?.logo?.width ?? 100}
-                            height={pageConfig.mobile?.logo?.height ?? 100}
-                        />
-                    </Mobile>
                     <div style={{
                         display: 'flex',
-                        alignSelf: 'stretch',
-                        textAlign: isTabletOrMobile ? 'left' : 'center',
-                        alignItems: 'center',
-                        justifyContent: 'center',
                         flexDirection: 'column',
-                        width: `${isTabletOrMobile ? '300px' : '620px'}`,
-                        margin: 'auto'
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        height: '90%',
+                        width: '90%',
+                        overflowY: 'auto',
+                        overflowX: 'hidden',
+                        paddingTop: '20px',
+                        gap: isTabletOrMobile ? 28 : 65,
                     }}>
                         <Mobile>
-                            <span style={{fontWeight: '600', fontSize: '24px', width: '100%'}}>{t(pageConfig.pageTitle)}</span><br/>
-                            <span style={{fontSize: '11px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}}></span>
+                            <img
+                                style={{marginBottom: 30}}
+                                src={pageConfig.mobile?.logo?.src ?? 'wallets/sphereon_logo.png'}
+                                alt={pageConfig.mobile?.logo?.alt ?? 'logo'}
+                                width={pageConfig.mobile?.logo?.width ?? 100}
+                                height={pageConfig.mobile?.logo?.height ?? 100}
+                            />
                         </Mobile>
-                        <NonMobile>
-                            <span style={{fontWeight: '600', fontSize: '32px'}}>{t(pageConfig.pageTitle)}</span><br/>
-                            <span style={{fontSize: '20px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}} ></span>
-                        </NonMobile>
-                    </div>
-                    {presentationDefinitions.map(pdItem => (
-                        <div onClick={() => handlePresentationDefinitionClick(pdItem)}>
+                        <div style={{
+                            display: 'flex',
+                            alignSelf: 'stretch',
+                            textAlign: isTabletOrMobile ? 'left' : 'center',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                            width: `${isTabletOrMobile ? '300px' : '620px'}`,
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginBottom: '20px'
+                        }}>
                             <Mobile>
-                                <div style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-evenly',
-                                    alignContent: 'space-between',
-                                    cursor: 'pointer'
-                                }}>
-                                    <CredentialMiniCardView
-                                        backgroundImage={{uri: pdItem.branding?.backgroundImage}}
-                                        backgroundColor={pdItem.branding?.backgroundColor}
-                                        logo={{
-                                            uri: pdItem.branding?.logo?.src,
-                                            ...((pdItem.branding?.logo?.height && pdItem.branding?.logo?.width) && {
-                                                dimensions: {
-                                                    height: pdItem.branding?.logo?.height,
-                                                    width: pdItem.branding?.logo?.width,
-                                                }
-                                            }),
-                                            style: {
-                                                height: 10
-                                            }
-                                        }}
-                                    />
-                                    <div style={{width: 200, paddingLeft: '5px'}}>
-                                        <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.definitionPayload.name}</span><br/>
-                                        <span style={{fontSize: '10px'}}>{pdItem.definitionPayload.purpose}</span>
-                                    </div>
-                                </div>
+                                <span style={{fontWeight: '600', fontSize: '24px', width: '100%'}}>{t(pageConfig.pageTitle)}</span><br/>
+                                <span style={{fontSize: '11px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}}></span>
                             </Mobile>
                             <NonMobile>
-                                <div style={{
-                                    display: 'flex',
-                                    textAlign: 'center',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    cursor: 'pointer'
-                                }}>
-                                    <CredentialMiniCardView
-                                        style={{width: 140, height: 90}}
-                                        backgroundColor={pdItem.branding?.backgroundColor}
-                                        backgroundImage={{
-                                            uri: pdItem.branding?.backgroundImage
-                                        }}
-                                        logo={{
-                                            uri: pdItem.branding?.logo?.src,
-                                            ...((pdItem.branding?.logo?.height && pdItem.branding?.logo?.width) && {
-                                                dimensions: {
-                                                    height: pdItem.branding?.logo?.height,
-                                                    width: pdItem.branding?.logo?.width,
-                                                }
-                                            }),
-                                            style: {
-                                                height: 32
-                                            }
-                                        }}
-                                    />
-                                    <div style={{width: '450px', textAlign: 'left', paddingLeft: '3%'}}>
-                                                                           <span style={{
-                                                                               fontSize: '30px',
-                                                                               fontWeight: '600',
-                                                                               color: '#303030'
-                                                                           }}>{pdItem.definitionPayload.name}</span><br/>
-                                        <span style={{fontSize: '18px', color: '#303030',}}>{pdItem.definitionPayload.purpose}</span>
-                                    </div>
-                                </div>
+                                <span style={{fontWeight: '600', fontSize: '32px'}}>{t(pageConfig.pageTitle)}</span><br/>
+                                <span style={{fontSize: '20px'}} dangerouslySetInnerHTML={{ __html: t(pageConfig.text) ?? ''}} ></span>
                             </NonMobile>
                         </div>
-                    ))}
+                        {presentationDefinitions.map((pdItem, index) => (
+                            <div key={pdItem.definitionId || index} onClick={() => handlePresentationDefinitionClick(pdItem)}>
+                                <Mobile>
+                                    <div style={{
+                                        display: 'flex',
+                                        justifyContent: 'space-evenly',
+                                        alignContent: 'space-between',
+                                        cursor: 'pointer'
+                                    }}>
+                                        <CredentialMiniCardView
+                                            backgroundImage={{uri: pdItem.branding?.backgroundImage}}
+                                            backgroundColor={pdItem.branding?.backgroundColor}
+                                            logo={{
+                                                uri: pdItem.branding?.logo?.src,
+                                                ...((pdItem.branding?.logo?.height && pdItem.branding?.logo?.width) && {
+                                                    dimensions: {
+                                                        height: pdItem.branding?.logo?.height,
+                                                        width: pdItem.branding?.logo?.width,
+                                                    }
+                                                }),
+                                                style: {
+                                                    height: 10
+                                                }
+                                            }}
+                                        />
+                                        <div style={{width: 200, paddingLeft: '5px'}}>
+                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.definitionPayload.name}</span><br/>
+                                            <span style={{fontSize: '10px'}}>{pdItem.definitionPayload.purpose}</span>
+                                        </div>
+                                    </div>
+                                </Mobile>
+                                <NonMobile>
+                                    <div style={{
+                                        display: 'flex',
+                                        textAlign: 'center',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        cursor: 'pointer'
+                                    }}>
+                                        <CredentialMiniCardView
+                                            style={{width: 140, height: 90}}
+                                            backgroundColor={pdItem.branding?.backgroundColor}
+                                            backgroundImage={{
+                                                uri: pdItem.branding?.backgroundImage
+                                            }}
+                                            logo={{
+                                                uri: pdItem.branding?.logo?.src,
+                                                ...((pdItem.branding?.logo?.height && pdItem.branding?.logo?.width) && {
+                                                    dimensions: {
+                                                        height: pdItem.branding?.logo?.height,
+                                                        width: pdItem.branding?.logo?.width,
+                                                    }
+                                                }),
+                                                style: {
+                                                    height: 32
+                                                }
+                                            }}
+                                        />
+                                        <div style={{width: '450px', textAlign: 'left', paddingLeft: '3%'}}>
+                                            <span style={{
+                                                fontSize: '30px',
+                                                fontWeight: '600',
+                                                color: '#303030'
+                                            }}>{pdItem.definitionPayload.name}</span><br/>
+                                            <span style={{fontSize: '18px', color: '#303030',}}>{pdItem.definitionPayload.purpose}</span>
+                                        </div>
+                                    </div>
+                                </NonMobile>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

@@ -57,185 +57,207 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     replace(":definitionId", flowRouter.getVpDefinitionId())
     
     return (
-        <div style={{display: 'flex', height: '100vh', width: '100%'}}>
-            <NonMobile>
+        <div style={{
+            display: 'flex',
+            height: '100vh',
+            background: '#E2E4FE',
+            overflow: 'hidden',
+        }}>
+            <div style={{
+                display: 'flex',
+                alignContent: 'center',
+                margin: '15px',
+                flex: 1,
+                backgroundColor: '#FBFBFB',
+                borderRadius: '15px',
+                borderTopLeftRadius: '15px',
+                borderBottomLeftRadius: '15px',
+                overflow: 'hidden',
+            }}>
+                <NonMobile>
+                    <div style={{
+                        display: 'flex',
+                        width: pageConfig.leftPaneWidth ?? 'auto',
+                        height: pageConfig.leftPaneWidth ? '100%' : 'auto',
+                        flexDirection: 'column',
+                        ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+                        ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
+                        ...(pageConfig.logo && { justifyContent: 'center', alignItems: 'center' })
+                    }}>
+                        { pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={`${pageConfig.logo.width}`}
+                                height={`${pageConfig.logo.height}`}
+                            />
+                        }
+                    </div>
+                </NonMobile>
                 <div style={{
+                    ...(pageConfig.rightPaneGrid?.style),
                     display: 'flex',
-                    width: pageConfig.leftPaneWidth ?? 'auto',
-                    height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                     flexDirection: 'column',
-                    ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
-                    ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
-                    ...(pageConfig.logo && { justifyContent: 'center', alignItems: 'center' })
+                    alignItems: "center",
+                    flexGrow: 1,
+                    gap: 50,
+                    ...(isTabletOrMobile && {
+                        gap: 24,
+                        height: '100vh',
+                        ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor })
+                    }),
+                    ...(!isTabletOrMobile && { backgroundColor: '#FFFFFF' }),
                 }}>
-                    { pageConfig.logo &&
+                    {(isTabletOrMobile && pageConfig?.mobile?.logo) &&
                         <img
-                            src={pageConfig.logo.src}
-                            alt={pageConfig.logo.alt}
-                            width={`${pageConfig.logo.width}`}
-                            height={`${pageConfig.logo.height}`}
+                            src={`${pageConfig.mobile?.logo?.src}`}
+                            alt={`${pageConfig.mobile?.logo?.alt}`}
+                            width={pageConfig.mobile?.logo?.width ?? 150}
+                            height={pageConfig.mobile?.logo?.height ?? 150}
                         />
                     }
-                </div>
-            </NonMobile>
-          <div style={{
-              ...(pageConfig.rightPaneGrid?.style),
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: "center",
-              flexGrow: 1,
-              gap: 50,
-              ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.backgroundColor && { backgroundColor: pageConfig.mobile.backgroundColor }) }),
-          }}>
-              {(isTabletOrMobile && pageConfig?.mobile?.logo) &&
-                  <img
-                      src={`${pageConfig.mobile?.logo?.src}`}
-                      alt={`${pageConfig.mobile?.logo?.alt}`}
-                      width={pageConfig.mobile?.logo?.width ?? 150}
-                      height={pageConfig.mobile?.logo?.height ?? 150}
-                  />
-              }
-            {!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && (<div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginTop: isTabletOrMobile ? 'auto' : '5%',
-                maxHeight: '300px'
-              }}>
-                <Text style={{ textAlign: 'center' }}
-                      className={style.pReduceLineSpace}
-                      h2Style={pageConfig.rightPaneLeftPane.qrCode.topTitle.h2Style}
-                      pStyle={pageConfig.rightPaneLeftPane.qrCode.topTitle.pStyle}
-                      title={pageConfig.rightPaneLeftPane.qrCode.topTitle.value ? t(pageConfig.rightPaneLeftPane.qrCode.topTitle.value).split('\n')
-                          : t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
+                    {!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && (<div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        marginTop: isTabletOrMobile ? 'auto' : '5%',
+                        maxHeight: '300px'
+                    }}>
+                        <Text style={{ textAlign: 'center' }}
+                              className={style.pReduceLineSpace}
+                              h2Style={pageConfig.rightPaneLeftPane.qrCode.topTitle.h2Style}
+                              pStyle={pageConfig.rightPaneLeftPane.qrCode.topTitle.pStyle}
+                              title={pageConfig.rightPaneLeftPane.qrCode.topTitle.value ? t(pageConfig.rightPaneLeftPane.qrCode.topTitle.value).split('\n')
+                                  : t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
 
-                      lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd.purpose}).split('\n')
-                          : t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
-              </div>)}
-            {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
-                    display: 'flex',
-                    flexGrow: 1,
-                    flexDirection: 'column',
-                    maxHeight: 300,
-                    textAlign: 'center',
-                }}
-              >
-                  <div
-                      style={{
-                          marginTop: 'auto',
-                          fontSize: 72,// FIXME design says 48, but 48 is way to small for some reason so upping the size here
-                          fontWeight: 600,
-                          color: "#424242",
-                      }}
-                  >
-                      {t('ssi_welcome_label')}
-                  </div>
-              </div>
-              }
-              <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginBottom: '31%'}), ...(isTabletOrMobile && pageConfig.mobile?.qrCode?.rootContainer?.style)}}>
-                  <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.qrCode?.container?.style) })}}>
-                    <div style={{...(isTabletOrMobile && { textAlign: 'center' })}}>
-                          <NonMobileOS>
-                              <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { height: '100%', marginTop: '4%'})}}>
-                                  {/*Whether the QR code is shown (mobile) is handled in the component itself */}
-                                  {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                             fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
-                                                             width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                             vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
-                                                             responseRedirectUri={responseRedirectUri} 
-                                                             onAuthRequestRetrieved={console.log}
-                                                             onSignInComplete={onSignInComplete}
-                                                             setQrCodeData={setDeepLink}/>}
-                              </div>
-                              <div style={{
-                                  display: 'flex',
-                                  flexDirection: 'row',
-                                  verticalAlign: 'bottom',
-                                  alignItems: 'flex-end',
-                                  justifyContent: 'center'
-                              }}>
-                                  <InputField
-                                      label={t('web_wallet_address')!}
-                                      type={'text'}
-                                      inlineStyle={{marginRight: '4px'}}
-                                      labelStyle={{textAlign: 'left'}}
-                                      onChange={async (value: FormFieldValue): Promise<void> => onWebWalletAddressChange(value)}
-                                  />
-                                  <SSIPrimaryButton
-                                      caption={t('go')}
-                                      style={{width: 87, ...styles}}
-                                      onClick={onWebWalletAddressClick}
-                                      disabled={webWalletAddressValue === undefined
-                                          || webWalletAddressValue.length === 0
-                                          || !urlRegex.test(webWalletAddressValue)}/>
-                              </div>
-                          </NonMobileOS>
-                          <MobileOS>
-                              {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                         vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
-                                                         onAuthRequestRetrieved={console.log}
-                                                         onSignInComplete={onSignInComplete}
-                                                         setQrCodeData={setDeepLink}/>}
-                              <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
-                                  { pageConfig.mobile?.image &&
-                                      <img src={`${pageConfig.mobile?.image}`} alt="success" style={{overflow: 'hidden'}}/>
-                                  }
-                                  <DeepLinkButton style={{flexGrow: 1}} link={deepLink}/>
-                              </div>
-                          </MobileOS>
-                          <Mobile>
-                              <div style={{ display: 'none', ...(pageConfig.mobile?.qrCode?.bottomText?.style) }}></div>
-                              <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} ${ pageConfig.mobile?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16' }`}
-                                    pStyle={pageConfig.mobile?.qrCode?.bottomText?.pStyle}
-                                    lines={t(pageConfig.mobile?.qrCode?.bottomText?.paragraph ?? 'credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}
-                              />
-                          </Mobile>
-                          <NonMobile>
-                              <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginTop: '12%' })}}
-                                    pStyle={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.pStyle}
-                                    className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
-                                    title={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title ? t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n') : []}
-                                    lines={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_paragraph}`).split('\n')}
-                              />
-                          </NonMobile>
-                      </div>
-                  </div>
-                  {(pageConfig.mostRightPanel && !isTabletOrMobile) &&
-                      <div style={{display: 'flex', flexDirection: 'row', flexGrow: 1, maxWidth: 350}}>
-                          {pageConfig.mostRightPanel?.separator &&
-                              <img src={`${pageConfig.mostRightPanel?.separator?.logo?.src}` }
-                                   alt={`${pageConfig.mostRightPanel?.separator?.logo?.alt}` }
-                                   width={`${pageConfig.mostRightPanel?.separator?.logo?.width}`}
-                                   height={`${pageConfig.mostRightPanel?.separator?.logo?.height}`}
-                              />
-                          }
-                          <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1, alignItems: 'center', paddingTop: 55, gap: 65}}>
-                              {pageConfig.mostRightPanel &&
-                                  <img
-                                      src={`${pageConfig.mostRightPanel?.logo?.src}`}
-                                      alt={`${pageConfig.mostRightPanel?.logo?.alt}`}
-                                      width={`${pageConfig.mostRightPanel?.logo?.width}`}
-                                      height={`${pageConfig.mostRightPanel?.logo?.height}`}
-                                  />
-                              }
-                              <SSIPrimaryButton
-                                  caption={t('ssi_download_app_button')}
-                                  style={{
-                                      backgroundColor: '#312B78',
-                                      color: '#FFFFFF',
-                                      height: 32,
-                                  }}
-                                  onClick={async (): Promise<void> => {
-                                      if (pageConfig.downloadAppStepId) {
-                                          await flowRouter.goToStep(pageConfig.downloadAppStepId)
-                                      }
-                                  }}
-                              />
-                          </div>
-                      </div>
-                  }
-              </div>
+                              lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd.purpose}).split('\n')
+                                  : t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
+                    </div>)}
+                    {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
+                            display: 'flex',
+                            flexGrow: 1,
+                            flexDirection: 'column',
+                            maxHeight: 300,
+                            textAlign: 'center',
+                        }}
+                    >
+                        <div
+                            style={{
+                                marginTop: 'auto',
+                                fontSize: 72,// FIXME design says 48, but 48 is way to small for some reason so upping the size here
+                                fontWeight: 600,
+                                color: "#424242",
+                            }}
+                        >
+                            {t('ssi_welcome_label')}
+                        </div>
+                    </div>
+                    }
+                    <div style={{maxHeight: 356, width: '100%', display: 'flex', flexDirection: 'row', flexGrow: 1, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginBottom: '31%'}), ...(isTabletOrMobile && pageConfig.mobile?.qrCode?.rootContainer?.style)}}>
+                        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, ...(isTabletOrMobile && { gap: 24, ...(pageConfig.mobile?.qrCode?.container?.style) })}}>
+                            <div style={{...(isTabletOrMobile && { textAlign: 'center' })}}>
+                                <NonMobileOS>
+                                    <div style={{flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { height: '100%', marginTop: '4%'})}}>
+                                        {/*Whether the QR code is shown (mobile) is handled in the component itself */}
+                                        {<MemoizedAuthenticationQR ecosystem={ecosystem}
+                                                                   fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
+                                                                   width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
+                                                                   vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
+                                                                   responseRedirectUri={responseRedirectUri}
+                                                                   onAuthRequestRetrieved={console.log}
+                                                                   onSignInComplete={onSignInComplete}
+                                                                   setQrCodeData={setDeepLink}/>}
+                                    </div>
+                                    <div style={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        verticalAlign: 'bottom',
+                                        alignItems: 'flex-end',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <InputField
+                                            label={t('web_wallet_address')!}
+                                            type={'text'}
+                                            inlineStyle={{marginRight: '4px'}}
+                                            labelStyle={{textAlign: 'left'}}
+                                            onChange={async (value: FormFieldValue): Promise<void> => onWebWalletAddressChange(value)}
+                                        />
+                                        <SSIPrimaryButton
+                                            caption={t('go')}
+                                            style={{width: 87, ...styles}}
+                                            onClick={onWebWalletAddressClick}
+                                            disabled={webWalletAddressValue === undefined
+                                                || webWalletAddressValue.length === 0
+                                                || !urlRegex.test(webWalletAddressValue)}/>
+                                    </div>
+                                </NonMobileOS>
+                                <MobileOS>
+                                    {<MemoizedAuthenticationQR ecosystem={ecosystem}
+                                                               vpDefinitionId={pd.id ?? flowRouter.getVpDefinitionId()}
+                                                               onAuthRequestRetrieved={console.log}
+                                                               onSignInComplete={onSignInComplete}
+                                                               setQrCodeData={setDeepLink}/>}
+                                    <div style={{gap: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden'}}>
+                                        { pageConfig.mobile?.image &&
+                                            <img src={`${pageConfig.mobile?.image}`} alt="success" style={{overflow: 'hidden'}}/>
+                                        }
+                                        <DeepLinkButton style={{flexGrow: 1}} link={deepLink}/>
+                                    </div>
+                                </MobileOS>
+                                <Mobile>
+                                    <div style={{ display: 'none', ...(pageConfig.mobile?.qrCode?.bottomText?.style) }}></div>
+                                    <Text style={{flexGrow: 1}} className={`${style.pReduceLineSpace} ${ pageConfig.mobile?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16' }`}
+                                          pStyle={pageConfig.mobile?.qrCode?.bottomText?.pStyle}
+                                          lines={t(pageConfig.mobile?.qrCode?.bottomText?.paragraph ?? 'credential_verify_request_right_pane_bottom_paragraph_mobile').split('\n')}
+                                    />
+                                </Mobile>
+                                <NonMobile>
+                                    <Text style={{flexGrow: 1, color: `${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.fontColor}`, ...(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle && { marginTop: '12%' })}}
+                                          pStyle={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.pStyle}
+                                          className={`${style.pReduceLineSpace} ${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.className ?? 'poppins-semi-bold-16'}`}
+                                          title={pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title ? t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_title}`).split('\n') : []}
+                                          lines={t(`${pageConfig.rightPaneLeftPane?.qrCode?.bottomText?.credential_verify_request_right_pane_bottom_paragraph}`).split('\n')}
+                                    />
+                                </NonMobile>
+                            </div>
+                        </div>
+                        {(pageConfig.mostRightPanel && !isTabletOrMobile) &&
+                            <div style={{display: 'flex', flexDirection: 'row', flexGrow: 1, maxWidth: 350}}>
+                                {pageConfig.mostRightPanel?.separator &&
+                                    <img src={`${pageConfig.mostRightPanel?.separator?.logo?.src}` }
+                                         alt={`${pageConfig.mostRightPanel?.separator?.logo?.alt}` }
+                                         width={`${pageConfig.mostRightPanel?.separator?.logo?.width}`}
+                                         height={`${pageConfig.mostRightPanel?.separator?.logo?.height}`}
+                                    />
+                                }
+                                <div style={{display: 'flex', flexDirection: 'column', flexGrow: 1, alignItems: 'center', paddingTop: 55, gap: 65}}>
+                                    {pageConfig.mostRightPanel &&
+                                        <img
+                                            src={`${pageConfig.mostRightPanel?.logo?.src}`}
+                                            alt={`${pageConfig.mostRightPanel?.logo?.alt}`}
+                                            width={`${pageConfig.mostRightPanel?.logo?.width}`}
+                                            height={`${pageConfig.mostRightPanel?.logo?.height}`}
+                                        />
+                                    }
+                                    <SSIPrimaryButton
+                                        caption={t('ssi_download_app_button')}
+                                        style={{
+                                            backgroundColor: '#312B78',
+                                            color: '#FFFFFF',
+                                            height: 32,
+                                        }}
+                                        onClick={async (): Promise<void> => {
+                                            if (pageConfig.downloadAppStepId) {
+                                                await flowRouter.goToStep(pageConfig.downloadAppStepId)
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     )
 }
 

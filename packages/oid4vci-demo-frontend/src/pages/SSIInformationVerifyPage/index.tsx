@@ -1,16 +1,16 @@
-import { UniformCredential } from '../../types';
-import React, { useEffect, useState } from 'react';
-import { useFlowRouter } from '../../router/flow-router';
-import { SSIInformationVerifyPageConfig } from '../../ecosystem/ecosystem-config';
-import { useLocation } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
-import { useEcosystem } from '../../ecosystem/ecosystem';
-import { Trans, useTranslation } from 'react-i18next';
-import { Text } from '../../components/Text';
+import {UniformCredential} from '../../types';
+import React, {useEffect, useState} from 'react';
+import {useFlowRouter} from '../../router/flow-router';
+import {SSIInformationVerifyPageConfig} from '../../ecosystem/ecosystem-config';
+import {useLocation} from 'react-router-dom';
+import {useMediaQuery} from 'react-responsive';
+import {Trans, useTranslation} from 'react-i18next';
+import {Text} from '../../components/Text';
 import SSIPrimaryButton from '../../components/SSIPrimaryButton';
-import { convertPIDToUniformCredential } from '../../utils/mapper/PIDMapper';
-import { NonMobile } from "../..";
+import {convertPIDToUniformCredential} from '../../utils/mapper/PIDMapper';
+import {NonMobile} from "../..";
 import RenderClaims from "../../components/RenderClaims";
+import '../../css/typography.css';
 
 type State = {
     data: object | undefined // raw credential
@@ -20,10 +20,10 @@ type State = {
 const SSIInformationVerifyPage: React.FC = () => {
     const flowRouter = useFlowRouter<SSIInformationVerifyPageConfig>();
     const location = useLocation();
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 767px)' });
-    
-    const pageConfig = flowRouter.getPageConfig();
-    const { t } = useTranslation();
+    const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'});
+
+    const pageConfig: SSIInformationVerifyPageConfig = flowRouter.getPageConfig();
+    const {t} = useTranslation();
     const [payload, setPayload] = useState<UniformCredential[] | null>(null);
     const [state, setState] = useState<State>(() => {
         const locationState = location.state as State | undefined
@@ -56,82 +56,117 @@ const SSIInformationVerifyPage: React.FC = () => {
         fetchData()
     }, [state.data])
 
+    function determineWidth() {
+        if (pageConfig.leftPaneWidth && pageConfig.leftPaneWidth.includes('%')) {
+            return '100%'
+        }
+        return isTabletOrMobile ? '50%' : '40%'
+    }
+
     if (!payload) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', height: '100vh', userSelect: 'none' }}>
-            <NonMobile>
-                <div
-                    style={{
+        <div style={{
+            display: 'flex',
+            height: '100vh',
+            background: '#E2E4FE',
+            overflow: 'hidden',
+        }}>
+            <div style={{
+                display: 'flex',
+                alignContent: 'center',
+                margin: '15px',
+                flex: 1,
+                backgroundColor: '#FBFBFB',
+                borderRadius: '15px',
+                borderTopLeftRadius: '15px',
+                borderBottomLeftRadius: '15px',
+                overflow: 'hidden',
+            }}>
+                <NonMobile>
+                    <div id={"photo"} style={{
                         display: 'flex',
-                        flexDirection: 'column',
-                        ...(pageConfig.photoLeft && {
-                            background: `url(${pageConfig.photoLeft})`,
-                            backgroundSize: 'cover',
-                        }),
                         width: pageConfig.leftPaneWidth ?? 'auto',
                         height: pageConfig.leftPaneWidth ? '100%' : 'auto',
+                        flexDirection: 'column',
                         alignItems: 'center',
+                        ...((pageConfig.photoLeft) && {background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
                         ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
-                        ...(pageConfig.logo && {justifyContent: 'center'})
-                    }}
-                >
-                    {pageConfig.logo &&
-                        <img
-                            src={pageConfig.logo.src}
-                            alt={pageConfig.logo.alt}
-                            width={pageConfig.logo.width}
-                            height={pageConfig.logo.height}
-                        />
-                    }
-                </div>
-            </NonMobile>
-            <div
-                style={{
+                        ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
+                    }}>
+                        {pageConfig.logo &&
+                            <img
+                                src={pageConfig.logo.src}
+                                alt={pageConfig.logo.alt}
+                                width={pageConfig.logo.width}
+                                height={pageConfig.logo.height}
+                            />
+                        }
+                    </div>
+                </NonMobile>
+                <div style={{
                     display: 'flex',
-                    width: `${isTabletOrMobile ? '100%' : '40%'}`,
-                    height: '100%',
-                    backgroundColor: '#FFFFFF',
+                    flexGrow: 1,
+                    width: determineWidth(),
                     alignItems: 'center',
-                    justifyContent: 'center',
                     flexDirection: 'column',
-                }}
-            >
-                <div
-                    style={{
+                    ...(isTabletOrMobile && {height: '100vh'}),
+                    ...(isTabletOrMobile && {gap: 24}),
+                    ...(!isTabletOrMobile && {justifyContent: 'center', backgroundColor: '#FFFFFF'}),
+                }}>
+                    <div style={{
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        height: '70%',
-                        marginTop: '6%',
-                    }}
-                >
-                    <Trans>
-                        <Text
+                        width: '60%',
+                        height: '83%',
+                    }}>
+                        <div
                             style={{
-                                whiteSpace: 'pre-line',
-                                flexGrow: 0,
-                                textAlign: 'center',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
                             }}
-                            title={t(pageConfig.topTitle ?? 'sharing_data_confirm_right_pane_title').split('\n')}
-                            lines={t(`${pageConfig.topDescription ?? 'sharing_data_confirm_right_pane_paragraph'}`).split('\r\n')}
-                        />
-                    </Trans>
-                    {payload.map((credential, index) => (
-                        <div key={index} style={{marginTop: '20px', textAlign: 'left', width: '80%'}}>
-                            {credential.transformedClaims &&
-                                <RenderClaims payload={credential.transformedClaims} /> }
+                        >
+                            <Text
+                                style={{
+                                    whiteSpace: 'pre-line',
+                                    flexGrow: 0,
+                                    textAlign: 'center',
+                                    marginBottom: 12
+                                }}
+                                title={t(pageConfig.topTitle ?? 'sharing_data_confirm_right_pane_title').split('\n')}
+                                lines={t(`${pageConfig.topDescription ?? 'sharing_data_confirm_right_pane_paragraph'}`).split('\r\n')}
+                            />
                         </div>
-                    ))}
-                    <div style={{width: '100%', alignSelf: 'flex-end' }}>
-                        <SSIPrimaryButton
-                            caption={t('label_next')}
-                            style={{ width: '100%' }}
-                            onClick={async () => await flowRouter.nextStep({ payload: state?.credentials })}
-                        />
+                        <div style={{
+                            overflowY: 'auto',
+                            overflowX: 'hidden',
+                            width: '90%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            marginTop: '8px',
+                            marginBottom: '8px',
+                            paddingRight: '25px',
+                            paddingLeft: '25px',
+                        }}>
+                            {payload.map((credential, index) => (
+                                <div key={index} style={{marginTop: '20px', textAlign: 'left', width: '100%'}}>
+                                    {credential.transformedClaims &&
+                                        <RenderClaims payload={credential.transformedClaims}/>}
+                                </div>
+                            ))}
+                        </div>
+                        <div>
+                            <SSIPrimaryButton
+                                caption={t('label_next')}
+                                onClick={async () => await flowRouter.nextStep({payload: state?.credentials})}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

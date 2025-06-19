@@ -1,5 +1,4 @@
 import React from 'react'
-import InputField from "../InputField";
 
 type ClaimsPayload = Record<string, any>
 
@@ -10,9 +9,9 @@ const formatKey = (key: string): string => {
     })
 }
 
-const RenderClaims: React.FC<{ payload: ClaimsPayload; depth?: number }> = ({ payload, depth = 0 }) => {
+const RenderClaims: React.FC<{ payload: ClaimsPayload; depth?: number }> = ({payload, depth = 0}) => {
     const indent = '\u00A0\u00A0\u00A0\u00A0'.repeat(depth)
-    const keyIndent = '\u00A0'
+    const keyIndent = '\u00A0\u00A0'
 
     return (
         <>
@@ -27,7 +26,27 @@ const RenderClaims: React.FC<{ payload: ClaimsPayload; depth?: number }> = ({ pa
                         </React.Fragment>
                     )
                 } else {
-                    return <div key={index}>{indent}{formattedKey}:{keyIndent} {String(value)}</div>
+                    return (
+                        <div
+                            key={index}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'flex-start'
+                            }}
+                        >
+                            <span style={{whiteSpace: 'pre'}}>
+                                {indent}{formattedKey}:{keyIndent}
+                            </span>
+                            <span style={{
+                                whiteSpace: 'pre-wrap',
+                                wordBreak: 'break-word',
+                                overflowWrap: 'break-word',
+                                flex: 1
+                            }}>
+                                {String(value)}
+                            </span>
+                        </div>
+                    )
                 }
             })}
         </>
