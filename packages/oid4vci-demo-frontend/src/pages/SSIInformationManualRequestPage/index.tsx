@@ -145,6 +145,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         height: '83%',
+                        width: '50%',
                     }}>
                         <div
                             style={{
