@@ -1,0 +1,159 @@
+{
+  "general": {
+    "credentialName": "Sphereon SSI-DEV",
+    "oid4vpAgentBaseUrl": "https://agent.ssi.dev.sphereon.com/oid4vp",
+    "rpcAgentBaseUrl": "https://agent.ssi.dev.sphereon.com/rpc",
+    "downloadUrl": "https://rp.ubo.demo.sphereon.com/#/download",
+    "verifierUrl": "https://agent.ssi.dev.sphereon.com"
+  },
+  "pages": {
+    "landingPage": {
+      "logo": {
+        "src": "eduskills/eduskills-photo-left-RP.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "mobile": {
+        "logo": {
+          "src": "eduskills/eduskills-photo-left-RP.png",
+          "alt": "background",
+          "width": "100%"
+        }
+      },
+      "pageTitle": "funke_landing_page_title",
+      "text": "funke_landing_page_description",
+      "presentationDefinitions": [
+        {
+          "id": "talentenoverzicht",
+          "name": "Talentenoverzicht credetnial",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "grey",
+          "backgroundImage": "https://i.ibb.co/W4frcp31/mini.png"
+        },
+        {
+          "id": "praktijkassessment",
+          "name": "Praktijkassessment credential",
+          "route": "https://account.banqup.demo.sphereon.com",
+          "description": "Purpose",
+          "backgroundColor": "grey",
+          "backgroundImage": "https://i.ibb.co/W4frcp31/mini.png"
+        }
+      ]
+    },
+    "verifyRequest": {
+      "primaryButtonResourceId": "label_continue",
+      "primaryButtonManualResourceId": "label_continue",
+      "logo": {
+        "src": "eduskills/eduskills-photo-left-RP.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "rightPaneLeftPane": {
+        "width": "50%",
+        "welcomeLabel": {
+          "style": {
+            "fontSize": "48px",
+            "fontWeight": 600,
+            "textAlign": "center",
+            "color": "#424242"
+          },
+          "className": "removeMarginBottom"
+        },
+        "qrCode": {
+          "pane": {
+            "height": "50%"
+          },
+          "topTitle": {
+            "value": "funke_verify_top_title",
+            "style": {
+              "display": "none"
+            }
+          },
+          "topDescription": "funke_verify_top_description",
+          "bottomText": {
+            "fontColor": "#424242",
+            "className": "removeMarginTop",
+            "pStyle": {
+              "textAlign": "center"
+            },
+            "credential_verify_request_right_pane_bottom_paragraph": "funke_verify_bottom_description"
+          },
+          "width": 200,
+          "marginTop": "0",
+          "marginBottom": "10%"
+        }
+      }
+    },
+    "verifyShare": {
+      "topTitle": "sharing_data_confirm_right_pane_title",
+      "topDescription": "sharing_data_confirm_right_pane_paragraph",
+      "logo": {
+        "src": "eduskills/eduskills-photo-left-RP.png",
+        "alt": "background",
+        "height": "100%"
+      }
+    },
+    "shareSuccess": {
+      "sideImage": {
+        "src": "eduskills/eduskills-photo-left-RP.png",
+        "alt": "background",
+        "height": "100%"
+      },
+      "photoRight": "undraw_messenger_re_8bky_grey.svg",
+      "topTitle": "funke_share_success_top_title",
+      "topDescription": "funke_share_success_top_description",
+      "buttonCaption": "funke_share_success_button_caption"
+    }
+  },
+  "routes": [
+    {
+      "id": "default",
+      "vpDefinitionId": "LegalPersonPID",
+      "steps": [
+        {
+          "id": "landingPage",
+          "operation": "navigate",
+          "path": "/landingvp",
+          "nextId": "verifyRequest",
+          "isDefaultRoute": true
+        },
+        {
+          "id": "verifyRequest",
+          "operation": "navigate",
+          "path": "/credentials/verify/request",
+          "nextId": "verifyShare"
+        },
+        {
+          "id": "verifyShare",
+          "operation": "navigate",
+          "path": "/credentials/verify/share",
+          "nextId": "shareSuccess"
+        },
+        {
+          "id": "shareSuccess",
+          "operation": "navigate",
+          "path": "/information/success",
+          "nextId": "backToHome"
+        },
+        {
+          "id": "backToHome",
+          "operation": "navigate",
+          "path": "https://rp.sander.home.sphereon.com/"
+        }
+      ]
+    }
+  ],
+  "components": {
+    "SSIPrimaryButton": {
+      "styles": {
+        "mainContainer": {
+          "backgroundColor": "#501592"
+        },
+        "button": {
+          "width": "220px"
+        }
+      }
+    }
+  }
+}
