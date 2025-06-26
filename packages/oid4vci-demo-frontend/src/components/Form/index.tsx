@@ -49,7 +49,7 @@ const evaluateDefaultValue = (
     formData: FormOutputData,
     jsonDefaults?: JsonDataItem
 ): FormFieldValue => {
-    const fieldValue = formData[field.key]
+    const fieldValue = field.key && formData[field.key]
     if (fieldValue) {
         return fieldValue
     }
@@ -250,7 +250,7 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                 return <Text
                     title={[field.label ?? '']}
                     lines={[`${defaultValue}`]}
-                    h2Style={{ fontSize: '1em', fontWeight: 'bold', margin: '0 0 4px 0' }}
+                    h2Style={{ fontSize: '0.8em', fontWeight: 'bold', margin: '0 0 4px 0' }}
                     pStyle={{ fontSize: '0.9em', margin: 0 }}
                 />
 

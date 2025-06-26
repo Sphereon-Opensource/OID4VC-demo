@@ -29,7 +29,7 @@
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "grey",
-          "backgroundImage": "https://i.ibb.co/W4frcp31/mini.png"
+          "backgroundImage": "https://i.ibb.co/jknYsJ00/card.png"
         },
         {
           "id": "praktijkassessment",
@@ -37,7 +37,7 @@
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "grey",
-          "backgroundImage": "https://i.ibb.co/W4frcp31/mini.png"
+          "backgroundImage": "https://i.ibb.co/jknYsJ00/card.png"
         }
       ]
     },
@@ -100,7 +100,7 @@
         "alt": "background",
         "height": "100%"
       },
-      "photoRight": "undraw_messenger_re_8bky_grey.svg",
+      "photoRight": "eduskills/mailman.png",
       "topTitle": "funke_share_success_top_title",
       "topDescription": "funke_share_success_top_description",
       "buttonCaption": "funke_share_success_button_caption"
