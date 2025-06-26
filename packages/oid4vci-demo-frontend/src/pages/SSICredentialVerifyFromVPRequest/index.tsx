@@ -46,7 +46,7 @@ export default function SSICredentialVerifyFromVPRequestPage(): React.ReactEleme
             width: '60%',
             height: '100%',
             flexDirection: 'column',
-            ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+            ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / contain no-repeat`}),
             ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
             ...(pageConfig.logo && { justifyContent: 'center', alignItems: 'center' })
           }}>

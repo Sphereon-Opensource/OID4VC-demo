@@ -67,7 +67,7 @@ const SSIInformationSuccessPage: React.FC = () => {
                             height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            ...((pageConfig.photoLeft) && {background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+                            ...((pageConfig.photoLeft) && {background: `url(${pageConfig.photoLeft}) 0% 0% / contain no-repeat`}),
                             ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
                             ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
                         }}>
@@ -199,7 +199,7 @@ const SSIInformationSharedSuccessPageLeftPanel: React.FC = () => {
                 height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                 flexDirection: 'column',
                 alignItems: 'center',
-                ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && {background: `url(${state?.isManualIdentification ? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / cover`}),
+                ...((pageConfig.photoLeft || pageConfig.photoLeftManual) && {background: `url(${state?.isManualIdentification ? `${pageConfig.photoLeftManual}` : `${pageConfig.photoLeft}`}) 0% 0% / contain no-repeat`}),
                 ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
                 ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
             }}>

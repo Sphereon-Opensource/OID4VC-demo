@@ -99,7 +99,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                         height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / contain`}),
+                        ...((pageConfig.photo) && {background: `url(${pageConfig.photo}) 0% 0% / contain no-repeat`}),
                         ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
                         ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
                     }}>

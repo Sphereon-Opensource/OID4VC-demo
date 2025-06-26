@@ -80,7 +80,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                         width: pageConfig.leftPaneWidth ?? 'auto',
                         height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                         flexDirection: 'column',
-                        ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / cover`}),
+                        ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / contain no-repeat`}),
                         ...(pageConfig.backgroundColor && { backgroundColor: pageConfig.backgroundColor }),
                         ...(pageConfig.logo && { justifyContent: 'center', alignItems: 'center' })
                     }}>

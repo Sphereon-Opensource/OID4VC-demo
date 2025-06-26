@@ -24,7 +24,7 @@ const SphereonWalletPage: React.FC = () => {
                     width: config.leftPane.width ?? '30%',
                     height: '100%',
                     flexDirection: 'column',
-                    ...(config.leftPane.image && {background: `url(${config.leftPane.image}) 0% 0% / cover`}),
+                    ...(config.leftPane.image && {background: `url(${config.leftPane.image}) 0% 0% / contain no-repeat`}),
                     ...(config.leftPane.backgroundColor && {backgroundColor: config.leftPane.backgroundColor}),
                     ...(config.leftPane.logo && {justifyContent: 'center', alignItems: 'center'})
                 }}>

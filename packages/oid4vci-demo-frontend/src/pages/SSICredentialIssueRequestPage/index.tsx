@@ -121,7 +121,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        ...((pageConfig.photoWallet) && {background: `url(${pageConfig.photoWallet}) 0% 0% / cover`}),
+                        ...((pageConfig.photoWallet) && {background: `url(${pageConfig.photoWallet}) 0% 0% / contain no-repeat`}),
                         ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
                         ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
                     }}>
