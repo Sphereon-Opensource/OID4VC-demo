@@ -29,7 +29,7 @@
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "grey",
-          "backgroundImage": "https://i.ibb.co/jknYsJ00/card.png"
+          "backgroundImage": "https://i.ibb.co/jknYsJ00/card.svg"
         },
         {
           "id": "praktijkassessment",
@@ -37,7 +37,7 @@
           "route": "https://account.banqup.demo.sphereon.com",
           "description": "Purpose",
           "backgroundColor": "grey",
-          "backgroundImage": "https://i.ibb.co/jknYsJ00/card.png"
+          "backgroundImage": "https://i.ibb.co/jknYsJ00/card.svg"
         }
       ]
     },
