@@ -206,6 +206,7 @@ export interface SSICredentialIssuedSuccessPageConfig extends PageConfig {
 
 export interface SSICredentialsLandingPageConfig extends PageConfig { // TODO
     leftPaneWidth?: string
+    photoLeft?: string
     logo?: LogoProperties
     mobile?: {
         logo?: LogoProperties
@@ -446,6 +447,7 @@ export interface SSICardConfig extends ComponentConfig {
 
 export interface SSICredentialCardConfig extends ComponentConfig {
     name: string
+    id: string
     route: string
     description?: string
     backgroundColor?: string

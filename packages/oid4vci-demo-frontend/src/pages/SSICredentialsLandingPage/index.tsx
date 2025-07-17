@@ -6,15 +6,20 @@ import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {SSICredentialCardConfig, SSICredentialsLandingPageConfig} from "../../ecosystem/ecosystem-config"
 
-function handleCredentialClick(value: SSICredentialCardConfig) {
-    window.location.href = value.route
-}
 
 const SSICredentialsLandingPage: React.FC = () => {
     const {t} = useTranslation()
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
     const flowRouter = useFlowRouter<SSICredentialsLandingPageConfig>()
     const pageConfig = flowRouter.getPageConfig()
+
+    const handleCredentialClick = async (config: SSICredentialCardConfig)=> {
+        if(config.route) {
+            window.location.href = config.route
+        } else {
+            await flowRouter.nextStep({payload: {selectedCredentialId: config.id}})
+        }
+    }
 
     return (
         <div style={{
@@ -43,6 +48,7 @@ const SSICredentialsLandingPage: React.FC = () => {
                         height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / contain no-repeat`}),
                         ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
                         ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ?? 'center'})
                     }}>
