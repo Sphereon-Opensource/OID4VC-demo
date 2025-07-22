@@ -172,7 +172,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        height: '83%',
+                        height: '94%',
                     }}>
                         <div
                             style={{
@@ -204,7 +204,7 @@ const SSICredentialIssueRequestPage: React.FC = () => {
                             flexDirection: 'column',
                             alignItems: 'center',
                             marginTop: '8px',
-                            marginBottom: '8px',
+                            marginBottom: '-18px',
                             paddingRight: '25px',
                             paddingLeft: '25px',
                         }}>

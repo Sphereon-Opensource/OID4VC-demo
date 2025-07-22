@@ -158,7 +158,11 @@ const SSICredentialsLandingPage: React.FC = () => {
                                                         height: value.logo?.height,
                                                         width: value.logo?.width,
                                                     }
-                                                })
+                                                }),
+                                                style: {
+                                                    height: value.logo?.height,
+                                                }
+
                                             }}
                                         />
                                         <div style={{width: '50%', textAlign: 'left', paddingLeft: '3%'}}>

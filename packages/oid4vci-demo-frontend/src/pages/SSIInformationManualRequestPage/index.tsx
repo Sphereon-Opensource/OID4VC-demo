@@ -52,7 +52,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
     function mapToForm(credentialData: ImmutableRecord | undefined): ImmutableRecord | undefined {
         if (!credentialData) {
             return undefined
-        }
+    }
 
         // Extract form field keys from pageConfig.form
         const formKeys = pageConfig.form.flat().map(field => field.key.toLowerCase())
@@ -195,7 +195,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        height: '83%',
+                        height: '94%',
                         width: '50%',
                     }}>
                         <div
