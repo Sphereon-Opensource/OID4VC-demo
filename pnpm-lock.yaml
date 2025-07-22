@@ -59,16 +59,16 @@ overrides:
 
 patchedDependencies:
   '@veramo/core@4.2.0':
-    hash: c5oempznsz4br5w3tcuk2i2mau
+    hash: 002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c
     path: patches/@veramo__core@4.2.0.patch
   '@veramo/credential-w3c@4.2.0':
-    hash: wuhizuafnrz3uzah2wlqaevbmi
+    hash: abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336
     path: patches/@veramo__credential-w3c@4.2.0.patch
   '@veramo/data-store@4.2.0':
-    hash: feb5u2ygzsdf67qbxr2lxgqjyy
+    hash: 25b55da53633b67af137c78afaf727c15cd0dd9f55a659a71d1a693193961a5d
     path: patches/@veramo__data-store@4.2.0.patch
   did-jwt@6.11.6:
-    hash: afqywxnnjnsy6hwgax66dyyiey
+    hash: 3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af
     path: patches/did-jwt@6.11.6.patch
 
 importers:
@@ -197,13 +197,13 @@ importers:
         version: 0.0.7
       '@veramo/core':
         specifier: 4.2.0
-        version: 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+        version: 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/credential-w3c':
         specifier: 4.2.0
-        version: 4.2.0(patch_hash=wuhizuafnrz3uzah2wlqaevbmi)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
+        version: 4.2.0(patch_hash=abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       '@veramo/data-store':
         specifier: 4.2.0
-        version: 4.2.0(patch_hash=feb5u2ygzsdf67qbxr2lxgqjyy)(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
+        version: 4.2.0(patch_hash=25b55da53633b67af137c78afaf727c15cd0dd9f55a659a71d1a693193961a5d)(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@veramo/did-discovery':
         specifier: 4.2.0
         version: 4.2.0
@@ -254,7 +254,7 @@ importers:
         version: 4.3.7(supports-color@5.5.0)
       did-jwt:
         specifier: 6.11.6
-        version: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+        version: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver:
         specifier: ^4.1.0
         version: 4.1.0
@@ -387,7 +387,7 @@ importers:
         version: 0.3.1-next.8(@babel/core@7.25.2)(@types/react@18.3.5)(date-fns@2.30.0)(dayjs@1.10.7)(encoding@0.1.13)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@veramo/core':
         specifier: 4.2.0
-        version: 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+        version: 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/remote-client':
         specifier: 4.2.0
         version: 4.2.0(encoding@0.1.13)
@@ -418,6 +418,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-easy-crop:
+        specifier: ^5.5.0
+        version: 5.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-i18next:
         specifier: ^12.3.1
         version: 12.3.1(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -508,7 +511,7 @@ importers:
         version: 0.32.1-next.17
       '@veramo/core':
         specifier: 4.2.0
-        version: 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+        version: 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
@@ -2830,6 +2833,7 @@ packages:
 
   '@sphereon/kmp-mdoc-core@0.2.0-SNAPSHOT.26':
     resolution: {integrity: sha512-QXJ6R8ENiZV2rPMbn06cw5JKwqUYN1kzVRbYfONqE1PEXx1noQ4md7uxr2zSczi0ubKkNcbyYDNtIMTZIhGzmQ==}
+    bundledDependencies: []
 
   '@sphereon/oid4vc-common@0.16.1-next.229':
     resolution: {integrity: sha512-TUU7IWqCnpun88HC5jEyOtwx5XX7GdeCWyB84bn1SDahtpcPZur2nCpkF3XaEt+5wTZ5N6KNNqj35at4VQV6bw==}
@@ -2915,9 +2919,6 @@ packages:
   '@sphereon/ssi-sdk-ext.did-utils@0.26.1-next.11':
     resolution: {integrity: sha512-c+nKP88CSBKtEmix2lXTHzngzhhcoXQGNFmjPOKPufk77Tqc2Y7GZC0aoFoa+pbmZW3ISL72ke3r50M8pHjdnw==}
 
-  '@sphereon/ssi-sdk-ext.did-utils@0.26.1-next.38':
-    resolution: {integrity: sha512-WQSdS26mPNmokFDNCTVx0NEB+1ESoGnnrL0oo7pt0PcCKOLhUix+MGozWTR7K1CECvLit7/MMVE6TNVTGeSr8A==}
-
   '@sphereon/ssi-sdk-ext.did-utils@0.27.0':
     resolution: {integrity: sha512-KucfuTdAQkFcUfw3wf4AiqksyLKxk5H+jGBoQi/rNJN4RWg/3/CxagKrBFuQ4DdQaK4OAS/bjwKylqQbSPC/CQ==}
 
@@ -2954,9 +2955,6 @@ packages:
   '@sphereon/ssi-sdk-ext.key-utils@0.26.1-next.11':
     resolution: {integrity: sha512-Ac8KQfz/ud8jnOY14KBUtNzK3hx580GYbjAb2H+xKsn2JM/vskVSKHG84c50Ch7SJEc7umFM5FQPHB8mhc6OdA==}
 
-  '@sphereon/ssi-sdk-ext.key-utils@0.26.1-next.38':
-    resolution: {integrity: sha512-D2gYT/vP8VPsE8coeI9HVQlvx3vMV0OTMZvJLD+1CKQvS1pzfgWENcszGHT0/KUXiuC7nB1zdDT+T0jHMt4QMw==}
-
   '@sphereon/ssi-sdk-ext.key-utils@0.27.0':
     resolution: {integrity: sha512-VFcrmlVk1ISohzvZWnc0O0YT+0uEYmVrX3sK08EAcFyqWr4brBCFOhqpsa3co9Jd5SaOC8aGgzilJiClMpg58Q==}
 
@@ -2968,9 +2966,6 @@ packages:
 
   '@sphereon/ssi-sdk-ext.x509-utils@0.26.1-next.11':
     resolution: {integrity: sha512-4YnJJc5XvCfDZ9iTI99BGvV5CanVHXLwoFgM4hM638PNR3/+J8+PpNzxMsbrviReY5CW/oHcUg7jknwRdv7yJg==}
-
-  '@sphereon/ssi-sdk-ext.x509-utils@0.26.1-next.38':
-    resolution: {integrity: sha512-OuI0KIVkDb3hxMNhII+pXMDAZByCjR4pMwl3sVTuKXLsBVjbFyCaSW2MgW7WKJZnHht8KfVAHpZa8utMZZPynA==}
 
   '@sphereon/ssi-sdk-ext.x509-utils@0.27.0':
     resolution: {integrity: sha512-JftZKSsZuGMWVTLGLokZQBVU1wYhWwQNhmwZv02EjiFiKGw0Qz/NX2Tv3vmEyMQoaRbm3yArdveAm7VWGsAhKg==}
@@ -8177,6 +8172,9 @@ packages:
     resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}
     engines: {node: '>=10'}
 
+  normalize-wheel@1.0.1:
+    resolution: {integrity: sha512-1OnlAPZ3zgrk8B91HyRj+eVv+kS5u+Z0SCsak6Xil/kmgEia50ga7zfkumayonZrImffAxPU/5WcyGhzetHNPA==}
+
   npm-package-arg@7.0.0:
     resolution: {integrity: sha512-xXxr8y5U0kl8dVkz2oK7yZjPBvqM2fwaO5l3Yg13p03v8+E3qQcD0JNhHzjL1vyGgxcKkD0cco+NLR72iuPk3g==}
 
@@ -9259,6 +9257,12 @@ packages:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
       react: ^18.3.1
+
+  react-easy-crop@5.5.0:
+    resolution: {integrity: sha512-OZzU+yXMhe69vLkDex+5QxcfT94FdcgVCyW2dBUw35ZoC3Is42TUxUy04w8nH1mfMKaizVdC3rh/wUfNW1mK4w==}
+    peerDependencies:
+      react: '>=16.4.0'
+      react-dom: '>=16.4.0'
 
   react-error-overlay@6.0.11:
     resolution: {integrity: sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==}
@@ -13798,7 +13802,7 @@ snapshots:
       ajv-formats: 2.1.1(ajv@8.17.1)
       lodash: 4.17.21
 
-  '@jsonforms/material-renderers@3.3.0(j5jjkf5jzckqnad3ydr4frfl3m)':
+  '@jsonforms/material-renderers@3.3.0(3537b3f9e15aaf9d4458b80df96e63c2)':
     dependencies:
       '@date-io/dayjs': 1.3.13(dayjs@1.10.7)
       '@emotion/react': 11.13.3(@types/react@18.3.5)(react@18.3.1)
@@ -14713,7 +14717,7 @@ snapshots:
       '@sphereon/did-uni-client': 0.6.3-unstable.1(encoding@0.1.13)
       '@sphereon/oid4vc-common': 0.16.1-next.229
       '@sphereon/wellknown-dids-client': 0.1.3(encoding@0.1.13)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
     transitivePeerDependencies:
       - encoding
@@ -14726,7 +14730,7 @@ snapshots:
       '@sphereon/did-uni-client': 0.6.3-unstable.1(encoding@0.1.13)
       '@sphereon/oid4vc-common': 0.16.1-next.231
       '@sphereon/wellknown-dids-client': 0.1.3(encoding@0.1.13)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
     transitivePeerDependencies:
       - encoding
@@ -14959,7 +14963,7 @@ snapshots:
       '@sphereon/ssi-sdk-ext.key-utils': 0.26.1-next.11
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/ed25519': 1.0.3
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-manager': 4.2.0
       base64url: 3.0.1
       debug: 4.3.7(supports-color@5.5.0)
@@ -14990,7 +14994,7 @@ snapshots:
     dependencies:
       '@sphereon/ssi-sdk-ext.did-utils': 0.26.1-next.11(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk-ext.key-utils': 0.26.1-next.11
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-manager': 4.2.0
       debug: 4.3.7(supports-color@5.5.0)
     transitivePeerDependencies:
@@ -15035,9 +15039,9 @@ snapshots:
       '@sphereon/ssi-sdk.core': 0.32.1-next.17(encoding@0.1.13)
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/ed25519': 1.0.3
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
       elliptic: 6.5.7
       uint8arrays: 3.1.1
@@ -15073,47 +15077,9 @@ snapshots:
       '@sphereon/ssi-sdk.core': 0.32.1-next.17(encoding@0.1.13)
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/ed25519': 1.0.3
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
-      did-resolver: 4.1.0
-      elliptic: 6.5.7
-      uint8arrays: 3.1.1
-    transitivePeerDependencies:
-      - '@google-cloud/spanner'
-      - '@sap/hana-client'
-      - better-sqlite3
-      - encoding
-      - hdb-pool
-      - ioredis
-      - mongodb
-      - mssql
-      - mysql2
-      - oracledb
-      - pg
-      - pg-native
-      - pg-query-stream
-      - redis
-      - sql.js
-      - sqlite3
-      - supports-color
-      - ts-node
-      - typeorm-aurora-data-api-driver
-
-  '@sphereon/ssi-sdk-ext.did-utils@0.26.1-next.38(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
-    dependencies:
-      '@ethersproject/networks': 5.7.1
-      '@ethersproject/transactions': 5.7.0
-      '@sphereon/did-uni-client': 0.6.3-unstable.1(encoding@0.1.13)
-      '@sphereon/ssi-sdk-ext.key-utils': 0.26.1-next.38
-      '@sphereon/ssi-sdk-ext.x509-utils': 0.26.1-next.38
-      '@sphereon/ssi-sdk.agent-config': 0.30.2-feature.SDK.41.oidf.support.286(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
-      '@sphereon/ssi-sdk.core': 0.32.1-next.17(encoding@0.1.13)
-      '@sphereon/ssi-types': 0.32.1-next.17
-      '@stablelib/ed25519': 1.0.3
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      '@veramo/utils': 4.2.0(encoding@0.1.13)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
       elliptic: 6.5.7
       uint8arrays: 3.1.1
@@ -15149,9 +15115,9 @@ snapshots:
       '@sphereon/ssi-sdk.core': 0.32.1-next.17(encoding@0.1.13)
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/ed25519': 1.0.3
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
       elliptic: 6.5.7
       uint8arrays: 3.1.1
@@ -15183,7 +15149,7 @@ snapshots:
       '@sphereon/ssi-sdk-ext.x509-utils': 0.25.0
       '@sphereon/ssi-sdk.agent-config': 0.30.1(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       pkijs: 3.2.4
@@ -15217,7 +15183,7 @@ snapshots:
       '@sphereon/ssi-sdk.agent-config': 0.30.2-feature.SDK.41.oidf.support.286(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk.oidf-client': 0.30.2-feature.SDK.41.oidf.support.286(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       pkijs: 3.2.4
@@ -15247,13 +15213,13 @@ snapshots:
 
   '@sphereon/ssi-sdk-ext.identifier-resolution@0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
     dependencies:
-      '@sphereon/ssi-sdk-ext.did-utils': 0.26.1-next.38(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
-      '@sphereon/ssi-sdk-ext.key-utils': 0.26.1-next.38
+      '@sphereon/ssi-sdk-ext.did-utils': 0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
+      '@sphereon/ssi-sdk-ext.key-utils': 0.27.0
       '@sphereon/ssi-sdk-ext.x509-utils': 0.27.0
       '@sphereon/ssi-sdk.agent-config': 0.30.2-feature.SDK.41.oidf.support.286(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk.oidf-client': 0.30.2-feature.SDK.41.oidf.support.286(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       pkijs: 3.2.4
@@ -15291,7 +15257,7 @@ snapshots:
       '@sphereon/ssi-sdk.agent-config': 0.30.1(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/random': 1.0.2
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       jose: 5.9.6
@@ -15328,7 +15294,7 @@ snapshots:
       '@sphereon/ssi-sdk.agent-config': 0.30.2-feature.SDK.41.oidf.support.286(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/random': 1.0.2
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       jose: 5.9.6
@@ -15359,15 +15325,15 @@ snapshots:
 
   '@sphereon/ssi-sdk-ext.jwt-service@0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
     dependencies:
-      '@sphereon/ssi-sdk-ext.did-utils': 0.26.1-next.38(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
+      '@sphereon/ssi-sdk-ext.did-utils': 0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk-ext.identifier-resolution': 0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk-ext.key-manager': 0.27.0
-      '@sphereon/ssi-sdk-ext.key-utils': 0.26.1-next.38
+      '@sphereon/ssi-sdk-ext.key-utils': 0.27.0
       '@sphereon/ssi-sdk-ext.x509-utils': 0.27.0
       '@sphereon/ssi-sdk.agent-config': 0.30.2-feature.SDK.41.oidf.support.286(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/random': 1.0.2
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       jose: 5.9.6
@@ -15398,7 +15364,7 @@ snapshots:
 
   '@sphereon/ssi-sdk-ext.key-manager@0.25.0':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/key-manager': 4.2.0
       uint8arrays: 3.1.1
     transitivePeerDependencies:
@@ -15406,7 +15372,7 @@ snapshots:
 
   '@sphereon/ssi-sdk-ext.key-manager@0.26.1-next.11':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/key-manager': 4.2.0
       uint8arrays: 3.1.1
     transitivePeerDependencies:
@@ -15414,7 +15380,7 @@ snapshots:
 
   '@sphereon/ssi-sdk-ext.key-manager@0.27.0':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/key-manager': 4.2.0
       uint8arrays: 3.1.1
     transitivePeerDependencies:
@@ -15429,7 +15395,7 @@ snapshots:
       '@stablelib/sha256': 1.0.1
       '@stablelib/sha512': 1.0.1
       '@trust/keyto': 1.0.1
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       base64url: 3.0.1
       debug: 4.3.7(supports-color@5.5.0)
       did-resolver: 4.1.0
@@ -15451,35 +15417,12 @@ snapshots:
       '@stablelib/sha256': 1.0.1
       '@stablelib/sha512': 1.0.1
       '@trust/keyto': 1.0.1
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       base64url: 3.0.1
       debug: 4.3.7(supports-color@5.5.0)
       did-resolver: 4.1.0
       elliptic: 6.5.7
       lodash.isplainobject: 4.0.6
-      multiformats: 9.9.0
-      uint8arrays: 3.1.1
-      varint: 6.0.0
-      web-encoding: 1.1.5
-    transitivePeerDependencies:
-      - supports-color
-
-  '@sphereon/ssi-sdk-ext.key-utils@0.26.1-next.38':
-    dependencies:
-      '@ethersproject/random': 5.7.0
-      '@noble/curves': 1.7.0
-      '@noble/hashes': 1.6.1
-      '@sphereon/ssi-sdk-ext.x509-utils': 0.26.1-next.38
-      '@sphereon/ssi-types': 0.32.1-next.17
-      '@stablelib/ed25519': 1.0.3
-      '@trust/keyto': 1.0.1
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      base64url: 3.0.1
-      debug: 4.3.7(supports-color@5.5.0)
-      did-resolver: 4.1.0
-      elliptic: 6.5.7
-      lodash.isplainobject: 4.0.6
-      micro-rsa-dsa-dh: 0.1.0
       multiformats: 9.9.0
       uint8arrays: 3.1.1
       varint: 6.0.0
@@ -15496,7 +15439,7 @@ snapshots:
       '@sphereon/ssi-types': 0.32.1-next.17
       '@stablelib/ed25519': 1.0.3
       '@trust/keyto': 1.0.1
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       base64url: 3.0.1
       debug: 4.3.7(supports-color@5.5.0)
       did-resolver: 4.1.0
@@ -15516,7 +15459,7 @@ snapshots:
       '@sphereon/ssi-sdk-ext.key-utils': 0.26.1-next.11
       '@sphereon/ssi-sdk-ext.x509-utils': 0.26.1-next.11
       '@trust/keyto': 2.0.0-alpha1
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/key-manager': 4.2.0
       '@veramo/kms-local': 4.2.0
       elliptic: 6.5.7
@@ -15567,21 +15510,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@sphereon/ssi-sdk-ext.x509-utils@0.26.1-next.38':
-    dependencies:
-      '@peculiar/asn1-schema': 2.3.13
-      '@peculiar/asn1-x509': 2.3.13
-      '@peculiar/x509': 1.12.3
-      '@sphereon/ssi-types': 0.32.1-next.17
-      '@trust/keyto': 1.0.1
-      debug: 4.3.7(supports-color@5.5.0)
-      js-x509-utils: 1.0.7
-      pkijs: 3.2.4
-      tsyringe: 4.8.0
-      uint8arrays: 3.1.1
-    transitivePeerDependencies:
-      - supports-color
-
   '@sphereon/ssi-sdk-ext.x509-utils@0.27.0':
     dependencies:
       '@peculiar/asn1-schema': 2.3.13
@@ -15599,7 +15527,7 @@ snapshots:
 
   '@sphereon/ssi-sdk.agent-config@0.30.1(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       debug: 4.3.7(supports-color@5.5.0)
       jsonpointer: 5.0.1
       typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
@@ -15627,7 +15555,7 @@ snapshots:
 
   '@sphereon/ssi-sdk.agent-config@0.30.2-feature.SDK.41.oidf.support.286(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       debug: 4.3.7(supports-color@5.5.0)
       jsonpointer: 5.0.1
       typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
@@ -15655,7 +15583,7 @@ snapshots:
 
   '@sphereon/ssi-sdk.agent-config@0.32.1-next.17(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       debug: 4.3.7(supports-color@5.5.0)
       jsonpointer: 5.0.1
       typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
@@ -15685,7 +15613,7 @@ snapshots:
     dependencies:
       '@noble/hashes': 1.6.1
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       cross-fetch: 3.1.8(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       image-size: 2.0.0-beta.2
@@ -15735,7 +15663,7 @@ snapshots:
       '@sphereon/ssi-sdk.mdl-mdoc': 0.32.1-next.17(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(typescript@4.9.5)
       '@sphereon/ssi-sdk.sd-jwt': 0.32.1-next.17(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(typescript@4.9.5)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       ajv: 8.17.1
       ajv-formats: 3.0.1(ajv@8.17.1)
@@ -15775,7 +15703,7 @@ snapshots:
       '@sphereon/ssi-sdk.agent-config': 0.32.1-next.17(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk.core': 0.32.1-next.17(encoding@0.1.13)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       blakejs: 1.2.1
       class-validator: 0.14.1
@@ -15844,7 +15772,7 @@ snapshots:
       '@sphereon/ssi-sdk-ext.x509-utils': 0.27.0
       '@sphereon/ssi-sdk.core': 0.32.1-next.17(encoding@0.1.13)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-manager': 4.2.0
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       cross-fetch: 3.1.8(encoding@0.1.13)
@@ -15887,8 +15815,8 @@ snapshots:
       '@sphereon/ssi-sdk.oid4vci-issuer': 0.32.1-next.17(@noble/hashes@1.6.1)(awesome-qr@2.1.5-rc.0(encoding@0.1.13))(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(passport-http-bearer@1.0.1)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(typescript@4.9.5)(web-streams-polyfill@3.3.3)
       '@sphereon/ssi-sdk.oid4vci-issuer-store': 0.32.1-next.17(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      '@veramo/credential-w3c': 4.2.0(patch_hash=wuhizuafnrz3uzah2wlqaevbmi)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
+      '@veramo/credential-w3c': 4.2.0(patch_hash=abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       awesome-qr: 2.1.5-rc.0(encoding@0.1.13)
       body-parser: 1.20.3
       cookie-parser: 1.4.6
@@ -15932,7 +15860,7 @@ snapshots:
     dependencies:
       '@sphereon/oid4vci-common': 0.16.1-next.229(encoding@0.1.13)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       cross-fetch: 3.1.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
@@ -15944,8 +15872,8 @@ snapshots:
       '@sphereon/ssi-sdk-ext.did-utils': 0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk-ext.identifier-resolution': 0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk.kv-store-temp': 0.32.1-next.17(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      '@veramo/credential-w3c': 4.2.0(patch_hash=wuhizuafnrz3uzah2wlqaevbmi)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
+      '@veramo/credential-w3c': 4.2.0(patch_hash=abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       cross-fetch: 3.1.8(encoding@0.1.13)
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -15990,8 +15918,8 @@ snapshots:
       '@sphereon/ssi-sdk.vc-status-list-issuer': 0.32.1-next.17(@noble/hashes@1.6.1)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(passport-http-bearer@1.0.1)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       '@sphereon/ssi-types': 0.32.1-next.17
       '@types/uuid': 9.0.8
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      '@veramo/credential-w3c': 4.2.0(patch_hash=wuhizuafnrz3uzah2wlqaevbmi)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
+      '@veramo/credential-w3c': 4.2.0(patch_hash=abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       cross-fetch: 3.1.8(encoding@0.1.13)
       jwt-decode: 4.0.0
       uuid: 9.0.1
@@ -16099,7 +16027,7 @@ snapshots:
       '@sphereon/ssi-sdk.data-store': 0.32.1-next.17(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-sdk.sd-jwt': 0.32.1-next.17(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(typescript@4.9.5)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
     transitivePeerDependencies:
       - '@google-cloud/spanner'
       - '@sap/hana-client'
@@ -16126,7 +16054,7 @@ snapshots:
 
   '@sphereon/ssi-sdk.qr-code-generator@0.32.1-next.17':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       base64url: 3.0.1
       react: 18.3.1
       react-qr-code: 2.0.15(react@18.3.1)
@@ -16136,7 +16064,7 @@ snapshots:
   '@sphereon/ssi-sdk.remote-server-rest-api@0.32.1-next.17(@noble/hashes@1.6.1)(encoding@0.1.13)(passport-http-bearer@1.0.1)':
     dependencies:
       '@sphereon/ssi-express-support': 0.32.1-next.17(@noble/hashes@1.6.1)(passport-http-bearer@1.0.1)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/remote-server': 4.2.0(encoding@0.1.13)(express@4.20.0)
       express: 4.20.0
     transitivePeerDependencies:
@@ -16244,8 +16172,8 @@ snapshots:
       '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.32.1-next.17(encoding@0.1.13)(typescript@4.9.5)
       '@sphereon/ssi-types': 0.32.1-next.17
       '@sphereon/wellknown-dids-client': 0.1.3(encoding@0.1.13)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      '@veramo/credential-w3c': 4.2.0(patch_hash=wuhizuafnrz3uzah2wlqaevbmi)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
+      '@veramo/credential-w3c': 4.2.0(patch_hash=abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       cross-fetch: 3.1.8(encoding@0.1.13)
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -16287,8 +16215,8 @@ snapshots:
       '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.32.1-next.17(encoding@0.1.13)(typescript@4.9.5)
       '@sphereon/ssi-sdk.siopv2-oid4vp-rp-auth': 0.32.1-next.17(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(typescript@4.9.5)(web-streams-polyfill@3.3.3)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      '@veramo/credential-w3c': 4.2.0(patch_hash=wuhizuafnrz3uzah2wlqaevbmi)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
+      '@veramo/credential-w3c': 4.2.0(patch_hash=abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       body-parser: 1.20.3
       cookie-parser: 1.4.6
       cors: 2.8.5
@@ -16331,7 +16259,7 @@ snapshots:
     dependencies:
       '@sphereon/ssi-sdk.siopv2-oid4vp-common': 0.32.1-next.17(encoding@0.1.13)(typescript@4.9.5)
       '@sphereon/ssi-types': 0.32.1-next.17
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       cross-fetch: 3.1.8(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
@@ -16367,7 +16295,7 @@ snapshots:
       '@transmute/vc-status-rl-2020': 0.7.0-unstable.81(encoding@0.1.13)(web-streams-polyfill@3.3.3)
       '@transmute/web-crypto-key-pair': 0.7.0-unstable.81
       '@veramo-community/lds-ecdsa-secp256k1-recovery2020': https://codeload.github.com/uport-project/EcdsaSecp256k1RecoverySignature2020/tar.gz/ab0db52de6f4e6663ef271a48009ba26e688ef9b(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       credentials-context: 2.0.0
       crypto-ld: 6.0.0
@@ -16415,7 +16343,7 @@ snapshots:
       '@sphereon/ssi-sdk.vc-status-list': 0.32.1-next.17(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       '@sphereon/ssi-types': 0.32.1-next.17
       '@sphereon/vc-status-list': 7.0.0-next.0(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       debug: 4.3.7(supports-color@5.5.0)
       typeorm: 0.3.20(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       uint8arrays: 3.1.1
@@ -16457,7 +16385,7 @@ snapshots:
       '@sphereon/ssi-sdk.vc-status-list-issuer-drivers': 0.32.1-next.17(@noble/hashes@1.6.1)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(passport-http-bearer@1.0.1)(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
       '@sphereon/ssi-types': 0.32.1-next.17
       '@sphereon/vc-status-list': 7.0.0-next.0(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       debug: 4.3.7(supports-color@5.5.0)
       express: 4.20.0
       reflect-metadata: 0.1.14
@@ -16499,7 +16427,7 @@ snapshots:
       '@sphereon/ssi-sdk-ext.identifier-resolution': 0.27.0(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
       '@sphereon/vc-status-list': 7.0.0-next.0(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/credential-status': 4.2.0(encoding@0.1.13)
       credential-status: 2.0.6
       debug: 4.3.7(supports-color@5.5.0)
@@ -16557,7 +16485,7 @@ snapshots:
       '@sphereon/ssi-sdk.data-store': 0.32.1-next.17(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))
       '@sphereon/ssi-types': 0.32.1-next.17
       '@sphereon/ui-components.core': 0.3.1-next.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       i18n-js: 3.9.2
       react: 18.3.1
@@ -16591,7 +16519,7 @@ snapshots:
       '@emotion/react': 11.13.3(@types/react@18.3.5)(react@18.3.1)
       '@emotion/styled': 11.13.0(@emotion/react@11.13.3(@types/react@18.3.5)(react@18.3.1))(@types/react@18.3.5)(react@18.3.1)
       '@jsonforms/core': 3.3.0
-      '@jsonforms/material-renderers': 3.3.0(j5jjkf5jzckqnad3ydr4frfl3m)
+      '@jsonforms/material-renderers': 3.3.0(3537b3f9e15aaf9d4458b80df96e63c2)
       '@jsonforms/react': 3.3.0(@jsonforms/core@3.3.0)(react@18.3.1)
       '@jsonforms/vanilla-renderers': 3.3.0(@jsonforms/core@3.3.0)(@jsonforms/react@3.3.0(@jsonforms/core@3.3.0)(react@18.3.1))(react@18.3.1)
       '@mui/icons-material': 5.16.7(@mui/material@5.16.7(@emotion/react@11.13.3(@types/react@18.3.5)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.5)(react@18.3.1))(@types/react@18.3.5)(react@18.3.1))(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.5)(react@18.3.1)
@@ -17632,7 +17560,7 @@ snapshots:
       - react-native
       - web-streams-polyfill
 
-  '@veramo/core@4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)':
+  '@veramo/core@4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)':
     dependencies:
       credential-status: 2.0.6
       debug: 4.3.7(supports-color@5.5.0)
@@ -17653,7 +17581,7 @@ snapshots:
       '@transmute/ed25519-signature-2018': 0.7.0-unstable.82(encoding@0.1.13)(web-streams-polyfill@3.3.3)
       '@transmute/json-web-signature': 0.7.0-unstable.82(encoding@0.1.13)(web-streams-polyfill@3.3.3)
       '@veramo-community/lds-ecdsa-secp256k1-recovery2020': https://codeload.github.com/uport-project/EcdsaSecp256k1RecoverySignature2020/tar.gz/ab0db52de6f4e6663ef271a48009ba26e688ef9b(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-resolver': 4.2.0(encoding@0.1.13)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
@@ -17669,18 +17597,18 @@ snapshots:
 
   '@veramo/credential-status@4.2.0(encoding@0.1.13)':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       credential-status: 2.0.6
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
     transitivePeerDependencies:
       - encoding
       - supports-color
 
-  '@veramo/credential-w3c@4.2.0(patch_hash=wuhizuafnrz3uzah2wlqaevbmi)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)':
+  '@veramo/credential-w3c@4.2.0(patch_hash=abcc7e761d8ed40afd17fe27e40a5b8c3c8e00b1d25ebf8c8bf9a3500179f336)(encoding@0.1.13)(expo@51.0.32(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(encoding@0.1.13))(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))(web-streams-polyfill@3.3.3)':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-jwt': 4.2.0
       '@veramo/did-resolver': 4.2.0(encoding@0.1.13)
       '@veramo/message-handler': 4.2.0
@@ -17700,9 +17628,9 @@ snapshots:
       - supports-color
       - web-streams-polyfill
 
-  '@veramo/data-store@4.2.0(patch_hash=feb5u2ygzsdf67qbxr2lxgqjyy)(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
+  '@veramo/data-store@4.2.0(patch_hash=25b55da53633b67af137c78afaf727c15cd0dd9f55a659a71d1a693193961a5d)(encoding@0.1.13)(sqlite3@5.1.7)(ts-node@10.9.2(@types/node@18.19.50)(typescript@4.9.5))':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-discovery': 4.2.0
       '@veramo/did-manager': 4.2.0
       '@veramo/key-manager': 4.2.0
@@ -17732,24 +17660,24 @@ snapshots:
 
   '@veramo/did-discovery@4.2.0':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       debug: 4.3.7(supports-color@5.5.0)
     transitivePeerDependencies:
       - supports-color
 
   '@veramo/did-jwt@4.2.0':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/message-handler': 4.2.0
       debug: 4.3.7(supports-color@5.5.0)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
     transitivePeerDependencies:
       - supports-color
 
   '@veramo/did-manager@4.2.0':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-discovery': 4.2.0
     transitivePeerDependencies:
       - supports-color
@@ -17763,7 +17691,7 @@ snapshots:
       '@ethersproject/properties': 5.7.0
       '@ethersproject/signing-key': 5.7.0
       '@ethersproject/transactions': 5.7.0
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-manager': 4.2.0
       debug: 4.3.7(supports-color@5.5.0)
       ethr-did: 2.3.9
@@ -17781,7 +17709,7 @@ snapshots:
       '@sphereon/react-native-argon2': 2.0.9(react-native@0.75.3(@babel/core@7.25.2)(@babel/preset-env@7.26.0(@babel/core@7.25.2))(@types/react@17.0.80)(encoding@0.1.13)(react@18.3.1)(typescript@4.9.5))
       '@stablelib/ed25519': 1.0.3
       '@trust/keyto': 1.0.1
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-manager': 4.2.0
       '@veramo/key-manager': 4.2.0
       '@veramo/kms-local': 4.2.0
@@ -17798,7 +17726,7 @@ snapshots:
       '@transmute/did-key-ed25519': 0.3.0-unstable.10(encoding@0.1.13)(web-streams-polyfill@3.3.3)
       '@transmute/did-key-secp256k1': 0.3.0-unstable.10(encoding@0.1.13)(web-streams-polyfill@3.3.3)
       '@transmute/did-key-x25519': 0.3.0-unstable.10(encoding@0.1.13)(web-streams-polyfill@3.3.3)
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/did-manager': 4.2.0
       debug: 4.3.7(supports-color@5.5.0)
       multibase: 4.0.6
@@ -17810,7 +17738,7 @@ snapshots:
 
   '@veramo/did-resolver@4.2.0(encoding@0.1.13)':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/utils': 4.2.0(encoding@0.1.13)
       cross-fetch: 3.1.8(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
@@ -17825,8 +17753,8 @@ snapshots:
       '@ethersproject/strings': 5.7.0
       '@ethersproject/transactions': 5.7.0
       '@stablelib/ed25519': 1.0.3
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       uint8arrays: 3.1.1
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -17843,11 +17771,11 @@ snapshots:
       '@ethersproject/wallet': 5.7.0
       '@stablelib/ed25519': 1.0.3
       '@stablelib/nacl': 1.0.4
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/key-manager': 4.2.0
       base-58: 0.0.1
       debug: 4.3.7(supports-color@5.5.0)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       elliptic: 6.5.7
       uint8arrays: 3.1.1
     transitivePeerDependencies:
@@ -17855,13 +17783,13 @@ snapshots:
 
   '@veramo/message-handler@4.2.0':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
     transitivePeerDependencies:
       - supports-color
 
   '@veramo/remote-client@4.2.0(encoding@0.1.13)':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       cross-fetch: 3.1.8(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       openapi-types: 12.0.2
@@ -17871,7 +17799,7 @@ snapshots:
 
   '@veramo/remote-server@4.2.0(encoding@0.1.13)(express@4.20.0)':
     dependencies:
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       '@veramo/remote-client': 4.2.0(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
       did-resolver: 4.1.0
@@ -17887,11 +17815,11 @@ snapshots:
     dependencies:
       '@ethersproject/transactions': 5.7.0
       '@stablelib/ed25519': 1.0.3
-      '@veramo/core': 4.2.0(patch_hash=c5oempznsz4br5w3tcuk2i2mau)
+      '@veramo/core': 4.2.0(patch_hash=002e69343dc4b4eb8372715652188a9baf2969c8cbb6d43cf21855eb1b95027c)
       blakejs: 1.2.1
       cross-fetch: 3.1.8(encoding@0.1.13)
       debug: 4.3.7(supports-color@5.5.0)
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-jwt-vc: 3.1.3
       did-resolver: 4.1.0
       elliptic: 6.5.7
@@ -19332,7 +19260,7 @@ snapshots:
 
   credential-status@2.0.6:
     dependencies:
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
 
   credentials-context@2.0.0: {}
@@ -19745,10 +19673,10 @@ snapshots:
 
   did-jwt-vc@3.1.3:
     dependencies:
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
 
-  did-jwt@6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey):
+  did-jwt@6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af):
     dependencies:
       '@stablelib/ed25519': 1.0.3
       '@stablelib/random': 1.0.2
@@ -20390,7 +20318,7 @@ snapshots:
       '@ethersproject/strings': 5.7.0
       '@ethersproject/transactions': 5.7.0
       '@ethersproject/wallet': 5.7.0
-      did-jwt: 6.11.6(patch_hash=afqywxnnjnsy6hwgax66dyyiey)
+      did-jwt: 6.11.6(patch_hash=3961df37be133a0b6a1493ec792a42d2fe4867acca16bde99554597fd98139af)
       did-resolver: 4.1.0
       ethr-did-resolver: 8.1.2
     transitivePeerDependencies:
@@ -23429,6 +23357,8 @@ snapshots:
 
   normalize-url@6.1.0: {}
 
+  normalize-wheel@1.0.1: {}
+
   npm-package-arg@7.0.0:
     dependencies:
       hosted-git-info: 3.0.8
@@ -24620,6 +24550,13 @@ snapshots:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+
+  react-easy-crop@5.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      normalize-wheel: 1.0.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      tslib: 2.7.0
 
   react-error-overlay@6.0.11: {}
 

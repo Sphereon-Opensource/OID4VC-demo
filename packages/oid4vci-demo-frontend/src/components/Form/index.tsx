@@ -9,6 +9,8 @@ import {FormFieldValue, FormOutputData, ImmutableRecord} from '../../types'
 import style from './index.module.css'
 import {extractComboboxItems, extractFormDefaults, JsonDataItem, loadJsonData} from '../../utils/jsonLoader'
 import {Text} from "../Text";
+import ImageCropModal from "../ImageCropModal";
+
 
 type Props = {
     inputBackgroundColor?: string
@@ -80,6 +82,9 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     const [jsonDefaults, setJsonDefaults] = useState<JsonDataItem | undefined>()
     const [defaultsLoaded, setDefaultsLoaded] = useState<boolean>(false)
     const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({})
+    const [cropModalOpen, setCropModalOpen] = useState(false)
+    const [imageToCrop, setImageToCrop] = useState<string>('')
+    const [currentCropField, setCurrentCropField] = useState<string>('')
 
     const onChangeValue = async (value: FormFieldValue, key: string): Promise<void> => {
         const data = {...formData, [key]: value}
@@ -197,11 +202,30 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     const handleFileUpload = async (file: File, fieldKey: string): Promise<void> => {
         if (file.type.startsWith('image/')) {
             const reader = new FileReader()
-            reader.onload = async (e) => {
-                const base64 = e.target?.result as string
-                await onChangeValue(base64, fieldKey)
+            reader.onload = (e) => {
+                const result = e.target?.result as string
+                setImageToCrop(result)
+                setCurrentCropField(fieldKey)
+                setCropModalOpen(true)
             }
             reader.readAsDataURL(file)
+        }
+    }
+
+    const handleCropSave = async (croppedImage: string): Promise<void> => {
+        await onChangeValue(croppedImage, currentCropField)
+        setCropModalOpen(false)
+        setImageToCrop('')
+        setCurrentCropField('')
+    }
+
+    const handleCropCancel = (): void => {
+        setCropModalOpen(false)
+        setImageToCrop('')
+        setCurrentCropField('')
+        // Reset file input
+        if (fileInputRefs.current[currentCropField]) {
+            fileInputRefs.current[currentCropField]!.value = ''
         }
     }
 
@@ -468,6 +492,12 @@ const Form: FC<Props> = (props: Props): ReactElement => {
 
     return <div className={style.container}>
         {getFormFrom()}
+        <ImageCropModal
+            imageSrc={imageToCrop}
+            isOpen={cropModalOpen}
+            onSave={handleCropSave}
+            onCancel={handleCropCancel}
+        />
     </div>
 }
 
