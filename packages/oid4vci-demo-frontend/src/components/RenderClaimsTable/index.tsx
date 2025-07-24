@@ -85,12 +85,16 @@ const RenderClaimsTable: React.FC<{ payload: ClaimsPayload }> = ({payload}) => {
             renderTreeToggle={() => null}
             autoHeight
             showHeader={false}
-            rowHeight={(rowData) => {
+            rowHeight={(rowData: any) => {
                 if (rowData?.isImage) {
                     return 220
                 }
-                if (rowData?.value && typeof rowData.value === 'string' && rowData.value.length > 100) {
-                    return 100
+                if (rowData?.value && typeof rowData.value === 'string') {
+                    const text = String(rowData.value)
+                    const lines = text.split('\n').length
+                    const wrappedLines = Math.ceil(text.length / 40) // Adjust based on column width
+                    const totalLines = Math.max(lines, wrappedLines)
+                    return Math.max(50, totalLines * 22 + 16) // 22px line height + padding
                 }
                 return 50
             }}
