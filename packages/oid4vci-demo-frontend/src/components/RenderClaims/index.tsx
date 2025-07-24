@@ -20,9 +20,9 @@ const RenderClaims: React.FC<{ payload: ClaimsPayload; depth?: number }> = ({pay
                 if (typeof value === 'object') {
                     return value !== null && Object.keys(value).length > 0 && (
                         <React.Fragment key={index}>
+                                <div>{'\u00A0'}</div>
                             <div>{indent}{formattedKey}:</div>
                             <RenderClaims payload={value} depth={depth + 1}/>
-                            <div>{'\u00A0'}</div>
                         </React.Fragment>
                     )
                 } else {

@@ -11,6 +11,7 @@ import {convertPIDToUniformCredential} from '../../utils/mapper/PIDMapper';
 import {NonMobile} from "../..";
 import RenderClaims from "../../components/RenderClaims";
 import '../../css/typography.css';
+import RenderClaimsTable from "../../components/RenderClaimsTable";
 
 type State = {
     data: object | undefined // raw credential
@@ -122,7 +123,7 @@ const SSIInformationVerifyPage: React.FC = () => {
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         width: '60%',
-                        height: '83%',
+                        height: '95%'
                     }}>
                         <div
                             style={{
@@ -157,7 +158,7 @@ const SSIInformationVerifyPage: React.FC = () => {
                             {payload.map((credential, index) => (
                                 <div key={index} style={{marginTop: '20px', textAlign: 'left', width: '100%'}}>
                                     {credential.transformedClaims &&
-                                        <RenderClaims payload={credential.transformedClaims}/>}
+                                        <RenderClaimsTable payload={credential.transformedClaims}/>}
                                 </div>
                             ))}
                         </div>
