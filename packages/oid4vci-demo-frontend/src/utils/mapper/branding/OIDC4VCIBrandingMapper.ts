@@ -3,8 +3,8 @@ import {
     CredentialsSupportedDisplay,
     EndpointMetadataResult
 } from '@sphereon/oid4vci-common'
-import {IBasicCredentialLocaleBranding} from '@sphereon/ssi-sdk.data-store'
-import {CredentialDefinitionJwtVcJsonV1_0_13} from "@sphereon/oid4vci-common/lib/types/v1_0_13.types";
+import type {IBasicCredentialLocaleBranding} from '@sphereon/ssi-sdk.data-store'
+import {CredentialDefinitionJwtVcJsonV1_0_15} from "@sphereon/oid4vci-common";
 
 export const credentialLocaleBrandingFrom = async (credentialDisplay: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> => {
     console.log(JSON.stringify(credentialDisplay, null, 2))
@@ -68,7 +68,7 @@ export const getCredentialBrandings = async (metadata: EndpointMetadataResult): 
             const types = 'types' in credentialsConfigSupported // TODO credentialsConfigSupported.types is deprecated
                 ? credentialsConfigSupported.types as string[]
                 : 'credential_definition' in credentialsConfigSupported
-                    ? (credentialsConfigSupported.credential_definition as CredentialDefinitionJwtVcJsonV1_0_13).type
+                    ? (credentialsConfigSupported.credential_definition as CredentialDefinitionJwtVcJsonV1_0_15).type
                     : undefined
 
             if (types) {

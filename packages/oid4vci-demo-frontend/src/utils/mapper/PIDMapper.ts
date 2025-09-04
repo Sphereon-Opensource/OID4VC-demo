@@ -1,11 +1,10 @@
 import {UniformCredential} from "../../types";
 import {CredentialDetailsRow, toNonPersistedCredentialSummary} from "@sphereon/ui-components.credential-branding";
-import {CredentialMapper, SdJwtDecodedVerifiableCredentialPayload, W3CVerifiableCredential} from "@sphereon/ssi-types";
+import {CredentialMapper, CredentialRole, IVerifiableCredential} from "@sphereon/ssi-types";
 // @ts-ignore
 import crypto from 'crypto-browserify'
 import {VerifiableCredential} from "@veramo/core";
-import {CredentialRole} from "@sphereon/ssi-sdk.data-store";
-import {IVerifiableCredential} from "@sphereon/ssi-types/src/types";
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function convertPIDToUniformCredential(credentials: Array<any>): Promise<Array<UniformCredential>> {

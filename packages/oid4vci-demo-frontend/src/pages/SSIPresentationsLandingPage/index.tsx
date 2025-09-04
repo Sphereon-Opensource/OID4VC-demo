@@ -6,7 +6,7 @@ import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {SSICredentialsLandingPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem";
-import {PresentationDefinitionItem} from "@sphereon/ssi-sdk.data-store";
+import type {PresentationDefinitionItem} from "@sphereon/ssi-sdk.data-store";
 import {ImageProperties} from "../../types";
 
 type PDWithBranding = PresentationDefinitionItem & {

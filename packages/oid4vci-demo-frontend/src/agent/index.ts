@@ -1,7 +1,7 @@
 import {createAgent, TAgent} from '@veramo/core'
 import {AgentRestClient} from '@veramo/remote-client'
 import {IQRCodeGenerator, QrCodeProvider} from '@sphereon/ssi-sdk.qr-code-generator'
-import {pdManagerMethods, IPDManager} from '@sphereon/ssi-sdk.pd-manager'
+import type {IPDManager} from '@sphereon/ssi-sdk.pd-manager'
 import {ISIOPv2OID4VPRPRestClient, SIOPv2OID4VPRPRestClient, Siopv2RestClientAuthenticationOpts} from '@sphereon/ssi-sdk.siopv2-oid4vp-rp-rest-client'
 import {IOID4VCIRestClient, OID4VCIRestClient} from '@sphereon/ssi-sdk.oid4vci-issuer-rest-client'
 import {EcosystemGeneralConfig} from '../ecosystem/ecosystem-config'
@@ -15,6 +15,16 @@ export type VCIAgentType = TAgent<IQRCodeGenerator & ISIOPv2OID4VPRPRestClient &
 type AgentMap = { [key: string]: VCIAgentType };
 
 const agentByEcosystemId: AgentMap = {}
+
+const pdManagerMethods = [
+    "pdmHasDefinition",
+    "pdmHasGetDefinitions",
+    "pdmGetDefinition",
+    "pdmGetDefinitions",
+    "pdmPersistDefinition",
+    "pdmDeleteDefinition",
+    "pdmDeleteDefinitions"
+];
 
 const buildAuthentication = (generalConfig: EcosystemGeneralConfig): Siopv2RestClientAuthenticationOpts => ({
     enabled: !!generalConfig.authenticationEnabled || !!generalConfig.authenticationStaticToken,

@@ -67,11 +67,11 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
     
       ecosystem.getAgent()
       .siopClientCreateAuthRequest({definitionId: vpDefinitionId, responseRedirectURI: responseRedirectUri})
-      .then((authRequestURIResponse) => {
+      .then((authRequestURIResponse: GenerateAuthRequestURIResponse) => {
         setQrCodeData(authRequestURIResponse.authRequestURI)
         ecosystem.getAgent()
           .qrURIElement(this.createQRCodeElement(authRequestURIResponse))
-          .then((qrCode) => {
+          .then((qrCode: JSX.Element) => {
             this.registerState(authRequestURIResponse, qrCode)
             // return this.setState({authRequestURIResponse, qrCode})
           })
