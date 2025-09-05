@@ -26,8 +26,13 @@ const SSIPresentationsLandingPage: React.FC = () => {
             .then((pds) => {
 
                 const pdWithBrandingMap = pds.map(pd => {
+                    const credentials = pd.dcqlPayload?.dcqlQuery.credentials || []
                     const ssiPDCardConfig = pageConfig.presentationDefinitions
-                        .find(value => value.id === pd.definitionId)
+                        .find(config =>
+                            credentials.some((credential) =>
+                                config.id === credential.id
+                            )
+                        )
                     const pdWithBranding: PDWithBranding = {
                         ...pd,
                         branding: {
@@ -45,7 +50,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
     }, []);
 
     const handlePresentationDefinitionClick = async (pdDefinitionItem: PresentationDefinitionItem)=> {
-        await flowRouter.nextStep({pd: pdDefinitionItem.definitionPayload})
+        await flowRouter.nextStep({pd: pdDefinitionItem.dcqlPayload})
     }
 
     return (
@@ -165,8 +170,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                             }}
                                         />
                                         <div style={{width: 200, paddingLeft: '5px'}}>
-                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.definitionPayload.name}</span><br/>
-                                            <span style={{fontSize: '10px'}}>{pdItem.definitionPayload.purpose}</span>
+                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.purpose ?? pdItem.definitionId}</span><br/>
+                                            {<span style={{fontSize: '10px'}}>{pdItem.purpose ?? 'placeholder'}</span>}
                                         </div>
                                     </div>
                                 </Mobile>
@@ -202,8 +207,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                                 fontSize: '30px',
                                                 fontWeight: '600',
                                                 color: '#303030'
-                                            }}>{pdItem.definitionPayload.name}</span><br/>
-                                            <span style={{fontSize: '18px', color: '#303030',}}>{pdItem.definitionPayload.purpose}</span>
+                                            }}>{pdItem.definitionId}</span><br/>
+                                            {<span style={{fontSize: '18px', color: '#303030',}}>{pdItem.purpose ?? 'placeholder'}</span>}
                                         </div>
                                     </div>
                                 </NonMobile>

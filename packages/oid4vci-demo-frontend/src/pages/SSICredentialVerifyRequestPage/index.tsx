@@ -129,7 +129,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                               title={pageConfig.rightPaneLeftPane.qrCode.topTitle.value ? t(pageConfig.rightPaneLeftPane.qrCode.topTitle.value).split('\n')
                                   : t('credential_verify_request_right_pane_top_title', {credentialName}).split('\n')}
 
-                              lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd.purpose}).split('\n')
+                              lines={pageConfig.rightPaneLeftPane.qrCode.topDescription ? t(pageConfig.rightPaneLeftPane.qrCode.topDescription, {credentialName, purpose: pd.purpose ?? 'placeholder'}).split('\n')
                                   : t('credential_verify_request_right_pane_top_paragraph', {credentialName}).split('\n')}/>
                     </div>)}
                     {!(!!pageConfig.rightPaneLeftPane?.qrCode?.topTitle) && <div style={{
