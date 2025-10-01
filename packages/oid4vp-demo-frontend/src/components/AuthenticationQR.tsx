@@ -14,7 +14,7 @@ export type AuthenticationQRProps = {
 }
 
 export interface AuthenticationQRState {
-    authRequestURIResponse?: GenerateAuthRequestURIResponse
+    createAuthorizationResponse?: GenerateAuthRequestURIResponse
     qrCode?: JSX.Element
 }
 
@@ -35,7 +35,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
         this.qrExpirationMs = parseInt(process.env.REACT_APP_QR_CODE_EXPIRES_AFTER_SEC ?? 1200) * 1000
         // actually since the QR points to a JWT it has its own expiration value as well.
 
-        if (!this.state.authRequestURIResponse || !this.state?.qrCode) {
+        if (!this.state.createAuthorizationResponse || !this.state?.qrCode) {
             this.generateNewQRCode();
             this.refreshTimerHandle = setTimeout(() => this.refreshQRCode(), this.qrExpirationMs)
         }
@@ -43,25 +43,25 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     }
 
     private generateNewQRCode() {
-        this.generateAuthRequestURI().then(authRequestURIResponse => {
-            agent.qrURIElement(this.createQRCodeElement(authRequestURIResponse)).then((qrCode) => {
-                this.registerState(authRequestURIResponse, qrCode)
-                // return this.setState({authRequestURIResponse, qrCode})
+        this.generateAuthRequestURI().then(createAuthorizationResponse => {
+            agent.qrURIElement(this.createQRCodeElement(createAuthorizationResponse)).then((qrCode) => {
+                this.registerState(createAuthorizationResponse, qrCode)
+                // return this.setState({createAuthorizationResponse, qrCode})
             })
         }).catch(e => console.error(e))
     }
 
-    createQRCodeElement(authRequestURIResponse: GenerateAuthRequestURIResponse): CreateElementArgs<QRType.URI, URIData> {
+    createQRCodeElement(createAuthorizationResponse: GenerateAuthRequestURIResponse): CreateElementArgs<QRType.URI, URIData> {
         const qrProps: CreateElementArgs<QRType.URI, URIData> = {
 
             data: {
                 type: QRType.URI,
-                object: authRequestURIResponse.authRequestURI,
-                id: authRequestURIResponse.correlationId
+                object: createAuthorizationResponse.authRequestURI,
+                id: createAuthorizationResponse.correlationId
 
             },
             onGenerate: (result: ValueResult<QRType.URI, URIData>) => {
-                // this.registerState(authRequestURIResponse, qrProps.renderingProps)
+                // this.registerState(createAuthorizationResponse, qrProps.renderingProps)
             },
             renderingProps: {
                 bgColor: 'white',
@@ -101,7 +101,7 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     private refreshQRCode = () => {
         console.log("Timeout expired, refreshing QR code...")
         if (this.qrExpirationMs > 0) {
-            if (this.state.authRequestURIResponse) {
+            if (this.state.createAuthorizationResponse) {
                 this.timedOutRequestMappings.add(this.state)
             }
             this.registerStateSent = false
@@ -110,28 +110,28 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
     }
 
 
-    private registerState = (authRequestURIResponse: GenerateAuthRequestURIResponse, qrCode: JSX.Element) => {
-        if (this.state.authRequestURIResponse?.correlationId === authRequestURIResponse.correlationId) {
+    private registerState = (createAuthorizationResponse: GenerateAuthRequestURIResponse, qrCode: JSX.Element) => {
+        if (this.state.createAuthorizationResponse?.correlationId === createAuthorizationResponse.correlationId) {
             // same correlationId, which we are already polling
             return
         }
 
-        /*if (!this.timedOutRequestMappings.has({authRequestURIResponse, qrCode})) {
-            this.timedOutRequestMappings.add({authRequestURIResponse, qrCode})
+        /*if (!this.timedOutRequestMappings.has({createAuthorizationResponse, qrCode})) {
+            this.timedOutRequestMappings.add({createAuthorizationResponse, qrCode})
         }*/
-        this.setState({qrCode, authRequestURIResponse})
+        this.setState({qrCode, createAuthorizationResponse})
         /*    this.state.qrCode = qrCode
-            this.state.authRequestURIResponse = authRequestURIResponse
+            this.state.createAuthorizationResponse = createAuthorizationResponse
     */
-        this.pollAuthStatus(authRequestURIResponse)
+        this.pollAuthStatus(createAuthorizationResponse)
     }
 
 
     /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
-    private pollAuthStatus = async (authRequestURIResponse: GenerateAuthRequestURIResponse) => {
+    private pollAuthStatus = async (createAuthorizationResponse: GenerateAuthRequestURIResponse) => {
         let authStatus:  AuthStatusResponse = await agent.siopClientGetAuthStatus({
-          correlationId: authRequestURIResponse?.correlationId,
-          definitionId: authRequestURIResponse.definitionId
+          correlationId: createAuthorizationResponse?.correlationId,
+          definitionId: createAuthorizationResponse.definitionId
         })
         const interval = setInterval(async args => {
             if (!this.state.qrCode) {
@@ -143,10 +143,10 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
                 const timedoutState = this.state
                 try {
                     console.log("Cancelling timed out auth request.")
-                    if (timedoutState?.authRequestURIResponse) {
+                    if (timedoutState?.createAuthorizationResponse) {
                         await agent.siopClientRemoveAuthRequestSession({
-                            correlationId: timedoutState.authRequestURIResponse.correlationId,
-                            definitionId: timedoutState.authRequestURIResponse.definitionId
+                            correlationId: timedoutState.createAuthorizationResponse.correlationId,
+                            definitionId: timedoutState.createAuthorizationResponse.definitionId
                         })
                         this.timedOutRequestMappings.delete(timedoutState) // only delete after deleted remotely
                     }
@@ -155,9 +155,9 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
                     console.log(error)
                 }
             }
-            if (authStatus.status === 'sent') {
+            if (authStatus.status === 'authorization_request_retrieved') {
                 this.props.onAuthRequestRetrieved()
-            } else if (authStatus.status === 'verified') {
+            } else if (authStatus.status === 'authorization_response_verified') {
                 clearInterval(interval)
                 return this.props.onSignInComplete(authStatus.payload as AuthorizationResponsePayload)
             } else if (authStatus.status === 'error') {
@@ -169,8 +169,8 @@ export default class AuthenticationQR extends Component<AuthenticationQRProps> {
 
             // Use the state, as that gets updated by the qr code
             authStatus = await agent.siopClientGetAuthStatus({
-              correlationId: authRequestURIResponse?.correlationId,
-              definitionId: authRequestURIResponse.definitionId
+              correlationId: createAuthorizationResponse?.correlationId,
+              definitionId: createAuthorizationResponse.definitionId
             })
             console.log(JSON.stringify(authStatus))
         }, 1000)

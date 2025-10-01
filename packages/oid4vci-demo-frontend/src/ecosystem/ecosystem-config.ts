@@ -13,7 +13,7 @@ export interface ComponentConfig {
 }
 
 export interface PageConfig {
-    vpDefinitionId?: string
+    vpQueryId?: string
 }
 export interface SSICredentialVerifyFromVPRequestPageConfig extends PageConfig {
   photoRight: string
@@ -542,7 +542,7 @@ export interface VCIConfigPages {
 
 export interface VCIConfigRoute {
     id?: string
-    vpDefinitionId?: string
+    vpQueryId?: string
     steps: VCIConfigRouteStep[]
 }
 

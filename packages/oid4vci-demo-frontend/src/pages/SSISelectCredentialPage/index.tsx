@@ -3,7 +3,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import './index.module.css'
 import { MetadataClient } from '@sphereon/oid4vci-client'
-import type  { IBasicCredentialLocaleBranding, IBasicImageDimensions } from '@sphereon/ssi-sdk.data-store'
+import type  { IBasicCredentialLocaleBranding, IBasicImageDimensions } from '@sphereon/ssi-sdk.data-store-types'
 import { getCredentialBrandings } from '../../utils/mapper/branding/OIDC4VCIBrandingMapper'
 import { useTranslation } from "react-i18next"
 import { useMediaQuery } from "react-responsive"

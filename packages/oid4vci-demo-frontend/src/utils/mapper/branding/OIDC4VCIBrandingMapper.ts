@@ -3,7 +3,7 @@ import {
     CredentialsSupportedDisplay,
     EndpointMetadataResult
 } from '@sphereon/oid4vci-common'
-import type {IBasicCredentialLocaleBranding} from '@sphereon/ssi-sdk.data-store'
+import type {IBasicCredentialLocaleBranding} from '@sphereon/ssi-sdk.data-store-types'
 import {CredentialDefinitionJwtVcJsonV1_0_15} from "@sphereon/oid4vci-common";
 
 export const credentialLocaleBrandingFrom = async (credentialDisplay: CredentialsSupportedDisplay): Promise<IBasicCredentialLocaleBranding> => {

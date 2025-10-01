@@ -6,10 +6,10 @@ import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {SSICredentialsLandingPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem";
-import type {PresentationDefinitionItem} from "@sphereon/ssi-sdk.data-store";
+import type {DcqlQueryItem} from "@sphereon/ssi-sdk.data-store-types";
 import {ImageProperties} from "../../types";
 
-type PDWithBranding = PresentationDefinitionItem & {
+type PDWithBranding = DcqlQueryItem & {
     branding: { backgroundColor?: string, backgroundImage?: string, logo?: ImageProperties }
 }
 
@@ -26,7 +26,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
             .then((pds) => {
 
                 const pdWithBrandingMap = pds.map(pd => {
-                    const credentials = pd.dcqlPayload?.dcqlQuery.credentials || []
+                    const credentials = pd.query.credentials || []
                     const ssiPDCardConfig = pageConfig.presentationDefinitions
                         .find(config =>
                             credentials.some((credential) =>
@@ -49,8 +49,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
             })
     }, []);
 
-    const handlePresentationDefinitionClick = async (pdDefinitionItem: PresentationDefinitionItem)=> {
-        await flowRouter.nextStep({pd: pdDefinitionItem.dcqlPayload})
+    const handlePresentationDefinitionClick = async (pdDefinitionItem: DcqlQueryItem)=> {
+        await flowRouter.nextStep({pd: pdDefinitionItem})
     }
 
     return (
@@ -145,7 +145,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
                             </NonMobile>
                         </div>
                         {presentationDefinitions.map((pdItem, index) => (
-                            <div key={pdItem.definitionId || index} onClick={() => handlePresentationDefinitionClick(pdItem)}>
+                            <div key={pdItem.queryId || index} onClick={() => handlePresentationDefinitionClick(pdItem)}>
                                 <Mobile>
                                     <div style={{
                                         display: 'flex',
@@ -170,7 +170,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                             }}
                                         />
                                         <div style={{width: 200, paddingLeft: '5px'}}>
-                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.purpose ?? pdItem.definitionId}</span><br/>
+                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.purpose ?? pdItem.queryId}</span><br/>
                                             {<span style={{fontSize: '10px'}}>{pdItem.purpose ?? 'placeholder'}</span>}
                                         </div>
                                     </div>
@@ -207,7 +207,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                                 fontSize: '30px',
                                                 fontWeight: '600',
                                                 color: '#303030'
-                                            }}>{pdItem.definitionId}</span><br/>
+                                            }}>{pdItem.queryId}</span><br/>
                                             {<span style={{fontSize: '18px', color: '#303030',}}>{pdItem.purpose ?? 'placeholder'}</span>}
                                         </div>
                                     </div>

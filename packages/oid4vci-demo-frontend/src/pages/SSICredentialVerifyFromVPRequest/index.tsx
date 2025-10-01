@@ -93,7 +93,7 @@ export default function SSICredentialVerifyFromVPRequestPage(): React.ReactEleme
                             {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                        fgColor={'rgba(50, 57, 72, 1)'}
                                                        width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                       vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                       vpQueryId={flowRouter.getVpQueryId()}
                                                        onAuthRequestRetrieved={console.log}
                                                        onSignInComplete={onSignInComplete}
                                                        setQrCodeData={setDeepLink}/>}
@@ -101,7 +101,7 @@ export default function SSICredentialVerifyFromVPRequestPage(): React.ReactEleme
                     </NonMobileOS>
                     <MobileOS>
                         {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                   vpDefinitionId={flowRouter.getVpDefinitionId()}
+                                                   vpQueryId={flowRouter.getVpQueryId()}
                                                    onAuthRequestRetrieved={console.log}
                                                    onSignInComplete={onSignInComplete}
                                                    setQrCodeData={setDeepLink}/>}

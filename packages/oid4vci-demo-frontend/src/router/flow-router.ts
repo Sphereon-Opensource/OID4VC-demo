@@ -174,12 +174,12 @@ export function useFlowRouter<T extends PageConfig>() {
         return stepState.pageConfig as T
     }
 
-    function getVpDefinitionId(): string {
-        const vpDefinitionId = getPageConfig().vpDefinitionId ?? currentRoute.vpDefinitionId
-        if (!vpDefinitionId) {
-            throw new Error('vpDefinitionId is neither defined in the page configuration nor in the route.')
+    function getQueryId(): string {
+        const vpQueryId = getPageConfig().vpQueryId ?? currentRoute.vpQueryId
+        if (!vpQueryId) {
+            throw new Error('vpQueryId is neither defined in the page configuration nor in the route.')
         }
-        return vpDefinitionId
+        return vpQueryId
     }
 
     function getCurrentStepId(): string | undefined {
@@ -188,7 +188,7 @@ export function useFlowRouter<T extends PageConfig>() {
 
     return {
         getPageConfig,
-        getVpDefinitionId,
+        getVpQueryId: getQueryId,
         getNextId,
         goToStep,
         nextStep,

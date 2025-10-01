@@ -3,7 +3,7 @@ import {Text} from "../../components/Text"
 import style from '../../components/Text/Text.module.css'
 import DeepLinkButton from "../../components/DeepLinkButton"
 import {useTranslation} from "react-i18next"
-import {AuthorizationResponsePayload} from "@sphereon/did-auth-siop"
+import {AuthorizationResponsePayload, VerifiedData} from "@sphereon/did-auth-siop"
 import MemoizedAuthenticationQR from '../../components/AuthenticationQR'
 import SSIPrimaryButton from "../../components/SSIPrimaryButton"
 import {useMediaQuery} from "react-responsive"
@@ -15,6 +15,7 @@ import {useLocation} from "react-router-dom";
 import InputField from "../../components/InputField";
 import {FormFieldValue} from "../../types";
 import styles from "../../components/DeepLinkButton/DeepLinkButton.module.css";
+import {AuthStatusResponse} from "@sphereon/ssi-sdk.siopv2-oid4vp-common";
 
 export default function SSICredentialVerifyRequestPage(): React.ReactElement | null {
     const ecosystem = useEcosystem()
@@ -43,19 +44,19 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
     };
 
 
-    const onSignInComplete = async (data: AuthorizationResponsePayload): Promise<void> => {
+    const onSignInComplete = async (verifiedData: VerifiedData): Promise<void> => {
         const state = {
             data: {
-                vp_token: data.vp_token
+                vp_token: Object.values(verifiedData.authorization_response!.vp_token!)[0]
             }
         };
         await flowRouter.nextStep(state)
     }
 
     const responseRedirectUri = pageConfig.responseRedirectURI?.
-    replace(":definition_id", flowRouter.getVpDefinitionId()).
-    replace(":definitionId", flowRouter.getVpDefinitionId())
-    
+    replace(":query_id", flowRouter.getVpQueryId()).
+    replace(":queryId", flowRouter.getVpQueryId())
+
     return (
         <div style={{
             display: 'flex',
@@ -161,7 +162,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                         {<MemoizedAuthenticationQR ecosystem={ecosystem}
                                                                    fgColor={pageConfig.rightPaneLeftPane?.qrCode?.fgColor ?? 'rgba(50, 57, 72, 1)'}
                                                                    width={pageConfig.rightPaneLeftPane?.qrCode?.width ?? 300}
-                                                                   vpDefinitionId={pd?.id ?? flowRouter.getVpDefinitionId()}
+                                                                   vpQueryId={pd?.id ?? flowRouter.getVpQueryId()}
                                                                    responseRedirectUri={responseRedirectUri}
                                                                    onAuthRequestRetrieved={console.log}
                                                                    onSignInComplete={onSignInComplete}
@@ -192,7 +193,7 @@ export default function SSICredentialVerifyRequestPage(): React.ReactElement | n
                                 </NonMobileOS>
                                 <MobileOS>
                                     {<MemoizedAuthenticationQR ecosystem={ecosystem}
-                                                               vpDefinitionId={pd?.id ?? flowRouter.getVpDefinitionId()}
+                                                               vpQueryId={pd?.id ?? flowRouter.getVpQueryId()}
                                                                onAuthRequestRetrieved={console.log}
                                                                onSignInComplete={onSignInComplete}
                                                                setQrCodeData={setDeepLink}/>}
