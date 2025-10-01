@@ -6,10 +6,10 @@ import {useMediaQuery} from "react-responsive"
 import {useFlowRouter} from "../../router/flow-router"
 import {SSICredentialsLandingPageConfig} from "../../ecosystem/ecosystem-config"
 import {useEcosystem} from "../../ecosystem/ecosystem";
-import {PresentationDefinitionItem} from "@sphereon/ssi-sdk.data-store";
+import type {DcqlQueryItem} from "@sphereon/ssi-sdk.data-store-types";
 import {ImageProperties} from "../../types";
 
-type PDWithBranding = PresentationDefinitionItem & {
+type PDWithBranding = DcqlQueryItem & {
     branding: { backgroundColor?: string, backgroundImage?: string, logo?: ImageProperties }
 }
 
@@ -26,8 +26,13 @@ const SSIPresentationsLandingPage: React.FC = () => {
             .then((pds) => {
 
                 const pdWithBrandingMap = pds.map(pd => {
+                    const credentials = pd.query.credentials || []
                     const ssiPDCardConfig = pageConfig.presentationDefinitions
-                        .find(value => value.id === pd.definitionId)
+                        .find(config =>
+                            credentials.some((credential) =>
+                                config.id === credential.id
+                            )
+                        )
                     const pdWithBranding: PDWithBranding = {
                         ...pd,
                         branding: {
@@ -44,8 +49,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
             })
     }, []);
 
-    const handlePresentationDefinitionClick = async (pdDefinitionItem: PresentationDefinitionItem)=> {
-        await flowRouter.nextStep({pd: pdDefinitionItem.definitionPayload})
+    const handlePresentationDefinitionClick = async (pdDefinitionItem: DcqlQueryItem)=> {
+        await flowRouter.nextStep({pd: pdDefinitionItem})
     }
 
     return (
@@ -73,6 +78,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
                         height: pageConfig.leftPaneWidth ? '100%' : 'auto',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        ...(pageConfig.photoLeft && { background: `url(${pageConfig.photoLeft}) 0% 0% / contain no-repeat`}),
                         ...(pageConfig.backgroundColor && {backgroundColor: pageConfig.backgroundColor}),
                         ...(pageConfig.logo && {justifyContent: pageConfig.logo.justifyContent ??'center'})
                     }}>
@@ -139,7 +145,7 @@ const SSIPresentationsLandingPage: React.FC = () => {
                             </NonMobile>
                         </div>
                         {presentationDefinitions.map((pdItem, index) => (
-                            <div key={pdItem.definitionId || index} onClick={() => handlePresentationDefinitionClick(pdItem)}>
+                            <div key={pdItem.queryId || index} onClick={() => handlePresentationDefinitionClick(pdItem)}>
                                 <Mobile>
                                     <div style={{
                                         display: 'flex',
@@ -164,8 +170,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                             }}
                                         />
                                         <div style={{width: 200, paddingLeft: '5px'}}>
-                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.definitionPayload.name}</span><br/>
-                                            <span style={{fontSize: '10px'}}>{pdItem.definitionPayload.purpose}</span>
+                                            <span style={{fontSize: '14px', fontWeight: '600'}}>{pdItem.purpose ?? pdItem.queryId}</span><br/>
+                                            {<span style={{fontSize: '10px'}}>{pdItem.purpose ?? 'placeholder'}</span>}
                                         </div>
                                     </div>
                                 </Mobile>
@@ -201,8 +207,8 @@ const SSIPresentationsLandingPage: React.FC = () => {
                                                 fontSize: '30px',
                                                 fontWeight: '600',
                                                 color: '#303030'
-                                            }}>{pdItem.definitionPayload.name}</span><br/>
-                                            <span style={{fontSize: '18px', color: '#303030',}}>{pdItem.definitionPayload.purpose}</span>
+                                            }}>{pdItem.queryId}</span><br/>
+                                            {<span style={{fontSize: '18px', color: '#303030',}}>{pdItem.purpose ?? 'placeholder'}</span>}
                                         </div>
                                     </div>
                                 </NonMobile>

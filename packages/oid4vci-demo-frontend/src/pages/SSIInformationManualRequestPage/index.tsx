@@ -49,9 +49,60 @@ const SSIInformationManualRequestPage: React.FC = () => {
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 767px)'})
 
 
+    function mapToForm(credentialData: ImmutableRecord | undefined): ImmutableRecord | undefined {
+        if (!credentialData) {
+            return undefined
+    }
+
+        // Extract form field keys from pageConfig.form
+        const formKeys = pageConfig.form.flat().map(field => field.key.toLowerCase())
+
+        // Flatten the credentialData object
+        const flattenedData: Record<string, any> = {}
+
+        function flattenObject(obj: any, prefix: string = '') {
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    const value = obj[key]
+                    const fullKey = prefix ? `${prefix}.${key}` : key
+
+                    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                        flattenObject(value, fullKey)
+                    } else {
+                        flattenedData[key.toLowerCase()] = value
+                    }
+                }
+            }
+        }
+
+        flattenObject(credentialData)
+
+        // Create result object with matching keys
+        const result: Record<string, any> = {}
+
+        for (const formKey of formKeys) {
+            const matchingKey = Object.keys(flattenedData).find(key =>
+                key.toLowerCase() === formKey
+            )
+
+            if (matchingKey) {
+                // Find the original form field key with correct casing
+                const originalFormField = pageConfig.form.flat().find(field =>
+                    field.key.toLowerCase() === formKey
+                )
+
+                if (originalFormField) {
+                    result[originalFormField.key] = flattenedData[matchingKey]
+                }
+            }
+        }
+
+        return result as ImmutableRecord
+    }
+
     useEffect(() => {
         credentialsReader.credentialDataFromVpToken(state?.data?.vp_token).then((credentialData?: ImmutableRecord) => {
-            setCredentialsData(credentialData)
+            setCredentialsData(mapToForm(credentialData))
             setInitComplete(true)
         })
     }, [])
@@ -144,7 +195,7 @@ const SSIInformationManualRequestPage: React.FC = () => {
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        height: '83%',
+                        height: '94%',
                         width: '50%',
                     }}>
                         <div

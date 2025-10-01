@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import {isImageAddress} from "@sphereon/ui-components.credential-branding"
 
 type ClaimsPayload = Record<string, any>
 
@@ -10,45 +11,86 @@ const formatKey = (key: string): string => {
 }
 
 const RenderClaims: React.FC<{ payload: ClaimsPayload; depth?: number }> = ({payload, depth = 0}) => {
+    const [processedEntries, setProcessedEntries] = useState<Array<{ key: string, value: any, isImage: boolean }>>([])
     const indent = '\u00A0\u00A0\u00A0\u00A0'.repeat(depth)
     const keyIndent = '\u00A0\u00A0'
 
+    useEffect(() => {
+        const processEntries = async () => {
+            const entries = await Promise.all(
+                Object.entries(payload).map(async ([key, value]) => ({
+                    key,
+                    value,
+                    isImage: typeof value === 'string' ? await isImageAddress(value) : false
+                }))
+            )
+            setProcessedEntries(entries)
+        }
+
+        processEntries()
+    }, [payload])
+
     return (
         <>
-            {Object.entries(payload).map(([key, value], index) => {
-                const formattedKey = formatKey(key)
-                if (typeof value === 'object') {
-                    return value !== null && Object.keys(value).length > 0 && (
-                        <React.Fragment key={index}>
+            {processedEntries.map(({key, value, isImage}, index) => {
+                    const formattedKey = formatKey(key)
+                    if (typeof value === 'object') {
+                        return value !== null && Object.keys(value).length > 0 && (
+                            <React.Fragment key={index}>
                                 <div>{'\u00A0'}</div>
-                            <div>{indent}{formattedKey}:</div>
-                            <RenderClaims payload={value} depth={depth + 1}/>
-                        </React.Fragment>
-                    )
-                } else {
-                    return (
-                        <div
-                            key={index}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'flex-start'
-                            }}
-                        >
+                                <div>{indent}{formattedKey}:</div>
+                                <RenderClaims payload={value} depth={depth + 1}/>
+                            </React.Fragment>
+                        )
+                    } else if (isImage) {
+                        return (
+                            <div
+                                key={index}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'flex-start'
+                                }}
+                            >
                             <span style={{whiteSpace: 'pre'}}>
                                 {indent}{formattedKey}:{keyIndent}
                             </span>
-                            <span style={{
-                                whiteSpace: 'pre-wrap',
-                                wordBreak: 'break-word',
-                                overflowWrap: 'break-word',
-                                flex: 1
-                            }}>
+                                <img
+                                    src={value}
+                                    alt={formattedKey}
+                                    style={{
+                                        maxWidth: '200px',
+                                        maxHeight: '200px',
+                                        objectFit: 'contain'
+                                    }}
+                                />
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div
+                                key={index}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'flex-start'
+                                }}
+                            >
+                            <span style={{whiteSpace: 'pre'}}>
+                                {indent}{formattedKey}:{keyIndent}
+                            </span>
+                                <span style={{
+                                    whiteSpace: 'pre-wrap',
+                                    wordBreak: 'break-word',
+                                    overflowWrap: 'break-word',
+                                    flex: 1
+                                }}>
                                 {String(value)}
                             </span>
-                        </div>
-                    )
+                            </div>
+                        )
+                    }
                 }
-            })}
+            )
+            }
         </>
     )
 }

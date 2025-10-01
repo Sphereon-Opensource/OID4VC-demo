@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {BallTriangle} from 'react-loader-spinner'
 // import {AuthorizationResponseStateStatus, GenerateAuthRequestURIResponse} from './auth-model'
 import {CreateElementArgs, QRType, URIData, ValueResult} from '@sphereon/ssi-sdk.qr-code-generator'
-import { AuthStatusResponse, GenerateAuthRequestURIResponse } from '@sphereon/ssi-sdk.siopv2-oid4vp-common'
+import { CreateAuthorizationResponse} from '@sphereon/ssi-sdk.siopv2-oid4vp-common'
 
-import {AuthorizationResponsePayload, AuthorizationResponseStateStatus} from '@sphereon/did-auth-siop'
+import { AuthorizationResponseStateStatus, VerifiedData} from '@sphereon/did-auth-siop'
 import Debug from 'debug'
 import {NonMobileOS} from "../../index"
 import {Ecosystem} from "../../ecosystem/ecosystem"
@@ -14,18 +14,18 @@ import {APP_SSI_QR_CODE_EXPIRES_AFTER_SEC} from "../../environment"
 const debug = Debug('sphereon:portal:ssi:AuthenticationQR')
 
 export type AuthenticationQRProps = {
-  vpDefinitionId: string
+  vpQueryId: string
   ecosystem: Ecosystem
   responseRedirectUri?: string
   width?: number
   fgColor?: string
   onAuthRequestRetrieved: () => void
-  onSignInComplete: (payload: AuthorizationResponsePayload) => void
+  onSignInComplete: (verifiedData: VerifiedData) => void
   setQrCodeData: (text: string) => void
 }
 
 export interface AuthenticationQRState {
-  authRequestURIResponse?: GenerateAuthRequestURIResponse
+  createAuthorizationResponse?: CreateAuthorizationResponse
   qrCode?: JSX.Element
 }
 
@@ -41,7 +41,7 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
 
 
   componentDidMount() {
-    const {ecosystem, vpDefinitionId} = this.props
+    const {ecosystem, vpQueryId} = this.props
 
     this.qrExpirationMs = APP_SSI_QR_CODE_EXPIRES_AFTER_SEC * 1000
     // actually since the QR points to a JWT it has its own expiration value as well.
@@ -57,39 +57,41 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
     if (!ecosystem) {
       throw new Error('Prop ecosystem is required')
     }
-    if (!vpDefinitionId) {
-      throw new Error('Prop vpDefinitionId is required')
+    if (!vpQueryId) {
+      throw new Error('Prop vpQueryId is required')
     }
   }
 
   private generateNewQRCode() {
-    const {ecosystem, vpDefinitionId, responseRedirectUri, setQrCodeData} = this.props
-    
+    const {ecosystem, vpQueryId, responseRedirectUri, setQrCodeData} = this.props
       ecosystem.getAgent()
-      .siopClientCreateAuthRequest({definitionId: vpDefinitionId, responseRedirectURI: responseRedirectUri})
-      .then((authRequestURIResponse) => {
-        setQrCodeData(authRequestURIResponse.authRequestURI)
+      .siopClientCreateAuthRequest({queryId: vpQueryId, directPostResponseRedirectUri: responseRedirectUri})
+      .then((createAuthorizationResponse: CreateAuthorizationResponse) => {
+          if(!createAuthorizationResponse.requestUri) {
+              return Promise.reject(Error(`requestUri missing in CreateAuthorizationResponse for queryId ${vpQueryId}`))
+          }
+        setQrCodeData(createAuthorizationResponse.requestUri)
         ecosystem.getAgent()
-          .qrURIElement(this.createQRCodeElement(authRequestURIResponse))
-          .then((qrCode) => {
-            this.registerState(authRequestURIResponse, qrCode)
-            // return this.setState({authRequestURIResponse, qrCode})
+          .qrURIElement(this.createQRCodeElement(createAuthorizationResponse))
+          .then((qrCode: JSX.Element) => {
+            this.registerState(createAuthorizationResponse, qrCode)
+            // return this.setState({createAuthorizationResponse, qrCode})
           })
       })
-      .catch(debug)
+      .catch(e => console.error(e))
   }
 
   createQRCodeElement(
-    authRequestURIResponse: GenerateAuthRequestURIResponse
+    createAuthorizationResponse: CreateAuthorizationResponse
   ): CreateElementArgs<QRType.URI, URIData> {
     const qrProps: CreateElementArgs<QRType.URI, URIData> = {
       data: {
         type: QRType.URI,
-        object: authRequestURIResponse.authRequestURI,
-        id: authRequestURIResponse.correlationId
+        object: createAuthorizationResponse.requestUri,
+        id: createAuthorizationResponse.correlationId
       },
       onGenerate: (result: ValueResult<QRType.URI, URIData>) => {
-        // this.registerState(authRequestURIResponse, qrProps.renderingProps)
+        // this.registerState(createAuthorizationResponse, qrProps.renderingProps)
       },
       renderingProps: {
         bgColor: 'white',
@@ -138,37 +140,34 @@ class AuthenticationQR extends Component<AuthenticationQRProps> {
   }
 
   private registerState = (
-    authRequestURIResponse: GenerateAuthRequestURIResponse,
-    qrCode: JSX.Element
+      createAuthorizationResponse: CreateAuthorizationResponse,
+      qrCode: JSX.Element
   ) => {
     if (
-      this.state.authRequestURIResponse?.correlationId ===
-      authRequestURIResponse.correlationId
+      this.state.createAuthorizationResponse?.correlationId ===
+      createAuthorizationResponse.correlationId
     ) {
       // same correlationId, which we are already polling
       return
     }
 
-    if (!this.timedOutRequestMappings.has({ authRequestURIResponse, qrCode })) {
-      this.timedOutRequestMappings.add({ authRequestURIResponse, qrCode })
+    if (!this.timedOutRequestMappings.has({ createAuthorizationResponse, qrCode })) {
+      this.timedOutRequestMappings.add({ createAuthorizationResponse, qrCode })
     }
-    this.setState({ qrCode, authRequestURIResponse })
-    void this.pollAuthStatus(authRequestURIResponse)
+    this.setState({ qrCode, createAuthorizationResponse })
+    void this.pollAuthStatus(createAuthorizationResponse)
   }
 
   /* Poll the backend until we get a response, abort when the component is unloaded or the QR code expired */
-  private pollAuthStatus = async (
-    authRequestURIResponse: GenerateAuthRequestURIResponse
-  ) => {
+    private pollAuthStatus = async (createAuthorizationResponse: CreateAuthorizationResponse) => {
     const {ecosystem, onSignInComplete} = this.props
     this.authStatusHandle = setInterval(async (args) => {
       ecosystem.getAgent().siopClientGetAuthStatus({
-        correlationId: authRequestURIResponse.correlationId,
-        definitionId: authRequestURIResponse.definitionId
-      }).then((response: AuthStatusResponse) => {
+        correlationId: createAuthorizationResponse.correlationId,
+      }).then((response: any) => {
         if (response.status === AuthorizationResponseStateStatus.VERIFIED) {
           clearInterval(this.authStatusHandle)
-          onSignInComplete(response.payload!)
+          onSignInComplete(response.verified_data!)
         }
       }).catch((error: Error) => {
         clearInterval(this.authStatusHandle)

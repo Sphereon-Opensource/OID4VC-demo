@@ -1,16 +1,10 @@
-import {
-    AdditionalClaims,
-    ICredentialSubject,
-    IVerifiableCredential,
-    IVerifiablePresentation,
-    W3CVerifiableCredential,
-    W3CVerifiablePresentation
-} from "@sphereon/ssi-types"
+import {AdditionalClaims, ICredentialSubject, IVerifiableCredential, IVerifiablePresentation, W3CVerifiableCredential, W3CVerifiablePresentation} from "@sphereon/ssi-types"
 import {Buffer} from "buffer"
 import {ImmutableRecord} from "../types"
+import {convertPIDToUniformCredential} from "./mapper/PIDMapper";
 
 export function useCredentialsReader() {
-    
+
     const decodeBase64 = async (jwt: string, kid?: string): Promise<any> => {
         return JSON.parse(Buffer.from(jwt.split('.')[1], 'base64').toString())
     }
@@ -37,7 +31,18 @@ export function useCredentialsReader() {
     const handleVP = async (vp: W3CVerifiablePresentation): Promise<ImmutableRecord[]> => {
         let verifiablePresentation: IVerifiablePresentation
         if (typeof vp === 'string') {
-            verifiablePresentation = (await decodeBase64(vp)).vp as IVerifiablePresentation
+            const decoded = await decodeBase64(vp);
+            if ('vp' in decoded) {
+                verifiablePresentation = decoded.vp as IVerifiablePresentation
+            } else if ('vct' in decoded) {
+                const uniformCredentials = await convertPIDToUniformCredential([vp]);
+                console.log(uniformCredentials)
+                return uniformCredentials.map(value => {
+                    return value.transformedClaims
+                })
+            } else {
+                verifiablePresentation = decoded
+            }
         } else {
             verifiablePresentation = vp as IVerifiablePresentation
         }

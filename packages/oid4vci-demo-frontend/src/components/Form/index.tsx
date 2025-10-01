@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, ReactNode, useEffect, useState} from 'react'
+import React, {FC, ReactElement, ReactNode, useEffect, useRef, useState} from 'react'
 import {SSICheckbox} from '@sphereon/ui-components.ssi-react'
 import {useTranslation} from 'react-i18next'
 import {DataFormElement, DataFormRow, FilterItem} from '../../ecosystem/ecosystem-config'
@@ -9,6 +9,8 @@ import {FormFieldValue, FormOutputData, ImmutableRecord} from '../../types'
 import style from './index.module.css'
 import {extractComboboxItems, extractFormDefaults, JsonDataItem, loadJsonData} from '../../utils/jsonLoader'
 import {Text} from "../Text";
+import ImageCropModal from "../ImageCropModal";
+
 
 type Props = {
     inputBackgroundColor?: string
@@ -36,11 +38,11 @@ const resolveFilters = (filters: FilterItem[], formData: FormOutputData): Filter
     return filters
         .filter(filter => filter?.filterKey && filter?.filterValue)
         .map(filter => ({
-        ...filter,
-        filterValue: filter.filterValue.startsWith('${') && filter.filterValue.endsWith('}')
-            ? formData[filter.filterValue.slice(2, -1)]?.toString() || ''
-            : filter.filterValue
-    }))
+            ...filter,
+            filterValue: filter.filterValue.startsWith('${') && filter.filterValue.endsWith('}')
+                ? formData[filter.filterValue.slice(2, -1)]?.toString() || ''
+                : filter.filterValue
+        }))
 }
 
 const evaluateDefaultValue = (
@@ -79,6 +81,10 @@ const Form: FC<Props> = (props: Props): ReactElement => {
     const [loadingCombobox, setLoadingCombobox] = useState<{ [key: string]: boolean }>({})
     const [jsonDefaults, setJsonDefaults] = useState<JsonDataItem | undefined>()
     const [defaultsLoaded, setDefaultsLoaded] = useState<boolean>(false)
+    const fileInputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({})
+    const [cropModalOpen, setCropModalOpen] = useState(false)
+    const [imageToCrop, setImageToCrop] = useState<string>('')
+    const [currentCropField, setCurrentCropField] = useState<string>('')
 
     const onChangeValue = async (value: FormFieldValue, key: string): Promise<void> => {
         const data = {...formData, [key]: value}
@@ -193,6 +199,81 @@ const Form: FC<Props> = (props: Props): ReactElement => {
         }
     }
 
+    const handleFileUpload = async (file: File, fieldKey: string): Promise<void> => {
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                const result = e.target?.result as string
+                setImageToCrop(result)
+                setCurrentCropField(fieldKey)
+                setCropModalOpen(true)
+            }
+            reader.readAsDataURL(file)
+        }
+    }
+
+    const handleCropSave = async (croppedImage: string): Promise<void> => {
+        await onChangeValue(croppedImage, currentCropField)
+        setCropModalOpen(false)
+        setImageToCrop('')
+        setCurrentCropField('')
+    }
+
+    const handleCropCancel = (): void => {
+        setCropModalOpen(false)
+        setImageToCrop('')
+        setCurrentCropField('')
+        // Reset file input
+        if (fileInputRefs.current[currentCropField]) {
+            fileInputRefs.current[currentCropField]!.value = ''
+        }
+    }
+
+    const handleFileDrop = (e: React.DragEvent<HTMLDivElement>, fieldKey: string): void => {
+        e.preventDefault()
+        const files = Array.from(e.dataTransfer.files)
+        if (files.length > 0) {
+            handleFileUpload(files[0], fieldKey)
+        }
+    }
+
+    const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>, fieldKey: string): void => {
+        const files = e.target.files
+        if (files && files.length > 0) {
+            handleFileUpload(files[0], fieldKey)
+        }
+    }
+
+    const deleteImage = async (fieldKey: string): Promise<void> => {
+        await onChangeValue('', fieldKey)
+        // Reset file input
+        if (fileInputRefs.current[fieldKey]) {
+            fileInputRefs.current[fieldKey]!.value = ''
+        }
+    }
+
+    const convertBase64 = (urlSafeBase64: string): string => {
+        console.log('getDisplayImageUrl IN', urlSafeBase64)
+        if (!urlSafeBase64 || !urlSafeBase64.startsWith('data:')) {
+            return urlSafeBase64 // not a base64 input
+        }
+
+        // Convert URL-safe base64 back to standard base64
+        let base64 = urlSafeBase64
+            .replace(/-/g, '+')
+            .replace(/_/g, '/')
+
+        // Add padding if needed
+        const padding = base64.length % 4
+        if (padding) {
+            base64 += '='.repeat(3 - padding)
+        }
+
+        // Add data URL prefix (assuming JPEG, adjust as needed)
+        console.log('getDisplayImageUrl OUT', base64)
+        return `${base64}`
+    }
+
     const getFieldElementFrom = (field: DataFormElement): ReactElement => {
         const defaultValue: FormFieldValue = evaluateDefaultValue(field, formInitData, formData, jsonDefaults)
 
@@ -244,14 +325,107 @@ const Form: FC<Props> = (props: Props): ReactElement => {
                         ))}
                     </select>
                 </div>
+            case 'profileImage':
+                const imageValue = defaultValue?.toString() || ''
+                const isImageReadonly = field.readonly || formInitData?.[field.key] !== undefined
+
+                return <div style={{width: '100%', ...field.inputStyle}}>
+                    {field.label && (
+                        <label style={field.labelStyle}>
+                            {t(field.label)}
+                        </label>
+                    )}
+                    <div style={{
+                        border: '2px dashed #ccc',
+                        borderRadius: '8px',
+                        padding: '16px',
+                        textAlign: 'center',
+                        backgroundColor: isImageReadonly && props.inputBackgroundColor ? props.inputBackgroundColor : '#fafafa',
+                        position: 'relative'
+                    }}
+                         onDrop={(e) => !isImageReadonly && handleFileDrop(e, field.key)}
+                         onDragOver={(e) => e.preventDefault()}
+                         onDragEnter={(e) => e.preventDefault()}
+                    >
+                        {imageValue ? (
+                            <div style={{position: 'relative'}}>
+                                <img
+                                    src={imageValue}
+                                    alt="Profile"
+                                    style={{
+                                        maxWidth: '200px',
+                                        maxHeight: '200px',
+                                        borderRadius: '8px',
+                                        objectFit: 'cover'
+                                    }}
+                                />
+                                {!isImageReadonly && (
+                                    <button
+                                        type="button"
+                                        onClick={() => deleteImage(field.key)}
+                                        style={{
+                                            position: 'absolute',
+                                            top: '8px',
+                                            right: '8px',
+                                            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                                            border: 'none',
+                                            borderRadius: '50%',
+                                            width: '24px',
+                                            height: '24px',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '14px'
+                                        }}
+                                        title="Delete image"
+                                    >
+                                        ×
+                                    </button>
+                                )}
+                            </div>
+                        ) : (
+                            <div>
+                                <div style={{marginBottom: '12px', color: '#666'}}>
+                                    Drop an image here or click to upload
+                                </div>
+                                {!isImageReadonly && (
+                                    <button
+                                        type="button"
+                                        onClick={() => fileInputRefs.current[field.key]?.click()}
+                                        style={{
+                                            backgroundColor: '#007bff',
+                                            color: 'white',
+                                            border: 'none',
+                                            padding: '8px 16px',
+                                            borderRadius: '4px',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Choose Image
+                                    </button>
+                                )}
+                            </div>
+                        )}
+                        {!isImageReadonly && (
+                            <input
+                                type="file"
+                                ref={(el) => fileInputRefs.current[field.key] = el}
+                                style={{display: 'none'}}
+                                accept="image/*"
+                                onChange={(e) => handleFileInputChange(e, field.key)}
+                            />
+                        )}
+                    </div>
+                </div>
             case 'header':
-                return <h4 style={{ margin: 0 }}>{field.label}{defaultValue && `: ${defaultValue}`}</h4>
+                return <h4 style={{margin: 0}}>{field.label}{defaultValue && `: ${defaultValue}`}</h4>
             case 'text-area':
                 return <Text
                     title={[field.label ?? '']}
                     lines={[`${defaultValue}`]}
-                    h2Style={{ fontSize: '0.8em', fontWeight: 'bold', margin: '0 0 4px 0' }}
-                    pStyle={{ fontSize: '0.9em', margin: 0 }}
+                    h2Style={{fontSize: '0.8em', fontWeight: 'bold', margin: '0 0 4px 0'}}
+                    pStyle={{fontSize: '0.9em', margin: 0}}
                 />
 
             case 'text':
@@ -318,6 +492,12 @@ const Form: FC<Props> = (props: Props): ReactElement => {
 
     return <div className={style.container}>
         {getFormFrom()}
+        <ImageCropModal
+            imageSrc={imageToCrop}
+            isOpen={cropModalOpen}
+            onSave={handleCropSave}
+            onCancel={handleCropCancel}
+        />
     </div>
 }
 
