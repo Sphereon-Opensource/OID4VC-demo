@@ -90,7 +90,9 @@
       "canvas",
       "core-js",
       "core-js-pure",
+      "keccak",
       "secp256k1",
+      "sodium-native",
       "sqlite3"
     ]
   }
