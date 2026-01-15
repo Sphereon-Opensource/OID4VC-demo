@@ -122,7 +122,7 @@ const SSIInformationVerifyPage: React.FC = () => {
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        width: '60%',
+                        width: '85%',
                         height: '95%'
                     }}>
                         <div
